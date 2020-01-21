@@ -18,9 +18,10 @@
 from pybossa.core import create_app
 
 if __name__ == "__main__":  # pragma: no cover
-    app = create_app()
-    # logging.basicConfig(level=logging.NOTSET)
-    app.run(host=app.config['HOST'], port=app.config['PORT'],
-            debug=app.config.get('DEBUG', True))
+	app = create_app()
+	# logging.basicConfig(level=logging.NOTSET)
+	#app.run(host=app.config['HOST'], port=app.config['PORT'],
+	app.run(host='0.0.0.0', port = 8000 ,
+			debug=app.config.get('DEBUG', True))
 else:
-    app = create_app()
+	app = create_app()
