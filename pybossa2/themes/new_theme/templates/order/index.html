@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% set active_page = "order" %}
+
+{% block content %}
+    {% include ['custom/_order.html'] ignore missing %}
+{% endblock %}

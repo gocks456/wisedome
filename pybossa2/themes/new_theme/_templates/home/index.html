@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
+{% import "account/_helpers.html" as account_helper %}
+{% block content %}
+<section class="home featured">
+  <div id="home-outer">
+    <div id="home-top-video">
+      <video autoplay loop muted width="100%">
+        <source src='//assets1.flashfunders.com/assets/FF_Video_Reel-9e5486aa5c1bb8186828cebacfa314fd410cc008d19a642052f1206780eb51d9.mp4' type="video/mp4" /> Your browser does not support the video tag. We suggest you upgrade your browser.
+      </video>
+      <div id="home-text">
+        <div><img src="/static/img/white_Data.ly.png" width='100px'></div>
+        <h3>Data.ly</h3>
+		<h5>작업수:</h5>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if featured %}
+{{ helper.render_grid_projects(featured, '참여가능 프로젝트', upload_method, current_user, section_class='home projects', readmore_text='Contribute', title_size='2') }}
+{% endif %}
+{% if historical_contributions %}
+{{ helper.render_grid_projects(historical_contributions, '참여한 프로젝트', upload_method, current_user, section_class='home projects', title_size='2') }}
+{% endif %}
+{% endblock %}
+

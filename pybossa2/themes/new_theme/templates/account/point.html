@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% set active_page = "point" %}
+{% set active_link = "point" %}
+{% import "account/_helpers.html" as helper %}
+{% import "projects/_helpers.html" as project_helper %}
+{% import "account/user_pref_metadata.html" as user_pref_metadata %}
+
+{% block content %}
+<section class="account point">
+    <div class="container">
+
+		<div class="col-sm-3 col-md-3">
+			{{ helper.render_account_local_nav(current_user, active_link) }}
+        </div>
+       	<div class="col-sm-9 col-md-9">
+			<h2>포인트</h2>
+        </div>
+		<div class="col-sm-9 col-md-9">
+			*********************************************
+			<h3>Point : {{current_user.current_point}}</h3>
+			<h3>누적Point :  {{current_user.point_sum}}</h3>
+			<a href="{{url_for('account.exchange', name=current_user.name)}}" class="btn btn-primary">환급신청하기</a>
+			<div class="row" style="padding:15px;">
+				<input type="text" id="myInput" onkeyup="filter_table()" placeholder="내용검색" class="col-sm-6 col-md-6">
+				{% for c in c_name %}
+					<button onclick="filter_by_btn('{{c.c_name}}')">&lt;{{ c.c_name }}&gt;</button>
+				{% endfor %}
+				<button onclick="filter_by_btn('환급')">&lt;환급&gt;</button>
+			</div>
+
+			<div class="table-responsive">
+				<h4>==POINT==</h4>
+				<table class="table table-hover" id="mmm">
+					<thead>
+						<tr style="background-color:lightgray">
+							<th onclick="sortTable(0)">내용</th>
+							<th onclick="sortTable(1)">날짜</th>
+							<th onclick="sortTable(2)">포인트</th>
+							{#							<th>카테고리</th>#}
+						</tr>
+					</thead>
+					<tbody>
+						{% for p_h in point_hist %}
+						{% if p_h.point != 0 %}
+						<tr style="cursor:pointer;" {% if p_h.project_short_name != 'exchange' %} onclick = "location.href='{{url_for('project.details', short_name = p_h.project_short_name)}}'{% endif %}">
+							<td>&lt;&nbsp;{{ p_h.category}}&nbsp;&gt; {{ p_h.project_name }}</td>
+							<td>{{ p_h.finish_time[0:10] }}</td>
+							<td>{% if p_h.point =='(0)' %} 0 {% else %} {{ p_h.point }} {% endif %}</td>
+							{#							<td>{{ p_h.point }}</td>#}
+							{#							<td>{{ p_h.category}}</td>#}
+						</tr>
+						{% endif %}
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		
+    </div>
+</section>
+<style>
+	th {
+		cursor: pointer;
+	}
+	tr:nth-child(even) {
+		background-color: #f2f2f2
+	}
+
+	#myInput {
+		font-size: 16px;
+		padding: 12px 20px 12px 12px;
+		border: 1px solid #ddd;
+		margin-bottom: 12px;
+	}
+
+
+</style>
+
+
+<script>
+	function sortTable(n) {
+		var table, rows, switching, i, x, y, z, shouldSwitch, dir, switchcount = 0;
+		table = document.getElementById("mmm");
+		switching = true;
+		//Set the sorting direction to ascending:
+		dir = "asc"; 
+		/*Make a loop that will continue until
+		  no switching has been done:*/
+		while (switching) {
+			//start by saying: no switching is done:
+			switching = false;
+			rows = table.rows;
+			/*Loop through all table rows (except the
+			  first, which contains table headers):*/
+			for (i = 1; i < (rows.length - 1); i++) {
+				//start by saying there should be no switching:
+				shouldSwitch = false;
+				/*Get the two elements you want to compare,
+				  one from current row and one from the next:*/
+				x = rows[i].getElementsByTagName("TD")[n];
+				y = rows[i + 1].getElementsByTagName("TD")[n];
+				/*check if the two rows should switch place,
+				  based on the direction, asc or desc:*/
+				if (dir == "asc") {
+					if (n == "0"||n=="1"){ 
+						if  (String(x.innerHTML.toLowerCase()) > String(y.innerHTML.toLowerCase())) {
+							//if so, mark as a switch and break the loop:
+							shouldSwitch= true;
+							break;
+						}
+					}
+					else{ 
+						if  (Number(x.innerHTML.toLowerCase()) > Number(y.innerHTML.toLowerCase())) {
+							//if so, mark as a switch and break the loop:
+							shouldSwitch= true;
+							break;
+						}
+					}
+				}
+				else if (dir == "desc") {
+					if (n == "0"||n=="1") {
+						if (String(x.innerHTML.toLowerCase()) <String( y.innerHTML.toLowerCase())) {
+							//if so, mark as a switch and break the loop:
+							shouldSwitch = true;
+							break;
+						}
+					}
+					else{
+						if (Number(x.innerHTML.toLowerCase()) <Number( y.innerHTML.toLowerCase())) {
+						//if so, mark as a switch and break the loop:
+						shouldSwitch = true;
+						break;				
+						}
+					}
+				}
+			}
+			if (shouldSwitch) {
+				/*If a switch has been marked, make the switch
+				  and mark that a switch has been done:*/
+				rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+				switching = true;
+				//Each time a switch is done, increase this count by 1:
+				switchcount ++;      
+			} else {
+				/*If no switching has been done AND the direction is "asc",
+				  set the direction to "desc" and run the while loop again.*/
+				if (switchcount == 0 && dir == "asc") {
+					dir = "desc";
+					switching = true;
+				}
+			}
+		}
+	}
+
+	function filter_table() {
+		var input, filter, table, tr, td, i, txtValue;
+		input = document.getElementById("myInput");
+		filter = input.value.toUpperCase();
+		table = document.getElementById("mmm");
+		tr = table.getElementsByTagName("TR");
+		for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+				txtValue = td.textContent || td.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
+				}
+			}       
+		}
+	}
+
+
+	function filter_by_btn(a) {
+		var x = document.getElementById("myInput");
+		x.value=a;
+
+		var filter, table, tr, td, i, txtValue;
+		filter = x.value.toUpperCase();
+		table = document.getElementById("mmm");
+		tr = table.getElementsByTagName("TR");
+		for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+				txtValue = td.textContent || td.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
+				}
+			}       
+		}
+	}
+
+
+</script>
+
+
+{% endblock %}
+{% block extrajs %}
+{% include "account/js/metadata.js" %}
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "/base.html" %}
+{% set active_page = "profile" %}
+{% set active_link = "admin" %}
+{% import "account/_helpers.html" as helper %}
+{% import "projects/_helpers.html" as project_helper %}
+{% from "account/_helpers.html" import render_account_local_nav %}
+{% from "projects/_helpers.html" import render_project_admin_featured, broken_image %}
+
+{% block content %}
+<!--<link rel="stylesheet" href="/admin/rq/static/css/min.css">
+<link href="/admin/rq/static/css/main.css" rel="stylesheet">
+-->
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid black;
+    text-align: center;
+    margin: auto;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddded;
+}
+</style>
+<script>
+function check_btn(pid, uid) {
+	var score = $('#score'+'_'+pid+'_'+uid).val();
+	$.ajax({
+		url : '/admin/score_update',
+		data : {
+			pname: pid,
+			uname: uid,
+			score: score
+		},
+		cache: false,
+		dataType: 'json',
+		success: function(data){
+			document.location('/admin/score_dashboard');
+		},
+	});
+//	location.reload();
+}
+</script>
+	<br/><br/>
+	<button id="refresh_page" style="float:right" class="btn btn-default btn-submit" onClick="window.location.reload()">Refresh</button>
+
+        <h1><strong>{{_("완료한 작업")}}</strong></h1>
+	<table class="table table-bordered">
+	<tr> <th>프로젝트 이름</th> <th>사용자 ID</th> <th>포인트</th> <th>진행상태</th> </tr>
+            {% for user in done_data %}
+	            <tr>
+		    <td>{{user.project_name}}({{user.project_id}})</td>
+		    <td>{{user.user_id}}</td>
+		    <td><input type=text id="score_{{user.project_id}}_{{user.user_id}}" value={{user.sum}} /></td>
+		    <td><button id="check_btn_{{user.project_id}}_{{user.user_id}}" class="btn btn-default btn-submit" onclick="check_btn({{user.project_id}}, {{user.user_id}})">검수완료</button></td>
+		    </tr>
+            {% endfor %}
+	</table>
+
+        <br/><br/><h1><strong>{{_("진행중인 작업")}}</strong></h1>
+	<table class="table table-bordered">
+	<tr> <th>프로젝트 이름</th> <th>사용자 ID</th> <th>포인트</th> <th>진행상태</th> </tr>	
+            {% for user in ing_data %}
+	            <tr>
+		    <td>{{user.project_name}}({{user.project_id}})</td>
+		    <td>{{user.user_id}}</td>
+		    <td><input type=text id="score_{{user.project_id}}_{{user.user_id}}" value={{user.sum}} /></td>
+		    <td><button id="check_btn_{{user.project_id}}_{{user.user_id}}" class="btn btn-default btn-submit" onclick="check_btn({{user.project_id}}, {{user.user_id}})">작업중단</button> </td>
+		    </tr>
+            {% endfor %}
+	</table>
+
+
+{% endblock %}
+

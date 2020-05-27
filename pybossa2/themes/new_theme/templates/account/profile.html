@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% set active_page = "profile" %}
+{% set active_link = "profile" %}
+{% import "account/_helpers.html" as helper %}
+{% import "projects/_helpers.html" as project_helper %}
+{% import "account/user_pref_metadata.html" as user_pref_metadata %}
+
+{% block content %}
+<section class="account profile">
+    <div class="container">
+
+            <div class="col-sm-3 col-md-3">
+				{{ helper.render_account_local_nav(current_user, active_link) }}
+            </div>
+            <div class="col-sm-9 col-md-9">
+				<h2>{{ _('Your Account') }}: {{current_user.fullname}}</h2>
+				{% if current_user.sex == 'M' %}
+				<h3><img src="{{url_for('static', filename='img/MM.jpg')}}"width="40" height="40">
+				{% elif current_user.sex == 'F' %}
+				<h3><img src="{{url_for('static', filename='img/FF.jpg')}}"width="40" height="40">
+				{% endif %}
+				{{ n_year|int - (current_user.birth / 10000)|int + 1 }} 세</h3>
+
+				{{ helper.render_user_profile(current_user, upload_method, "settings") }}
+				{% if config.upref_mdata %}
+				{{ user_pref_metadata.render_upref_mdata(user, form, can_update, input_form) }}
+				{% endif %}
+
+			</div>
+			<div>
+				{% if projects_contrib | count > 0 %}
+				{#{{ project_helper.render_grid_projects(projects_contrib,  _('Your Contributions'), upload_method, title_class="col-md-12", container=False)}}#}
+				<section class="account {{title |lower }}-projects">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="text-center">
+								<h1>당신이 참여한 과제</h1>
+								<p>채점 하지 않은 작업의 정답은 정답 수로 카운트되지 않습니다.</p></br>
+							</div>
+							{% for f in projects_contrib %}
+							<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4" onclick="location.href='{{ url_for('project.details', short_name=f.short_name)}}'" style="cursor:pointer;">
+								<div class="thumbnail card">
+									<div class="post-pic" style="background: rgb(0, 151, 167) url({{project_helper.render_url_thumbnail(f, upload_method)}}) no-repeat center top; background-size: cover;"></div>
+									<div class="caption">
+										<h3>{{f.name}}</h3>
+										<h4><strong>{{f.all_point}}</strong><img src="{{url_for('static',filename='img/pppp.jpg')}}" width="33" height="35"></h4>
+										<h5><strong>정답 수 / 총 작업 수 : {{f.n_correct_rate}} / {{f.n_tasks_rate}}</strong></h5>
+										<p>{{f.description}}</p>
+										<!-- 정답 갯수 추가 -->
+
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</section>
+				{% endif %}
+			</div>
+
+	</div>
+</section>
+{% endblock %}
+{% block extrajs %}
+{% include "account/js/metadata.js" %}
+{% endblock %}

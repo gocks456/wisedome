@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
+{% import "account/_helpers.html" as account_helper %}
+{% block content %}
+<!--
+<section class="home top">
+<div id='home_header'>
+<video autoplay='' id='video-bg' loop='' muted='' playsinline=''>
+<source src='//assets1.flashfunders.com/assets/FF_Video_Reel-9e5486aa5c1bb8186828cebacfa314fd410cc008d19a642052f1206780eb51d9.mp4' type='video/mp4'>
+</video>
+<div id='filter-image'>
+<div class='hero'>
+<h1 class='sh'>Invest in Companies You Believe In</h1>
+<a class="btn-normal btn-medium hidden" id="home_start_invest" href="/browse">Start Investing</a>
+<a class="btn-normal btn-medium" id="home_join_newsletter" href="javascript:document.querySelector(&#39;#home_new_subscription #subscription_email&#39;).focus();">Join our newsletter</a>
+</div>
+</div>
+</div>
+</section>
+-->
+<section class="home featured">
+<div>
+  <div id="home-outer">
+    <div id="home-top-video">
+      <video autoplay loop muted width="100%">
+        <source src='//assets1.flashfunders.com/assets/FF_Video_Reel-9e5486aa5c1bb8186828cebacfa314fd410cc008d19a642052f1206780eb51d9.mp4' type="video/mp4" /> Your browser does not support the video tag. We suggest you upgrade your browser.
+      </video>
+      <div id="home-text">
+        <div><img src="/static/img/white_Data.ly.png" heifht='120px' width='120px'></div>
+        <h1>Data.ly</h1>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<!--
+<section class="home featured">
+    <div class="jumbotron">
+        <div class="container text-center firstfold">
+            {% if featured | count > 0 %}
+            {% set featured_project = featured | random %}
+			<h1><a href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{ featured_project.name }}</a></h1>
+            <p>{{ featured_project.description }}</p>
+			<a class="btn btn-primary" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute')}}</a> 
+            {% else %}
+            <h1>{{_('Welcome to ')}} {{brand}}</h1>
+            <p>{{_("Data.ly는 인공지능에서 필요한 데이터를 Crowd와 전문가가 협업하여 제작하는 플랫폼입니다.")}}</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+-->
+{% if featured %}
+{{ helper.render_grid_projects(featured, '참여가능 프로젝트', upload_method, current_user, section_class='home projects', readmore_text='Contribute', title_size='2') }}
+{% endif %}
+{% if historical_contributions %}
+{{ helper.render_grid_projects(historical_contributions, '참여한 프로젝트', upload_method, current_user, section_class='home projects', title_size='2') }}
+{% endif %}
+{% endblock %}
+
