@@ -34,6 +34,7 @@ from flask_wtf.csrf import generate_csrf
 from werkzeug.exceptions import HTTPException
 from sqlalchemy.exc import ProgrammingError
 import pandas as pd
+import datetime
 
 from pybossa.model.category import Category
 from pybossa.model.announcement import Announcement
@@ -41,8 +42,9 @@ from pybossa.util import admin_required, handle_content_type
 from pybossa.util import redirect_content_type
 from pybossa.cache import projects as cached_projects
 from pybossa.cache import categories as cached_cat
+from pybossa.cache import users as cached_users
 from pybossa.auth import ensure_authorized_to
-from pybossa.core import announcement_repo, project_repo, user_repo, sentinel
+from pybossa.core import announcement_repo, project_repo, user_repo, sentinel, point_repo, exchange_repo
 from pybossa.feed import get_update_feed
 import pybossa.dashboard.data as dashb
 from pybossa.jobs import get_dashboard_jobs
@@ -73,6 +75,84 @@ def index():
     key = NOTIFY_ADMIN + str(current_user.id)
     sentinel.master.delete(key)
     return handle_content_type(dict(template='/admin/index.html'))
+
+def gettime():
+    now = datetime.datetime.now()
+    return now.strftime('%Y-%m-%dT%H:%M:%S.%f')
+
+
+
+@blueprint.route('/manage_exchange')
+@blueprint.route('/manage_exchange/<eid>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def manage_exchange(eid=None):
+
+    if request.method == 'GET':
+        if eid == None:
+            print("adad")
+        if eid != None:
+            print(eid)
+            if eid[0]=='Q':
+                if len(eid)==1:
+                    flash(gettext('체크를 해 주세요'),'success')
+                ids = eid[1:].split(',')
+                del ids[-1]
+                for cid in ids:
+                    update_ex = exchange_repo.get(cid)
+                    update_ex.finish_time = gettime()
+                    update_ex.exchanged='정상환급'
+                    exchange_repo.update(update_ex)
+                    flash(gettext('환급성공'),'success')
+            if eid[0]=='A':
+                manage_exchange = cached_users.get_manage_exchange()
+                for m in manage_exchange:
+                    update_ex = exchange_repo.get(m['id'])
+                    update_ex.finish_time = gettime()
+                    update_ex.exchanged='정상환급'
+                    exchange_repo.update(update_ex)
+                    flash(gettext('환급성공'),'success')
+            if eid[0]=='Y':
+                get_re = cached_users.get_requested_exchange_by_id(int(eid[1:]))
+#                point_repo.exchange(get_re['user_id'],get_re['point'])
+                update_ex = exchange_repo.get(get_re['id'])
+                update_ex.finish_time = gettime()
+                update_ex.exchanged='정상환급'
+                exchange_repo.update(update_ex)
+                flash(gettext('환급성공'),'success')
+            elif eid[0]=='N':
+                get_re = cached_users.get_requested_exchange_by_id(int(eid[2:]))
+                update_ex = exchange_repo.get(eid[2:])
+                print(eid[1])
+                point_repo.exchange(get_re['user_id'],((get_re['point'])*(-1)))
+                if (eid[1]=="1"):
+                    update_ex.exchanged='계좌오류로 인한 취소'
+                elif (eid[2]=="2"):
+                    update_ex.exchanged='악성버그'
+                #여기위에 옵션 넣기
+                update_ex.finish_time = gettime()
+                exchange_repo.update(update_ex)
+                flash(gettext('환급거절'),'success')
+        
+        return _show_exchange()
+
+
+    if request.method == 'POST':
+        print('ppp')
+        return _show_exchange()
+
+def _show_exchange():
+    manage_exchange = cached_users.get_manage_exchange()
+    all_point_history = cached_users.get_all_user_point_history()
+    all_exchange_history = cached_users.get_all_exchange_history()
+    from pprint import pprint as pp
+    #pp(all_exchange_history)
+    response = dict(template = '/admin/manage_exchange.html',
+            manage_exchange=manage_exchange,
+            all_point_history=all_point_history,
+            all_exchange_history=all_exchange_history
+            )
+    return handle_content_type(response)
 
 
 @blueprint.route('/featured')

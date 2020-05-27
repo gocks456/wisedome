@@ -53,10 +53,12 @@ class Blogpost(db.Model, DomainObject):
     #: Published flag
     published = Column(Boolean, nullable=False, default=False)
 
+    user_name= Column(Unicode(length=254))
+
     @classmethod
     def public_attributes(self):
         """Return a list of public attributes."""
-        return ['created', 'updated', 'project_id', 'id', 'user_id',
+        return ['created', 'updated', 'project_id', 'id', 'user_id', 'user_name',
                 'title', 'body', 'media_url', 'published']
 
     @classmethod

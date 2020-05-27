@@ -25,4 +25,5 @@ from .forms import (
     ResetPasswordForm,
     ForgotPasswordForm,
     AvatarUploadForm,
-    OTPForm)
+    OTPForm,
+    ExchangeForm)

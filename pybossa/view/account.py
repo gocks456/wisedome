@@ -29,6 +29,7 @@ This module exports the following endpoints:
 from itsdangerous import BadData
 from markdown import markdown
 import time
+import datetime
 
 from flask import Blueprint, request, url_for, flash, redirect, abort
 from flask import render_template, current_app
@@ -48,9 +49,10 @@ from pybossa.util import get_avatar_url
 from pybossa.util import url_for_app_type
 from pybossa.util import fuzzyboolean
 from pybossa.cache import users as cached_users
+from pybossa.cache import categories as cached_cat
 from pybossa.auth import ensure_authorized_to
 from pybossa.jobs import send_mail, export_userdata, delete_account
-from pybossa.core import user_repo, ldap
+from pybossa.core import user_repo, ldap, point_repo, exchange_repo, achi_repo
 from pybossa.feed import get_update_feed
 from pybossa.messages import *
 from pybossa import otp
@@ -121,14 +123,17 @@ def signin():
         elif user:
             msg, method = get_user_signup_method(user)
             if method == 'local':
-                msg = gettext("Ooops, Incorrect email/password")
+                #msg = gettext("Ooops, Incorrect email/password")
+                msg = gettext("비밀번호가 일치하지 않습니다.")
                 flash(msg, 'error')
             else:
                 flash(msg, 'info')
         else:
-            msg = gettext("Ooops, we didn't find you in the system, \
-                          did you sign up?")
+            #msg = gettext("Ooops, we didn't find you in the system, \
+            #              did you sign up?")
+            msg = gettext("존재하지 않는 아이디입니다.")
             flash(msg, 'info')
+
 
     if (request.method == 'POST' and form.validate()
             and isLdap):
@@ -306,6 +311,9 @@ def confirm_email():
     return redirect_content_type(url_for('.profile', name=current_user.name))
 
 
+user_sex = None
+user_birth = 0
+
 @blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     """
@@ -324,13 +332,36 @@ def register():
 
     msg = "I accept receiving emails from %s" % current_app.config.get('BRAND')
     form.consent.label = msg
+
+    global user_sex
+    global user_birth
+
+    if request.method == 'GET':
+        year = request.args.get('year')
+        month = request.args.get('month')
+        day = request.args.get('day')
+        user_sex = request.args.get('sex')
+
+        if month != None:
+            if len(month) == 1:
+                month = '0' + month
+            if len(day) == 1:
+                day = '0' + day
+            user_birth = int(year+month+day)
+
     if request.method == 'POST' and form.validate():
+        if user_birth == 0:
+            flash(gettext('생년월일과 성별을 체크해 주세요'),
+                  'error')
+            return redirect_content_type(url_for('.register'))
+
         if current_app.config.upref_mdata:
             user_pref, metadata = get_user_pref_and_metadata(form.name.data, form)
             account = dict(fullname=form.fullname.data, name=form.name.data,
                            email_addr=form.email_addr.data,
                            password=form.password.data,
                            consent=form.consent.data,
+                           sex=user_sex, birth=user_birth,
                            user_type=form.user_type.data)
             account['user_pref'] = user_pref
             account['metadata'] = metadata
@@ -338,9 +369,12 @@ def register():
             account = dict(fullname=form.fullname.data, name=form.name.data,
                            email_addr=form.email_addr.data,
                            password=form.password.data,
-                           consent=form.consent.data)
-
+                           consent=form.consent.data,
+                           sex=user_sex, birth=user_birth)
         confirm_url = get_email_confirmation_url(account)
+
+
+
         if current_app.config.get('ACCOUNT_CONFIRMATION_DISABLED'):
             return _create_account(account)
         msg = dict(subject='Welcome to %s!' % current_app.config.get('BRAND'),
@@ -413,6 +447,10 @@ def _create_account(user_data, ldap_disabled=True):
                                name=user_data['name'],
                                email_addr=user_data['email_addr'],
                                valid_email=True,
+                               #20.02.26. 수정사항
+                               achievement={"all": "", "rank": "", "category": ""},
+                               sex=user_data['sex'],
+                               birth=user_data['birth'],
                                consent=user_data['consent'])
 
     if user_data.get('user_pref'):
@@ -425,10 +463,26 @@ def _create_account(user_data, ldap_disabled=True):
     else:
         if user_data.get('ldap'):
             new_user.ldap = user_data['ldap']
+
     user_repo.save(new_user)
-    flash(gettext('Thanks for signing-up'), 'success')
+
+    #20.02.19. 수정사항
+    point_create = _create_point(new_user.id)
+    if point_create != new_user.id:
+        flash(gettext('시스템 오류'), 'error')
+        return _sign_in_user(new_user)
+
+    #flash(gettext('Thanks for signing-up'), 'success')
+    flash(gettext('회원가입을 축하드립니다.'), 'success')
     return _sign_in_user(new_user)
 
+#20.02.21. 수정사항
+def _create_point(user_id):
+    new_point = model.point.Point(user_id=user_id)
+    point_repo.save(new_point)
+    return user_id
+    
+    
 
 def _update_user_with_valid_email(user, email_addr):
     user.valid_email = True
@@ -511,8 +565,129 @@ def _show_public_profile(user, form):
 
     return handle_content_type(response)
 
+@blueprint.route('/<name>/point/exchange', methods=['GET', 'POST'])
+@login_required
+def exchange(name):
+    """
+    Get user point.
+    """
+    user = user_repo.get_by_name(name)
+
+    if not user:
+        return abort(404)
+    if current_user.name != name:
+        return abort(403)
+
+
+    if request.method == 'GET' and current_user.is_authenticated and user.id == current_user.id:
+        return _exchange_request(user)
+
+    if request.method == 'POST':
+        form = ExchangeForm(request.body)
+        exchange = model.exchange.Exchange(user_id = current_user.id,
+                            request_name = form.request_name.data,
+                            bank = form.bank.data,
+                            account_number = form.account_number.data,
+                            exchange_point = form.exchange_point.data,
+                            created = get_time())
+        response = dict(template='/account/exchange.html',
+                form=form,
+                name=name)
+
+        if form.validate():
+            a = form.exchange_point
+            if (int(exchange.exchange_point) > int(current_user.current_point)):
+                flash(gettext('가지고 있는 포인트 이내에서 환급요청 하십시오!'), 'error')
+                return handle_content_type(response)
+            flash(gettext('환급요청성공'), 'success')
+            point_repo.exchange(current_user.id,form.exchange_point.data)
+            exchange_repo.save(exchange)
+            return redirect_content_type(url_for('.point',
+                                                 name=current_user.name))
+
+        flash(gettext('환급 요청 실패'), 'error')
+        return handle_content_type(response)
+
+def get_time():
+    now = datetime.datetime.now()
+    return now.strftime('%Y-%m-%dT%H:%M:%S.%f')
+
+def _exchange_request(user):
+    exchange_user = model.exchange.Exchange(request_name = current_user.fullname)
+    user_dict = cached_users.get_user_summary(user.name)
+    form = ExchangeForm(obj=exchange_user)
+    #form.request_name=current_user.fullname
+    response = dict(template='account/exchange.html',
+                    title=gettext("Exchange"),
+                    user=user_dict,
+                    form = form,
+                    can_update=False)
+    return handle_content_type(response)
+
+@blueprint.route('/<name>/achievement/')
+@blueprint.route('/<name>/achievement/<string:achieve_id>/')
+@blueprint.route('/<name>/achievement/<string:achieve_id>/<string:category_name>/')
+@login_required
+def achievement(name, achieve_id='', category_name=''):
+    """ 업적 페이지 """
+    user = user_repo.get_by_name(name)
+    achieve_dict = []
+    if achieve_id != '':
+        achieve_dict = cached_users.get_achievement(user.id, achieve_id)
+    all_category = []
+    if achieve_id == 'category':
+        all_category = cached_cat.get_all()
+    achieve_list = ['bronze', 'silver', 'gold', 'master']
+
+    response = dict(template='account/achievement.html',
+                              title=gettext("Achievement"),
+                              achieve_list=achieve_list,
+                              achieve_id=achieve_id,
+                              cat_name=category_name,
+                              category = all_category,
+                              user=user,
+                              achievement=achieve_dict)
+    return handle_content_type(response)
+        
+@blueprint.route('/<name>/point')
+@login_required
+def point(name):
+    """
+    Get user point.
+    """
+    user = user_repo.get_by_name(name)
+
+    if not user:
+        return abort(404)
+    if current_user.name != name:
+        return abort(403)
+
+    if current_user.is_anonymous or (user.id != current_user.id):
+        return _show_public_profile(user, form)
+    if current_user.is_authenticated and user.id == current_user.id:
+        return _show_points(user)
+
+def _show_points(user):
+    user_dict = cached_users.get_user_summary(user.name)
+    projects_contributed = cached_users.public_projects_contributed_cached(user.id)
+    point_history = cached_users.get_user_point_history(current_user.id)
+    from operator import itemgetter
+    point_history = sorted(point_history, key=itemgetter('finish_time'), reverse=True)
+    from pprint import pprint as pp
+    pp(point_history)
+    response = dict(template='account/point.html',
+                    title=gettext("Point"),
+                    user=user_dict,
+                    projects_contrib=projects_contributed,
+                    point_hist=point_history,
+                    c_name=cached_cat.get_all_name(),
+                    can_update=False)
+    return handle_content_type(response)
+
+
 
 def _show_own_profile(user, form, current_user):
+    n_year = datetime.datetime.now().year
     user_dict = cached_users.get_user_summary(user.name, current_user)
     rank_and_score = cached_users.rank_and_score(user.id)
     user.rank = rank_and_score['rank']
@@ -521,9 +696,17 @@ def _show_own_profile(user, form, current_user):
     projects_contributed = cached_users.public_projects_contributed_cached(user.id)
     projects_published, projects_draft = _get_user_projects(user.id)
     cached_users.get_user_summary(user.name)
+    projects_answer_rate = cached_users.projects_answer_rate(user.id)
+
+    for row in projects_contributed:
+        for temp in projects_answer_rate:
+            if(row['id'] == temp['id']):
+                row['n_correct_rate']=temp['n_correct_rate']
+                row['n_tasks_rate']=temp['n_tasks_rate']
 
     response = dict(template='account/profile.html',
                     title=gettext("Profile"),
+                    n_year=n_year,
                     user=user_dict,
                     projects_contrib=projects_contributed,
                     projects_published=projects_published,
@@ -913,7 +1096,8 @@ def delete(name):
     if current_user.name != name:
         return abort(403)
 
-    super_queue.enqueue(delete_account, user.id)
+    #super_queue.enqueue(delete_account, user.id)
+    delete_account(user.id)
 
     if (request.headers.get('Content-Type') == 'application/json' or
         request.args.get('response_format') == 'json'):

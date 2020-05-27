@@ -227,6 +227,17 @@ def setup_repositories(app):
     helping_repo = HelpingMaterialRepository(db)
     page_repo = PageRepository(db)
 
+	#20.02.19. 추가내용
+    from pybossa.repositories import PointRepository
+    global point_repo
+    point_repo = PointRepository(db)
+    from pybossa.repositories import ExchangeRepository
+    global exchange_repo
+    exchange_repo = ExchangeRepository(db)
+    from pybossa.repositories import AchievementRepository
+    global achi_repo
+    achi_repo = AchievementRepository(db)
+
 
 def setup_error_email(app):
     """Setup error email."""

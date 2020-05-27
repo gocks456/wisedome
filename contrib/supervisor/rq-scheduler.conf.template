@@ -1,6 +1,6 @@
 [program:rq-scheduler]
-command=/home/pybossa/pybossa/env/bin/rqscheduler --host 127.0.0.1 --port 6379 --interval 60 --db 0
-directory=/home/pybossa/pybossa
+command=/home/gocks456/venv/bin/rqscheduler --host 127.0.0.1 --port 6379 --interval 60 --db 0
+directory=/home/gocks456/pybossa/pybossa
 autostart=true
 autorestart=true
 priority=910

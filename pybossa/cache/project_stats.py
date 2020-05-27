@@ -18,10 +18,11 @@
 """Cache module for project stats."""
 from flask import current_app
 from sqlalchemy.sql import text
-from pybossa.core import db
+from pybossa.core import db, project_repo
 from pybossa.cache import memoize, ONE_DAY, FIVE_MINUTES
 import pybossa.cache.projects as cached_projects
 from pybossa.model.project_stats import ProjectStats
+from pybossa.model.project import Project
 from flask_babel import gettext
 
 import operator
@@ -577,6 +578,14 @@ def update_stats(project_id, period='2 week'):
         ps.n_volunteers = n_volunteers
         ps.average_time = average_time
         ps.n_blogposts = n_blogposts
+
+    project = project_repo.get(project_id)
+    if ps.overall_progress >= 100:
+        project.complete = True
+    else:
+        project.complete = False
+    project_repo.save(project)
+
     db.session.commit()
     return dates_stats, hours_stats, users_stats
 

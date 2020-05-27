@@ -251,6 +251,9 @@ from .webhook_repository import WebhookRepository
 from .result_repository import ResultRepository
 from .helping_repository import HelpingMaterialRepository
 from .page_repository import PageRepository
+from .point_repository import PointRepository
+from .exchange_repository import ExchangeRepository
+from .achievement_repository import AchievementRepository
 
 assert ProjectRepository
 assert ProjectStatsRepository
@@ -263,3 +266,6 @@ assert WebhookRepository
 assert ResultRepository
 assert HelpingMaterialRepository
 assert PageRepository
+assert PointRepository
+assert ExchangeRepository
+assert AchievementRepository

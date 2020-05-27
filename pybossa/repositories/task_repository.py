@@ -18,6 +18,7 @@
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import cast, Date
+from sqlalchemy.sql import func
 
 from pybossa.repositories import Repository
 from pybossa.model.task import Task
@@ -29,6 +30,30 @@ from sqlalchemy import text
 
 
 class TaskRepository(Repository):
+
+    #20.02.25. 수정사항
+    def count_task(self, project_id):
+        return self.db.session.query(Task).filter_by(project_id = project_id, score_check=False).count()
+
+    def redundancy(self, project_id):
+        return self.db.session.query(Task).filter_by(project_id = project_id).first()
+
+    def save_point(self, project_id, point):
+        task_run=self.db.session.query(TaskRun).filter_by(project_id=project_id, score_mark=True, completed_score=False).all()
+        for row in task_run:
+            if row.is_featured == True:
+                row.point = point * 1.1
+            else:
+                row.point = point
+
+        task=self.db.session.query(Task).filter_by(project_id=project_id, state='completed', score_check=False).all()
+        for row in task:
+            row.score_check=True
+
+        self.db.session.commit()
+
+    def get_task_Yes(self, project_id):
+        return self.db.session.query(TaskRun.user_id, func.sum(TaskRun.point).label('point_sum')).filter_by(project_id=project_id, score_mark=True, completed_score=False).group_by(TaskRun.user_id).all()
 
     # Methods for queries on Task objects
     def get_task(self, id):

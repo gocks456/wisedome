@@ -33,7 +33,7 @@ class BlogpostAPI(APIBase):
 
     """Class API for domain object Blogpost."""
 
-    reserved_keys = set(['id', 'created', 'updated', 'user_id'])
+    reserved_keys = set(['id', 'created', 'updated', 'user_id', 'user_name'])
 
     __class__ = Blogpost
 
@@ -46,3 +46,4 @@ class BlogpostAPI(APIBase):
     def _update_object(self, obj):
         if not current_user.is_anonymous:
             obj.user_id = current_user.id
+            obj.user_name = current_user.name

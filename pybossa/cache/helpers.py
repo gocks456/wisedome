@@ -17,9 +17,9 @@
 # along with PYBOSSA.  If not, see <http://www.gnu.org/licenses/>.
 """Cache module with helper functions."""
 
-from flask import current_app
+from flask import current_app, abort
 from sqlalchemy.sql import text
-from pybossa.core import db
+from pybossa.core import db, project_repo
 from pybossa.cache import memoize, ONE_HOUR
 from pybossa.cache.projects import n_results
 from pybossa.model.project_stats import ProjectStats
@@ -70,10 +70,12 @@ def check_contributing_state(project, user_id=None, user_ip=None,
     project_id = project['id'] if type(project) == dict else project.id
     published = project['published'] if type(project) == dict else project.published
     states = ('completed', 'draft', 'publish', 'can_contribute', 'cannot_contribute')
+    project['complete'] = False
     if ps is None:
         ps = session.query(ProjectStats)\
                     .filter_by(project_id=project_id).first()
     if ps.overall_progress >= 100:
+        project['complete'] = True
         return states[0]
     if not published:
         if has_no_presenter(project) or _has_no_tasks(project_id):
@@ -83,11 +85,17 @@ def check_contributing_state(project, user_id=None, user_ip=None,
         return states[3]
     return states[4]
 
+def change_complete(project_dict):
+    project = project_repo.get(project_dict['id'])
+    project.complete = project_dict['complete']
+    project_repo.save(project)
+    return 0
 
 def add_custom_contrib_button_to(project, user_id_or_ip, ps=None):
     """Add a customized contrib button for a project."""
     if type(project) != dict:
         project = project.dictize()
+
     project['contrib_button'] = check_contributing_state(project,
                                                          ps=ps,
                                                          **user_id_or_ip)
@@ -98,7 +106,10 @@ def add_custom_contrib_button_to(project, user_id_or_ip, ps=None):
     project['n_blogposts'] = ps.n_blogposts
     project['n_results'] = ps.n_results
 
+    if change_complete(project) != 0:
+        return abort(500)
     return project
+    
 
 
 def has_no_presenter(project):

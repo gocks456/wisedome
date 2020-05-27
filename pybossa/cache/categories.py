@@ -31,6 +31,24 @@ def get_all():
     data = session.query(model.category.Category).all()
     return data
 
+def get_one():
+    """Return all categories"""
+    data = session.query(model.category.Category).first()
+    return data
+
+def get_all_name():
+    sql = text('''
+               SELECT name AS c_name
+               FROM  category
+               ''')
+    results = session.execute(sql,dict())
+    all_category = []
+    for row in results:
+        name = dict(c_name=row.c_name)
+        all_category.append(name)
+
+    return all_category
+
 
 @cache(key_prefix="categories_used",
        timeout=timeouts.get('CATEGORY_TIMEOUT'))

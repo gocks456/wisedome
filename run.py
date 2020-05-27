@@ -16,12 +16,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with PYBOSSA. If not, see <http://www.gnu.org/licenses/>.
 from pybossa.core import create_app
+from pybossa.leaderboard.jobs import leaderboard as lb
 
 if __name__ == "__main__":  # pragma: no cover
+
 	app = create_app()
 	# logging.basicConfig(level=logging.NOTSET)
-	#app.run(host=app.config['HOST'], port=app.config['PORT'],
-	app.run(host='0.0.0.0', port = 8000 ,
+	app.run(host=app.config['HOST'], port=app.config['PORT'],
+	#app.run(host='0.0.0.0', port = 8000 ,
 			debug=app.config.get('DEBUG', True))
 else:
 	app = create_app()

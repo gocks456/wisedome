@@ -59,6 +59,29 @@ def about():
     response = dict(template="/home/about.html")
     return handle_content_type(response)
 
+@blueprint.route("faq")
+def faq():
+	"""Render the about template."""
+	response = dict(template="/custom/faq.html")
+	return handle_content_type(response)
+
+#@blueprint.route("order")
+#def requset_order():
+#	"""Render the about template."""
+#	response = dict(template="/order/_order.html")
+#	return handle_content_type(response)
+
+@blueprint.route("faq/orderer")
+def orderer():
+	"""Render the about template."""
+	response = dict(template="/custom/faq_orderer.html")
+	return handle_content_type(response)
+
+@blueprint.route("faq/worker")
+def worker():
+	"""Render the about template."""
+	response = dict(template="/custom/faq_worker.html")
+	return handle_content_type(response)
 
 @blueprint.route("search")
 def search():

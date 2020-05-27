@@ -63,6 +63,9 @@ auditlog_repo = None
 webhook_repo = None
 result_repo = None
 
+#20.02.19. 추가
+point_repo = None
+
 # Signer
 from pybossa.signer import Signer
 signer = Signer()

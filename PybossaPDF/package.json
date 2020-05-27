@@ -1,0 +1,25 @@
+{
+  "name": "pdfpybossa",
+  "version": "1.0.0",
+  "description": "PyBossa demo project PDF Transcribe ======================================= PDF Transcribe is a **demo project** for PyBossa that shows how you can  crowdsource a PDF transcription problem.",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "webpack": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development --open --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Scifabric/pdftranscribe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Scifabric/pdftranscribe/issues"
+  },
+  "homepage": "https://github.com/Scifabric/pdftranscribe#readme"
+}

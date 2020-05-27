@@ -87,7 +87,7 @@ def cache(key_prefix, timeout=300):
                 if output:
                     return pickle.loads(output)
                 output = f(*args, **kwargs)
-                sentinel.master.setex(key, timeout, pickle.dumps(output))
+                #sentinel.master.setex(key, timeout, pickle.dumps(output))
                 return output
             output = f(*args, **kwargs)
             return output
@@ -115,7 +115,7 @@ def memoize(timeout=300):
                 if output:
                     return pickle.loads(output)
                 output = f(*args, **kwargs)
-                sentinel.master.setex(key, timeout, pickle.dumps(output))
+                #sentinel.master.setex(key, timeout, pickle.dumps(output))
                 return output
             output = f(*args, **kwargs)
             return output

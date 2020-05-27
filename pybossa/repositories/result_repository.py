@@ -25,6 +25,12 @@ from sqlalchemy import text
 
 class ResultRepository(Repository):
 
+    def get_all(self, project_id):
+        return self.db.session.query(Result).filter_by(project_id=project_id).all();
+
+    def get_mark_all(self, project_id):
+        return self.db.session.query(Result).filter_by(project_id=project_id, info=None).all();
+
     def get(self, id):
         return self.db.session.query(Result).get(id)
 

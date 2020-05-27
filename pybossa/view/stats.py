@@ -19,15 +19,18 @@
 import json
 from flask import Blueprint
 from flask import render_template
+from flask_login import login_required
 
 from pybossa.cache import site_stats
 from pybossa.cache import projects as cached_projects
-from pybossa.util import handle_content_type
+from pybossa.util import handle_content_type, admin_required
 
 blueprint = Blueprint('stats', __name__)
 
 
 @blueprint.route('/')
+@admin_required
+
 def index():
     """Return Global Statistics for the site."""
     title = "Global Statistics"
@@ -78,6 +81,7 @@ def index():
                     projects=json.dumps(projects),
                     tasks=json.dumps(tasks),
                     show_locs=False,
+					#show_locs=True,
                     top5_users_24_hours=top5_users_24_hours,
                     top5_projects_24_hours=top5_projects_24_hours,
                     stats=stats)

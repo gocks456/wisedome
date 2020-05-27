@@ -29,6 +29,10 @@ from pybossa.core import uploader
 
 class ProjectRepository(Repository):
 
+    #20.02.25. 수정사항
+    def get_point(self, short_name):
+        return self.db.session.query(Project).filter_by(short_name=short_name).all()
+
     # Methods for Project objects
     def get(self, id):
         return self.db.session.query(Project).get(id)

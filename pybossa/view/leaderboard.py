@@ -16,10 +16,11 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with PYBOSSA.  If not, see <http://www.gnu.org/licenses/>.
 """Leaderboard view for PYBOSSA."""
-from flask import Blueprint, current_app, request, abort
+from flask import Blueprint, current_app, request, abort, redirect
 from flask_login import current_user
-from pybossa.cache import users as cached_users
+from pybossa.cache import users as cached_users, categories as cached_cat
 from pybossa.util import handle_content_type
+from pybossa.core import user_repo, project_repo
 
 blueprint = Blueprint('leaderboard', __name__)
 
@@ -48,8 +49,28 @@ def index(window=0):
                                              user_id=user_id,
                                              window=window,
                                              info=info)
-
+    one_category = cached_cat.get_one()
     response = dict(template='/stats/index.html',
                     title="Community Leaderboard",
+                    category = one_category,
                     top_users=top_users)
+    return handle_content_type(response)
+
+
+@blueprint.route('/category/<string:category>')
+def category_index(category):
+    if current_user.is_authenticated:
+        user_name = user_repo.get(current_user.id).name
+    else:
+        user_name = None
+
+    rank_category = cached_users.get_category_leaderboard(user_name, category)
+    active_cats = project_repo.get_category_by(name=category)
+    all_category = cached_cat.get_all()
+
+    response = dict(template='/stats/category_rank.html',
+                    title="Category Leaderboard",
+                    category_rank = rank_category,
+                    categories = all_category,
+                    active_cat = active_cats)
     return handle_content_type(response)

@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with PYBOSSA.  If not, see <http://www.gnu.org/licenses/>.
 
-from sqlalchemy import Integer, Text
+from sqlalchemy import Integer, Text, Boolean
 from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.dialects.postgresql import JSONB
 
@@ -53,6 +53,12 @@ class TaskRun(db.Model, DomainObject):
     media_url = Column(Text)
     #: Value of the answer.
     info = Column(JSONB)
+
+    # 20.02.18. 수정
+    point = Column(Integer, default=0)
+    score_mark = Column(Boolean, default=False)
+    completed_score = Column(Boolean, default=False)
+    is_featured = Column(Boolean)
     '''General writable field that should be used by clients to record results\
     of a TaskRun. Usually a template for this will be provided by Task
     For example::

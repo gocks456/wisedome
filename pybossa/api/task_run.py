@@ -58,9 +58,17 @@ class TaskRunAPI(APIBase):
         guard = ContributionsGuard(sentinel.master)
 
         self._validate_project_and_task(taskrun, task)
+
+        self._add_is_featured(taskrun)
+
         self._ensure_task_was_requested(task, guard)
         self._add_user_info(taskrun)
         self._add_created_timestamp(taskrun, task, guard)
+
+    def _add_is_featured(self, taskrun):
+        project=project_repo.get(taskrun.project_id)
+        taskrun.is_featured = project.featured
+
 
     def _forbidden_attributes(self, data):
         for key in list(data.keys()):
@@ -143,6 +151,14 @@ class TaskRunAPI(APIBase):
                 data['info'] = dict()
             data['info']['container'] = container
             data['info']['file_name'] = _file.filename
+
+            #실험
+            print('data = ' + data)
+            print('datatype = ' + type(data))
+            print('file_url = ' + file_url)
+            print('container = ' + container)
+            print('file.filename = ' + _file.filename)
+
             return data
         else:
             return None

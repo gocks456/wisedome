@@ -811,6 +811,9 @@ def delete_account(user_id, **kwargs):
     brand = current_app.config.get('BRAND')
     user_repo.delete(user)
     subject = '[%s]: Your account has been deleted' % brand
+
+#20.02.21 메일이 제대로 작동하지않아 socket error 발생
+'''
     mailchimp_deleted = True
     body = """Hi,\nYour account and personal data has been deleted from %s.""" % brand
     if current_app.config.get('MAILCHIMP_API_KEY'):
@@ -825,6 +828,7 @@ def delete_account(user_id, **kwargs):
             recipients.append(em)
     mail_dict = dict(recipients=recipients, subject=subject, body=body)
     send_mail(mail_dict)
+'''
 
 def export_userdata(user_id, **kwargs):
     from pybossa.core import user_repo, project_repo, task_repo, result_repo

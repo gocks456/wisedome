@@ -72,6 +72,11 @@ class Project(db.Model, DomainObject):
     #: Project info field formatted as JSON
     info = Column(MutableDict.as_mutable(JSONB), default=dict())
 
+	#20.02.24. 수정사항
+    all_point = Column(Integer, default=0)
+    condition = Column(MutableDict.as_mutable(JSONB), default=dict())
+    complete = Column(Boolean, default=False)
+
     tasks = relationship(Task, cascade='all, delete, delete-orphan', backref='project')
     task_runs = relationship(TaskRun, backref='project',
                              cascade='all, delete-orphan',
@@ -79,6 +84,8 @@ class Project(db.Model, DomainObject):
     category = relationship(Category)
     blogposts = relationship(Blogpost, cascade='all, delete-orphan', backref='project')
     owners_ids = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())
+
+    option_sex = option_age_start = option_age_end = "0"
 
     def needs_password(self):
         return self.get_passwd_hash() is not None
@@ -128,7 +135,7 @@ class Project(db.Model, DomainObject):
                 'overall_progress', 'short_name', 'created', 'category_id',
                 'long_description', 'last_activity', 'last_activity_raw',
                 'n_task_runs', 'n_results', 'owner', 'updated', 'featured',
-                'owner_id', 'n_completed_tasks', 'n_blogposts', 'owners_ids']
+                'owner_id', 'n_completed_tasks', 'n_blogposts', 'owners_ids', 'all_point', 'condition', 'complete']
 
     @classmethod
     def public_info_keys(self):

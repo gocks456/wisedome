@@ -23,6 +23,7 @@ import os
 import math
 import requests
 from io import StringIO
+import datetime
 
 from flask import Blueprint, request, url_for, flash, redirect, abort, Response, current_app
 from flask import render_template, make_response, session
@@ -65,7 +66,7 @@ from pybossa.importers import BulkImportException
 from pybossa.pro_features import ProFeatureHandler
 
 from pybossa.core import (project_repo, user_repo, task_repo, blog_repo,
-                          result_repo, webhook_repo, auditlog_repo)
+                          result_repo, webhook_repo, auditlog_repo, point_repo, achi_repo)
 from pybossa.auditlogger import AuditLogger
 from pybossa.contributions_guard import ContributionsGuard
 from pybossa.default_settings import TIMEOUT
@@ -73,7 +74,7 @@ from pybossa.exporter.csv_reports_export import ProjectReportCsvExporter
 
 blueprint = Blueprint('project', __name__)
 
-MAX_NUM_SYNCHRONOUS_TASKS_IMPORT = 200
+MAX_NUM_SYNCHRONOUS_TASKS_IMPORT = 500
 auditlogger = AuditLogger(auditlog_repo, caller='web')
 importer_queue = Queue('medium',
                        connection=sentinel.master,
@@ -158,8 +159,102 @@ def pro_features(owner=None):
     return pro
 
 
+#20.02.25. 수정사항
+
+def marking(project):
+    result = result_repo.get_mark_all(project.id)
+
+    for result_idx in result:
+        sentence = {}
+        for idx in result_idx.task_run_ids:
+            task_run = task_repo.get_task_run(idx)
+
+            if task_run.info in sentence:
+                sentence[task_run.info] = sentence[task_run.info] + 1
+            else:
+                sentence[task_run.info] = 1
+
+        sort_sen = sorted(sentence, key=lambda k : sentence[k], reverse=True)
+
+        for idx in result_idx.task_run_ids:
+            task_run = task_repo.get_task_run(idx)
+            if task_run.info == sort_sen[0]:
+               task_run.score_mark=True
+               task_repo.update(task_run)
+        
+        result_idx.info=sort_sen[0]
+        result_repo.update(result_idx)
+
+    return result
+
+def score_check(result):
+    for result_idx in result:
+        for idx in result_idx.task_run_ids:
+            task_run = task_repo.get_task_run(idx)
+
+            if task_run.completed_score==False:
+                task_run.completed_score=True
+                task_repo.update(task_run)
+
+@blueprint.route('/<short_name>/score', methods=['GET', 'POST'])
+@admin_required
+def score(short_name):
+    project = project_repo.get_by_shortname(short_name)
+    all_point = project.all_point
+
+    if all_point == 0 :
+        msg_1 = gettext('포인트를 설정해 주세요.')
+        markup = Markup('<i class="icon-ok"></i> {}')
+        flash(markup.format(msg_1), 'error')
+        return redirect_content_type(url_for('.tasks',
+                                                 short_name=project.short_name))
+
+    result = marking(project)
+
+    if result == None or result == []:
+        msg_1 = gettext('완료된 작업이 없습니다.')
+        markup = Markup('<i class="icon-ok"></i> {}')
+        flash(markup.format(msg_1), 'error')
+        return redirect_content_type(url_for('.tasks',
+                                                 short_name=project.short_name))
+
+    task_count = task_repo.count_task(project.id)
+    task = task_repo.redundancy(project.id)
+    task_point = all_point // task_count
+
+    task_repo.save_point(project.id, task_point)
+
+    yes_task = task_repo.get_task_Yes(project.id)
+
+    for task_run in yes_task:
+        user = user_repo.get(task_run.user_id)
+        point_repo.update_point(task_run.point_sum, user.id)
+        point = point_repo.get_point(user.id)
+        user.point_sum = point.point_sum
+        user.current_point = point.current_point
+        user.answer_rate = cached_users.get_answer_rate(user)
+        user_repo.update(user)
+
+    score_check(result)
+    achievement_renewal()
+    
+    msg_1 = gettext('채점 및 포인트 갱신 완료!')
+    markup = Markup('<i class="icon-ok"></i> {}')
+    flash(markup.format(msg_1), 'success')
+    return redirect_content_type(url_for('.tasks',
+                                             short_name=project.short_name))
+
+
+def achievement_renewal():
+    from pybossa.leaderboard import jobs
+    print(jobs.all_rank_achievement())
+    print(jobs.category_rank_achievement())
+    return "Success"
+
+
 @blueprint.route('/category/featured/', defaults={'page': 1})
 @blueprint.route('/category/featured/page/<int:page>/')
+@login_required
 def index(page):
     """List projects in the system"""
     order_by = request.args.get('orderby', None)
@@ -172,6 +267,18 @@ def index(page):
         cat_short_name = categories[0].short_name
         return redirect_content_type(url_for('.project_cat_index', category=cat_short_name))
 
+def user_all_achieve(achieve):
+    if current_user.achievement["all"] == "bronze_all":
+        achieve[0] = 1
+    elif current_user.achievement["all"] == "silver_all":
+        achieve[0] = 2
+    elif current_user.achievement["all"] == "gold_all":
+        achieve[0] = 3
+    elif current_user.achievement["all"] == "master_all":
+        achieve[0] = 4
+    else:
+        achieve[0] = 5
+    return
 
 def project_index(page, lookup, category, fallback, use_count, order_by=None,
                   desc=False, pre_ranked=False):
@@ -192,7 +299,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
     pagination = Pagination(page, per_page, count)
     categories = cached_cat.get_all()
     # Check for pre-defined categories featured and draft
-    featured_cat = Category(name='Featured',
+    #featured_cat = Category(name='Featured',
+    featured_cat = Category(name='긴급',
                             short_name='featured',
                             description='Featured projects')
     historical_contributions_cat = Category(name='Historical Contributions',
@@ -204,6 +312,10 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
         active_cat = Category(name='Draft',
                               short_name='draft',
                               description='Draft projects')
+    elif category == 'complete':
+        active_cat = Category(name='Complete',
+                              short_name='complete',
+                              description='Complete projects')
     elif category == 'historical_contributions':
         active_cat = historical_contributions_cat
     else:
@@ -214,7 +326,13 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
     # Check if we have to add the section Featured to local nav
     if cached_projects.n_count('featured') > 0:
         categories.insert(0, featured_cat)
+    n = datetime.datetime.now()
+    achieve = cached_users.get_category_achieve(current_user.id)
+    user_all_achieve(achieve)
+
     template_args = {
+        "n_year": n.year,
+        "achieve": achieve,
         "projects": projects,
         "title": gettext("Projects"),
         "pagination": pagination,
@@ -235,7 +353,18 @@ def draft(page):
     """Show the Draft projects"""
     order_by = request.args.get('orderby', None)
     desc = bool(request.args.get('desc', False))
-    return project_index(page, cached_projects.get_all_draft, 'draft',
+    return project_index(page, cached_projects.get_all_draft, 'draft', #XXX
+                         False, True, order_by, desc)
+
+@blueprint.route('/category/complete/', defaults={'page': 1})
+@blueprint.route('/category/complete/page/<int:page>/')
+@login_required
+@admin_required
+def complete(page):
+    """Show the complete projects"""
+    order_by = request.args.get('orderby', None)
+    desc = bool(request.args.get('desc', False))
+    return project_index(page, cached_projects.get_all_complete, 'complete', #XXX
                          False, True, order_by, desc)
 
 
@@ -267,6 +396,14 @@ def project_cat_index(category, page):
 @blueprint.route('/new', methods=['GET', 'POST'])
 @login_required
 def new():
+    #20.02.28. 수정사항 프로젝트 만드는거 막음
+    user = user_repo.get(current_user.id)
+    if user.admin != True:
+        msg_1 = gettext('관리자가 아닙니다.')
+        markup = Markup('<i class="icon-ok"></i> {}')
+        flash(markup.format(msg_1), 'warning')
+        return redirect_content_type(url_for('home.home'))
+
     ensure_authorized_to('create', Project)
     form = ProjectForm(request.body)
 
@@ -300,12 +437,30 @@ def new():
     info = {}
     category_by_default = cached_cat.get_all()[0]
 
+    n = datetime.datetime.now()
+    condition_json = dict()
+    condition_json["sex"] = form.option_sex.data
+    if form.option_age_start.data =="":
+        form.option_age_start.data = 0
+    if form.option_age_end.data=="":
+        form.option_age_end.data =100
+    condition_json["age_s"] = ((n.year) - int(form.option_age_start.data) +1)*10000
+    condition_json["age_e"] = ((n.year) - int(form.option_age_end.data) + 2)*10000
+    condition_json["all_achieve"] = form.option_all_achieve.data
+    condition_json["cat_achieve"] = form.option_cat_achieve.data
+
     project = Project(name=form.name.data,
                       short_name=form.short_name.data,
                       description=_description_from_long_description(),
                       long_description=form.long_description.data,
                       owner_id=current_user.id,
                       info=info,
+
+                      #20.02.25. 수정사항
+                      all_point=form.all_point.data,
+                      #condition=form.condition.data,
+                      condition = condition_json,
+
                       category_id=category_by_default.id,
                       owners_ids=[current_user.id])
 
@@ -436,10 +591,13 @@ def delete(short_name):
     title = project_title(project, "Delete")
     ensure_authorized_to('read', project)
     ensure_authorized_to('delete', project)
+
     pro = pro_features()
+
     project_sanitized, owner_sanitized = sanitize_project_owner(project, owner,
                                                                 current_user,
                                                                 ps)
+
     if request.method == 'GET':
         response = dict(template='/projects/delete.html',
                         title=title,
@@ -456,6 +614,19 @@ def delete(short_name):
     flash(gettext('Project deleted!'), 'success')
     return redirect_content_type(url_for('account.profile', name=current_user.name))
 
+def condition_form(p_condition):
+    n = datetime.datetime.now()
+    condition = dict()
+    condition["age_s"] = int(n.year - (int(p_condition["age_s"]) / 10000) + 1)
+    condition["age_e"] = int(n.year - (int(p_condition["age_e"]) / 10000) + 2)
+    if condition["age_s"] == 0:
+        condition["age_s"] = ""
+    if condition["age_e"] == 100:
+        condition["age_e"] = ""
+    condition["sex"] = p_condition["sex"]
+    condition["all_achieve"] = p_condition["all_achieve"]
+    condition["cat_achieve"] = p_condition["cat_achieve"]
+    return condition
 
 @blueprint.route('/<short_name>/update', methods=['GET', 'POST'])
 @login_required
@@ -469,9 +640,26 @@ def update(short_name):
         old_project = Project(**new_project.dictize())
         old_info = dict(new_project.info)
         old_project.info = old_info
+
+
+        n = datetime.datetime.now()
+        condition_json = dict()
+        condition_json["sex"] = form.option_sex.data
+        if form.option_age_start.data =="":
+            form.option_age_start.data = 0
+        if form.option_age_end.data=="":
+            form.option_age_end.data =100
+        condition_json["age_s"] = ((n.year) - int(form.option_age_start.data) +1)*10000
+        condition_json["age_e"] = ((n.year) - int(form.option_age_end.data) + 2)*10000
+        condition_json["all_achieve"] = form.option_all_achieve.data
+        condition_json["cat_achieve"] = form.option_cat_achieve.data
+
         if form.id.data == new_project.id:
             new_project.name = form.name.data
             new_project.short_name = form.short_name.data
+            new_project.all_point = form.all_point.data
+            new_project.condition = condition_json
+            #new_project.complete = form.complete.data
             new_project.description = form.description.data
             new_project.long_description = form.long_description.data
             new_project.webhook = form.webhook.data
@@ -501,6 +689,12 @@ def update(short_name):
 
     title = project_title(project, "Update")
     if request.method == 'GET':
+        condition = condition_form(project.condition)
+        project.option_sex = condition['sex']
+        project.option_age_end = condition['age_e']
+        project.option_age_start = condition['age_s']
+        project.option_all_achieve = condition['all_achieve']
+        project.option_cat_achieve = condition['cat_achieve']
         form = ProjectUpdateForm(obj=project)
         upload_form = AvatarUploadForm()
         categories = project_repo.get_all_categories()
@@ -509,6 +703,7 @@ def update(short_name):
             project.category_id = categories[0].id
         form.populate_obj(project)
         form.protect.data = project.needs_password()
+
 
     if request.method == 'POST':
         upload_form = AvatarUploadForm()
@@ -803,8 +998,14 @@ def password_required(short_name):
                             next=request.args.get('next'))
 
 
-@blueprint.route('/<short_name>/task/<int:task_id>')
+@blueprint.route('/<short_name>/task/<int:task_id>', methods=['GET','POST'])
 def task_presenter(short_name, task_id):
+    if request.method =='GET':
+        msg_1 = gettext('잘못된 접근 입니다.')
+        markup = Markup('<i class="icon-ok"></i> {}')
+        flash(markup.format(msg_1), 'error')
+        return redirect_content_type(url_for('home.home'))
+
     project, owner, ps = project_by_shortname(short_name)
     task = task_repo.get_task(id=task_id)
     if task is None:
@@ -860,7 +1061,7 @@ def task_presenter(short_name, task_id):
 
 
 @blueprint.route('/<short_name>/presenter')
-@blueprint.route('/<short_name>/newtask')
+@blueprint.route('/<short_name>/newtask', methods=['GET','POST'])
 def presenter(short_name):
 
     def invite_new_volunteers(project, ps):
@@ -961,8 +1162,10 @@ def export(short_name, task_id):
         return abort(404)
 
 
-@blueprint.route('/<short_name>/tasks/')
+@blueprint.route('/<short_name>/tasks/', methods=['GET','POST'])
+@login_required
 def tasks(short_name):
+
     project, owner, ps = project_by_shortname(short_name)
     title = project_title(project, "Tasks")
 
@@ -1091,7 +1294,9 @@ def export_to(short_name):
     supported_tables = ['task', 'task_run', 'result']
 
     title = project_title(project, gettext("Export"))
+
     loading_text = gettext("Exporting data..., this may take a while")
+
     pro = pro_features()
 
     if project.needs_password():
@@ -1490,11 +1695,18 @@ def task_priority(short_name):
 def show_blogposts(short_name):
     project, owner, ps = project_by_shortname(short_name)
 
-    if current_user.is_authenticated and current_user.id == owner.id:
-        blogposts = blog_repo.filter_by(project_id=project.id)
+    if current_user.is_authenticated and current_user.id == owner.id:#관리자일 때
+        blogposts = blog_repo.get_blogposts(project.id, owner)
+        anno_posts = blog_repo.filter_by(project_id=project.id, user_id=owner.id,
+                                         published=True)
+        temp_posts = blog_repo.filter_by(project_id=project.id, published=False)
     else:
-        blogposts = blog_repo.filter_by(project_id=project.id,
-                                        published=True)
+        blogposts = blog_repo.get_blogposts(project.id, owner)
+        anno_posts = blog_repo.filter_by(project_id=project.id, user_id=owner.id,
+                                         published=True)
+        temp_posts = blog_repo.filter_by(project_id=project.id, user_id=current_user.id,
+                                        published=False)
+
     if project.needs_password():
         redirect_to_password = _check_if_redirect_to_password(project)
         if redirect_to_password:
@@ -1508,11 +1720,13 @@ def show_blogposts(short_name):
                                                                 owner,
                                                                 current_user,
                                                                 ps)
-
+    
     response = dict(template='projects/blog.html',
                     project=project_sanitized,
                     owner=owner_sanitized,
                     blogposts=blogposts,
+                    anno_posts=anno_posts,
+                    temp_posts=temp_posts,
                     overall_progress=ps.overall_progress,
                     n_tasks=ps.n_tasks,
                     n_task_runs=ps.n_task_runs,
@@ -1522,13 +1736,38 @@ def show_blogposts(short_name):
     return handle_content_type(response)
 
 
-@blueprint.route('/<short_name>/<int:id>')
+@blueprint.route('/<short_name>/<int:id>', methods=['GET'])
 def show_blogpost(short_name, id):
     project, owner, ps = project_by_shortname(short_name)
 
     blogpost = blog_repo.get_by(id=id, project_id=project.id)
     if blogpost is None:
         raise abort(404)
+
+    if request.method == 'GET':
+        if request.args.get('state') == "insert":
+            user_name = request.args.get('user_name')
+            comment = request.args.get('comment')
+            import datetime
+            now = datetime.datetime.now()
+            created = now.strftime('%Y-%m-%dT%H:%M:%S.%f')
+            blogpost.info[user_name+'/'+comment] = created
+            blog_repo.save(blogpost)
+            return user_name
+        elif request.args.get('state') == "delete":
+            del_data = request.args.get('data')
+            del blogpost.info[del_data]
+            blog_repo.save(blogpost)
+            return del_data
+        elif request.args.get('state') == "update":
+            key = request.args.get('key')
+            created = blogpost.info[key]
+            data = request.args.get('data')
+            del blogpost.info[key]
+            blogpost.info[data] = created
+            blog_repo.save(blogpost)
+            return data
+
     if current_user.is_anonymous and blogpost.published is False:
         raise abort(404)
     if (blogpost.published is False and
@@ -1543,10 +1782,28 @@ def show_blogpost(short_name, id):
         ensure_authorized_to('read', blogpost)
     pro = pro_features()
     project = add_custom_contrib_button_to(project, get_user_id_or_ip(), ps=ps)
+
+    def blog_comment(blogpost, count):
+        info = sorted(blogpost.info.items(), key=lambda item: item[1])
+        comment = []
+        for blog in info:
+            temp = blog[0].split('/')
+            temp.append(blog[1])
+            comment.append(temp)
+            count = count + 1
+        return comment, count
+
+    comment = None
+    count = 0
+    if blogpost.info != None:
+        comment,count = blog_comment(blogpost, count)
+
     return render_template('projects/blog_post.html',
                            project=project,
                            owner=owner,
                            blogpost=blogpost,
+                           comments=comment,
+                           counts=count,
                            overall_progress=ps.overall_progress,
                            n_tasks=ps.n_tasks,
                            n_task_runs=ps.n_task_runs,
@@ -1558,6 +1815,15 @@ def show_blogpost(short_name, id):
 @blueprint.route('/<short_name>/new-blogpost', methods=['GET', 'POST'])
 @login_required
 def new_blogpost(short_name):
+    if request.method == 'GET':
+        if request.args.get('user_id') != None:
+            new_blog = blog_repo.get_lately(request.args.get('user_id'))
+            blog_id = 0
+            for row in new_blog:
+                blog_id = row
+            url = url_for('.show_blogpost', short_name=short_name, id=blog_id)
+            return url
+
     pro = pro_features()
 
     def respond():
@@ -1592,7 +1858,6 @@ def new_blogpost(short_name):
     if not form.validate():
         flash(gettext('Please correct the errors'), 'error')
         return respond()
-
     blogpost = Blogpost(title=form.title.data,
                         body=form.body.data,
                         user_id=current_user.id,
@@ -1609,6 +1874,10 @@ def new_blogpost(short_name):
 @blueprint.route('/<short_name>/<int:id>/update', methods=['GET', 'POST'])
 @login_required
 def update_blogpost(short_name, id):
+    if request.method == 'GET':
+        if request.args.get('user_id') != None:
+            url = url_for('.show_blogpost', short_name=short_name, id=id)
+            return url
 
     project, owner, ps = project_by_shortname(short_name)
 

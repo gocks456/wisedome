@@ -29,6 +29,13 @@ class BlogRepository(Repository):
     def __init__(self, db):
         self.db = db
 
+    def get_lately(self, user_id):
+        return self.db.session.query(Blogpost.id).filter_by(user_id=user_id).order_by(Blogpost.created.desc()).first()
+
+    def get_blogposts(self, project_id, owner):
+        return self.db.session.query(Blogpost).filter(Blogpost.project_id==project_id, Blogpost.user_id!=owner.id,
+                                                      Blogpost.published==True)
+
     def get(self, id):
         return self.db.session.query(Blogpost).get(id)
 

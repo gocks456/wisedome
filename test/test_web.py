@@ -2490,10 +2490,10 @@ class TestWeb(web.Helper):
         mock_webhook.return_value = html_request
 
         res = self.update_project(new_name="")
-        assert "This field is required" in str(res.data)
+        assert "This field is requiredaaaaa" in str(res.data)
 
         res = self.update_project(new_short_name="")
-        assert "This field is required" in str(res.data)
+        assert "This field is requiredbbbb" in str(res.data)
 
         res = self.update_project(new_description="")
         assert "You must provide a description." in str(res.data)

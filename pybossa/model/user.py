@@ -16,9 +16,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with PYBOSSA.  If not, see <http://www.gnu.org/licenses/>.
 
-from sqlalchemy import Integer, Boolean, Unicode, Text, String, BigInteger
+from sqlalchemy import Integer, Boolean, Unicode, Text, String, BigInteger, Numeric
 from sqlalchemy.schema import Column
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.mutable import MutableDict
 from flask_login import UserMixin
@@ -29,10 +29,14 @@ from pybossa.model import DomainObject, make_timestamp, make_uuid
 from pybossa.model.project import Project
 from pybossa.model.task_run import TaskRun
 from pybossa.model.blogpost import Blogpost
+from pybossa.model.point import Point
 
 
 class User(db.Model, DomainObject, UserMixin):
     '''A registered user of the PYBOSSA system'''
+
+    # 추가해야 할 칼럼 : 생년월일,포인트 등
+	# 필요 없는 칼럼 : 다 뭐가 뭔지 알아야 지우지 ㅋㅋ
 
     __tablename__ = 'user'
 
@@ -45,9 +49,20 @@ class User(db.Model, DomainObject, UserMixin):
     #: Fullname of the user.
     fullname = Column(Unicode(length=500), nullable=False)
     #: Language used by the user in the PYBOSSA server.
-    locale = Column(Unicode(length=254), default='en', nullable=False)
+    #locale = Column(Unicode(length=254), default='en', nullable=False)
+    locale = Column(Unicode(length=254), default='ko', nullable=False)
     api_key = Column(String(length=36), default=make_uuid, unique=True)
     passwd_hash = Column(Unicode(length=254), unique=True)
+
+    #20.02.18. User 성별 추가 male = M / female = F
+    sex = Column(Unicode(length=1), nullable=False)
+    birth = Column(Integer)
+    point_sum = Column(Integer, default=0)
+    current_point = Column(Integer, default=0)
+    answer_rate = Column(Numeric(4,1), default=0)
+    achievement = Column(JSONB)
+    
+
     ldap = Column(Unicode, unique=True)
     admin = Column(Boolean, default=False)
     pro = Column(Boolean, default=False)
@@ -72,6 +87,8 @@ class User(db.Model, DomainObject, UserMixin):
     projects = relationship(Project, backref='owner')
     blogposts = relationship(Blogpost, backref='owner')
 
+	#20.02.21. 추가 사항
+    points = relationship(Point, backref='user')
 
     def get_id(self):
         '''id for login system. equates to name'''
@@ -91,7 +108,7 @@ class User(db.Model, DomainObject, UserMixin):
     @classmethod
     def public_attributes(self):
         """Return a list of public attributes."""
-        return ['created', 'name', 'fullname', 'info',
+        return ['created', 'name', 'fullname', 'info', 'point_sum', 'answer_rate', 'current_point', 'achievement',
                 'n_answers', 'registered_ago', 'rank', 'score', 'locale']
 
     @classmethod

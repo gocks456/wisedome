@@ -36,8 +36,11 @@ class BlogpostAuth(object):
             return False
         project = self._get_project(blogpost, project_id)
         if blogpost is None:
-            return user.id in project.owners_ids or user.admin
-        return blogpost.user_id == project.owner_id == user.id or user.admin
+            #return user.id in project.owners_ids or user.admin
+            return user.id
+        #return blogpost.user_id == project.owner_id == user.id or user.admin
+        return user.id
+        # 모든 사용자가 blogpost를 작성할 수 있게 권한을 바꿈
 
     def _read(self, user, blogpost=None, project_id=None):
         if blogpost or project_id:

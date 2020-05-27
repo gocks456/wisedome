@@ -235,7 +235,7 @@ def n_blogposts(project_id):
        key_prefix="number_featured_projects")
 def _n_featured():
     """Return number of featured projects."""
-    sql = text('''SELECT COUNT(*) FROM project WHERE featured=true;''')
+    sql = text('''SELECT COUNT(*) FROM project WHERE featured=true AND complete=false;''')
 
     results = session.execute(sql)
     for row in results:
@@ -249,12 +249,13 @@ def get_all_featured(category=None):
     """Return a list of featured projects with a pagination."""
     sql = text(
         '''SELECT project.id, project.name, project.short_name, project.info,
-               project.created, project.updated, project.description,
-               "user".fullname AS owner
+               project.created, project.updated, project.description, project.all_point, project.condition, project.complete,
+               "user".fullname AS owner, project.category_id
            FROM project, "user"
            WHERE project.featured=true
            AND "user".id=project.owner_id
            AND "user".restrict=false
+           AND project.complete=false
            GROUP BY project.id, "user".id;''')
 
     results = session.execute(sql)
@@ -269,7 +270,11 @@ def get_all_featured(category=None):
                        overall_progress=overall_progress(row.id),
                        n_tasks=n_tasks(row.id),
                        n_volunteers=n_volunteers(row.id),
-                       info=row.info)
+                       info=row.info,
+                       all_point=row.all_point,
+                       condition=row.condition,
+                       category_id=row.category_id,
+                       complete=row.complete)
         projects.append(Project().to_public_json(project))
     return projects
 
@@ -310,8 +315,8 @@ def get_all_draft(category=None):
     """Return list of all draft projects."""
     sql = text(
         '''SELECT project.id, project.name, project.short_name, project.created,
-            project.description, project.info, project.updated,
-            "user".fullname AS owner
+            project.description, project.info, project.updated, project.all_point, project.condition, project.complete,
+            "user".fullname AS owner, project.category_id
            FROM "user", project
            WHERE project.owner_id="user".id
            AND "user".restrict=false
@@ -330,8 +335,45 @@ def get_all_draft(category=None):
                        overall_progress=overall_progress(row.id),
                        n_tasks=n_tasks(row.id),
                        n_volunteers=n_volunteers(row.id),
-                       info=row.info)
-        projects.append(Project().to_public_json(project))
+                       info=row.info,
+                       all_point=row.all_point,
+                       condition=row.condition,
+                       category_id=row.category_id,
+                       complete=row.complete)
+        projects.append(Project().to_public_json(project)) #XXX
+    return projects
+
+@memoize(timeout=timeouts.get('STATS_FRONTPAGE_TIMEOUT'))
+def get_all_complete(category=None):
+    """Return list of all draft projects."""
+    sql = text(
+        '''SELECT project.id, project.name, project.short_name, project.created,
+            project.description, project.info, project.updated, project.all_point, project.condition, project.complete,
+            "user".fullname AS owner, project.category_id
+           FROM "user", project
+           WHERE project.owner_id="user".id
+           AND "user".restrict=false
+           AND project.complete=true;''')
+
+    results = session.execute(sql)
+    projects = []
+    for row in results:
+        project = dict(id=row.id, name=row.name, short_name=row.short_name,
+                       created=row.created,
+                       updated=row.updated,
+                       description=row.description,
+                       owner=row.owner,
+                       last_activity=pretty_date(last_activity(row.id)),
+                       last_activity_raw=last_activity(row.id),
+                       overall_progress=overall_progress(row.id),
+                       n_tasks=n_tasks(row.id),
+                       n_volunteers=n_volunteers(row.id),
+                       info=row.info,
+                       all_point=row.all_point,
+                       condition=row.condition,
+                       category_id=row.category_id,
+                       complete=row.complete)
+        projects.append(Project().to_public_json(project)) #XXX
     return projects
 
 
@@ -355,7 +397,6 @@ def n_count(category):
                WHERE
                category.short_name=:category
                AND project.published=true
-               AND (project.info->>'passwd_hash') IS NULL
                GROUP BY project.id)
                SELECT COUNT(*) FROM uniq
                ''')
@@ -373,7 +414,7 @@ def get_all(category):
     """
     sql = text(
         '''SELECT project.id, project.name, project.short_name,
-           project.description, project.info, project.created, project.updated,
+           project.description, project.info, project.created, project.updated, project.all_point, project.condition, project.complete,
            project.category_id, project.featured, "user".fullname AS owner
            FROM "user", project
            LEFT OUTER JOIN category ON project.category_id=category.id
@@ -382,7 +423,7 @@ def get_all(category):
            AND "user".id=project.owner_id
            AND "user".restrict=false
            AND project.published=true
-           AND (project.info->>'passwd_hash') IS NULL
+           AND project.complete=false
            GROUP BY project.id, "user".id ORDER BY project.name;''')
 
     results = session.execute(sql, dict(category=category))
@@ -400,7 +441,11 @@ def get_all(category):
                        overall_progress=overall_progress(row.id),
                        n_tasks=n_tasks(row.id),
                        n_volunteers=n_volunteers(row.id),
-                       info=row.info)
+                       info=row.info,
+                       all_point=row.all_point,
+                       condition=row.condition,
+                       category_id=row.category_id,
+                       complete=row.complete)
         projects.append(Project().to_public_json(project))
     return projects
 

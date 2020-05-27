@@ -19,12 +19,10 @@
 from flask import current_app
 from flask_wtf import Form
 from flask_wtf.file import FileField, FileRequired
-from wtforms import IntegerField, DecimalField, TextField, BooleanField, \
-    SelectField, validators, TextAreaField, PasswordField, FieldList, SelectMultipleField
+from wtforms import IntegerField, DecimalField, TextField, BooleanField, SelectField, validators, TextAreaField, PasswordField, FieldList, SelectMultipleField, StringField
 from wtforms.fields.html5 import EmailField, URLField
 from wtforms.widgets import HiddenInput
 from flask_babel import lazy_gettext, gettext
-
 from pybossa.core import project_repo, user_repo
 from pybossa.sched import sched_variants
 from . import validator as pb_validator
@@ -56,19 +54,71 @@ class ProjectForm(Form):
                                           message=lazy_gettext("Name is already taken."))])
     short_name = TextField(lazy_gettext('Short Name'),
                            [validators.Required(),
-                            pb_validator.NotAllowedChars(),
+                            #pb_validator.NotAllowedChars(),
                             pb_validator.Unique(project_repo.get_by, 'short_name',
                                 message=lazy_gettext(
                                     "Short Name is already taken.")),
                             pb_validator.ReservedName('project', current_app)])
+# 이거 추가함
+    all_point = TextField(lazy_gettext('ALL Point'),
+                           [validators.Required(),
+                            pb_validator.CommaSeparatedIntegers(
+                                message=lazy_gettext("숫자만"))])
+#XXX
+    option_sex = SelectField(lazy_gettext('성별'), choices=[('0', '상관없음'), ('F', '여성만'), ('M', '남성만')])
+    option_age_start = TextField(lazy_gettext('부터'))
+    option_age_end = TextField(lazy_gettext('까지'))
+    option_all_achieve = SelectField(lazy_gettext('전체 업적'), choices=[('0', '상관없음'), ('1', 'BRONZE'), ('2', 'SILVER'), ('3', 'GOLD'), ('4', 'MASTER')])
+    option_cat_achieve = SelectField(lazy_gettext('카테고리 업적'), choices=[('0', '상관없음'), ('1', 'BRONZE'), ('2', 'SILVER'), ('3', 'GOLD'), ('4', 'MASTER')])
     long_description = TextAreaField(lazy_gettext('Long Description'),
                                      [validators.Required()])
     description = TextAreaField(lazy_gettext('Description'),
                                 [validators.Length(max=255)])
 
 
+#XXX
+
+
+class ExchangeForm(Form):
+
+#    def exchange_max():
+#        max_ex=1
+#        if (current_user.id > max):
+#            max_ex = current_user.id
+#        return max_ex
+
+    request_name = TextField(lazy_gettext('예금주'),
+                             [validators.Required(
+                                 message=lazy_gettext(
+                                     "예금주를 입력해주세요."))])
+    bank = TextField(lazy_gettext('은행'),
+                             [validators.Required(
+                                 message=lazy_gettext(
+                                     "은행을 입력해주세요."))])
+    account_number = TextField(lazy_gettext('계좌번호'),
+                             [validators.Required(
+                                 message=lazy_gettext(
+                                     "계좌번호를 입력해주세요.")),
+                              pb_validator.CommaSeparatedIntegers(
+                                  message=lazy_gettext("'-'를 제외한 숫자만 입력해주세요."))])
+    exchange_point = IntegerField(lazy_gettext('환급신청 포인트'),
+                             [validators.Required(),
+                              validators.NumberRange(
+                                  min=1, max=10000,
+                                  message=lazy_gettext('최대10,000 POINT까지 환전신청 가능합니다.'))])
+'''                              [validators.Required(),
+                               validators.NumberRange(
+                                   min=1, max=1000,
+                                   message=lazy_gettext('보유한 Point안에서만 환급 할 수 있습니다.'))])
+'''
+
+
+
 class ProjectUpdateForm(ProjectForm):
     id = IntegerField(label=None, widget=HiddenInput())
+    #20.03.02. 수정사항
+    all_point = TextField(lazy_gettext('ALL Point'))
+
     description = TextAreaField(lazy_gettext('Description'),
                             [validators.Required(
                                 message=lazy_gettext(
@@ -82,6 +132,11 @@ class ProjectUpdateForm(ProjectForm):
     password = TextField(lazy_gettext('Password'))
     webhook = TextField(lazy_gettext('Webhook'),
                         [pb_validator.Webhook()])
+#XXX
+    #option_sex = SelectField(lazy_gettext('성별'), choices=[('0', '상관없음'), ('여', '여성만'), ('남', '남성만')])
+    #option_age_start = TextField(lazy_gettext('부터'))
+    #option_age_end = TextField(lazy_gettext('까지'))
+
 
 
 class TaskPresenterForm(Form):
@@ -337,6 +392,7 @@ class LoginForm(Form):
 
     """Login Form class for signin into PYBOSSA."""
 
+    #Test_SJ = SelectField(u'Test SelectField', choices=[('a', '손'), ('b', '석'), ('c', '준')])
     email = TextField(lazy_gettext('E-mail'),
                       [validators.Required(
                           message=lazy_gettext("The e-mail is required"))])
@@ -351,23 +407,29 @@ class RegisterForm(Form):
 
     """Register Form Class for creating an account in PYBOSSA."""
 
-    err_msg = lazy_gettext("Full name must be between 3 and %(fullname)s "
-                           "characters long", fullname=USER_FULLNAME_MAX_LENGTH)
+    #err_msg = lazy_gettext("Full name must be between 3 and %(fullname)s "
+    #                       "characters long", fullname=USER_FULLNAME_MAX_LENGTH)
+    err_msg = lazy_gettext("이름을 입력하세요.")
     fullname = TextField(lazy_gettext('Full name'),
-                         [validators.Length(min=3, max=USER_FULLNAME_MAX_LENGTH, message=err_msg)])
+                         [validators.Length(min=2, max=USER_FULLNAME_MAX_LENGTH, message=err_msg)])
 
-    err_msg = lazy_gettext("User name must be between 3 and %(username_length)s "
-                           "characters long", username_length=USER_NAME_MAX_LENGTH)
-    err_msg_2 = lazy_gettext("The user name is already taken")
-    name = TextField(lazy_gettext('User name'),
-                         [validators.Length(min=3, max=USER_NAME_MAX_LENGTH, message=err_msg),
+    #err_msg = lazy_gettext("User name must be between 3 and %(username_length)s "
+    #                       "characters long", username_length=USER_NAME_MAX_LENGTH)
+    err_msg = lazy_gettext("별명을 입력하세요.")
+    #err_msg_2 = lazy_gettext("The user name is already taken")
+    err_msg_2 = lazy_gettext("이미 등록된 별명 입니다.")
+    #name = TextField(lazy_gettext('User name'),
+    name = StringField('별명 (설정하지 않을 시 이름으로 자동입력)',
+                         [validators.Length(min=2, max=USER_NAME_MAX_LENGTH, message=err_msg),
                           pb_validator.NotAllowedChars(),
                           pb_validator.Unique(user_repo.get_by, 'name', err_msg_2),
                           pb_validator.ReservedName('account', current_app)])
 
-    err_msg = lazy_gettext("Email must be between 3 and %(email_length)s "
-                           "characters long", email_length=EMAIL_MAX_LENGTH)
-    err_msg_2 = lazy_gettext("Email is already taken")
+    #err_msg = lazy_gettext("Email must be between 3 and %(email_length)s "
+    #                       "characters long", email_length=EMAIL_MAX_LENGTH)
+    err_msg = lazy_gettext("이메일을 입력하세요.")
+    #err_msg_2 = lazy_gettext("Email is already taken")
+    err_msg_2 = lazy_gettext("이미 등록된 이메일 입니다.")
     email_addr = EmailField(lazy_gettext('Email Address'),
                            [validators.Length(min=3,
                                               max=EMAIL_MAX_LENGTH,
@@ -375,8 +437,10 @@ class RegisterForm(Form):
                             validators.Email(),
                             pb_validator.Unique(user_repo.get_by, 'email_addr', err_msg_2)])
 
-    err_msg = lazy_gettext("Password cannot be empty")
-    err_msg_2 = lazy_gettext("Passwords must match")
+    #err_msg = lazy_gettext("Password cannot be empty")
+    #err_msg_2 = lazy_gettext("Passwords must match")
+    err_msg = lazy_gettext("비밀번호를 입력하세요.")
+    err_msg_2 = lazy_gettext("비밀번호가 일치하지 않습니다.")
     if enable_strong_password:
         password = PasswordField(
                         lazy_gettext('New Password'),
@@ -399,23 +463,29 @@ class UpdateProfileForm(Form):
 
     id = IntegerField(label=None, widget=HiddenInput())
 
-    err_msg = lazy_gettext("Full name must be between 3 and %(fullname)s "
-                           "characters long" , fullname=USER_FULLNAME_MAX_LENGTH)
+    #err_msg = lazy_gettext("Full name must be between 3 and %(fullname)s "
+    #                       "characters long" , fullname=USER_FULLNAME_MAX_LENGTH)
+    err_msg = lazy_gettext("이름을 입력하세요." , fullname=USER_FULLNAME_MAX_LENGTH)
     fullname = TextField(lazy_gettext('Full name'),
-                         [validators.Length(min=3, max=USER_FULLNAME_MAX_LENGTH, message=err_msg)])
+                         [validators.Length(min=2, max=USER_FULLNAME_MAX_LENGTH, message=err_msg)])
 
-    err_msg = lazy_gettext("User name must be between 3 and %(username_length)s "
-                           "characters long", username_length=USER_NAME_MAX_LENGTH)
-    err_msg_2 = lazy_gettext("The user name is already taken")
+    #err_msg = lazy_gettext("User name must be between 3 and %(username_length)s "
+    #                       "characters long", username_length=USER_NAME_MAX_LENGTH)
+    err_msg = lazy_gettext("별명을 입력하세요.")
+    #err_msg_2 = lazy_gettext("The user name is already taken")
+    err_msg_2 = lazy_gettext("이미 등록된 별명 입니다.")
     name = TextField(lazy_gettext('Username'),
                      [validators.Length(min=3, max=USER_NAME_MAX_LENGTH, message=err_msg),
                       pb_validator.NotAllowedChars(),
                       pb_validator.Unique(user_repo.get_by, 'name', err_msg_2),
                       pb_validator.ReservedName('account', current_app)])
 
-    err_msg = lazy_gettext("Email must be between 3 and %(email_length)s "
-                           "characters long", email_length=EMAIL_MAX_LENGTH)
-    err_msg_2 = lazy_gettext("Email is already taken")
+
+    #err_msg = lazy_gettext("Email must be between 3 and %(email_length)s "
+    #                       "characters long", email_length=EMAIL_MAX_LENGTH)
+    err_msg = lazy_gettext("이메일을 입력하세요.")
+    #err_msg_2 = lazy_gettext("Email is already taken")
+    err_msg_2 = lazy_gettext("이미 등록된 이메일 입니다.")
     email_addr = EmailField(lazy_gettext('Email Address'),
                            [validators.Length(min=3,
                                               max=EMAIL_MAX_LENGTH,

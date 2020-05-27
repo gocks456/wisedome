@@ -18,6 +18,7 @@
 
 from sqlalchemy import or_, func
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.attributes import flag_modified
 
 from pybossa.repositories import Repository
 from pybossa.model.user import User
@@ -29,9 +30,18 @@ from flask import current_app
 
 
 class UserRepository(Repository):
-
     def __init__(self, db):
         self.db = db
+
+    def get_current_point(self, user_id):
+        return self.db.session.query(User.current_point).filter_by(id=user_id).first()
+
+    def update_achievement(self, user_id, achieve, achieve_id):
+        user = self.db.session.query(User).get(user_id)
+        user.achievement[achieve_id] = achieve
+        flag_modified(user, "achievement")
+        self.db.session.add(user)
+        self.db.session.commit()
 
     def get(self, id):
         return self.db.session.query(User).get(id)
@@ -106,7 +116,7 @@ class UserRepository(Repository):
             raise DBIntegrityError(e)
 
     def _validate_can_be(self, action, user):
-        if not isinstance(user, User):
+        if not isinstance(user, User): #isinstance( a , b ) = a가 b자료형이 맞는지
             name = user.__class__.__name__
             msg = '%s cannot be %s by %s' % (name, action, self.__class__.__name__)
             raise WrongObjectError(msg)
