@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+{% set active_page = "account" %}
+{% import "account/_helpers.html" as helper %}
+{% from "projects/_helpers.html" import render_grid_projects, broken_image %}
+{% import "privacy/locked.html" as privacy %}
+{% import "account/user_pref_metadata.html" as user_pref_metadata %}
+
+{% block content %}
+<style>
+.layer-achieve-card {
+	text-align: center;
+}
+.card {
+	max-width: 230px;
+	width: 50%;
+	height: 250px;
+	border-radius: 10px;
+	display: inline-block;
+	transition: 0.3s;
+	margin-top: 30px;
+	margin-left: 30px;
+	margin-bottom: 30px;
+	position: relative;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+}
+.card:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	cursor: pointer;
+}
+.header {
+	width: 100%;
+	height: 80%;
+}
+.card-body {
+	height: 20%;
+	padding: 2px 16px;
+
+}
+.card-title {
+	font-size: 20px;
+	font-weight:bold;
+	text-align: center;
+}
+.header img{
+	width: 100%;
+	height: 100%;
+}
+.layer h2 {
+	margin-top: 30px;
+	font-weight: bold;
+}
+.layer p {
+	margin-top: 30px;
+	font-size: 20px;
+}
+.layer img {
+	margin-top: 10px;
+	border: 5px double #546E7A;
+	width: 50%;
+}
+
+.layer {
+	position: absolute;
+	z-index: 51;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	height: 50%;
+	width: 60%;
+	max-width: 350px;
+	max-height: 500px;
+	margin: auto;
+	border: 5px solid #546E7A;
+	background-color: #fff;
+	text-align: center;
+	word-wrap: break-word;
+}
+.layer-pop{
+	position: fixed;
+	z-index: 50;
+	top: 0;
+	left: 0;
+	display: none;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+</style>
+
+<section class="account public-profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8" style="margin-top:30px;">
+                {% if enforce_privacy and (current_user.is_anonymous or (current_user.is_authenticated and not current_user.admin)) %}
+                {{ privacy.render_lock_page() }}
+                {% else %}
+                <div class="text-center">
+                    {{helper.render_user_thumbnail(user, upload_method, class='col-xs-4 img-circle')}}
+                </div>
+                <div class="text-center">
+                    <h1 id="user-data">{{user.fullname}}</h1>
+                    {% if user.rank %}
+                    <h2><i class="fa fa-trophy"></i> {{ _('Rank')}}: {{user.rank}}</h2>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% if config.upref_mdata %}
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <div class="col-md-offset-15 col-md-10">
+                    {{ user_pref_metadata.render_upref_mdata(user, form, can_update, input_form) }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{#
+{% if projects_created %}
+{{render_grid_projects(projects_created, "Created Projects", upload_method, id="created-projects")}}
+{% endif %}
+#} {#  만든 프로젝트가 뜸 #}
+{# {% if projects %}
+{{render_grid_projects(projects, "Contributions", upload_method, id="contributed-projects")}}
+{% endif %} #} {# 이거 대신 업적 띄움 #}
+{{helper.render_user_achievement(user, upload_method) }}
+{% endif %}
+{{ broken_image() }}
+
+<script src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var achieve = {{user.achievement|safe}};
+		for(var row in achieve){
+			console.log(achieve[row]);
+			if(achieve[row] == "")
+				continue;
+			var src=$('#'+row).attr("src");
+			if(row == 'category') {
+				var s_achieve = achieve[row].split('_');
+				var src = src.replace(row, s_achieve[0]+'_category');
+			}
+			else if(row == 'rank'){
+
+			}
+			else{
+				var src = src.replace(row, achieve[row]);
+			}
+			$('#'+row).attr("src",src);
+		}
+		$(document).mouseup(function(e){
+			var popup_layer = $("#popup");
+			if(popup_layer.has(e.target).length === 0)
+				popup_layer.fadeOut();
+		});	
+	});
+
+$('.btn-layer').click(function(){
+	var $id = $(this).data('id');
+	console.log($id);
+	var achieve = {{user.achievement|safe}};
+	if(achieve[$id] != '')
+		layer_popup($id);
+});
+
+function get_text(text) {
+	var s_text = text.split('_');
+	switch(s_text[0]){
+		case "master":
+			if(s_text[1] == 'all'){
+				return "모든 프로젝트에서 포인트를 10% 더 획득 할 수 있습니다.";
+			}
+			else if(s_text[1] == 'rank'){
+				return "RANK 순위"
+			}
+			else{
+				return s_text[1] + " 프로젝트에서 포인트를 15% 더 획득 할 수 있습니다..";
+			}
+		default:
+			if(s_text[1] == 'all'){
+				return "더 높은 단가의 프로젝트를 수행할 수 있습니다.";
+			}
+			else if(s_text[1] == 'rank'){
+				return "RANK 순위"
+			}
+			else{
+				return "더 높은 단가의 "+ s_text[1] +" 프로젝트를 수행 할 수 있습니다.";
+			}
+	}
+}
+
+function layer_popup(id){
+	var src = $('#'+id).attr("src");
+	$('#popup-img').attr("src",src);
+	var title = {{user.achievement|safe}};
+	var title = title[id];
+	text = get_text(title);
+
+	s_title = title.split('_');
+	title = s_title[0].toUpperCase();
+	if(s_title[1] != 'all') {
+		title = s_title[1] + '_' + title;
+	}
+	$('.popup-title').text(title);
+	$('.popup-text').text(text);
+	$('#popup').fadeIn();
+	return false;
+}
+</script>
+
+
+{% endblock %}
+{% block extrajs %}
+{% include "account/js/metadata.js" %}
+{% endblock %}

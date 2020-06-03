@@ -1,0 +1,41 @@
+{% extends "projects/base.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% set active_link = "blog" %}
+{% set section = "" %}
+
+{% block projectcontent %}
+{% from "_formhelpers.html" import render_field %}
+<div id="editorpybossa" style="margin-top:30px;">
+	<Imagecrop/>
+</div>
+
+
+<script src="/static/js/editor.min.js?ver=14"></script>
+<script src="/static/js/add-js/jquery-1.12.4.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$(".file-upload-form").hide();
+		$("#cropit-ctn").hide();
+	});
+
+$(document).on("click", '.btn-primary', function(){
+	var url = window.location.href;
+	$.ajax({
+		type:"GET",
+		url: url,
+		data: {
+			user_id : {{current_user.id}}
+		},
+		success:function(data){
+			alert("게시글 수정 완료");
+			re_url = url.replace(window.location.pathname, data);
+			window.location.href = re_url;
+		},
+		dataType: "text"
+	});
+});
+</script>
+
+{% endblock %}
+

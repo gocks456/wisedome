@@ -1,0 +1,70 @@
+{% extends "projects/base.html" %}
+{% from "projects/_helpers.html" import render_project_card_option %}
+{% set active_page = "projects" %}
+{% set active_link = "blog" %}
+
+{% block projectcontent %}
+
+<div class="row" style="margin-top:30px;">
+	<div class="table-responsive">
+		<table id="blog-post" class="table table-hover">
+			<thead>
+				<tr style="background-color:lightgray;">
+					<th style="width:10%; text-align:center;">번호</th>
+					<th style="width:60%; text-align:center;">제목</th>
+					<th style="width:15%; text-align:center;">작성자</th>
+					<th style="width:15%; text-align:center;">작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for temppost in temp_posts | sort(attribute='id', reverse=True) %}
+				<tr style="cursor:pointer;" onclick="location.href='{{url_for('project.show_blogpost', short_name=project.short_name, id=temppost.id)}}'">
+					<td style="text-align:center;"><strong>임시</strong></td>
+					<td>{{temppost.title}}</td> <!-- 새로운 글인지 아닌지 비교할 코드-->
+					{% if current_user.id == owner.id %}
+					<td style="text-align:center;">{{temppost.user_name}}</td>
+					{% else %}
+					<td style="text-align:center;">{{current_user.fullname}}</td>
+					{% endif %}
+					<td style="text-align:center;">{{temppost.created[0:10]}}</td>
+				</tr>
+				{% endfor %}
+				{% for annopost in anno_posts | sort(attribute='id', reverse=True) %}
+				<tr style="cursor:pointer;" onclick="location.href='{{url_for('project.show_blogpost', short_name=project.short_name, id=annopost.id)}}'">
+					<td style="text-align:center;"><strong>공지</strong></td>
+					<td>{{annopost.title}}</td>
+					<td style="text-align:center;">관리자</td>
+					<td style="text-align:center;">{{annopost.created[0:10]}}</td>
+				</tr>
+				{% endfor %}
+				{% for blogpost in blogposts | sort(attribute='id', reverse=True) %}
+				<tr style="cursor:pointer;" onclick="location.href='{{url_for('project.show_blogpost', short_name=project.short_name, id=blogpost.id)}}'">
+					<td style="text-align:center;">{{blogpost.id}}</td> <!--관리자가 작성한 글은 공지로 변경-->
+					<td>{{blogpost.title}}</td> <!-- 새로운 글인지 아닌지 비교할 코드-->
+					<td style="text-align:center;">{{blogpost.user_name}}</td>
+					<td style="text-align:center;">{{blogpost.created[0:10]}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div style="margin-top: 15px; text-align:right;">
+		<a class="btn btn-warning" href="{{url_for('project.new_blogpost', short_name=project.short_name)}}">글쓰기</a>
+	</div>
+</div>
+
+<script src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/add-js/datatables.min.js')}}"></script>
+<link rel="stylesheet" type"text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+
+<script>
+	$(document).ready(function(){
+	});
+
+	$(function($){
+		    $("#blog-post").dataTable( {
+				 "ordering": false
+				    } );
+	});
+</script>
+{% endblock %}

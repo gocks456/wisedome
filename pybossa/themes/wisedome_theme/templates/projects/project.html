@@ -1,0 +1,10 @@
+{% set active_link = "info" %}
+{% extends "/projects/base.html" %}
+
+{% block projectcontent %}
+<h2>할당된 총 포인트 : {{ project.all_point }}</h2>
+<hr/>
+    {% if project.long_description != project.description  %}
+    {{ project.long_description | markdown }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,2175 @@
+# Japanese translations for PROJECT.
+# Copyright (C) 2015 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# Yu Fujimoto <yu.fujimoto@geo-nara.net>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-01-28 05:05+0000\n"
+"PO-Revision-Date: 2015-07-13 10:40+0900\n"
+"Last-Translator: Yu Fujimoto <yu.fujimoto@geo-nara.net>\n"
+"Language: ja\n"
+"Language-Team: ja <yu.fujimoto@geo-nara.net>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#~ msgid "<strong>注意</strong> You will need to upload the tasks using the"
+#~ msgstr ""
+
+#~ msgid ""
+#~ msgstr ""
+
+#~ msgid "The file you uploaded has two headers with the same name."
+#~ msgstr "アップロードされたファイルは、同じ名前のヘッダーが複数含まれているようです。"
+
+#~ msgid "The file you uploaded has an empty header on column %s."
+#~ msgstr "アップロードされたファイルは、%s 列に空白のヘッダーがあります。"
+
+#~ msgid "The file you uploaded has an extra value on row %s."
+#~ msgstr ""
+
+#~ msgid "Oops! That file doesn't look like the right file."
+#~ msgstr "おっと！そのファイルは間違っているようです。"
+
+#~ msgid "It looks like there were no new records to import"
+#~ msgstr "インポートするべき新規レコードがありません"
+
+#~ msgid "new tasks were imported successfully"
+#~ msgstr "複数の新しいタスクが無事にインポートされました"
+
+#~ msgid "new task was imported successfully"
+#~ msgstr "一つの新しいタスクが無事にインポートされました。"
+
+#~ msgid "Name is already taken."
+#~ msgstr "名前は取得済みです。"
+
+#~ msgid "Short Name"
+#~ msgstr "省略名"
+
+#~ msgid "Short Name is already taken."
+#~ msgstr "省略名は取得済みです。"
+
+#~ msgid "Long Description"
+#~ msgstr "長い説明"
+
+#~ msgid "You must provide a description."
+#~ msgstr "説明を書いて下さい。"
+
+#~ msgid "Allow Anonymous Contributors"
+#~ msgstr "匿名の参加者を許可します。"
+
+#~ msgid "Category"
+#~ msgstr "カテゴリ"
+
+#~ msgid "Hide?"
+#~ msgstr "隠しますか？"
+
+#~ msgid "Password (leave blank for no password)"
+#~ msgstr "パスワード（空白の場合はパスワードを設定しません）"
+
+#~ msgid "Webhook"
+#~ msgstr "Webhook"
+
+#~ msgid "Task IDs"
+#~ msgstr "タスクID"
+
+#~ msgid "Title"
+#~ msgstr "タイトル"
+
+#~ msgid "You must enter a title for the post."
+#~ msgstr "投稿するにはタイトルを入力する必要があります。"
+
+#~ msgid "Body"
+#~ msgstr "本文"
+
+#~ msgid "You must enter some text for the post."
+#~ msgstr "投稿するには何らかの文章を入力する必要があります。"
+
+#~ msgid "Password"
+#~ msgstr "パスワード"
+
+#~ msgid "You must enter a password"
+#~ msgstr "パスワードを入力する必要があります。"
+
+#~ msgid "You must provide a URL"
+#~ msgstr "URLを入力する必要があります"
+
+#~ msgid "Oops! That's not a valid URL. You must provide a valid URL"
+#~ msgstr "おっと！URLが有効ではありません。有効なURLを入力してください。"
+
+#~ msgid "URL"
+#~ msgstr "URL"
+
+#~ msgid "You must provide an EpiCollect Plus project name"
+#~ msgstr "EpiCollect Plusのプロジェクト名を入力する必要があります"
+
+#~ msgid "You must provide a Form name for the project"
+#~ msgstr "プロジェクトのフォーム名を入力する必要があります"
+
+#~ msgid "Project Name"
+#~ msgstr "プロジェクト名"
+
+#~ msgid "Form name"
+#~ msgstr "フォーム名"
+
+#~ msgid "You must provide a valid Flickr album ID"
+#~ msgstr "有効なFlickrのアルバムIDを入力する必要があります"
+
+#~ msgid "Album ID"
+#~ msgstr "アルバムID"
+
+#~ msgid "The e-mail is required"
+#~ msgstr "Eメールが必要です"
+
+#~ msgid "You must provide a password"
+#~ msgstr "パスワードが必要です"
+
+#~ msgid "Full name must be between 3 and %s characters long"
+#~ msgstr "フルネームは3〜%s の文字数である必要があります"
+
+#~ msgid "Full name"
+#~ msgstr "氏名"
+
+#~ msgid "User name must be between 3 and %s characters long"
+#~ msgstr "ユーザー名は3〜%s の文字数である必要があります"
+
+#~ msgid "The user name is already taken"
+#~ msgstr "ユーザー名は取得済みです"
+
+#~ msgid "User name"
+#~ msgstr "ユーザー名"
+
+#~ msgid "Email must be between 3 and %s characters long"
+#~ msgstr "Eメールは3〜%sの文字数である必要があります"
+
+#~ msgid "Email is already taken"
+#~ msgstr "Eメールは取得済みです"
+
+#~ msgid "Email Address"
+#~ msgstr "Eメール"
+
+#~ msgid "Password cannot be empty"
+#~ msgstr "パスワードは空白にはできません"
+
+#~ msgid "Passwords must match"
+#~ msgstr "パスワードは一致する必要があります"
+
+#~ msgid "New Password"
+#~ msgstr "新しいパスワード"
+
+#~ msgid "Repeat Password"
+#~ msgstr "パスワード再入力"
+
+#~ msgid "Username"
+#~ msgstr "ユーザー名"
+
+#~ msgid "Get email notifications"
+#~ msgstr "お知らせメールの受信"
+
+#~ msgid "Language"
+#~ msgstr "表示言語"
+
+#~ msgid "CKAN API Key"
+#~ msgstr "CKAN APIキー"
+
+#~ msgid "Privacy Mode"
+#~ msgstr "プライバシー・モード"
+
+#~ msgid "English"
+#~ msgstr "英語"
+
+#~ msgid "Spanish"
+#~ msgstr "スペイン語"
+
+#~ msgid "French"
+#~ msgstr "フランス語"
+
+#~ msgid "German"
+#~ msgstr "ドイツ語"
+
+#~ msgid "Italian"
+#~ msgstr "イタリア語"
+
+#~ msgid "Japanese"
+#~ msgstr "日本語"
+
+#~ msgid "Current password"
+#~ msgstr "現在のパスワード"
+
+#~ msgid "New password"
+#~ msgstr "新規パスワード"
+
+#~ msgid "Repeat password"
+#~ msgstr "パスワード再入力"
+
+#~ msgid "Avatar"
+#~ msgstr "プロフィール画像"
+
+#~ msgid "This item already exists"
+#~ msgstr "この項目は既に存在しています"
+
+#~ msgid "%sand space symbols are forbidden"
+#~ msgstr "%s と空白は禁止されています"
+
+#~ msgid "Only comma separated values are allowed, no spaces"
+#~ msgstr "カンマ区切り（CSVファイル）のみが利用でき、スペース区切りは利用できません"
+
+#~ msgid "Invalid URL"
+#~ msgstr "無効なURL"
+
+#~ msgid "Connection error"
+#~ msgstr "接続エラー"
+
+#~ msgid "This name is used by the system."
+#~ msgstr "この名前はシステムで使われています。"
+
+#~ msgid "Your profile"
+#~ msgstr "プロフィール"
+
+#~ msgid "External Services"
+#~ msgstr "外部サービス"
+
+#~ msgid "Reset"
+#~ msgstr "リセット"
+
+#~ msgid "Refresh"
+#~ msgstr ""
+
+#~ msgid "Order by"
+#~ msgstr "並べ替え："
+
+#~ msgid "name"
+#~ msgstr "名前"
+
+#~ msgid "date"
+#~ msgstr "日付"
+
+#~ msgid "activity"
+#~ msgstr "活動"
+
+#~ msgid "progress"
+#~ msgstr "進捗"
+
+#~ msgid "for any of the template projects."
+#~ msgstr "をプロジェクトに適用します。"
+
+#~ msgid "Welcome back"
+#~ msgstr "おかえりなさい"
+
+#~ msgid "Ooops, Incorrect email/password"
+#~ msgstr "おっと！Eメールあるいはパスワードが間違っているようです。"
+
+#~ msgid "Please correct the errors"
+#~ msgstr "エラーを修正してください。"
+
+#~ msgid "You are now signed out"
+#~ msgstr "サインアウトしました"
+
+#~ msgid "Register"
+#~ msgstr "登録"
+
+#~ msgid "Subscribe to our Newsletter"
+#~ msgstr "ニュースレターの購読"
+
+#~ msgid "Thanks for signing-up"
+#~ msgstr "サインアップ頂きありがとうございます。"
+
+#~ msgid "Your email has been validated."
+#~ msgstr "Eメールアドレスが確認されました。"
+
+#~ msgid "Profile"
+#~ msgstr "プロファイル"
+
+#~ msgid "Your profile has been updated!"
+#~ msgstr "プロファイルが更新されました！"
+
+#~ msgid "Yay, you changed your password succesfully!"
+#~ msgstr "確かに、パスワードは変更されました！"
+
+#~ msgid "Your current password doesn't match the one in our records"
+#~ msgstr "パスワードが一致しません"
+
+#~ msgid "You reset your password successfully!"
+#~ msgstr "パスワードは無事にリセットされました！"
+
+#~ msgid "We've send you an email with account recovery instructions!"
+#~ msgstr "アカウントの回復方法についての案内をEメールで送信しました！"
+
+#~ msgid "Something went wrong, please correct the errors on the form"
+#~ msgstr "何か間違いがあるようです。フォームのエラーを修正してください。"
+
+#~ msgid "New API-KEY generated"
+#~ msgstr "新しいAPIキーが生成されました"
+
+#~ msgid "Category added"
+#~ msgstr "カテゴリーが追加されました"
+
+#~ msgid "Category deleted"
+#~ msgstr "カテゴリーは消去されました"
+
+#~ msgid "Category updated"
+#~ msgstr "カテゴリーが更新されました"
+
+#~ msgid "Dashboard jobs enqueued, refresh page in a few minutes"
+#~ msgstr "ダッシュボードのジョブは待機状態です。更新まで数分お待ちください。"
+
+#~ msgid "Project created!"
+#~ msgstr "プロジェクトが作成されました。"
+
+#~ msgid "You can check the "
+#~ msgstr ""
+
+#~ msgid "Guide and Documentation"
+#~ msgstr ""
+
+#~ msgid "for adding tasks, a thumbnail, using PyBossa.JS, etc."
+#~ msgstr ""
+
+#~ msgid "Task presenter added!"
+#~ msgstr "タスク提供者が追加されました！"
+
+#~ msgid "<strong>Note</strong> You will need to upload the tasks using the"
+#~ msgstr ""
+
+#~ msgid "CSV importer"
+#~ msgstr ""
+
+#~ msgid "Project deleted!"
+#~ msgstr "プロジェクトは削除されました"
+
+#~ msgid "Project updated!"
+#~ msgstr "プロジェクトは更新されました"
+
+#~ msgid "You must provide a file to change the avatar"
+#~ msgstr "プロフィール画像を変更するためのファイルが必要です"
+
+#~ msgid "Importing tasks, this may take a while, wait..."
+#~ msgstr "タスクをインポート中です。しばらく時間がかかるかもしれません。お待ちください。"
+
+#~ msgid "Success! Tasks will be imported daily."
+#~ msgstr "成功です！タスクは日毎にインポートされました。"
+
+#~ msgid "Sorry, incorrect password"
+#~ msgstr "申し訳ございませんが、パスワードが間違っているようです。"
+
+#~ msgid "All the tasks and associated task runs have been deleted"
+#~ msgstr "稼働中の全てのタスクおよび関連するタスクは削除されました。"
+
+#~ msgid "Exporting data..., this may take a while"
+#~ msgstr "データをエクスポートしています…。この作業には時間がかかる場合があります。"
+
+#~ msgid "Data exported to "
+#~ msgstr "データは次の場所にエクスポートされました："
+
+#~ msgid "Redundancy of Tasks updated!"
+#~ msgstr "タスクの冗長性が更新されました！"
+
+#~ msgid "Project Task Scheduler updated!"
+#~ msgstr "プロジェクト・タスク・スケジューラーが更新されました！"
+
+#~ msgid "Task priority has been changed"
+#~ msgstr "タスクの優先順位が変更されました"
+
+#~ msgid "Write a new post"
+#~ msgstr "新しい投稿を執筆する"
+
+#~ msgid "Blog post created!"
+#~ msgstr "ブロク投稿が作成されました！"
+
+#~ msgid "Edit a post"
+#~ msgstr "投稿の編集"
+
+#~ msgid "Blog post updated!"
+#~ msgstr "ブログ投稿は更新されました。"
+
+#~ msgid "Hidden"
+#~ msgstr "隠す"
+
+#~ msgid "No"
+#~ msgstr "いいえ"
+
+#~ msgid "Community"
+#~ msgstr "コミュニティ"
+
+#~ msgid "Projects"
+#~ msgstr "プロジェクト"
+
+#~ msgid "Create"
+#~ msgstr "作成"
+
+#~ msgid "About"
+#~ msgstr ""
+
+#~ msgid "My Profile"
+#~ msgstr "ユーザー・プロフィール"
+
+#~ msgid "My Projects"
+#~ msgstr "ユーザー・プロジェクト"
+
+#~ msgid "My Settings"
+#~ msgstr "個人設定"
+
+#~ msgid "Admin Site"
+#~ msgstr "管理ページ"
+
+#~ msgid "Sign Out"
+#~ msgstr "サインアウト"
+
+#~ msgid "Sign in"
+#~ msgstr "サインイン"
+
+#~ msgid "Resources"
+#~ msgstr "リソース"
+
+#~ msgid "Docs"
+#~ msgstr "ドキュメント"
+
+#~ msgid "Terms of Use"
+#~ msgstr "利用規約"
+
+#~ msgid "Cookies Policy"
+#~ msgstr "クッキーの利用ポリシー"
+
+#~ msgid "Stats"
+#~ msgstr "統計"
+
+#~ msgid "Licenses"
+#~ msgstr "ライセンス"
+
+#~ msgid "Overview"
+#~ msgstr "概要"
+
+#~ msgid "Data"
+#~ msgstr "データ"
+
+#~ msgid "Content"
+#~ msgstr "内容"
+
+#~ msgid "Technologies"
+#~ msgstr "技術"
+
+#~ msgid "CKAN"
+#~ msgstr "CKAN"
+
+#~ msgid "EpiCollect"
+#~ msgstr "EpiCollect"
+
+#~ msgid "Contact"
+#~ msgstr "連絡先"
+
+#~ msgid "Email"
+#~ msgstr "Eメール"
+
+#~ msgid "Twitter"
+#~ msgstr "Twitter"
+
+#~ msgid "I've done"
+#~ msgstr "完了しました"
+
+#~ msgid "tasks for the @PyBossa project:"
+#~ msgstr "＠PyBossaプロジェクトのタスク"
+
+#~ msgid "Do you want to help?"
+#~ msgstr "手助けしてみませんか？"
+
+#~ msgid "Tweet"
+#~ msgstr "ツイートする"
+
+#~ msgid "Nick"
+#~ msgstr "ニックネーム"
+
+#~ msgid "E-mail"
+#~ msgstr "Eメール"
+
+#~ msgid "Rank"
+#~ msgstr "ランク"
+
+#~ msgid "of"
+#~ msgstr ""
+
+#~ msgid "with a Score of"
+#~ msgstr ""
+
+#~ msgid "contributed tasks"
+#~ msgstr "貢献済みのタスク"
+
+#~ msgid "The user has not contributed to any tasks yet"
+#~ msgstr "まだ、作業に貢献していません。"
+
+#~ msgid "Joined"
+#~ msgstr "加わりました"
+
+#~ msgid "API key"
+#~ msgstr "APIキー"
+
+#~ msgid "Edit your profile"
+#~ msgstr "プロファイルの編集"
+
+#~ msgid "Prev"
+#~ msgstr "前へ"
+
+#~ msgid "Next"
+#~ msgstr "次へ"
+
+#~ msgid "Just one more step, please"
+#~ msgstr "もうあと１ステップです"
+
+#~ msgid ""
+#~ "In order to confirm your identity, "
+#~ "we've sent an email to the address"
+#~ " you just provided. Please, check it"
+#~ " out and click on the link "
+#~ "you'll find to create your account "
+#~ "at"
+#~ msgstr "たった今、ユーザーを特定するために、入力して頂いたメールアドレスにメールを送信しました。受信したメールを確認し、新規アカウントを作成するためのリンクをクリックしてください。"
+
+#~ msgid ""
+#~ "If you are not receiving the "
+#~ "email, please check the junk folder. "
+#~ "If it's not there please drop us"
+#~ " an email to"
+#~ msgstr "もしもメールが受信できていない場合、迷惑メールをチェックしてください。メールが受信できていない場合には次のアドレスにご連絡ください："
+
+#~ msgid "In the meantime, you can check some of the amazing"
+#~ msgstr "その間、いくつかの素晴らしい機能を確認することができます。"
+
+#~ msgid "projects"
+#~ msgstr "プロジェクト"
+
+#~ msgid "and contribute to them as anonymous"
+#~ msgstr "また、匿名でこれらに貢献することができます"
+
+#~ msgid "registered users"
+#~ msgstr "名の登録ユーザー"
+
+#~ msgid "Leaderboard"
+#~ msgstr "リーダーボード"
+
+#~ msgid "Newsletter"
+#~ msgstr "ニュースレター"
+
+#~ msgid ""
+#~ "If you want to be updated with our new features, projects, and\n"
+#~ "        scientific projects, subscribe to our newsletter."
+#~ msgstr "新しい機能、新規プロジェクト、および科学プロジェクトを更新したい場合は、私達のニュースレターを講読してください。"
+
+#~ msgid "Sign me up!"
+#~ msgstr "ログイン"
+
+#~ msgid "Not interested"
+#~ msgstr "興味がありません"
+
+#~ msgid "Reset your Password"
+#~ msgstr "パスワードのリセット"
+
+#~ msgid "my e-mail"
+#~ msgstr "Eメール"
+
+#~ msgid "Reset my Password"
+#~ msgstr "パスワードのリセット"
+
+#~ msgid "Cancel"
+#~ msgstr "キャンセル"
+
+#~ msgid "my new password"
+#~ msgstr "新しいパスワード"
+
+#~ msgid "my new password again"
+#~ msgstr "パスワードの再入力"
+
+#~ msgid "Your Profile"
+#~ msgstr "プロファイル"
+
+#~ msgid "Your Contributions"
+#~ msgstr "現在の貢献状況"
+
+#~ msgid "Contribute!"
+#~ msgstr "貢献する"
+
+#~ msgid "Published"
+#~ msgstr "公開済み"
+
+#~ msgid "Draft"
+#~ msgstr "起草中"
+
+#~ msgid "You have not created a project"
+#~ msgstr "プロジェクトが作成されていません。"
+
+#~ msgid "Create a Project"
+#~ msgstr "プロジェクトを作成する"
+
+#~ msgid "Note"
+#~ msgstr "ノート"
+
+#~ msgid "By click the"
+#~ msgstr ""
+
+#~ msgid "Create account button"
+#~ msgstr "アカウント作成ボタン"
+
+#~ msgid "below you are agreeing to the"
+#~ msgstr ""
+
+#~ msgid "terms of use"
+#~ msgstr "利用規約"
+
+#~ msgid "and"
+#~ msgstr "および"
+
+#~ msgid "data"
+#~ msgstr "日付"
+
+#~ msgid "Create an account"
+#~ msgstr "アカウントを作成する"
+
+#~ msgid "my full name"
+#~ msgstr "フルネーム"
+
+#~ msgid "myusername"
+#~ msgstr "ユーザーネーム"
+
+#~ msgid "hello@mywebsite.org"
+#~ msgstr "hello@mywebsite.org"
+
+#~ msgid "my secret password"
+#~ msgstr "秘密のパスワード"
+
+#~ msgid "Sign in button"
+#~ msgstr "サインインボタン"
+
+#~ msgid ""
+#~ "below you are agreeing to\n"
+#~ "    the"
+#~ msgstr ""
+
+#~ msgid "Sign in with Twitter"
+#~ msgstr "Twitterでログイン"
+
+#~ msgid "Sign in with Facebook"
+#~ msgstr "Facebookでログイン"
+
+#~ msgid "Sign in with Google"
+#~ msgstr "Googleでログイン"
+
+#~ msgid "Or Sign in with your PyBossa account"
+#~ msgstr "あるいは、PyBossaアカウントでログイン"
+
+#~ msgid "Sign in with your PyBossa account"
+#~ msgstr "PyBossaアカウントでログイン"
+
+#~ msgid " Create a new account!"
+#~ msgstr "新しいアカウントを作成"
+
+#~ msgid "Forgot Password"
+#~ msgstr "パスワードを忘れた方へ"
+
+#~ msgid "Update your profile"
+#~ msgstr "プロフィールの更新"
+
+#~ msgid "Upload"
+#~ msgstr "アップロード"
+
+#~ msgid "Save the changes"
+#~ msgstr "変更の保存"
+
+#~ msgid "Change your Password"
+#~ msgstr "パスワード変更"
+
+#~ msgid "Save the Changes"
+#~ msgstr "変更を保存する"
+
+#~ msgid "Do you want to reset your personal API Key?"
+#~ msgstr "APIキーをリセットしますか？"
+
+#~ msgid "No, do not reset the API key!"
+#~ msgstr "いいえ、APIキーのリセットはしません！"
+
+#~ msgid "Recover your lost password"
+#~ msgstr "パスワードのリセット"
+
+#~ msgid "Hello"
+#~ msgstr ""
+
+#~ msgid "We received a request to recover your password for"
+#~ msgstr ""
+
+#~ msgid "If you did not request this, please ignore this email"
+#~ msgstr ""
+
+#~ msgid "To recover your password, please visit the URL below"
+#~ msgstr ""
+
+#~ msgid "Click here to recover your account"
+#~ msgstr ""
+
+#~ msgid "Regards"
+#~ msgstr ""
+
+#~ msgid "Recover your password"
+#~ msgstr "パスワードのリセット"
+
+#~ msgid "Our records show that you use your"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "account to sign in. Please use the"
+#~ " same account to sign-in again. "
+#~ "If you forgot the password to your"
+#~ msgstr ""
+
+#~ msgid "account, please contact"
+#~ msgstr " "
+
+#~ msgid "Team"
+#~ msgstr ""
+
+#~ msgid "Validate your account"
+#~ msgstr "アカウントを作成"
+
+#~ msgid "Thank you for creating an account in"
+#~ msgstr "アカウントを作成"
+
+#~ msgid "Just one more step!"
+#~ msgstr "もうあと１ステップです"
+
+#~ msgid ""
+#~ "To verify that you are the owner"
+#~ " of this e-mail address, please visit"
+#~ " the URL below"
+#~ msgstr ""
+
+#~ msgid "Click here to confirm your e-mail address and create your account"
+#~ msgstr ""
+
+#~ msgid "nick"
+#~ msgstr "ニックネーム"
+
+#~ msgid "Member since"
+#~ msgstr ""
+
+#~ msgid "Remove from admin group"
+#~ msgstr "管理グループから削除"
+
+#~ msgid "Add to admin group"
+#~ msgstr "管理グループへの追加"
+
+#~ msgid "Manage Categories"
+#~ msgstr "カテゴリーの管理"
+
+#~ msgid "Category name"
+#~ msgstr "カテゴリー名"
+
+#~ msgid "Category description"
+#~ msgstr "カテゴリーの説明"
+
+#~ msgid "Add Category"
+#~ msgstr "カテゴリーの追加"
+
+#~ msgid "List of Available Categories"
+#~ msgstr "利用できるカテゴリー"
+
+#~ msgid "Edit Category Name"
+#~ msgstr "カテゴリー名の編集"
+
+#~ msgid "Delete Category"
+#~ msgstr "カテゴリーの削除"
+
+#~ msgid "Dashboard last 7 days"
+#~ msgstr "過去7日間のダッシュボード"
+
+#~ msgid "Active users"
+#~ msgstr ""
+
+#~ msgid "Active anonymous users"
+#~ msgstr "匿名ユーザー"
+
+#~ msgid "Draft projects"
+#~ msgstr "件の起草中のプロジェクト"
+
+#~ msgid "Published projects"
+#~ msgstr "公開中のプロジェクト"
+
+#~ msgid "Updated projects"
+#~ msgstr "プロジェクトの更新"
+
+#~ msgid "New tasks"
+#~ msgstr "タスクの閲覧"
+
+#~ msgid "New Answers"
+#~ msgstr "寄与された回答"
+
+#~ msgid "New Users"
+#~ msgstr "上位5名のユーザー"
+
+#~ msgid "Returning Users"
+#~ msgstr ""
+
+#~ msgid "Recent activity"
+#~ msgstr "最近のアクティビティ"
+
+#~ msgid "new project created"
+#~ msgstr "新しいプロジェクトが作成されました。"
+
+#~ msgid "has published a blog post"
+#~ msgstr "は、ブログ・ポストに公開されました。"
+
+#~ msgid "has added new tasks"
+#~ msgstr "は、新しいタスクに追加されました。"
+
+#~ msgid "has completed a task"
+#~ msgstr "は、完了したタスクです。"
+
+#~ msgid "has contributed to"
+#~ msgstr ""
+
+#~ msgid "has joined"
+#~ msgstr "が加わりました。"
+
+#~ msgid "No data available yet. You'll need to wait 24 hours."
+#~ msgstr ""
+
+#~ msgid "Danger Zone!"
+#~ msgstr "警告！"
+
+#~ msgid ""
+#~ "Deleting the category will remove it "
+#~ "from all the projects! This operation"
+#~ " cannot be undone!"
+#~ msgstr "全てのプロジェクトからカテゴリーを削除します！この操作は元に戻せません！"
+
+#~ msgid "No, do not delete it"
+#~ msgstr "いいえ、削除しません。"
+
+#~ msgid "Dashboard"
+#~ msgstr "ダッシュボード"
+
+#~ msgid "Internal Statistics"
+#~ msgstr "内部統計"
+
+#~ msgid "Go"
+#~ msgstr "進む"
+
+#~ msgid "Background Jobs"
+#~ msgstr "バックグラウンド処理"
+
+#~ msgid "Monitor the background jobs"
+#~ msgstr "バックグランド処理を確認する。"
+
+#~ msgid "Manage"
+#~ msgstr "管理"
+
+#~ msgid "Featured Projects"
+#~ msgstr "注目されているプロジェクト"
+
+#~ msgid "Show projects on the front page"
+#~ msgstr "フロントページにプロジェクトを表示する。"
+
+#~ msgid "Categories"
+#~ msgstr "カテゴリー"
+
+#~ msgid "Manage project categories"
+#~ msgstr "プロジェクトのカテゴリーを管理する。"
+
+#~ msgid "Administrators"
+#~ msgstr "管理者"
+
+#~ msgid "Manage administrators"
+#~ msgstr "管理者の管理"
+
+#~ msgid "Users"
+#~ msgstr "ユーザー"
+
+#~ msgid "Export a list of users"
+#~ msgstr "ユーザーのリストをエクスポート"
+
+#~ msgid "JSON"
+#~ msgstr "JSON"
+
+#~ msgid "CSV"
+#~ msgstr "CSV"
+
+#~ msgid "Latest news from PyBossa"
+#~ msgstr ""
+
+#~ msgid "New PyBossa version"
+#~ msgstr ""
+
+#~ msgid "New SciFabric Blog Post"
+#~ msgstr "ブログ記事を執筆"
+
+#~ msgid "Manage featured projects"
+#~ msgstr "注目されているプロジェクトの管理"
+
+#~ msgid "Update Category"
+#~ msgstr "カテゴリーの更新"
+
+#~ msgid "Manage Admin Users"
+#~ msgstr "管理ユーザーの管理"
+
+#~ msgid "Try with the full name or nick"
+#~ msgstr "フルネームあるいはニックネームで試みる"
+
+#~ msgid "Search"
+#~ msgstr "検索"
+
+#~ msgid "Found Users"
+#~ msgstr "見つかったユーザー"
+
+#~ msgid "Current Users with Admin privileges"
+#~ msgstr "管理者特権を保持している現在のユーザー"
+
+#~ msgid ""
+#~ "PyBossa is a free, open-source "
+#~ "crowd-sourcing and micro-tasking platform."
+#~ " It enables people to create and "
+#~ "run projects that utilise online "
+#~ "assistance in performing tasks that "
+#~ "require human cognition such as image"
+#~ " classification, transcription, geocoding and "
+#~ "more. PyBossa is there to help "
+#~ "researchers, civic hackers and developers "
+#~ "to create projects where anyone around"
+#~ " the world with some time, interest"
+#~ " and an internet connection can "
+#~ "contribute."
+#~ msgstr "PyBossaは、無償のオープンソース・クラウド・ソーシングおよびマイクロ・タスキングのプラットフォームです。このシステムは、人による手作業を必要とするような、画像分類、転機、ジオコーディング、あるいは、それ以外の作業において、オンライン支援によるプロジェクトの作成と運用を可能にします。PyBossaは、プロジェクトを通して研究者、一般のIT技術者および開発者を手助けするとともに、時間がある人、興味がある人、そして、インターネット接続が可能な世界中の誰もが参加できる機会を提供します。"
+
+#~ msgid "PyBossa is different to existing efforts:"
+#~ msgstr "PyBossaは既存の努力と異なっています。"
+
+#~ msgid "It's a 100%% open-source"
+#~ msgstr "100%、オープンソースです。"
+
+#~ msgid ""
+#~ "Unlike, say, “mechanical turk” style "
+#~ "projects, PyBossa is not designed to "
+#~ "handle payment or money — it is"
+#~ " designed to support volunteer-driven "
+#~ "projects."
+#~ msgstr ""
+#~ "いわゆる、「Mechanical "
+#~ "Turk」スタイルのプロジェクトではなく、PyBossaは、金銭的報酬を伴うようには設計されていません。PyBossaは、ボランティア・ベースのプロジェクトをサポートするように設計されています。"
+
+#~ msgid ""
+#~ "It's designed as a platform and "
+#~ "framework for developing deploying crowd-"
+#~ "sourcing and microtasking project rather "
+#~ "than being a crowd-sourcing project "
+#~ "itself. Individual crowd-sourcing projects "
+#~ "are written as simple snippets of "
+#~ "Javascript and HTML which are then "
+#~ "deployed on a PyBossa instance (such "
+#~ "as"
+#~ msgstr "展開されているクラウド・ソーシングあるいはマイクロ・タスキングのプロジェクトを開発するためのプラットフォームあるいはフレームワークとして設計されています。"
+
+#~ msgid ""
+#~ "This way one can easily develop "
+#~ "custom projects while using the PyBossa"
+#~ " platform to store your data, manage"
+#~ " users, and handle workflow"
+#~ msgstr "この方法によって、データの蓄積、ユーザー管理、ワークフロー通りの処理のためのPyBossaプラットフォームを使うことで、誰もが簡単にカスタム・プロジェクトを開発できます。"
+
+#~ msgid "You can read more about the architecture in the"
+#~ msgstr "以下では、アーキテクチャについてより詳しい情報を得ることができます。"
+
+#~ msgid "PyBossa Documentation"
+#~ msgstr "PyBossaの解説書"
+
+#~ msgid "and follow the"
+#~ msgstr "そして以下の、"
+
+#~ msgid "step-by-step tutorial to create your own projects"
+#~ msgstr "自分のプロジェクトを作成するための、ステップ・バイ・ステップのチュートリアルがあります。"
+
+#~ msgid "Statistics"
+#~ msgstr "統計"
+
+#~ msgid ""
+#~ " PyBossa provides individual statistics "
+#~ "for every project in the system, "
+#~ "as well as a"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "general overview about the system like"
+#~ " total number of users, tasks, etc"
+#~ msgstr ""
+
+#~ msgid "Check the global statistics"
+#~ msgstr "全体の統計を確認する。"
+
+#~ msgid "Contact information"
+#~ msgstr "連絡先について"
+
+#~ msgid "For more info, send us an e-mail to: "
+#~ msgstr "詳しい情報、次のEメールアドレスまでお問い合わせください："
+
+#~ msgid "Follow us on Twitter!"
+#~ msgstr "Twitterでフォロー！"
+
+#~ msgid "E-mail list: "
+#~ msgstr "Eメールのリスト"
+
+#~ msgid "Report any bug, issue or improvement:"
+#~ msgstr "バグ、ご意見、あういは改善点について報告します。"
+
+#~ msgid "Github Issues"
+#~ msgstr "Githubの問題"
+
+#~ msgid ""
+#~ "Online assistance in performing tasks "
+#~ "that require human cognition, knowledge "
+#~ "or intelligence such as image "
+#~ "classification, transcription, geocoding and "
+#~ "more!"
+#~ msgstr "画像の分類や転記、ジオコーディングといった、人の認識や知識、知性を必要とする作業をオンラインで支援します。"
+
+#~ msgid "Help advance research"
+#~ msgstr "高度な調査研究を支援します"
+
+#~ msgid "Everything is open and freely usable"
+#~ msgstr "全てがオープンかつ自由に利用できます"
+
+#~ msgid "Things computers can't do"
+#~ msgstr "コンピュータには出来ないことができます"
+
+#~ msgid "Info"
+#~ msgstr "概要"
+
+#~ msgid "Get Started"
+#~ msgstr "開始する"
+
+#~ msgid "It's really simple to start contributing."
+#~ msgstr "非常に簡単に貢献作業に参加できます。"
+
+#~ msgid " Start Contributing"
+#~ msgstr "貢献作業を開始する"
+
+#~ msgid "Most Active Projects"
+#~ msgstr "活動的なプロジェクト"
+
+#~ msgid "Start"
+#~ msgstr "開始"
+
+#~ msgid "Your project"
+#~ msgstr "あなたのプロジェクト"
+
+#~ msgid "could be here!"
+#~ msgstr ""
+
+#~ msgid "Create a project"
+#~ msgstr "プロジェクトを作成する"
+
+#~ msgid "Most Active Volunteers"
+#~ msgstr "最もアクティブなボランティア"
+
+#~ msgid "Submitted Tasks"
+#~ msgstr "タスクを提出する"
+
+#~ msgid "Tasks"
+#~ msgstr "タスク"
+
+#~ msgid "Search Results"
+#~ msgstr "結果を検索する"
+
+#~ msgid "Contribute"
+#~ msgstr "貢献する"
+
+#~ msgid "Results"
+#~ msgstr "結果を検索する"
+
+#~ msgid "Settings"
+#~ msgstr "設定"
+
+#~ msgid "Audit Logs"
+#~ msgstr "検査ログ"
+
+#~ msgid "Webhooks"
+#~ msgstr ""
+
+#~ msgid "Blog"
+#~ msgstr "ブログ"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Description"
+#~ msgstr "説明"
+
+#~ msgid "Creation Date"
+#~ msgstr "作成日"
+
+#~ msgid "Last Activity"
+#~ msgstr "最新の活動"
+
+#~ msgid "Overall progress"
+#~ msgstr "全体の進捗"
+
+#~ msgid "completed"
+#~ msgstr "完了"
+
+#~ msgid "Remove from Featured!"
+#~ msgstr "特集から省く"
+
+#~ msgid "Add to Featured!"
+#~ msgstr "特集に加える"
+
+#~ msgid "Created by"
+#~ msgstr "作成者"
+
+#~ msgid "Me"
+#~ msgstr ""
+
+#~ msgid "Try it!"
+#~ msgstr "挑戦する！"
+
+#~ msgid "Done! View results"
+#~ msgstr ""
+
+#~ msgid "Start Contributing Now!"
+#~ msgstr "今すぐ、貢献作業を開始する！"
+
+#~ msgid "Thanks for contributing"
+#~ msgstr "貢献作業を開始"
+
+#~ msgid "Draft project, complete it!"
+#~ msgstr ""
+
+#~ msgid "You can now publish it!"
+#~ msgstr ""
+
+#~ msgid "Edit the project details"
+#~ msgstr "プロジェクトの詳細を編集する"
+
+#~ msgid "Edit the task presenter"
+#~ msgstr "タスクの発表者を編集する"
+
+#~ msgid "Import tasks"
+#~ msgstr "タスクをインポートする"
+
+#~ msgid "Delete the project"
+#~ msgstr "プロジェクトを削除する"
+
+#~ msgid "When"
+#~ msgstr "いつ？"
+
+#~ msgid "Who"
+#~ msgstr "だれが？"
+
+#~ msgid "Source"
+#~ msgstr "情報源"
+
+#~ msgid "Action"
+#~ msgstr "活動"
+
+#~ msgid "Attribute"
+#~ msgstr "属性"
+
+#~ msgid "Old Value"
+#~ msgstr "古い値"
+
+#~ msgid "New Value"
+#~ msgstr "新しい値"
+
+#~ msgid "You"
+#~ msgstr "あなた"
+
+#~ msgid "Sorry! No logs so far."
+#~ msgstr "申し訳ございません！今のところログはありません。"
+
+#~ msgid "Sorry! This project does not exist."
+#~ msgstr "申し訳ございません！このプロジェクトは存在しません。"
+
+#~ msgid "Sorry! No posts so far."
+#~ msgstr "申し訳ございません！今のところ投稿はありません。"
+
+#~ msgid "Author: "
+#~ msgstr "著者"
+
+#~ msgid "Written: "
+#~ msgstr ""
+
+#~ msgid "Delete"
+#~ msgstr "消去"
+
+#~ msgid "Edit"
+#~ msgstr "編集"
+
+#~ msgid "Back"
+#~ msgstr "戻る"
+
+#~ msgid "Sorry! This blogpost does not exist."
+#~ msgstr "申し訳ございません！このブログ投稿は存在していません。"
+
+#~ msgid "Delete project"
+#~ msgstr "プロジェクトの消去"
+
+#~ msgid "If you delete the project and its tasks, it will be gone forever!"
+#~ msgstr "プロジェクトとその作業を削除すると、永久に失われることになります！"
+
+#~ msgid ""
+#~ "Are you sure you want to delete"
+#~ " this project and all its tasks "
+#~ "and associated task runs?"
+#~ msgstr "このプロジェクトと、その全ての作業、および、関連する稼働中の作業が消去されます。"
+
+#~ msgid "Yes, delete it"
+#~ msgstr "はい、削除します"
+
+#~ msgid "No, do not delete it!"
+#~ msgstr "いいえ、消去しません！"
+
+#~ msgid "Export All Tasks and Task Runs"
+#~ msgstr "全てのタスクと稼働中のタスクをエクスポートします。"
+
+#~ msgid "You can export and download"
+#~ msgstr "出力およびダウンロードをすることができます。"
+
+#~ msgid "all the available"
+#~ msgstr "利用可能な全ての"
+
+#~ msgid ""
+#~ "Tasks and Task Runs (the submitted "
+#~ "answers by the users) in CSV or"
+#~ " JSON formats."
+#~ msgstr "タスクおよび稼働中のタスク（ユーザーによって提出された回答）をCSVあるいはJSON形式で出力します。"
+
+#~ msgid "Export in CSV format"
+#~ msgstr "CSV形式でエクスポート"
+
+#~ msgid "Task Runs"
+#~ msgstr "稼働中のタスク"
+
+#~ msgid "Export in JSON format"
+#~ msgstr "JSON形式でのエクスポート"
+
+#~ msgid "Export to the"
+#~ msgstr ""
+
+#~ msgid "Export to a CKAN server"
+#~ msgstr "CKANサーバーの形式でエクスポート"
+
+#~ msgid "IMPORTANT"
+#~ msgstr "重要！"
+
+#~ msgid ""
+#~ "This export option stills in beta "
+#~ "mode and may fail in the CKAN "
+#~ "server. If you get an error, "
+#~ "please send an e-mail to "
+#~ "info@pybossa.com"
+#~ msgstr "この出力オプションはまだベータ版であり、CKANサーバーの形式の場合には失敗する可能性があります。エラーが発生した場合には、info@pybossa.comにメールしてください。"
+
+#~ msgid "You don't have a Datahub.io API key in your"
+#~ msgstr "アカウントにDatahub.io API キーがありません。"
+
+#~ msgid "account. Please,"
+#~ msgstr " "
+
+#~ msgid "create an account"
+#~ msgstr "アカウントを作成"
+
+#~ msgid ""
+#~ "and copy/paste the API key in your"
+#~ " profile in order to use this "
+#~ "exporter"
+#~ msgstr "し、このエクスポート機能を使用するために、APIキーをプロフィールにコピー・アンド・ペーストしてください。"
+
+#~ msgid "A special selection of the most interesting projects"
+#~ msgstr "最も興味深いプロジェクトの特集"
+
+#~ msgid "Draft Projects"
+#~ msgstr "件の起草中のプロジェクト"
+
+#~ msgid "Work in progress projects"
+#~ msgstr "稼働中のプロジェクト"
+
+#~ msgid "Sorry, there are no published projects for this category yet"
+#~ msgstr "申し訳ございません。このカテゴリーのプロジェクトはまだありません。"
+
+#~ msgid "Project"
+#~ msgstr "プロジェクト"
+
+#~ msgid "Create a new project"
+#~ msgstr "プロジェクトの新規作成"
+
+#~ msgid "The name of the project"
+#~ msgstr "プロジェクトの名称"
+
+#~ msgid "Short name or slug for the project"
+#~ msgstr "プロジェクトの省略名あるいは識別名"
+
+#~ msgid "Project slug:"
+#~ msgstr "識別名"
+
+#~ msgid ""
+#~ "Explain your project"
+#~ "                                                             \n"
+#~ "                · Why? Why you are "
+#~ "creating this project, what you want "
+#~ "to achieve with it"
+#~ "                                                             \n"
+#~ "                · How? Explain how your"
+#~ " project works"
+#~ "                                                             \n"
+#~ "                · How you can help: "
+#~ "Explain to the volunteers how they "
+#~ "can help and contribute to the "
+#~ "goal of your project"
+#~ "                                                             \n"
+#~ "                · Will you help make "
+#~ "a difference? Explain to the volunteers"
+#~ " why their contribution is essential "
+#~ "and how the result of your project"
+#~ " can help change things!"
+#~ "                                                             \n"
+#~ "            (you can use Markdown to give format to your description!)"
+#~ msgstr ""
+#~ "プロジェクトの説明\n"
+#~ "    · プロジェクトの目的と期待する成果について\n"
+#~ "    · プロジェクトの運用方法について\n"
+#~ "    · ボラティンティアの支援方法および貢献方法\n"
+#~ "    · 世の中に与えるインパクトについて\n"
+#~ "\n"
+#~ "（Markdownを使用して整形された記述を書くことができます。）"
+
+#~ msgid "Create the project"
+#~ msgstr "プロジェクトの作成"
+
+#~ msgid "Write a new blog post for ad"
+#~ msgstr "宣伝のための新規ブログの投稿記事を執筆する"
+
+#~ msgid "The title of your post"
+#~ msgstr "投稿のタイトル"
+
+#~ msgid "Write your post here. You can use Markdown!"
+#~ msgstr "投稿記事の執筆欄。Markdownを使用することができます！"
+
+#~ msgid "Enter the password to contribute to this project:"
+#~ msgstr "パスワードを入力してこのプロジェクトに貢献する"
+
+#~ msgid "Project password"
+#~ msgstr "プロジェクトパスワード"
+
+#~ msgid "Submit"
+#~ msgstr "投稿"
+
+#~ msgid ""
+#~ "Sorry, you've contributed to all the "
+#~ "tasks for this project, but this "
+#~ "project still needs more volunteers, so"
+#~ " please spread the word!"
+#~ msgstr "申し訳ございません。このプロジェクトではより多くのボランティアを必要としています。このプロジェクトの事を周知していただけると幸いです。"
+
+#~ msgid "Publish the project"
+#~ msgstr "公開中のプロジェクト"
+
+#~ msgid "Please read carefully!"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You are about to publish your "
+#~ "project. This CANNOT be undone! Once "
+#~ "your project has been published, people"
+#~ " will be able to contribute to "
+#~ "it and answers will begin to be"
+#~ " stored."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "That means that your project should "
+#~ "be working properly, so please make "
+#~ "sure it does. Otherwise you can "
+#~ "work on it and publish it once "
+#~ "it works fine."
+#~ msgstr ""
+
+#~ msgid "Are you sure you want to publish this project?"
+#~ msgstr "プロジェクトを隠しますか？"
+
+#~ msgid "Yes, publish it"
+#~ msgstr ""
+
+#~ msgid "No, do not publish it!"
+#~ msgstr "いいえ、消去しません！"
+
+#~ msgid "No results"
+#~ msgstr ""
+
+#~ msgid "The project owner has not created/published/visualized any results yet."
+#~ msgstr ""
+
+#~ msgid "Project Settings"
+#~ msgstr "プロジェクトの設定"
+
+#~ msgid "Task Settings"
+#~ msgstr "タスクの設定"
+
+#~ msgid "Write a blog post"
+#~ msgstr "ブログ記事を執筆"
+
+#~ msgid "Important"
+#~ msgstr "重要"
+
+#~ msgid "Data have been"
+#~ msgstr ""
+
+#~ msgid "anonymized"
+#~ msgstr "匿名化"
+
+#~ msgid "Average contribution time per task"
+#~ msgstr ""
+
+#~ msgid "seconds"
+#~ msgstr "二つ目の数字は"
+
+#~ msgid "Distribution of Answers per Hour"
+#~ msgstr "1時間当たりの回答の分布"
+
+#~ msgid "Completed Tasks in the last 15 days"
+#~ msgstr "過去15日間に完了したタスク"
+
+#~ msgid "select an area to zoom, click to reset the chart"
+#~ msgstr "範囲を選択してズームし、クリックでグラフをリセットします"
+
+#~ msgid "Answers per day"
+#~ msgstr "1日当たりの回答"
+
+#~ msgid "answers were submitted this day"
+#~ msgstr "回答はこの日に投稿されました"
+
+#~ msgid "Distribution of Answers"
+#~ msgstr "回答の分布"
+
+#~ msgid "Type"
+#~ msgstr "タイプ"
+
+#~ msgid "Percentage"
+#~ msgstr "パーセンテージ"
+
+#~ msgid "Details about Anonymous Users"
+#~ msgstr "匿名ユーザーの詳細"
+
+#~ msgid "anonymous users have"
+#~ msgstr "人の匿名ユーザーが"
+
+#~ msgid "participated"
+#~ msgstr "参加しました。"
+
+#~ msgid "Country"
+#~ msgstr "国"
+
+#~ msgid "City"
+#~ msgstr "都市"
+
+#~ msgid "User"
+#~ msgstr "ユーザー"
+
+#~ msgid "This page includes GeoLite data created by MaxMind, available from"
+#~ msgstr "このページは、MaxMindによって作成されたGeoLiteデータが含まれており、以下から利用することができます："
+
+#~ msgid "Details about Authenticated Users"
+#~ msgstr "登録ユーザーの詳細"
+
+#~ msgid "authenticated users have"
+#~ msgstr "人の登録ユーザーが"
+
+#~ msgid "Top 5 users"
+#~ msgstr "上位5名のユーザー"
+
+#~ msgid "Setup task autoimporter"
+#~ msgstr "タスクの自動インポートを設定"
+
+#~ msgid "Use one of the following available"
+#~ msgstr "以下の利用可能なものを使用し、"
+
+#~ msgid "importers"
+#~ msgstr "インポート"
+
+#~ msgid "to setup as the autoimporter"
+#~ msgstr ""
+
+#~ msgid "Currently configured autoimport"
+#~ msgstr "現在設定済みの自動インポート"
+
+#~ msgid "You currently have the following autoimporter configured"
+#~ msgstr "以下の設定済み自動インポートがあります"
+
+#~ msgid "Import Tasks"
+#~ msgstr "タスクのインポート"
+
+#~ msgid "to import tasks..."
+#~ msgstr "タスクをインポートするためには..."
+
+#~ msgid "... or import a set of"
+#~ msgstr "あるいは、その他の"
+
+#~ msgid "template tasks"
+#~ msgstr "テンプレートタスク"
+
+#~ msgid "Task Redundancy"
+#~ msgstr "タスクの冗長性"
+
+#~ msgid "The number of answers per tasks that you want for the project"
+#~ msgstr "プロジェクトで必要とするタスクに対する回答数"
+
+#~ msgid "Set redundancy"
+#~ msgstr "冗長性の設定"
+
+#~ msgid "Task Presenter Editor"
+#~ msgstr "タスク提供者の編集"
+
+#~ msgid "Help"
+#~ msgstr "ヘルプ"
+
+#~ msgid "Update the project task presenter"
+#~ msgstr "プロジェクトのタスク提供者の情報を更新"
+
+#~ msgid "Preview the task presenter"
+#~ msgstr "タスク提供者のプレビュー"
+
+#~ msgid "&times;"
+#~ msgstr ""
+
+#~ msgid "Task Presenter Preview"
+#~ msgstr "タスク提供者のプレビュー"
+
+#~ msgid "Close"
+#~ msgstr "閉じる"
+
+#~ msgid "Task Priority"
+#~ msgstr "タスクの優先度"
+
+#~ msgid "You can change the"
+#~ msgstr "タスクの優先度を変更することができます。"
+
+#~ msgid "priority"
+#~ msgstr "優先度"
+
+#~ msgid ""
+#~ "of one or more tasks,\n"
+#~ "                providing a list of task"
+#~ " IDs separated by commas. The lowest"
+#~ "\n"
+#~ "                priority is"
+#~ msgstr "は、一つあるいは複数のタスクに与えることができ、カンマ区切りのタスクIDのリストによって定義されます。最も低い優先度＝"
+
+#~ msgid "and the highest priority is"
+#~ msgstr "、最も高い優先度の値＝"
+
+#~ msgid ""
+#~ "The priority value is only\n"
+#~ "                respected by the"
+#~ msgstr "優先度の値は、"
+
+#~ msgid "default scheduler"
+#~ msgstr "規定の予定管理"
+
+#~ msgid "Comma separated Task.IDs i.e.: 3, 532, 100"
+#~ msgstr "タスクリストの例: 3, 532, 100"
+
+#~ msgid "Priority value between 0.0 and 1.0"
+#~ msgstr "0.0～1.0の優先度の値"
+
+#~ msgid "Change Priority"
+#~ msgstr "優先度の変更"
+
+#~ msgid "Task Scheduler"
+#~ msgstr "タスク・スケジューラー"
+
+#~ msgid "You can choose from the following schedulers"
+#~ msgstr "以下のスケジュール管理から選択できます"
+
+#~ msgid "Default"
+#~ msgstr "規定の検索"
+
+#~ msgid "or"
+#~ msgstr "あるいは"
+
+#~ msgid "Depth First"
+#~ msgstr "縦型探索"
+
+#~ msgid ""
+#~ "returns a task that\n"
+#~ "                    has not been completed "
+#~ "(the value of number of answers "
+#~ "has\n"
+#~ "                    not achieved) excluding the current user"
+#~ msgstr "現在のユーザーを除いた、完了していないタスク（回答数の値は得られません）を検索します。"
+
+#~ msgid "Breadth First"
+#~ msgstr "幅優先探索"
+
+#~ msgid ""
+#~ "returns a\n"
+#~ "                    task which has the "
+#~ "least number of task runs (answers)\n"
+#~ ""
+#~ "                    excluding the current user"
+#~ msgstr "現在のユーザーを除いた、稼働中のタスクが最も少ないタスクを検索します。"
+
+#~ msgid "Random"
+#~ msgstr "ランダム"
+
+#~ msgid ""
+#~ "returns a task\n"
+#~ "                    randomly --a user could"
+#~ " get the same task twice or "
+#~ "more\n"
+#~ "                    times"
+#~ msgstr "ランダムにタスクを検索します。したがって、同じタスクを複数回取得することがあります。"
+
+#~ msgid "Change how the tasks are delivered to volunteers"
+#~ msgstr "どのようにタスクがボランティアの人々に公開されるかを変更します"
+
+#~ msgid "Scheduler"
+#~ msgstr "予定管理"
+
+#~ msgid "Change the priority of the tasks"
+#~ msgstr "タスクの優先度の変更"
+
+#~ msgid "Priority"
+#~ msgstr "優先度"
+
+#~ msgid "Delete Tasks"
+#~ msgstr "タスクの削除"
+
+#~ msgid "Delete all the tasks and associated answers"
+#~ msgstr "全てのタスクおよび関連する回答の削除"
+
+#~ msgid "Change the redundancy level for the tasks"
+#~ msgstr "タスクの冗長性レベルの変更"
+
+#~ msgid "Redundancy"
+#~ msgstr "冗長性"
+
+#~ msgid "Import tasks from templates, GDrive, or CSV"
+#~ msgstr "テンプレート、GDriveあるいはCSVによるタスクのインポート"
+
+#~ msgid "Import"
+#~ msgstr "インポート"
+
+#~ msgid "Export Tasks"
+#~ msgstr "タスクのエクスポート"
+
+#~ msgid "Export tasks to JSON, CSV or a CKAN server"
+#~ msgstr "JSON、CSV、CKANサーバーへのタスクのエクスポート"
+
+#~ msgid "Export"
+#~ msgstr "エクスポート"
+
+#~ msgid "Task Presenter"
+#~ msgstr "タスク提供者"
+
+#~ msgid "Editor"
+#~ msgstr "編集者"
+
+#~ msgid "Configure the task scheduler, redundancy, etc."
+#~ msgstr "タスク管理、冗長性等の設定"
+
+#~ msgid "Browse"
+#~ msgstr "閲覧"
+
+#~ msgid "Check the status of the tasks"
+#~ msgstr "タスクの状態を確認"
+
+#~ msgid "Auto-import Tasks"
+#~ msgstr "自動インポートのタスク"
+
+#~ msgid "Import tasks regularly and automatically"
+#~ msgstr "タスクを定期的かつ自動的にインポートする"
+
+#~ msgid "Setup"
+#~ msgstr "設定"
+
+#~ msgid "Browse tasks"
+#~ msgstr "タスクの閲覧"
+
+#~ msgid "This page shows all the available tasks for this project"
+#~ msgstr "このページでは、このプロジェクトで利用可能なタスクが表示されます。"
+
+#~ msgid "For each task, you can find the following information"
+#~ msgstr "各々のタスクについて、以下の情報があります"
+
+#~ msgid "Task"
+#~ msgstr "タスク"
+
+#~ msgid "This number identifies the task for the project and it is unique"
+#~ msgstr "この番号は、プロジェクトのタスクを識別するユニークなものです。"
+
+#~ msgid ""
+#~ "The first number shows how many "
+#~ "answers have been submitted for the "
+#~ "task and the"
+#~ msgstr "最初の数字は、タスクに対して得られた回答数を示し、"
+
+#~ msgid ""
+#~ "This redundancy method will help to "
+#~ "detect errors, typos, data forging, etc."
+#~ " when the task has been completed"
+#~ msgstr "この冗長性メソッドは、タスクが完了した際に、エラー検出、タイプミス、データねつ造等の検出を助けます。"
+
+#~ msgid "second number"
+#~ msgstr "二つ目の数字は"
+
+#~ msgid "how many need to be obtained to mark the task as"
+#~ msgstr "完了状態に必要な数字を示しています。"
+
+#~ msgid "Progress Bar"
+#~ msgstr "プログレスバー"
+
+#~ msgid ""
+#~ "The progress bar will the percentage "
+#~ "that has been completed for the "
+#~ "task"
+#~ msgstr "プログレスバーは、タスクの完了状況のパーセンテージを表しています"
+
+#~ msgid "Download Task Results"
+#~ msgstr "タスクの成果をダウンロード"
+
+#~ msgid "Download Partial results"
+#~ msgstr "成果の一部をダウンロード"
+
+#~ msgid "Nothing to download yet"
+#~ msgstr "まだ、ダウンロードできるものはありません"
+
+#~ msgid "Start contributing"
+#~ msgstr "貢献作業を開始"
+
+#~ msgid "Update the project"
+#~ msgstr "プロジェクトの更新"
+
+#~ msgid "Give some details about the project"
+#~ msgstr "プロジェクトについての詳細な情報について"
+
+#~ msgid "Explain the project (use Markdown!)"
+#~ msgstr "プロジェクトについて説明する（Markdownを使用！）"
+
+#~ msgid "Check if you want to allow anonymous users contribute to your project"
+#~ msgstr ""
+
+#~ msgid "Edit the blog post"
+#~ msgstr "ブログ投稿を編集"
+
+#~ msgid "Update"
+#~ msgstr "更新"
+
+#~ msgid "Created"
+#~ msgstr "作成"
+
+#~ msgid "Updated"
+#~ msgstr "更新"
+
+#~ msgid "Payload"
+#~ msgstr "アップロード"
+
+#~ msgid "Response"
+#~ msgstr ""
+
+#~ msgid "Response Status Code"
+#~ msgstr ""
+
+#~ msgid "Repeat"
+#~ msgstr "作成"
+
+#~ msgid "From a IIIF manifest"
+#~ msgstr "IIIFマニフェストから"
+
+#~ msgid "From a CSV file"
+#~ msgstr "CSVファイルから"
+
+#~ msgid ""
+#~ "Please provide a URL (i.e. DropBox, "
+#~ "Box, Ubuntu One, etc. public link) "
+#~ "to a CSV file with data for"
+#~ msgstr "CSVファイルのURL（DropBox, Box, Ubuntu One等のパブリック・リンク）を入力してください："
+
+#~ msgid "For more information, please look at"
+#~ msgstr "より詳しい情報は次のリンク先を参照してください："
+
+#~ msgid "the documentation"
+#~ msgstr "解説書"
+
+#~ msgid "The URL of the CSV file"
+#~ msgstr "CSVファイルのURL"
+
+#~ msgid "From your Dropbox account"
+#~ msgstr "Dropboxアカウントから"
+
+#~ msgid "You are about to import"
+#~ msgstr ""
+
+#~ msgid "files"
+#~ msgstr "ファイル"
+
+#~ msgid "From an EpiCollect Plus project"
+#~ msgstr "EpiCollect Plusプロジェクトから"
+
+#~ msgid "Please provide an EpiCollect Plus project name to import its data for"
+#~ msgstr "EpiCollect Plusのデータをインポートするためにプロジェクト名を入力してください"
+
+#~ msgid "The name of the public EpiCollect Plus project"
+#~ msgstr "公開されているEpiCollect Plus のプロジェクトの名前"
+
+#~ msgid "The name of the project's form"
+#~ msgstr ""
+
+#~ msgid "From a Flickr Album"
+#~ msgstr ""
+
+#~ msgid "Revoke access"
+#~ msgstr "アクセスを無効にする"
+
+#~ msgid "Grant access to your Flickr albums to select one..."
+#~ msgstr "CrowdcraftingがFlickrのアルバムに接続することを許可する"
+
+#~ msgid "Log in Flickr"
+#~ msgstr "Flickrにログイン"
+
+#~ msgid "Or manually provide the ID of a Flickr set with images for"
+#~ msgstr ""
+
+#~ msgid "Select one of your albums:"
+#~ msgstr "アルバムを選択："
+
+#~ msgid "photos"
+#~ msgstr "写真"
+
+#~ msgid "Select"
+#~ msgstr "選択"
+
+#~ msgid "From a Google Docs Spreadsheet"
+#~ msgstr "Google Docs スプレッドシートからのインポート"
+
+#~ msgid "Please provide a URL to a Google Drive Spreadsheet with data for"
+#~ msgstr "このプロジェクトのためのGoogle Drive スプレッドシートのURLを入力してください："
+
+#~ msgid "The URL of the Google Docs Spreadsheet"
+#~ msgstr "Google Docs スプレッドシートのURL"
+
+#~ msgid "From an Amazon S3 bucket"
+#~ msgstr ""
+
+#~ msgid "Name of the S3 bucket"
+#~ msgstr "プロジェクトの名称"
+
+#~ msgid "Search in bucket"
+#~ msgstr ""
+
+#~ msgid "Oops... it seems that bucket is private."
+#~ msgstr ""
+
+#~ msgid "Oops... we could not find that bucket."
+#~ msgstr ""
+
+#~ msgid "From a Twitter hashtag or account"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You can provide your own Twitter "
+#~ "credentials and make API requests in "
+#~ "behalf of them, or use the "
+#~ "credentials provided by us. (The later"
+#~ " only allows to import the number "
+#~ "of tweets returned by a single "
+#~ "Twitter API call, which is 100 for"
+#~ " searches and 200 for user "
+#~ "timelines.)"
+#~ msgstr ""
+
+#~ msgid "I'll use my credentials"
+#~ msgstr ""
+
+#~ msgid "I'll use credentials provided by the platform"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Please provide the source of your "
+#~ "tweets. It can be a \"#hashtag\", "
+#~ "a regular \"word\" for search or a"
+#~ " \"@user_account\" from where to import "
+#~ "them"
+#~ msgstr ""
+
+#~ msgid "#hashtag or @user or something else"
+#~ msgstr ""
+
+#~ msgid "Basic"
+#~ msgstr "基本"
+
+#~ msgid "The most basic template"
+#~ msgstr "代表的なテンプレート"
+
+#~ msgid "Complexity"
+#~ msgstr "難易度"
+
+#~ msgid "Skills"
+#~ msgstr "スキル"
+
+#~ msgid "HTML and JavaScript"
+#~ msgstr "HTMLとJavaScript"
+
+#~ msgid "Use the Basic template"
+#~ msgstr "基本テンプレート"
+
+#~ msgid "Image Pattern Recognition"
+#~ msgstr "イメージパターン認識"
+
+#~ msgid "Re-use the Flickr Person Finder template"
+#~ msgstr "Flickr Person Finder のテンプレートの再利用"
+
+#~ msgid "Use the Image template"
+#~ msgstr "イメージテンプレート"
+
+#~ msgid "Download the template and work locally"
+#~ msgstr "テンプレートのダウンロード"
+
+#~ msgid "Geo-coding"
+#~ msgstr "ジオコーディング"
+
+#~ msgid "Re-use the Urban Park template"
+#~ msgstr "Urban Parkのテンプレートの使用"
+
+#~ msgid "HTML, JavaScript and Geo expertise"
+#~ msgstr "HTML、JavaScriptおよびGeoExpertis"
+
+#~ msgid "Use the Maps project template"
+#~ msgstr "マッププロジェクトのテンプレート"
+
+#~ msgid "Transcribing documents"
+#~ msgstr "解説書の転記"
+
+#~ msgid "Re-use the PDF transcription template"
+#~ msgstr "PDFの転記テンプレートの再利用"
+
+#~ msgid "HTML, JavaScript and Server side"
+#~ msgstr "HTML、JavaScriptおよびサーバー"
+
+#~ msgid "Use the Transcription template"
+#~ msgstr "転記テンプレート"
+
+#~ msgid "Sound Pattern Recognition"
+#~ msgstr "サウンドパターンの再認識"
+
+#~ msgid "Re-use the SoundCloud template"
+#~ msgstr "SoundCloudテンプレートの再利用"
+
+#~ msgid "Use the Sound template"
+#~ msgstr "サウンドテンプレート"
+
+#~ msgid "Video Pattern Recognition"
+#~ msgstr "ビデオパターン認識"
+
+#~ msgid "Re-use the Vimeo template"
+#~ msgstr "Vimeoテンプレートの再利用"
+
+#~ msgid "Use the Video template"
+#~ msgstr "ビデオテンプレートを使用"
+
+#~ msgid "templates"
+#~ msgstr "テンプレート"
+
+#~ msgid "for your project"
+#~ msgstr "をプロジェクトに適用します。"
+
+#~ msgid "Error!"
+#~ msgstr "エラー"
+
+#~ msgid "This task does not belong to"
+#~ msgstr "このタスクは次のプロジェクトにはありません："
+
+#~ msgid "Try with another one"
+#~ msgstr "別のもので試す"
+
+#~ msgid "Import from a IIIF manifest"
+#~ msgstr "IIIFマニフェストからのインポート"
+
+#~ msgid "Provide a public link to your own CSV file"
+#~ msgstr "自分のCSVファイルのパブリックリンクを使用"
+
+#~ msgid ""
+#~ "Use the CSV URL\n"
+#~ "      importer"
+#~ msgstr ""
+#~ "CSVのURLを使用する\n"
+#~ "インポートCSV URL\n"
+#~ "インポート"
+
+#~ msgid "Delete all Tasks and Task Runs"
+#~ msgstr "全てのタスクおよび稼働中のタスクの消去"
+
+#~ msgid ""
+#~ "If you delete all the\n"
+#~ "            tasks and task runs they will be gone\n"
+#~ "            forever!"
+#~ msgstr "全てのタスクと稼働中のタスクを消去すると、永久に元に戻すことはできません！"
+
+#~ msgid "You cannot undo this action!"
+#~ msgstr "この処理を元に戻すことはできません！"
+
+#~ msgid ""
+#~ "Are you sure you want to delete"
+#~ " ALL the project tasks and associated"
+#~ " task runs?"
+#~ msgstr "全てのプロジェクトタスクと関連する稼働中のタスクを消去しますか？"
+
+#~ msgid "Yes"
+#~ msgstr "はい"
+
+#~ msgid ""
+#~ "No, do not delete\n"
+#~ "              anything!"
+#~ msgstr "いいえ、何も消去しません！"
+
+#~ msgid "Use files from your Dropbox account"
+#~ msgstr "Dropboxのアカウントのファイルの使用"
+
+#~ msgid "Use the Dropbox importer"
+#~ msgstr "Dropboxのインポート"
+
+#~ msgid "EpiCollect Plus Project"
+#~ msgstr "EpiCollect Plusプロジェクト"
+
+#~ msgid "Use an EpiCollect Plus project"
+#~ msgstr "EpiCollect Plusプロジェクトの使用"
+
+#~ msgid ""
+#~ "Use the EpiCollect\n"
+#~ "      Plus importer"
+#~ msgstr ""
+#~ "EpiCollect Plus\n"
+#~ "インポート"
+
+#~ msgid "Use images from a Flickr set"
+#~ msgstr "Flickr の画像を使用"
+
+#~ msgid "Use the Flickr importer"
+#~ msgstr "Flickrのインポート"
+
+#~ msgid "Re-use the Flickr Person Finder tasks"
+#~ msgstr "Flickr Person Finder タスクの再利用"
+
+#~ msgid ""
+#~ "Use the\n"
+#~ "      Image tasks"
+#~ msgstr "画像タスクの使用"
+
+#~ msgid "Re-use the Urban Park tasks"
+#~ msgstr "Urban Parkタスクの再利用"
+
+#~ msgid ""
+#~ "Use the\n"
+#~ "      Mapping tasks"
+#~ msgstr "マッピングタスクの使用"
+
+#~ msgid "Re-use the PDF transcription tasks"
+#~ msgstr "PDFファイルの転記タスクの再利用"
+
+#~ msgid ""
+#~ "Use the\n"
+#~ "      Transcription tasks"
+#~ msgstr "転記タスクの使用"
+
+#~ msgid "Re-use the SoundCloud tasks"
+#~ msgstr "SoundCloudのタスクの再利用"
+
+#~ msgid ""
+#~ "Use the\n"
+#~ "      Sound tasks"
+#~ msgstr "音声タスクの使用"
+
+#~ msgid "Re-use the Vimeo tasks"
+#~ msgstr "Vimeoのタスクの再利用"
+
+#~ msgid ""
+#~ "Use the\n"
+#~ "      Video tasks"
+#~ msgstr "ビデオタスクの使用"
+
+#~ msgid "Google Drive Spreadsheet"
+#~ msgstr "Google Drive スプレッドシート"
+
+#~ msgid "Import a Google Drive Spreadsheet"
+#~ msgstr "Google Drive スプレッドシートのインポート"
+
+#~ msgid ""
+#~ "Use the Google Drive\n"
+#~ "      importer"
+#~ msgstr ""
+#~ "Google Drive\n"
+#~ "インポート"
+
+#~ msgid "S3"
+#~ msgstr ""
+
+#~ msgid "Use files from an Amazon S3 bucket"
+#~ msgstr ""
+
+#~ msgid "Use the Amazon S3 importer"
+#~ msgstr "Dropboxのインポート"
+
+#~ msgid "Import tweets from a search or a user account"
+#~ msgstr ""
+
+#~ msgid "Use the Twitter importer"
+#~ msgstr "Flickrのインポート"
+
+#~ msgid "General Statistics"
+#~ msgstr "一般的な統計"
+
+#~ msgid "Anonymous users"
+#~ msgstr "匿名ユーザー"
+
+#~ msgid "Authenticated users"
+#~ msgstr "登録ユーザー"
+
+#~ msgid "Total"
+#~ msgstr "合計"
+
+#~ msgid "Top 5 Users in the last 24 hours"
+#~ msgstr "過去24時間における上位5名のユーザー"
+
+#~ msgid "with"
+#~ msgstr ""
+
+#~ msgid "contributed answers"
+#~ msgstr "寄与された回答"
+
+#~ msgid "No active users in the last 24 hours"
+#~ msgstr "過去24時刊に活動したユーザーはありません"
+
+#~ msgid "Published Projects"
+#~ msgstr "公開中のプロジェクト"
+
+#~ msgid "Top 5 projects in the last 24 hours"
+#~ msgstr "過去24時刊の上位5位であったプロジェクト"
+
+#~ msgid "No active projects in the last 24 hours"
+#~ msgstr "過去24時刊に活動中のプロジェクトはありません"
+
+#~ msgid "Tasks and Answers"
+#~ msgstr "タスクと回答"
+
+#~ msgid "Number of Tasks"
+#~ msgstr "タスク数"
+
+#~ msgid "Number of Task Runs"
+#~ msgstr "稼働中のタスク数"
+
+#~ msgid "Anonymous Volunteers"
+#~ msgstr "匿名のボランティア"
+
+#~ msgid "Community Leaderboard"
+#~ msgstr "コミュニティのリーダーボード"
+
+#~ msgid "Name"
+#~ msgstr "名前"
+
+#~ msgid "Score"
+#~ msgstr "スコア"
+

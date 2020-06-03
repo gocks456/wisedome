@@ -1,0 +1,162 @@
+{% extends "projects/base.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% set active_link = "blog" %}
+{% block projectcontent %}
+
+<article style="margin-top:30px; border:1px solid; box-shadow:1px 1px 3px 3px #999, -1px -1px 3px 3px #999;">
+	<div class="info" style="margin-left:20px;">
+		<h3>글 설명</h3>
+	</div>
+	<hr style="border:1px solid; margin-bottom:15px;">
+    <div class="board-view">
+		<table style="width:100%";>
+			<tbody>
+				<tr>
+					<td colspan=1 style="text-align:center; width:20%; font-size:15px;">제목</td>
+					<td colspan=3 style="width:100%; font-size:16px;"><strong>{{blogpost.title}}<strong></td>
+				</tr>
+				<tr style="height:14px;">
+					<td colspan=4 style="border-bottom:0.3px solid;"></td>
+				</tr>
+				<tr style="height:14px;">
+				</tr>
+				<tr>
+					<td style="text-align:center; width:15%; font-size:15px;">작성자</td>
+					<td style=" width:35%; font-size:16px;">{{blogpost.user_name}}</td>
+					<td style="text-align:center; width:15%; font-size:15px;">작성일</td>
+					<td style=" width:100%; font-size:16px;">{{blogpost.created[0:10]}}</td>
+				</tr>
+			</tbody>
+		</table>
+	<hr style="border:1px solid; margin-top:13px;">
+	</div>
+
+    <body>
+		<div style="margin-left:5%; margin-right:5%; min-height:300px;">
+        <p>{{ blogpost.body | e | markdown }}</p>
+		</div>
+    </body>
+</article>
+{% if current_user.is_authenticated and current_user.id in project.owners_ids or current_user.admin or current_user.id == blogpost.user_id %}
+<form class="form-horizontal" method="post" action="{{ url_for('project.delete_blogpost', short_name=project.short_name, id=blogpost.id) }}" onsubmit="return confirm('Do you really want to delete the blog post?');">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <div class="form-actions" style="margin-top: 20px;">
+        <input type="submit" value={{_('Delete')}} class="btn btn-danger" />
+        <a href="{{url_for('project.update_blogpost', short_name=project.short_name, id=blogpost.id)}}" class="btn btn-default">수정</a>
+    </div>
+</form>
+{% endif %}
+
+<div id="commentInfo" style="margin-top:15px;">
+	<div id="comment-count">댓글 <span id="count">{{counts}}</span></div>
+	<input id="comment-input" placeholder="댓글을 입력해 주세요." style="width:90%; height: 3.3em;">
+	<button class="btn btn-primary" id="submit">등록</button>
+</div>
+<div id="comments" style="margin-top:20px;">
+	{% for comment in comments %}
+	<div id="each-comment" style="margin:10px; border-bottom: 1px solid black; color:black;">
+		<div id="user-name" style="font-size: 20px; font-weight: bold; margin-bottom: 0.3em;">{{ comment[0] }}
+			{% if comment[0] == current_user.name or current_user.id == owner.id %}
+			<div id="update-delete" style="float:right; width:11%;">
+				<button class="update" title="수정" value="{{comment[0] + '/' + comment[1]}}">
+					<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+				</button>
+				<button class="delete" title="삭제" value="{{comment[0] + '/' + comment[1]}}">
+					<i class="fa fa-trash-o" aria-hidden="true"></i>
+				</button>
+			</div>
+			{% endif %}
+		</div>
+		<div id="comment" style="font-size: 18px; margin-bottom: 0.5em;">{{ comment[1] }}</div>
+		<div id="created" style="color: #bdbebd; margin-bottom: 10px;">{{ comment[2][0:10] + " " + comment[2][11:16] }}</div>
+	</div>
+	{% endfor %}
+</div>
+
+<script src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}" type="text/javascript"></script>
+<script>
+$(document).on("click", '#submit', function() {
+	var url = window.location.href;
+	var comment = $('#comment-input').val();
+    if (comment == '') {
+		alert("내용을 입력해주세요");
+		return false;
+	}
+	$.ajax({
+		type:"GET",
+		url: url,
+		data: {
+			state : "insert",
+			user_name : "{{current_user.name}}",
+			comment: comment
+		},
+		success:function(data){
+			alert("댓글 작성 완료");
+			window.location.href = url;
+		},
+		dataType:"text"
+	});
+});
+
+$(document).on("click", '.update', function() {
+	var position = $(this).parents("#each-comment").children("#comment");
+	var prev_data = $(this).parents("#each-comment").children("#comment").text();
+	var key = this.value;
+	position.text('');
+
+	var input = document.createElement('input');
+	input.setAttribute("id","update-comment");
+	var button = document.createElement('button');
+	button.setAttribute("id","update-btn");
+	button.setAttribute("class","btn btn-primary");
+	position.append(input);
+	position.append(button);
+
+	$('#update-comment').css('width','85%').css('height','2.9em').css('margin-top','5px');
+	$('#update-comment').val(prev_data);
+	$('#update-btn').css('margin-left', '5px');
+	$('#update-btn').text("수정");
+
+	$(document).on("click", '#update-btn', function() {
+		var data = $('#update-comment').val();
+		var temp = key.split('/');
+		data = temp[0] + '/' + data;
+		var url = window.location.href;
+		$.ajax({
+			type:"GET",
+			url: url,
+			data: {
+				state : "update",
+				key: key,
+				data: data
+			},
+			success:function(data){
+				alert("댓글 수정 완료");
+				window.location.href = url;
+			},
+			dataType:"text"
+		});
+	});
+});
+
+$(document).on("click", '.delete', function() {
+	var url = window.location.href;
+	$.ajax({
+		type:"GET",
+		url: url,
+		data: {
+			state : "delete",
+			data: this.value
+		},
+		success:function(data){
+			alert("댓글 삭제 완료");
+			window.location.href = url;
+		},
+		dataType:"text"
+	});
+});
+
+</script>
+
+{% endblock %}

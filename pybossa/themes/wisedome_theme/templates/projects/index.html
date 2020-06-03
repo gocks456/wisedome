@@ -1,0 +1,141 @@
+{% extends "/base.html" %}
+{% set active_page = "projects" %}
+
+{% import "projects/_helpers.html" as helper %}
+{% import "account/_helpers.html" as helper_account %}
+
+{% block content %}
+{% set n_featured = 0 %}
+<section class="project categories selector">
+    <div class="container">
+        <div class="row">
+			<!--<div class="col-md-10 col-md-offset-1 hidden-xs hidden-sm">-->
+            <div class="col-md-10 col-md-offset-1">
+                <ul class="nav nav-pills nav-justified categories">
+                    {% for c in categories %}
+                    <li {% if active_cat.short_name==c.short_name%}class="active"{% endif %}>
+						<a href="{{url_for('project.project_cat_index', category=c.short_name)}}" rel="nofollow">
+							<i class="icon-chevron-right"></i> {{ c.name }}
+						</a>
+					</li>
+                    {% endfor %}
+                    {% if current_user.is_authenticated and current_user.admin %}
+					<li {% if active_cat.short_name=="complete"%}class="active"{% endif %}><a href="{{url_for('project.complete')}}" rel="nofollow"><i class="icon-chevron-right"></i>완료</a></li>
+                    <li {% if active_cat.short_name=="draft"%}class="active"{% endif %}><a href="{{url_for('project.draft')}}" rel="nofollow"><i class="icon-chevron-right"></i> {{ _('Draft') }}</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+            {% if active_cat.short_name=="featured"%} 
+                {% set title = _('Featured Projects') %}
+				{#{% set subheading =_('A special selection of the most interesting projects') %}#}
+				{% set subheading = '긴급 프로젝트를 수행할 시 10%의 추가 포인트를 받을 수 있습니다.' %}
+            {% elif active_cat.short_name=='draft' %}
+                {% set title = _('Draft Projects') %}
+				{#{% set subheading = _('Work in progress projects') %}#}
+				{% set subheading = '공개하지 않은 프로젝트 입니다.' %}
+            {% elif active_cat.short_name=='complete' %}
+                {% set title = '완료된 프로젝트' %}
+                {% set subheading = '완료된 프로젝트 입니다.' %}
+            {% else %}
+                {% set title = active_cat.name + ' ' + _('Projects') %}
+                {% set subheading = active_cat.description %}
+				{% endif %}
+				<div class="row">
+					<div class="col-md-offset-1 col-md-10">
+						<!-- {하나 더쓰면 주석 풀림
+						-->				<!--{ helper.render_grid_projects(projects, title, upload_method, title_class="col-md-12", container=False, active_cat = active_cat.short_name, subheading=subheading)}}-->
+
+						{% if section_class %}
+						<section id="{{id}}" class="{{section_class}}">
+							{% else %}
+							<section id="{{id}}" class="account {{title |lower }}-projects">
+								{% endif %}
+								{% if container %}
+								<div class="container">
+									{% endif %}
+									<div class="row">
+										<div class="col-md-12">
+											<div class="text-center">
+												<h1>{{title}}</h1>
+												{% if subheading %}
+												<p>{{subheading}}</p>
+												{% endif %}
+											</div>
+											
+											{% for f in projects %}
+											{% if (f.condition.sex=='0') or (f.condition.sex == current_user.sex) or current_user.admin %}
+											{% if (f.condition.age_s | int >= current_user.birth) and (f.condition.age_e | int <= current_user.birth) or current_user.admin %}
+											{% if (f.condition.all_achieve | int <= achieve[0]) and (f.condition.cat_achieve | int <= achieve[f.category_id]) or current_user.admin %}
+
+											<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4" onclick="location.href='{{ url_for('project.details', short_name=f.short_name)}}'" style="cursor:pointer;">
+												<div class="thumbnail card">
+													<div class="post-pic" style="background: rgb(0, 151, 167) url({{helper.render_url_thumbnail(f, upload_method)}}) no-repeat center top; background-size: cover;"></div>
+													<div class="caption">
+
+														<h3 style="margin-bottom : 0px; margin-top : 10px; height : 45px;">{{f.name}}</h3>
+														{#{% if f.condition.age_s | int == (n_year+1)*10000 and f.condition.sex == '0' and f.condition.age_e | int == (n_year-98)*10000 %}
+															<p>조건 없음</p>
+															{% else %}#}
+															<p id={{f.id}}>
+																{% if f.condition.sex == '0' %}
+																	<img src="{{url_for('static',filename='img/MM.jpg')}}"width="33" height="33">
+																	<img src="{{url_for('static',filename='img/FF.jpg')}}"width="33" height="33">
+																	
+																{% elif f.condition.sex == 'M' %}
+																	<img src="{{url_for('static',filename='img/MM.jpg')}}"width="33" height="33">
+
+																{% elif f.condition.sex =='F' %}
+																	<img src="{{url_for('static',filename='img/FF.jpg')}}"width="33" height="33">
+															{% endif %}
+															나이: 
+															{% if ( (n_year - (f.condition.age_s / 10000) + 1) | int == 0 ) and ( (n_year - (f.condition.age_e / 10000) + 2) | int == 100 ) %}
+																무관
+															{% else %}
+																{{ (n_year - (f.condition.age_s / 10000) + 1) | int}}~{{ (n_year - (f.condition.age_e / 10000) + 2) | int}}
+															{% endif %}
+															</p>
+															{#{% endif %}#}
+														<h4><strong>{{f.all_point}}</strong><img src="{{url_for('static',filename='img/pppp.jpg')}}" width="33" height="35"></h4>
+														<p>{{f.description}}</p>
+														{% if featured %}
+														{% if f.featured %}
+														<p class="readmore">
+														<a id="projectBtnDel{{f.id}}" onclick="del({{f.id}})">{{ _('Remove from Featured') }}</a>
+														<a id="projectBtnAdd{{f.id}}" onclick="add({{f.id}})" style="display:none">{{ _('Add to Featured') }}</a>
+														</p>
+														{% else %}
+														<p class="readmore">
+														<a id="projectBtnAdd{{f.id}}" onclick="add({{f.id}})" >{{ _('Add to Featured') }}</a>
+														<a id="projectBtnDel{{f.id}}" onclick="del({{f.id}})" style="display:none">{{ _('Remove from Featured') }}</a>
+														</p>
+														{% endif %}
+														{% else %}
+														<!--<p class="readmore"><a href="{{ url_for('project.details', short_name=f.short_name)}}">{{_(readmore_text or 'More info')}}</a></p>-->
+														<!--<p class="readmore"><a href="{{ url_for('project.details', short_name=f.short_name)}}">참여</a></p>-->
+
+														{% endif %}
+													</div>
+												</div>
+											</div>
+											{% endif %}
+											{% endif %}
+											{% endif %}
+											{% endfor %}
+										</div>
+									</div>
+									{% if container %}
+								</div>
+								{% endif %}
+							</section>
+				</div>
+			</div>
+			{% if pagination.pages > 1 %}
+			<div class="col-md-offset-2 col-md-8 text-center">
+				{{ helper_account.render_pagination(pagination) }}
+			</div>
+			{% endif %}
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "/base.html" %}
+{% set active_page = "leaderboard" %}
+{% set active_project  = "all" %}
+{% import "privacy/locked.html" as privacy %}
+
+
+{% block content %}
+<section class="stats leaderboard">
+	{% include "/stats/helper.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                {% if enforce_privacy and (current_user.is_anonymous or (current_user.is_authenticated and not current_user.admin)) %}
+                {{ privacy.render_lock_page() }}
+                {% else %}
+                <h1><i class="icon-trophy"></i> <strong>{{_('Community Leaderboard')}}</strong></h1>
+				<p id="TODAY"></p>
+                <table class="table table-striped table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th>{{ _('Rank') }}</th>
+							<!--<th>{{ _('Name') }}</th>-->
+							<th>별명</th>
+							<!--<th>{{ _('Score') }}</th>-->
+							<th>포인트</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in top_users %}
+                        {% if user.name == current_user.name %}
+                        <tr class="info" style="background-color:#ffff92; cursor:pointer;" onclick="location.href='{{url_for('account.profile', name=user.name)}}'">
+                            <td style=color:black;>{{user.rank}}</td>
+                            <td style=color:black;><strong>{{user.name}}</strong></td>
+							<!--<td style=color:black;><strong>{{user.score}}</strong></td>-->
+							<td style=color:black;>{{user.point_sum}}</td>
+						</tr> 
+						{% else %}
+						<tr onclick="location.href='{{url_for('account.profile', name=user.name)}}'" style=cursor:pointer;>
+							<td>{{user.rank}}</td>
+							<td><strong><a href="{{url_for('account.profile', name=user.name)}}">{{user.name}}</a></strong></td>
+							<!--<td>{{user.score}}</td>-->
+							<td>{{user.point_sum}}</td>
+                        </tr> 
+                        {%endif%}
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+
+	window.onload = function(){
+		var dt = new Date();
+		var Year = dt.getFullYear();        
+		var Month = "" + (dt.getMonth()+1);
+		var Day = "" + dt.getDate();            
+
+		if(Month.length < 2) Month = "0" + Month;
+		if(Day.length < 2) Day = "0" + Day;
+
+		var Today ="Today : " +  Year.toString() + "/" + Month + "/"  + Day;
+
+		document.getElementById("TODAY").innerHTML= Today;
+	} 
+</script>
+
+{% endblock %}

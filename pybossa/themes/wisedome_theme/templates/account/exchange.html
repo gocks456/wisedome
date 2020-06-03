@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% set active_page = "exchange" %}
+{% set active_link = "point" %}
+{% import "account/_helpers.html" as helper %}
+{% from "_formhelpers.html" import render_form %}
+{% from "_formhelpers.html" import render_field %}
+
+
+{% block content %}
+<section class="account profile">
+    <div class="container">
+
+		<div class="col-sm-3 col-md-3" >
+			{{ helper.render_account_local_nav(current_user, active_link) }}
+        </div>
+       	<div class="col-sm-9 col-md-9">
+			<h2>환급신청</h2>
+        </div>
+		<div class="col-sm-9 col-md-9">
+			*********************************************
+			<h3>Point : {{current_user.current_point}}</h3>
+			*********************************************
+		</div>
+		<div class="col-sm-9 col-md-9">
+			<h4>환급요청 후 환급 완료까지 @@@이 소요됩니다.</h4>
+		</div>
+		{#			<div class="col-sm-9 col-md-9">{{ render_form(form, form_id="exchange", action_url=url_for('account.exchange',name=current_user.name), btn_class="btn btn-primary btn-block" )}}</div>#}
+
+	    <form id="exchange" method="POST" action="{{ url_for('account.exchange',name=current_user.name )}}" role="form">
+		<div class="col-sm-9 col-md-9"> 
+		    {{ form.hidden_tag() if form.hidden_tag }}
+			{{ render_field(form.request_name, class_="col-sm-3 col-md-3", placeholder=_('예금주')) }}
+			{{ render_field(form.bank , class_="col-sm-3 col-md-3", placeholder=_('거래은행'))}}
+			{{ render_field(form.exchange_point, class_="col-sm-3 col-md-3", placeholder=_('환전포인트')) }}
+			{{ render_field(form.account_number, class_="col-sm-9 col-md-9", placeholder=_('-빼고 숫자만 입력하십시오.')) }}
+		</div>
+
+			<div><button type="submit" name="None" value="None" class="btn btn-primary" style="margin-left: 30px;">{{_('환전요청하기') }} </button></div>
+	    </form>
+
+    </div>
+</section>
+{% endblock %}
+{% block extrajs %}
+{% include "account/js/metadata.js" %}
+{% endblock %}

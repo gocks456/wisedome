@@ -1,0 +1,61 @@
+{% extends "/base.html" %}
+{% set active_page = "create" %}
+{% set active_link  = "projects_new" %}
+{% import "account/_helpers.html" as helper %}
+
+{% block content %}
+{% from "_formhelpers.html" import render_field %}
+ 
+<section class="account profile">
+<div id="app-form" class="container">
+    <div class=" col-sm-3 col-md-3 ">
+        {{ helper.render_account_local_nav(current_user, active_link) }}
+    </div>
+    <div class="col-sm-9 col-md-9">
+        <h2><strong>{{ _('Project') }}</strong>: {{ _('Create a new project') }}</h2>
+        <form class="" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data"}}>
+        {{ form.hidden_tag() }}
+        <fieldset>
+			{{ render_field(form.name, class_="span4", placeholder=_('프로젝트의 이름')) }}
+			{{ render_field(form.short_name, class_="span4", placeholder=_('프로젝트의 짧은 이름이나 키워드')) }}
+			{{ render_field(form.all_point, class_="span4", placeholder=_('지급할 총 포인트')) }}
+			{{ render_field(form.long_description, class_="span4", rows="13", placeholder=_('Explain your project 
+			· Why? Why you are creating this project, what you want to achieve with it 
+			· How? Explain how your project works 
+			· How you can help: Explain to the volunteers how they can help and contribute to the goal of your project 
+			· Will you help make a difference? Explain to the volunteers why their contribution is essential and how the result of your project can help change things! 
+
+			(you can use Markdown to give format to your description!)')
+			)}}
+		</fieldset>
+		<div class ="row">
+			<h3 class ='col-sm-12'><strong>Project 제한사항</strong></h3>
+			{{ render_field(form.option_sex, class_="col-sm-3") }}
+			{{ render_field(form.option_age_start, class_="col-sm-3", placeholder=_('몇 살부터')) }}
+			{{ render_field(form.option_age_end, class_="col-sm-3", placeholder=_('몇 살까지')) }}
+		</div>
+		<div class="row">
+			{{ render_field(form.option_all_achieve, class_="col-sm-3") }}
+			{{ render_field(form.option_cat_achieve, class_="col-sm-3") }}
+			<h4 class ='col-sm-8' style="margin-bottom:30px;">제한이 필요 없으시다면 빈칸으로 남겨주세요. </h4>
+		</div>
+
+            <div class="form-actions">
+                <input type="submit" value="저 장" class="btn btn-primary" />
+                <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-default">취 소</a>
+            </div>
+        </fieldset>
+    </form>
+    </div>
+</div>
+</section>
+<script type="text/javascript" src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/add-js/jquery-ui.min.js')}}"></script>
+<script>
+	$(document).ready(function() {
+		$("span[rel='tooltip']").tooltip();
+		$("i[rel='tooltip']").tooltip();
+	});
+</script>
+<script src="{{url_for('static', filename='js/forms.js')}}" type="text/javascript"></script>
+{% endblock %}

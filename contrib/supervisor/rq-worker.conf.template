@@ -1,0 +1,12 @@
+[program:rq-worker]
+command=/home/gocks456/venv/bin/python app_context_rqworker.py scheduled_jobs super high medium low email maintenance
+directory=/home/gocks456/pybossa/pybossa
+autostart=true
+autorestart=true
+priority=915
+user=pybossa
+log_stdout=true
+log_stderr=true
+logfile=/var/log/rq-worker.log
+logfile_maxbytes=10MB
+logfile_backups=2
