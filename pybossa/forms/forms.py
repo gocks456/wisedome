@@ -455,7 +455,13 @@ class RegisterForm(Form):
 
     confirm = PasswordField(lazy_gettext('Repeat Password'))
     consent = BooleanField(false_values=("False", "false", '', '0', 0))
+    err_msg = lazy_gettext("생년월일과 성별을 체크해주세요.")
+    birth = IntegerField([validators.Required(),
+                              validators.NumberRange(
+                                  min=10000000, max=99999999,
+                                  message=lazy_gettext('생년월일과 성별을 체크해주세요.'))])
 
+    sex = TextField(label=None, widget=HiddenInput())
 
 class UpdateProfileForm(Form):
 

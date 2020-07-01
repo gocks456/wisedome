@@ -76,29 +76,29 @@
 							<option value="1950" >1950</option>
 						</select> 년
                         <select class="form-control" id="month">
-							<option value="1" selected>1</option>
-	                        <option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
+							<option value="01" selected>1</option>
+	                        <option value="02">2</option>
+							<option value="03">3</option>
+							<option value="04">4</option>
+							<option value="05">5</option>
+							<option value="06">6</option>
+							<option value="07">7</option>
+							<option value="08">8</option>
+							<option value="09">9</option>
 							<option value="10">10</option>
 							<option value="11">11</option>
 							<option value="12">12</option>
 	                    </select> 월
                         <select class="form-control" id="day">
-							<option value="1" selected >1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
+							<option value="01" selected >1</option>
+							<option value="02">2</option>
+							<option value="03">3</option>
+							<option value="04">4</option>
+							<option value="05">5</option>
+							<option value="06">6</option>
+							<option value="07">7</option>
+							<option value="08">8</option>
+							<option value="09">9</option>
 							<option value="10">10</option>
 							<option value="11">11</option>
 							<option value="12">12</option>
@@ -122,7 +122,7 @@
 							<option value="31">31</option>
 						</select> 일
 						<div class="form-group" style = "float: right;">
-							<select class="form-control" id="sex">
+							<select class="form-control" id="user_sex">
 								<option value="0">성별</option>
 								<option value="M" selected>남성</option>
 								<option value="F">여성</option>
@@ -155,6 +155,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.13.2/tingle.min.js"></script>
 
 <script>
+	$(document).ready(function() {
+		$("label[for = 'birth']").hide();
+		$("label[for = 'sex']").hide();
+		$("#birth").hide();
+	});
 
 $('#fullname').attr("autocomplete","off");
 $('#name').attr("autocomplete","off");
@@ -191,41 +196,23 @@ modal.addFooterBtn('OK', 'tingle-btn tingle-btn--primary', function() {
     modal.close();
 });
 
-// add another button
-// modal.addFooterBtn('Dangerous action !', 'tingle-btn tingle-btn--danger', function() {
-//     // here goes some logic
-//     modal.close();
-// });
-
 function checkAge () {
     var day = document.getElementById('day').value;
     var month = document.getElementById('month').value;
     var year = document.getElementById('year').value;
     var birthday = moment(new Date(year, month, day));
     var yearsOld = moment().diff(birthday, 'year');
-    console.log(yearsOld)
 
-	// 잠깐만
-	var sex = document.getElementById('sex').value;
+	var sex = document.getElementById('user_sex').value;
+	var user_birth = year + month + day;
+	
+	$('#birth').val(user_birth);
+	$('#sex').val(sex);
 
-    if (sex==0){
-        modal.open();
-    } else if (yearsOld >= 16) {
-		$.ajax({
-			url: "http://urd.nlp.wo.tc:8000/account/register",
-			data: { year : year , month : month , day : day , sex : sex},
-			method: "GET",
-			success : function(){
-			}
-
-		})
-		alert('확인되었습니다')
-        //document.getElementById('register').style.display='block';00
-        //document.getElementById('ageCheck').style.display='block';
-        localStorage.setItem('ageCheck', true);
-    } else {
+    if (sex==0 || yearsOld < 16){
         modal.open();
     }
+	alert("확인되었습니다.");
 }
 </script>
 <style>

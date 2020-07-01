@@ -311,9 +311,6 @@ def confirm_email():
     return redirect_content_type(url_for('.profile', name=current_user.name))
 
 
-user_sex = None
-user_birth = 0
-
 @blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     """
@@ -333,35 +330,14 @@ def register():
     msg = "I accept receiving emails from %s" % current_app.config.get('BRAND')
     form.consent.label = msg
 
-    global user_sex
-    global user_birth
-
-    if request.method == 'GET':
-        year = request.args.get('year')
-        month = request.args.get('month')
-        day = request.args.get('day')
-        user_sex = request.args.get('sex')
-
-        if month != None:
-            if len(month) == 1:
-                month = '0' + month
-            if len(day) == 1:
-                day = '0' + day
-            user_birth = int(year+month+day)
-
     if request.method == 'POST' and form.validate():
-        if user_birth == 0:
-            flash(gettext('생년월일과 성별을 체크해 주세요'),
-                  'error')
-            return redirect_content_type(url_for('.register'))
-
         if current_app.config.upref_mdata:
             user_pref, metadata = get_user_pref_and_metadata(form.name.data, form)
             account = dict(fullname=form.fullname.data, name=form.name.data,
                            email_addr=form.email_addr.data,
                            password=form.password.data,
                            consent=form.consent.data,
-                           sex=user_sex, birth=user_birth,
+                           sex=form.sex.data, birth=form.birth.data,
                            user_type=form.user_type.data)
             account['user_pref'] = user_pref
             account['metadata'] = metadata
@@ -370,9 +346,8 @@ def register():
                            email_addr=form.email_addr.data,
                            password=form.password.data,
                            consent=form.consent.data,
-                           sex=user_sex, birth=user_birth)
+                           sex=form.sex.data, birth=form.birth.data)
         confirm_url = get_email_confirmation_url(account)
-
 
 
         if current_app.config.get('ACCOUNT_CONFIRMATION_DISABLED'):

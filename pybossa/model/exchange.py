@@ -12,7 +12,7 @@ class Exchange(db.Model, DomainObject):
 
     id = Column(Integer, primary_key=True)
 
-    user_id = Column(Integer, ForeignKey('user.name'), nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
 
     request_name = Column(Unicode(length=254), nullable=False)
 
@@ -27,13 +27,3 @@ class Exchange(db.Model, DomainObject):
     finish_time = Column(Text) #, default='F')
 
     exchanged = Column(Unicode(length=2))
-
-#init 기능이 USER에서 대신해줄지 의문
-''' 
-	def __init__(self, name, task_sum, exchange):
-		self.name = name
-		self.task_sum = task_sum
-		self.exchange = exchange
-
-Base.metadata.create_all(engine)
-'''
