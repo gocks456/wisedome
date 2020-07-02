@@ -1,6 +1,6 @@
 [program:rq-worker]
 command=/home/gocks456/venv/bin/python app_context_rqworker.py scheduled_jobs super high medium low email maintenance
-directory=/home/gocks456/pybossa/pybossa
+directory=/home/gocks456/pybossa
 autostart=true
 autorestart=true
 priority=915
