@@ -1,0 +1,6 @@
+{
+	"name": "개체명 인식Test2",
+	"short_name": "nertest2",
+	"description": "Named Entity Recognition",
+	"condition": {"sex":"0", "age_e": 0, "age_s": 0}
+}

@@ -1,0 +1,6 @@
+{
+    "name": "TEST",
+    "short_name": "tessst",
+    "description": "두 문장이 얼마나 유사한지 알려주세요.",
+	"all_point": "10000"
+}

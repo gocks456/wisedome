@@ -1,0 +1,128 @@
+<! -- Fix for Bootstrap css with Google Maps https://github.com/twitter/bootstrap/issues/1552 -->
+<style type="text/css">
+.map_canvas label {
+    width: auto;
+    display: inline;
+}
+.olTileImage {
+    max-width: none !important;
+}
+
+.layersDiv label {
+    color: white;
+}
+</style>
+<div class="row">
+    <!-- Success and Error Messages for the user -->
+    <div class="col-md-12" style="height:50px">
+        <!-- Success alert box -->
+        <div id="success" class="alert alert-success" style="display:none;">
+            <a class="close">×</a><strong>Well done!</strong> Your answer has been saved
+        </div>
+        <!-- Task completed alert box -->
+        <div id="taskcompleted" class="alert alert-info" style="display:none;">
+            <strong>The task has been completed!</strong> Thanks a lot!
+        </div>
+        <!-- Task loading alert box -->
+        <div id="loadingTask" class="alert alert-info">
+            <strong>Loading task...</strong>
+        </div>
+        <!-- Task completed alert box -->
+        <div id="finish" class="alert alert-success" style="display:none;">
+            <strong>Congratulations!</strong> You have participated in all available tasks!
+            <br/>
+            <div class="alert-actions">
+<!--                <a class="btn small" href="/" style="color:white">Go back</a>-->
+                <a class="btn small" href="/project/category/featured">Check other projects</a>
+            </div>
+        </div>
+        <!-- Error alert box -->
+        <div id="error" class="alert alert-danger" style="display:none;">
+            <a class="close">×</a>
+            <strong>Error!</strong> Something went wrong, please contact the site administrators
+        </div>
+        <!-- Old Browser alert box -->
+        <div id="oldBrowser" class="alert alert-info" style="display:none;">
+            <a class="close">×</a>
+            <p><strong>Sorry!</strong> Your web browser does not support the application.<p>
+            <div class="alert-actions">
+                <a class="btn small" href="/project/category/featured">Please, try with another project</a>
+            </div>
+        </div>
+    </div><!-- End of span8 col-md-offset-2-->
+</div><!-- End of Row-->
+
+<div class="row">
+  <div class="skeleton col-md-12">
+    <div id="question">
+      <h1>Question</h1>
+      <h3 id="question">Sentence</h3> 분석이 올바른가요? <br/><br/>
+      <button id="idonknowbtn" class="btn btn-default btn-submit" value="-1">I don't know</button>
+      <button id="nobtn" class="btn btn-default btn-submit" value="0">No</button>
+      <button id="answerbtn" class="btn btn-success btn-submit" value="1">Yes</button>
+      <p>Task: <span id="task-id" class="label label-warning">#</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- PyBossa interface -->
+<script>
+pybossa.taskLoaded(function(task, deferred){
+    if ( !$.isEmptyObject(task) ) {
+        $("#loadingTask").hide();
+        deferred.resolve(task);
+        } // End if task empty
+    else {
+        deferred.resolve(task);
+        }
+});
+
+pybossa.presentTask(function(task, deferred){
+    if ( !$.isEmptyObject(task) ) {
+        if (task.state == 'completed') {
+            $('#answerbtn').hide();
+            $('#taskcompleted').show();
+        }
+
+       if(task.info.question == 'Done') {
+            $('#idonknowbtn').hide();
+            $('#nobtn').hide();
+            $('#answerbtn').hide();
+	    pybossa.saveTask( task.id, -1, {}).done( function(data) {
+                deferred.resolve();
+            });
+	    delete task;
+	}
+	else {
+       	    $("#answerbtn").show();
+            $("#question h1").text(task.info.question);
+            $("#question h3").text(task.info.candidate);
+            $("#task-id").text(task.id);
+            $("#loadingTask").hide();
+	}
+
+        $(".btn-submit").off('click').on('click', function(evt){
+            var btnClicked = $(this);
+            var answer = btnClicked.attr("id");
+            console.log(answer);
+
+            console.log(task.id);
+
+            pybossa.saveTask( task.id, task.info.score, {'candidate': task.info.candidate, 'select': answer}).done( function(data) {
+                // Show the feedback div
+                $("#success").fadeIn();
+                // Fade out the pop-up after a 2000 miliseconds
+                setTimeout(function() { $("#success").fadeOut() }, 2000);
+                deferred.resolve();
+            });
+        });
+    }
+    else {
+        $(".skeleton").hide();
+        $("#loadingTask").hide();
+        $("#finish").fadeIn();	
+    }
+});
+
+pybossa.run('pospos1');
+</script>
