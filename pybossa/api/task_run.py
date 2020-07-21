@@ -151,14 +151,6 @@ class TaskRunAPI(APIBase):
                 data['info'] = dict()
             data['info']['container'] = container
             data['info']['file_name'] = _file.filename
-
-            #실험
-            print('data = ' + data)
-            print('datatype = ' + type(data))
-            print('file_url = ' + file_url)
-            print('container = ' + container)
-            print('file.filename = ' + _file.filename)
-
             return data
         else:
             return None

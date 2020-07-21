@@ -72,6 +72,8 @@ from pybossa.contributions_guard import ContributionsGuard
 from pybossa.default_settings import TIMEOUT
 from pybossa.exporter.csv_reports_export import ProjectReportCsvExporter
 
+from pybossa.backup.manage_postgres_db import *
+
 blueprint = Blueprint('project', __name__)
 
 MAX_NUM_SYNCHRONOUS_TASKS_IMPORT = 500
@@ -609,6 +611,9 @@ def delete(short_name):
                         pro_features=pro,
                         csrf=generate_csrf())
         return handle_content_type(response)
+
+    if request.form['backup'] == "backup":
+        DB_backup_restore("backup")
     project_repo.delete(project)
     auditlogger.add_log_entry(project, None, current_user)
     flash(gettext('Project deleted!'), 'success')
@@ -999,14 +1004,45 @@ def password_required(short_name):
 
 
 @blueprint.route('/<short_name>/task/<int:task_id>', methods=['GET','POST'])
+@login_required
 def task_presenter(short_name, task_id):
-    if request.method =='GET':
-        msg_1 = gettext('잘못된 접근 입니다.')
-        markup = Markup('<i class="icon-ok"></i> {}')
-        flash(markup.format(msg_1), 'error')
-        return redirect_content_type(url_for('home.home'))
-
     project, owner, ps = project_by_shortname(short_name)
+    task_run = task_repo.get_task_run_present(project.id, current_user.id, task_id)
+
+    if request.method =='GET':
+        if request.args.get('data') == "prev":
+            prev_task_run = task_repo.get_task_run_prev(project.id, current_user.id, task_id)
+            if prev_task_run is None:
+                msg_1 = gettext('이전 Task가 존재하지 않습니다.')
+                markup = Markup('<i class="icon-ok"></i> {}')
+                flash(markup.format(msg_1), 'error')
+                return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
+            return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = prev_task_run.task_id))
+        elif request.args.get('data') == "next":
+            next_task_run = task_repo.get_task_run_next(project.id, current_user.id, task_id)
+            if next_task_run is None:
+                msg_1 = gettext('현재 수행 할 Task 입니다.')
+                markup = Markup('<i class="icon-ok"></i> {}')
+                flash(markup.format(msg_1), 'warning')
+                return redirect_content_type(url_for('.presenter', short_name = project.short_name))
+            elif task_run is None:
+                msg_1 = gettext('현재 Task의 답변이 존재하지 않습니다.')
+                markup = Markup('<i class="icon-ok"></i> {}')
+                flash(markup.format(msg_1), 'error')
+                return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
+            return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = next_task_run.task_id))
+        elif request.args.get('data') == "delete":
+            if task_run is None:
+                msg_1 = gettext('현재 Task의 답변이 존재하지 않습니다.')
+                markup = Markup('<i class="icon-ok"></i> {}')
+                flash(markup.format(msg_1), 'error')
+                return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id=task_id))
+            task_repo.delete(task_run)
+            msg_1 = gettext('현재 Task의 답변을 삭제하였습니다.')
+            markup = Markup('<i class="icon-ok"></i> {}')
+            flash(markup.format(msg_1), 'success')
+            return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
+
     task = task_repo.get_task(id=task_id)
     if task is None:
         raise abort(404)
@@ -1042,7 +1078,8 @@ def task_presenter(short_name, task_id):
     project_sanitized, owner_sanitized = sanitize_project_owner(project, owner,
                                                                 current_user,
                                                                 ps)
-    template_args = {"project": project_sanitized, "title": title, "owner": owner_sanitized}
+
+    template_args = {"project": project_sanitized, "title": title, "owner": owner_sanitized, "task_run": task_run}
 
     def respond(tmpl):
         response = dict(template = tmpl, **template_args)
@@ -1062,6 +1099,7 @@ def task_presenter(short_name, task_id):
 
 @blueprint.route('/<short_name>/presenter')
 @blueprint.route('/<short_name>/newtask', methods=['GET','POST'])
+@login_required
 def presenter(short_name):
 
     def invite_new_volunteers(project, ps):
@@ -1091,7 +1129,7 @@ def presenter(short_name):
 
     title = project_title(project, "Contribute")
     template_args = {"project": project, "title": title, "owner": owner,
-                     "invite_new_volunteers": invite_new_volunteers(project, ps)}
+            "invite_new_volunteers": invite_new_volunteers(project, ps), "task_run":None}
 
     if not project.allow_anonymous_contributors and current_user.is_anonymous:
         msg = "Oops! You have to sign in to participate in <strong>%s</strong> \

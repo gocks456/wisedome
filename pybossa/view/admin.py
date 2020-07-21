@@ -54,6 +54,9 @@ from io import StringIO
 from pybossa.forms.admin_view_forms import *
 from pybossa.news import NOTIFY_ADMIN
 
+from pybossa.backup.manage_postgres_db import *
+import os
+
 
 blueprint = Blueprint('admin', __name__)
 
@@ -80,6 +83,35 @@ def gettime():
     now = datetime.datetime.now()
     return now.strftime('%Y-%m-%dT%H:%M:%S.%f')
 
+@blueprint.route('/db_backup')
+@admin_required
+def back_up():
+    DB_backup_restore("backup")
+    flash(gettext("백업 완료!"), 'success')
+    return redirect_content_type(url_for('admin.index'))
+
+@blueprint.route('/db_restore', methods=['GET','POST'])
+@blueprint.route('/db_restore/<int:time_range>')
+@admin_required
+def restore(time_range = 30):
+    file_list = os.listdir(DB_backup_restore("filepath"))
+    now = datetime.datetime.now()
+    file_list.sort()
+    for row in file_list:
+        compare_time = datetime.datetime.strptime(row[7:26], "%Y-%m-%d %H %M %S")
+        if (now - compare_time).days > time_range:
+            file_list.remove(row)
+
+    if request.method == 'GET' and request.args.get("data") == "data":
+        DB_backup_restore("create", request.args.get("name"))
+        DB_backup_restore("restore", request.args.get("name"), request.args.get("filename"))
+        flash(gettext("복원 완료!"), 'success')
+        return redirect_content_type(url_for('admin.index'))
+
+    response = dict(template='admin/restore.html',
+                    title=gettext('DB 복원'),
+                    file_list=file_list)
+    return handle_content_type(response)
 
 
 @blueprint.route('/manage_exchange')
@@ -126,7 +158,14 @@ def manage_exchange(eid=None):
                 update_ex.finish_time = gettime()
                 exchange_repo.update(update_ex)
                 flash(gettext('환급거절'),'success')
-        
+            elif eid[0]=='D':
+                checked_id = request.args.getlist("checked_id[]")
+                for row in checked_id:
+                    exchange = exchange_repo.get(int(row))
+                    exchange.down_check = True
+                    exchange_repo.update(exchange)
+                return "success"
+
         return _show_exchange()
 
 
@@ -135,11 +174,11 @@ def manage_exchange(eid=None):
 
 def _show_exchange():
     manage_exchange = cached_users.get_manage_exchange()
-    all_point_history = cached_users.get_all_user_point_history()
+    down_check_exchange = cached_users.get_down_check_exchange()
     all_exchange_history = cached_users.get_all_exchange_history()
     response = dict(template = '/admin/manage_exchange.html',
             manage_exchange=manage_exchange,
-            all_point_history=all_point_history,
+            down_check_exchange=down_check_exchange,
             all_exchange_history=all_exchange_history
             )
     return handle_content_type(response)

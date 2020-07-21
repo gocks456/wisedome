@@ -215,19 +215,35 @@ def get_manage_exchange():
     """RETURN REQUESTED EXCHANGE"""
     sql = text('''
                SELECT e.id AS id, e.user_id AS user_id, u.name AS user, e.request_name AS account_holder, e.bank AS bank,
-               e.account_number AS account_number, e.exchange_point AS point, e.created as request_time
+               e.account_number AS account_number, e.exchange_point AS point, e.created as request_time, e.down_check AS down_check
                FROM exchange e, "user" u
-               WHERE u.id = e.user_id and e.finish_time is null
+               WHERE u.id = e.user_id and e.finish_time is null and e.down_check is null
                ORDER BY finish_time desc
                ''')
     results = session.execute(sql, dict())
     manage_exchanges =[]
     for row in results:
         manage_exchange = dict(id=row.id, user_id=row.user_id, user=row.user, account_number=row.account_number,
-                bank=row.bank, account_holder=row.account_holder, point=row.point, request_time=row.request_time[0:10])
+                bank=row.bank, account_holder=row.account_holder, point=row.point, request_time=row.request_time[0:10], down_check=row.down_check)
         manage_exchanges.append(manage_exchange)
     return manage_exchanges
 
+def get_down_check_exchange():
+    """RETURN REQUESTED EXCHANGE"""
+    sql = text('''
+               SELECT e.id AS id, e.user_id AS user_id, u.name AS user, e.request_name AS account_holder, e.bank AS bank,
+               e.account_number AS account_number, e.exchange_point AS point, e.created as request_time, e.down_check AS down_check
+               FROM exchange e, "user" u
+               WHERE u.id = e.user_id and e.finish_time is null and e.down_check is not null
+               ORDER BY finish_time desc
+               ''')
+    results = session.execute(sql, dict())
+    manage_exchanges =[]
+    for row in results:
+        manage_exchange = dict(id=row.id, user_id=row.user_id, user=row.user, account_number=row.account_number,
+                bank=row.bank, account_holder=row.account_holder, point=row.point, request_time=row.request_time[0:10], down_check=row.down_check)
+        manage_exchanges.append(manage_exchange)
+    return manage_exchanges
 
 def get_all_exchange_history():
     """RETURN ALL EXCHANGE HISTORY"""
@@ -240,7 +256,6 @@ def get_all_exchange_history():
                ''')
     results = session.execute(sql,dict())
     all_exchange_history=[]
-    print(type(results))
     for row in results:
         exchange_history = dict(name=row.name, request_name=row.request_name, bank=row.bank, account_number=row.account_number,
                 finish_time=row.finish_time, point=row.point, exchanged=row.exchanged)

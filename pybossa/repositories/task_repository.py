@@ -30,6 +30,14 @@ from sqlalchemy import text
 
 
 class TaskRepository(Repository):
+    def get_task_run_present(self, project_id, user_id, task_id):
+        return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).filter(TaskRun.task_id==task_id).first()
+
+    def get_task_run_prev(self, project_id, user_id, task_id):
+        return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).filter(TaskRun.task_id<task_id).order_by(TaskRun.task_id.desc()).first()
+
+    def get_task_run_next(self, project_id, user_id, task_id):
+        return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).filter(TaskRun.task_id>task_id).order_by(TaskRun.task_id).first()
 
     #20.02.25. 수정사항
     def count_task(self, project_id):

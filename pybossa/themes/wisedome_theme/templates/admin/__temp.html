@@ -19,7 +19,7 @@
 			<table id = "waiting" class="table table-hover">
 				<thead>
 					<tr style="background-color:lightgray">
-						<th><input type="checkbox" id="wait_allCheck"/></th>
+						<th><input type="checkbox" id="allCheck"/></th>
 						<th>id</th>
 						<th>user</th>
 						<th>예금주</th>
@@ -32,7 +32,7 @@
 				<tbody>
 					{% for me in manage_exchange %}
 					<tr>
-						<td><input type="checkbox" name="wait_check" value={{me.id}}></td>
+						<td><input type="checkbox" name="agree"/></td>
 						<td>{{me.id}}</td>
 						<td>{{me.user}}</td>
 						<td>{{me.account_holder}}</td>
@@ -44,13 +44,13 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			<button style="float:right; margin-top:10px;" type="button" onclick="DownToCsv('waiting','환급 대기',1)">전체다운로드</button>
-			<button style="float:right; margin-top:10px;" type="button" onclick="DownToCsvForChecked('waiting')">체크다운로드</button>
+			<!--<button style="float:right; margin-top:10px;" type="button" onclick="DownToCsv('waiting','환급 대기',1)">CSV로 다운받기</button> -->
+			<button style="float:right; margin-top:10px;" type="button" onclick="DownToCsvForChecked('waiting')">CHECK - CSV로 다운받기</button>
 		</div>
 
 		<h3>환급 처리 중</h3>
 		<div class="table-responsive">
-			<table id = "down_check_table" class="table table-hover">
+			<table id = "down_check_user" class="table table-hover">
 				<thead>
 					<tr style="background-color:lightgray">
 						<th><input type="checkbox" id="allCheck"/></th>
@@ -62,13 +62,13 @@
 						<th>포인트</th>
 						<th>요청일자</th>
 						<th>수락</th>
-						<th style="width: 16%;">거절</th>
+						<th style="width: 18%;">거절</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for me in down_check_exchange %}
+					{% for me in manage_exchange %}
 					<tr>
-						<td><input type="checkbox" name="down_check"/></td>
+						<td><input type="checkbox" name="agree"/></td>
 						<td>{{me.id}}</td>
 						<td>{{me.user}}</td>
 						<td>{{me.account_holder}}</td>
@@ -94,7 +94,7 @@
 			<form style="display:none;" name="form1">
 				<input type="text" id="eid">
 			</form>
-			<button type="button" id="check_accept">체크수락</button>
+			<button type="button" id="aaaa">체크수락</button>
 		</div>
 
 
@@ -142,10 +142,10 @@
 
 
 <script>
-	$("#check_accept").click(function (tableId){
+	$("#aaaa").click(function aa(tableId){
 		var url =  window.location.protocol + "//" + window.location.host + "/" + "admin/manage_exchange"
 		var ids = "";
-		var checkbox = $("input[name=down_check]:checked");				// checked checkbox 를 가져온다.
+		var checkbox = $("input[name=agree]:checked");				// checked checkbox 를 가져온다.
 		checkbox.each(function(i){
 			var tr = checkbox.parent().parent().eq(i);
 			var td = tr.children();
@@ -158,6 +158,7 @@
 		document.form1.eid.value = ids;
 		console.log(ids);
 		window.location.href = url + "/Q" + ids;
+
 	})
 </script>
 
@@ -173,8 +174,8 @@
 		} );
     });
     $(function($){
-        $("#down_check_table").dataTable( {
-			"order":[1,'desc'],
+        $("#all_user_point_history").dataTable( {
+			"order":[2,'desc'],
 			"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
 		} );
     });
@@ -191,20 +192,11 @@
 
 <script>
 	$(function(){
-		$("#wait_allCheck").click(function(){							// 전체선택 체크박스 클릭하면
-			if($("#wait_allCheck").prop("checked")) {					// 전체 선택 체크박스가 체크된상태일경우
-				$("input[name=wait_check]").prop("checked",true);		// 해당화면에 전체 checkbox들을 체크해준다
-			} else {												// 전체 선택 체크박스가 해제된 경우
-				$("input[name=wait_check]").prop("checked",false);	// 해당화면에 모든 checkbox들의 체크를해제시킨다.
-			}
-		})
-	})
-	$(function(){
 		$("#allCheck").click(function(){							// 전체선택 체크박스 클릭하면
 			if($("#allCheck").prop("checked")) {					// 전체 선택 체크박스가 체크된상태일경우
-				$("input[name=down_check]").prop("checked",true);		// 해당화면에 전체 checkbox들을 체크해준다
+				$("input[type=checkbox]").prop("checked",true);		// 해당화면에 전체 checkbox들을 체크해준다
 			} else {												// 전체 선택 체크박스가 해제된 경우
-				$("input[name=down_check]").prop("checked",false);	// 해당화면에 모든 checkbox들의 체크를해제시킨다.
+				$("input[type=checkbox]").prop("checked",false);	// 해당화면에 모든 checkbox들의 체크를해제시킨다.
 			}
 		})
 	})
@@ -213,30 +205,54 @@
 
 
 <script>
-	function DownToCsv(tableId) {
-		$("input[name=wait_check]").prop("checked",true);		// 해당화면에 전체 checkbox들을 체크해준다
-		DownToCsvForChecked(tableId);
+	function DownToCsv(tableId,filename,witcht) {
+
+		filename += ".csv";
+
+		var BOM = "\uFEFF";
+
+		var table = document.getElementById(tableId);
+		var csvString = BOM;
+		for (var rowCnt = 0; rowCnt < table.rows.length; rowCnt++) {
+			var rowData = table.rows[rowCnt].cells;
+			var r_l = rowData.length;
+			if (witcht == 1){
+				r_l -=2;				
+			}
+			for (var colCnt = 0+witcht; colCnt < r_l; colCnt++) {		// 환급 대기같은 경우엔 rowData.length 의 크기를 줄여 수락, 거절을 없애기
+				var columnData = rowData[colCnt].innerHTML;
+				if (columnData == null || columnData.length == 0) {
+					columnData = "".replace(/"/g, '""');
+				}
+				else {
+					columnData = columnData.toString().replace(/"/g, '""'); // escape double quotes
+				}
+				csvString = csvString.replace('&lt;&nbsp;','< ').replace('&nbsp;&gt;',' >') + '"' + columnData + '",';	// replace 는 유저 포인트 내역- 내용을 위해
+			}
+			csvString = csvString.substring(0, csvString.length - 1);
+			csvString = csvString + "\r\n";
+		}
+		csvString = csvString.substring(0, csvString.length - 1);
+
+		if (window.Blob && window.URL) {
+			// HTML5 Blob
+			var blob = new Blob([csvString], { type: 'text/csv;charset=utf8' });
+			var csvUrl = URL.createObjectURL(blob);
+			var a = document.createElement('a');
+			a.setAttribute('style', 'display:none');
+			a.setAttribute('href', csvUrl);
+			a.setAttribute('download', filename);
+			document.body.appendChild(a);
+
+			a.click()
+			a.remove();
+		}
 	}
 </script>
 
 <script>
 	function DownToCsvForChecked(tableId) {
-		var checked_id = [];
-
-		$('input:checkbox[name="wait_check"]').each(function() {
-			if(this.checked){
-				checked_id.push(this.value);
-			}
-		});
-		console.log(checked_id);
-
-		$.ajax({
-			url         :   "{{url_for('admin.manage_exchange',eid="DC"|string )}}",
-			dataType    :   "json",
-			type        :   "get",
-			data		:	{ "checked_id" : checked_id },
-		});
-
+		
 
 		var filename = tableId;
 		filename += ".csv";
@@ -245,7 +261,7 @@
 
 		var table = document.getElementById(tableId);
 		var csvString = BOM;
-		var chkbox = document.getElementsByName('wait_check');
+		var chkbox = document.getElementsByName('agree');
 		for (var rowCnt = 0; rowCnt < table.rows.length; rowCnt++) {
 
 			if (rowCnt==0 || chkbox[rowCnt-1].checked){

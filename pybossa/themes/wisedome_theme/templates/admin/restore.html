@@ -1,0 +1,42 @@
+{% extends "admin/base.html" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block rightbody%}
+<style>
+	input[type=radio] {margin: -2px 3px 0 5px; vertical-align:middle;}
+	label#file_check {
+		width:60%;
+		margin: 5px;
+		font-size: medium;
+	}
+
+</style>
+
+<h1><strong>{{ _('Admin Site') }}:</strong> {{title}}</h1>
+<form method="GET" action="{{url_for('admin.restore')}}">
+	<fieldset>
+		<div class="form-actions">
+			<div class="form-group">
+				<label for="name" class="control-label">
+					<label for="name" style="font-size:large;">저장할 DB 이름</label>
+				</label>
+				<input type="text" class="form-control" id="name" name="name" placeholder="저장할 DB의 이름을 입력하시오.(예: test 입력 -> test_restore)">
+			</div>
+			<div class="form-group">
+				<label for="file_name" class="control-label">
+					<label for="file_name" style="font-size:large;"> 복원 시간 설정</label>
+				</label>
+				<div class="check">
+					{% for list in file_list %}
+					<label id="file_check">
+						<input type="radio" name="filename" value="{{list}}">
+						{{list[7:17]}} {{list[18:26] | replace(" ", ":")}}<br>
+					</label>
+					{% endfor %}
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary" name="data" value="data">DB 복원</button>
+		</div>
+	</fieldset>
+</form>
+{% endblock %}
