@@ -39,10 +39,24 @@
 </div><!-- End of Row--> <!-- 정답을 눌렀을 때 뜨는 내용들로 딱히 수정하지 않아도 됨 -->
 
 <div class="row skeleton">
-	<div class="skeleton col-md-9">
+	<div class="skeleton col-md-12">
 		<u>제목을 입력하시오</u><br/><br/>
 		<div id="sentence">문제 <!-- 여기에 만들거나 Jquery를 이용해도 됩니다. --></div>
 		<div id="candidate">답변 <!-- 여기에 만들거나 Jquery를 이용해도 됩니다. --></div>
+
+		<!-- 이전 답변 및 답변 수정 기능 method와 name, value, type 변경 금지-->
+		<div id="form_div" style="text-align:center; float:right; width:100%;">
+			<form action="" method="GET" style="float: right;">
+				<button name="data" value="next" type="submit" class="btn btn-primary">다음</button>
+			</form>
+			<form action="" method="GET" style="float: right;">
+				<button name="data" value="delete" type="submit" class="btn btn-warning">답변 삭제</button>
+			</form>
+			<form action="" method="GET" style="float: right;">
+				<button name="data" value="prev" type="submit" class="btn btn-info">이전</button>
+			</form>
+		</div>
+		<br/><br/>
 
 		<!-- 작업 표시줄 기능으로 몇 번째 문제를 하고 있는지, 얼마나 했는지 표시 PYBOSSA의 loadUserProgress() 함수로 자동 추가 가능! -->
 		<p>Task: <span id="task-id" class="label label-warning">#</span></p><br/>

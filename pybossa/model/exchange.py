@@ -27,3 +27,5 @@ class Exchange(db.Model, DomainObject):
     finish_time = Column(Text) #, default='F')
 
     exchanged = Column(Unicode(length=2))
+
+    down_check = Column (Boolean)

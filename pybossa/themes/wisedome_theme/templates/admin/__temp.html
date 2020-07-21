@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+{% set active_page = "manage_exchange" %}
+{% set active_link = "admin" %}
+
+{% block content %}
+
+
+<script src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}" type="text/javascript"></script>
+<script src="{{url_for('static', filename='js/add-js/datatables.min.js')}}" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+
+<div class="container">
+	<div class="col-sm-12 col-md-12">
+		<h2>환급요청관리</h2>	
+	</div>
+	<div class="col-sm-12 col-md-12">
+		<h3>환급대기</h3>
+		<div class="table-responsive">
+			<table id = "waiting" class="table table-hover">
+				<thead>
+					<tr style="background-color:lightgray">
+						<th><input type="checkbox" id="allCheck"/></th>
+						<th>id</th>
+						<th>user</th>
+						<th>예금주</th>
+						<th>은행</th>
+						<th>계좌번호</th>
+						<th>포인트</th>
+						<th>요청일자</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for me in manage_exchange %}
+					<tr>
+						<td><input type="checkbox" name="agree"/></td>
+						<td>{{me.id}}</td>
+						<td>{{me.user}}</td>
+						<td>{{me.account_holder}}</td>
+						<td>{{me.bank}}</td>
+						<td>{{me.account_number}}</td>
+						<td>{{me.point}}</td>
+						<td>{{me.request_time}} </td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<!--<button style="float:right; margin-top:10px;" type="button" onclick="DownToCsv('waiting','환급 대기',1)">CSV로 다운받기</button> -->
+			<button style="float:right; margin-top:10px;" type="button" onclick="DownToCsvForChecked('waiting')">CHECK - CSV로 다운받기</button>
+		</div>
+
+		<h3>환급 처리 중</h3>
+		<div class="table-responsive">
+			<table id = "down_check_user" class="table table-hover">
+				<thead>
+					<tr style="background-color:lightgray">
+						<th><input type="checkbox" id="allCheck"/></th>
+						<th>id</th>
+						<th>user</th>
+						<th>예금주</th>
+						<th>은행</th>
+						<th>계좌번호</th>
+						<th>포인트</th>
+						<th>요청일자</th>
+						<th>수락</th>
+						<th style="width: 18%;">거절</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for me in manage_exchange %}
+					<tr>
+						<td><input type="checkbox" name="agree"/></td>
+						<td>{{me.id}}</td>
+						<td>{{me.user}}</td>
+						<td>{{me.account_holder}}</td>
+						<td>{{me.bank}}</td>
+						<td>{{me.account_number}}</td>
+						<td>{{me.point}}</td>
+						<td>{{me.request_time}} </td>
+						<td><form action="{{url_for('admin.manage_exchange',eid="Y"+me.id|string )}}">
+								<input type='int' value="{{me.id}}" style="display:none"/> <input type='submit' value="수락"/>
+							</form></td>
+							<td><form  action="{{url_for('admin.manage_exchange',eid="N1"+me.id|string )}}">
+									<input type='submit' value="계좌오류"/></form>
+								<form  action="{{url_for('admin.manage_exchange',eid="N2"+me.id|string )}}">
+									<input type='submit' value="악용유저"/></form>
+							</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<form  style="margin-top:10px;" action="{{url_for('admin.manage_exchange',eid="AL"|string )}}">
+				<input type='submit' value="전체수락"/>
+			</form>
+			<form style="display:none;" name="form1">
+				<input type="text" id="eid">
+			</form>
+			<button type="button" id="aaaa">체크수락</button>
+		</div>
+
+
+		<h3>환급완료 내역</h3>
+		<div class="table-responsive">
+			<table id="all_exchange_history" class="table table-hover">
+				<thead>
+					<tr style="background-color:lightgray">
+						<th>이름</th>
+						<th>예금주</th>
+						<th>은행</th>
+						<th>계좌번호</th>
+						<th>날짜</th>
+						<th>포인트</th>
+						<th>결과</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for eh in all_exchange_history %}
+					<tr>
+						<td>{{eh.name}}</td>
+						<td>{{eh.request_name}}</td>
+						<td>{{eh.bank}}</td>
+						<td>{{eh.account_number}}</td>
+						<td>{{eh.finish_time[0:10]}}</td>
+						<td>{{eh.point}}</td>
+						<td>{{eh.exchanged}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<button type="button" onclick="DownToCsv('all_exchange_history','환급완료 내역',0)">CSV로 다운받기</button>
+
+		</div>
+
+	</div>
+
+</div>   {# container #}
+
+
+<style type="text/css">
+ form{display:inline}
+</style>
+
+
+
+<script>
+	$("#aaaa").click(function aa(tableId){
+		var url =  window.location.protocol + "//" + window.location.host + "/" + "admin/manage_exchange"
+		var ids = "";
+		var checkbox = $("input[name=agree]:checked");				// checked checkbox 를 가져온다.
+		checkbox.each(function(i){
+			var tr = checkbox.parent().parent().eq(i);
+			var td = tr.children();
+			var exchange_id = td.eq(1).text()+","
+			ids += exchange_id;
+		});
+		
+		//$("#checked_ids"[1]).html(ids.toString());
+		//document.getElementById('aaa')[1].innerHTML = ids;
+		document.form1.eid.value = ids;
+		console.log(ids);
+		window.location.href = url + "/Q" + ids;
+
+	})
+</script>
+
+
+<script>
+    $(function($){
+        $("#waiting").dataTable( {
+			"order":[1,'desc'],
+			"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+			"columnDefs": [
+			 { "orderable": false, "targets": 0 }
+			 ]
+		} );
+    });
+    $(function($){
+        $("#all_user_point_history").dataTable( {
+			"order":[2,'desc'],
+			"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
+		} );
+    });
+    $(function($){
+        $("#all_exchange_history").dataTable( {
+			"order":[4,'desc'],
+			"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
+		} );
+    });
+
+</script>
+
+
+
+<script>
+	$(function(){
+		$("#allCheck").click(function(){							// 전체선택 체크박스 클릭하면
+			if($("#allCheck").prop("checked")) {					// 전체 선택 체크박스가 체크된상태일경우
+				$("input[type=checkbox]").prop("checked",true);		// 해당화면에 전체 checkbox들을 체크해준다
+			} else {												// 전체 선택 체크박스가 해제된 경우
+				$("input[type=checkbox]").prop("checked",false);	// 해당화면에 모든 checkbox들의 체크를해제시킨다.
+			}
+		})
+	})
+
+</script>
+
+
+<script>
+	function DownToCsv(tableId,filename,witcht) {
+
+		filename += ".csv";
+
+		var BOM = "\uFEFF";
+
+		var table = document.getElementById(tableId);
+		var csvString = BOM;
+		for (var rowCnt = 0; rowCnt < table.rows.length; rowCnt++) {
+			var rowData = table.rows[rowCnt].cells;
+			var r_l = rowData.length;
+			if (witcht == 1){
+				r_l -=2;				
+			}
+			for (var colCnt = 0+witcht; colCnt < r_l; colCnt++) {		// 환급 대기같은 경우엔 rowData.length 의 크기를 줄여 수락, 거절을 없애기
+				var columnData = rowData[colCnt].innerHTML;
+				if (columnData == null || columnData.length == 0) {
+					columnData = "".replace(/"/g, '""');
+				}
+				else {
+					columnData = columnData.toString().replace(/"/g, '""'); // escape double quotes
+				}
+				csvString = csvString.replace('&lt;&nbsp;','< ').replace('&nbsp;&gt;',' >') + '"' + columnData + '",';	// replace 는 유저 포인트 내역- 내용을 위해
+			}
+			csvString = csvString.substring(0, csvString.length - 1);
+			csvString = csvString + "\r\n";
+		}
+		csvString = csvString.substring(0, csvString.length - 1);
+
+		if (window.Blob && window.URL) {
+			// HTML5 Blob
+			var blob = new Blob([csvString], { type: 'text/csv;charset=utf8' });
+			var csvUrl = URL.createObjectURL(blob);
+			var a = document.createElement('a');
+			a.setAttribute('style', 'display:none');
+			a.setAttribute('href', csvUrl);
+			a.setAttribute('download', filename);
+			document.body.appendChild(a);
+
+			a.click()
+			a.remove();
+		}
+	}
+</script>
+
+<script>
+	function DownToCsvForChecked(tableId) {
+		
+
+		var filename = tableId;
+		filename += ".csv";
+
+		var BOM = "\uFEFF";
+
+		var table = document.getElementById(tableId);
+		var csvString = BOM;
+		var chkbox = document.getElementsByName('agree');
+		for (var rowCnt = 0; rowCnt < table.rows.length; rowCnt++) {
+
+			if (rowCnt==0 || chkbox[rowCnt-1].checked){
+
+				var rowData = table.rows[rowCnt].cells;
+				for (var colCnt = 1; colCnt < rowData.length-2; colCnt++) {		// 환급 대기같은 경우엔 rowData.length 의 크기를 줄여 수락, 거절을 없애기
+					var columnData = rowData[colCnt].innerHTML;
+					if (columnData == null || columnData.length == 0) {
+						columnData = "".replace(/"/g, '""');
+					}
+					else {
+						columnData = columnData.toString().replace(/"/g, '""'); // escape double quotes
+					}
+					csvString = csvString.replace('&lt;&nbsp;','< ').replace('&nbsp;&gt;',' >') + '"' + columnData + '",';	// replace 는 유저 포인트 내역- 내용을 위해
+				}
+				csvString = csvString.substring(0, csvString.length - 1);
+				csvString = csvString + "\r\n";
+			}
+		}
+		csvString = csvString.substring(0, csvString.length - 1);
+
+		// IE 10, 11, Edge Run
+		if (window.Blob && window.URL) {
+			// HTML5 Blob
+			var blob = new Blob([csvString], { type: 'text/csv;charset=utf8' });
+			var csvUrl = URL.createObjectURL(blob);
+			var a = document.createElement('a');
+			a.setAttribute('style', 'display:none');
+			a.setAttribute('href', csvUrl);
+			a.setAttribute('download', filename);
+			document.body.appendChild(a);
+
+			a.click()
+			a.remove();
+		}
+	}
+</script>
+
+{% endblock %}

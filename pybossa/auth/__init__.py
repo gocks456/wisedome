@@ -89,7 +89,6 @@ def is_authorized(user, action, resource, **kwargs):
 
 def ensure_authorized_to(action, resource, **kwargs):
     authorized = is_authorized(current_user, action, resource, **kwargs)
-
     #당장 삭제가안되서 주석해둠
     if authorized is False:
         if current_user.is_anonymous:

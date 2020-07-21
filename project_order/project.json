@@ -1,0 +1,6 @@
+{
+    "name": "FindPokemon",
+    "short_name": "FP2",
+    "description": "이미지속에 포켓몬이 있나요?",
+    "condition": {"sex":"0", "age_s":0,"age_e":0, "all_achieve":"0", "cat_achieve":"0"}
+}

@@ -548,6 +548,12 @@ def exchange(name):
     """
     user = user_repo.get_by_name(name)
 
+   # f = open("./pybossa/is_lock.py",'r')
+   # ff = f.read()
+   # f.close()
+
+    #print(ff[5])
+
     if not user:
         return abort(404)
     if current_user.name != name:
@@ -570,6 +576,9 @@ def exchange(name):
                 name=name)
 
         if form.validate():
+#            if (ff[5]=="F"):
+ #               flash(gettext('LOCKED'), 'error')
+  #              return handle_content_type(response)
             a = form.exchange_point
             if (int(exchange.exchange_point) > int(current_user.current_point)):
                 flash(gettext('가지고 있는 포인트 이내에서 환급요청 하십시오!'), 'error')

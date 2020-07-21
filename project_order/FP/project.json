@@ -1,0 +1,6 @@
+{
+    "name": "FP1",
+    "short_name": "FP1",
+    "description": "이미지를 보고 Pokemon을 찾아주세요.",
+    "condition": {"sex":"0", "age_s":0,"age_e":0, "all_achieve":"0", "cat_achieve":"0"}
+}
