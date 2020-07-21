@@ -1,0 +1,11 @@
+# Directories #
+/backups/
+/__pycache__/
+/contrib/
+pybossa/__pycache__/
+*.pyc
+
+alembic.ini
+pybossa.ini
+settings_local.py
+.swp

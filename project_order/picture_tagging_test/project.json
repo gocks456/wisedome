@@ -1,0 +1,6 @@
+{
+    "name": "사진 태깅",
+    "short_name": "taggingpictures1",
+    "description": "Do you know this person?",
+	"condition": {"sex":"0", "age_e": 0, "age_s": 0, "all_achieve": "0", "cat_achieve": "0"}
+}
