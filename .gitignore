@@ -8,4 +8,4 @@ pybossa/__pycache__/
 alembic.ini
 pybossa.ini
 settings_local.py
-.swp
+*.swp
