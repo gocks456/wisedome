@@ -35,10 +35,12 @@
         </div>
     </div>
     {% endif %}
-
-	<button id="answer_manage" class="btn btn-primary">답변 관리</button>
-
-	<div class="col-md-12" id="form_div" style="margin:15px 0px 15px 0px; display:none;">
+	
+	<form action="" method="GET">
+		<button name="data" value="answer_manage" class="btn btn-primary">답변 관리</button>
+	</form>
+	{% if task_run is not none %}
+	<div class="col-md-12" id="form_div" style="margin:15px 0px 15px 0px;">
 		<h4 style="line-height: 1.5; word-spacing: 5px;"> <strong>답변</strong> <br/>{{ task_run.info }} </h4>
 		<div style="text-align:center;">
 			<form action="" method="GET" style="float: right; margin-left:10px;">
@@ -52,6 +54,7 @@
 			</form>
 		</div>
 	</div>
+	{% endif %}
 	<div style="clear:both;"></div>
 	{{ project.info.task_presenter|safe }}
 
@@ -85,7 +88,7 @@ $(document).ready(function() {
 		$("#form_div").show();
 });
 
-$("#answer_manage").off('click').on('click', function(evt){
+/*$("#answer_manage").off('click').on('click', function(evt){
 	if($("#form_div").css("display") == "none") {
 		document.cookie = "answer_open=yes";
 		$("#form_div").show();
@@ -94,7 +97,7 @@ $("#answer_manage").off('click').on('click', function(evt){
 		document.cookie = "answer_open=no";
 		$("#form_div").hide();
 	}
-});
+});*/
 </script>
 {% endblock %}
 {% block extrajs %}

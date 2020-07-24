@@ -22,17 +22,22 @@ from pybossa.model.result import Result
 from pybossa.exc import WrongObjectError, DBIntegrityError
 from sqlalchemy import text
 
+from pybossa.cache import projects as cached_projects
+
 
 class ResultRepository(Repository):
 
     def get_all(self, project_id):
-        return self.db.session.query(Result).filter_by(project_id=project_id).all();
+        return self.db.session.query(Result).filter_by(project_id=project_id).all()
 
     def get_mark_all(self, project_id):
-        return self.db.session.query(Result).filter_by(project_id=project_id, info=None).all();
+        return self.db.session.query(Result).filter_by(project_id=project_id, info=None).all()
 
     def get(self, id):
         return self.db.session.query(Result).get(id)
+
+    def get_by_task_id(self, task_id):
+        return self.db.session.query(Result).filter_by(task_id=task_id).first()
 
     def get_by(self, **attributes):
         if 'last_version' not in attributes.keys():
@@ -59,6 +64,11 @@ class ResultRepository(Repository):
         except IntegrityError as e:
             self.db.session.rollback()
             raise DBIntegrityError(e)
+
+    def delete(self, element):
+        self.db.session.delete(element)
+        self.db.session.commit()
+        cached_projects.clean_project(element.project_id)
 
     def delete_results_from_project(self, project):
         sql = text('''

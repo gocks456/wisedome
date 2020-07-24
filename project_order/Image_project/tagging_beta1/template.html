@@ -49,7 +49,12 @@ span.label {
 <script>
       //anno.addPlugin('SemanticTagging', { endpoint_url: 'http://samos.mminf.univie.ac.at:8080/wikipediaminer' });
 </script>
-<script>
+	<script>
+		$(".photo").on('DOMNodeInserted', '.r6o-editor', function(){
+			$(".r6o-editable-text").attr('data-placeholder', "이름을 적어주세요.");
+			$(".tag").css({display:"none"});
+		});
+
 pybossa.taskLoaded(function(task, deferred) {
     if ( ! $.isEmptyObject(task) ) {
         // load image from flickr
@@ -62,6 +67,7 @@ pybossa.taskLoaded(function(task, deferred) {
         img.attr('id', 'anno_' + task.id);
         img.addClass('img-polaroid');
         img.addClass('annotable');
+		img.css({width: "100%"});
         task.info.image = img;
     }
     else {

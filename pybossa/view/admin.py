@@ -164,7 +164,10 @@ def manage_exchange(eid=None):
                     exchange = exchange_repo.get(int(row))
                     exchange.down_check = True
                     exchange_repo.update(exchange)
-                return "success"
+                print (eid)
+                return redirect(url_for('admin.manage_exchange'))
+            print ('aaaaa'+eid)
+            return redirect_content_type(url_for('admin.manage_exchange'))
 
         return _show_exchange()
 

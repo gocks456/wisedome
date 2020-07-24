@@ -3,36 +3,32 @@
     <div class="col-md-12" style="height:50px">
         <!-- Success alert box -->
         <div id="success" class="alert alert-success" style="display:none;">
-            <a class="close">×</a><strong>Well done!</strong> Your answer has been saved
-        </div>
-        <!-- Task completed alert box -->
-        <div id="taskcompleted" class="alert alert-info" style="display:none;">
-            <strong>The task has been completed!</strong> Thanks a lot!
+            <a class="close">×</a><strong>답변 저장 중...</strong>
         </div>
         <!-- Task loading alert box -->
         <div id="loadingTask" class="alert alert-info">
-            <strong>Loading task...</strong>
+            <strong>Task 불러오는 중...</strong>
         </div>
         <!-- Task completed alert box -->
         <div id="finish" class="alert alert-success" style="display:none;">
-            <strong>Congratulations!</strong> You have participated in all available tasks!
+            <strong>프로젝트 완료!</strong> 모든 일감을 수행하였습니다.
             <br/>
             <div class="alert-actions">
 <!--                <a class="btn small" href="/" style="color:white">Go back</a>-->
-                <a class="btn-small" href="/project/category/featured" style="color:white;">Check other projects</a>
+                <a class="btn-small" href="/project/category/featured" style="color:white;">다른 프로젝트 둘러보기</a>
             </div>
         </div>
         <!-- Error alert box -->
         <div id="error" class="alert alert-danger" style="display:none;">
             <a class="close">×</a>
-            <strong>Error!</strong> Something went wrong, please contact the site administrators
+			<strong>오류 발생!</strong> 문제가 발생하였습니다. 관리자에게 문의 하세요.
         </div>
         <!-- Old Browser alert box -->
         <div id="oldBrowser" class="alert alert-info" style="display:none;">
             <a class="close">×</a>
-            <p><strong>Sorry!</strong> Your web browser does not support the application.<p>
+            <p><strong>죄송합니다.</strong> 웹 브라우저가 이 프로젝트를 지원하지 않습니다.<p>
             <div class="alert-actions">
-				<a class="btn small" href="/project/category/featured">Please, try with another project</a>
+				<a class="btn small" href="/project/category/featured" style="color:white;">다른 프로젝트 둘러보기</a>
 			</div>
 		</div>
 	</div><!-- End of span8 col-md-offset-2-->
@@ -95,9 +91,6 @@ pybossa.taskLoaded(function(task, deferred){ // task를 불러오는 함수
 
 pybossa.presentTask(function(task, deferred){ // task를 뿌리는 함수 (결과 저장도 여기서 일어납니다.)
     if ( !$.isEmptyObject(task) ) {
-        if (task.state == 'completed') {
-            $('#taskcompleted').show();
-        }
 
        if(task.info.sentence == 'Done') {
 			pybossa.saveTask( task.id, -1, {}).done( function(data) { deferred.resolve(); });

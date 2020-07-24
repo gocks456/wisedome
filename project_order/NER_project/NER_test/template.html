@@ -71,10 +71,11 @@ tr:nth-child(even) {
 
 <div class="row skeleton">
   <div class="skeleton col-md-6">
-	<u>어떤 문장인지를 선택하세오.</u><br/><br/>
+	<u>올바른 분석을 선택하세오.</u><br/><br/>
 	<div id="sentence">Question</div>
 	<div id="candidate"></div>
-	<!--<button id="explain" class="btn btn-explain" style="float: right; display: none;">해설</button><br/><br/>-->
+	<button id="nextbtn" class="btn btn-success btn-submit" style="float: right;">다음</button><!--<br/><br/>-->
+	<button id="explain" class="btn btn-explain" style="float: right; display: none;">해설</button><br/><br/>
 	
 	<p>Task: <span id="task-id" class="label label-warning">#</span></p><br/>
 	<p>완료한 작업 수: <span id="done" class="label label-info"></span> / 총 작업 수:
@@ -83,10 +84,99 @@ tr:nth-child(even) {
 		<div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
 	</div>
 
+
+	<!--<table border="1" width="100%">
+		<tr><td text-align="left"><b><u>WIKIPEDIA</u></b></td></tr>
+		<tr><td text-align="left"><div id="wikicontent">None</div></td></tr>
+	</table>-->
+
   </div>
   <div class="skeleton col-md-6">
     <div id="div3">
-
+      <div id="tagset">
+		  	  <font size="2">
+			  <table class="table table-bordered" id="necat">
+				<tbody>
+				<tr>
+				<th scope="col">개체명 범주</th>
+				<th scope="col">태그</th>
+				<th scope="col">정의</th>
+				</tr>
+				<tr id="PER" style="display:none;">
+				<td>PERSON</td>
+				<td>PER</td>
+				<td>실존, 가상 등 인물명에 해당 하는 것</td>
+				</tr>
+				<tr id="FLD" style="display:none;">
+				<td>FIELD</td>
+				<td>FLD</td>
+				<td>학문 분야 및 이론, 법칙, 기술 등</td>
+				</tr>
+				<tr id="AFW" style="display:none;">
+				<td>ARTIFACTS_WORKS</td>
+				<td>AFW</td>
+				<td>인공물로 사람에 의해 창조된 대상물</td>
+				</tr>
+				<tr id="ORG" style="display:none;">
+				<td>ORGANIZATION</td>
+				<td>ORG</td>
+				<td>기관 및 단체와 회의/회담을 모두 포함</td>
+				</tr>
+				<tr id="LOC" style="display:none;">
+				<td>LOCATION</td>
+				<td>LOC</td>
+				<td>지역명칭과 행정구역 명칭 등</td>
+				</tr>
+				<tr id="CVL" style="display:none;">
+				<td>CIVILIZATION</td>
+				<td>CVL</td>
+				<td>문명 및 문화에 관련된 용어</td>
+				</tr>
+				<tr id="DAT" style="display:none;">
+				<td>DATE</td>
+				<td>DAT</td>
+				<td>날짜</td>
+				</tr>
+				<tr id="TIM" style="display:none;">
+				<td>TIME</td>
+				<td>TIM</td>
+				<td>시간</td>
+				</tr>
+				<tr id="NUM" style="display:none;">
+				<td>NUMBER</td>
+				<td>NUM</td>
+				<td>숫자</td>
+				</tr>
+				<tr id="EVT" style="display:none;">
+				<td>EVENT</td>
+				<td>EVT</td>
+				<td>특정 사건 및 사고 명칭과 행사 등</td>
+				</tr>
+				<tr id="ANM" style="display:none;">
+				<td>ANIMAL</td>
+				<td>ANM</td>
+				<td>동물</td>
+				</tr>
+				<tr id="PLT" style="display:none;">
+				<td>PLANT</td>
+				<td>PLT</td>
+				<td>식물</td>
+				</tr>
+				<tr id="MAT" style="display:none;">
+				<td>MATERIAL</td>
+				<td>MAT</td>
+				<td>금속, 암석, 화학물질 등</td>
+				</tr>
+				<tr id="TRM" style="display:none;">
+				<td>TERM</td>
+				<td>TRM</td>
+				<td>의학 용어, IT곤련 용어 등 일반 용어를 총칭</td>
+				</tr>
+				</tbody>
+			  </table>
+			  </font>
+	  </div>
+	</div>
 	<div class="explain">
 	</div>
   </div>
@@ -100,7 +190,7 @@ function showExplain(task) {
 }
 
 function loadUserProgress() {
-	pybossa.userProgress('emotion_test').done(function(data){
+	pybossa.userProgress('ner_practice').done(function(data){
 		var pct = Math.round((data.done*100)/data.total);
 		console.log(pct);
 		$("#progress").css("width", pct.toString() +"%");
@@ -111,15 +201,28 @@ function loadUserProgress() {
 	});
 }
 
-function makeButton(name, value, text, btn) {
-    var div = document.createElement("div");
-	var button = document.createElement("button");
+function NER_table(task) {
+	var can1 = task.info.candidate1.substr( task.info.candidate1.length-3, 3);
+	var can2 = task.info.candidate2.substr( task.info.candidate2.length-3, 3);
+	var can3 = task.info.candidate3.substr( task.info.candidate3.length-3, 3);
+	$("#" + can3).show();
+	$("#" + can2).show();
+	$("#" + can1).show();
+};
 
-	button.id = name;
-	button.value = value;
-	button.class = "btn btn-submit" + btn
-	button.appendChild(document.createTextNode(text));
-	div.appendChild(button);
+function makeRadioButton(name, value, text, checked) {
+    var div = document.createElement("div");
+    var radio = document.createElement("input");
+	var label = document.createElement("label");
+	
+    radio.type = "radio";
+    radio.name = name;
+    radio.value = value;
+	if(checked == 1) radio.checked=1;
+
+	label.appendChild(radio);
+	label.appendChild(document.createTextNode(text));
+	div.appendChild(label);
 	
     return div;
 };
@@ -137,34 +240,41 @@ pybossa.taskLoaded(function(task, deferred){
 pybossa.presentTask(function(task, deferred){
     if ( !$.isEmptyObject(task) ) {
         if (task.state == 'completed') {
+            $('#nextbtn').hide();
             $('#taskcompleted').show();
         }
 
        if(task.info.sentence == 'Done') {
+            $('#nextbtn').hide();
 			pybossa.saveTask( task.id, -1, {}).done( function(data) { deferred.resolve(); });
 			delete task;
 		} else {
+				$('#nextbtn').show();
 				loadUserProgress();
 				document.getElementById("sentence").innerHTML = "<h3>" + task.info.sentence + "</h3>";
 
-				var buttonlist = document.getElementById("candidate");
-				var btn1 = makeButton("candidate", "긍정", " 긍정", btn-success);
-				var btn2 = makeButton("candidate", "중립", " 중립", btn-warning);
-				var btn3 = makeButton("candidate", "부정", " 부정", btn-danger);
-				buttonlist.innerHTML = ''; // button input init
-				buttonlist.appendChild(btn1);
-				buttonlist.appendChild(btn2);
-				buttonlist.appendChild(btn3);
+				var radiolist = document.getElementById("candidate");
+				var btn1 = makeRadioButton("candidate", task.info.candidate1, " " + task.info.candidate1, 1);
+				var btn2 = makeRadioButton("candidate", task.info.candidate2, " " + task.info.candidate2, 0);
+				var btn3 = makeRadioButton("candidate", task.info.candidate3, " " + task.info.candidate3, 0);
+				var btn4 = makeRadioButton("candidate", "None", " I don't know");
+				radiolist.innerHTML = ''; // radio type input init
+				radiolist.appendChild(btn1);
+				radiolist.appendChild(btn2);
+				radiolist.appendChild(btn3);
+				radiolist.appendChild(btn4);
+
 
 				$("#task-id").text(task.id);
 				$("#loadingTask").hide();
+				NER_table(task)
 		}
-		/*$(".btn-explain").off('click').on('click', function(evt){
+		$(".btn-explain").off('click').on('click', function(evt){
 			showExplain(task);
-		});*/
+		});
 
         $(".btn-submit").off('click').on('click', function(evt){
-			/*var chkval = document.getElementsByName('candidate');
+			var chkval = document.getElementsByName('candidate');
 			var answer;
 			var answer_value;
 			for(var i=0; i<chkval.length; i++){
@@ -172,21 +282,7 @@ pybossa.presentTask(function(task, deferred){
 					answer = task.info.sentence + ", " + chkval[i].value;
 					answer_value = chkval[i].value;
 				}
-			}*/
-			var answer = (this).value;
-			answer = task.info.sentence + ", " + answer;
-            console.log(answer);
-            console.log(task.id);
-
-			/*if(task.info.answer != ""){
-				if (task.info.answer != answer_value){
-					alert("오답 입니다.");
-					$('#explain').show();
-					return false;
-				}
-			}*/
-			$('#explain').hide();
-
+			}
 		    // TODO: gt와 현재 answer가 같은지를 확인
 
 		    // db에 현재 결과 저장
@@ -206,5 +302,5 @@ pybossa.presentTask(function(task, deferred){
     }
 });
 
-pybossa.run('emotion_test');
+pybossa.run('ner_practice');
 </script>

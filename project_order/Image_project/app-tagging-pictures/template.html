@@ -1,31 +1,20 @@
-<link type="text/css" rel="stylesheet" href="http://annotorious.github.io/latest/themes/dark/annotorious-dark.css"/>
+<style>
+span.label {
+	color:black;
+	font-size:100%;
+}
+</style>
+
 <div class="row skeleton"> 
     <div class="col-md-12">
-        <p class="lead"> Tag all the faces people that you know <button id="btn-submit" class="btn btn-large btn-answer pull-right" value='NoTag'><i class="fa fa-repeat"></i> I don't recognize any person, try next one</button></p>
-    </div>
-    <div id="img-details" class="col-md-4">
-        <h4 id="title"></h4>
-        <p id="description"></p>
-        <p><i class="fa fa-clock-o"></i> Date taken: <span id="date_taken"></span></p>
-        <p><i class="fa fa-tag"></i> Tags: <span id="tags"></span></p>
+        <p class="lead" style="color: black;"> 문제 ! <button id="btn-submit" class="btn btn-large btn-answer pull-right" value='NoTag'><i class="fa fa-repeat"></i> I don't recognize any person, try next one</button></p>
     </div>
     <div class="col-md-8">
-        <span id="photo-link" style="float: right;">
+        <span id="photo-link">
             <img id="photo" src="http://i.imgur.com/GeHxzb7.png" style="max-width=100%">
         </span>
     </div>
 </div><!-- End of Skeleton Row -->
-
-<div class="row skeleton">
-    <div class="col-md-12">
-        <div id="disqus_show_btn" style="margin-top:5px;">
-            <button class="btn btn-primary btn-large btn-disqus" onclick="loadDisqus()"><i class="fa fa-comments"></i> Show comments</button>
-            <button class="btn btn-large btn-disqus" onclick="loadDisqus()" style="display:none"><i class="fa fa-comments"></i> Hide comments</button>
-        </div><!-- End of Disqus Button section -->
-        <!-- Disqus thread for the given task -->
-        <div id="disqus_thread" style="margin-top:5px;display:none"></div>
-    </div>
-</div>
 
 <div class="row">
     <!-- Success and Error Messages for the user -->
@@ -45,8 +34,7 @@
             <strong>Congratulations!</strong> You have participated in all available tasks!
             <br/>
             <div class="alert-actions">
-                <a class="btn small" href="/">Go back</a>
-                <a class="btn small" href="/app">or, Check other applications</a>
+				<a class="btn small" href="/project/category/featured" style="color:white;">다른 프로젝트</a>
             </div>
         </div>
         <div id="error" class="alert alert-error" style="display:none;">
@@ -56,35 +44,17 @@
     </div> <!-- End Success and Error Messages for the user -->
 </div> <!-- End of Row -->
 
-
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    function loadDisqus() {
-    $("#disqus_thread").toggle();
-    $(".btn-disqus").toggle();
-    var disqus_shortname = 'pybossa'; // required: replace example with your forum shortname
-    //var disqus_identifier = taskId;
-    var disqus_developer = 1;
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-    }
-
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-<script type="text/javascript" src="http://annotorious.github.io/latest/annotorious.min.js"></script>
+<script type="text/javascript" src="/static/js/add-js/anno/annotorious.min.js?ver=6"></script>
 <script type="text/javascript" src="/static/vendor/jquery.js"></script>
-<script type="text/javascript" src="http://annotorious.github.io/demos/semantic-tagging-plugin.js"></script>
 <script>
       //anno.addPlugin('SemanticTagging', { endpoint_url: 'http://samos.mminf.univie.ac.at:8080/wikipediaminer' });
 </script>
-<script>
+	<script>
+		$(".photo").on('DOMNodeInserted', '.r6o-editor', function(){
+			$(".r6o-editable-text").attr('data-placeholder', "이름을 적어주세요.");
+			$(".tag").css({display:"none"});
+		});
+
 pybossa.taskLoaded(function(task, deferred) {
     if ( ! $.isEmptyObject(task) ) {
         // load image from flickr
@@ -93,23 +63,17 @@ pybossa.taskLoaded(function(task, deferred) {
             // continue as soon as the image is loaded
             deferred.resolve(task);
         });
-        var url_raw = task.info.url_raw || genericFlickrURL(task.info.url);
-        img.attr('src', url_raw + "_z.jpg");
+        img.attr('src', task.info.url);
         img.attr('id', 'anno_' + task.id);
         img.addClass('img-polaroid');
         img.addClass('annotable');
+		img.css({width: "100%"});
         task.info.image = img;
     }
     else {
         deferred.resolve(task);
     }
 });
-
-function genericFlickrURL(url) {
-    var splittedURL = url.split(".");
-    splittedURL.pop();
-    return splittedURL.join(".");
-}
 
 pybossa.presentTask(function(task, deferred) {
     if ( !$.isEmptyObject(task) ) {
@@ -124,9 +88,14 @@ pybossa.presentTask(function(task, deferred) {
         $("#date_taken").html(task.info.date_taken);
         $("#tags").html(task.info.tags);
 
-        anno.makeAnnotatable(document.getElementById('anno_' + task.id));
+		var Tag_arr = ["가족들", "친구들"];
 
-        anno.addHandler('onAnnotationCreated', function(annotation) {
+		var anno = Annotorious.init({
+			image: document.getElementById('anno_' + task.id),
+			tagVocabulary: Tag_arr
+		});
+		// Attach listeners to handle annotation events
+		anno.on('createAnnotation', function(annotation) {
             $("#btn-submit").html("<i class='fa fa-save'></i> Save current annotations");
             $("#btn-submit").addClass("btn-success");
         });
@@ -156,5 +125,5 @@ pybossa.presentTask(function(task, deferred) {
     }
 });
 
-pybossa.run('taggingpictures');
+pybossa.run('taggingZzang9');
 </script>

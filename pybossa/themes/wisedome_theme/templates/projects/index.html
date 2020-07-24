@@ -73,7 +73,7 @@
 													<div class="post-pic" style="background: rgb(0, 151, 167) url({{helper.render_url_thumbnail(f, upload_method)}}) no-repeat center top; background-size: cover;"></div>
 													<div class="caption">
 
-														<h3 style="margin-bottom : 0px; margin-top : 10px; height : 45px;">{{f.name}}</h3>
+														<h3 style="overflow:initial; margin-bottom : 15px; margin-top : 10px; height : 45px;">{{f.name}}</h3>
 														{#{% if f.condition.age_s | int == (n_year+1)*10000 and f.condition.sex == '0' and f.condition.age_e | int == (n_year-98)*10000 %}
 															<p>조건 없음</p>
 															{% else %}#}
