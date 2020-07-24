@@ -1,0 +1,261 @@
+<! -- Fix for Bootstrap css with Google Maps https://github.com/twitter/bootstrap/issues/1552 -->
+<style type="text/css">
+h3 {
+	line-height:1.5;
+	word-spacing:5px;
+}
+table#necat {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table>td, th {
+    border: 1px solid black;
+    text-align: center;
+    margin: auto;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddded;
+}
+.btn {
+	margin: 20px 10px 20px 0px;
+}
+</style>
+<div class="row">
+    <!-- Success and Error Messages for the user -->
+    <div class="col-md-12" style="height:50px">
+        <!-- Success alert box -->
+        <div id="success" class="alert alert-success" style="display:none;">
+            <a class="close">×</a><strong>답변 저장 중...</strong>
+        </div>
+        <!-- Task loading alert box -->
+        <div id="loadingTask" class="alert alert-info" style="display:none;">
+            <strong>Task 불러오는 중...</strong>
+        </div>
+        <!-- Task completed alert box -->
+        <div id="finish" class="alert alert-success" style="display:none;">
+            <strong>프로젝트 완료!</strong> 모든 일감을 수행하였습니다.
+            <br/>
+            <div class="alert-actions">
+<!--                <a class="btn small" href="/" style="color:white">Go back</a>-->
+                <a class="btn-small" href="/project/category/featured" style="color:white;">다른 프로젝트 둘러보기</a>
+            </div>
+        </div>
+        <!-- Error alert box -->
+        <div id="error" class="alert alert-danger" style="display:none;">
+            <a class="close">×</a>
+            <strong>오류 발생!</strong> 문제가 발생하였습니다. 관리자에게 문의 하세요.
+        </div>
+        <!-- Old Browser alert box -->
+        <div id="oldBrowser" class="alert alert-info" style="display:none;">
+            <a class="close">×</a>
+			<p><strong>죄송합니다.</strong> 웹 브라우저가 이 프로젝트를 지원하지 않습니다.<p>
+            <div class="alert-actions">
+				<a class="btn small" href="/project/category/featured">다른 프로젝트 둘러보기</a>
+			</div>
+		</div>
+	</div><!-- End of span8 col-md-offset-2-->
+</div><!-- End of Row-->
+
+<div class="row skeleton">
+	<div class="skeleton col-md-12">
+		<u>문장 분석 결과를 선택하시오.</u><br/><br/>
+		<div id="sentence">Question</div>
+		<div id="candidate"></div>
+		<p>Task: <span id="task-id" class="label label-warning">#</span></p><br/>
+		<p>완료한 작업 수: <span id="done" class="label label-info"></span> / 총 작업 수:
+		<span id="total" class="label label-inverse" style="background-color: #3498DB;"></span></p>
+		<div class="progress progress-striped">
+			<div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
+		</div>
+
+	</div>
+	<div class="skeleton col-md-12">
+		<button id="help" class="btn btn-info">HELP</button>
+		<div id="div3" style="display:none;">
+			<div class="explain">
+				<font size="2">
+					<table class="table table-bordered" id="necat">
+						<tbody>
+							<tr>
+								<th scope="col" style="width:4.6%; background-color:#dddded;">태그</th>
+								<th scope="col">설명</th>
+								<th scope="col">예시</th>
+							</tr>
+							<tr>
+								<td rowspan="4" style="background-color:white;">긍정</td>
+								<td>&middot; 보편적 가치관에 따라 긍정적인 내용</td>
+								<td>&middot; 코로나 확진자가 줄었다.</td>
+							</tr>
+							<tr>
+								<td>&middot; 긍정적인 의견을 포함하는 경우</td>
+								<td>&middot; 한화호텔앤드리조트 관계자는 "이번 물적 분할을 통해 푸디스트 주식 회사가 식음 전문 기업으로서 도약할 수 있는 계기가 되리라 기대한다"라고 밝혔다.</td>
+							</tr>
+							<tr>
+								<td>&middot; 복문에서 주절의 내용이 긍정적인 경우</td>
+								<td>&middot; 기존 모듈의 경우 실험실 규모로 제작되어 현장 적용 시 전문가의 추가 보정 작업이 필요한 반면, <strong>개발된 모듈은 보정이 필요없어 현장 적용에 유리하다.<strong></td>
+							</tr>
+							<tr>
+								<td>&middot; 긍정적인 반응/결과를 기대/예상하는 경우</td>
+								<td>&middot; 앞서 공사는 지난 2일 침체된 지역 경제에 활력을 불어넣기 위한 9406억원 규모의 지방재정 신속집행 계획을 밝혔다.</td>
+							</tr>
+							</tr>
+							<tr>
+								<td rowspan="2" style="background-color:#dddded;">중립</td>
+								<td>&middot; 감성이 포함되지않은 사실 전달일 경우</td>
+								<td>&middot; 구는 올해 9월까지 총 19억 8800만원을 투입해 모든 공사를 마무리한다는 방침이다.</td>
+							</tr>
+							<tr>
+								<td>&middot; 긍부정 구분이 어려운 경우</td>
+								<td>&middot; 이번 사건에서 결정적 증거가 될 것으로 보인다.</td>
+							</tr>
+							<tr>
+								<td rowspan="3" style="background-color:white;">부정</td>
+								<td>&middot; 보편적 가치관에 따라 부정적인 내용</td>
+								<td>&middot; 그때 대인기피증과 우울증이 심해졌어요.</td>
+							</tr>
+							<tr>
+								<td>&middot; 부정적인 의견을 포함하는 경우</td>
+								<td>&middot; 협회는 이 같은 초소형 전기차 특성에 맞는 충돌안전성 평가 기준이 없다 보니 소비자들이 안전성에 관한 정확한 정보를 파악하기 어렵다고 지적했다.</td>
+							</tr>
+							<tr>
+								<td>&middot; 복문에서 주절의 내용이 부정적인 경우</td>
+								<td>&middot; 이 때문에 의료계 일각에서는 가벼운 시술시 마취목적으로 프로포폴만큼 좋은 약물이 없으나 향정신성의약품 지정으로 <strong>사용이 어려워졌다는 지적이 나오기도 했다.</strong></td>
+							</tr>
+							<tr>
+								<td style="background-color:#dddded;">둘다</td>
+								<td>&middot; 긍정 표현과 부정 표현이 함께 나타나는 경우</td>
+								<td>&middot; 학교 오니 좋지만 입시･감염 걱정 교차</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</font>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- PyBossa interface -->
+<script>
+/*function showExplain(task) {
+	$('.explain').text(task.info.explain);
+}*/
+
+$("#help").off('click').on('click', function(evt){
+	$("#div3").toggle();
+});
+
+function loadUserProgress() {
+	pybossa.userProgress('emotion_beta1').done(function(data){
+		var pct = Math.round((data.done*100)/data.total);
+		console.log(pct);
+		$("#progress").css("width", pct.toString() +"%");
+		$("#progress").attr("title", pct.toString() + "% completed!");
+		$("#progress").tooltip({'placement': 'left'}); 
+		$("#total").text(data.total);
+		$("#done").text(data.done);
+	});
+}
+
+function makeButton(name, value, text, btn) {
+    //var div = document.createElement("div");
+	var button = document.createElement("button");
+
+	button.id = name;
+	button.value = value;
+	button.className = "btn btn-submit " + btn;
+	button.appendChild(document.createTextNode(text));
+	//div.appendChild(button);
+	
+    //return div;
+	return button;
+};
+
+pybossa.taskLoaded(function(task, deferred){
+    if ( !$.isEmptyObject(task) ) {
+        $("#loadingTask").hide();
+        deferred.resolve(task);
+        } // End if task empty
+    else {
+        deferred.resolve(task);
+        }
+});
+
+pybossa.presentTask(function(task, deferred){
+    if ( !$.isEmptyObject(task) ) {
+
+       if(task.info.sentence == 'Done') {
+			pybossa.saveTask( task.id, -1, {}).done( function(data) { deferred.resolve(); });
+			delete task;
+		} else {
+				$("#loadingTask").show();
+				loadUserProgress();
+				document.getElementById("sentence").innerHTML = "<h3>" + task.info.sentence + "</h3>";
+
+				var buttonlist = document.getElementById("candidate");
+				var btn1 = makeButton("candidate", "긍정", " 긍정", "btn-success");
+				var btn2 = makeButton("candidate", "중립", " 중립", "btn-warning");
+				var btn3 = makeButton("candidate", "부정", " 부정", "btn-danger");
+				var btn4 = makeButton("candidate", "둘다", " 둘다", "btn-primary");
+				buttonlist.innerHTML = ''; // button input init
+				buttonlist.appendChild(btn1);
+				buttonlist.appendChild(btn2);
+				buttonlist.appendChild(btn3);
+				buttonlist.appendChild(btn4);
+				$("#task-id").text(task.id);
+				$("#loadingTask").hide();
+		}
+		/*$(".btn-explain").off('click').on('click', function(evt){
+			showExplain(task);
+		});*/
+
+        $(".btn-submit").off('click').on('click', function(evt){
+			/*var chkval = document.getElementsByName('candidate');
+			var answer;
+			var answer_value;
+			for(var i=0; i<chkval.length; i++){
+				if(chkval[i].checked) {
+					answer = task.info.sentence + ", " + chkval[i].value;
+					answer_value = chkval[i].value;
+				}
+			}*/
+			var answer = (this).value;
+			answer = task.info.sentence +"+"+ answer;
+            console.log(answer);
+            console.log(task.id);
+
+			/*if(task.info.answer != ""){
+				if (task.info.answer != answer_value){
+					alert("오답 입니다.");
+					$('#explain').show();
+					return false;
+				}
+			}*/
+			$('#explain').hide();
+
+		    // TODO: gt와 현재 answer가 같은지를 확인
+
+		    // db에 현재 결과 저장
+            pybossa.saveTask( task.id, answer).done( function(data) {
+                // Show the feedback div
+                $("#success").fadeIn();
+                // Fade out the pop-up after a 2000 miliseconds
+                setTimeout(function() { $("#success").fadeOut() }, 2000);
+                deferred.resolve();
+            });
+        });
+    }
+    else {
+        $(".skeleton").hide();
+        $("#loadingTask").hide();
+        $("#finish").fadeIn();	
+    }
+});
+
+pybossa.run('emotion_beta1');
+</script>

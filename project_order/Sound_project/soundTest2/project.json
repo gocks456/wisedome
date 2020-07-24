@@ -1,0 +1,6 @@
+{
+    "name": "SoundTest3",
+    "short_name": "ST3",
+    "description": "Sound Test",
+    "condition": {"sex":"0", "age_s":20,"age_e":80, "all_achieve":"0", "cat_achieve":"0"}
+}

@@ -1,0 +1,6 @@
+{
+    "name": "짱구 태깅(옵션 추가)",
+    "short_name": "tagging2",
+    "description": "짱구 등장인물을 찾아주세요!",
+    "condition": {"sex":"0", "age_e": 0, "age_s": 0, "all_achieve": "0", "cat_achieve": "0"}
+}

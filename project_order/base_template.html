@@ -6,7 +6,7 @@
             <a class="close">×</a><strong>답변 저장 중...</strong>
         </div>
         <!-- Task loading alert box -->
-        <div id="loadingTask" class="alert alert-info">
+        <div id="loadingTask" class="alert alert-info" style="display:none;">
             <strong>Task 불러오는 중...</strong>
         </div>
         <!-- Task completed alert box -->
@@ -90,6 +90,7 @@ pybossa.taskLoaded(function(task, deferred){ // task를 불러오는 함수
 });
 
 pybossa.presentTask(function(task, deferred){ // task를 뿌리는 함수 (결과 저장도 여기서 일어납니다.)
+	$("#loadingTask").show();
     if ( !$.isEmptyObject(task) ) {
 
        if(task.info.sentence == 'Done') {
