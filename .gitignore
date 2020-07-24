@@ -17,5 +17,5 @@ venv
 dump.rdb
 settings_local.py
 alembic.ini
-pybossa/backup/conf
+pybossa/backup/conf/*.config
 pybossa.ini
