@@ -234,7 +234,7 @@
 			url         :   "{{url_for('admin.manage_exchange',eid="DC"|string )}}",
 			dataType    :   "json",
 			type        :   "get",
-			data		:	{ "checked_id" : checked_id },
+			data		:	{ "checked_id" : checked_id }
 		});
 
 
@@ -251,7 +251,7 @@
 			if (rowCnt==0 || chkbox[rowCnt-1].checked){
 
 				var rowData = table.rows[rowCnt].cells;
-				for (var colCnt = 1; colCnt < rowData.length-2; colCnt++) {		// 환급 대기같은 경우엔 rowData.length 의 크기를 줄여 수락, 거절을 없애기
+				for (var colCnt = 1; colCnt < rowData.length; colCnt++) {		// 환급 대기같은 경우엔 rowData.length 의 크기를 줄여 수락, 거절을 없애기
 					var columnData = rowData[colCnt].innerHTML;
 					if (columnData == null || columnData.length == 0) {
 						columnData = "".replace(/"/g, '""');
@@ -281,6 +281,7 @@
 			a.click()
 			a.remove();
 		}
+		setTimeout('location.reload()',100);
 	}
 </script>
 

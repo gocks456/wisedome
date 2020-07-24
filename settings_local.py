@@ -42,6 +42,9 @@ SQLALCHEMY_DATABASE_URI = 'postgresql://py_user:1234@urd.nlp.wo.tc:7000/pybossa'
 
 ITSDANGEROUSKEY = 'its-dangerous-key'
 
+## 백그라운드 작업 시간 테스트
+TIMEOUT = 5 * 60
+
 ## project configuration
 BRAND = 'Data.ly'
 TITLE = 'Data.ly'
