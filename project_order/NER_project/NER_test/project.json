@@ -1,6 +1,0 @@
-{
-	"name": "개체명 인식practice",
-	"short_name": "ner_practice",
-	"description": "Named Entity Recognition",
-	"condition": {"sex":"0", "age_e": 0, "age_s": 0}
-}

@@ -1,6 +1,0 @@
-{
-	"name": "감정분석 긍/부정",
-	"short_name": "emotion_test1",
-	"description": "문장을 보고 분석 결과를 입력해주세요.",
-	"condition": {"sex":"0", "age_e": 0, "age_s": 0, "all_achieve": "0", "cat_achieve": "0"}
-}

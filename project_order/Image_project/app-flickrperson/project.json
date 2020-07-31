@@ -1,6 +1,0 @@
-{
-    "name": "Tagging1",
-    "short_name": "Tagging1",
-    "description": "이미지를 보고 사람을 찾아주세요.",
-    "condition": {"sex":"0", "age_s":0,"age_e":0, "all_achieve":"0", "cat_achieve":"0"}
-}

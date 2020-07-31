@@ -1,6 +1,0 @@
-{
-    "name": "SoundTest",
-    "short_name": "ST",
-    "description": "Sound Test",
-    "condition": {"sex":"0", "age_s":0,"age_e":0, "all_achieve":"0", "cat_achieve":"0"}
-}

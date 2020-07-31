@@ -265,8 +265,8 @@ def index(page):
         return project_index(page, cached_projects.get_all_featured,
                              'featured', True, False, order_by, desc)
     else:
-        categories = cached_cat.get_all()
-        cat_short_name = categories[0].short_name
+        categories = cached_cat.get_list_cat()
+        cat_short_name = categories[0]['short_name']
         return redirect_content_type(url_for('.project_cat_index', category=cat_short_name))
 
 def user_all_achieve(achieve):
