@@ -20,6 +20,7 @@
 					</li>
                     {% endfor %}
                     {% if current_user.is_authenticated and current_user.admin %}
+					<li {% if active_cat.short_name=="before_score"%}class="active"{% endif %}><a href="{{url_for('project.before_score')}}" rel="nofollow"><i class="icon-chevron-right"></i>채점필요</a></li>
 					<li {% if active_cat.short_name=="complete"%}class="active"{% endif %}><a href="{{url_for('project.complete')}}" rel="nofollow"><i class="icon-chevron-right"></i>완료</a></li>
                     <li {% if active_cat.short_name=="draft"%}class="active"{% endif %}><a href="{{url_for('project.draft')}}" rel="nofollow"><i class="icon-chevron-right"></i> {{ _('Draft') }}</a></li>
                     {% endif %}
@@ -30,6 +31,9 @@
                 {% set title = _('Featured Projects') %}
 				{#{% set subheading =_('A special selection of the most interesting projects') %}#}
 				{% set subheading = '긴급 프로젝트를 수행할 시 10%의 추가 포인트를 받을 수 있습니다.' %}
+            {% elif active_cat.short_name=='before_score' %}
+                {% set title = _('채점해야 할 프로젝트') %}
+				{% set subheading = '채점해야 할 프로젝트 입니다.' %}
             {% elif active_cat.short_name=='draft' %}
                 {% set title = _('Draft Projects') %}
 				{#{% set subheading = _('Work in progress projects') %}#}

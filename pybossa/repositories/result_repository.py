@@ -31,7 +31,7 @@ class ResultRepository(Repository):
         return self.db.session.query(Result).filter_by(project_id=project_id).all()
 
     def get_mark_all(self, project_id):
-        return self.db.session.query(Result).filter_by(project_id=project_id, info=None).all()
+        return self.db.session.query(Result).filter_by(project_id=project_id, last_version=True, info=None).all()
 
     def get(self, id):
         return self.db.session.query(Result).get(id)

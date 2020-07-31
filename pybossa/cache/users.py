@@ -45,7 +45,7 @@ def get_leaderboard(n, user_id=None, window=0, info=None):
 def get_category_leaderboard(current_user_name, category_name):
     sql = text('''
                SELECT ROW_NUMBER() OVER(ORDER BY SUM(t.point) desc) AS rank, u.id AS id, u.name AS name,
-               SUM(t.point) AS point, COUNT(t.id) AS n_tasks, COUNT(CASE WHEN t.score_mark = True THEN 1 END) AS n_correct, c.name AS category_name
+               SUM(t.point) AS point, c.name AS category_name
                FROM "user" u, category c, project p, task_run t
                WHERE p.category_id = c.id AND t.project_id = p.id AND t.user_id = u.id AND c.name=:cat_name GROUP BY u.id, c.name ORDER BY c.name, 4 DESC;
                ''')
@@ -53,20 +53,20 @@ def get_category_leaderboard(current_user_name, category_name):
     rank_categorys = []
     for row in results:
         if row.rank <= 20:
-            # n_tasks 와 n_correct 는 정답률이 얼마인지 계산하여 answer_rate 로 저장
-            rank_category = dict(id=row.id, rank=row.rank, name=row.name, point=row.point, answer_rate=round(row.n_correct / row.n_tasks * 100, 1),
+            rank_category = dict(id=row.id, rank=row.rank, name=row.name, point=row.point,
                                 category_name=row.category_name)
             rank_categorys.append(rank_category)
         elif row.rank > 20 and row.name == current_user_name:
-            rank_category = dict(id=row.id, rank=row.rank, name=row.name, point=row.point, answer_rate=round(row.n_correct / row.n_tasks * 100, 1),
+            rank_category = dict(id=row.id, rank=row.rank, name=row.name, point=row.point,
                                 category_name=row.category_name)
             rank_categorys.append(rank_category)
-
     return rank_categorys
 
 def get_category_GPA():
     sql = text('''
-               SELECT u.id AS id, SUM(t.point) AS point, COUNT(t.id) AS n_tasks, COUNT(CASE WHEN t.score_mark = True THEN 1 END) AS n_correct, c.name AS category_name
+               SELECT u.id AS id, SUM(t.point) AS point, COUNT(t.id) AS n_tasks,
+               COUNT(CASE WHEN t.score_mark = True THEN 1 END) AS n_correct,
+               COUNT(CASE WHEN t.completed_score = False THEN 1 END) AS n_no_score, c.name AS category_name
                FROM "user" u, category c, project p, task_run t
                WHERE p.category_id = c.id AND t.project_id = p.id AND t.user_id = u.id GROUP BY p.name, u.id, c.name ORDER BY c.name DESC;
                ''')
@@ -74,8 +74,14 @@ def get_category_GPA():
     rank_categorys = []
     for row in results:
         # n_tasks 와 n_correct 는 정답률이 얼마인지 계산하여 answer_rate 로 저장
-        rank_category = dict(id=row.id, point_sum=row.point, answer_rate=round(row.n_correct / row.n_tasks * 100, 1),
-                                category_name=row.category_name)
+        if(row.n_tasks - row.n_no_score > 0):
+            rank_category = dict(id=row.id, point_sum=row.point,
+                                 answer_rate=round((row.n_correct - row.n_no_score) / (row.n_tasks - row.n_no_score) * 100, 1),
+                                 category_name=row.category_name)
+        else:
+            rank_category = dict(id=row.id, point_sum=row.point,
+                                 answer_rate=0,
+                                 category_name=row.category_name)
         rank_categorys.append(rank_category)
     return rank_categorys
 
@@ -120,14 +126,15 @@ def get_category_achieve(user_id):
 
 def get_answer_rate(user):
     sql = text('''
-              SELECT COUNT(id) AS n_tasks, COUNT(CASE WHEN score_mark = True THEN 1 END) AS n_correct
+              SELECT COUNT(id) AS n_tasks, COUNT(CASE WHEN score_mark = True THEN 1 END) AS n_correct,
+              COUNT(CASE WHEN completed_score = False THEN 1 END) AS n_no_score
               FROM task_run
               WHERE user_id=:user_id
               ''')
     results = session.execute(sql, dict(user_id=user.id))
     answer_rate = 0
     for row in results:
-        answer_rate = row.n_correct / row.n_tasks * 100
+        answer_rate = (row.n_correct - row.n_no_score) / (row.n_tasks - row.n_no_score) * 100
 
     return round(answer_rate, 1)
 
@@ -410,14 +417,17 @@ def rank_and_score(user_id):
 
 def projects_answer_rate(user_id):
     sql = text('''
-               SELECT p.id AS id, COUNT(t.id) AS n_tasks, COUNT(CASE WHEN t.score_mark = True THEN 1 END) AS n_correct
+               SELECT p.id AS id, COUNT(t.id) AS n_tasks, COUNT(CASE WHEN t.score_mark = True THEN 1 END) AS n_correct,
+               COUNT(CASE WHEN t.completed_score = False THEN 1 END) AS complete_check
                FROM project p, task_run t
                WHERE t.project_id = p.id AND t.user_id=:user_id GROUP BY p.id
                ''')
     results = session.execute(sql, dict(user_id=user_id))
     projects_answer_rate = []
     for row in results:
-        project = dict(id=row.id, n_correct_rate=row.n_correct, n_tasks_rate=row.n_tasks)
+        project = dict(id=row.id, n_correct_rate=row.n_correct, n_tasks_rate=row.n_tasks, complete_check=True)
+        if row.complete_check == row.n_tasks:
+            project['complete_check'] = False
         projects_answer_rate.append(project)
     return projects_answer_rate
 

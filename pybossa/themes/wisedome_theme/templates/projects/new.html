@@ -19,17 +19,15 @@
 			{{ render_field(form.name, class_="span4", placeholder=_('프로젝트의 이름')) }}
 			{{ render_field(form.short_name, class_="span4", placeholder=_('프로젝트의 짧은 이름이나 키워드')) }}
 			{{ render_field(form.all_point, class_="span4", placeholder=_('지급할 총 포인트')) }}
-			{{ render_field(form.long_description, class_="span4", rows="13", placeholder=_('Explain your project 
-			· Why? Why you are creating this project, what you want to achieve with it 
-			· How? Explain how your project works 
-			· How you can help: Explain to the volunteers how they can help and contribute to the goal of your project 
-			· Will you help make a difference? Explain to the volunteers why their contribution is essential and how the result of your project can help change things! 
-
-			(you can use Markdown to give format to your description!)')
+			{{ render_field(form.long_description, class_="span4", rows="13", placeholder=_('프로젝트의 설명을 적으세요
+	· 프로젝트 설명
+	· 프로젝트 방법
+	· 기타
+(마크다운 언어 사용이 가능합니다.)')
 			)}}
 		</fieldset>
 		<div class ="row">
-			<h3 class ='col-sm-12'><strong>Project 제한사항</strong></h3>
+			<h3 class ='col-sm-12'><strong>프로젝트 제한사항</strong></h3>
 			{{ render_field(form.option_sex, class_="col-sm-3") }}
 			{{ render_field(form.option_age_start, class_="col-sm-3", placeholder=_('몇 살부터')) }}
 			{{ render_field(form.option_age_end, class_="col-sm-3", placeholder=_('몇 살까지')) }}

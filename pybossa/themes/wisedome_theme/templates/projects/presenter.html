@@ -66,6 +66,16 @@
         {% endif %}
 	</div>
 </div>
+
+<script src="{{url_for('static', filename='js/vendor/cropper.min.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('static', filename='css/cropper.min.css')}}" type="text/css" />
+<script src="{{url_for('static', filename='js/image_crop.js')}}" type="text/javascript"></script>
+
+	<script>
+		var csrf = "{{ csrf_token() }}";
+		$("#csrf_token").val(csrf);
+	</script>
+
 <script>
 	function get_cookie(cname) {
 		var name = cname + "=";

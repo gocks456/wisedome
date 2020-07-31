@@ -1,4 +1,4 @@
-# Korean translations for PROJECT.
+# Greek translations for PROJECT.
 # Copyright (C) 2015 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # Stella Christou <stella.christou.10@ucl.ac.uk>, 2015.
@@ -10,49 +10,50 @@ msgstr ""
 "POT-Creation-Date: 2016-02-05 18:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: el\n"
 "Language-Team: el <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 1.3\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: themes/default/templates/_navbar.html:12
 #: themes/default/templates/account/index.html:14
 msgid "Community"
-msgstr "고객센터"
+msgstr "Κοινότητα"
 
 #: themes/default/templates/_navbar.html:13
-#: themes/default/templates/base.html:78
 #: themes/default/templates/account/projects.html:13
+#: themes/default/templates/base.html:78
 #: themes/default/templates/stats/global.html:89
 msgid "Projects"
-msgstr "프로젝트"
+msgstr "Προγράμματα"
 
 #: themes/default/templates/_navbar.html:14
 #: themes/default/templates/projects/new_blogpost.html:21
 msgid "Create"
-msgstr "프로젝트 생성"
+msgstr "Δημιουργία"
 
 #: themes/default/templates/_navbar.html:15
 #: themes/default/templates/home/_about.html:3
 msgid "About"
-msgstr "서비스소개"
+msgstr "Σχετικά με"
 
 #: themes/default/templates/_navbar.html:22
 #: themes/default/templates/account/_helpers.html:3
 msgid "My Profile"
-msgstr "나의 프로필"
+msgstr "Το προφίλ μου"
 
 #: themes/default/templates/_navbar.html:23
 #: themes/default/templates/account/_helpers.html:4
 msgid "My Projects"
-msgstr "나의 프로젝트"
+msgstr "Τα Προγράμματά μου"
 
 #: themes/default/templates/_navbar.html:24
 #: themes/default/templates/account/_helpers.html:8
 msgid "My Settings"
-msgstr "내 설정"
+msgstr "Οι Ρυθμίσεις μου"
 
 #: themes/default/templates/_navbar.html:27
 #: themes/default/templates/account/_helpers.html:6
@@ -63,56 +64,56 @@ msgstr "내 설정"
 #: themes/default/templates/admin/update_category.html:13
 #: themes/default/templates/admin/users.html:14
 msgid "Admin Site"
-msgstr "관리자 사이트"
+msgstr "Σελίδα Διαχειριστή"
 
 #: themes/default/templates/_navbar.html:30
 msgid "Sign Out"
-msgstr "로그아웃"
+msgstr "'Αποσύνδεση"
 
 #: themes/default/templates/_navbar.html:38
 #: themes/default/templates/account/signin.html:45
 msgid "Sign in"
-msgstr "로그인"
+msgstr "Σύνδεση"
 
 #: themes/default/templates/base.html:66
 msgid "Resources"
-msgstr "자원들"
+msgstr "Πηγές"
 
 #: themes/default/templates/base.html:67
 msgid "Docs"
-msgstr "문서들"
+msgstr "Αρχεία"
 
 #: themes/default/templates/base.html:69
 msgid "Terms of Use"
-msgstr "용어들"
+msgstr "Όροι χρήσης"
 
 #: themes/default/templates/base.html:70
 msgid "Cookies Policy"
-msgstr "쿠키 정책"
+msgstr "Πολιτική Ηλεκτρονικού Μπισκότου Δεδομένων "
 
 #: themes/default/templates/base.html:71
 msgid "Stats"
-msgstr "상태"
+msgstr "Στατιστικά"
 
 #: themes/default/templates/base.html:76
 msgid "Licenses"
-msgstr "라이센스"
+msgstr "Άδειες"
 
 #: themes/default/templates/base.html:77
 msgid "Overview"
-msgstr "둘러보기"
+msgstr "Επισκόπηση"
 
 #: themes/default/templates/base.html:79
 msgid "Data"
-msgstr "데이터"
+msgstr "Δεδομένα"
 
 #: themes/default/templates/base.html:80
 msgid "Content"
-msgstr "내용"
+msgstr "Περιεχόμενο"
 
 #: themes/default/templates/base.html:85
 msgid "Technologies"
-msgstr "기술"
+msgstr "Τεχνολογίες"
 
 #: themes/default/templates/base.html:86
 msgid "CKAN"
@@ -124,154 +125,162 @@ msgstr "EpiCollect"
 
 #: themes/default/templates/base.html:92
 msgid "Contact"
-msgstr "연락처"
+msgstr "Επαφή"
 
 #: themes/default/templates/base.html:93
 msgid "Email"
-msgstr "이메일"
+msgstr "Ηλεκτρονικό ταχυδρομείο"
 
 #: themes/default/templates/base.html:94
 msgid "Twitter"
-msgstr "트위터"
+msgstr "Twitter"
 
 #: themes/default/templates/account/_helpers.html:14
 msgid "I've done"
-msgstr "종료"
+msgstr "Έχω κάνει"
 
 #: themes/default/templates/account/_helpers.html:14
 msgid "tasks for the @PyBossa project:"
-msgstr "@PyBossa 프로젝트를 위한 작업"
+msgstr "εργασίες για το πρόγραμμα @PyBossa "
 
 #: themes/default/templates/account/_helpers.html:14
 msgid "Do you want to help?"
-msgstr "도움이 필요하세요?"
+msgstr "Θέλετε να βοηθήσετε;"
 
 #: themes/default/templates/account/_helpers.html:15
 msgid "Tweet"
-msgstr "트윗"
+msgstr "Tweet"
 
 #: themes/default/templates/account/_helpers.html:39
 msgid "Nick"
-msgstr "별명"
+msgstr "Ψευδώνυμο"
 
 #: themes/default/templates/account/_helpers.html:41
 msgid "E-mail"
-msgstr "이메일"
+msgstr "Ηλεκτρονικό Ταχυδρομείο"
 
 #: themes/default/templates/account/_helpers.html:54
 #: themes/default/templates/account/_helpers.html:67
 #: themes/default/templates/stats/index.html:17
 msgid "Rank"
-msgstr "순위"
+msgstr "Σειρά"
 
 #: themes/default/templates/account/_helpers.html:59
 #: themes/default/templates/projects/tasks_browse.html:33
 msgid "of"
-msgstr ""
+msgstr "του"
 
 #: themes/default/templates/account/_helpers.html:59
 msgid "with a Score of"
-msgstr "점수로"
+msgstr "με το Σκορ του"
 
 #: themes/default/templates/account/_helpers.html:59
 msgid "contributed tasks"
-msgstr "참여 작업"
+msgstr "συντελεσμένες εργασίες"
 
 #: themes/default/templates/account/_helpers.html:67
 msgid "The user has not contributed to any tasks yet"
-msgstr "아직 어떠한 작업도 참여하지 않았습니다."
+msgstr "Ο χρήστης δεν έχει συμβάλλει σε καμία εργασία ακόμα"
 
 #: themes/default/templates/account/_helpers.html:70
 #: themes/default/templates/home/index.html:78
 msgid "Joined"
-msgstr "참여"
+msgstr "Σύνδεση"
 
 #: themes/default/templates/account/_helpers.html:73
 msgid "API key"
-msgstr "API 키"
+msgstr "Κλειδί API "
 
 #: themes/default/templates/account/_helpers.html:76
 msgid "Edit your profile"
-msgstr "프로파일 수정"
+msgstr "Επεξεργαστείτε το προφίλ σας"
 
 #: themes/default/templates/account/_helpers.html:100
 #: themes/default/templates/projects/_helpers.html:7
 msgid "Prev"
-msgstr "이전"
+msgstr "Προηγούμενο"
 
 #: themes/default/templates/account/_helpers.html:120
 #: themes/default/templates/projects/_helpers.html:27
 msgid "Next"
-msgstr "다음"
+msgstr "Επόμενο"
 
 #: themes/default/templates/account/account_validation.html:7
 msgid "Just one more step, please"
-msgstr "추가로 한 단계만 더 하세요"
+msgstr "Άλλο ένα βήμα, παρακαλώ"
 
 #: themes/default/templates/account/account_validation.html:8
 msgid ""
 "In order to confirm your identity, we've sent an email to the address you"
 " just provided. Please, check it out and click on the link you'll find to"
 " create your account at"
-msgstr "여러분을 확인하기 위해서 제공하신 이메일 주소로 이메일을 전송했습니다.예정을 생성하길 원하시면 링크를 누르시기 바랍니다."
+msgstr ""
+"Για να διασταυρώσουμε την ταυτότητά σας, στείλαμε μήνυμα στη διεύθυνση "
+"του ηλεκτρονικού ταχυδρομείουπου μόλις καταχωρήσατε. Σας παρακαλούμε να "
+"το ελέγξετε και να κάνετε κλικ στον σύνδεσμο που θα βρείτε γιανα "
+"δημιουργήσετε τον λογαριασμό σας στο"
 
 #: themes/default/templates/account/account_validation.html:9
 msgid ""
 "If you are not receiving the email, please check the junk folder. If it's"
 " not there please drop us an email to"
-msgstr "만약 메일을 받지 않았다면 정크 폴드를 확인해 보시기 바랍니다.그곳에 메일이 없다면 저희에게 메일을 보내 주시기 바랍니다."
+msgstr ""
+"Εάν δε λαμβάνετε το μήνυμα, παρακαλούμε να ελέγξετε των φάκελο των "
+"αχρήστων. Εαν δεν είναι εκεί, παρακαλούμε να μας στείλετε ένα μήνυμα στο"
 
 #: themes/default/templates/account/account_validation.html:10
 msgid "In the meantime, you can check some of the amazing"
-msgstr ""
+msgstr "Στο μεταξύ, μπορείτε να κοιτάξετε κάποια από τα καταπληκτικά "
 
 #: themes/default/templates/account/account_validation.html:10
 msgid "projects"
-msgstr "프로젝트"
+msgstr "προγράμματα"
 
 #: themes/default/templates/account/account_validation.html:10
 msgid "and contribute to them as anonymous"
-msgstr "익명으로 기여하다."
+msgstr "και να συμβάλλετε σε αυτά ανώνυμα"
 
 #: themes/default/templates/account/index.html:14
 msgid "registered users"
-msgstr "등록된 사용자"
+msgstr "εγγεγραμένοι χρήστες"
 
 #: themes/default/templates/account/index.html:14
 #: themes/default/templates/stats/global.html:49
 msgid "Leaderboard"
-msgstr "작업자 순위"
+msgstr "Πίνακας κατάταξης"
 
 #: themes/default/templates/account/newsletter.html:10
 msgid "Newsletter"
-msgstr "뉴스레터"
+msgstr "Ενημερωτικό δελτίο"
 
 #: themes/default/templates/account/newsletter.html:11
 msgid ""
 "If you want to be updated with our new features, projects, and\n"
 "        scientific projects, subscribe to our newsletter."
 msgstr ""
+"Εάν θέλετε να μένετε ενήμεροι σχετικά με τις νέες εφαρμογρές, προγράμματα"
+" καιεπιστημονικά προγράμματα, εγγραφείτε στο ενημερωτικό μας δελτίο"
 
 #: themes/default/templates/account/newsletter.html:15
 msgid "Sign me up!"
-msgstr ""
+msgstr "Θέλω να εγγραφώ!"
 
 #: themes/default/templates/account/newsletter.html:18
 msgid "Not interested"
-msgstr ""
+msgstr "Δεν με ενδιαφέρει"
 
 #: themes/default/templates/account/password_forgot.html:6
 #: themes/default/templates/account/password_reset.html:6
 msgid "Reset your Password"
-msgstr ""
+msgstr "Επαναφορά του κωδικού"
 
 #: themes/default/templates/account/password_forgot.html:10
 msgid "my e-mail"
-msgstr ""
+msgstr "το ηλεκτρονικό μου ταχυδρομείο"
 
 #: themes/default/templates/account/password_forgot.html:12
 msgid "Reset my Password"
-msgstr ""
+msgstr "Επαναφορά του κωδικού μου"
 
 #: themes/default/templates/account/password_forgot.html:13
 #: themes/default/templates/account/password_reset.html:14
@@ -281,6 +290,13 @@ msgstr ""
 #: themes/default/templates/account/update.html:65
 #: themes/default/templates/account/update.html:78
 #: themes/default/templates/admin/update_category.html:23
+#: themes/default/templates/projects/importers/csv.html:24
+#: themes/default/templates/projects/importers/dropbox.html:31
+#: themes/default/templates/projects/importers/epicollect.html:26
+#: themes/default/templates/projects/importers/flickr.html:35
+#: themes/default/templates/projects/importers/gdocs.html:24
+#: themes/default/templates/projects/importers/s3.html:37
+#: themes/default/templates/projects/importers/twitter.html:44
 #: themes/default/templates/projects/new.html:27
 #: themes/default/templates/projects/new_blogpost.html:22
 #: themes/default/templates/projects/password.html:20
@@ -290,102 +306,95 @@ msgstr ""
 #: themes/default/templates/projects/task_scheduler.html:36
 #: themes/default/templates/projects/update.html:48
 #: themes/default/templates/projects/update_blogpost.html:24
-#: themes/default/templates/projects/importers/csv.html:24
-#: themes/default/templates/projects/importers/dropbox.html:31
-#: themes/default/templates/projects/importers/epicollect.html:26
-#: themes/default/templates/projects/importers/flickr.html:35
-#: themes/default/templates/projects/importers/gdocs.html:24
-#: themes/default/templates/projects/importers/s3.html:37
-#: themes/default/templates/projects/importers/twitter.html:44
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση"
 
 #: themes/default/templates/account/password_reset.html:10
 msgid "my new password"
-msgstr ""
+msgstr "ο νέος κωδικός μου"
 
 #: themes/default/templates/account/password_reset.html:11
 msgid "my new password again"
-msgstr ""
+msgstr "ο νέος κωδικός μου, πάλι"
 
 #: themes/default/templates/account/profile.html:15
 msgid "Your Profile"
-msgstr "프로파일"
+msgstr "Το προφίλ σας"
 
 #: themes/default/templates/account/profile.html:18
 msgid "Your Contributions"
-msgstr "당신이 참여한 과제"
+msgstr "Η συνεισφορά σας "
 
 #: themes/default/templates/account/profile.html:26
 msgid "Contribute!"
-msgstr "참여!"
+msgstr "Συμβάλλετε!"
 
 #: themes/default/templates/account/projects.html:16
 msgid "Published"
-msgstr "공개"
+msgstr "Δημοσιεύθηκε"
 
 #: themes/default/templates/account/projects.html:22
 #: themes/default/templates/projects/index.html:15
 msgid "Draft"
-msgstr "임시"
+msgstr "Προσχέδιο"
 
 #: themes/default/templates/account/projects.html:28
 msgid "You have not created a project"
-msgstr "프로젝트를 생성할 수 없습니다"
+msgstr "Δεν έχετε δημιουργήσει πρόγραμμα"
 
 #: themes/default/templates/account/projects.html:29
 #: themes/default/templates/home/index.html:37
 msgid "Create a Project"
-msgstr "프로젝트 생성"
+msgstr "Δημιουργία προγράμματος"
 
 #: themes/default/templates/account/register.html:6
 #: themes/default/templates/account/signin.html:6
 msgid "Note"
-msgstr ""
+msgstr "Σημείωση"
 
 #: themes/default/templates/account/register.html:7
 #: themes/default/templates/account/signin.html:7
 msgid "By click the"
-msgstr ""
+msgstr "Κάνοντας κλικ στο"
 
 #: themes/default/templates/account/register.html:8
 msgid "Create account button"
-msgstr "계정 생성"
+msgstr "Κουμπί δημιουργίας λογαριασμού "
 
 #: themes/default/templates/account/register.html:9
 msgid "below you are agreeing to the"
-msgstr ""
+msgstr "παρακάτω συμφωνείτε στους"
 
 #: themes/default/templates/account/register.html:10
 #: themes/default/templates/account/signin.html:8
 msgid "terms of use"
-msgstr ""
+msgstr "όρους χρήσης"
 
 #: themes/default/templates/account/register.html:10
 #: themes/default/templates/account/signin.html:8
 msgid "and"
-msgstr ""
+msgstr "και"
 
 #: themes/default/templates/account/register.html:11
 #: themes/default/templates/account/signin.html:9
 msgid "data"
-msgstr ""
+msgstr "δεδομένων"
 
 #: themes/default/templates/account/register.html:14
 #: themes/default/templates/account/register.html:24
 msgid "Create an account"
-msgstr "계정 생성"
+msgstr "Δημιουργία λογαργιασμού"
 
 #: themes/default/templates/account/register.html:18
 #: themes/default/templates/account/update.html:40
 msgid "my full name"
-msgstr "이름"
+msgstr "Ολόκληρο το όνομά μου"
 
 #: themes/default/templates/account/register.html:19
 #: themes/default/templates/account/update.html:41
 #, fuzzy
 msgid "myusername"
-msgstr "별명"
+msgstr "το όνομα χρήστη μου"
 
 #: themes/default/templates/account/register.html:20
 #: themes/default/templates/account/update.html:42
@@ -395,85 +404,85 @@ msgstr "hello@mywebsite.org"
 #: themes/default/templates/account/register.html:21
 #: themes/default/templates/account/register.html:22
 msgid "my secret password"
-msgstr "비밀번호"
+msgstr "ο κρυφός μου κωδικός"
 
 #: themes/default/templates/account/signin.html:7
 msgid "Sign in button"
-msgstr "로그인"
+msgstr "Κουμπί σύνδεσης"
 
 #: themes/default/templates/account/signin.html:7
 msgid ""
 "below you are agreeing to\n"
 "    the"
-msgstr ""
+msgstr "παρακάτω συμφωνείτε μετα"
 
 #: themes/default/templates/account/signin.html:13
 #: themes/default/templates/account/signin.html:23
 msgid "Sign in with Twitter"
-msgstr ""
+msgstr "Συνδεθείτε μέσω Twitter"
 
 #: themes/default/templates/account/signin.html:16
 #: themes/default/templates/account/signin.html:26
 msgid "Sign in with Facebook"
-msgstr ""
+msgstr "Συνδεθείτε μέσω Facebook"
 
 #: themes/default/templates/account/signin.html:19
 #: themes/default/templates/account/signin.html:29
 msgid "Sign in with Google"
-msgstr ""
+msgstr "Συνδεθείτε μέσω Google"
 
 #: themes/default/templates/account/signin.html:38
 msgid "Or Sign in with your PyBossa account"
-msgstr ""
+msgstr "Ή συνδεθείτε μέσω του λογαριασμού σας στο PyBossa"
 
 #: themes/default/templates/account/signin.html:40
 msgid "Sign in with your PyBossa account"
-msgstr ""
+msgstr "Συνθεθείτε μέσω του λογαριασμού σας στο PyBossa"
 
 #: themes/default/templates/account/signin.html:52
 msgid " Create a new account!"
-msgstr "계정 생성 완료!"
+msgstr "Δημιουργία νέου λογαριασμού!"
 
 #: themes/default/templates/account/signin.html:53
 msgid "Forgot Password"
-msgstr "비밀번호 찾기"
+msgstr "Ξέχασα τον κωδικό μου"
 
 #: themes/default/templates/account/update.html:17
 msgid "Update your profile"
-msgstr "프로필 업데이트"
+msgstr "Ανανεώστε το προφίλ σας"
 
 #: themes/default/templates/account/update.html:31
 #: themes/default/templates/projects/update.html:28
 msgid "Upload"
-msgstr "업데이트"
+msgstr "Ανεβάστε"
 
 #: themes/default/templates/account/update.html:47
 #: themes/default/templates/account/update.html:77
 #: themes/default/templates/projects/update.html:47
 #, fuzzy
 msgid "Save the changes"
-msgstr "저장"
+msgstr "Αποθήκευση αλλαγών"
 
 #: themes/default/templates/account/update.html:54
 msgid "Change your Password"
-msgstr "비밀번호 변경"
+msgstr "Αλλαγή κωδικού"
 
 #: themes/default/templates/account/update.html:64
 msgid "Save the Changes"
-msgstr "저장"
+msgstr "Αποθήκευση αλλαγών"
 
 #: themes/default/templates/account/update.html:85
 msgid "Do you want to reset your personal API Key?"
-msgstr "API Key를 재설정 하시겠습니까?"
+msgstr "Θέλετε να επαναφέρετε το προσωπικό σας κλειδί API;"
 
 #: themes/default/templates/account/update.html:89
 msgid "No, do not reset the API key!"
-msgstr "아니오, 재설정 하지 않습니다!"
+msgstr "Όχι, μην επαναφέρεις το κλειδί API!"
 
 #: themes/default/templates/account/email/forgot_password.html:4
 #, fuzzy
 msgid "Recover your lost password"
-msgstr ""
+msgstr "Επαναφορά του κωδικού"
 
 #: themes/default/templates/account/email/forgot_password.html:8
 #: themes/default/templates/account/email/forgot_password_openid.html:8
@@ -509,7 +518,7 @@ msgstr ""
 #: themes/default/templates/account/email/forgot_password_openid.html:4
 #, fuzzy
 msgid "Recover your password"
-msgstr ""
+msgstr "Επαναφορά του κωδικού"
 
 #: themes/default/templates/account/email/forgot_password_openid.html:19
 msgid "Our records show that you use your"
@@ -524,7 +533,7 @@ msgstr ""
 #: themes/default/templates/account/email/forgot_password_openid.html:19
 #, fuzzy
 msgid "account, please contact"
-msgstr ""
+msgstr "λογαριασμό σας. Παρακαλείστε"
 
 #: themes/default/templates/account/email/forgot_password_openid.html:25
 #: themes/default/templates/account/email/validate_account.html:34
@@ -534,17 +543,17 @@ msgstr ""
 #: themes/default/templates/account/email/validate_account.html:4
 #, fuzzy
 msgid "Validate your account"
-msgstr ""
+msgstr "να δημιουργήσετε λογαργιασμό"
 
 #: themes/default/templates/account/email/validate_account.html:13
 #, fuzzy
 msgid "Thank you for creating an account in"
-msgstr ""
+msgstr "να δημιουργήσετε λογαργιασμό"
 
 #: themes/default/templates/account/email/validate_account.html:16
 #, fuzzy
 msgid "Just one more step!"
-msgstr ""
+msgstr "Άλλο ένα βήμα, παρακαλώ"
 
 #: themes/default/templates/account/email/validate_account.html:19
 msgid ""
@@ -558,55 +567,55 @@ msgstr ""
 
 #: themes/default/templates/admin/_helpers.html:9
 msgid "nick"
-msgstr ""
+msgstr "Ψευδώνυμο"
 
 #: themes/default/templates/admin/_helpers.html:10
 msgid "Member since"
-msgstr ""
+msgstr "Μέλος από"
 
 #: themes/default/templates/admin/_helpers.html:14
 msgid "Remove from admin group"
-msgstr ""
+msgstr "Αφαίρεση απο την ομάδα των διαχειριστών"
 
 #: themes/default/templates/admin/_helpers.html:18
 msgid "Add to admin group"
-msgstr ""
+msgstr "Προσθήκη στην ομάδα διαχειριστών"
 
 #: themes/default/templates/admin/categories.html:13
 msgid "Manage Categories"
-msgstr ""
+msgstr "Διαχείριση Κατηγοριών"
 
 #: themes/default/templates/admin/categories.html:20
 #: themes/default/templates/admin/update_category.html:19
 msgid "Category name"
-msgstr ""
+msgstr "Όνομα κατηγορίας"
 
 #: themes/default/templates/admin/categories.html:21
 #: themes/default/templates/admin/update_category.html:20
 msgid "Category description"
-msgstr ""
+msgstr "Περιγραφή κατηγορίας"
 
 #: themes/default/templates/admin/categories.html:23
 msgid "Add Category"
-msgstr ""
+msgstr "Προσθήκη Κατηγορίας"
 
 #: themes/default/templates/admin/categories.html:30
 msgid "List of Available Categories"
-msgstr ""
+msgstr "Λίστα Διαθέσιμων Κατηγοριών"
 
 #: themes/default/templates/admin/categories.html:39
 msgid "Edit Category Name"
-msgstr ""
+msgstr "Επεξεργασία Ονόματος Κατηγορίας"
 
 #: themes/default/templates/admin/categories.html:41
 #: themes/default/templates/admin/categories.html:43
 #: themes/default/templates/admin/del_category.html:17
 msgid "Delete Category"
-msgstr ""
+msgstr "Διαγραφή Κατηγορίας"
 
 #: themes/default/templates/admin/dashboard.html:19
 msgid "Dashboard last 7 days"
-msgstr ""
+msgstr "Το ταμπλό τις τελευταίες 7 ημέρες"
 
 #: themes/default/templates/admin/dashboard.html:22
 msgid "Refresh"
@@ -619,37 +628,37 @@ msgstr ""
 #: themes/default/templates/admin/dashboard.html:37
 #, fuzzy
 msgid "Active anonymous users"
-msgstr "활동 중인 익명 사용자"
+msgstr "Ανώνυμοι χρήστες"
 
 #: themes/default/templates/admin/dashboard.html:46
 #, fuzzy
 msgid "Draft projects"
-msgstr "준비 중인 프로젝트"
+msgstr "Προσχέδια Προγράμματα"
 
 #: themes/default/templates/admin/dashboard.html:54
 #, fuzzy
 msgid "Published projects"
-msgstr "공개 프로젝트"
+msgstr "Δημοσιευμένα Προγράμματα"
 
 #: themes/default/templates/admin/dashboard.html:62
 #, fuzzy
 msgid "Updated projects"
-msgstr "갱신된 프로젝트"
+msgstr "Ανανεώστε το πρόγραμμα"
 
 #: themes/default/templates/admin/dashboard.html:70
 #, fuzzy
 msgid "New tasks"
-msgstr "새로운 작업"
+msgstr "Περιήγηση εργασιών"
 
 #: themes/default/templates/admin/dashboard.html:79
 #, fuzzy
 msgid "New Answers"
-msgstr "새로운 정답"
+msgstr "συμβαλλόμενες απαντήσεις"
 
 #: themes/default/templates/admin/dashboard.html:88
 #, fuzzy
 msgid "New Users"
-msgstr "새로운 사용자"
+msgstr "Οι 5 Κορυφαίοι χρήστες"
 
 #: themes/default/templates/admin/dashboard.html:97
 msgid "Returning Users"
@@ -657,118 +666,119 @@ msgstr ""
 
 #: themes/default/templates/admin/dashboard.html:108
 msgid "Recent activity"
-msgstr "최근 활동"
+msgstr "Πρόσφατη δραστηριότητα"
 
 #: themes/default/templates/admin/dashboard.html:115
 msgid "new project created"
-msgstr "새로운 프로젝트가 다음을 생성했다."
+msgstr "το νέο πρόγραμμα που δημιουργήθηκε"
 
 #: themes/default/templates/admin/dashboard.html:119
 msgid "has published a blog post"
-msgstr "블로그 글을 공개했다."
+msgstr "έχει δημοσιεύσει ανάρτηση σε blog "
 
 #: themes/default/templates/admin/dashboard.html:123
 msgid "has added new tasks"
-msgstr "새로운 작업으로 추가했다."
+msgstr "'έχει προσθέσει νέες εργασίες"
 
 #: themes/default/templates/admin/dashboard.html:127
 msgid "has completed a task"
-msgstr "작업을 끝냈다."
+msgstr "έχει ολοκληρώσει μία εργασία"
 
 #: themes/default/templates/admin/dashboard.html:131
 msgid "has contributed to"
-msgstr "기여했다."
+msgstr "έχει συμβάλλει στο"
 
 #: themes/default/templates/admin/dashboard.html:139
 #: themes/default/templates/admin/dashboard.html:149
 msgid "has joined"
-msgstr "가입했다."
+msgstr "έχει συνδεθεί"
 
 #: themes/default/templates/admin/dashboard.html:159
 msgid "No data available yet. You'll need to wait 24 hours."
-msgstr "아직 데이터가 없습니다. 24시간을 기다려 주세요."
+msgstr ""
 
 #: themes/default/templates/admin/del_category.html:15
 #: themes/default/templates/projects/delete.html:14
 #: themes/default/templates/projects/tasks/delete.html:14
 msgid "Danger Zone!"
-msgstr "경고"
+msgstr "Ζώνη Κινδύνου!"
 
 #: themes/default/templates/admin/del_category.html:15
 msgid ""
 "Deleting the category will remove it from all the projects! This "
 "operation cannot be undone!"
-msgstr "범주를 삭제하시면 그에 포함된 모든 프로젝트들이 삭제됩니다.직업을 되돌릴 수는 없습니다."
+msgstr ""
+"Η διαγραφή αυτής της κατηγορίας θα την αφαιρέσει από όλα τα προγράμματα! "
+"Ηπράξη αυτή δε μπορεί να ανακαλεστεί!"
 
 #: themes/default/templates/admin/del_category.html:21
 msgid "No, do not delete it"
-msgstr "아니오, 지우지 마시오."
+msgstr "Όχι, μην την διαγράψεις"
 
 #: themes/default/templates/admin/index.html:15
 msgid "Dashboard"
-msgstr "상황판"
+msgstr "Ταμπλό"
 
 #: themes/default/templates/admin/index.html:16
 msgid "Internal Statistics"
-msgstr "내부 통계"
+msgstr "Εσωτερικές Στατιστικές"
 
 #: themes/default/templates/admin/index.html:18
 msgid "Go"
-msgstr "실행"
+msgstr "Πάμε"
 
 #: themes/default/templates/admin/index.html:22
 msgid "Background Jobs"
-msgstr ""
+msgstr "Εργασίες παρασκηνίου"
 
 #: themes/default/templates/admin/index.html:23
 msgid "Monitor the background jobs"
-msgstr "숨은 작업 살펴보기"
+msgstr "Παρακολούθηση εργασιών παρασκηνίου"
 
 #: themes/default/templates/admin/index.html:25
 #: themes/default/templates/admin/index.html:34
 #: themes/default/templates/admin/index.html:41
 #: themes/default/templates/admin/index.html:50
 msgid "Manage"
-msgstr "관리"
+msgstr "Διαχείριση"
 
 #: themes/default/templates/admin/index.html:31
 #: themes/default/templates/projects/index.html:33
 msgid "Featured Projects"
-msgstr "긴급 프로젝트"
+msgstr "Προτεινόμενα Προγράμματα"
 
 #: themes/default/templates/admin/index.html:32
-#, fuzzy
 msgid "Show projects on the front page"
-msgstr "첫 페이지에 프로젝트를 보이시오."
+msgstr "Εμφάνιση προγραμμάτων στην αρχική σελίδα"
 
 #: themes/default/templates/admin/index.html:38
 msgid "Categories"
-msgstr "범주"
+msgstr "Κατηγορίες"
 
 #: themes/default/templates/admin/index.html:39
 msgid "Manage project categories"
-msgstr "프로젝트 범주 관리"
+msgstr "Διαχείριση κατηγοριών προγραμμάτων"
 
 #: themes/default/templates/admin/index.html:47
 msgid "Administrators"
-msgstr "관리자"
+msgstr "Διαχειριστές"
 
 #: themes/default/templates/admin/index.html:48
 msgid "Manage administrators"
-msgstr "관리자 관리"
+msgstr "Διαχείριση διαχειριστών"
 
 #: themes/default/templates/admin/index.html:54
 #: themes/default/templates/projects/stats.html:235
 msgid "Users"
-msgstr "사용자"
+msgstr "Χρήστες"
 
 #: themes/default/templates/admin/index.html:55
 msgid "Export a list of users"
-msgstr "사용자 리스트 출력"
+msgstr "Εξαγωγή λίστας χρηστών"
 
 #: themes/default/templates/admin/index.html:57
 msgid "JSON"
-msgstr "JSON"
+msgstr "JSO"
 
 #: themes/default/templates/admin/index.html:60
 msgid "CSV"
@@ -776,7 +786,7 @@ msgstr "CSV"
 
 #: themes/default/templates/admin/index.html:66
 msgid "Latest news from PyBossa"
-msgstr "Dataly에서 보낸 마지막 뉴스"
+msgstr ""
 
 #: themes/default/templates/admin/index.html:69
 msgid "New PyBossa version"
@@ -785,35 +795,35 @@ msgstr ""
 #: themes/default/templates/admin/index.html:69
 #, fuzzy
 msgid "New SciFabric Blog Post"
-msgstr ""
+msgstr "Γράψτε μία ανάρτηση blog "
 
 #: themes/default/templates/admin/projects.html:13
 msgid "Manage featured projects"
-msgstr "긴급 프로젝트 관리"
+msgstr "Διαχείριση προτεινόμενων προγραμμάτων"
 
 #: themes/default/templates/admin/update_category.html:22
 msgid "Update Category"
-msgstr "범주 업데이트"
+msgstr "Ανανέωση Κατηγορίας"
 
 #: themes/default/templates/admin/users.html:14
 msgid "Manage Admin Users"
-msgstr "관리자 관리"
+msgstr "Διαχείριση των Χρηστών Διαχείρισης "
 
 #: themes/default/templates/admin/users.html:19
 msgid "Try with the full name or nick"
-msgstr "실명이나 별명으로 시도하기"
+msgstr "Δοκιμάστε με ολόκληρο όνομα ή με ψευδώνυμο"
 
 #: themes/default/templates/admin/users.html:20
 msgid "Search"
-msgstr "검색"
+msgstr "Αναζήτηση"
 
 #: themes/default/templates/admin/users.html:24
 msgid "Found Users"
-msgstr "발견된 사용자"
+msgstr "Βρέθηκαν Χρήστες"
 
 #: themes/default/templates/admin/users.html:31
 msgid "Current Users with Admin privileges"
-msgstr "관리자 권한을 가진 현재 사용자"
+msgstr "Τρέχοντες Χρήστες με δικαιώματα Διαχειριστή"
 
 #: themes/default/templates/home/_about.html:5
 msgid ""
@@ -825,6 +835,15 @@ msgid ""
 "anyone around the world with some time, interest and an internet "
 "connection can contribute."
 msgstr ""
+"Το PyBossa είναι μία δωρεάν πλατφόρμα ανοιχτών πηγών που βασίζεται στη "
+"συμμετοχή ατόμων για μικρο-εργασίες τα πλαίσια του "
+"πληθοπορισμού.Επιτρέπει στα άτομα να δημιουργούν και να τρέχουν "
+"προγρμάμματα που άμεσα βοηθάνετην ολοκλήρωση εργασιών που χρειάζονται "
+"ανθρώπινη νόηση όπως η κατηγοριοποιήσηεικόνων, η μεταγραφή, η "
+"γεωκωδικοποίηση κ.ά.. Το PyBossa είναιβοηθητικό εργαλείο που "
+"χρησιμοποιείται από ερευνητές, χάκερ πολίτες και προγραμματιστές, "
+"ενώδίνει τη δυνατότητα σε οποιονδήποτε ανά τον κόσμο- με λίγο χρόνο, "
+"θέληση και πρόσβαση στο διαδύκτιο-να συμβάλλει."
 
 #: themes/default/templates/home/_about.html:8
 msgid "PyBossa is different to existing efforts:"
@@ -833,7 +852,7 @@ msgstr "Το PyBossa είναι διαφορετικό από άλλες τρέ�
 #: themes/default/templates/home/_about.html:10
 #, python-format
 msgid "It's a 100%% open-source"
-msgstr ""
+msgstr "Είνα μια 100% ανοιχτή πηγή"
 
 #: themes/default/templates/home/_about.html:11
 msgid ""
@@ -841,6 +860,9 @@ msgid ""
 " handle payment or money — it is designed to support volunteer-driven "
 "projects."
 msgstr ""
+"Σε αντίθεση για παράδειγμα με τα προγράμματα τύπου “mechanical turk”, το "
+"PyBossa δεν είναι σχεδιασμένο για ναδιαχειρίζεται πληρωμές ή χρήματα- "
+"είναι σχεδιασμένο για να υποστηρίζει εθελοντικά προγράμματα."
 
 #: themes/default/templates/home/_about.html:13
 msgid ""
@@ -850,64 +872,76 @@ msgid ""
 "snippets of Javascript and HTML which are then deployed on a PyBossa "
 "instance (such as"
 msgstr ""
+" Είναι σχεδιασμένο σαν πλατφόρμα για την ανάπτυξη προγραμμάτων "
+"μικρο-εργασιών στα πλαίσια του πληθοπορισμού, χωρίς όμως να είναι "
+"πληθοποριστικό πρόγραμμα αυτό καθέ αυτό. Ξεχωριστά προγράμματα "
+"καταγράφονται ως απλάαποσπάσματα Javascript και HTML και μετά "
+"αναπτύσσονται κατά την υπόδειξη του PyBossa(όπως το"
 
 #: themes/default/templates/home/_about.html:13
 msgid ""
 "This way one can easily develop custom projects while using the PyBossa "
 "platform to store your data, manage users, and handle workflow"
 msgstr ""
+"Με αυτό τον τρόπο, μπορεί κανείς να αναπτύξει πρωτότυπα προγράμματα ενώ "
+"χρησιμοποιεί την πλατφόρμα τουPyBossa για την αποθήκευση δεδομένων, τη "
+"διαχείριση των χρηστών και της ροής των εργασιών"
 
 #: themes/default/templates/home/_about.html:18
 msgid "You can read more about the architecture in the"
-msgstr "구조에 관해서 좀 더 읽어볼 수 있습니다."
+msgstr "Μπορείτε να διαβάσετε περισσότερα για την αρχιτεκτονική στο"
 
 #: themes/default/templates/home/_about.html:18
 msgid "PyBossa Documentation"
-msgstr "Pybossa 문서"
+msgstr "Τεκμηρίωση του PyBossa "
 
 #: themes/default/templates/home/_about.html:18
 msgid "and follow the"
-msgstr ""
+msgstr "και να ακολουθήσετε το"
 
 #: themes/default/templates/home/_about.html:18
 msgid "step-by-step tutorial to create your own projects"
-msgstr "프로젝트를 생성하기 위한 단계별 튜토리얼"
+msgstr "βήμα-προς-βήμα σεμινάριο για να δημιουργήσετε τα δικά σας προγράμματα"
 
 #: themes/default/templates/home/_about.html:21
 #: themes/default/templates/projects/_helpers.html:40
 #: themes/default/templates/projects/stats.html:32
 msgid "Statistics"
-msgstr "통계"
+msgstr "Στατιστικές"
 
 #: themes/default/templates/home/_about.html:23
 msgid ""
 " PyBossa provides individual statistics for every project in the system, "
 "as well as a"
-msgstr "Pybossa는 프로젝트별 통계를 제공합니다. 뿐만 아니라"
+msgstr ""
+"Το PyBossa παρέχει μεμονωμένες στατιστικές για κάθε πρόγραμμα σε αυτό το "
+"σύστημακαθώς και μια"
 
 #: themes/default/templates/home/_about.html:23
 msgid "general overview about the system like total number of users, tasks, etc"
-msgstr "사용자수, 작업수 등과 같은 일반적인 정보"
+msgstr ""
+"γενική επισκόπηση του συστήματος, όπως τον συνολικό αριθμό χρηστών, "
+"εργασιών κ.ο.κ.\" "
 
 #: themes/default/templates/home/_about.html:25
 msgid "Check the global statistics"
-msgstr ""
+msgstr "Κοιτάξτε τις παγκόσμιες στατιστικές"
 
 #: themes/default/templates/home/_about.html:27
 msgid "Contact information"
-msgstr "연락 정보"
+msgstr "Πληροφορίες επαφής"
 
 #: themes/default/templates/home/_about.html:29
 msgid "For more info, send us an e-mail to: "
-msgstr "추가 정보를 위해서는 다음 주소로 이메일을 보내세요."
+msgstr "Για περισσότερες πληροφορίες, στείλτε μας μήνυμα στο"
 
 #: themes/default/templates/home/_about.html:29
 msgid "Follow us on Twitter!"
-msgstr "트위터를 팔로워 하세요!"
+msgstr "Ακολουθήστε μας στο Twitter"
 
 #: themes/default/templates/home/_about.html:30
 msgid "E-mail list: "
-msgstr "이메일 리스트: "
+msgstr "Λίστα ηλεκτρονικού ταχυδρομείου"
 
 #: themes/default/templates/home/_about.html:31
 msgid "Report any bug, issue or improvement:"
@@ -929,7 +963,7 @@ msgstr ""
 
 #: themes/default/templates/home/_pybossa_text.html:3
 msgid "Help advance research"
-msgstr "고급 검색 도움말"
+msgstr "Βοηθείστε στην ανάπτυξη της έρευνας"
 
 #: themes/default/templates/home/_pybossa_text.html:4
 msgid "Everything is open and freely usable"
@@ -943,47 +977,47 @@ msgstr "Πράγματα που δε μπορούν να κάνουν οι υπ�
 #: themes/default/templates/projects/_helpers.html:36
 #: themes/default/templates/projects/_helpers.html:240
 msgid "Info"
-msgstr "정보"
+msgstr "Πληροφορίες"
 
 #: themes/default/templates/home/index.html:33
 msgid "Get Started"
-msgstr "시작!"
+msgstr "Ξεκινήστε"
 
 #: themes/default/templates/home/index.html:34
 msgid "It's really simple to start contributing."
-msgstr ""
+msgstr "Είναι πολύ εύκολο να αρχίσετε να συμβάλλετε"
 
 #: themes/default/templates/home/index.html:37
 msgid " Start Contributing"
-msgstr "참여 시작"
+msgstr "Αρχίστε να συμβάλλετε"
 
 #: themes/default/templates/home/index.html:42
 msgid "Most Active Projects"
-msgstr "가장 활동적인 프로젝트"
+msgstr "Τα πιο ενεργά προγράμματα"
 
 #: themes/default/templates/home/index.html:54
 msgid "Start"
-msgstr "시작"
+msgstr "Αρχή"
 
 #: themes/default/templates/home/index.html:62
 msgid "Your project"
-msgstr "당신의 프로젝트"
+msgstr "Το πρόγραμμά σας"
 
 #: themes/default/templates/home/index.html:63
 msgid "could be here!"
-msgstr "거의 다 되었습니다."
+msgstr "Θα μπορούσε να είναι εδω!"
 
 #: themes/default/templates/home/index.html:64
 msgid "Create a project"
-msgstr "프로젝트 생성"
+msgstr "Δημιουργία προγράμματος"
 
 #: themes/default/templates/home/index.html:73
 msgid "Most Active Volunteers"
-msgstr "가장 활동적인 사용자"
+msgstr "Οι πιο ενεργοί εθελοντές"
 
 #: themes/default/templates/home/index.html:80
 msgid "Submitted Tasks"
-msgstr "제출된 작업"
+msgstr "Υποβεβλημένες εργασίες"
 
 #: themes/default/templates/home/index.html:84
 #: themes/default/templates/projects/_helpers.html:39
@@ -999,22 +1033,22 @@ msgstr "제출된 작업"
 #: themes/default/templates/projects/tasks.html:13
 #: themes/default/templates/projects/tasks_browse.html:62
 msgid "Tasks"
-msgstr "작업"
+msgstr "Εργασίες"
 
 #: themes/default/templates/home/search.html:7
 msgid "Search Results"
-msgstr "검색 결과"
+msgstr "Αποτελέσματα Αναζήτησης"
 
 #: themes/default/templates/projects/_helpers.html:37
 #: themes/default/templates/projects/presenter.html:15
 msgid "Contribute"
-msgstr "참여"
+msgstr "Συμβολή"
 
 #: themes/default/templates/projects/_helpers.html:38
 #: themes/default/templates/projects/results.html:15
 #, fuzzy
 msgid "Results"
-msgstr "결과"
+msgstr "Αποτελέσματα Αναζήτησης"
 
 #: themes/default/templates/projects/_helpers.html:42
 #: themes/default/templates/projects/_helpers.html:89
@@ -1023,11 +1057,11 @@ msgstr "결과"
 #: themes/default/templates/projects/tasks.html:37
 #: themes/default/templates/projects/tasks.html:41
 msgid "Settings"
-msgstr "설정"
+msgstr "Ρυθμίσεις"
 
 #: themes/default/templates/projects/_helpers.html:49
 msgid "Audit Logs"
-msgstr "작성 기록"
+msgstr "Αρχεία Καταγραφής Ελέγχου"
 
 #: themes/default/templates/projects/_helpers.html:54
 msgid "Webhooks"
@@ -1039,88 +1073,88 @@ msgstr "Blog"
 
 #: themes/default/templates/projects/_helpers.html:69
 msgid "ID"
-msgstr "ID"
+msgstr "Ταυτότητα"
 
 #: themes/default/templates/projects/_helpers.html:71
 #: themes/default/templates/projects/_helpers.html:131
 msgid "Description"
-msgstr "설명"
+msgstr "Περιγραφή"
 
 #: themes/default/templates/projects/_helpers.html:72
 #: themes/default/templates/projects/_helpers.html:132
 msgid "Creation Date"
-msgstr "생성 날짜"
+msgstr "Ημερομηνία Δημιουργίας"
 
 #: themes/default/templates/projects/_helpers.html:73
 #: themes/default/templates/projects/_helpers.html:134
 msgid "Last Activity"
-msgstr "마지막 활동"
+msgstr "Τελευταία καταγεγραμμένη δραστηριότητα"
 
 #: themes/default/templates/projects/_helpers.html:74
 #: themes/default/templates/projects/_helpers.html:137
 #: themes/default/templates/projects/_helpers.html:199
 msgid "Overall progress"
-msgstr "전체 진행"
+msgstr "Γενική πρόοδος "
 
 #: themes/default/templates/projects/_helpers.html:74
 #: themes/default/templates/projects/_helpers.html:199
 #: themes/default/templates/projects/tasks_browse.html:19
 msgid "completed"
-msgstr "완료"
+msgstr "ολοκληρώθηκε"
 
 #: themes/default/templates/projects/_helpers.html:105
 #: themes/default/templates/projects/_helpers.html:115
 msgid "Remove from Featured!"
-msgstr "긴급 프로젝트에서 삭제"
+msgstr "Αφαίρεση από τα Προτεινόμενα!"
 
 #: themes/default/templates/projects/_helpers.html:108
 #: themes/default/templates/projects/_helpers.html:112
 msgid "Add to Featured!"
-msgstr "긴급 프로젝트에 추가"
+msgstr "Προσθήκη στα προτεινόμενα!"
 
 #: themes/default/templates/projects/_helpers.html:139
 #: themes/default/templates/projects/_helpers.html:141
 msgid "Created by"
-msgstr "에 의해 생성되었습니다."
+msgstr "Δημιουργήθηκε από"
 
 #: themes/default/templates/projects/_helpers.html:139
 msgid "Me"
-msgstr "나"
+msgstr "Εμένα"
 
 #: themes/default/templates/projects/_helpers.html:144
 msgid "Try it!"
-msgstr "시도해보기!"
+msgstr "Δοκιμάστε το!"
 
 #: themes/default/templates/projects/_helpers.html:212
 msgid "Done! View results"
-msgstr "종료! 결과 보기"
+msgstr ""
 
 #: themes/default/templates/projects/_helpers.html:215
 msgid "Start Contributing Now!"
-msgstr "지금 시작하세요!"
+msgstr "Αρχίστε να συμβάλλετε τώρα!"
 
 #: themes/default/templates/projects/_helpers.html:218
 #, fuzzy
 msgid "Thanks for contributing"
-msgstr "참여해주셔서 감사합니다."
+msgstr "Αρχίστε να συμβάλλετε"
 
 #: themes/default/templates/projects/_helpers.html:221
 msgid "Draft project, complete it!"
-msgstr "임시 프로젝트가 생성되었습니다."
+msgstr ""
 
 #: themes/default/templates/projects/_helpers.html:224
 msgid "You can now publish it!"
-msgstr "이제 공개할 수 있습니다."
+msgstr ""
 
 #: themes/default/templates/projects/actions.html:9
 #: themes/default/templates/projects/settings.html:18
 msgid "Edit the project details"
-msgstr "프로젝트 상세사항 수정"
+msgstr "Επεξεργαστείτε τις λεπτομέρειες του προγράμματος"
 
 #: themes/default/templates/projects/actions.html:10
 #: themes/default/templates/projects/tasks.html:33
 msgid "Edit the task presenter"
-msgstr "작업 보기 수정"
+msgstr "Επεξεργασία κομιστή εργασιών"
 
 #: themes/default/templates/projects/actions.html:11
 #: themes/default/templates/projects/importers/csv.html:14
@@ -1128,52 +1162,52 @@ msgstr "작업 보기 수정"
 #: themes/default/templates/projects/importers/epicollect.html:14
 #: themes/default/templates/projects/importers/flickr.html:15
 #: themes/default/templates/projects/importers/gdocs.html:14
+#: themes/default/templates/projects/importers/iiif.html:5
 #: themes/default/templates/projects/importers/s3.html:20
 #: themes/default/templates/projects/importers/twitter.html:14
-#: themes/default/templates/projects/importers/iiif.html:5
 msgid "Import tasks"
-msgstr "중요 작업"
+msgstr "Εισαγωγή εργασιών"
 
 #: themes/default/templates/projects/actions.html:12
 #: themes/default/templates/projects/settings.html:20
 msgid "Delete the project"
-msgstr "프로젝트 삭제"
+msgstr "Διαγραφή του προγράμματος"
 
 #: themes/default/templates/projects/auditlog.html:17
 msgid "When"
-msgstr "언제"
+msgstr "Πότε"
 
 #: themes/default/templates/projects/auditlog.html:18
 msgid "Who"
-msgstr "누가"
+msgstr "Ποιός"
 
 #: themes/default/templates/projects/auditlog.html:19
 msgid "Source"
-msgstr "제공자"
+msgstr "Πηγή"
 
 #: themes/default/templates/projects/auditlog.html:20
 msgid "Action"
-msgstr "실행"
+msgstr "Δράση"
 
 #: themes/default/templates/projects/auditlog.html:21
 msgid "Attribute"
-msgstr ""
+msgstr "Χαρακτηριστικά"
 
 #: themes/default/templates/projects/auditlog.html:22
 msgid "Old Value"
-msgstr "옛값"
+msgstr "Παλιά Τιμή"
 
 #: themes/default/templates/projects/auditlog.html:23
 msgid "New Value"
-msgstr "새값"
+msgstr "Νέα Τιμή"
 
 #: themes/default/templates/projects/auditlog.html:28
 msgid "You"
-msgstr "당신"
+msgstr "Εσείς"
 
 #: themes/default/templates/projects/auditlog.html:39
 msgid "Sorry! No logs so far."
-msgstr "죄송합니다. 지금까지는 로그가 없습니다."
+msgstr "Συγγνώμη! Καμία καταχώρηση προς το παρόν. "
 
 #: themes/default/templates/projects/auditlog.html:45
 #: themes/default/templates/projects/blog.html:33
@@ -1188,86 +1222,90 @@ msgstr "죄송합니다. 지금까지는 로그가 없습니다."
 #: themes/default/templates/projects/tasks.html:78
 #: themes/default/templates/projects/tasks_browse.html:65
 msgid "Sorry! This project does not exist."
-msgstr "죄송합니다. 이 프로젝트는 존재하지 않습니다."
+msgstr " Συγγνώμη! Αυτό το πρόγραμμα δεν υπάρχει."
 
 #: themes/default/templates/projects/blog.html:27
 msgid "Sorry! No posts so far."
-msgstr "죄송합니다. 지금까지는 글이 없습니다."
+msgstr "Συγγνώμη! Καμία ανάρτηση προς το παρόν."
 
 #: themes/default/templates/projects/blog_post.html:15
 msgid "Author: "
-msgstr "저자: "
+msgstr "Δημιουργός:"
 
 #: themes/default/templates/projects/blog_post.html:17
 msgid "Written: "
-msgstr "작성자:"
+msgstr "Γράφτηκε:"
 
 #: themes/default/templates/projects/blog_post.html:31
 #: themes/default/templates/projects/task_autoimporter.html:40
 #: themes/default/templates/projects/task_settings.html:31
 msgid "Delete"
-msgstr "삭제"
+msgstr "Διαγραφή"
 
 #: themes/default/templates/projects/blog_post.html:32
 msgid "Edit"
-msgstr "작성"
+msgstr "Επεξεργασία"
 
 #: themes/default/templates/projects/blog_post.html:36
 #: themes/default/templates/projects/blog_post.html:41
 #: themes/default/templates/projects/task_autoimporter.html:41
 msgid "Back"
-msgstr "뒤로"
+msgstr "Πίσω"
 
 #: themes/default/templates/projects/blog_post.html:40
 msgid "Sorry! This blogpost does not exist."
-msgstr "죄송합니다. 이 블로그 글이 존재하지 않습니다."
+msgstr "Συγγνώμη! Αυτή η ανάρτηση δεν υπάρχει στο blog."
 
 #: themes/default/templates/projects/delete.html:12
 msgid "Delete project"
-msgstr "프로젝트 삭제"
+msgstr "Διαγραφή προγράμματος"
 
 #: themes/default/templates/projects/delete.html:14
 msgid "If you delete the project and its tasks, it will be gone forever!"
 msgstr ""
-"만약 프로젝트와 작업을 삭제하면 되돌릴 수 없습니다."
+"Εάν διαγράψετε το πρόγραμμα και τις εργασίες του, θα εξαφανιστεί για "
+"πάντα!"
 
 #: themes/default/templates/projects/delete.html:20
 msgid ""
 "Are you sure you want to delete this project and all its tasks and "
 "associated task runs?"
 msgstr ""
-"정말 프로젝트와 그와 관련된 작업, 답변을 삭제하길 원하시나요?"
+"Είστε σίγουρος/η οτι θέλετε να διαγράψετε αυτό το πρόγραμμα και όλες του "
+"τις"
 
 #: themes/default/templates/projects/delete.html:22
 #, fuzzy
 msgid "Yes, delete it"
-msgstr "예, 삭제하세요."
+msgstr "Όχι, μην την διαγράψεις"
 
 #: themes/default/templates/projects/delete.html:23
 msgid "No, do not delete it!"
-msgstr "아니오, 삭제하지 마세요"
+msgstr "Όχι, μην το διαγράψεις!"
 
 #: themes/default/templates/projects/export.html:13
 msgid "Export All Tasks and Task Runs"
-msgstr "모든 작업과 답변 내보내기"
+msgstr "Εξαγωγή Όλων των Εργασιών και Εκτελέσεων"
 
 #: themes/default/templates/projects/export.html:14
 msgid "You can export and download"
-msgstr "내보내거나 다운로드를 할 수 있습니다."
+msgstr "Δε μπορείτε να εξάγετε και να κατεβάσετε"
 
 #: themes/default/templates/projects/export.html:14
 msgid "all the available"
-msgstr "모든 것이 가능합니다."
+msgstr "όλα είναι διαθέσιμα"
 
 #: themes/default/templates/projects/export.html:14
 msgid ""
 "Tasks and Task Runs (the submitted answers by the users) in CSV or JSON "
 "formats."
-msgstr "CSV나 JSON으로 작성된 작업과 답변"
+msgstr ""
+"Εργασίες και Εκτελέσεις (όπως έχουν υποβληθεί από τους χρήστες) σε μορφές"
+" CSV ή JSON "
 
 #: themes/default/templates/projects/export.html:17
 msgid "Export in CSV format"
-msgstr "CSV 형식으로 내보내기"
+msgstr "Εξαγωγή σε μορφή CSV "
 
 #: themes/default/templates/projects/export.html:24
 #: themes/default/templates/projects/export.html:26
@@ -1275,85 +1313,91 @@ msgstr "CSV 형식으로 내보내기"
 #: themes/default/templates/projects/export.html:39
 #: themes/default/templates/projects/export.html:54
 msgid "Task Runs"
-msgstr "답변"
+msgstr "Εκτελέσεις Εργασιών"
 
 #: themes/default/templates/projects/export.html:30
 msgid "Export in JSON format"
-msgstr "JSON 형식으로 내보내기"
+msgstr "Εξαγωγή σε μορφή JSON"
 
 #: themes/default/templates/projects/export.html:47
 msgid "Export to the"
-msgstr "내보내기"
+msgstr "Εξαγωγή στο"
 
 #: themes/default/templates/projects/export.html:49
 msgid "Export to a CKAN server"
-msgstr "CKAN 서버로 내보내기"
+msgstr "Εξαγωγή σε διακομιστή CKAN"
 
 #: themes/default/templates/projects/export.html:51
 msgid "IMPORTANT"
-msgstr "중요!"
+msgstr "ΣΗΜΑΝΤΙΚΟ"
 
 #: themes/default/templates/projects/export.html:51
 msgid ""
 "This export option stills in beta mode and may fail in the CKAN server. "
 "If you get an error, please send an e-mail to info@pybossa.com"
 msgstr ""
+"Αυτή η επιλογή εξαγωγή λειτουργεί με φίλτρα βήτα λειτουργίας και μπορεί "
+"να αποτύχει σε διακομιστή CKAN "
 
 #: themes/default/templates/projects/export.html:56
 msgid "You don't have a Datahub.io API key in your"
-msgstr ""
+msgstr "Δεν έχετε κλειδί Datahub.io API για τον "
 
 #: themes/default/templates/projects/export.html:56
 msgid "account. Please,"
-msgstr "계정."
+msgstr "λογαριασμό σας. Παρακαλείστε"
 
 #: themes/default/templates/projects/export.html:56
 msgid "create an account"
-msgstr "계정을 생성하세요."
+msgstr "να δημιουργήσετε λογαργιασμό"
 
 #: themes/default/templates/projects/export.html:56
 msgid "and copy/paste the API key in your profile in order to use this exporter"
 msgstr ""
+"και να κάνετε αντιγραφή/ επικόλληση του κλειδιού API στο προφίλ σας για "
+"να μπορέσετε να χρησιμοποιείσετε αυτόν τον εξαγωγέα"
 
 #: themes/default/templates/projects/index.html:35
 msgid "A special selection of the most interesting projects"
-msgstr ""
+msgstr "Μία ξεχωριστή συλλογή των πιο ενδιαφέροντων προγραμμάτων"
 
 #: themes/default/templates/projects/index.html:38
 #: themes/default/templates/stats/global.html:93
 msgid "Draft Projects"
-msgstr ""
+msgstr "Προσχέδια Προγράμματα"
 
 #: themes/default/templates/projects/index.html:39
 msgid "Work in progress projects"
-msgstr ""
+msgstr "Προγράμματα σε εξέλιξη"
 
 #: themes/default/templates/projects/index.html:58
 msgid "Sorry, there are no published projects for this category yet"
-msgstr "죄송합니다. 이 범주에는 아직 공개된 프로젝트가 없습니다."
+msgstr ""
+"Συγγνώμη, δεν υπάρχουν δημοσιευμένα προγράμματα σε αυτή την κατηγορία "
+"προς το παρόν"
 
 #: themes/default/templates/projects/new.html:13
 msgid "Project"
-msgstr "프로젝트"
+msgstr "Πρόγραμμα"
 
 #: themes/default/templates/projects/new.html:13
 msgid "Create a new project"
-msgstr "새 프로젝트 생성"
+msgstr "Δημιουργία νέου προγράμματος"
 
 #: themes/default/templates/projects/new.html:17
 #: themes/default/templates/projects/update.html:37
 msgid "The name of the project"
-msgstr "프로젝트의 이름은"
+msgstr "Το όνομα του προγράμματος"
 
 #: themes/default/templates/projects/new.html:18
 #: themes/default/templates/projects/update.html:38
 msgid "Short name or slug for the project"
-msgstr "프로젝트의 짧은 이름이나 키워드"
+msgstr "Μικρό όνομα ή ανεπίσημο όνομα του προγράμματος"
 
 #: themes/default/templates/projects/new.html:18
 #: themes/default/templates/projects/update.html:38
 msgid "Project slug:"
-msgstr "프로젝트 키워드"
+msgstr "Ανεπίσημο όνομα προγράμματος"
 
 #: themes/default/templates/projects/new.html:19
 msgid ""
@@ -1373,17 +1417,19 @@ msgid ""
 "                                                             \n"
 "            (you can use Markdown to give format to your description!)"
 msgstr ""
-"프로젝트에 관해서 다음을 기술하세요.                · 왜? 왜 프로젝트를 생성했나요? 프로젝트에서 얻고자 하는 것은 "
-"무엇인가?                · 어떻게? 프로젝트가 어떻게 진행되는가?                (설명을 위해서 마크다운"
-" 형식을 사용할 수 있습니다.)"
+"Εξηγείστε το πρόγραμμα \t\t· Γιατί; Γιατί δημιουργείτε αυτό το πρόγραμμα,"
+" τι θέλετενα επιτύχετε με αυτό\t\t· Πώς; Εξηγείστε πώς δουλεύει το "
+"πρόγραμμά σας\t\t· Πώς μπορείτε να βοηθήσετε: Εξηγείστε στουςεθελοντές "
+"γιατί είναι σημαντική η συμβολή τους και πώς τα αποτελέσματα "
+"τουπρογράμματος μπορούν να βοηθήσουν στο να αλλάξουν πράγματα!"
 
 #: themes/default/templates/projects/new.html:26
 msgid "Create the project"
-msgstr "프로젝트 생성"
+msgstr "Δημιουργία προγράμματος"
 
 #: themes/default/templates/projects/new_blogpost.html:14
 msgid "Write a new blog post for ad"
-msgstr ""
+msgstr "Γράψτε μία νέα ανάρτηση blog για διαφήμιση"
 
 #: themes/default/templates/projects/new_blogpost.html:18
 #: themes/default/templates/projects/update_blogpost.html:20
@@ -1393,34 +1439,37 @@ msgstr ""
 #: themes/default/templates/projects/new_blogpost.html:19
 #: themes/default/templates/projects/update_blogpost.html:21
 msgid "Write your post here. You can use Markdown!"
-msgstr ""
+msgstr "Γράψτε την ανάρτησή σας εδώ. Μπορείτε να χρησιμοποιήσετε Markdown!"
 
 #: themes/default/templates/projects/password.html:14
 msgid "Enter the password to contribute to this project:"
-msgstr "참여하는 프로젝트에 관한 패스워드를 입력하시오."
+msgstr "Εισάγετε τον κωδικό για να συμβάλλετε σε αυτό πρόγραμμα "
 
 #: themes/default/templates/projects/password.html:18
 msgid "Project password"
-msgstr "프로젝트 패스워드"
+msgstr "Κωδικός προγράμματος"
 
 #: themes/default/templates/projects/password.html:21
 msgid "Submit"
-msgstr "제출"
+msgstr "Υποβολή"
 
 #: themes/default/templates/projects/presenter.html:22
 msgid ""
 "Sorry, you've contributed to all the tasks for this project, but this "
 "project still needs more volunteers, so please spread the word!"
-msgstr "죄송합니다. 당신은 이 프로젝트의 작업에 참여해왔습니다.그렇지만 이 프로젝트는 참여자가 더 필요합니다."
+msgstr ""
+"Συγγνώμη, έχετε συμβάλλει σε όλες τις εργασίες του προγράμματος, αλλά "
+"αυτότο πρόγραμμα χρειάζεται περισσότερους εθελοντές, γι' αυτό διαδώστε "
+"το!"
 
 #: themes/default/templates/projects/publish.html:12
 #, fuzzy
 msgid "Publish the project"
-msgstr "프로젝트 공개"
+msgstr "Δημοσιευμένα Προγράμματα"
 
 #: themes/default/templates/projects/publish.html:14
 msgid "Please read carefully!"
-msgstr "유심히 읽어 주세요"
+msgstr ""
 
 #: themes/default/templates/projects/publish.html:15
 msgid ""
@@ -1439,20 +1488,20 @@ msgstr ""
 #: themes/default/templates/projects/publish.html:21
 #, fuzzy
 msgid "Are you sure you want to publish this project?"
-msgstr "정말로 이 프로젝트를 공개할까요?"
+msgstr "Θέλετε να ελαχιστοποιήσετε το πρόγραμμά σας;"
 
 #: themes/default/templates/projects/publish.html:23
 msgid "Yes, publish it"
-msgstr "네 공개하세요."
+msgstr ""
 
 #: themes/default/templates/projects/publish.html:24
 #, fuzzy
 msgid "No, do not publish it!"
-msgstr "아니오, 공개하지 마세요!"
+msgstr "Όχι, μην το διαγράψεις!"
 
 #: themes/default/templates/projects/results.html:21
 msgid "No results"
-msgstr "결과 없슴"
+msgstr ""
 
 #: themes/default/templates/projects/results.html:22
 msgid "The project owner has not created/published/visualized any results yet."
@@ -1460,92 +1509,94 @@ msgstr ""
 
 #: themes/default/templates/projects/settings.html:16
 msgid "Project Settings"
-msgstr "프로젝트 설정"
+msgstr "Ρυθμίσεις Προγράμματος"
 
 #: themes/default/templates/projects/settings.html:19
 #: themes/default/templates/projects/task_settings.html:13
 msgid "Task Settings"
-msgstr "작업 설정"
+msgstr "Ρυθμίσεις Εργασίας"
 
 #: themes/default/templates/projects/settings.html:21
 msgid "Write a blog post"
-msgstr ""
+msgstr "Γράψτε μία ανάρτηση blog "
 
 #: themes/default/templates/projects/stats.html:39
 #: themes/default/templates/projects/task_priority.html:21
 msgid "Important"
-msgstr "중요"
+msgstr "Σημαντικό"
 
 #: themes/default/templates/projects/stats.html:39
 msgid "Data have been"
-msgstr "데이터는"
+msgstr "Τα δεδομένα είναι"
 
 #: themes/default/templates/projects/stats.html:39
 msgid "anonymized"
-msgstr "익명의"
+msgstr "ανώνυμα"
 
 #: themes/default/templates/projects/stats.html:47
 msgid "Average contribution time per task"
-msgstr "작업 당 평균 참여시간"
+msgstr ""
 
 #: themes/default/templates/projects/stats.html:48
 #, fuzzy
 msgid "seconds"
-msgstr "두번째"
+msgstr "δεύτερος αριθμός"
 
 #: themes/default/templates/projects/stats.html:56
 msgid "Distribution of Answers per Hour"
-msgstr "시간당 정답의 분포"
+msgstr "Διανομή Απαντήσεων ανά Ώρα"
 
 #: themes/default/templates/projects/stats.html:86
 msgid "Completed Tasks in the last 15 days"
-msgstr "지난 15일간 완료된 작업"
+msgstr "Ολοκληρωμένες Εργασίες τις τελευταίες 15 ημέρες"
 
 #: themes/default/templates/projects/stats.html:86
 #: themes/default/templates/projects/stats.html:157
 msgid "select an area to zoom, click to reset the chart"
-msgstr "확대를 위해서 영역을 선택하고 차트 재설정을 누르시오."
+msgstr ""
+"διαλέξτε μια περιοχή για να εστιάσετε και να μεγενθύνετε, κάντε κλικ για "
+"να επαναφέρετε τον πίνακα"
 
 #: themes/default/templates/projects/stats.html:157
 msgid "Answers per day"
-msgstr "일별 정답"
+msgstr "Απαντήσεις τη μέρα"
 
 #: themes/default/templates/projects/stats.html:169
 msgid "answers were submitted this day"
-msgstr "오늘 젵출된 정답들"
+msgstr "οι απαντήσεις θα υποβληθούν αυτή τη μέρα"
 
 #: themes/default/templates/projects/stats.html:228
 msgid "Distribution of Answers"
-msgstr "정답의 분포"
+msgstr "Διανομή Απαντήσεων"
 
 #: themes/default/templates/projects/stats.html:234
 msgid "Type"
-msgstr "형식"
+msgstr "Τύπος"
 
 #: themes/default/templates/projects/stats.html:236
 msgid "Percentage"
-msgstr "비율"
+msgstr "Ποσοστό"
 
 #: themes/default/templates/projects/stats.html:275
 msgid "Details about Anonymous Users"
-msgstr "익명 사용자 상세 정보"
+msgstr "Λεπτομέρειες για τους Ανώνυμους Χρήστες"
 
 #: themes/default/templates/projects/stats.html:278
 msgid "anonymous users have"
-msgstr "익명 사용자는"
+msgstr "οι ανώνυμοι χρήστες έχουν"
 
 #: themes/default/templates/projects/stats.html:278
 #: themes/default/templates/projects/stats.html:369
 msgid "participated"
-msgstr "참여한"
+msgstr "συμμετάχει"
 
 #: themes/default/templates/projects/stats.html:285
 msgid "Country"
-msgstr "국가"
+msgstr "Χώρα"
 
 #: themes/default/templates/projects/stats.html:286
 msgid "City"
-msgstr "도시"
+msgstr "Πόλη"
 
 #: themes/default/templates/projects/stats.html:307
 #: themes/default/templates/projects/stats.html:308
@@ -1554,124 +1605,124 @@ msgstr "도시"
 #: themes/default/templates/projects/stats.html:311
 #: themes/default/templates/projects/stats.html:376
 msgid "User"
-msgstr "사용자"
+msgstr "Χρήστης"
 
 #: themes/default/templates/projects/stats.html:327
 #: themes/default/templates/stats/global.html:169
 msgid "This page includes GeoLite data created by MaxMind, available from"
-msgstr ""
+msgstr "Αυτή η σελίδα εμπεριέχει δεδομένα GeoLite από το MaxMind, διαθέσιμα από "
 
 #: themes/default/templates/projects/stats.html:366
 msgid "Details about Authenticated Users"
-msgstr "인증 사용자에 대한 상세 정보"
+msgstr "Λεπτομέριες για Εξουσιοδοτημένους Χρήστες "
 
 #: themes/default/templates/projects/stats.html:369
 msgid "authenticated users have"
-msgstr "인증 사용자는"
+msgstr "οι εξουσιοδοτημένοι χρήστες έχουν"
 
 #: themes/default/templates/projects/stats.html:371
 msgid "Top 5 users"
-msgstr "상위 5 사용자"
+msgstr "Οι 5 Κορυφαίοι χρήστες"
 
 #: themes/default/templates/projects/task_autoimport_options.html:13
 msgid "Setup task autoimporter"
-msgstr "작업 자동들여오기 설정하기"
+msgstr "Εγκατάσταση αυτο-εισαγωγέα εργασιών"
 
+#: themes/default/templates/projects/snippets/options.html:4
 #: themes/default/templates/projects/task_autoimport_options.html:16
 #: themes/default/templates/projects/task_import_options.html:16
-#: themes/default/templates/projects/snippets/options.html:4
 msgid "Use one of the following available"
-msgstr "다음중에 이용 가능"
+msgstr "Χρησιμοποιήστε έναν από τους ακόλουθους διαθέσιμους "
 
 #: themes/default/templates/projects/task_autoimport_options.html:17
 #: themes/default/templates/projects/task_import_options.html:17
 msgid "importers"
-msgstr "들어오기"
+msgstr "εισαγωγείς"
 
 #: themes/default/templates/projects/task_autoimport_options.html:17
 msgid "to setup as the autoimporter"
-msgstr "자동들여오기로 설정하기 위해서"
+msgstr "για να τον εγκαταστήσετε ως αυτο-εισαγωγέα  "
 
 #: themes/default/templates/projects/task_autoimporter.html:14
 msgid "Currently configured autoimport"
-msgstr ""
+msgstr "Προς το παρόν ρυθμισμένος αυτο-εισαγωγέας"
 
 #: themes/default/templates/projects/task_autoimporter.html:15
 msgid "You currently have the following autoimporter configured"
-msgstr ""
+msgstr "Προς το παρόν έχετε ρυθμίσει τον ακόλουθο αυτο-εισαγωγέα"
 
 #: themes/default/templates/projects/task_import_options.html:13
 #: themes/default/templates/projects/tasks.html:20
 msgid "Import Tasks"
-msgstr "작업 추가"
+msgstr "Εισαγωγή Εργασιών"
 
 #: themes/default/templates/projects/task_import_options.html:17
 msgid "to import tasks..."
-msgstr ""
+msgstr "για να εισάγετε εργασίες..."
 
 #: themes/default/templates/projects/task_import_options.html:31
 msgid "... or import a set of"
-msgstr ""
+msgstr "… ή για να εισάγετε μια σειρά από"
 
 #: themes/default/templates/projects/task_import_options.html:31
 msgid "template tasks"
-msgstr "작업 템플릿"
+msgstr "πρότυπα εργασιών"
 
 #: themes/default/templates/projects/task_n_answers.html:14
 #: themes/default/templates/projects/task_settings.html:34
 msgid "Task Redundancy"
-msgstr "작업 반복"
+msgstr "Πλεονασμός Εργασιών"
 
 #: themes/default/templates/projects/task_n_answers.html:18
 msgid "The number of answers per tasks that you want for the project"
-msgstr "프로젝트 작업당 필요한 답변수"
+msgstr "Ο αριθμός απαντήσεων ανά εργασία που θέλετε για το πρόγραμμα"
 
 #: themes/default/templates/projects/task_n_answers.html:20
 #: themes/default/templates/projects/task_scheduler.html:35
 msgid "Set redundancy"
-msgstr "설정"
+msgstr "Ορίστε τον πλεονασμό "
 
-#: themes/default/templates/projects/task_presenter_editor.html:28
 #: themes/default/templates/projects/snippets/options.html:3
+#: themes/default/templates/projects/task_presenter_editor.html:28
 msgid "Task Presenter Editor"
-msgstr "작업 템플릿 수정"
+msgstr "Εκδότης Κομιστή Εργασιών"
 
 #: themes/default/templates/projects/task_presenter_editor.html:28
 msgid "Help"
-msgstr ""
+msgstr "Βοήθεια"
 
 #: themes/default/templates/projects/task_presenter_editor.html:34
 msgid "Update the project task presenter"
-msgstr "작업 템플릿 저장"
+msgstr "Ενημερώστε τον κομιστή εργασιών του προγράμματος"
 
 #: themes/default/templates/projects/task_presenter_editor.html:35
 msgid "Preview the task presenter"
-msgstr "미리보기"
+msgstr "Προεπισκόπηση του κομιστή εργασιών"
 
 #: themes/default/templates/projects/task_presenter_editor.html:45
 msgid "&times;"
-msgstr "&번"
+msgstr "&ώρες"
 
 #: themes/default/templates/projects/task_presenter_editor.html:46
 msgid "Task Presenter Preview"
-msgstr ""
+msgstr "Προεπισκόπηση Κομιστή Εργασιών"
 
 #: themes/default/templates/projects/task_presenter_editor.html:54
 msgid "Close"
-msgstr ""
+msgstr "Κλείσιμο"
 
 #: themes/default/templates/projects/task_priority.html:14
 #: themes/default/templates/projects/task_settings.html:22
 msgid "Task Priority"
-msgstr "작업 우선순위"
+msgstr "Προτεραιότητα Εργασίας"
 
 #: themes/default/templates/projects/task_priority.html:15
 msgid "You can change the"
-msgstr ""
+msgstr "Μπορείτε να αλλάξετε την"
 
 #: themes/default/templates/projects/task_priority.html:16
 msgid "priority"
-msgstr "우선순위"
+msgstr "προτεραιότητα"
 
 #: themes/default/templates/projects/task_priority.html:16
 msgid ""
@@ -1680,53 +1731,56 @@ msgid ""
 "lowest\n"
 "                priority is"
 msgstr ""
+"μιας ή παραπάνω εργασιών, \n"
+" \t\tπαραθέτοντας μια λίστα των ταυτοτήτων των εργασιών διαχωρισμένες με "
+"κόμμα. ΗΠροτεραιότητα είναι"
 
 #: themes/default/templates/projects/task_priority.html:19
 msgid "and the highest priority is"
-msgstr ""
+msgstr "και η ανώτερη προτεραιότητα είναι"
 
 #: themes/default/templates/projects/task_priority.html:21
 msgid ""
 "The priority value is only\n"
 "                respected by the"
-msgstr ""
+msgstr "Η τιμή της προτεραιότητας \t\t εκτιμάται μόνο από τον"
 
 #: themes/default/templates/projects/task_priority.html:22
 msgid "default scheduler"
-msgstr "기본 스케쥴러"
+msgstr "προεπιλεγμένο προγραμματιστή"
 
 #: themes/default/templates/projects/task_priority.html:27
 msgid "Comma separated Task.IDs i.e.: 3, 532, 100"
-msgstr ""
+msgstr "Ταυτότητες εργασιών διαχωρισμένες με κόμμα, όπως π.χ.: 3, 532, 100"
 
 #: themes/default/templates/projects/task_priority.html:28
 msgid "Priority value between 0.0 and 1.0"
-msgstr ""
+msgstr "Τιμή προτεραιότητας μεταξύ 0.0 και 1.0"
 
 #: themes/default/templates/projects/task_priority.html:30
 msgid "Change Priority"
-msgstr "우선순위 변경"
+msgstr "Αλλαγή προτεραιότητας"
 
 #: themes/default/templates/projects/task_scheduler.html:14
 #: themes/default/templates/projects/task_settings.html:17
 msgid "Task Scheduler"
-msgstr "작업 스케쥴"
+msgstr "Προγραμματιστής Εργασιών"
 
 #: themes/default/templates/projects/task_scheduler.html:15
 msgid "You can choose from the following schedulers"
-msgstr ""
+msgstr "Μπορείτε να επιλέξετε μετάξύ των ακόλουθων προγραμματιστών"
 
 #: themes/default/templates/projects/task_scheduler.html:17
 msgid "Default"
-msgstr "기본"
+msgstr "Προεπιλογή"
 
 #: themes/default/templates/projects/task_scheduler.html:17
 msgid "or"
-msgstr ""
+msgstr "ή"
 
 #: themes/default/templates/projects/task_scheduler.html:18
 msgid "Depth First"
-msgstr "깊이 우선"
+msgstr "Διερεύνηση Πρώτα κατά Βάθος"
 
 #: themes/default/templates/projects/task_scheduler.html:18
 msgid ""
@@ -1735,10 +1789,12 @@ msgid ""
 "answers has\n"
 "                    not achieved) excluding the current user"
 msgstr ""
+"επιστρέφει μία εργασία πουαπαντήσεων δε\t\t\tέχει επιτευχθεί) εξαιρώντας "
+"τον παρόν χρήστη"
 
 #: themes/default/templates/projects/task_scheduler.html:21
 msgid "Breadth First"
-msgstr ""
+msgstr "Διερεύνηση Πρώτα κατά Πλάτους"
 
 #: themes/default/templates/projects/task_scheduler.html:21
 msgid ""
@@ -1746,7 +1802,9 @@ msgid ""
 "                    task which has the least number of task runs "
 "(answers)\n"
 "                    excluding the current user"
-msgstr ""러
+msgstr ""
+"επιστρέφει μία\t\tεργασία η οποία έχει τον χαμηλότερο αριθμό (απαντήσεων)"
+" εργασιών προς εκτέλεση\t\tεξαιρώντας τον παρόν χρήστη"
 
 #: themes/default/templates/projects/task_scheduler.html:24
 msgid "Random"
@@ -1759,44 +1817,45 @@ msgid ""
 "more\n"
 "                    times"
 msgstr ""
+"επιστρέφει μία εργασία\t\tτυχαία-- ο χρήστης μπορεί να λάβει την ίδια "
+"εργασία δύο ήκαι παραπάνω\t\tφορές"
 
 #: themes/default/templates/projects/task_settings.html:18
 msgid "Change how the tasks are delivered to volunteers"
-msgstr ""
+msgstr "Αλλάξτε τον τρόπο με τον οποία οι εργασίες διανέμονται σε εθελοντές"
 
 #: themes/default/templates/projects/task_settings.html:19
 msgid "Scheduler"
-msgstr "스케쥴러"
+msgstr "Προγραμματιστής"
 
 #: themes/default/templates/projects/task_settings.html:23
 msgid "Change the priority of the tasks"
-msgstr "작업 우선순위 변경"
+msgstr "Αλλαγή προτεραιότητας εργασιών"
 
 #: themes/default/templates/projects/task_settings.html:24
 msgid "Priority"
-msgstr "우선순위"
+msgstr "Προτεραιότητα"
 
 #: themes/default/templates/projects/task_settings.html:29
 msgid "Delete Tasks"
-msgstr "작업 삭제"
+msgstr "Διαγραφή Εργασιών"
 
 #: themes/default/templates/projects/task_settings.html:30
 msgid "Delete all the tasks and associated answers"
-msgstr "모든 작업과 답변을 삭제합니다"
+msgstr "Διαγράψτε όλες τις εργασίες και τις ανάλογες απαντήσεις"
 
 #: themes/default/templates/projects/task_settings.html:35
 msgid "Change the redundancy level for the tasks"
-msgstr "작업 반복 변경"
+msgstr "Αλλάξτε το επίπεδο πλεονασμού για τις εργασίες"
 
 #: themes/default/templates/projects/task_settings.html:36
 msgid "Redundancy"
-msgstr "반복"
+msgstr "Πλεονασμός"
 
 #: themes/default/templates/projects/tasks.html:21
 msgid "Import tasks from templates, GDrive, or CSV"
-msgstr "템플릿, GDrive, CSV로 작업 추가"
+msgstr "Εισαγωγή εργασιών από πρότυπα, GDrive ή CSV  "
 
-#: themes/default/templates/projects/tasks.html:22
 #: themes/default/templates/projects/importers/csv.html:23
 #: themes/default/templates/projects/importers/dropbox.html:30
 #: themes/default/templates/projects/importers/epicollect.html:25
@@ -1804,137 +1863,142 @@ msgstr "템플릿, GDrive, CSV로 작업 추가"
 #: themes/default/templates/projects/importers/gdocs.html:23
 #: themes/default/templates/projects/importers/s3.html:36
 #: themes/default/templates/projects/importers/twitter.html:43
+#: themes/default/templates/projects/tasks.html:22
 msgid "Import"
-msgstr "추가"
+msgstr "Εισαγωγή"
 
 #: themes/default/templates/projects/tasks.html:25
 #: themes/default/templates/projects/tasks.html:68
 msgid "Export Tasks"
-msgstr "작업 받기"
+msgstr "Εξαγωγή Εργασιών"
 
 #: themes/default/templates/projects/tasks.html:26
 #: themes/default/templates/projects/tasks.html:69
 msgid "Export tasks to JSON, CSV or a CKAN server"
-msgstr "JSON, CSV, CKAN 서버로 작업 받기"
+msgstr "Εξαγωγή εργασιών σε διακομυστή JSON, CSV ή CKAN"
 
 #: themes/default/templates/projects/tasks.html:27
 #: themes/default/templates/projects/tasks.html:70
 msgid "Export"
-msgstr "받기"
+msgstr "Εξαγωγή"
 
 #: themes/default/templates/projects/tasks.html:32
 msgid "Task Presenter"
-msgstr "작업 템플릿"
+msgstr "Κομιστής Εργασιών"
 
 #: themes/default/templates/projects/tasks.html:34
 msgid "Editor"
-msgstr "수정"
+msgstr "Εκδότης"
 
 #: themes/default/templates/projects/tasks.html:38
 msgid "Configure the task scheduler, redundancy, etc."
-msgstr "작업 스케쥴러, 반복 등등 수정"
+msgstr "Διαμορφώστε τον προγραμματιστή των προγραμμάτων, τον πλεονασμό, κ.λ.π."
 
 #: themes/default/templates/projects/tasks.html:46
 #: themes/default/templates/projects/tasks.html:49
 #: themes/default/templates/projects/tasks.html:62
 #: themes/default/templates/projects/tasks.html:65
 msgid "Browse"
-msgstr "상태"
+msgstr "Περιήγηση"
 
 #: themes/default/templates/projects/tasks.html:47
 #: themes/default/templates/projects/tasks.html:63
 msgid "Check the status of the tasks"
-msgstr "작업 상태 체크"
+msgstr "Ελέγξτε την κατάσταση των εργασιών"
 
 #: themes/default/templates/projects/tasks.html:53
 msgid "Auto-import Tasks"
-msgstr "자동 작업 추가"
+msgstr "Αυτο-εισαγώμενες Εργασίες"
 
 #: themes/default/templates/projects/tasks.html:54
 msgid "Import tasks regularly and automatically"
-msgstr "정기적으로 작업 추가"
+msgstr "Εισάγετε εργασίες τακτικά και αυτόματα"
 
 #: themes/default/templates/projects/tasks.html:55
 msgid "Setup"
-msgstr "추가"
+msgstr "Δημιουργία"
 
 #: themes/default/templates/projects/tasks_browse.html:13
 msgid "Browse tasks"
-msgstr "작업 상태"
+msgstr "Περιήγηση εργασιών"
 
 #: themes/default/templates/projects/tasks_browse.html:15
 msgid "This page shows all the available tasks for this project"
-msgstr "이 페이지는 프로젝트의 작업 상태를 보여줍니다."
+msgstr "Αυτή η σελίδα δείχνει όλες τις διαθέσιμες εργασίες για αυτό το πρόγραμμα"
 
 #: themes/default/templates/projects/tasks_browse.html:16
 msgid "For each task, you can find the following information"
-msgstr "각 작업의 정보를 찾을 수 있습니다."
+msgstr "Για κάθε εργασία, μπορείτε να βρείτε τις ακόλουθες πληροφορίες"
 
 #: themes/default/templates/projects/tasks_browse.html:18
 #: themes/default/templates/projects/tasks_browse.html:29
 #: themes/default/templates/projects/tasks_browse.html:31
 msgid "Task"
-msgstr "작업"
+msgstr "Εργασία"
 
 #: themes/default/templates/projects/tasks_browse.html:18
 msgid "This number identifies the task for the project and it is unique"
-msgstr "이 숫자는 작업 번호 입니다."
+msgstr ""
+"Αυτός ο αριθμός ταυτοποιεί την εργασία για το πρόγραμμα και είναι "
+"μοναδικός"
 
 #: themes/default/templates/projects/tasks_browse.html:19
 msgid ""
 "The first number shows how many answers have been submitted for the task "
 "and the"
-msgstr "첫 숫자는 작업에 답변한 수를 보여줍니다."
+msgstr "Ο πρώτος αριθμόες δείχνει πόσες απαντήσεις έχουν υποβληθεί για την εργασία"
 
 #: themes/default/templates/projects/tasks_browse.html:19
 msgid ""
 "This redundancy method will help to detect errors, typos, data forging, "
 "etc. when the task has been completed"
 msgstr ""
+"Αυτή η μέθοδος πλεονασμού θα βοηθήσει στον εντοπισμό σφαλμάτων, "
+"τυπογραφικών, αντιγραφή δεδομένωνκ.λ.π. αφού έχει ολοκληρωθεί η εργασία"
 
 #: themes/default/templates/projects/tasks_browse.html:19
 msgid "second number"
-msgstr "두번째 숫자는"
+msgstr "δεύτερος αριθμός"
 
 #: themes/default/templates/projects/tasks_browse.html:19
 msgid "how many need to be obtained to mark the task as"
-msgstr "필요한 답변 수를 보여줍니다."
+msgstr "πόσες χρειάζονται να ολοκληρωθούν για να σημειωθεί η εργασία ώς"
 
 #: themes/default/templates/projects/tasks_browse.html:20
 msgid "Progress Bar"
-msgstr "진행 표시줄"
+msgstr "Μπάρα Προόδου"
 
 #: themes/default/templates/projects/tasks_browse.html:20
 msgid "The progress bar will the percentage that has been completed for the task"
-msgstr "작업완료된 양을 퍼센트로 보여줍니다."
+msgstr "Η μπάρα προόδου είναι το ποσοστό που έχει ολοκληρωθεί για μία εργασία "
 
 #: themes/default/templates/projects/tasks_browse.html:48
 msgid "Download Task Results"
-msgstr "작업 결과 다운로드"
+msgstr "Κατεβάστε τα Αποτελέσματα της Εργασίας"
 
 #: themes/default/templates/projects/tasks_browse.html:52
 msgid "Download Partial results"
-msgstr "부분 결과 다운로드"
+msgstr "Κατεβάστε Μερικά αποτελέσματα"
 
 #: themes/default/templates/projects/tasks_browse.html:55
 msgid "Nothing to download yet"
-msgstr "아직 다운로드 할 수 없습니다"
+msgstr "Τίποτα για να κατεβάσετε προς το παρόν"
 
 #: themes/default/templates/projects/tutorial.html:14
 msgid "Start contributing"
-msgstr "참여 시작"
+msgstr "Αρχίστε να συμβάλλετε"
 
 #: themes/default/templates/projects/update.html:14
 msgid "Update the project"
-msgstr "프로젝트 업데이트"
+msgstr "Ανανεώστε το πρόγραμμα"
 
 #: themes/default/templates/projects/update.html:39
 msgid "Give some details about the project"
-msgstr ""
+msgstr "Δώστε κάποιες πληροφορίες για το πρόγραμμα"
 
 #: themes/default/templates/projects/update.html:40
 msgid "Explain the project (use Markdown!)"
-msgstr ""
+msgstr "Εξηγείστε το πρόγραμμα (χρησιμοποιώντας Markdown!)"
 
 #: themes/default/templates/projects/update.html:42
 msgid "Check if you want to allow anonymous users contribute to your project"
@@ -1942,26 +2006,26 @@ msgstr ""
 
 #: themes/default/templates/projects/update_blogpost.html:14
 msgid "Edit the blog post"
-msgstr ""
+msgstr "Επεξεργαστείετε την ανάρτηση του blog "
 
 #: themes/default/templates/projects/update_blogpost.html:23
 msgid "Update"
-msgstr ""
+msgstr "Ενημέρωση"
 
 #: themes/default/templates/projects/webhook.html:20
 #, fuzzy
 msgid "Created"
-msgstr ""
+msgstr "Δημιουργία"
 
 #: themes/default/templates/projects/webhook.html:21
 #, fuzzy
 msgid "Updated"
-msgstr ""
+msgstr "Ενημέρωση"
 
 #: themes/default/templates/projects/webhook.html:22
 #, fuzzy
 msgid "Payload"
-msgstr ""
+msgstr "Ανεβάστε"
 
 #: themes/default/templates/projects/webhook.html:23
 msgid "Response"
@@ -1974,120 +2038,128 @@ msgstr ""
 #: themes/default/templates/projects/webhook.html:25
 #, fuzzy
 msgid "Repeat"
-msgstr ""
+msgstr "Δημιουργία"
 
 #: themes/default/templates/projects/importers/iiif.html:10
 msgid "From a IIIF manifest"
-msgstr ""
+msgstr "Από ένα δηλωτικό IIIF"
 
 #: themes/default/templates/projects/importers/csv.html:16
 msgid "From a CSV file"
-msgstr ""
+msgstr "Από αρχείο CSV "
 
 #: themes/default/templates/projects/importers/csv.html:20
 msgid ""
 "Please provide a URL (i.e. DropBox, Box, Ubuntu One, etc. public link) to"
 " a CSV file with data for"
 msgstr ""
+"Παρακαλούμε να παραθέσετε έναn Ενιαίος Εντοπιστής Πόρων (URL) (π.χ. "
+"DropBox, Box, Ubuntu One, κ.λ.π. δημόσιους συνδέσμους) στο"
 
 #: themes/default/templates/projects/importers/csv.html:20
 #: themes/default/templates/projects/importers/dropbox.html:26
 #: themes/default/templates/projects/importers/epicollect.html:20
 #: themes/default/templates/projects/importers/flickr.html:31
 #: themes/default/templates/projects/importers/gdocs.html:20
+#: themes/default/templates/projects/importers/iiif.html:16
 #: themes/default/templates/projects/importers/s3.html:23
 #: themes/default/templates/projects/importers/twitter.html:34
-#: themes/default/templates/projects/importers/iiif.html:16
 msgid "For more information, please look at"
-msgstr ""
+msgstr "Για περισσότερες πληροφορίες, παρακαλούμε να δείτε στο"
 
 #: themes/default/templates/projects/importers/csv.html:20
 #: themes/default/templates/projects/importers/dropbox.html:26
 #: themes/default/templates/projects/importers/epicollect.html:20
 #: themes/default/templates/projects/importers/flickr.html:31
 #: themes/default/templates/projects/importers/gdocs.html:20
+#: themes/default/templates/projects/importers/iiif.html:16
 #: themes/default/templates/projects/importers/s3.html:23
 #: themes/default/templates/projects/importers/twitter.html:35
-#: themes/default/templates/projects/importers/iiif.html:16
 msgid "the documentation"
-msgstr ""
+msgstr "η καταγραφή"
 
 #: themes/default/templates/projects/importers/csv.html:21
 msgid "The URL of the CSV file"
-msgstr ""
+msgstr "Ο Ενιαίος Εντοπιστής Πόρων (URL) του αρχείου CSV "
 
 #: themes/default/templates/projects/importers/dropbox.html:18
 msgid "From your Dropbox account"
-msgstr ""
+msgstr "Από τον λογαριασμό σας στο Dropbox"
 
 #: themes/default/templates/projects/importers/dropbox.html:27
 msgid "You are about to import"
-msgstr ""
+msgstr "Είστε έτοιμος να εισάγετε"
 
 #: themes/default/templates/projects/importers/dropbox.html:27
 msgid "files"
-msgstr ""
+msgstr "αρχεία"
 
 #: themes/default/templates/projects/importers/epicollect.html:16
 msgid "From an EpiCollect Plus project"
-msgstr ""
+msgstr "Από ένα πρόγραμμα EpiCollect"
 
 #: themes/default/templates/projects/importers/epicollect.html:20
 msgid "Please provide an EpiCollect Plus project name to import its data for"
 msgstr ""
+"Παρακαλούμε να παραθέσετε ένα όνομα προγράμματος EpiCollect Plus για να "
+"εισάγετε δεδομένα για"
 
 #: themes/default/templates/projects/importers/epicollect.html:22
 msgid "The name of the public EpiCollect Plus project"
-msgstr ""
+msgstr "Το όνομα για το δημόσιο πρόγραμμα EpiCollect Plus"
 
 #: themes/default/templates/projects/importers/epicollect.html:23
 msgid "The name of the project's form"
-msgstr ""
+msgstr "Το όνομα για τη μορφή του προγράμματος"
 
 #: themes/default/templates/projects/importers/flickr.html:16
 msgid "From a Flickr Album"
-msgstr ""
+msgstr "Από άλμπουμ Flickr"
 
 #: themes/default/templates/projects/importers/flickr.html:17
 msgid "Revoke access"
-msgstr ""
+msgstr "Ανάκληση πρόσβασης"
 
 #: themes/default/templates/projects/importers/flickr.html:20
 #, fuzzy
 msgid "Grant access to your Flickr albums to select one..."
 msgstr ""
+"Παραχωρήστε άδεια πρόσβασης Crowdcrafting στα Flickr άλμουπ σας για να "
+"διαλέξετε ένα … "
 
 #: themes/default/templates/projects/importers/flickr.html:21
 msgid "Log in Flickr"
-msgstr ""
+msgstr "Συνδεθείτε στο Flickr "
 
 #: themes/default/templates/projects/importers/flickr.html:31
 msgid "Or manually provide the ID of a Flickr set with images for"
-msgstr ""
+msgstr "Ή χειροκίνητα παραθέστε την ταυτότητα από μια σειρά εικόνων στο Flickr "
 
 #: themes/default/templates/projects/importers/flickr.html:53
 msgid "Select one of your albums:"
-msgstr ""
+msgstr "Διαλέξτε ένα από τα άλμουπ σας:"
 
 #: themes/default/templates/projects/importers/flickr.html:55
 msgid "photos"
-msgstr "사진"
+msgstr "φωτογραφίες"
 
 #: themes/default/templates/projects/importers/flickr.html:55
 msgid "Select"
-msgstr "선택"
+msgstr "Επίλογή"
 
 #: themes/default/templates/projects/importers/gdocs.html:16
 msgid "From a Google Docs Spreadsheet"
-msgstr ""
+msgstr "Από ένα Υπολογιστικό Φύλλο στο Google Docs "
 
 #: themes/default/templates/projects/importers/gdocs.html:20
 msgid "Please provide a URL to a Google Drive Spreadsheet with data for"
 msgstr ""
+"Παρακαλούμε να παραθέσετε έναν Ενιαίο Εντοπιστή Πόρων (URL) για ένα "
+"Υπολογιστικό Φύλλο στο Google Drive με δεδομένα για"
 
 #: themes/default/templates/projects/importers/gdocs.html:21
 msgid "The URL of the Google Docs Spreadsheet"
-msgstr ""
+msgstr "Ο Ενιαίος Εντοπιστής Πόρων (URL) του Υπολογιστικού Φύλλου του Google Docs "
 
 #: themes/default/templates/projects/importers/s3.html:21
 msgid "From an Amazon S3 bucket"
@@ -2096,7 +2168,7 @@ msgstr ""
 #: themes/default/templates/projects/importers/s3.html:33
 #, fuzzy
 msgid "Name of the S3 bucket"
-msgstr ""
+msgstr "Το όνομα του προγράμματος"
 
 #: themes/default/templates/projects/importers/s3.html:35
 msgid "Search in bucket"
@@ -2143,11 +2215,11 @@ msgstr ""
 
 #: themes/default/templates/projects/presenters/basic.html:2
 msgid "Basic"
-msgstr ""
+msgstr "Βασικά"
 
 #: themes/default/templates/projects/presenters/basic.html:3
 msgid "The most basic template"
-msgstr ""
+msgstr "Το πιό βασικό πρότυπο"
 
 #: themes/default/templates/projects/presenters/basic.html:4
 #: themes/default/templates/projects/presenters/image.html:4
@@ -2156,7 +2228,7 @@ msgstr ""
 #: themes/default/templates/projects/presenters/sound.html:4
 #: themes/default/templates/projects/presenters/video.html:4
 msgid "Complexity"
-msgstr ""
+msgstr "Περιπλοκότητα"
 
 #: themes/default/templates/projects/presenters/basic.html:5
 #: themes/default/templates/projects/presenters/image.html:5
@@ -2165,31 +2237,31 @@ msgstr ""
 #: themes/default/templates/projects/presenters/sound.html:5
 #: themes/default/templates/projects/presenters/video.html:5
 msgid "Skills"
-msgstr ""
+msgstr "Δεξιότητες"
 
 #: themes/default/templates/projects/presenters/basic.html:5
 #: themes/default/templates/projects/presenters/image.html:5
 #: themes/default/templates/projects/presenters/sound.html:5
 #: themes/default/templates/projects/presenters/video.html:5
 msgid "HTML and JavaScript"
-msgstr ""
+msgstr "HTML και JavaScript"
 
 #: themes/default/templates/projects/presenters/basic.html:6
 msgid "Use the Basic template"
-msgstr ""
+msgstr "Χρήση Βασικού προτύπου"
 
 #: themes/default/templates/projects/presenters/image.html:2
 #: themes/default/templates/projects/tasks/gdocs-image.html:2
 msgid "Image Pattern Recognition"
-msgstr ""
+msgstr "Αναγνώριση Μοτίβου Εικόνων "
 
 #: themes/default/templates/projects/presenters/image.html:3
 msgid "Re-use the Flickr Person Finder template"
-msgstr ""
+msgstr "Επαναχρησιμοποίηση του προτύπου Εύρεσης Ατόμων του Flickr"
 
 #: themes/default/templates/projects/presenters/image.html:6
 msgid "Use the Image template"
-msgstr ""
+msgstr "Χρήση του προτύπου Εικόνας"
 
 #: themes/default/templates/projects/presenters/image.html:7
 #: themes/default/templates/projects/presenters/map.html:7
@@ -2197,226 +2269,230 @@ msgstr ""
 #: themes/default/templates/projects/presenters/sound.html:7
 #: themes/default/templates/projects/presenters/video.html:7
 msgid "Download the template and work locally"
-msgstr ""
+msgstr "Κατεβάστε το πρότυπο και δουλέψτε τοπικά"
 
 #: themes/default/templates/projects/presenters/map.html:2
 #: themes/default/templates/projects/tasks/gdocs-map.html:2
 msgid "Geo-coding"
-msgstr ""
+msgstr "Γεωκωδικοποίηση"
 
 #: themes/default/templates/projects/presenters/map.html:3
 msgid "Re-use the Urban Park template"
-msgstr ""
+msgstr "Επαναχρησιμοποίηση του προτύπου Urban Park"
 
 #: themes/default/templates/projects/presenters/map.html:5
 msgid "HTML, JavaScript and Geo expertise"
-msgstr ""
+msgstr "Γνώση HTML, JavaScript και Geo"
 
 #: themes/default/templates/projects/presenters/map.html:6
 msgid "Use the Maps project template"
-msgstr ""
+msgstr "Χρήση του προτύπου Χάρτες του προγράμματος"
 
 #: themes/default/templates/projects/presenters/pdf.html:2
 #: themes/default/templates/projects/tasks/gdocs-pdf.html:2
 msgid "Transcribing documents"
-msgstr ""
+msgstr "Μεταγραφή αρχείων"
 
 #: themes/default/templates/projects/presenters/pdf.html:3
 msgid "Re-use the PDF transcription template"
-msgstr ""
+msgstr "Επαναχρησιμοποίηση του προτύπου μεταγραφής σε PDF"
 
 #: themes/default/templates/projects/presenters/pdf.html:5
 msgid "HTML, JavaScript and Server side"
-msgstr ""
+msgstr "Μεριά HTML, JavaScript και Server"
 
 #: themes/default/templates/projects/presenters/pdf.html:6
 msgid "Use the Transcription template"
-msgstr ""
+msgstr "Χρήση του προτύπου Μεταγραφής"
 
 #: themes/default/templates/projects/presenters/sound.html:2
 #: themes/default/templates/projects/tasks/gdocs-sound.html:2
 msgid "Sound Pattern Recognition"
-msgstr ""
+msgstr "Αναγνώριση Μοτίβου Ήχου"
 
 #: themes/default/templates/projects/presenters/sound.html:3
 msgid "Re-use the SoundCloud template"
-msgstr ""
+msgstr "Επαναχρησιμοποίηση του προτύπου SoundCloud"
 
 #: themes/default/templates/projects/presenters/sound.html:6
 msgid "Use the Sound template"
-msgstr ""
+msgstr "Χρήση του προτύπου Ήχου"
 
 #: themes/default/templates/projects/presenters/video.html:2
 #: themes/default/templates/projects/tasks/gdocs-video.html:2
 msgid "Video Pattern Recognition"
-msgstr ""
+msgstr "Αναγνώριση Μοτίβου Βίντεο"
 
 #: themes/default/templates/projects/presenters/video.html:3
 msgid "Re-use the Vimeo template"
-msgstr ""
+msgstr "Επαναχρησιμοποίηση του προτύπου Vimeo"
 
 #: themes/default/templates/projects/presenters/video.html:6
 msgid "Use the Video template"
-msgstr ""
+msgstr "Χρήση του προτύπου Βίντεο"
 
 #: themes/default/templates/projects/snippets/options.html:5
 msgid "templates"
-msgstr ""
+msgstr "πρότυπα"
 
 #: themes/default/templates/projects/snippets/options.html:5
 msgid "for your project"
-msgstr ""
+msgstr "για το πρόγραμμά σας"
 
 #: themes/default/templates/projects/task/wrong.html:8
 msgid "Error!"
-msgstr "오류!"
+msgstr "Σφάλμα!"
 
 #: themes/default/templates/projects/task/wrong.html:8
 msgid "This task does not belong to"
-msgstr ""
+msgstr "Αυτή η εργασία δεν ανήκει στο"
 
 #: themes/default/templates/projects/task/wrong.html:9
 msgid "Try with another one"
-msgstr ""
+msgstr "Δοκιμάστε με ένα άλλο"
 
 #: themes/default/templates/projects/tasks/iiif.html:2
 msgid "Import from a IIIF manifest"
-msgstr ""
+msgstr "Εισαγωγή από ένα δηλωτικό IIIF"
 
 #: themes/default/templates/projects/tasks/csv.html:3
 msgid "Provide a public link to your own CSV file"
-msgstr ""
+msgstr "Παραθέστε έναν δημόσιο σύνδεσμο για το δικό σας αρχείο CSV"
 
 #: themes/default/templates/projects/tasks/csv.html:5
 msgid ""
 "Use the CSV URL\n"
 "      importer"
-msgstr ""
+msgstr "Χρήση του εισαγωγέα Ενιαίου Εντοπιστή Πόρων (URL) CSV"
 
 #: themes/default/templates/projects/tasks/delete.html:12
 msgid "Delete all Tasks and Task Runs"
-msgstr "모든 작업과 결과 삭제"
+msgstr "Διαγραφή όλων των Εργασιών και των Εκτελέσεων "
 
 #: themes/default/templates/projects/tasks/delete.html:14
 msgid ""
 "If you delete all the\n"
 "            tasks and task runs they will be gone\n"
 "            forever!"
-msgstr "다시 되돌릴 수 없습니다!"
+msgstr ""
+"Εάν διαγράψετε όλες τι\tεργασίες και τις εκτελέσεις θα εξαφανιστούν\tγια "
+"πάντα!"
 
 #: themes/default/templates/projects/tasks/delete.html:16
 msgid "You cannot undo this action!"
-msgstr ""
+msgstr "Δεν μπορείτε να ανακαλέσετε αυτή την πράξη!"
 
 #: themes/default/templates/projects/tasks/delete.html:20
 msgid ""
 "Are you sure you want to delete ALL the project tasks and associated task"
 " runs?"
 msgstr ""
+"Είστε σίγουρος/η οτι θέλετε να διαγράψετε ΟΛΕΣ τις εργασίες του "
+"προγράμματος και τις αντίστοιχεςεκτελέσεις τους;"
 
 #: themes/default/templates/projects/tasks/delete.html:24
 msgid "Yes"
-msgstr "네"
+msgstr "Ναι"
 
 #: themes/default/templates/projects/tasks/delete.html:26
 msgid ""
 "No, do not delete\n"
 "              anything!"
-msgstr "어떤 것도 지우지 마세요."
+msgstr "Όχι, μην διαγράψεις\t\t τίποτα!"
 
 #: themes/default/templates/projects/tasks/dropbox.html:3
 msgid "Use files from your Dropbox account"
-msgstr ""
+msgstr "Χρήση αρχείων από τον λογαριασμό σας στο Dropbox "
 
 #: themes/default/templates/projects/tasks/dropbox.html:5
 msgid "Use the Dropbox importer"
-msgstr ""
+msgstr "Χρησιμοποιήστε τον εισαγωγέα του Dropbox"
 
 #: themes/default/templates/projects/tasks/epicollect.html:2
 msgid "EpiCollect Plus Project"
-msgstr ""
+msgstr "Πρόγραμμα EpiCollect Plus"
 
 #: themes/default/templates/projects/tasks/epicollect.html:3
 msgid "Use an EpiCollect Plus project"
-msgstr ""
+msgstr "Χρήση προγράμματος EpiCollect Plus"
 
 #: themes/default/templates/projects/tasks/epicollect.html:5
 msgid ""
 "Use the EpiCollect\n"
 "      Plus importer"
-msgstr ""
+msgstr "Χρήση του εισαγωγέα του EpiCollect Plus"
 
 #: themes/default/templates/projects/tasks/flickr.html:3
 msgid "Use images from a Flickr set"
-msgstr ""
+msgstr "Χρήση εικόνων από σειρά του Flickr"
 
 #: themes/default/templates/projects/tasks/flickr.html:5
 msgid "Use the Flickr importer"
-msgstr ""
+msgstr "Χρήση του εισαγωγέα Flickr "
 
 #: themes/default/templates/projects/tasks/gdocs-image.html:3
 msgid "Re-use the Flickr Person Finder tasks"
-msgstr ""
+msgstr "Επαναχρησιμοποίηση των εργασιών Εύρεσης Ατόμων του Flickr "
 
 #: themes/default/templates/projects/tasks/gdocs-image.html:5
 msgid ""
 "Use the\n"
 "      Image tasks"
-msgstr ""
+msgstr "Χρήση των\tεργασιών Εικόνας"
 
 #: themes/default/templates/projects/tasks/gdocs-map.html:3
 msgid "Re-use the Urban Park tasks"
-msgstr ""
+msgstr "Επαναχρησιμοποίηση των εργασιών του Urban Park"
 
 #: themes/default/templates/projects/tasks/gdocs-map.html:5
 msgid ""
 "Use the\n"
 "      Mapping tasks"
-msgstr ""
+msgstr "Χρήση των\tεργασιών χαρτογράφησης"
 
 #: themes/default/templates/projects/tasks/gdocs-pdf.html:3
 msgid "Re-use the PDF transcription tasks"
-msgstr ""
+msgstr "Επαναχρησιμοποίηση των εργασιών PDF μεταγραφής"
 
 #: themes/default/templates/projects/tasks/gdocs-pdf.html:5
 msgid ""
 "Use the\n"
 "      Transcription tasks"
-msgstr ""
+msgstr "Χρήση των\tεργασιών Μεταγραφής"
 
 #: themes/default/templates/projects/tasks/gdocs-sound.html:3
 msgid "Re-use the SoundCloud tasks"
-msgstr ""
+msgstr "Επαναχρησιμοποίηση των εργασιών του SoundCloud"
 
 #: themes/default/templates/projects/tasks/gdocs-sound.html:5
 msgid ""
 "Use the\n"
 "      Sound tasks"
-msgstr ""
+msgstr "Χρήση των\tεργασιών Ήχου"
 
 #: themes/default/templates/projects/tasks/gdocs-video.html:3
 msgid "Re-use the Vimeo tasks"
-msgstr ""
+msgstr "Επαναχρησιμοποίηση εργασιών Vimeo"
 
 #: themes/default/templates/projects/tasks/gdocs-video.html:5
 msgid ""
 "Use the\n"
 "      Video tasks"
-msgstr ""
+msgstr "Χρήση των\tεργασιών Βίντεο"
 
 #: themes/default/templates/projects/tasks/gdocs.html:2
 msgid "Google Drive Spreadsheet"
-msgstr ""
+msgstr "Υπολογιστικά Φύλλα Google Drive "
 
 #: themes/default/templates/projects/tasks/gdocs.html:3
 msgid "Import a Google Drive Spreadsheet"
-msgstr ""
+msgstr "Εισαγωγή Υπολογιστικού Φύλλου Google Drive"
 
 #: themes/default/templates/projects/tasks/gdocs.html:5
 msgid ""
 "Use the Google Drive\n"
 "      importer"
-msgstr ""
+msgstr "Χρήση του εισαγωγέα του Google Drive"
 
 #: themes/default/templates/projects/tasks/s3.html:2
 msgid "S3"
@@ -2429,7 +2505,7 @@ msgstr ""
 #: themes/default/templates/projects/tasks/s3.html:5
 #, fuzzy
 msgid "Use the Amazon S3 importer"
-msgstr ""
+msgstr "Χρησιμοποιήστε τον εισαγωγέα του Dropbox"
 
 #: themes/default/templates/projects/tasks/twitter.html:3
 msgid "Import tweets from a search or a user account"
@@ -2438,44 +2514,44 @@ msgstr ""
 #: themes/default/templates/projects/tasks/twitter.html:5
 #, fuzzy
 msgid "Use the Twitter importer"
-msgstr "트위터 들여오기를 사용하시오"
+msgstr "Χρήση του εισαγωγέα Flickr "
 
 #: themes/default/templates/stats/global.html:38
 msgid "General Statistics"
-msgstr "일반 통계"
+msgstr "Γενικές Στατιστικές"
 
 #: themes/default/templates/stats/global.html:46
 msgid "Anonymous users"
-msgstr "익명 사용자"
+msgstr "Ανώνυμοι χρήστες"
 
 #: themes/default/templates/stats/global.html:47
 msgid "Authenticated users"
-msgstr "인증 사용자"
+msgstr "Εξουσιοδοτημένοι χρήστες"
 
 #: themes/default/templates/stats/global.html:48
 #: themes/default/templates/stats/global.html:94
 msgid "Total"
-msgstr "총합"
+msgstr "Σύνολο"
 
 #: themes/default/templates/stats/global.html:52
 msgid "Top 5 Users in the last 24 hours"
-msgstr "지난 24시간 동안의 상위 5 사용자"
+msgstr "Οι 5 Κορυφαίοι Χρήστες τις τελευταίες 24 ώρες "
 
 #: themes/default/templates/stats/global.html:55
 msgid "with"
-msgstr ""
+msgstr "με"
 
 #: themes/default/templates/stats/global.html:55
 msgid "contributed answers"
-msgstr "정답"
+msgstr "συμβαλλόμενες απαντήσεις"
 
 #: themes/default/templates/stats/global.html:60
 msgid "No active users in the last 24 hours"
-msgstr "지난 24시간 동안에는 활동중인 사용자가 없습니다."
+msgstr "Κανένας ενεργός χρήστης τις τελευταίες 24 ώρες"
 
 #: themes/default/templates/stats/global.html:92
 msgid "Published Projects"
-msgstr "공개된 프로젝트"
+msgstr "Δημοσιευμένα Προγράμματα"
 
 #: themes/default/templates/stats/global.html:97
 msgid "Top 5 projects in the last 24 hours"
@@ -2483,35 +2559,35 @@ msgstr "Τα 5 κορυφαία προγράμματα τις τελευταίε
 
 #: themes/default/templates/stats/global.html:105
 msgid "No active projects in the last 24 hours"
-msgstr "지난 24시간 동안은 진행 중인 프로젝트가 없습니다."
+msgstr "Κανένα ενεργό πρόγραμμα τις τελευταίες 24 ώρες"
 
 #: themes/default/templates/stats/global.html:135
 msgid "Tasks and Answers"
-msgstr "작업과 답변"
+msgstr "Εργασίες και Απαντήσεις"
 
 #: themes/default/templates/stats/global.html:138
 msgid "Number of Tasks"
-msgstr "작업 수"
+msgstr "Αριθμός Εργασιών"
 
 #: themes/default/templates/stats/global.html:139
 msgid "Number of Task Runs"
-msgstr "진행 중인 작업 수"
+msgstr "Αριθμός Εκτελέσεων Εργασιών"
 
 #: themes/default/templates/stats/global.html:167
 msgid "Anonymous Volunteers"
-msgstr "익명 자원봉사자"
+msgstr "Ανώνυμοι Εθελοντές"
 
 #: themes/default/templates/stats/index.html:13
 msgid "Community Leaderboard"
-msgstr "작업자 순위"
+msgstr "Κοινοτικός Πίνακας Κατάταξης"
 
 #: themes/default/templates/stats/index.html:18
 msgid "Name"
-msgstr "프로젝트 이름"
+msgstr "Όνομα"
 
 #: themes/default/templates/stats/index.html:19
 msgid "Score"
-msgstr "점수"
+msgstr "Σκορ"
 
 #~ msgid ""
 #~ msgstr ""
@@ -2534,29 +2610,23 @@ msgstr "점수"
 #~ msgid "Name is already taken."
 #~ msgstr "Αυτό το όνομα χρησιμοποιείται"
 
-msgid "Short Name"
-msgstr "프로젝트 아이디"
+#~ msgid "Short Name"
+#~ msgstr "Μικρό Όνομα"
 
 #~ msgid "Short Name is already taken."
 #~ msgstr "Αυτό το μικρό όνομα χρησιμοποιείται"
 
-msgid "Long Description"
-msgstr "프로젝트 상세내용"
+#~ msgid "Long Description"
+#~ msgstr "Εκτενής Περιγραφή"
 
 #~ msgid "You must provide a description."
 #~ msgstr "Πρέπει να παραθέσετε περιγραφή"
 
-msgid "Allow Anonymous Contributors"
-msgstr "익명 사용자 기여 허용"
+#~ msgid "Allow Anonymous Contributors"
+#~ msgstr "Επιτρέψτε Ανώνυμους Συνειρφέρωντες  "
 
-msgid "Allow ZIP data download"
-msgstr "ZIP 다운로드 허용"
-
-msgid "Project with a password"
-msgstr "프로젝트 비밀번호 설정"
-
-msgid "Category"
-msgstr "카테고리"
+#~ msgid "Category"
+#~ msgstr "Κατηγορία"
 
 #~ msgid "Hide?"
 #~ msgstr "Ελαχιστοποίηση;"
@@ -2603,8 +2673,8 @@ msgstr "카테고리"
 #~ msgid "You must provide a Form name for the project"
 #~ msgstr "Πρέπει να παραθέσετε ένα όνομα Μορφής για το πρόγραμμα "
 
-msgid "Project Name"
-msgstr "프로젝트 이름"
+#~ msgid "Project Name"
+#~ msgstr "Όνομα Προγράμματος"
 
 #~ msgid "Form name"
 #~ msgstr "Όνομα Μορφής"
@@ -2624,8 +2694,8 @@ msgstr "프로젝트 이름"
 #~ msgid "Full name must be between 3 and %s characters long"
 #~ msgstr "Ολόκληρο το όνομα θα πρέπει να αποτελείται από 3 εως και  % χαρακτήρες"
 
-msgid "Full name"
-msgstr "이름"
+#~ msgid "Full name"
+#~ msgstr "Ολόκληρο Όνομα"
 
 #~ msgid "User name must be between 3 and %s characters long"
 #~ msgstr "Το όνομα του χρήστη θα πρέπει να αποτελείται από 3 εως και % χαρακτήρες"
@@ -2633,8 +2703,8 @@ msgstr "이름"
 #~ msgid "The user name is already taken"
 #~ msgstr "Αυτό το όνομα χρήστη χρησιμοποιείται"
 
-msgid "User name"
-msgstr "별명"
+#~ msgid "User name"
+#~ msgstr "Όνομα χρήστη"
 
 #~ msgid "Email must be between 3 and %s characters long"
 #~ msgstr ""
@@ -2642,8 +2712,8 @@ msgstr "별명"
 #~ msgid "Email is already taken"
 #~ msgstr "Αυτό το ηλεκτρονικό ταχυδρομείο χρησιμοποιείται"
 
-msgid "Email Address"
-msgstr "이메일 주소"
+#~ msgid "Email Address"
+#~ msgstr "Διεύθυνση Ηλεκτρονικού Ταχυδρομείου"
 
 #~ msgid "Password cannot be empty"
 #~ msgstr "Ο κωδικός δε μπορεί να είναι κενός"
@@ -2651,26 +2721,26 @@ msgstr "이메일 주소"
 #~ msgid "Passwords must match"
 #~ msgstr "Οι δυο κωδικοί πρέπει να ταυτίζονται"
 
-msgid "New Password"
-msgstr "새로운 비밀번호"
+#~ msgid "New Password"
+#~ msgstr "Νέος κωδικός"
 
-msgid "Repeat Password"
-msgstr "비밀번호 다시"
+#~ msgid "Repeat Password"
+#~ msgstr "Επαναλάβετε τον κωδικό"
 
-msgid "Username"
-msgstr "별명"
+#~ msgid "Username"
+#~ msgstr "Όνομα χρήστη"
 
-msgid "Get email notifications"
-msgstr "이메일 수신 허용"
+#~ msgid "Get email notifications"
+#~ msgstr "Θέλω να λαμβάνω ειδοποιήσεις μέσω του ηλεκτρονικού ταχυδρομείου "
 
-msgid "Language"
-msgstr "언어"
+#~ msgid "Language"
+#~ msgstr "Γλώσσα"
 
 #~ msgid "CKAN API Key"
 #~ msgstr "CKAN API Κλειδί"
 
-msgid "Privacy Mode"
-msgstr "개인 정보 보호 모드"
+#~ msgid "Privacy Mode"
+#~ msgstr "Λειτουργία προστασίας ιδιωτικού απορρήτου"
 
 #~ msgid "English"
 #~ msgstr "Αγγλικά"
@@ -2687,17 +2757,17 @@ msgstr "개인 정보 보호 모드"
 #~ msgid "Italian"
 #~ msgstr "Ιταλικά"
 
-msgid "Current password"
-msgstr "현재 비밀번호"
+#~ msgid "Current password"
+#~ msgstr "Τρέχοντας κωδικός πρόσβασης"
 
-msgid "New password"
-msgstr "새로운 비밀번호"
+#~ msgid "New password"
+#~ msgstr "Νέος κωδικός"
 
-msgid "Repeat password"
-msgstr "재입력"
+#~ msgid "Repeat password"
+#~ msgstr "Επαναλάβετε τον κωδικό"
 
-msgid "Avatar"
-msgstr "프로필 사진"
+#~ msgid "Avatar"
+#~ msgstr "Είδωλο"
 
 #~ msgid "This item already exists"
 #~ msgstr "Αυτό το αρχείο υπάρχει ήδη "

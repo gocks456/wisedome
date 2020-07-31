@@ -20,7 +20,6 @@ from sqlalchemy import text
 from pybossa.core import db
 from pybossa.util import exists_materialized_view, refresh_materialized_view
 
-
 def leaderboard(info=None):
     """Create or update leaderboard materialized view."""
     materialized_view = 'users_rank'
@@ -30,9 +29,6 @@ def leaderboard(info=None):
         materialized_view_idx = 'users_rank_%s_idx' % info
 
     if exists_materialized_view(db, materialized_view):
-        #현재는 채점을 계속 누르는 상황이 아니므로 여기서 갱신 중 나중에 삭제 할 것
-        all_rank_achievement()
-        category_rank_achievement()
         return refresh_materialized_view(db, materialized_view)
     else:
         #sql = '''
@@ -66,6 +62,18 @@ def leaderboard(info=None):
         db.session.commit()
 
         return "Materialized view created"
+
+def update_all_user_answer_rate():
+    from pybossa.cache import users as cached_users
+
+    sql = text('''
+               SELECT * FROM "user";
+               ''')
+    users = db.session.execute(sql)
+    for user in users:
+        answer_rate = cached_users.get_answer_rate(user)
+        user_repo.update(user)
+    return "Update AnswerRate"
 
 def all_rank_achievement():
     sql = '''

@@ -234,7 +234,6 @@ def score(short_name):
         point = point_repo.get_point(user.id)
         user.point_sum = point.point_sum
         user.current_point = point.current_point
-        user.answer_rate = cached_users.get_answer_rate(user)
         user_repo.update(user)
 
     score_check(result)
@@ -249,6 +248,7 @@ def score(short_name):
 
 def achievement_renewal():
     from pybossa.leaderboard import jobs
+    print(jobs.update_all_user_answer_rate())
     print(jobs.all_rank_achievement())
     print(jobs.category_rank_achievement())
     return "Success"
@@ -265,8 +265,8 @@ def index(page):
         return project_index(page, cached_projects.get_all_featured,
                              'featured', True, False, order_by, desc)
     else:
-        categories = cached_cat.get_all()
-        cat_short_name = categories[0].short_name
+        categories = cached_cat.get_list_cat2()
+        cat_short_name = categories[0]['short_name']
         return redirect_content_type(url_for('.project_cat_index', category=cat_short_name))
 
 def user_all_achieve(achieve):
@@ -300,7 +300,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
 
     pagination = Pagination(page, per_page, count)
 #    categories = cached_cat.get_all()
-    categories = cached_cat.get_list_cat()
+#    categories = cached_cat.get_list_cat()
+    categories = cached_cat.get_list_cat2()
     # Check for pre-defined categories featured and draft
     #featured_cat = Category(name='Featured',
     featured_cat = Category(name='긴급',
@@ -311,6 +312,11 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
                                             description='Projects previously contributed to')
     if category == 'featured':
         active_cat = featured_cat
+
+    elif category == 'before_score':
+        active_cat = Category(name='Before_score',
+                              short_name='before_score',
+                              description='Need to Score projects')
     elif category == 'draft':
         active_cat = Category(name='Draft',
                               short_name='draft',
@@ -370,6 +376,16 @@ def complete(page):
     return project_index(page, cached_projects.get_all_complete, 'complete', #XXX
                          False, True, order_by, desc)
 
+@blueprint.route('/category/before_score/', defaults={'page': 1})
+@blueprint.route('/category/before_score/page/<int:page>/')
+@login_required
+@admin_required
+def before_score(page):
+    """Show the before_score projects"""
+    order_by = request.args.get('orderby', None)
+    desc = bool(request.args.get('desc', False))
+    return project_index(page, cached_projects.get_all_before_score, 'before_score', #XXX
+                         False, True, order_by, desc)
 
 @blueprint.route('/category/historical_contributions/', defaults={'page': 1})
 @blueprint.route('/category/historical_contributions/page/<int:page>/')
@@ -434,7 +450,8 @@ def new():
         return respond(False)
 
     if not form.validate():
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
         return respond(True)
 
     info = {}
@@ -469,15 +486,17 @@ def new():
 
     project_repo.save(project)
 
-    msg_1 = gettext('Project created!')
+    #msg_1 = gettext('Project created!')
+    msg_1 = gettext('프로젝스 생성!')
     flash(Markup('<i class="icon-ok"></i> {}').format(msg_1), 'success')
     markup = Markup('<i class="icon-bullhorn"></i> {} ' +
                     '<strong><a href="https://docs.pybossa.com"> {}' +
                     '</a></strong> {}')
     flash(markup.format(
-              gettext('You can check the '),
-              gettext('Guide and Documentation'),
-              gettext('for adding tasks, a thumbnail, using PYBOSSA.JS, etc.')),
+              gettext('프로젝트 생성 완료. 프로젝트 세부설정을 해주세요.')),
+              #gettext('You can check the '),
+              #gettext('Guide and Documentation'),
+              #gettext('for adding tasks, a thumbnail, using PYBOSSA.JS, etc.')),
           'success')
     auditlogger.add_log_entry(None, project, current_user)
 
@@ -507,7 +526,8 @@ def task_presenter_editor(short_name):
         db_project.info = old_info
         auditlogger.add_log_entry(old_project, db_project, current_user)
         project_repo.update(db_project)
-        msg_1 = gettext('Task presenter added!')
+        #msg_1 = gettext('Task presenter added!')
+        msg_1 = gettext('작업 템플릿 추가!')
         markup = Markup('<i class="icon-ok"></i> {}')
         flash(markup.format(msg_1), 'success')
         return redirect_content_type(url_for('.tasks',
@@ -515,19 +535,23 @@ def task_presenter_editor(short_name):
 
     # It does not have a validation
     if request.method == 'POST' and not form.validate():  # pragma: no cover
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
         errors = True
 
     if project.info.get('task_presenter'):
         form.editor.data = project.info['task_presenter']
     else:
         if not request.args.get('template'):
-            msg_1 = gettext('<strong>Note</strong> You will need to upload the'
-                            ' tasks using the')
-            msg_2 = gettext('CSV importer')
-            msg_3 = gettext(' or download the project bundle and run the'
-                            ' <strong>createTasks.py</strong> script in your'
-                            ' computer')
+            #msg_1 = gettext('<strong>Note</strong> You will need to upload the'
+            #                ' tasks using the')
+            #msg_2 = gettext('CSV importer')
+            #msg_3 = gettext(' or download the project bundle and run the'
+            #                ' <strong>createTasks.py</strong> script in your'
+            #                ' computer')
+            msg_1 = gettext('작업 템플릿은 작업에 따라 다르게 추가하여주세요.')
+            msg_2 = gettext('작업 추가')
+            msg_3 = gettext(' ')
             url = '<a href="%s"> %s</a>' % (url_for('project.import_task',
                                                     short_name=project.short_name), msg_2)
             msg = msg_1 + url + msg_3
@@ -559,9 +583,10 @@ def task_presenter_editor(short_name):
             % request.args.get('template')
         tmpl = render_template(tmpl_uri, project=project)
         form.editor.data = tmpl
-        msg = 'Your code will be <em>automagically</em> rendered in \
-                      the <strong>preview section</strong>. Click in the \
-                      preview button!'
+        #msg = 'Your code will be <em>automagically</em> rendered in \
+        #              the <strong>preview section</strong>. Click in the \
+        #              preview button!'
+        msg = '템플릿 코드는 미리보기를 통해 확인할 수 있습니다.'
         flash(Markup(gettext(msg)), 'info')
     project_sanitized, owner_sanitized = sanitize_project_owner(project,
                                                                 owner,
@@ -617,7 +642,8 @@ def delete(short_name):
         DB_backup_restore("backup")
     project_repo.delete(project)
     auditlogger.add_log_entry(project, None, current_user)
-    flash(gettext('Project deleted!'), 'success')
+    #flash(gettext('Project deleted!'), 'success')
+    flash(getttext('프로젝트 삭제 완료!'), 'success')
     return redirect_content_type(url_for('account.profile', name=current_user.name))
 
 def condition_form(p_condition):
@@ -684,7 +710,8 @@ def update(short_name):
         auditlogger.add_log_entry(old_project, new_project, current_user)
         cached_cat.reset()
         cached_projects.clean_project(new_project.id)
-        flash(gettext('Project updated!'), 'success')
+        #flash(gettext('Project updated!'), 'success')
+        flash(gettext('프로젝트 업데이트 완료!'), 'success')
         return redirect_content_type(url_for('.details',
                                      short_name=new_project.short_name))
 
@@ -720,7 +747,8 @@ def update(short_name):
         if request.form.get('btn') != 'Upload':
             if form.validate():
                 return handle_valid_form(form)
-            flash(gettext('Please correct the errors'), 'error')
+            #flash(gettext('Please correct the errors'), 'error')
+            flash(gettext('오류를 수정해주세요'), 'error')
         else:
             if upload_form.validate_on_submit():
                 project = project_repo.get(project.id)
@@ -730,6 +758,7 @@ def update(short_name):
                 prefix = time.time()
                 _file.filename = "project_%s_thumbnail_%i.png" % (project.id, prefix)
                 container = "user_%s" % current_user.id
+
                 uploader.upload_file(_file,
                                      container=container,
                                      coordinates=coordinates)
@@ -746,11 +775,13 @@ def update(short_name):
                                                )
                 project.info['thumbnail_url'] = thumbnail_url
                 project_repo.save(project)
-                flash(gettext('Your project thumbnail has been updated! It may \
-                                  take some minutes to refresh...'), 'success')
+                #flash(gettext('Your project thumbnail has been updated! It may \
+                #                  take some minutes to refresh...'), 'success')
+                flash(gettext('프로필사진 업데이트 완료!'), 'success')
             else:
-                flash(gettext('You must provide a file to change the avatar'),
-                      'error')
+                #flash(gettext('You must provide a file to change the avatar'),
+                #      'error')
+                flash(gettext('프로필 사진을 추가해주세요'), 'error')
             return redirect_content_type(url_for('.update', short_name=short_name))
 
     project = add_custom_contrib_button_to(project, get_user_id_or_ip(), ps=ps)
@@ -878,7 +909,8 @@ def import_task(short_name):
             except Exception as inst:  # pragma: no cover
                 raise
                 current_app.logger.error(inst)
-                msg = 'Oops! Looks like there was an error!'
+                #msg = 'Oops! Looks like there was an error!'
+                msg = '오류 발생'
                 flash(gettext(msg), 'error')
         template_args['template'] = '/projects/importers/%s.html' % importer_type
         return handle_content_type(template_args)
@@ -952,7 +984,8 @@ def setup_autoimporter(short_name):
             project_repo.save(project)
             auditlogger.log_event(project, current_user, 'create', 'autoimporter',
                                   'Nothing', json.dumps(project.get_autoimporter()))
-            flash(gettext("Success! Tasks will be imported daily."))
+            #flash(gettext("Success! Tasks will be imported daily."))
+            flash(gettext("완료! 매일 작업이 추가될 것입니다."))
             return redirect(url_for('.setup_autoimporter', short_name=project.short_name))
 
     if request.method == 'GET':
@@ -996,7 +1029,8 @@ def password_required(short_name):
         if passwd_mngr.validates(password, project):
             response = make_response(redirect(request.args.get('next')))
             return passwd_mngr.update_response(response, project, get_user_id_or_ip())
-        flash(gettext('Sorry, incorrect password'))
+        #flash(gettext('Sorry, incorrect password'))
+        flash(gettext('비밀번호가 일치하지 않습니다.'))
     return render_template('projects/password.html',
                             project=project,
                             form=form,
@@ -1012,7 +1046,6 @@ def task_presenter(short_name, task_id):
 
     if request.method =='GET':
         if request.args.get('data') == "prev":
-            #prev_task_run = task_repo.get_task_run_prev(project.id, current_user.id, task_id)
             prev_task_run = task_repo.get_task_run_prev(project.id, current_user.id, task_run.finish_time)
             if prev_task_run is None:
                 msg_1 = gettext('이전 Task가 존재하지 않습니다.')
@@ -1062,6 +1095,18 @@ def task_presenter(short_name, task_id):
             flash(markup.format(msg_1), 'success')
             return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
 
+    if request.method == "POST":
+        if request.form.get('btn', None) == "Upload" :
+            _file = request.files['avatar']
+            coordinates = (int(request.form['x1']), int(request.form['y1']),
+                           int(request.form['x2']), int(request.form['y2']))
+            prefix = time.time()
+            _file.filename = "%i_%i.png" % (current_user.id, prefix)
+            container = "project_%s/user_id_%i" % (short_name, current_user.id)
+            uploader.upload_file(_file,
+                                 container=container,
+                                 coordinates=coordinates)
+
     task = task_repo.get_task(id=task_id)
     if task is None:
         raise abort(404)
@@ -1074,19 +1119,22 @@ def task_presenter(short_name, task_id):
 
     if current_user.is_anonymous:
         if not project.allow_anonymous_contributors:
-            msg = ("Oops! You have to sign in to participate in "
-                   "<strong>%s</strong>"
-                   "project" % project.name)
+            #msg = ("Oops! You have to sign in to participate in "
+            #       "<strong>%s</strong>"
+            #       "project" % project.name)
+            msg = ("프로젝트 참여를 원하신다면 로그인해주세요.")
             flash(Markup(gettext(msg)), 'warning')
             return redirect(url_for('account.signin',
                                     next=url_for('.presenter',
                                     short_name=project.short_name)))
         else:
-            msg_1 = gettext(
-                "Ooops! You are an anonymous user and will not "
-                "get any credit"
-                " for your contributions.")
-            msg_2 = gettext('Sign in now!')
+            #msg_1 = gettext(
+            #    "Ooops! You are an anonymous user and will not "
+            #    "get any credit"
+            #    " for your contributions.")
+            msg_1 = gettext("익명의 사용자는 포인트를 얻을 수 없습니다.")
+            #msg_2 = gettext('Sign in now!')
+            msg_2 = gettext('로그인 해주세요!')
             next_url = url_for('project.task_presenter',
                                 short_name=short_name, task_id=task_id)
             url = url_for('account.signin', next=next_url)
@@ -1098,7 +1146,8 @@ def task_presenter(short_name, task_id):
                                                                 current_user,
                                                                 ps)
 
-    template_args = {"project": project_sanitized, "title": title, "owner": owner_sanitized, "task_run": task_run}
+    template_args = {"project": project_sanitized, "title": title, "owner": owner_sanitized,
+                     "task_run": task_run, "csrf": generate_csrf()}
 
     def respond(tmpl):
         response = dict(template = tmpl, **template_args)
@@ -1111,8 +1160,9 @@ def task_presenter(short_name, task_id):
     guard.stamp(task, get_user_id_or_ip())
 
     if has_no_presenter(project):
-        flash(gettext("Sorry, but this project is still a draft and does "
-                      "not have a task presenter."), "error")
+        #flash(gettext("Sorry, but this project is still a draft and does "
+        #              "not have a task presenter."), "error")
+        flash(gettext("죄송합니다, 이 프로젝트는 임시 프로젝트입니다."), "error")
     return respond('/projects/presenter.html')
 
 
@@ -1148,19 +1198,21 @@ def presenter(short_name):
 
     title = project_title(project, "Contribute")
     template_args = {"project": project, "title": title, "owner": owner,
-            "invite_new_volunteers": invite_new_volunteers(project, ps), "task_run":None}
+              "invite_new_volunteers": invite_new_volunteers(project, ps), "task_run":None, "csrf":generate_csrf()}
 
     if not project.allow_anonymous_contributors and current_user.is_anonymous:
-        msg = "Oops! You have to sign in to participate in <strong>%s</strong> \
-               project" % project.name
+        #msg = "Oops! You have to sign in to participate in <strong>%s</strong> \
+        #       project" % project.name
+        msg = "프로젝트 참여를 원하신다면 로그인 해주세요"
         flash(Markup(gettext(msg)), 'warning')
         return redirect(url_for('account.signin',
                         next=url_for('.presenter',
                                      short_name=project.short_name)))
 
-    msg = "Ooops! You are an anonymous user and will not \
-           get any credit for your contributions. Sign in \
-           now!"
+    #msg = "Ooops! You are an anonymous user and will not \
+    #       get any credit for your contributions. Sign in \
+    #       now!"
+    msg = "익명의 사용자는 포인트를 얻을 수 없습니다."
 
     if project.info.get("tutorial") and \
             request.cookies.get(project.short_name + "tutorial") is None:
@@ -1169,8 +1221,9 @@ def presenter(short_name):
         return resp
     else:
         if has_no_presenter(project):
-            flash(gettext("Sorry, but this project is still a draft and does "
-                          "not have a task presenter."), "error")
+            #flash(gettext("Sorry, but this project is still a draft and does "
+            #              "not have a task presenter."), "error")
+            flash(gettext("죄송합니다, 이 프로젝트는 임시 프로젝트입니다."), "error")
         return respond('/projects/presenter.html')
 
 
@@ -1339,7 +1392,8 @@ def delete_tasks(short_name):
         return handle_content_type(response)
     else:
         task_repo.delete_valid_from_project(project)
-        msg = gettext("Tasks and taskruns with no associated results have been deleted")
+        #msg = gettext("Tasks and taskruns with no associated results have been deleted")
+        msg = gettext("작업과 답변을 모두 삭제하였습니다.")
         flash(msg, 'success')
         return redirect_content_type(url_for('.tasks', short_name=project.short_name))
 
@@ -1626,11 +1680,13 @@ def task_n_answers(short_name):
         # Log it
         auditlogger.log_event(project, current_user, 'update', 'task.n_answers',
                               'N/A', form.n_answers.data)
-        msg = gettext('Redundancy of Tasks updated!')
+        #msg = gettext('Redundancy of Tasks updated!')
+        msg = gettext('반복 수 업데이트 완료!')
         flash(msg, 'success')
         return redirect_content_type(url_for('.tasks', short_name=project.short_name))
     else:
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
         response = dict(template='/projects/task_n_answers.html',
                         title=title,
                         form=form,
@@ -1687,12 +1743,14 @@ def task_scheduler(short_name):
         if old_sched != project.info['sched']:
             auditlogger.log_event(project, current_user, 'update', 'sched',
                                   old_sched, project.info['sched'])
-        msg = gettext("Project Task Scheduler updated!")
+        #msg = gettext("Project Task Scheduler updated!")
+        msg = gettext("스케쥴러 업데이트 완료!")
         flash(msg, 'success')
 
         return redirect_content_type(url_for('.tasks', short_name=project.short_name))
     else:  # pragma: no cover
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
         return respond()
 
 
@@ -1740,11 +1798,14 @@ def task_priority(short_name):
                                               'task.priority_0',
                                               old_value, new_value)
                 else:  # pragma: no cover
-                    flash(gettext(("Ooops, Task.id=%s does not belong to the project" % task_id)), 'danger')
-        flash(gettext("Task priority has been changed"), 'success')
+                    #flash(gettext(("Ooops, Task.id=%s does not belong to the project" % task_id)), 'danger')
+                    flash(gettext(("%s 는 존재하지 않습니다" % task_id)), 'danger')
+        #flash(gettext("Task priority has been changed"), 'success')
+        flash(gettext("우선순위 변경 완료"), 'success')
         return respond()
     else:
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
         return respond()
 
 
@@ -1913,7 +1974,8 @@ def new_blogpost(short_name):
         return respond()
 
     if not form.validate():
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
         return respond()
     blogpost = Blogpost(title=form.title.data,
                         body=form.body.data,
@@ -1922,7 +1984,8 @@ def new_blogpost(short_name):
     ensure_authorized_to('create', blogpost)
     blog_repo.save(blogpost)
 
-    msg_1 = gettext('Blog post created!')
+    #msg_1 = gettext('Blog post created!')
+    msg_1 = gettext('게시글 생성 완료!')
     flash(Markup('<i class="icon-ok"></i> {}').format(msg_1), 'success')
 
     return redirect(url_for('.show_blogposts', short_name=short_name))
@@ -1962,7 +2025,8 @@ def update_blogpost(short_name, id):
         return respond()
 
     if not form.validate():
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
         return respond()
 
     ensure_authorized_to('update', blogpost)
@@ -1974,7 +2038,8 @@ def update_blogpost(short_name, id):
                         published=form.published.data)
     blog_repo.update(blogpost)
 
-    msg_1 = gettext('Blog post updated!')
+    #msg_1 = gettext('Blog post updated!')
+    msg_1 = gettext('게시글 업데이트 완료!')
     flash(Markup('<i class="icon-ok"></i> {}').format(msg_1), 'success')
 
     return redirect(url_for('.show_blogposts', short_name=short_name))
@@ -1990,7 +2055,8 @@ def delete_blogpost(short_name, id):
 
     ensure_authorized_to('delete', blogpost)
     blog_repo.delete(blogpost)
-    msg_1 = gettext('Blog post deleted!')
+    #msg_1 = gettext('Blog post deleted!')
+    msg_1 = gettext('게시글 삭제 완료!')
     flash(Markup('<i class="icon-ok"></i> {}').format(msg_1), 'success')
     return redirect(url_for('.show_blogposts', short_name=short_name))
 
@@ -2051,9 +2117,11 @@ def publish(short_name):
         webhook_repo.delete_entries_from_project(project)
         auditlogger.log_event(project, current_user,
                               'update', 'published', False, True)
-        flash(gettext('Project published! Volunteers will now be able to help you!'))
+        #flash(gettext('Project published! Volunteers will now be able to help you!'))
+        flash(gettext('프로젝트가 공개되었습니다!'))
     else:
-        flash(gettext('Project already published'))
+        #flash(gettext('Project already published'))
+        flash(gettext('이미 공개된 프로젝트입니다'))
     return redirect(url_for('.details', short_name=project.short_name))
 
 
@@ -2197,7 +2265,8 @@ def reset_secret_key(short_name):
 
     project.secret_key = make_uuid()
     project_repo.update(project)
-    msg = gettext('New secret key generated')
+    #msg = gettext('New secret key generated')
+    msg = gettext('새로운 키 생성')
     flash(msg, 'success')
     return redirect_content_type(url_for('.update', short_name=short_name))
 
@@ -2224,12 +2293,14 @@ def transfer_ownership(short_name):
             project.owner_id = new_owner.id
             project.owners_ids = [new_owner.id]
             project_repo.update(project)
-            msg = gettext("Project owner updated")
+            #msg = gettext("Project owner updated")
+            msg = gettext("프로젝트 관리자 업데이트")
             flash(msg, 'info')
             return redirect_content_type(url_for('.details',
                                                  short_name=short_name))
         else:
-            msg = gettext("New project owner not found by email")
+            #msg = gettext("New project owner not found by email")
+            msg = gettext("이메일과 일치하는 사용자를 찾을 수 없습니다")
             flash(msg, 'info')
             return redirect_content_type(url_for('.transfer_ownership',
                                                  short_name=short_name))
@@ -2282,8 +2353,9 @@ def coowners(short_name):
 
         if not user or user.id == current_user.id:
             markup = Markup('<strong>{}</strong> {} <strong>{}</strong>')
-            flash(markup.format(gettext("Ooops!"),
-                                gettext("We didn't find a user matching your query:"),
+            #flash(markup.format(gettext("Ooops!"),
+            #                    gettext("We didn't find a user matching your query:"),
+            flash(markup.format(gettext("일치하는 사용자를 찾을 수 없습니다 : "),
                                 form.user.data))
         else:
             found = user.to_public_json()
@@ -2306,11 +2378,13 @@ def add_coowner(short_name, user_name=None):
 
     if project and user:
         if user.id in project.owners_ids:
-            flash(gettext('User is already an owner'), 'warning')
+            #flash(gettext('User is already an owner'), 'warning')
+            flash(gettext("이미 관리자입니다"), 'warning')
         else:
             project.owners_ids.append(user.id)
             project_repo.update(project)
-            flash(gettext('User was added to list of owners'), 'success')
+            #flash(gettext('User was added to list of owners'), 'success')
+            flash(gettext('관리자 목록에 추가하였습니다'), 'success')
         return redirect_content_type(url_for(".coowners", short_name=short_name))
     return abort(404)
 
@@ -2327,14 +2401,17 @@ def del_coowner(short_name, user_name=None):
 
     if project and user:
         if user.id == project.owner_id:
-            flash(gettext('Cannot remove project creator'), 'error')
+            #flash(gettext('Cannot remove project creator'), 'error')
+            flash(gettext('프로젝트 생성자를 삭제할 수 없습니다'), 'error')
         elif user.id not in project.owners_ids:
-            flash(gettext('User is not a project owner'), 'error')
+            #flash(gettext('User is not a project owner'), 'error')
+            flash(gettext('프로젝트 관리자가 아닙니다'), 'error')
         else:
             project.owners_ids.remove(user.id)
             project_repo.update(project)
-            flash(gettext('User was deleted from the list of owners'),
-                  'success')
+            #flash(gettext('User was deleted from the list of owners'),
+            #      'success')
+            flash(gettext('관리자 목록에서 삭제하였습니다'), 'success')
         return redirect_content_type(url_for('.coowners', short_name=short_name))
     return abort(404)
 

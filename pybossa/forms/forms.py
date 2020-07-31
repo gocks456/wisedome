@@ -60,7 +60,7 @@ class ProjectForm(Form):
                                     "Short Name is already taken.")),
                             pb_validator.ReservedName('project', current_app)])
 # 이거 추가함
-    all_point = TextField(lazy_gettext('ALL Point'),
+    all_point = TextField(lazy_gettext('포인트'),
                            [validators.Required(),
                             pb_validator.CommaSeparatedIntegers(
                                 message=lazy_gettext("숫자만"))])
@@ -117,7 +117,7 @@ class ExchangeForm(Form):
 class ProjectUpdateForm(ProjectForm):
     id = IntegerField(label=None, widget=HiddenInput())
     #20.03.02. 수정사항
-    all_point = TextField(lazy_gettext('ALL Point'))
+    all_point = TextField(lazy_gettext('포인트'))
 
     description = TextAreaField(lazy_gettext('Description'),
                             [validators.Required(
@@ -502,8 +502,8 @@ class UpdateProfileForm(Form):
 
     locale = SelectField(lazy_gettext('Language'))
     ckan_api = TextField(lazy_gettext('CKAN API Key'))
-    privacy_mode = BooleanField(lazy_gettext('Privacy Mode'))
-    restrict = BooleanField(lazy_gettext('Restrict processing'))
+    privacy_mode = BooleanField(lazy_gettext('개인 정보 보호 모드'))
+    restrict = BooleanField(lazy_gettext('처리 제한'))
 
     def set_locales(self, locales):
         """Fill the locale.choices."""
@@ -517,7 +517,8 @@ class ChangePasswordForm(Form):
 
     """Form for changing user's password."""
 
-    current_password = PasswordField(lazy_gettext('Current password'))
+    #current_password = PasswordField(lazy_gettext('Current password'))
+    current_password = PasswordField(lazy_gettext('현재 비밀번호'))
 
     err_msg = lazy_gettext("Password cannot be empty")
     err_msg_2 = lazy_gettext("Passwords must match")
@@ -534,7 +535,8 @@ class ChangePasswordForm(Form):
                         [validators.Required(err_msg),
                             validators.EqualTo('confirm', err_msg_2)])
 
-    confirm = PasswordField(lazy_gettext('Repeat password'))
+    #confirm = PasswordField(lazy_gettext('Repeat password'))
+    confirm = PasswordField(lazy_gettext('비밀번호 재입력'))
 
 
 class ResetPasswordForm(Form):
