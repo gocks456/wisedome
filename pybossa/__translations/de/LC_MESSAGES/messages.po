@@ -1,4 +1,4 @@
-# Italian translations for PROJECT.
+# German translations for PROJECT.
 # Copyright (C) 2014 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
@@ -6,54 +6,54 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-05 18:06+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: it\n"
-"Language-Team: it <LL@li.org>\n"
+"PO-Revision-Date: 2013-03-26 18:24+0100\n"
+"Last-Translator: Marvin Reimer <marvin@scifabric.com>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.1.1\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: themes/default/templates/_navbar.html:12
 #: themes/default/templates/account/index.html:14
 msgid "Community"
-msgstr "Comunità"
+msgstr "Community"
 
 #: themes/default/templates/_navbar.html:13
-#: themes/default/templates/base.html:78
 #: themes/default/templates/account/projects.html:13
+#: themes/default/templates/base.html:78
 #: themes/default/templates/stats/global.html:89
 msgid "Projects"
-msgstr "Progetti"
+msgstr "Projekte"
 
 #: themes/default/templates/_navbar.html:14
 #: themes/default/templates/projects/new_blogpost.html:21
 msgid "Create"
-msgstr "Creare"
+msgstr "Erstellen"
 
 #: themes/default/templates/_navbar.html:15
 #: themes/default/templates/home/_about.html:3
 msgid "About"
-msgstr "Circa"
+msgstr "Über"
 
 #: themes/default/templates/_navbar.html:22
 #: themes/default/templates/account/_helpers.html:3
 msgid "My Profile"
-msgstr "Mio Profilo"
+msgstr "Mein Profil"
 
 #: themes/default/templates/_navbar.html:23
 #: themes/default/templates/account/_helpers.html:4
 msgid "My Projects"
-msgstr "I miei Progetti"
+msgstr "Meine Projekte"
 
 #: themes/default/templates/_navbar.html:24
 #: themes/default/templates/account/_helpers.html:8
 msgid "My Settings"
-msgstr "Configurazione"
+msgstr "Meine Einstellungen"
 
 #: themes/default/templates/_navbar.html:27
 #: themes/default/templates/account/_helpers.html:6
@@ -64,56 +64,56 @@ msgstr "Configurazione"
 #: themes/default/templates/admin/update_category.html:13
 #: themes/default/templates/admin/users.html:14
 msgid "Admin Site"
-msgstr "Sito amministratore"
+msgstr "Administrator Seite"
 
 #: themes/default/templates/_navbar.html:30
 msgid "Sign Out"
-msgstr "Esci"
+msgstr "Ausloggen"
 
 #: themes/default/templates/_navbar.html:38
 #: themes/default/templates/account/signin.html:45
 msgid "Sign in"
-msgstr "Accedi"
+msgstr "Einloggen"
 
 #: themes/default/templates/base.html:66
 msgid "Resources"
-msgstr "Risorse"
+msgstr "Ressourcen"
 
 #: themes/default/templates/base.html:67
 msgid "Docs"
-msgstr "Documenti"
+msgstr "Dokumentation"
 
 #: themes/default/templates/base.html:69
 msgid "Terms of Use"
-msgstr "Condizioni di utilizzo"
+msgstr "Nutzungsbedingungen"
 
 #: themes/default/templates/base.html:70
 msgid "Cookies Policy"
-msgstr "Norme sui cookies"
+msgstr "Cookie-Richtlinien"
 
 #: themes/default/templates/base.html:71
 msgid "Stats"
-msgstr "Statistiche"
+msgstr "Statistiken"
 
 #: themes/default/templates/base.html:76
 msgid "Licenses"
-msgstr "Licenze"
+msgstr "Lizenzen"
 
 #: themes/default/templates/base.html:77
 msgid "Overview"
-msgstr "Overview"
+msgstr "Übersicht"
 
 #: themes/default/templates/base.html:79
 msgid "Data"
-msgstr "Dati"
+msgstr "Daten"
 
 #: themes/default/templates/base.html:80
 msgid "Content"
-msgstr "Contenuto"
+msgstr "Inhalt"
 
 #: themes/default/templates/base.html:85
 msgid "Technologies"
-msgstr "Tecnologie"
+msgstr "Technologien"
 
 #: themes/default/templates/base.html:86
 msgid "CKAN"
@@ -125,11 +125,11 @@ msgstr "EpiCollect"
 
 #: themes/default/templates/base.html:92
 msgid "Contact"
-msgstr "Contatto"
+msgstr "Kontakt"
 
 #: themes/default/templates/base.html:93
 msgid "Email"
-msgstr "Posta elettronica"
+msgstr "E-Mail"
 
 #: themes/default/templates/base.html:94
 msgid "Twitter"
@@ -137,15 +137,15 @@ msgstr "Twitter"
 
 #: themes/default/templates/account/_helpers.html:14
 msgid "I've done"
-msgstr "Ho fatto"
+msgstr "Ich habe"
 
 #: themes/default/templates/account/_helpers.html:14
 msgid "tasks for the @PyBossa project:"
-msgstr "Compiti per il progetto @PyBossa"
+msgstr "Aufgaben für das @PyBossa Projekt erledigt:"
 
 #: themes/default/templates/account/_helpers.html:14
 msgid "Do you want to help?"
-msgstr "Hai bisogno di aiuto?"
+msgstr "Wollen Sie helfen?"
 
 #: themes/default/templates/account/_helpers.html:15
 msgid "Tweet"
@@ -153,61 +153,61 @@ msgstr "Tweet"
 
 #: themes/default/templates/account/_helpers.html:39
 msgid "Nick"
-msgstr "Nick"
+msgstr "Nickname"
 
 #: themes/default/templates/account/_helpers.html:41
 msgid "E-mail"
-msgstr "E-mail"
+msgstr "E-Mail"
 
 #: themes/default/templates/account/_helpers.html:54
 #: themes/default/templates/account/_helpers.html:67
 #: themes/default/templates/stats/index.html:17
 msgid "Rank"
-msgstr "Rango"
+msgstr "Rang"
 
 #: themes/default/templates/account/_helpers.html:59
 #: themes/default/templates/projects/tasks_browse.html:33
 msgid "of"
-msgstr "di"
+msgstr "von"
 
 #: themes/default/templates/account/_helpers.html:59
 msgid "with a Score of"
-msgstr "con un punteggio di"
+msgstr "mit"
 
 #: themes/default/templates/account/_helpers.html:59
 msgid "contributed tasks"
-msgstr "compiti contribuito"
+msgstr "beigetragenen Aufgaben"
 
 #: themes/default/templates/account/_helpers.html:67
 msgid "The user has not contributed to any tasks yet"
-msgstr "L'utente non ha ancora contribuito a qualsiasi attività"
+msgstr "Der Benutzer hat bisher noch zu keinen Aufgaben beigetragen"
 
 #: themes/default/templates/account/_helpers.html:70
 #: themes/default/templates/home/index.html:78
 msgid "Joined"
-msgstr "Iscritto"
+msgstr "Beigetreten"
 
 #: themes/default/templates/account/_helpers.html:73
 msgid "API key"
-msgstr "Chiave API"
+msgstr "API Schlüssel"
 
 #: themes/default/templates/account/_helpers.html:76
 msgid "Edit your profile"
-msgstr "Modifica il tuo profilo"
+msgstr "Benutzerprofil bearbeiten"
 
 #: themes/default/templates/account/_helpers.html:100
 #: themes/default/templates/projects/_helpers.html:7
 msgid "Prev"
-msgstr "Prev"
+msgstr "Zurück"
 
 #: themes/default/templates/account/_helpers.html:120
 #: themes/default/templates/projects/_helpers.html:27
 msgid "Next"
-msgstr "Successivo"
+msgstr "Vor"
 
 #: themes/default/templates/account/account_validation.html:7
 msgid "Just one more step, please"
-msgstr ""
+msgstr "Nur noch ein weiterer Schritt"
 
 #: themes/default/templates/account/account_validation.html:8
 msgid ""
@@ -215,66 +215,71 @@ msgid ""
 " just provided. Please, check it out and click on the link you'll find to"
 " create your account at"
 msgstr ""
+"Um ihre Identität zu bestätigen haben wir eine E-Mail an ihre Adresse "
+"gesendet. Bitte überprüfen sie ihr E-Mail-Postfach und klicken sie auf "
+"den Link um ihren Account zu aktivieren"
 
 #: themes/default/templates/account/account_validation.html:9
 msgid ""
 "If you are not receiving the email, please check the junk folder. If it's"
 " not there please drop us an email to"
 msgstr ""
+"Wenn sie keine E-Mail erhalten haben überprüfen sie bitte auch ihren SPAM"
+" Ordner. Falls die E-Mail auch dort nicht ist kontaktieren sie uns bitte."
 
 #: themes/default/templates/account/account_validation.html:10
 msgid "In the meantime, you can check some of the amazing"
-msgstr ""
+msgstr "In der Zwischenzeit können sie eine der erstaunlichen"
 
 #: themes/default/templates/account/account_validation.html:10
-#, fuzzy
 msgid "projects"
-msgstr "Progetti"
+msgstr "Projekte"
 
 #: themes/default/templates/account/account_validation.html:10
 msgid "and contribute to them as anonymous"
-msgstr ""
+msgstr "und anonym beitragen"
 
 #: themes/default/templates/account/index.html:14
 msgid "registered users"
-msgstr "utenti registrati"
+msgstr "Registrierte Nutzer"
 
 #: themes/default/templates/account/index.html:14
 #: themes/default/templates/stats/global.html:49
 msgid "Leaderboard"
-msgstr "Leaderboard"
+msgstr "Bestenliste"
 
 #: themes/default/templates/account/newsletter.html:10
-#, fuzzy
 msgid "Newsletter"
-msgstr "Cancella"
+msgstr "Newsletter"
 
 #: themes/default/templates/account/newsletter.html:11
 msgid ""
 "If you want to be updated with our new features, projects, and\n"
 "        scientific projects, subscribe to our newsletter."
 msgstr ""
+"Wenn sie informiert werden wollen über neue Features, Projekte und\n"
+"wissenschaftliche Projekte dann bestellen sie unseren Newsletter."
 
 #: themes/default/templates/account/newsletter.html:15
 msgid "Sign me up!"
-msgstr ""
+msgstr "Ja Bitte!"
 
 #: themes/default/templates/account/newsletter.html:18
 msgid "Not interested"
-msgstr ""
+msgstr "Nicht interessiert"
 
 #: themes/default/templates/account/password_forgot.html:6
 #: themes/default/templates/account/password_reset.html:6
 msgid "Reset your Password"
-msgstr "Resetta la password"
+msgstr "Passwort zurücksetzen"
 
 #: themes/default/templates/account/password_forgot.html:10
 msgid "my e-mail"
-msgstr "la mia e-mail"
+msgstr "E-Mail Adresse"
 
 #: themes/default/templates/account/password_forgot.html:12
 msgid "Reset my Password"
-msgstr "Resetta la password"
+msgstr "Passwort zurücksetzen"
 
 #: themes/default/templates/account/password_forgot.html:13
 #: themes/default/templates/account/password_reset.html:14
@@ -284,6 +289,13 @@ msgstr "Resetta la password"
 #: themes/default/templates/account/update.html:65
 #: themes/default/templates/account/update.html:78
 #: themes/default/templates/admin/update_category.html:23
+#: themes/default/templates/projects/importers/csv.html:24
+#: themes/default/templates/projects/importers/dropbox.html:31
+#: themes/default/templates/projects/importers/epicollect.html:26
+#: themes/default/templates/projects/importers/flickr.html:35
+#: themes/default/templates/projects/importers/gdocs.html:24
+#: themes/default/templates/projects/importers/s3.html:37
+#: themes/default/templates/projects/importers/twitter.html:44
 #: themes/default/templates/projects/new.html:27
 #: themes/default/templates/projects/new_blogpost.html:22
 #: themes/default/templates/projects/password.html:20
@@ -293,187 +305,180 @@ msgstr "Resetta la password"
 #: themes/default/templates/projects/task_scheduler.html:36
 #: themes/default/templates/projects/update.html:48
 #: themes/default/templates/projects/update_blogpost.html:24
-#: themes/default/templates/projects/importers/csv.html:24
-#: themes/default/templates/projects/importers/dropbox.html:31
-#: themes/default/templates/projects/importers/epicollect.html:26
-#: themes/default/templates/projects/importers/flickr.html:35
-#: themes/default/templates/projects/importers/gdocs.html:24
-#: themes/default/templates/projects/importers/s3.html:37
-#: themes/default/templates/projects/importers/twitter.html:44
 msgid "Cancel"
-msgstr "Cancella"
+msgstr "Abbrechen"
 
 #: themes/default/templates/account/password_reset.html:10
 msgid "my new password"
-msgstr "la mia nuova password"
+msgstr "Neues Passwort"
 
 #: themes/default/templates/account/password_reset.html:11
 msgid "my new password again"
-msgstr "nuova password (ancora)"
+msgstr "Neues Passwort (erneut)"
 
 #: themes/default/templates/account/profile.html:15
 msgid "Your Profile"
-msgstr "Il tuo profilo"
+msgstr "Ihr Profil"
 
 #: themes/default/templates/account/profile.html:18
 msgid "Your Contributions"
-msgstr "I tuoi contributi"
+msgstr "Ihre Beiträge"
 
 #: themes/default/templates/account/profile.html:26
 msgid "Contribute!"
-msgstr "Contribuisci!"
+msgstr "Beitragen!"
 
 #: themes/default/templates/account/projects.html:16
 msgid "Published"
-msgstr "Pubblicato"
+msgstr "Veröffentlicht"
 
 #: themes/default/templates/account/projects.html:22
 #: themes/default/templates/projects/index.html:15
 msgid "Draft"
-msgstr "Bozza"
+msgstr "Entwurf"
 
 #: themes/default/templates/account/projects.html:28
 msgid "You have not created a project"
-msgstr "Non hai creato un progetto"
+msgstr "Sie haben noch kein Projekt erstellt"
 
 #: themes/default/templates/account/projects.html:29
 #: themes/default/templates/home/index.html:37
 msgid "Create a Project"
-msgstr "Crea un progetto"
+msgstr "Ein Projekt erstellen"
 
 #: themes/default/templates/account/register.html:6
 #: themes/default/templates/account/signin.html:6
 msgid "Note"
-msgstr "Nota"
+msgstr "Hinweis"
 
 #: themes/default/templates/account/register.html:7
 #: themes/default/templates/account/signin.html:7
 msgid "By click the"
-msgstr "Per cliccare sul "
+msgstr "Durch Klicken auf den"
 
 #: themes/default/templates/account/register.html:8
 msgid "Create account button"
-msgstr "Crea il pulsante conto"
+msgstr "Konto Anlegen Button"
 
 #: themes/default/templates/account/register.html:9
 msgid "below you are agreeing to the"
-msgstr "di seguito accetti "
+msgstr "weiter unten stimmen Sie den"
 
 #: themes/default/templates/account/register.html:10
 #: themes/default/templates/account/signin.html:8
 msgid "terms of use"
-msgstr "le condizioni di utilizzo"
+msgstr "Nutzungsbedingungen"
 
 #: themes/default/templates/account/register.html:10
 #: themes/default/templates/account/signin.html:8
 msgid "and"
-msgstr "e"
+msgstr "und"
 
 #: themes/default/templates/account/register.html:11
 #: themes/default/templates/account/signin.html:9
 msgid "data"
-msgstr "i dati"
+msgstr "Daten"
 
 #: themes/default/templates/account/register.html:14
 #: themes/default/templates/account/register.html:24
 msgid "Create an account"
-msgstr "Crea un account"
+msgstr "Konto anlegen"
 
 #: themes/default/templates/account/register.html:18
 #: themes/default/templates/account/update.html:40
 msgid "my full name"
-msgstr "Il mio nome completo"
+msgstr "Voller Name"
 
 #: themes/default/templates/account/register.html:19
 #: themes/default/templates/account/update.html:41
 msgid "myusername"
-msgstr "il mio nome utente"
+msgstr "Nutzername"
 
 #: themes/default/templates/account/register.html:20
 #: themes/default/templates/account/update.html:42
 msgid "hello@mywebsite.org"
-msgstr "hello@mywebsite.org"
+msgstr "hallo@meinewebseite.org"
 
 #: themes/default/templates/account/register.html:21
 #: themes/default/templates/account/register.html:22
 msgid "my secret password"
-msgstr "la mia password segreta"
+msgstr "mein geheimes Passwort"
 
 #: themes/default/templates/account/signin.html:7
 msgid "Sign in button"
-msgstr "Tasto Accedi"
+msgstr "Einloggen Button"
 
 #: themes/default/templates/account/signin.html:7
 msgid ""
 "below you are agreeing to\n"
 "    the"
-msgstr "di seguito accetti "
+msgstr "Unten stimmen Sie den"
 
 #: themes/default/templates/account/signin.html:13
 #: themes/default/templates/account/signin.html:23
 msgid "Sign in with Twitter"
-msgstr "Accedi con Twitter"
+msgstr "Mit Twitter einloggen"
 
 #: themes/default/templates/account/signin.html:16
 #: themes/default/templates/account/signin.html:26
 msgid "Sign in with Facebook"
-msgstr "Accedi con Facebook"
+msgstr "Mit Facebook einloggen"
 
 #: themes/default/templates/account/signin.html:19
 #: themes/default/templates/account/signin.html:29
 msgid "Sign in with Google"
-msgstr "Accedi con Google"
+msgstr "Mit Google einloggen"
 
 #: themes/default/templates/account/signin.html:38
 msgid "Or Sign in with your PyBossa account"
-msgstr "o Accedi con il tuo account PyBossa"
+msgstr "Oder mit PyBossa-Konto einloggen"
 
 #: themes/default/templates/account/signin.html:40
 msgid "Sign in with your PyBossa account"
-msgstr "Accedi con il tuo account PyBossa"
+msgstr "Logge Dich mit Deinem PyBossa-Konto ein"
 
 #: themes/default/templates/account/signin.html:52
 msgid " Create a new account!"
-msgstr "Crea un nuovo account!"
+msgstr " Neues Konto anlegen!"
 
 #: themes/default/templates/account/signin.html:53
 msgid "Forgot Password"
-msgstr "Password dimenticata"
+msgstr "Passwort vergessen"
 
 #: themes/default/templates/account/update.html:17
 msgid "Update your profile"
-msgstr "Aggiorna il profilo"
+msgstr "Profil aktualisieren"
 
 #: themes/default/templates/account/update.html:31
 #: themes/default/templates/projects/update.html:28
 msgid "Upload"
-msgstr "Carica"
+msgstr "Hochladen"
 
 #: themes/default/templates/account/update.html:47
 #: themes/default/templates/account/update.html:77
+#: themes/default/templates/projects/update.html:47
 msgid "Save the changes"
-msgstr "Salva le modifiche"
+msgstr "Änderungen speichern"
 
 #: themes/default/templates/account/update.html:54
 msgid "Change your Password"
-msgstr "Cambia la tua password"
+msgstr "Passwort ändern"
 
 #: themes/default/templates/account/update.html:64
 msgid "Save the Changes"
-msgstr "Salva le modifiche"
+msgstr "Änderungen speichern"
 
 #: themes/default/templates/account/update.html:85
 msgid "Do you want to reset your personal API Key?"
-msgstr "Vuoi resettare la tua Chiave API personale?"
+msgstr "Wollen Sie Ihren persönlichen API-Schlüssel zurücksetzen?"
 
 #: themes/default/templates/account/update.html:89
 msgid "No, do not reset the API key!"
-msgstr "No, non resettare la chiave API!"
+msgstr "Nein, den API-Schlüssel nicht zurücksetzen!"
 
 #: themes/default/templates/account/email/forgot_password.html:4
-#, fuzzy
 msgid "Recover your lost password"
-msgstr "Resetta la password"
+msgstr "Passwort zurücksetzen"
 
 #: themes/default/templates/account/email/forgot_password.html:8
 #: themes/default/templates/account/email/forgot_password_openid.html:8
@@ -507,9 +512,8 @@ msgid "Regards"
 msgstr ""
 
 #: themes/default/templates/account/email/forgot_password_openid.html:4
-#, fuzzy
 msgid "Recover your password"
-msgstr "Resetta la password"
+msgstr "Passwort zurücksetzen"
 
 #: themes/default/templates/account/email/forgot_password_openid.html:19
 msgid "Our records show that you use your"
@@ -523,7 +527,7 @@ msgstr ""
 
 #: themes/default/templates/account/email/forgot_password_openid.html:19
 msgid "account, please contact"
-msgstr ""
+msgstr "Konto. Bitte "
 
 #: themes/default/templates/account/email/forgot_password_openid.html:25
 #: themes/default/templates/account/email/validate_account.html:34
@@ -531,18 +535,16 @@ msgid "Team"
 msgstr ""
 
 #: themes/default/templates/account/email/validate_account.html:4
-#, fuzzy
 msgid "Validate your account"
-msgstr "Crea un account"
+msgstr "Konto bestätigen"
 
 #: themes/default/templates/account/email/validate_account.html:13
-#, fuzzy
 msgid "Thank you for creating an account in"
-msgstr "Crea un account"
+msgstr "Danke dass sie einen Account erstellt haben in"
 
 #: themes/default/templates/account/email/validate_account.html:16
 msgid "Just one more step!"
-msgstr ""
+msgstr "Nur noch ein weiterer Schritt!"
 
 #: themes/default/templates/account/email/validate_account.html:19
 msgid ""
@@ -555,53 +557,52 @@ msgid "Click here to confirm your e-mail address and create your account"
 msgstr ""
 
 #: themes/default/templates/admin/_helpers.html:9
-#, fuzzy
 msgid "nick"
-msgstr "Nick"
+msgstr "Nickname"
 
 #: themes/default/templates/admin/_helpers.html:10
 msgid "Member since"
-msgstr ""
+msgstr "Mitglied seit"
 
 #: themes/default/templates/admin/_helpers.html:14
 msgid "Remove from admin group"
-msgstr "Rimuovi dal gruppo admin"
+msgstr "Aus der Gruppe der Administratoren entfernen"
 
 #: themes/default/templates/admin/_helpers.html:18
 msgid "Add to admin group"
-msgstr "Aggiungi al gruppo admin"
+msgstr "Zur Gruppe der Administratoren hinzufügen"
 
 #: themes/default/templates/admin/categories.html:13
 msgid "Manage Categories"
-msgstr "Gestisci Categorie"
+msgstr "Kategorien verwalten"
 
 #: themes/default/templates/admin/categories.html:20
 #: themes/default/templates/admin/update_category.html:19
 msgid "Category name"
-msgstr "Nome della categoria"
+msgstr "Kategoriename"
 
 #: themes/default/templates/admin/categories.html:21
 #: themes/default/templates/admin/update_category.html:20
 msgid "Category description"
-msgstr "Descrizione categoria"
+msgstr "Kategoriebeschreibung"
 
 #: themes/default/templates/admin/categories.html:23
 msgid "Add Category"
-msgstr "Aggiungi categoria"
+msgstr "Kategorie hinzufügen"
 
 #: themes/default/templates/admin/categories.html:30
 msgid "List of Available Categories"
-msgstr "Elenco delle categorie disponibili"
+msgstr "Liste vorhandener Kategorien"
 
 #: themes/default/templates/admin/categories.html:39
 msgid "Edit Category Name"
-msgstr "Modifica il nome della categoria"
+msgstr "Kategoriename bearbeiten"
 
 #: themes/default/templates/admin/categories.html:41
 #: themes/default/templates/admin/categories.html:43
 #: themes/default/templates/admin/del_category.html:17
 msgid "Delete Category"
-msgstr "Cancella Categoria"
+msgstr "Kategorie löschen"
 
 #: themes/default/templates/admin/dashboard.html:19
 msgid "Dashboard last 7 days"
@@ -618,76 +619,70 @@ msgstr ""
 #: themes/default/templates/admin/dashboard.html:37
 #, fuzzy
 msgid "Active anonymous users"
-msgstr "Utenti anonimi"
+msgstr "Anonyme Benutzer"
 
 #: themes/default/templates/admin/dashboard.html:46
 #, fuzzy
 msgid "Draft projects"
-msgstr "Progetti bozza"
+msgstr "Projekte im Entwurf"
 
 #: themes/default/templates/admin/dashboard.html:54
 #, fuzzy
 msgid "Published projects"
-msgstr "Progetti pubblicati"
+msgstr "Veröffentlichte Projekte"
 
 #: themes/default/templates/admin/dashboard.html:62
 #, fuzzy
 msgid "Updated projects"
-msgstr "Aggiornare il progetto"
+msgstr "Projekt aktualisieren"
 
 #: themes/default/templates/admin/dashboard.html:70
 #, fuzzy
 msgid "New tasks"
-msgstr "Sfoglia tasks"
+msgstr "Tasks anschauen"
 
 #: themes/default/templates/admin/dashboard.html:79
 #, fuzzy
 msgid "New Answers"
-msgstr "risposte contribuite"
+msgstr "erledigten Aufgaben"
 
 #: themes/default/templates/admin/dashboard.html:88
 #, fuzzy
 msgid "New Users"
-msgstr "Top 5 utenti"
+msgstr "Top 5 Benutzer"
 
 #: themes/default/templates/admin/dashboard.html:97
 msgid "Returning Users"
 msgstr ""
 
 #: themes/default/templates/admin/dashboard.html:108
-#, fuzzy
 msgid "Recent activity"
-msgstr "Ultima attività"
+msgstr "Letzte Aktivität"
 
 #: themes/default/templates/admin/dashboard.html:115
-#, fuzzy
 msgid "new project created"
-msgstr "Progetto creato!"
+msgstr "Projekt angelegt"
 
 #: themes/default/templates/admin/dashboard.html:119
-#, fuzzy
 msgid "has published a blog post"
-msgstr "Scrivi un post sul blog"
+msgstr "hat einen Blogpost veröffentlicht"
 
 #: themes/default/templates/admin/dashboard.html:123
 msgid "has added new tasks"
 msgstr ""
 
 #: themes/default/templates/admin/dashboard.html:127
-#, fuzzy
 msgid "has completed a task"
-msgstr "completato"
+msgstr "hat einen Task erledigt"
 
 #: themes/default/templates/admin/dashboard.html:131
-#, fuzzy
 msgid "has contributed to"
-msgstr "compiti contribuito"
+msgstr "hat beigetragen zu"
 
 #: themes/default/templates/admin/dashboard.html:139
 #: themes/default/templates/admin/dashboard.html:149
-#, fuzzy
 msgid "has joined"
-msgstr "Iscritto"
+msgstr "Beigetreten"
 
 #: themes/default/templates/admin/dashboard.html:159
 msgid "No data available yet. You'll need to wait 24 hours."
@@ -697,30 +692,27 @@ msgstr ""
 #: themes/default/templates/projects/delete.html:14
 #: themes/default/templates/projects/tasks/delete.html:14
 msgid "Danger Zone!"
-msgstr "Attenzione!"
+msgstr "Vorsicht!"
 
 #: themes/default/templates/admin/del_category.html:15
 msgid ""
 "Deleting the category will remove it from all the projects! This "
 "operation cannot be undone!"
 msgstr ""
-"Se cancelli la categoria, verrà rimossa da tutti i progetti! Questa "
-"operazione è irreversibile!"
+"Wenn die Kategorie gelöscht wird, wird diese von allen Projekten "
+"entfernt! Diese Operation kann nicht rückgängig gemacht werden!"
 
 #: themes/default/templates/admin/del_category.html:21
-#, fuzzy
 msgid "No, do not delete it"
-msgstr "No, non cancellare!"
+msgstr "Nein, nicht löschen"
 
 #: themes/default/templates/admin/index.html:15
-#, fuzzy
 msgid "Dashboard"
-msgstr "Leaderboard"
+msgstr "Bestenliste"
 
 #: themes/default/templates/admin/index.html:16
-#, fuzzy
 msgid "Internal Statistics"
-msgstr "Statistiche generali"
+msgstr "Allgemeine Statistik"
 
 #: themes/default/templates/admin/index.html:18
 msgid "Go"
@@ -728,52 +720,52 @@ msgstr ""
 
 #: themes/default/templates/admin/index.html:22
 msgid "Background Jobs"
-msgstr ""
+msgstr "Hintergrund-Jobs"
 
 #: themes/default/templates/admin/index.html:23
 msgid "Monitor the background jobs"
-msgstr ""
+msgstr "Hintergrund-Jobs überwachen"
 
 #: themes/default/templates/admin/index.html:25
 #: themes/default/templates/admin/index.html:34
 #: themes/default/templates/admin/index.html:41
 #: themes/default/templates/admin/index.html:50
 msgid "Manage"
-msgstr "Gestisci"
+msgstr "Verwalten"
 
 #: themes/default/templates/admin/index.html:31
 #: themes/default/templates/projects/index.html:33
 msgid "Featured Projects"
-msgstr "Progetti in evidenza"
+msgstr "Hervorgehobene Projekte"
 
 #: themes/default/templates/admin/index.html:32
 msgid "Show projects on the front page"
-msgstr "Visualizza i progetti sulla prima pagina"
+msgstr "Projekte auf der Hauptseite anzeigen"
 
 #: themes/default/templates/admin/index.html:38
 msgid "Categories"
-msgstr "Categorie"
+msgstr "Kategorien"
 
 #: themes/default/templates/admin/index.html:39
 msgid "Manage project categories"
-msgstr "Gestisci categorie progetto"
+msgstr "Projektkategorien verwalten"
 
 #: themes/default/templates/admin/index.html:47
 msgid "Administrators"
-msgstr "Amministratori"
+msgstr "Administratoren"
 
 #: themes/default/templates/admin/index.html:48
 msgid "Manage administrators"
-msgstr "Gestisci amministratori"
+msgstr "Administratoren verwalten"
 
 #: themes/default/templates/admin/index.html:54
 #: themes/default/templates/projects/stats.html:235
 msgid "Users"
-msgstr "Utenti"
+msgstr "Benutzer"
 
 #: themes/default/templates/admin/index.html:55
 msgid "Export a list of users"
-msgstr "Esporta una lista di utenti"
+msgstr "Liste der Benutzer exportieren"
 
 #: themes/default/templates/admin/index.html:57
 msgid "JSON"
@@ -794,36 +786,35 @@ msgstr ""
 #: themes/default/templates/admin/index.html:69
 #, fuzzy
 msgid "New SciFabric Blog Post"
-msgstr "Scrivi un post sul blog"
+msgstr "Schreibe einen Blogpost"
 
 #: themes/default/templates/admin/projects.html:13
 msgid "Manage featured projects"
-msgstr "Gestisci progetti in evidenza"
+msgstr "Verwalte hervorgehobene Projekte"
 
 #: themes/default/templates/admin/update_category.html:22
 msgid "Update Category"
-msgstr "Aggiorna categoria"
+msgstr "Kategorie aktualisieren"
 
 #: themes/default/templates/admin/users.html:14
 msgid "Manage Admin Users"
-msgstr ""
+msgstr "Administrationen-Benutzer verwalten"
 
 #: themes/default/templates/admin/users.html:19
 msgid "Try with the full name or nick"
-msgstr "Prova con il nome completo o il nick"
+msgstr "Versuche es mit dem Namen oder dem Nicknamen"
 
 #: themes/default/templates/admin/users.html:20
 msgid "Search"
-msgstr "Cerca"
+msgstr "Suchen"
 
 #: themes/default/templates/admin/users.html:24
-#, fuzzy
 msgid "Found Users"
-msgstr "Top 5 utenti"
+msgstr "Gefundene Benutzer"
 
 #: themes/default/templates/admin/users.html:31
 msgid "Current Users with Admin privileges"
-msgstr ""
+msgstr "Aktuelle Benutzer mit Administrator-Privilegien"
 
 #: themes/default/templates/home/_about.html:5
 msgid ""
@@ -835,23 +826,23 @@ msgid ""
 "anyone around the world with some time, interest and an internet "
 "connection can contribute."
 msgstr ""
-"PyBossa è una piattaforma gratuita, open-source, crowd-sourcing e micro-"
-"tasking. Permette alle persone di creare e avviare progetti che "
-"utilizzano l'aiuto online nell'eseguire processi che richiedono "
-"cognizione umana come la classificazione delle immagini, la trascrizione,"
-" il geocoding e altro. PyBossa è qui per aiutare i ricercatori, gli "
-"hackers civici e gli sviluppatori a creare progetti a cui chiunque nel "
-"mondo con un po' di tempo, interesse e una connessione internet può "
-"contribuire. "
+"PyBossa ist eine freie, quelloffene Crowd-Sourcing und Micro-Tasking "
+"Plattform. Sie ermöglicht es, Projekte online anzulegen und zu verwalten,"
+" deren Aufgaben  durch Menschen gelöst werden können. Dies kann "
+"beispielweise Mustererkennung in  Bilder, Videos oder Audioaufnahmen "
+"sein, die Klassifikation und Transkribierung von Texten und vieles mehr."
+"  PyBossa unterstützt Forscher und Entwickler dabei, Projekte umzusetzten"
+"  zu denen potentiell weltweit jeder mit Zeit, Interesse und "
+"Internetzugang beitragen kann."
 
 #: themes/default/templates/home/_about.html:8
 msgid "PyBossa is different to existing efforts:"
-msgstr "Pybossa è diverso dai lavori esistenti:"
+msgstr "PyBossa unterscheidet sich von anderen Ansätzen:"
 
 #: themes/default/templates/home/_about.html:10
 #, python-format
 msgid "It's a 100%% open-source"
-msgstr "E' open-source al 100%"
+msgstr "Es ist 100%% Opensource"
 
 #: themes/default/templates/home/_about.html:11
 msgid ""
@@ -859,9 +850,10 @@ msgid ""
 " handle payment or money — it is designed to support volunteer-driven "
 "projects."
 msgstr ""
-"A differenza , ad esempio, \"Turco meccanico \" progetti di stile , "
-"PyBossa non è progettato per gestire il pagamento o il denaro - è stato "
-"progettato per sostenere progetti di volontariato - driven."
+"Im Unterschiede z.B. zu (Amazon) “Mechanical Turk” und ähnlichen "
+"Projekten, wurde PyBossa nicht dazu konzipiert die Beitragenden zu "
+"bezahlen. Es wurde mit der Idee entwickelt, dass die Unterstützung der "
+"Projekte auf freiwilliger Basis erfolgt."
 
 #: themes/default/templates/home/_about.html:13
 msgid ""
@@ -871,84 +863,83 @@ msgid ""
 "snippets of Javascript and HTML which are then deployed on a PyBossa "
 "instance (such as"
 msgstr ""
-"È stato creato come piattaforma e framework per sviluppare progetti "
-"crowd-sourcing e microtasking da lanciare piuttosto che essere un "
-"progetto crowd-sourcing esso stesso. Progetti crowd-sourcing individuali "
-"sono scritti come semplici frammenti di Javascript e HTML che vengono poi"
-" messi in un testo PyBossa (come"
+"Sie ist als eine Plattform konzipiert für die Entwicklung und "
+"Umsetzungvon crowd-sourcing und micro-tasking Projekt. PyBossa ist dabei "
+"selbst kein Crowd-sourcing Projekt Die einzelnen crowd-sourcing Projekte "
+"werden mit Hilfe einfacher Code-Schnipsel geschrieben Javascript und HTML"
+" werden verwendet. Die Code-Schnipsel werden dann als neues Projekt auf "
+"einem PyBossa Server umgesetzt"
 
 #: themes/default/templates/home/_about.html:13
 msgid ""
 "This way one can easily develop custom projects while using the PyBossa "
 "platform to store your data, manage users, and handle workflow"
 msgstr ""
-"In questo modo si può facilmente sviluppare progetti personalizzati "
-"durante l'utilizzo della piattaforma PyBossa per memorizzare i dati , "
-"gestire gli utenti , e di gestire il flusso di lavoro"
+"Dadurch können auf einfache Art eigene Projekte umgesetzt werden. Die "
+"PyBossa Plattform dient dazu, Deine Daten zu sichern und Nutzer/Workflow "
+"zu verwalten."
 
 #: themes/default/templates/home/_about.html:18
 msgid "You can read more about the architecture in the"
-msgstr "Puoi leggere più riguardo l'architettura nel"
+msgstr "Genauere Infos zur Archtektur stehen in der"
 
 #: themes/default/templates/home/_about.html:18
 msgid "PyBossa Documentation"
-msgstr "Documentazione PyBossa"
+msgstr "PyBossa Dokumentation"
 
 #: themes/default/templates/home/_about.html:18
 msgid "and follow the"
-msgstr "e segui il"
+msgstr "und folgen sie der"
 
 #: themes/default/templates/home/_about.html:18
 msgid "step-by-step tutorial to create your own projects"
-msgstr "istruzioni passo-per-passo per creare i tuoi progetti"
+msgstr "Schritt für Schritt Anleitung um ihre eigenen Projekte zu erstellen"
 
 #: themes/default/templates/home/_about.html:21
 #: themes/default/templates/projects/_helpers.html:40
 #: themes/default/templates/projects/stats.html:32
 msgid "Statistics"
-msgstr "Statistiche"
+msgstr "Statistiken"
 
 #: themes/default/templates/home/_about.html:23
 msgid ""
 " PyBossa provides individual statistics for every project in the system, "
 "as well as a"
-msgstr ""
-"PyBossa garantisce statistiche individuali per ogni progetto nel sistema,"
-" e anche un"
+msgstr " PyBossa zeigt für jedes Projekt Statistiken an  sowie"
 
 #: themes/default/templates/home/_about.html:23
 msgid "general overview about the system like total number of users, tasks, etc"
 msgstr ""
-"panoramica generale sul sistema , come numero totale di utenti , compiti "
-", ecc"
+"eine allgemeine Übersicht über das Gesamtsystem, beispielsweise Anzahl "
+"der Nutzer, Aufgaben, etc."
 
 #: themes/default/templates/home/_about.html:25
 msgid "Check the global statistics"
-msgstr "Controlla le statistiche globali"
+msgstr "Überprüfen sie die globalen Statistiken"
 
 #: themes/default/templates/home/_about.html:27
 msgid "Contact information"
-msgstr "informazioni sui contatti"
+msgstr "Kontaktinformation"
 
 #: themes/default/templates/home/_about.html:29
 msgid "For more info, send us an e-mail to: "
-msgstr "Per maggiori informazioni, mandaci una e-mail a:"
+msgstr "Für mehr Infos schicken sie uns eine E-Mail an: "
 
 #: themes/default/templates/home/_about.html:29
 msgid "Follow us on Twitter!"
-msgstr "Seguici su Twitter!"
+msgstr "Folgen sie uns auf Twitter!"
 
 #: themes/default/templates/home/_about.html:30
 msgid "E-mail list: "
-msgstr "Lista e-mail:"
+msgstr "E-Mail Liste: "
 
 #: themes/default/templates/home/_about.html:31
 msgid "Report any bug, issue or improvement:"
-msgstr "Segnalare qualsiasi bug , problema o il miglioramento:"
+msgstr "Melden sie Bugs oder Verbesserungsvorschläge:"
 
 #: themes/default/templates/home/_about.html:33
 msgid "Github Issues"
-msgstr "Problemi Github"
+msgstr "Github Issues"
 
 #: themes/default/templates/home/_pybossa_text.html:1
 msgid ""
@@ -956,67 +947,66 @@ msgid ""
 "knowledge or intelligence such as image classification, transcription, "
 "geocoding and more!"
 msgstr ""
-"Assistenza online nell'eseguire processi che riguardano cognizione umana,"
-" conoscenza o intelligenza come la classificazione immagini, la "
-"trascrizione, il geocoding e altro!"
+"Onlinesystem zur Unterstützung von Aufgaben, die von Menschen bearbeitet "
+"werden, beispielsweise Mustererkennung, Klassifizierung und vieles mehr! "
 
 #: themes/default/templates/home/_pybossa_text.html:3
 msgid "Help advance research"
-msgstr "Aiuta la ricerca a progredire"
+msgstr "Unterstütze die Forschung"
 
 #: themes/default/templates/home/_pybossa_text.html:4
 msgid "Everything is open and freely usable"
-msgstr "Tutto è aperto e liberamente utilizzabili"
+msgstr "Alles ist offen und frei nutzbar"
 
 #: themes/default/templates/home/_pybossa_text.html:5
 msgid "Things computers can't do"
-msgstr "Cose che i computer non possono fare"
+msgstr "Aufgaben, die Computer allein nicht lösen können"
 
 #: themes/default/templates/home/index.html:18
 #: themes/default/templates/projects/_helpers.html:36
 #: themes/default/templates/projects/_helpers.html:240
 msgid "Info"
-msgstr "Informazioni"
+msgstr "Info"
 
 #: themes/default/templates/home/index.html:33
 msgid "Get Started"
-msgstr "Inizia"
+msgstr "So fängt man an"
 
 #: themes/default/templates/home/index.html:34
 msgid "It's really simple to start contributing."
-msgstr "È veramente semplice iniziare a contribuire."
+msgstr "Es ist wirklich einfach, zu helfen."
 
 #: themes/default/templates/home/index.html:37
 msgid " Start Contributing"
-msgstr "Inizia a contribuire"
+msgstr " Trage jetzt bei"
 
 #: themes/default/templates/home/index.html:42
 msgid "Most Active Projects"
-msgstr "Progetti più attivi"
+msgstr "Aktivste Projekte"
 
 #: themes/default/templates/home/index.html:54
 msgid "Start"
-msgstr "Inizia"
+msgstr "Beginne"
 
 #: themes/default/templates/home/index.html:62
 msgid "Your project"
-msgstr "Il tuo progetto"
+msgstr "Dein Projekt"
 
 #: themes/default/templates/home/index.html:63
 msgid "could be here!"
-msgstr "potrebbe essere qui!"
+msgstr "könnte hier sein"
 
 #: themes/default/templates/home/index.html:64
 msgid "Create a project"
-msgstr "Crea un progetto"
+msgstr "Ein Projekt anlegen"
 
 #: themes/default/templates/home/index.html:73
 msgid "Most Active Volunteers"
-msgstr "Volontari più attivi"
+msgstr "Aktivste Beitragende"
 
 #: themes/default/templates/home/index.html:80
 msgid "Submitted Tasks"
-msgstr "Progetti inviati"
+msgstr "Abgeschlossene Aufgaben"
 
 #: themes/default/templates/home/index.html:84
 #: themes/default/templates/projects/_helpers.html:39
@@ -1032,22 +1022,22 @@ msgstr "Progetti inviati"
 #: themes/default/templates/projects/tasks.html:13
 #: themes/default/templates/projects/tasks_browse.html:62
 msgid "Tasks"
-msgstr "Compiti"
+msgstr "Aufgaben"
 
 #: themes/default/templates/home/search.html:7
 msgid "Search Results"
-msgstr "Risultati della ricerca"
+msgstr "Suchergebnisse"
 
 #: themes/default/templates/projects/_helpers.html:37
 #: themes/default/templates/projects/presenter.html:15
 msgid "Contribute"
-msgstr "Contribuire"
+msgstr "Beitragen"
 
 #: themes/default/templates/projects/_helpers.html:38
 #: themes/default/templates/projects/results.html:15
 #, fuzzy
 msgid "Results"
-msgstr "Risultati della ricerca"
+msgstr "Suchergebnisse"
 
 #: themes/default/templates/projects/_helpers.html:42
 #: themes/default/templates/projects/_helpers.html:89
@@ -1056,11 +1046,11 @@ msgstr "Risultati della ricerca"
 #: themes/default/templates/projects/tasks.html:37
 #: themes/default/templates/projects/tasks.html:41
 msgid "Settings"
-msgstr "Configurazione"
+msgstr "Einstellungen"
 
 #: themes/default/templates/projects/_helpers.html:49
 msgid "Audit Logs"
-msgstr ""
+msgstr "Audit Logs"
 
 #: themes/default/templates/projects/_helpers.html:54
 msgid "Webhooks"
@@ -1077,52 +1067,52 @@ msgstr "ID"
 #: themes/default/templates/projects/_helpers.html:71
 #: themes/default/templates/projects/_helpers.html:131
 msgid "Description"
-msgstr "Descrizione"
+msgstr "Beschreibung"
 
 #: themes/default/templates/projects/_helpers.html:72
 #: themes/default/templates/projects/_helpers.html:132
 msgid "Creation Date"
-msgstr "Data Creazione"
+msgstr "Erstellungsdatum"
 
 #: themes/default/templates/projects/_helpers.html:73
 #: themes/default/templates/projects/_helpers.html:134
 msgid "Last Activity"
-msgstr "Ultima attività"
+msgstr "Letzte Aktivität"
 
 #: themes/default/templates/projects/_helpers.html:74
 #: themes/default/templates/projects/_helpers.html:137
 #: themes/default/templates/projects/_helpers.html:199
 msgid "Overall progress"
-msgstr "Progresso generale"
+msgstr "Gesamtfortschritt"
 
 #: themes/default/templates/projects/_helpers.html:74
 #: themes/default/templates/projects/_helpers.html:199
 #: themes/default/templates/projects/tasks_browse.html:19
 msgid "completed"
-msgstr "completato"
+msgstr "erledigt"
 
 #: themes/default/templates/projects/_helpers.html:105
 #: themes/default/templates/projects/_helpers.html:115
 msgid "Remove from Featured!"
-msgstr "Rimuovi da In Evidenza!"
+msgstr "Von Liste der hervorgehobenen Projekte entfernen!"
 
 #: themes/default/templates/projects/_helpers.html:108
 #: themes/default/templates/projects/_helpers.html:112
 msgid "Add to Featured!"
-msgstr "Aggiungi a \"In primo piano\"!"
+msgstr "Zu Liste der hervorgehobenen Projekte hinzufügen!"
 
 #: themes/default/templates/projects/_helpers.html:139
 #: themes/default/templates/projects/_helpers.html:141
 msgid "Created by"
-msgstr "Creato da"
+msgstr "Erstellt von"
 
 #: themes/default/templates/projects/_helpers.html:139
 msgid "Me"
-msgstr "Me"
+msgstr "Mir"
 
 #: themes/default/templates/projects/_helpers.html:144
 msgid "Try it!"
-msgstr "Provalo!"
+msgstr "Probier es aus!"
 
 #: themes/default/templates/projects/_helpers.html:212
 msgid "Done! View results"
@@ -1130,12 +1120,11 @@ msgstr ""
 
 #: themes/default/templates/projects/_helpers.html:215
 msgid "Start Contributing Now!"
-msgstr "Inizia a contribuire ora!"
+msgstr "Jetzt beitragen!"
 
 #: themes/default/templates/projects/_helpers.html:218
-#, fuzzy
 msgid "Thanks for contributing"
-msgstr "Inizia a contribuire"
+msgstr "Danke fürs beitragen"
 
 #: themes/default/templates/projects/_helpers.html:221
 msgid "Draft project, complete it!"
@@ -1148,12 +1137,12 @@ msgstr ""
 #: themes/default/templates/projects/actions.html:9
 #: themes/default/templates/projects/settings.html:18
 msgid "Edit the project details"
-msgstr "Modificare i dettagli del progetto"
+msgstr "Projektdetails editieren"
 
 #: themes/default/templates/projects/actions.html:10
 #: themes/default/templates/projects/tasks.html:33
 msgid "Edit the task presenter"
-msgstr "Modifica il presentatore dell'incarico"
+msgstr "Task Presenter bearbeiten"
 
 #: themes/default/templates/projects/actions.html:11
 #: themes/default/templates/projects/importers/csv.html:14
@@ -1161,55 +1150,52 @@ msgstr "Modifica il presentatore dell'incarico"
 #: themes/default/templates/projects/importers/epicollect.html:14
 #: themes/default/templates/projects/importers/flickr.html:15
 #: themes/default/templates/projects/importers/gdocs.html:14
+#: themes/default/templates/projects/importers/iiif.html:5
 #: themes/default/templates/projects/importers/s3.html:20
 #: themes/default/templates/projects/importers/twitter.html:14
-#: themes/default/templates/projects/importers/iiif.html:5
 msgid "Import tasks"
-msgstr "Importa tasks"
+msgstr "Aufgaben importieren"
 
 #: themes/default/templates/projects/actions.html:12
 #: themes/default/templates/projects/settings.html:20
 msgid "Delete the project"
-msgstr "Cancella il progetto"
+msgstr "Projekt löschen"
 
 #: themes/default/templates/projects/auditlog.html:17
 msgid "When"
-msgstr ""
+msgstr "Wenn"
 
 #: themes/default/templates/projects/auditlog.html:18
 msgid "Who"
-msgstr ""
+msgstr "Wer"
 
 #: themes/default/templates/projects/auditlog.html:19
-#, fuzzy
 msgid "Source"
-msgstr "Risorse"
+msgstr "Quelle"
 
 #: themes/default/templates/projects/auditlog.html:20
 msgid "Action"
-msgstr ""
+msgstr "Aktion"
 
 #: themes/default/templates/projects/auditlog.html:21
-#, fuzzy
 msgid "Attribute"
-msgstr "Contribuire"
+msgstr "Attribute"
 
 #: themes/default/templates/projects/auditlog.html:22
 msgid "Old Value"
-msgstr ""
+msgstr "Alter Wert"
 
 #: themes/default/templates/projects/auditlog.html:23
 msgid "New Value"
-msgstr ""
+msgstr "Neuer Wert"
 
 #: themes/default/templates/projects/auditlog.html:28
 msgid "You"
-msgstr ""
+msgstr "Sie"
 
 #: themes/default/templates/projects/auditlog.html:39
-#, fuzzy
 msgid "Sorry! No logs so far."
-msgstr "Spiacenti! Non ci sono post finora."
+msgstr "Bisher gibt es noch keine Logs."
 
 #: themes/default/templates/projects/auditlog.html:45
 #: themes/default/templates/projects/blog.html:33
@@ -1224,87 +1210,89 @@ msgstr "Spiacenti! Non ci sono post finora."
 #: themes/default/templates/projects/tasks.html:78
 #: themes/default/templates/projects/tasks_browse.html:65
 msgid "Sorry! This project does not exist."
-msgstr "Sorry! Questo progetto non esiste."
+msgstr "Sorry! Dieses Projekt existiert nicht."
 
 #: themes/default/templates/projects/blog.html:27
 msgid "Sorry! No posts so far."
-msgstr "Spiacenti! Non ci sono post finora."
+msgstr "Sorry! Bisher keine Posts veröffentlicht."
 
 #: themes/default/templates/projects/blog_post.html:15
 msgid "Author: "
-msgstr "Autore:"
+msgstr "Autor: "
 
 #: themes/default/templates/projects/blog_post.html:17
 msgid "Written: "
-msgstr "Scritto:"
+msgstr "Geschrieben: "
 
 #: themes/default/templates/projects/blog_post.html:31
 #: themes/default/templates/projects/task_autoimporter.html:40
 #: themes/default/templates/projects/task_settings.html:31
 msgid "Delete"
-msgstr "Cancella"
+msgstr "Löschen"
 
 #: themes/default/templates/projects/blog_post.html:32
 msgid "Edit"
-msgstr "Modifica"
+msgstr "Bearbeiten"
 
 #: themes/default/templates/projects/blog_post.html:36
 #: themes/default/templates/projects/blog_post.html:41
 #: themes/default/templates/projects/task_autoimporter.html:41
 msgid "Back"
-msgstr "Indietro"
+msgstr "Zurück"
 
 #: themes/default/templates/projects/blog_post.html:40
 msgid "Sorry! This blogpost does not exist."
-msgstr "Spiacenti! Questo post non esiste."
+msgstr "Sorry! Dieser Blogpost existiert nicht."
 
 #: themes/default/templates/projects/delete.html:12
-#, fuzzy
 msgid "Delete project"
-msgstr "Cancella il progetto"
+msgstr "Projekt löschen"
 
 #: themes/default/templates/projects/delete.html:14
 msgid "If you delete the project and its tasks, it will be gone forever!"
-msgstr "Se cancelli il progetto e i suoi tasks, saranno persi per sempre!"
+msgstr ""
+"Das Projekt und alle zugehörige Tasks können nach dem Löschen nicht "
+"wieder hergestellt werden!"
 
 #: themes/default/templates/projects/delete.html:20
 msgid ""
 "Are you sure you want to delete this project and all its tasks and "
 "associated task runs?"
 msgstr ""
-"Sei sicuro di voler cancellare il progetto, i suoi tasks e le task runs "
-"associate?"
+"Sind Sie sicher, dass Sie dieses Projekte, alle dazugehörigen Tasks sowie"
+" Task-Beiträge löschen wollen?"
 
 #: themes/default/templates/projects/delete.html:22
-#, fuzzy
 msgid "Yes, delete it"
-msgstr "No, non cancellare!"
+msgstr "Ja, bitte löschen"
 
 #: themes/default/templates/projects/delete.html:23
 msgid "No, do not delete it!"
-msgstr "No, non cancellare!"
+msgstr "Nein, nicht löschen!"
 
 #: themes/default/templates/projects/export.html:13
 msgid "Export All Tasks and Task Runs"
-msgstr "Esporta tutti gli incarichi e gli sviluppi"
+msgstr "Alle Aufgaben und Antworten exportieren"
 
 #: themes/default/templates/projects/export.html:14
 msgid "You can export and download"
-msgstr "Puoi esportare e scaricare"
+msgstr "Sie können "
 
 #: themes/default/templates/projects/export.html:14
 msgid "all the available"
-msgstr "tutti i disponibili"
+msgstr "alle vorhandenen"
 
 #: themes/default/templates/projects/export.html:14
 msgid ""
 "Tasks and Task Runs (the submitted answers by the users) in CSV or JSON "
 "formats."
-msgstr "Tasks e Task Runs (le risposte inviate dagli utenti) in formato CSV o JSON"
+msgstr ""
+"Tasks und Task-Beitrage in CSV oder JSON Format exportieren und "
+"herunterladen."
 
 #: themes/default/templates/projects/export.html:17
 msgid "Export in CSV format"
-msgstr "Esporta in formato CSV"
+msgstr "Export im CSV-Format"
 
 #: themes/default/templates/projects/export.html:24
 #: themes/default/templates/projects/export.html:26
@@ -1312,88 +1300,90 @@ msgstr "Esporta in formato CSV"
 #: themes/default/templates/projects/export.html:39
 #: themes/default/templates/projects/export.html:54
 msgid "Task Runs"
-msgstr "Task Runs"
+msgstr "Antworten"
 
 #: themes/default/templates/projects/export.html:30
 msgid "Export in JSON format"
-msgstr "Esporta in formato JSON"
+msgstr "Export im JSON-Format"
 
 #: themes/default/templates/projects/export.html:47
-#, fuzzy
 msgid "Export to the"
-msgstr "Dati esportati a"
+msgstr "Daten exportiert nach "
 
 #: themes/default/templates/projects/export.html:49
 msgid "Export to a CKAN server"
-msgstr ""
+msgstr "Zum CKAN Server exportieren"
 
 #: themes/default/templates/projects/export.html:51
-#, fuzzy
 msgid "IMPORTANT"
-msgstr "Importante"
+msgstr "WICHTIG"
 
 #: themes/default/templates/projects/export.html:51
 msgid ""
 "This export option stills in beta mode and may fail in the CKAN server. "
 "If you get an error, please send an e-mail to info@pybossa.com"
 msgstr ""
+"Diese Exportfunktion befindet sich noch im Beta Stadium und kann "
+"Fehlschlagen im CKAN ServerWenn sie einen Fehler erhalten kontaktieren "
+"sie bitte info@pybossa.com"
 
 #: themes/default/templates/projects/export.html:56
 msgid "You don't have a Datahub.io API key in your"
-msgstr ""
+msgstr "Sie haben keinen Datahub.io API Schlüssel in Ihrem"
 
 #: themes/default/templates/projects/export.html:56
 msgid "account. Please,"
-msgstr ""
+msgstr "Konto. Bitte "
 
 #: themes/default/templates/projects/export.html:56
-#, fuzzy
 msgid "create an account"
-msgstr "Crea un account"
+msgstr "erstellen sie ein Konto"
 
 #: themes/default/templates/projects/export.html:56
 msgid "and copy/paste the API key in your profile in order to use this exporter"
 msgstr ""
+"und fügen sie ihren API Schlüssel in ihr Profil ein um diesen Exporter zu"
+" benutzen"
 
 #: themes/default/templates/projects/index.html:35
 msgid "A special selection of the most interesting projects"
-msgstr "Una selezione speciale dei progetti più interessanti"
+msgstr "Eine Auswahl der interessantesten Projekte"
 
 #: themes/default/templates/projects/index.html:38
 #: themes/default/templates/stats/global.html:93
 msgid "Draft Projects"
-msgstr "Progetti bozza"
+msgstr "Projekte im Entwurf"
 
 #: themes/default/templates/projects/index.html:39
 msgid "Work in progress projects"
-msgstr "Progetti in corso"
+msgstr "Projekte in Bearbeitung"
 
 #: themes/default/templates/projects/index.html:58
 msgid "Sorry, there are no published projects for this category yet"
-msgstr "Spiacenti, non ci sono ancora progetti pubblicati per questa categoria"
+msgstr "Sorry, es gibt bisher keine veröffentlichten Projekte für die Kategorie"
 
 #: themes/default/templates/projects/new.html:13
 msgid "Project"
-msgstr "Progetto"
+msgstr "Projekt"
 
 #: themes/default/templates/projects/new.html:13
 msgid "Create a new project"
-msgstr "Creare un nuovo progetto"
+msgstr "Ein neues Projekt erstellen"
 
 #: themes/default/templates/projects/new.html:17
 #: themes/default/templates/projects/update.html:37
 msgid "The name of the project"
-msgstr "Il nome del progetto"
+msgstr "Name des Projekts"
 
 #: themes/default/templates/projects/new.html:18
 #: themes/default/templates/projects/update.html:38
 msgid "Short name or slug for the project"
-msgstr "Denominazione abbreviata o slug per il progetto"
+msgstr "Kurzname für das Projekt"
 
 #: themes/default/templates/projects/new.html:18
 #: themes/default/templates/projects/update.html:38
 msgid "Project slug:"
-msgstr "Prototipo progetto:"
+msgstr "Projekt Kurzname:"
 
 #: themes/default/templates/projects/new.html:19
 msgid ""
@@ -1413,57 +1403,68 @@ msgid ""
 "                                                             \n"
 "            (you can use Markdown to give format to your description!)"
 msgstr ""
-"Spiegate il vostro progetto · Perché ? Perche ' si sta creando questo "
-"progetto , ciò che si vuole raggiungere con esso · Come ? Spiegare come "
-"funziona il progetto · Come si può aiutare : Spiegare ai volontari come "
-"possono aiutare e contribuire a raggiungere l'obiettivo del progetto · vi"
-" aiuterà a fare la differenza ? Spiegare ai volontari perché il loro "
-"contributo è essenziale e come il risultato del progetto può contribuire "
-"a cambiare le cose ! ( è possibile usare Markdown per dare formato alla "
-"descrizione ! )"
+"Erklären Sie Ihr Projekt"
+"                                                             \n"
+"                · Warum? Warum haben Sie dieses Projekt erstellt und was "
+"wollen Sie damit erreichen"
+"                                                             \n"
+"                · Wie? Erklären Sie, wie Ihr Projekt funktioniert"
+"                                                             \n"
+"                · Wie man helfen kann: Erklären Sie den Freiwilligen, wie"
+" Sie helfen können, Ihre Projektziele zu erreichen"
+"                                                             \n"
+"                · Wird die Hilfe etwas bringen? Erklären Sie den "
+"Freiwilligen, warum deren Beitrag wichtig ist und wie die Ergebnisse "
+"Ihres Projektes helfen können, Dinge zu ändern!\"\""
+"                                                             \n"
+"            (Sie können Markdown-Syntax verwenden, um Ihre Beschreibung "
+"zu formatieren!)"
 
 #: themes/default/templates/projects/new.html:26
 msgid "Create the project"
-msgstr "Crea progetto"
+msgstr "Projekt anlegen"
 
 #: themes/default/templates/projects/new_blogpost.html:14
 msgid "Write a new blog post for ad"
-msgstr "Scrivi un nuovo post sul blog per l'annuncio"
+msgstr "Schreiben Sie einen neuen Blog-Beitrag"
 
 #: themes/default/templates/projects/new_blogpost.html:18
 #: themes/default/templates/projects/update_blogpost.html:20
 msgid "The title of your post"
-msgstr "Titolo del post"
+msgstr "Titel Ihres Blog-Beitrags"
 
 #: themes/default/templates/projects/new_blogpost.html:19
 #: themes/default/templates/projects/update_blogpost.html:21
 msgid "Write your post here. You can use Markdown!"
-msgstr "Scrivi il tuo post qui. Puoi usare Markdown!"
+msgstr ""
+"Schreiben Sie hier Ihren Blog-Beitrag. Sie können zur Formatierung "
+"Markdown-Syntax verwenden!"
 
 #: themes/default/templates/projects/password.html:14
 msgid "Enter the password to contribute to this project:"
-msgstr "Inserisci la password per contribuire a questo progetto: "
+msgstr "Geben Sie das Passwort ein, um für dieses Projekt beitragen zu können:"
 
 #: themes/default/templates/projects/password.html:18
 msgid "Project password"
-msgstr "password Progetto"
+msgstr "Projekt-Passwort"
 
 #: themes/default/templates/projects/password.html:21
 msgid "Submit"
-msgstr "Invia"
+msgstr "Abschicken"
 
 #: themes/default/templates/projects/presenter.html:22
 msgid ""
 "Sorry, you've contributed to all the tasks for this project, but this "
 "project still needs more volunteers, so please spread the word!"
 msgstr ""
-"Scusa, hai contribuito a tutti i task di questo progetto, ma il progetto "
-"richiede ancora volontari, quindi per favore passa parola!"
+"Entschuldigung, aber Sie haben bereits zu allen Tasks des Projekts "
+"beigetragen. Dieses Projekt benötigt allerdings noch weitere Helfer - "
+"Bitte Informieren Sie Ihre Bekannten!"
 
 #: themes/default/templates/projects/publish.html:12
 #, fuzzy
 msgid "Publish the project"
-msgstr "Progetti pubblicati"
+msgstr "Veröffentlichte Projekte"
 
 #: themes/default/templates/projects/publish.html:14
 msgid "Please read carefully!"
@@ -1486,7 +1487,7 @@ msgstr ""
 #: themes/default/templates/projects/publish.html:21
 #, fuzzy
 msgid "Are you sure you want to publish this project?"
-msgstr "Vuoi nascondere il tuo progetto?"
+msgstr "Möchtest Du Dein Projekt verstecken?"
 
 #: themes/default/templates/projects/publish.html:23
 msgid "Yes, publish it"
@@ -1495,7 +1496,7 @@ msgstr ""
 #: themes/default/templates/projects/publish.html:24
 #, fuzzy
 msgid "No, do not publish it!"
-msgstr "No, non cancellare!"
+msgstr "Nein, nicht löschen!"
 
 #: themes/default/templates/projects/results.html:21
 msgid "No results"
@@ -1507,29 +1508,29 @@ msgstr ""
 
 #: themes/default/templates/projects/settings.html:16
 msgid "Project Settings"
-msgstr "Configurazione Progetto"
+msgstr "Projekt Einstellungen"
 
 #: themes/default/templates/projects/settings.html:19
 #: themes/default/templates/projects/task_settings.html:13
 msgid "Task Settings"
-msgstr "Configurazione Task"
+msgstr "Task Einstellungen"
 
 #: themes/default/templates/projects/settings.html:21
 msgid "Write a blog post"
-msgstr "Scrivi un post sul blog"
+msgstr "Schreibe einen Blogpost"
 
 #: themes/default/templates/projects/stats.html:39
 #: themes/default/templates/projects/task_priority.html:21
 msgid "Important"
-msgstr "Importante"
+msgstr "Wichtig"
 
 #: themes/default/templates/projects/stats.html:39
 msgid "Data have been"
-msgstr "I dati sono stati"
+msgstr "Daten wurden"
 
 #: themes/default/templates/projects/stats.html:39
 msgid "anonymized"
-msgstr "anonimizzati"
+msgstr "anonymisiert"
 
 #: themes/default/templates/projects/stats.html:47
 msgid "Average contribution time per task"
@@ -1538,61 +1539,63 @@ msgstr ""
 #: themes/default/templates/projects/stats.html:48
 #, fuzzy
 msgid "seconds"
-msgstr "secondo numero"
+msgstr "zweite Zahl"
 
 #: themes/default/templates/projects/stats.html:56
 msgid "Distribution of Answers per Hour"
-msgstr "Distribuzione di Risposta all'ora"
+msgstr "Verteilung der Antworten pro Stunde"
 
 #: themes/default/templates/projects/stats.html:86
 msgid "Completed Tasks in the last 15 days"
-msgstr "Tasks completati negli ultimi 15 giorni"
+msgstr "Tasks, welche in den letzten 15 Tagen vervollständigt wurden"
 
 #: themes/default/templates/projects/stats.html:86
 #: themes/default/templates/projects/stats.html:157
 msgid "select an area to zoom, click to reset the chart"
-msgstr "selezionare un'area per ingrandire , fare clic per ripristinare il grafico"
+msgstr ""
+"Wählen Sie einen Bereich, um zu zoomen odder Klicken Sie um die Grafik "
+"zurückzusetzen"
 
 #: themes/default/templates/projects/stats.html:157
 msgid "Answers per day"
-msgstr "Risposte al giorno"
+msgstr "Antworten pro Tag"
 
 #: themes/default/templates/projects/stats.html:169
 msgid "answers were submitted this day"
-msgstr "risposte sono state inviate in questo giorno"
+msgstr "Antworten wurden an diesem Tag abgegeben"
 
 #: themes/default/templates/projects/stats.html:228
 msgid "Distribution of Answers"
-msgstr "Distribuzione di risposte"
+msgstr "Verteilung der Anworten"
 
 #: themes/default/templates/projects/stats.html:234
 msgid "Type"
-msgstr "Tipo"
+msgstr "Typ"
 
 #: themes/default/templates/projects/stats.html:236
 msgid "Percentage"
-msgstr "Percentuale"
+msgstr "Prozentsatz"
 
 #: themes/default/templates/projects/stats.html:275
 msgid "Details about Anonymous Users"
-msgstr "Dettagli su Utenti anonimi"
+msgstr "Details über anonyme Nutzer"
 
 #: themes/default/templates/projects/stats.html:278
 msgid "anonymous users have"
-msgstr "utenti anonimi hanno"
+msgstr "anonyme Nutzer haben"
 
 #: themes/default/templates/projects/stats.html:278
 #: themes/default/templates/projects/stats.html:369
 msgid "participated"
-msgstr "partecipato"
+msgstr "teilgenommen"
 
 #: themes/default/templates/projects/stats.html:285
 msgid "Country"
-msgstr "Nazione"
+msgstr "Land"
 
 #: themes/default/templates/projects/stats.html:286
 msgid "City"
-msgstr "Città"
+msgstr "Stadt"
 
 #: themes/default/templates/projects/stats.html:307
 #: themes/default/templates/projects/stats.html:308
@@ -1601,102 +1604,101 @@ msgstr "Città"
 #: themes/default/templates/projects/stats.html:311
 #: themes/default/templates/projects/stats.html:376
 msgid "User"
-msgstr "Utente"
+msgstr "Benutzer"
 
 #: themes/default/templates/projects/stats.html:327
 #: themes/default/templates/stats/global.html:169
 msgid "This page includes GeoLite data created by MaxMind, available from"
-msgstr "Questa pagina contiene dati GeoLite creati da MaxMind, disponibili su"
+msgstr ""
+"Diese Seite entält GeoLite-Daten, die von MaxMind erzeugt wurden und "
+"bezogen werden können von"
 
 #: themes/default/templates/projects/stats.html:366
 msgid "Details about Authenticated Users"
-msgstr "Dettagli sugli utenti registrati"
+msgstr "Details über authentifizierte Benutzer"
 
 #: themes/default/templates/projects/stats.html:369
 msgid "authenticated users have"
-msgstr "utenti registrati hanno"
+msgstr "authentifizierte Benutzer haben"
 
 #: themes/default/templates/projects/stats.html:371
 msgid "Top 5 users"
-msgstr "Top 5 utenti"
+msgstr "Top 5 Benutzer"
 
 #: themes/default/templates/projects/task_autoimport_options.html:13
 msgid "Setup task autoimporter"
-msgstr ""
+msgstr "Aufgaben Auto Importer einstellen"
 
+#: themes/default/templates/projects/snippets/options.html:4
 #: themes/default/templates/projects/task_autoimport_options.html:16
 #: themes/default/templates/projects/task_import_options.html:16
-#: themes/default/templates/projects/snippets/options.html:4
 msgid "Use one of the following available"
-msgstr "Usare uno dei seguenti disponibili"
+msgstr "Benutzen sie einen der folgenden verfügbaren"
 
 #: themes/default/templates/projects/task_autoimport_options.html:17
 #: themes/default/templates/projects/task_import_options.html:17
-#, fuzzy
 msgid "importers"
-msgstr "CSV importatore"
+msgstr "Importer"
 
 #: themes/default/templates/projects/task_autoimport_options.html:17
 msgid "to setup as the autoimporter"
-msgstr ""
+msgstr "um den Autoimporter einzurichten"
 
 #: themes/default/templates/projects/task_autoimporter.html:14
 msgid "Currently configured autoimport"
-msgstr ""
+msgstr "Momentan konfigurierte Autoimporter"
 
 #: themes/default/templates/projects/task_autoimporter.html:15
 msgid "You currently have the following autoimporter configured"
-msgstr ""
+msgstr "Sie haben die folgenden Autoimporter konfiguriert"
 
 #: themes/default/templates/projects/task_import_options.html:13
 #: themes/default/templates/projects/tasks.html:20
 msgid "Import Tasks"
-msgstr "Importa Tasks"
+msgstr "Tasks importieren"
 
 #: themes/default/templates/projects/task_import_options.html:17
-#, fuzzy
 msgid "to import tasks..."
-msgstr "per importare tasks"
+msgstr "um Tasks zu importieren"
 
 #: themes/default/templates/projects/task_import_options.html:31
 msgid "... or import a set of"
-msgstr ""
+msgstr "... oder eine Auswahl von"
 
 #: themes/default/templates/projects/task_import_options.html:31
-#, fuzzy
 msgid "template tasks"
-msgstr "template"
+msgstr "Taskvorlagen"
 
 #: themes/default/templates/projects/task_n_answers.html:14
 #: themes/default/templates/projects/task_settings.html:34
 msgid "Task Redundancy"
-msgstr "Task ridondanza"
+msgstr "Aufgabenredundanz"
 
 #: themes/default/templates/projects/task_n_answers.html:18
 msgid "The number of answers per tasks that you want for the project"
-msgstr "Il numero di risposte per task che vuoi per il progetto"
+msgstr "Die Anzahl an Antworten, die Sie pro Task für dieses Projekt benötigen"
 
 #: themes/default/templates/projects/task_n_answers.html:20
 #: themes/default/templates/projects/task_scheduler.html:35
 msgid "Set redundancy"
-msgstr "Fissa ridondanza"
+msgstr "Redundanz festlegen"
 
-#: themes/default/templates/projects/task_presenter_editor.html:28
 #: themes/default/templates/projects/snippets/options.html:3
+#: themes/default/templates/projects/task_presenter_editor.html:28
 msgid "Task Presenter Editor"
-msgstr "Task Presenter Editor"
+msgstr "Editor für die Präsentation der Aufgaben"
 
 #: themes/default/templates/projects/task_presenter_editor.html:28
 msgid "Help"
-msgstr "Aiuto"
+msgstr "Hilfe"
 
 #: themes/default/templates/projects/task_presenter_editor.html:34
 msgid "Update the project task presenter"
-msgstr "Aggiorna il presentatore del task del progetto"
+msgstr "Aktualisiere die Aufgabenpräsentation dieses Projektes"
 
 #: themes/default/templates/projects/task_presenter_editor.html:35
 msgid "Preview the task presenter"
-msgstr "Anteprima presentatore task"
+msgstr "Vorschau der Aufgabenpräsentation"
 
 #: themes/default/templates/projects/task_presenter_editor.html:45
 msgid "&times;"
@@ -1704,24 +1706,24 @@ msgstr "&times;"
 
 #: themes/default/templates/projects/task_presenter_editor.html:46
 msgid "Task Presenter Preview"
-msgstr "Anteprima presentatore task"
+msgstr "Vorschau der Aufgabenpräsentation"
 
 #: themes/default/templates/projects/task_presenter_editor.html:54
 msgid "Close"
-msgstr "Chiudi"
+msgstr "Schließen"
 
 #: themes/default/templates/projects/task_priority.html:14
 #: themes/default/templates/projects/task_settings.html:22
 msgid "Task Priority"
-msgstr "Priorità Task"
+msgstr "Priorität der Aufgaben"
 
 #: themes/default/templates/projects/task_priority.html:15
 msgid "You can change the"
-msgstr "Puoi cambiare"
+msgstr "Sie können die"
 
 #: themes/default/templates/projects/task_priority.html:16
 msgid "priority"
-msgstr "la priorità"
+msgstr "Priorität"
 
 #: themes/default/templates/projects/task_priority.html:16
 msgid ""
@@ -1730,55 +1732,56 @@ msgid ""
 "lowest\n"
 "                priority is"
 msgstr ""
-"di una o più attività , fornendo un elenco di ID di attività separati da "
-"virgole . La priorità più bassa è"
+"                indem Sie eine Komma-separierte List von Task IDs "
+"angeben. Die niedrigste\n"
+"                Priorität ist"
 
 #: themes/default/templates/projects/task_priority.html:19
 msgid "and the highest priority is"
-msgstr "e la più alta priorità è"
+msgstr "und die höchste Priorität hat"
 
 #: themes/default/templates/projects/task_priority.html:21
 msgid ""
 "The priority value is only\n"
 "                respected by the"
-msgstr "Il valore di priorità è solo rispettato da"
+msgstr "Der Prioritätswert wird nur vom\n"
 
 #: themes/default/templates/projects/task_priority.html:22
 msgid "default scheduler"
-msgstr "scheduler di default"
+msgstr "Standard Task-Planer berücksichtigt"
 
 #: themes/default/templates/projects/task_priority.html:27
 msgid "Comma separated Task.IDs i.e.: 3, 532, 100"
-msgstr "Task IDs separato da virgola, es. : 3, 532, 100"
+msgstr "Komma-separierte Task-IDs, z.B.: 3, 532, 100"
 
 #: themes/default/templates/projects/task_priority.html:28
 msgid "Priority value between 0.0 and 1.0"
-msgstr "Valori di priorità tra 0.0 e 1.0"
+msgstr "Prioritätswert zwischen 0.0 und 1.0"
 
 #: themes/default/templates/projects/task_priority.html:30
 msgid "Change Priority"
-msgstr "Cambia priorità"
+msgstr "Priorität ändern"
 
 #: themes/default/templates/projects/task_scheduler.html:14
 #: themes/default/templates/projects/task_settings.html:17
 msgid "Task Scheduler"
-msgstr "Programmatore di Task"
+msgstr "Aufgaben Planer"
 
 #: themes/default/templates/projects/task_scheduler.html:15
 msgid "You can choose from the following schedulers"
-msgstr "Puoi scegliere tra i seguenti organizzatori"
+msgstr "Sie können folgende Task-Planer auswählen"
 
 #: themes/default/templates/projects/task_scheduler.html:17
 msgid "Default"
-msgstr "Predefinito"
+msgstr "Standard"
 
 #: themes/default/templates/projects/task_scheduler.html:17
 msgid "or"
-msgstr "o"
+msgstr "oder"
 
 #: themes/default/templates/projects/task_scheduler.html:18
 msgid "Depth First"
-msgstr "Profondità prima"
+msgstr "Tiefensuche"
 
 #: themes/default/templates/projects/task_scheduler.html:18
 msgid ""
@@ -1787,12 +1790,14 @@ msgid ""
 "answers has\n"
 "                    not achieved) excluding the current user"
 msgstr ""
-"restituisce un compito che non è stato completato ( il valore del numero "
-"di risposte non è raggiunto ) escludendo l' utente corrente"
+"Gibt einen Task zurück, der\n"
+"                    noch nicht vervollständigt wurde (die Anzahl an "
+"vorgegebenen Antworten\n"
+"wurde noch nicht erreicht) und vom Benutzer noch nicht bearbeitet wurd"
 
 #: themes/default/templates/projects/task_scheduler.html:21
 msgid "Breadth First"
-msgstr "Prima l'ampiezza"
+msgstr "Breitensuche"
 
 #: themes/default/templates/projects/task_scheduler.html:21
 msgid ""
@@ -1801,12 +1806,13 @@ msgid ""
 "(answers)\n"
 "                    excluding the current user"
 msgstr ""
-"restituisce un task che ha il minor numero di task runs (risposte) "
-"escluso l'utente corrente"
+"Gibt den Task zurück, der\n"
+"                    die wenigsten Beiträge (Antworten) hat\n"
+" und vom Benutzer noch nicht bearbeitet wurde"
 
 #: themes/default/templates/projects/task_scheduler.html:24
 msgid "Random"
-msgstr "Random"
+msgstr "Zufällig"
 
 #: themes/default/templates/projects/task_scheduler.html:24
 msgid ""
@@ -1815,46 +1821,46 @@ msgid ""
 "more\n"
 "                    times"
 msgstr ""
-"restituisce un compito --Una casualmente utente potrebbe ottenere la "
-"stessa operazione due o più volte"
+"Gibt einen zufälligen Task zurück, d.h. \n"
+"                    ein Benutzer kann den selben Task ein oder mehrmals "
+"bekommen"
 
 #: themes/default/templates/projects/task_settings.html:18
 msgid "Change how the tasks are delivered to volunteers"
-msgstr "Cambia il modo in cui i task sono assegnati ai volontari"
+msgstr "Ändern, wie die Tasks an die Freiwilligen verteilt werden"
 
 #: themes/default/templates/projects/task_settings.html:19
 msgid "Scheduler"
-msgstr "Organizzatore"
+msgstr "Task-Planer"
 
 #: themes/default/templates/projects/task_settings.html:23
 msgid "Change the priority of the tasks"
-msgstr "Cambia priorità dei tasks"
+msgstr "Ändere die Priorität der Aufgaben"
 
 #: themes/default/templates/projects/task_settings.html:24
 msgid "Priority"
-msgstr "Priorità"
+msgstr "Priorität"
 
 #: themes/default/templates/projects/task_settings.html:29
 msgid "Delete Tasks"
-msgstr "Cancella Task"
+msgstr "Tasks löschen"
 
 #: themes/default/templates/projects/task_settings.html:30
 msgid "Delete all the tasks and associated answers"
-msgstr "Cancella tutti i task e le risposte associate"
+msgstr "Alle Tasks und damit verbundene Antworten löschen"
 
 #: themes/default/templates/projects/task_settings.html:35
 msgid "Change the redundancy level for the tasks"
-msgstr "Cambia il livello di ridondanza per i tasks"
+msgstr "Redundanz-Wert für die Tasks ändern"
 
 #: themes/default/templates/projects/task_settings.html:36
 msgid "Redundancy"
-msgstr "Ridondanza"
+msgstr "Redundanz"
 
 #: themes/default/templates/projects/tasks.html:21
 msgid "Import tasks from templates, GDrive, or CSV"
-msgstr "Importa task da templetas, GDrive, o CSV"
+msgstr "Tasks von Vorlage, GDrive oder CSV importieren"
 
-#: themes/default/templates/projects/tasks.html:22
 #: themes/default/templates/projects/importers/csv.html:23
 #: themes/default/templates/projects/importers/dropbox.html:30
 #: themes/default/templates/projects/importers/epicollect.html:25
@@ -1862,27 +1868,28 @@ msgstr "Importa task da templetas, GDrive, o CSV"
 #: themes/default/templates/projects/importers/gdocs.html:23
 #: themes/default/templates/projects/importers/s3.html:36
 #: themes/default/templates/projects/importers/twitter.html:43
+#: themes/default/templates/projects/tasks.html:22
 msgid "Import"
-msgstr "Importa"
+msgstr "Importieren"
 
 #: themes/default/templates/projects/tasks.html:25
 #: themes/default/templates/projects/tasks.html:68
 msgid "Export Tasks"
-msgstr "Esposta Task"
+msgstr "Tasks exportieren"
 
 #: themes/default/templates/projects/tasks.html:26
 #: themes/default/templates/projects/tasks.html:69
 msgid "Export tasks to JSON, CSV or a CKAN server"
-msgstr "Esporta task su server JSON, CSV o CKAN"
+msgstr "Tasks nach JSON, CSV oder einem CKAN-Server exportieren"
 
 #: themes/default/templates/projects/tasks.html:27
 #: themes/default/templates/projects/tasks.html:70
 msgid "Export"
-msgstr "Esporta"
+msgstr "Exportieren"
 
 #: themes/default/templates/projects/tasks.html:32
 msgid "Task Presenter"
-msgstr "Presentatore Task"
+msgstr "Task-Presenter"
 
 #: themes/default/templates/projects/tasks.html:34
 msgid "Editor"
@@ -1890,44 +1897,43 @@ msgstr "Editor"
 
 #: themes/default/templates/projects/tasks.html:38
 msgid "Configure the task scheduler, redundancy, etc."
-msgstr "Configura l'organizzatore task, ridondanza, ecc."
+msgstr "Konfigurieren des Task-Planers, der Task-Redundanz, etc."
 
 #: themes/default/templates/projects/tasks.html:46
 #: themes/default/templates/projects/tasks.html:49
 #: themes/default/templates/projects/tasks.html:62
 #: themes/default/templates/projects/tasks.html:65
 msgid "Browse"
-msgstr "Sfoglia"
+msgstr "Navigieren"
 
 #: themes/default/templates/projects/tasks.html:47
 #: themes/default/templates/projects/tasks.html:63
 msgid "Check the status of the tasks"
-msgstr "Controlla lo stato dei task"
+msgstr "Status der Tasks überprüfen"
 
 #: themes/default/templates/projects/tasks.html:53
-#, fuzzy
 msgid "Auto-import Tasks"
-msgstr "per importare tasks"
+msgstr "Tasks anschauen"
 
 #: themes/default/templates/projects/tasks.html:54
 msgid "Import tasks regularly and automatically"
-msgstr ""
+msgstr "Tasks automatisch und regelmäßig importieren"
 
 #: themes/default/templates/projects/tasks.html:55
 msgid "Setup"
-msgstr ""
+msgstr "Einrichtung"
 
 #: themes/default/templates/projects/tasks_browse.html:13
 msgid "Browse tasks"
-msgstr "Sfoglia tasks"
+msgstr "Tasks anschauen"
 
 #: themes/default/templates/projects/tasks_browse.html:15
 msgid "This page shows all the available tasks for this project"
-msgstr "Questa pagina mostra tutti i tasks disponibili per il progetto"
+msgstr "Diese Seite zeigt alle vorhandenen Tasks für dieses Projekt"
 
 #: themes/default/templates/projects/tasks_browse.html:16
 msgid "For each task, you can find the following information"
-msgstr "Per ogni attività , è possibile trovare le seguenti informazioni"
+msgstr "Zu jedem Task können Sie folgende Informationen finden"
 
 #: themes/default/templates/projects/tasks_browse.html:18
 #: themes/default/templates/projects/tasks_browse.html:29
@@ -1937,100 +1943,96 @@ msgstr "Task"
 
 #: themes/default/templates/projects/tasks_browse.html:18
 msgid "This number identifies the task for the project and it is unique"
-msgstr ""
-"Questo numero identifica il compito per il progetto ed è unico nel suo "
-"genere"
+msgstr "Diese Zahl identifiziert den Task für das Projekt und ist eindeutig"
 
 #: themes/default/templates/projects/tasks_browse.html:19
 msgid ""
 "The first number shows how many answers have been submitted for the task "
 "and the"
 msgstr ""
-"Il primo numero indica il numero di risposte sono state presentate per "
-"l'attività e la"
+"Die erste Zahl zeigt die Zahl der beigetragenen Antworteten für den Task "
+"und die"
 
 #: themes/default/templates/projects/tasks_browse.html:19
 msgid ""
 "This redundancy method will help to detect errors, typos, data forging, "
 "etc. when the task has been completed"
 msgstr ""
-"Questo metodo di ridondanza aiuterà ad individuare errori, refusi, "
-"falsificazione dati, ecc. quando il task viene completato"
+"Die Redundanz-Methode hilft, Detektions-Fehler, Vertipper, Datenfehler "
+"etc. zu vermeiden, wenn der Task verfollständigt wurde"
 
 #: themes/default/templates/projects/tasks_browse.html:19
 msgid "second number"
-msgstr "secondo numero"
+msgstr "zweite Zahl"
 
 #: themes/default/templates/projects/tasks_browse.html:19
 msgid "how many need to be obtained to mark the task as"
-msgstr "quanti ne devono essere ottenuti per classificare il task come"
+msgstr "wie viele erreicht werden müssen, um den Task als "
 
 #: themes/default/templates/projects/tasks_browse.html:20
 msgid "Progress Bar"
-msgstr "barra di avanzamento"
+msgstr "Fortschrittsbalken"
 
 #: themes/default/templates/projects/tasks_browse.html:20
 msgid "The progress bar will the percentage that has been completed for the task"
-msgstr "La barra di avanzamento indica la percentuale del task completata"
+msgstr ""
+"Der Fortschrittsbalken zeigt den Prozentsatz der vervollständigten Tasks "
+"an"
 
 #: themes/default/templates/projects/tasks_browse.html:48
 msgid "Download Task Results"
-msgstr "Scarica i risultati del Task"
+msgstr "Task-Ergebnisse herunterladen"
 
 #: themes/default/templates/projects/tasks_browse.html:52
 msgid "Download Partial results"
-msgstr "Scarica i risultati parziali"
+msgstr ""
 
 #: themes/default/templates/projects/tasks_browse.html:55
 msgid "Nothing to download yet"
-msgstr "Niente da scaricare ancora"
+msgstr "Bisher keine Antworten"
 
 #: themes/default/templates/projects/tutorial.html:14
 msgid "Start contributing"
-msgstr "Inizia a contribuire"
+msgstr "Beginne mit Deinen Beiträgen"
 
 #: themes/default/templates/projects/update.html:14
 msgid "Update the project"
-msgstr "Aggiornare il progetto"
+msgstr "Projekt aktualisieren"
 
 #: themes/default/templates/projects/update.html:39
 msgid "Give some details about the project"
-msgstr "Fornisci dettagli sul progetto"
+msgstr "Informationen über das Projekt angeben"
 
 #: themes/default/templates/projects/update.html:40
 msgid "Explain the project (use Markdown!)"
-msgstr "Spiega il progetto (usa Markdown!)"
+msgstr "Beschreibe das Projekt (Benutze bitte Markdown!)"
 
 #: themes/default/templates/projects/update.html:42
 msgid "Check if you want to allow anonymous users contribute to your project"
 msgstr ""
 
-#: themes/default/templates/projects/update.html:47
-msgid "Save the changes"
-msgstr "Salva le modifiche"
-
 #: themes/default/templates/projects/update_blogpost.html:14
 msgid "Edit the blog post"
-msgstr "Modifica il post"
+msgstr "Blogpost bearbeiten"
 
 #: themes/default/templates/projects/update_blogpost.html:23
 msgid "Update"
-msgstr "Aggiorna"
+msgstr "Aktualisieren"
 
 #: themes/default/templates/projects/webhook.html:20
 #, fuzzy
 msgid "Created"
-msgstr "Creare"
+msgstr "Erstellen"
 
 #: themes/default/templates/projects/webhook.html:21
 #, fuzzy
 msgid "Updated"
-msgstr "Aggiorna"
+msgstr "Aktualisieren"
 
 #: themes/default/templates/projects/webhook.html:22
 #, fuzzy
 msgid "Payload"
-msgstr "Carica"
+msgstr "Hochladen"
 
 #: themes/default/templates/projects/webhook.html:23
 msgid "Response"
@@ -2043,49 +2045,49 @@ msgstr ""
 #: themes/default/templates/projects/webhook.html:25
 #, fuzzy
 msgid "Repeat"
-msgstr "Creare"
+msgstr "Erstellen"
 
 #: themes/default/templates/projects/importers/iiif.html:10
 msgid "From a IIIF manifest"
-msgstr "Da un manifest di IIIF"
+msgstr ""
 
 #: themes/default/templates/projects/importers/csv.html:16
 msgid "From a CSV file"
-msgstr "Da un file CSV"
+msgstr "Aus einer CSV Datei"
 
 #: themes/default/templates/projects/importers/csv.html:20
 msgid ""
 "Please provide a URL (i.e. DropBox, Box, Ubuntu One, etc. public link) to"
 " a CSV file with data for"
 msgstr ""
-"Per favore fornisci un URL (es. DropBox, Box, Ubuntu One, ecc. link "
-"pubblico) ad un file CSV con dati per"
+"Bitte gib eine URL an (z.B. DropBox, Ubunto One, etc. öffentlicher Link) "
+"zurCSV Datei mit den Daten für"
 
 #: themes/default/templates/projects/importers/csv.html:20
 #: themes/default/templates/projects/importers/dropbox.html:26
 #: themes/default/templates/projects/importers/epicollect.html:20
 #: themes/default/templates/projects/importers/flickr.html:31
 #: themes/default/templates/projects/importers/gdocs.html:20
+#: themes/default/templates/projects/importers/iiif.html:16
 #: themes/default/templates/projects/importers/s3.html:23
 #: themes/default/templates/projects/importers/twitter.html:34
-#: themes/default/templates/projects/importers/iiif.html:16
 msgid "For more information, please look at"
-msgstr "Per maggiori informazioni, vedi"
+msgstr "Weitere Informationen in"
 
 #: themes/default/templates/projects/importers/csv.html:20
 #: themes/default/templates/projects/importers/dropbox.html:26
 #: themes/default/templates/projects/importers/epicollect.html:20
 #: themes/default/templates/projects/importers/flickr.html:31
 #: themes/default/templates/projects/importers/gdocs.html:20
+#: themes/default/templates/projects/importers/iiif.html:16
 #: themes/default/templates/projects/importers/s3.html:23
 #: themes/default/templates/projects/importers/twitter.html:35
-#: themes/default/templates/projects/importers/iiif.html:16
 msgid "the documentation"
-msgstr "la documentazione"
+msgstr "der Dokumentation"
 
 #: themes/default/templates/projects/importers/csv.html:21
 msgid "The URL of the CSV file"
-msgstr "L'URL del file CSV"
+msgstr "Die URL der CSV-Datei"
 
 #: themes/default/templates/projects/importers/dropbox.html:18
 msgid "From your Dropbox account"
@@ -2096,25 +2098,26 @@ msgid "You are about to import"
 msgstr ""
 
 #: themes/default/templates/projects/importers/dropbox.html:27
-#, fuzzy
 msgid "files"
-msgstr "Profilo"
+msgstr "Profil"
 
 #: themes/default/templates/projects/importers/epicollect.html:16
 msgid "From an EpiCollect Plus project"
-msgstr "Da un progetto EpiCollect Plus"
+msgstr "Aus einem EpiCollect Plus Projekt"
 
 #: themes/default/templates/projects/importers/epicollect.html:20
 msgid "Please provide an EpiCollect Plus project name to import its data for"
-msgstr "Inserire il nome di un progetto EpiCollect Plus da cui importare i dati"
+msgstr ""
+"Bitte gib den EpiCollect Plus Projektnamen an, aus die Daten für "
+"importiert werden sollen"
 
 #: themes/default/templates/projects/importers/epicollect.html:22
 msgid "The name of the public EpiCollect Plus project"
-msgstr "Il nome del progetto EpiCollect Plus"
+msgstr "Der Name des EpiCollect Plus Projektes"
 
 #: themes/default/templates/projects/importers/epicollect.html:23
 msgid "The name of the project's form"
-msgstr "Il nome del tipo di progetto"
+msgstr "Der Name des Projektformulars"
 
 #: themes/default/templates/projects/importers/flickr.html:16
 msgid "From a Flickr Album"
@@ -2145,22 +2148,20 @@ msgid "photos"
 msgstr ""
 
 #: themes/default/templates/projects/importers/flickr.html:55
-#, fuzzy
 msgid "Select"
-msgstr "Cancella"
+msgstr "Auswaehlen"
 
 #: themes/default/templates/projects/importers/gdocs.html:16
 msgid "From a Google Docs Spreadsheet"
-msgstr "Da un foglio di calcolo Google Docs"
+msgstr "Aus einer Google Docs Tabelle"
 
 #: themes/default/templates/projects/importers/gdocs.html:20
 msgid "Please provide a URL to a Google Drive Spreadsheet with data for"
-msgstr "Per favore fornisci un URL al foglio di lavoro Google Drive con i dati per"
+msgstr "Bitte gib eine URL für eine Google Drive Tabelle mit Daten für an"
 
 #: themes/default/templates/projects/importers/gdocs.html:21
-#, fuzzy
 msgid "The URL of the Google Docs Spreadsheet"
-msgstr "Da un foglio di calcolo Google Docs"
+msgstr "Aus einer Google Docs Tabelle"
 
 #: themes/default/templates/projects/importers/s3.html:21
 msgid "From an Amazon S3 bucket"
@@ -2169,7 +2170,7 @@ msgstr ""
 #: themes/default/templates/projects/importers/s3.html:33
 #, fuzzy
 msgid "Name of the S3 bucket"
-msgstr "Il nome del progetto"
+msgstr "Name des Projekts"
 
 #: themes/default/templates/projects/importers/s3.html:35
 msgid "Search in bucket"
@@ -2219,9 +2220,8 @@ msgid "Basic"
 msgstr ""
 
 #: themes/default/templates/projects/presenters/basic.html:3
-#, fuzzy
 msgid "The most basic template"
-msgstr "Ri-utilizza il template del task Vimeo"
+msgstr ""
 
 #: themes/default/templates/projects/presenters/basic.html:4
 #: themes/default/templates/projects/presenters/image.html:4
@@ -2229,9 +2229,8 @@ msgstr "Ri-utilizza il template del task Vimeo"
 #: themes/default/templates/projects/presenters/pdf.html:4
 #: themes/default/templates/projects/presenters/sound.html:4
 #: themes/default/templates/projects/presenters/video.html:4
-#, fuzzy
 msgid "Complexity"
-msgstr "completato"
+msgstr ""
 
 #: themes/default/templates/projects/presenters/basic.html:5
 #: themes/default/templates/projects/presenters/image.html:5
@@ -2250,24 +2249,21 @@ msgid "HTML and JavaScript"
 msgstr ""
 
 #: themes/default/templates/projects/presenters/basic.html:6
-#, fuzzy
 msgid "Use the Basic template"
-msgstr "Ri-utilizza il template del task Vimeo"
+msgstr ""
 
 #: themes/default/templates/projects/presenters/image.html:2
 #: themes/default/templates/projects/tasks/gdocs-image.html:2
 msgid "Image Pattern Recognition"
-msgstr "Riconoscimento Trama Immagine"
+msgstr "Mustererkennung"
 
 #: themes/default/templates/projects/presenters/image.html:3
-#, fuzzy
 msgid "Re-use the Flickr Person Finder template"
-msgstr "Riutilizza il progetto modello Flickr Person Finder"
+msgstr ""
 
 #: themes/default/templates/projects/presenters/image.html:6
-#, fuzzy
 msgid "Use the Image template"
-msgstr "Ri-utilizza il template del task Vimeo"
+msgstr ""
 
 #: themes/default/templates/projects/presenters/image.html:7
 #: themes/default/templates/projects/presenters/map.html:7
@@ -2280,77 +2276,70 @@ msgstr ""
 #: themes/default/templates/projects/presenters/map.html:2
 #: themes/default/templates/projects/tasks/gdocs-map.html:2
 msgid "Geo-coding"
-msgstr "Geo - codifica"
+msgstr "Geocodierung"
 
 #: themes/default/templates/projects/presenters/map.html:3
-#, fuzzy
 msgid "Re-use the Urban Park template"
-msgstr "Ri-utilizza il template Task Parco Urbano"
+msgstr "Verwende die Vorlage der Urban Park Aufgabe"
 
 #: themes/default/templates/projects/presenters/map.html:5
 msgid "HTML, JavaScript and Geo expertise"
 msgstr ""
 
 #: themes/default/templates/projects/presenters/map.html:6
-#, fuzzy
 msgid "Use the Maps project template"
-msgstr "Ri-utilizza il template del task Vimeo"
+msgstr "Verwende das Maps Aufgabentemplate"
 
 #: themes/default/templates/projects/presenters/pdf.html:2
 #: themes/default/templates/projects/tasks/gdocs-pdf.html:2
 msgid "Transcribing documents"
-msgstr "Trascrivendo documenti"
+msgstr "Dokumente transkribieren"
 
 #: themes/default/templates/projects/presenters/pdf.html:3
 msgid "Re-use the PDF transcription template"
-msgstr "Riutilizza il modello trascrizione PDF"
+msgstr "Benutze die Vorlage der PDF Transkribierung"
 
 #: themes/default/templates/projects/presenters/pdf.html:5
 msgid "HTML, JavaScript and Server side"
 msgstr ""
 
 #: themes/default/templates/projects/presenters/pdf.html:6
-#, fuzzy
 msgid "Use the Transcription template"
-msgstr "Riutilizza il modello trascrizione PDF"
+msgstr ""
 
 #: themes/default/templates/projects/presenters/sound.html:2
 #: themes/default/templates/projects/tasks/gdocs-sound.html:2
 msgid "Sound Pattern Recognition"
-msgstr "Riconoscimento tracciato sonoro"
+msgstr "Audio Mustererkennung"
 
 #: themes/default/templates/projects/presenters/sound.html:3
-#, fuzzy
 msgid "Re-use the SoundCloud template"
-msgstr "Riutilizzare il modello di attività SoundCloud"
+msgstr "Verwende die Vorlage der SoundCloud Aufgabe"
 
 #: themes/default/templates/projects/presenters/sound.html:6
-#, fuzzy
 msgid "Use the Sound template"
-msgstr "Riutilizzare il modello di attività SoundCloud"
+msgstr ""
 
 #: themes/default/templates/projects/presenters/video.html:2
 #: themes/default/templates/projects/tasks/gdocs-video.html:2
 msgid "Video Pattern Recognition"
-msgstr "Video Pattern Recognition"
+msgstr "Video Mustererkennung"
 
 #: themes/default/templates/projects/presenters/video.html:3
-#, fuzzy
 msgid "Re-use the Vimeo template"
-msgstr "Ri-utilizza il template del task Vimeo"
+msgstr "Verwende das Vimeo Aufgabentemplate"
 
 #: themes/default/templates/projects/presenters/video.html:6
-#, fuzzy
 msgid "Use the Video template"
-msgstr "Ri-utilizza il template del task Vimeo"
+msgstr ""
 
 #: themes/default/templates/projects/snippets/options.html:5
 msgid "templates"
-msgstr "template"
+msgstr "verfügbaren Vorlagen"
 
 #: themes/default/templates/projects/snippets/options.html:5
 msgid "for your project"
-msgstr "per il tuo progetto"
+msgstr "für Dein Projekt"
 
 #: themes/default/templates/projects/task/wrong.html:8
 msgid "Error!"
@@ -2366,11 +2355,11 @@ msgstr ""
 
 #: themes/default/templates/projects/tasks/iiif.html:2
 msgid "Import from a IIIF manifest"
-msgstr "Importa da un manifest IIIF"
+msgstr "Import aus einem IIIF-Manifest"
 
 #: themes/default/templates/projects/tasks/csv.html:3
 msgid "Provide a public link to your own CSV file"
-msgstr "Fornisci un link pubblico per il tuo file CSV"
+msgstr "Gib einen öffentlichen Link zu Deiner CSV Datei an"
 
 #: themes/default/templates/projects/tasks/csv.html:5
 msgid ""
@@ -2379,9 +2368,8 @@ msgid ""
 msgstr ""
 
 #: themes/default/templates/projects/tasks/delete.html:12
-#, fuzzy
 msgid "Delete all Tasks and Task Runs"
-msgstr "Esporta tutti gli incarichi e gli sviluppi"
+msgstr ""
 
 #: themes/default/templates/projects/tasks/delete.html:14
 msgid ""
@@ -2389,30 +2377,31 @@ msgid ""
 "            tasks and task runs they will be gone\n"
 "            forever!"
 msgstr ""
-"Se si eliminano tutti i compiti e attività viene eseguita saranno andati "
-"per sempre !"
+"Wenn Du alle Aufgaben und Antworten löschst, so können diese nicht wieder"
+" hergestellt werden!"
 
 #: themes/default/templates/projects/tasks/delete.html:16
 msgid "You cannot undo this action!"
-msgstr "Non puoi annullare questa azione!"
+msgstr "Diese Aktion kann nicht rückgängig gemacht werden"
 
 #: themes/default/templates/projects/tasks/delete.html:20
 msgid ""
 "Are you sure you want to delete ALL the project tasks and associated task"
 " runs?"
 msgstr ""
-"Sei sicuro di voler eliminare tutte le attività del progetto e le piste "
-"di attività associate ?"
+"Bist Du sicher, dass Du ALLE Aufgaben und Antworten des Projektes löschen"
+" möchtest?\"\n"
+"\""
 
 #: themes/default/templates/projects/tasks/delete.html:24
 msgid "Yes"
-msgstr "Si"
+msgstr "Ja"
 
 #: themes/default/templates/projects/tasks/delete.html:26
 msgid ""
 "No, do not delete\n"
 "              anything!"
-msgstr "No, non cancellare nulla!"
+msgstr "Nein, bitte nichts löschen!"
 
 #: themes/default/templates/projects/tasks/dropbox.html:3
 msgid "Use files from your Dropbox account"
@@ -2424,18 +2413,17 @@ msgstr ""
 
 #: themes/default/templates/projects/tasks/epicollect.html:2
 msgid "EpiCollect Plus Project"
-msgstr "EpiCollect progetto più"
+msgstr "EpiCollect Plus Projekt"
 
 #: themes/default/templates/projects/tasks/epicollect.html:3
 msgid "Use an EpiCollect Plus project"
-msgstr "Usa un progetto EpiCollect Plus"
+msgstr "Benutze ein EpiCollect Plus Projekt"
 
 #: themes/default/templates/projects/tasks/epicollect.html:5
-#, fuzzy
 msgid ""
 "Use the EpiCollect\n"
 "      Plus importer"
-msgstr "Usa un progetto EpiCollect Plus"
+msgstr ""
 
 #: themes/default/templates/projects/tasks/flickr.html:3
 msgid "Use images from a Flickr set"
@@ -2446,79 +2434,68 @@ msgid "Use the Flickr importer"
 msgstr ""
 
 #: themes/default/templates/projects/tasks/gdocs-image.html:3
-#, fuzzy
 msgid "Re-use the Flickr Person Finder tasks"
-msgstr "Riutilizza il progetto modello Flickr Person Finder"
+msgstr ""
 
 #: themes/default/templates/projects/tasks/gdocs-image.html:5
-#, fuzzy
 msgid ""
 "Use the\n"
 "      Image tasks"
-msgstr "Usa il modello Image Task"
+msgstr ""
 
 #: themes/default/templates/projects/tasks/gdocs-map.html:3
-#, fuzzy
 msgid "Re-use the Urban Park tasks"
-msgstr "Ri-utilizza il template Task Parco Urbano"
+msgstr ""
 
 #: themes/default/templates/projects/tasks/gdocs-map.html:5
-#, fuzzy
 msgid ""
 "Use the\n"
 "      Mapping tasks"
-msgstr "Usa il template Mappatura"
+msgstr "Benutze die Kartenvorlage"
 
 #: themes/default/templates/projects/tasks/gdocs-pdf.html:3
-#, fuzzy
 msgid "Re-use the PDF transcription tasks"
-msgstr "Riutilizza il modello trascrizione PDF"
+msgstr ""
 
 #: themes/default/templates/projects/tasks/gdocs-pdf.html:5
-#, fuzzy
 msgid ""
 "Use the\n"
 "      Transcription tasks"
-msgstr "Usa il modello Trascrizione"
+msgstr ""
 
 #: themes/default/templates/projects/tasks/gdocs-sound.html:3
-#, fuzzy
 msgid "Re-use the SoundCloud tasks"
-msgstr "Riutilizzare il modello di attività SoundCloud"
+msgstr ""
 
 #: themes/default/templates/projects/tasks/gdocs-sound.html:5
-#, fuzzy
 msgid ""
 "Use the\n"
 "      Sound tasks"
-msgstr "Usa il modello SoundCloud Task"
+msgstr ""
 
 #: themes/default/templates/projects/tasks/gdocs-video.html:3
-#, fuzzy
 msgid "Re-use the Vimeo tasks"
-msgstr "Ri-utilizza il template del task Vimeo"
+msgstr ""
 
 #: themes/default/templates/projects/tasks/gdocs-video.html:5
-#, fuzzy
 msgid ""
 "Use the\n"
 "      Video tasks"
-msgstr "Usa il template del task Video"
+msgstr ""
 
 #: themes/default/templates/projects/tasks/gdocs.html:2
 msgid "Google Drive Spreadsheet"
-msgstr "Foglio di calcolo Google Drive"
+msgstr "Google Drive Tabelle"
 
 #: themes/default/templates/projects/tasks/gdocs.html:3
 msgid "Import a Google Drive Spreadsheet"
-msgstr "Importa un foglio di calcolo Google Drive"
+msgstr "Importiere Google Drive Tabelle"
 
 #: themes/default/templates/projects/tasks/gdocs.html:5
-#, fuzzy
 msgid ""
 "Use the Google Drive\n"
 "      importer"
-msgstr "Usa il template Google Drive"
+msgstr "Benutze die Google Drive Vorlage"
 
 #: themes/default/templates/projects/tasks/s3.html:2
 msgid "S3"
@@ -2531,7 +2508,7 @@ msgstr ""
 #: themes/default/templates/projects/tasks/s3.html:5
 #, fuzzy
 msgid "Use the Amazon S3 importer"
-msgstr "Usa il template Google Drive"
+msgstr "um den Autoimporter einzurichten"
 
 #: themes/default/templates/projects/tasks/twitter.html:3
 msgid "Import tweets from a search or a user account"
@@ -2540,69 +2517,68 @@ msgstr ""
 #: themes/default/templates/projects/tasks/twitter.html:5
 #, fuzzy
 msgid "Use the Twitter importer"
-msgstr "Usa il template Google Drive"
+msgstr "um den Autoimporter einzurichten"
 
 #: themes/default/templates/stats/global.html:38
 msgid "General Statistics"
-msgstr "Statistiche generali"
+msgstr "Allgemeine Statistik"
 
 #: themes/default/templates/stats/global.html:46
 msgid "Anonymous users"
-msgstr "Utenti anonimi"
+msgstr "Anonyme Benutzer"
 
 #: themes/default/templates/stats/global.html:47
 msgid "Authenticated users"
-msgstr "Utenti autenticati"
+msgstr "Authentifizierte Benutzer"
 
 #: themes/default/templates/stats/global.html:48
 #: themes/default/templates/stats/global.html:94
 msgid "Total"
-msgstr "Totale"
+msgstr "Insgesamt"
 
 #: themes/default/templates/stats/global.html:52
 msgid "Top 5 Users in the last 24 hours"
-msgstr "Top 5 utenti in ultime 24 ore"
+msgstr "Top 5 Beitragende in den letzten 24 Stunden"
 
 #: themes/default/templates/stats/global.html:55
 msgid "with"
-msgstr "con"
+msgstr "mit"
 
 #: themes/default/templates/stats/global.html:55
 msgid "contributed answers"
-msgstr "risposte contribuite"
+msgstr "erledigten Aufgaben"
 
 #: themes/default/templates/stats/global.html:60
 msgid "No active users in the last 24 hours"
-msgstr "Nessun utente attivo nelle ultime 24 ore"
+msgstr "Keine aktiven Beitragenden in den letzten 24 Stunden"
 
 #: themes/default/templates/stats/global.html:92
 msgid "Published Projects"
-msgstr "Progetti pubblicati"
+msgstr "Veröffentlichte Projekte"
 
 #: themes/default/templates/stats/global.html:97
 msgid "Top 5 projects in the last 24 hours"
-msgstr "Top 5 progetti nelle ultime 24 ore"
+msgstr "Top 5 Projekte der letzten 24 Stunden"
 
 #: themes/default/templates/stats/global.html:105
-#, fuzzy
 msgid "No active projects in the last 24 hours"
-msgstr "Nessun progetto attivo nelle ultime 24 ore"
+msgstr "Keine aktiven Projekte in den letzten 24 Stunden"
 
 #: themes/default/templates/stats/global.html:135
 msgid "Tasks and Answers"
-msgstr "Processi e risposte"
+msgstr "Aufgaben und Antworten"
 
 #: themes/default/templates/stats/global.html:138
 msgid "Number of Tasks"
-msgstr "Numero di compiti"
+msgstr "Anzahl der Aufgaben"
 
 #: themes/default/templates/stats/global.html:139
 msgid "Number of Task Runs"
-msgstr "Numero di Task Runs"
+msgstr "Anzahl der Antworten"
 
 #: themes/default/templates/stats/global.html:167
 msgid "Anonymous Volunteers"
-msgstr "Volontari Anonimi"
+msgstr "Anonyme Beitragende"
 
 #: themes/default/templates/stats/index.html:13
 msgid "Community Leaderboard"
@@ -2610,360 +2586,366 @@ msgstr "Community Leaderboard"
 
 #: themes/default/templates/stats/index.html:18
 msgid "Name"
-msgstr "Nome"
+msgstr "Name"
 
 #: themes/default/templates/stats/index.html:19
 msgid "Score"
-msgstr "Punteggio"
+msgstr "Wertung"
+
+#~ msgid "German"
+#~ msgstr ""
 
 #~ msgid ""
 #~ msgstr ""
 
 #~ msgid "Oops! It looks like the file is empty."
-#~ msgstr "Oops! Sembra che il file sia vuoto."
+#~ msgstr "Uhps! Diese Datei enthält keine Einträge."
 
 #~ msgid "Task imported successfully!"
-#~ msgstr "Processo importato con successo!"
+#~ msgstr "Aufgabe erfolgreich importiert!"
 
-#~ msgid "The file you uploaded has two headers with the same name."
-#~ msgstr "Il file che hai caricato ha due intestazioni con lo stesso nome"
-
-#~ msgid "Oops! That file doesn't look like the right file."
-#~ msgstr "Oops! Quel file non sembra il file giusto"
-
-#~ msgid "It looks like there were no new records to import"
-#~ msgstr "Ops! Non sembrano esserci nuovi documenti da importare."
-
-#~ msgid "new tasks were imported successfully"
-#~ msgstr "Compiti importato con successo"
-
-#~ msgid "new task was imported successfully"
-#~ msgstr "Compiti importato con successo"
-
-#~ msgid "Name is already taken."
-#~ msgstr "Scegliere un altro nome."
-
-#~ msgid "Short Name"
-#~ msgstr "Nome"
-
-#~ msgid "Short Name is already taken."
-#~ msgstr "Nome breve è già stato preso."
-
-#~ msgid "Long Description"
-#~ msgstr "Descrizione esaustiva"
-
-#~ msgid "You must provide a description."
-#~ msgstr "Dovrebbe fornire una descrizione"
-
-#~ msgid "Allow Anonymous Contributors"
-#~ msgstr "Permetti contributi anonimi"
-
-#~ msgid "Category"
-#~ msgstr "Categoria"
-
-#~ msgid "Hide?"
-#~ msgstr "Nascondi?"
-
-#~ msgid "Password (leave blank for no password)"
-#~ msgstr "Password (lasciare vuoto per nessuna password)"
-
-#~ msgid "Webhook"
+#~ msgid "Use the Mprojecting template"
 #~ msgstr ""
 
+#~ msgid "The file you uploaded has two headers with the same name."
+#~ msgstr ""
+
+#~ msgid "Oops! That file doesn't look like the right file."
+#~ msgstr "Hoppla! Diese Datei scheint nicht die richtige zu sein."
+
+#~ msgid "It looks like there were no new records to import"
+#~ msgstr "Es sieht so aus als wenn keine Daten zu importieren waeren"
+
+#~ msgid "new tasks were imported successfully"
+#~ msgstr "Aufgaben erfolgreich improtert!"
+
+#~ msgid "new task was imported successfully"
+#~ msgstr "Aufgaben erfolgreich improtert!"
+
+#~ msgid "Name is already taken."
+#~ msgstr "Der Name ist bereits vergeben."
+
+#~ msgid "Short Name"
+#~ msgstr "Kurzbezeichnung"
+
+#~ msgid "Short Name is already taken."
+#~ msgstr "Diese Kurzbezeichnung wird bereits verwendet"
+
+#~ msgid "Long Description"
+#~ msgstr "Ausführliche Beschreibung"
+
+#~ msgid "You must provide a description."
+#~ msgstr "Sie müssen eine Beschreibung angeben."
+
+#~ msgid "Allow Anonymous Contributors"
+#~ msgstr "Beiträge von anonymen Teilnehmern zulassen"
+
+#~ msgid "Category"
+#~ msgstr "Kategorie"
+
+#~ msgid "Hide?"
+#~ msgstr "Verstecken?"
+
+#~ msgid "Password (leave blank for no password)"
+#~ msgstr "Passwort (leer lassen, falls kein Passwort)"
+
+#~ msgid "Webhook"
+#~ msgstr "Webhook"
+
 #~ msgid "Task IDs"
-#~ msgstr "Nomi dei lavori"
+#~ msgstr "Aufgaben IDs"
 
 #~ msgid "Title"
-#~ msgstr "Titolo"
+#~ msgstr "Titel"
 
 #~ msgid "You must enter a title for the post."
-#~ msgstr "Bisogna introdurre un titolo per il messaggio"
+#~ msgstr "Sie müssen einen Titel für den Post eingeben."
 
 #~ msgid "Body"
-#~ msgstr "Corpo"
+#~ msgstr "Haupttext"
 
 #~ msgid "You must enter some text for the post."
-#~ msgstr "Inserire del testo per il post"
+#~ msgstr "Sie müssen einen Text für den Post eingeben."
 
 #~ msgid "Password"
-#~ msgstr "Password"
+#~ msgstr "Passwort"
 
 #~ msgid "You must enter a password"
-#~ msgstr "Bisogna introdurre una chiave di accesso"
+#~ msgstr "Sie müssen ein Passwort eingeben"
 
 #~ msgid "You must provide a URL"
-#~ msgstr "Bisogna fornire una URL"
+#~ msgstr "Sie müssen eine URL angeben"
 
 #~ msgid "Oops! That's not a valid URL. You must provide a valid URL"
-#~ msgstr "OOps! Questa non é una URL valida. Bisogna fornire una URL valida"
+#~ msgstr "Hoppla! Dies ist keine gültige URL. Sie müssen eine gültige URL angeben"
 
 #~ msgid "URL"
 #~ msgstr "URL"
 
 #~ msgid "You must provide an EpiCollect Plus project name"
-#~ msgstr "Bisogna dare un nome Form per il progetto "
+#~ msgstr "Sie müssen einen EpiCollect Plus Projektnamen angeben"
 
 #~ msgid "You must provide a Form name for the project"
-#~ msgstr "Bisogna dare un nome Form per il progetto "
+#~ msgstr "Sie müssen einen Namen für das Formular des Projektes angeben"
 
 #~ msgid "Project Name"
-#~ msgstr "Nome del progetto"
+#~ msgstr "Projektname"
 
 #~ msgid "Form name"
-#~ msgstr "Nome Form"
+#~ msgstr "Formularname"
 
 #~ msgid "You must provide a valid Flickr album ID"
-#~ msgstr "È necessario fornire una password"
+#~ msgstr "Sie müssen eine gültige Flickr Album ID angeben"
 
 #~ msgid "Album ID"
-#~ msgstr ""
+#~ msgstr "Album ID"
 
 #~ msgid "The e-mail is required"
-#~ msgstr "È necessaria l'e-mail"
+#~ msgstr "Die E-Mail Adresse ist erforderlich"
 
 #~ msgid "You must provide a password"
-#~ msgstr "È necessario fornire una password"
+#~ msgstr "Sie müssen ein Passwort angeben"
 
 #~ msgid "Full name must be between 3 and 35 characters long"
-#~ msgstr "Il nome completo deve essere lungo da 3 a 35 caratteri"
+#~ msgstr "Der vollständige Name muss zwischen 3 und 35 Zeichen lang sein"
 
 #~ msgid "Full name"
-#~ msgstr "Nome completo"
+#~ msgstr "Voller Name"
 
 #~ msgid "User name must be between 3 and 35 characters long"
-#~ msgstr "Il nome utente deve essere lungo da 3 a 35 caratteri"
+#~ msgstr "Der Benutzername muss zwischen 3 und 35 Zeichen lang sein"
 
 #~ msgid "The user name is already taken"
-#~ msgstr "Il nome utente è gia definito"
+#~ msgstr "Dieser Benutzername ist bereits vergeben"
 
 #~ msgid "User name"
-#~ msgstr "Nome utente"
+#~ msgstr "Benutzername"
 
 #~ msgid "Email must be between 3 and 35 characters long"
-#~ msgstr "L' E-mail deve essere lunga da 3 a 35 caratteri"
+#~ msgstr "E-Mail Adresse muss zwischen 3 und 35 Zeichen lang sein"
 
 #~ msgid "Email is already taken"
-#~ msgstr "E-mail non disponibile"
+#~ msgstr "Die E-Mail Adresse ist bereits vergeben"
 
 #~ msgid "Email Address"
-#~ msgstr "Indirizzo email"
+#~ msgstr "E-Mail Adresse"
 
 #~ msgid "Password cannot be empty"
-#~ msgstr "La password deve contenere almeno un carattere"
+#~ msgstr "Das Passwort darf nicht leer sein"
 
 #~ msgid "Passwords must match"
-#~ msgstr "Le password non corrispondono"
+#~ msgstr "Die Passwörter müssen übereinstimmen"
 
 #~ msgid "New Password"
-#~ msgstr "Nuova password"
+#~ msgstr "Neues Passwort"
 
 #~ msgid "Repeat Password"
-#~ msgstr "Ripetere password"
+#~ msgstr "Passwort wiederholen"
 
 #~ msgid "Username"
-#~ msgstr "Nome utente"
+#~ msgstr "Benutzername"
 
 #~ msgid "Get email notifications"
-#~ msgstr ""
+#~ msgstr "E-Mail Benachrichtigungen"
 
 #~ msgid "Language"
-#~ msgstr "Lingua"
+#~ msgstr "Sprache"
 
 #~ msgid "CKAN API Key"
 #~ msgstr "CKAN API Key"
 
 #~ msgid "Privacy Mode"
-#~ msgstr "Privacy Mode"
+#~ msgstr "Privater Modus"
 
 #~ msgid "English"
-#~ msgstr "Inglese"
+#~ msgstr "Englisch"
 
 #~ msgid "Spanish"
-#~ msgstr "Spagnolo"
+#~ msgstr "Spanisch"
 
 #~ msgid "French"
-#~ msgstr "Francese"
-
-#~ msgid "German"
-#~ msgstr ""
+#~ msgstr "Französisch"
 
 #~ msgid "Italian"
 #~ msgstr ""
 
 #~ msgid "Current password"
-#~ msgstr "Password attuale"
+#~ msgstr "Aktuelles Passwort"
 
 #~ msgid "New password"
-#~ msgstr "Nuova password"
+#~ msgstr "Neues Passwort"
 
 #~ msgid "Repeat password"
-#~ msgstr "Ripetere password"
+#~ msgstr "Passwort wiederholen"
 
 #~ msgid "Avatar"
 #~ msgstr "Avatar"
 
 #~ msgid "This item already exists"
-#~ msgstr "Questo elemento esiste già"
+#~ msgstr "Dieses Element existiert bereits"
 
 #~ msgid "%sand space symbols are forbidden"
-#~ msgstr "Il simbolo %s e gli spazi non sono permessi"
+#~ msgstr "%sund Leerzeichen sind verboten"
 
 #~ msgid "Only comma separated values are allowed, no spaces"
-#~ msgstr "Sono permessi solo valori separati da virgola, non spazi"
+#~ msgstr "Nur Komma als Trennzeichen erlaubt, keine Leerzeichen"
 
 #~ msgid "Invalid URL"
-#~ msgstr ""
+#~ msgstr "Ungültige URL"
 
 #~ msgid "Connection error"
-#~ msgstr ""
+#~ msgstr "Verbindungsfehler"
 
 #~ msgid "This name is used by the system."
-#~ msgstr ""
+#~ msgstr "Dieser Name ist vom System reserviert."
 
 #~ msgid "my current password"
-#~ msgstr "La mia password attuale"
+#~ msgstr "Aktuelles Passwort"
 
 #~ msgid " Reset API Key"
-#~ msgstr "Resetta la Chiave API"
+#~ msgstr " API Schlüssel zurücksetzen"
 
 #~ msgid "Reset the API Key"
-#~ msgstr "Resetta la Chiave API"
+#~ msgstr "API Schlüssel zurücksetzen"
 
 #~ msgid " Change your Password"
-#~ msgstr "Cambia la tua password"
+#~ msgstr " Passwort ändern"
 
 #~ msgid "Welcome back"
-#~ msgstr "Ben tornato"
+#~ msgstr "Willkommen zurück"
 
 #~ msgid "Ooops, Incorrect email/password"
-#~ msgstr "Ooops, email o password non corretti"
+#~ msgstr "Uups, falsche E-Mail oder falsches Passwort"
 
 #~ msgid "Please correct the errors"
-#~ msgstr "Per favore correggi gli errori"
+#~ msgstr "Bitte korrigiere die Fehler"
 
 #~ msgid "You are now signed out"
-#~ msgstr "Ora sei uscito"
+#~ msgstr "Du bist jetzt abgemeldet"
 
 #~ msgid "Register"
-#~ msgstr "Register"
+#~ msgstr "Registrieren"
 
 #~ msgid "Subscribe to our Newsletter"
 #~ msgstr ""
 
 #~ msgid "Thanks for signing-up"
-#~ msgstr "Grazie per esserti registrato"
+#~ msgstr "Danke für die Anmeldung"
 
 #~ msgid "Your email has been validated."
-#~ msgstr "Il tuo profilo è stato aggiornato!"
+#~ msgstr ""
 
 #~ msgid "Profile"
-#~ msgstr "Profilo"
+#~ msgstr "Profil"
 
 #~ msgid "Your profile has been updated!"
-#~ msgstr "Il tuo profilo è stato aggiornato!"
+#~ msgstr "Dein Profil wurde aktualisiert"
 
 #~ msgid "Yay, you changed your password succesfully!"
-#~ msgstr "Bene, hai cambiato la tua password correttamente!"
+#~ msgstr "Du hast Dein Passwort erfolgreich geändert."
 
 #~ msgid "Your current password doesn't match the one in our records"
 #~ msgstr ""
 
 #~ msgid "You reset your password successfully!"
-#~ msgstr "Hai reimpostato la password correttamente!"
+#~ msgstr "Du hast Dein Passwort erfolgreich zurückgesetzt!"
 
 #~ msgid "We've send you an email with account recovery instructions!"
-#~ msgstr "Ti abbiamo mandato una mail con le istruzione per recuperare l'account"
+#~ msgstr ""
 
 #~ msgid "Something went wrong, please correct the errors on the form"
-#~ msgstr "Qualcosa è andato storto, per favore correggi gli errori nella forma"
+#~ msgstr "Ein Fehler ist aufgetreten. Bitte berichtige die Fehler im Formular"
 
 #~ msgid "New API-KEY generated"
-#~ msgstr "Generata nuova API-KEY"
+#~ msgstr "Neuer API-Schlüssel generiert"
 
 #~ msgid "Category added"
-#~ msgstr "Categoria aggiunta"
+#~ msgstr "Kategorie hinzugefügt"
 
 #~ msgid "Category deleted"
-#~ msgstr "Categoria cancellato"
+#~ msgstr "Kategorie gelöscht"
 
 #~ msgid "Category updated"
-#~ msgstr "Categoria aggiornata"
+#~ msgstr "Kategorie aktualisiert"
 
 #~ msgid "Project created!"
-#~ msgstr "Progetto creato!"
+#~ msgstr "Projekt angelegt"
 
 #~ msgid "You can check the "
-#~ msgstr "È possibile controllare il"
+#~ msgstr "Du kannst Dir die"
 
 #~ msgid "Guide and Documentation"
-#~ msgstr "la Guida e la Documentazione"
+#~ msgstr "Anleitung und Dokumentation ansehen zum "
 
 #~ msgid "for adding tasks, a thumbnail, using PyBossa.JS, etc."
-#~ msgstr "per aggiungere processi, una miniatura, usare PyBossa.JS, etc."
+#~ msgstr ""
 
 #~ msgid "Task presenter added!"
-#~ msgstr "Presentatore di Task aggiunto!"
+#~ msgstr "Aufgabenpräsentation hinzugefügt!"
 
 #~ msgid "<strong>Note</strong> You will need to upload the tasks using the"
-#~ msgstr "<strong>Nota</strong> Dovrai caricare i tasks usando"
+#~ msgstr "<strong>Beachte</strong> Du musst Aufgaben hochladen, um den"
 
 #~ msgid "CSV importer"
-#~ msgstr "CSV importatore"
+#~ msgstr "CSV Import zu nutzen"
 
 #~ msgid "Project deleted!"
-#~ msgstr "Progetto cancellato!"
+#~ msgstr "Projekt gelöscht!"
 
 #~ msgid "Project updated!"
-#~ msgstr "Progetto aggiornato!"
+#~ msgstr "Projekt aktualisiert!"
 
 #~ msgid "You must provide a file to change the avatar"
-#~ msgstr "Devi fornire un file per cambiare l'avatar"
+#~ msgstr ""
 
 #~ msgid "Importing tasks, this may take a while, wait..."
-#~ msgstr "Sto importando i processi, potrebbe volerci un po', attendi..."
+#~ msgstr "Importiere Aufgaben, dies kann eine Weile Dauern..."
 
 #~ msgid "Success! Tasks will be imported daily."
 #~ msgstr ""
 
 #~ msgid "Sorry, incorrect password"
-#~ msgstr "La mia password attuale"
+#~ msgstr ""
 
 #~ msgid "All the tasks and associated task runs have been deleted"
-#~ msgstr "Tutti i tasks e le task runs associate sono stati cancellati"
+#~ msgstr "Alle Aufgaben und die zugehörigen Antworten wurden gelöscht"
 
 #~ msgid "Exporting data..., this may take a while"
-#~ msgstr "Esportazione dati ... , questo potrebbe richiedere un po '"
+#~ msgstr "Daten exportieren..., das kann einen Moment dauern"
 
 #~ msgid "Data exported to "
-#~ msgstr "Dati esportati a"
+#~ msgstr "Daten exportiert nach "
 
 #~ msgid "Redundancy of Tasks updated!"
-#~ msgstr "Ridondanza dei compiti aggiornato !"
+#~ msgstr "Redendanz der Antworten aktualisiert!"
 
 #~ msgid "Project Task Scheduler updated!"
-#~ msgstr "Organizzatore Task Progetto aggiornato!"
+#~ msgstr "Projektaufgabenplanung aktualisiert"
 
 #~ msgid "Task priority has been changed"
-#~ msgstr "La priorità dei Task è stata aggiornata"
+#~ msgstr "Aufgabenpriorität wurden geändert"
 
 #~ msgid "Write a new post"
-#~ msgstr "Scrivi un nuovo post"
+#~ msgstr "Schreibe einen neuen Blogpost"
 
 #~ msgid "Blog post created!"
-#~ msgstr "Blog messaggio creato !"
+#~ msgstr "Blogpost erstellt!"
 
 #~ msgid "Edit a post"
-#~ msgstr "Modifica un post"
+#~ msgstr "Blogpost bearbeiten"
 
 #~ msgid "Blog post updated!"
-#~ msgstr "Blog post aggiornato !"
+#~ msgstr "Blogpost aktualisiert!"
 
 #~ msgid "Hidden"
-#~ msgstr "Nascosto"
+#~ msgstr "Versteckt"
 
 #~ msgid "No"
-#~ msgstr "No"
+#~ msgstr "Nein"
 
 #~ msgid "Grant Crowdcrafting access to your Flickr albums to select one..."
 #~ msgstr ""
+
+#~ msgid "From a IIIF-Manifest"
+#~ msgstr "Aus einer IIIF-Manifest"
 

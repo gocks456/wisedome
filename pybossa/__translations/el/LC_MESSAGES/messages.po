@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.1.1\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: themes/default/templates/_navbar.html:12
 #: themes/default/templates/account/index.html:14
@@ -24,8 +24,8 @@ msgid "Community"
 msgstr "Κοινότητα"
 
 #: themes/default/templates/_navbar.html:13
-#: themes/default/templates/base.html:78
 #: themes/default/templates/account/projects.html:13
+#: themes/default/templates/base.html:78
 #: themes/default/templates/stats/global.html:89
 msgid "Projects"
 msgstr "Προγράμματα"
@@ -290,6 +290,13 @@ msgstr "Επαναφορά του κωδικού μου"
 #: themes/default/templates/account/update.html:65
 #: themes/default/templates/account/update.html:78
 #: themes/default/templates/admin/update_category.html:23
+#: themes/default/templates/projects/importers/csv.html:24
+#: themes/default/templates/projects/importers/dropbox.html:31
+#: themes/default/templates/projects/importers/epicollect.html:26
+#: themes/default/templates/projects/importers/flickr.html:35
+#: themes/default/templates/projects/importers/gdocs.html:24
+#: themes/default/templates/projects/importers/s3.html:37
+#: themes/default/templates/projects/importers/twitter.html:44
 #: themes/default/templates/projects/new.html:27
 #: themes/default/templates/projects/new_blogpost.html:22
 #: themes/default/templates/projects/password.html:20
@@ -299,13 +306,6 @@ msgstr "Επαναφορά του κωδικού μου"
 #: themes/default/templates/projects/task_scheduler.html:36
 #: themes/default/templates/projects/update.html:48
 #: themes/default/templates/projects/update_blogpost.html:24
-#: themes/default/templates/projects/importers/csv.html:24
-#: themes/default/templates/projects/importers/dropbox.html:31
-#: themes/default/templates/projects/importers/epicollect.html:26
-#: themes/default/templates/projects/importers/flickr.html:35
-#: themes/default/templates/projects/importers/gdocs.html:24
-#: themes/default/templates/projects/importers/s3.html:37
-#: themes/default/templates/projects/importers/twitter.html:44
 msgid "Cancel"
 msgstr "Ακύρωση"
 
@@ -458,6 +458,8 @@ msgstr "Ανεβάστε"
 
 #: themes/default/templates/account/update.html:47
 #: themes/default/templates/account/update.html:77
+#: themes/default/templates/projects/update.html:47
+#, fuzzy
 msgid "Save the changes"
 msgstr "Αποθήκευση αλλαγών"
 
@@ -1160,9 +1162,9 @@ msgstr "Επεξεργασία κομιστή εργασιών"
 #: themes/default/templates/projects/importers/epicollect.html:14
 #: themes/default/templates/projects/importers/flickr.html:15
 #: themes/default/templates/projects/importers/gdocs.html:14
+#: themes/default/templates/projects/importers/iiif.html:5
 #: themes/default/templates/projects/importers/s3.html:20
 #: themes/default/templates/projects/importers/twitter.html:14
-#: themes/default/templates/projects/importers/iiif.html:5
 msgid "Import tasks"
 msgstr "Εισαγωγή εργασιών"
 
@@ -1626,9 +1628,9 @@ msgstr "Οι 5 Κορυφαίοι χρήστες"
 msgid "Setup task autoimporter"
 msgstr "Εγκατάσταση αυτο-εισαγωγέα εργασιών"
 
+#: themes/default/templates/projects/snippets/options.html:4
 #: themes/default/templates/projects/task_autoimport_options.html:16
 #: themes/default/templates/projects/task_import_options.html:16
-#: themes/default/templates/projects/snippets/options.html:4
 msgid "Use one of the following available"
 msgstr "Χρησιμοποιήστε έναν από τους ακόλουθους διαθέσιμους "
 
@@ -1680,8 +1682,8 @@ msgstr "Ο αριθμός απαντήσεων ανά εργασία που θέ
 msgid "Set redundancy"
 msgstr "Ορίστε τον πλεονασμό "
 
-#: themes/default/templates/projects/task_presenter_editor.html:28
 #: themes/default/templates/projects/snippets/options.html:3
+#: themes/default/templates/projects/task_presenter_editor.html:28
 msgid "Task Presenter Editor"
 msgstr "Εκδότης Κομιστή Εργασιών"
 
@@ -1854,7 +1856,6 @@ msgstr "Πλεονασμός"
 msgid "Import tasks from templates, GDrive, or CSV"
 msgstr "Εισαγωγή εργασιών από πρότυπα, GDrive ή CSV  "
 
-#: themes/default/templates/projects/tasks.html:22
 #: themes/default/templates/projects/importers/csv.html:23
 #: themes/default/templates/projects/importers/dropbox.html:30
 #: themes/default/templates/projects/importers/epicollect.html:25
@@ -1862,6 +1863,7 @@ msgstr "Εισαγωγή εργασιών από πρότυπα, GDrive ή CSV  
 #: themes/default/templates/projects/importers/gdocs.html:23
 #: themes/default/templates/projects/importers/s3.html:36
 #: themes/default/templates/projects/importers/twitter.html:43
+#: themes/default/templates/projects/tasks.html:22
 msgid "Import"
 msgstr "Εισαγωγή"
 
@@ -2002,11 +2004,6 @@ msgstr "Εξηγείστε το πρόγραμμα (χρησιμοποιώντα
 msgid "Check if you want to allow anonymous users contribute to your project"
 msgstr ""
 
-#: themes/default/templates/projects/update.html:47
-#, fuzzy
-msgid "Save the changes"
-msgstr "Αποθήκευση αλλαγών"
-
 #: themes/default/templates/projects/update_blogpost.html:14
 msgid "Edit the blog post"
 msgstr "Επεξεργαστείετε την ανάρτηση του blog "
@@ -2064,9 +2061,9 @@ msgstr ""
 #: themes/default/templates/projects/importers/epicollect.html:20
 #: themes/default/templates/projects/importers/flickr.html:31
 #: themes/default/templates/projects/importers/gdocs.html:20
+#: themes/default/templates/projects/importers/iiif.html:16
 #: themes/default/templates/projects/importers/s3.html:23
 #: themes/default/templates/projects/importers/twitter.html:34
-#: themes/default/templates/projects/importers/iiif.html:16
 msgid "For more information, please look at"
 msgstr "Για περισσότερες πληροφορίες, παρακαλούμε να δείτε στο"
 
@@ -2075,9 +2072,9 @@ msgstr "Για περισσότερες πληροφορίες, παρακαλο
 #: themes/default/templates/projects/importers/epicollect.html:20
 #: themes/default/templates/projects/importers/flickr.html:31
 #: themes/default/templates/projects/importers/gdocs.html:20
+#: themes/default/templates/projects/importers/iiif.html:16
 #: themes/default/templates/projects/importers/s3.html:23
 #: themes/default/templates/projects/importers/twitter.html:35
-#: themes/default/templates/projects/importers/iiif.html:16
 msgid "the documentation"
 msgstr "η καταγραφή"
 

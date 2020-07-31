@@ -376,6 +376,42 @@ def get_all_complete(category=None):
         projects.append(Project().to_public_json(project)) #XXX
     return projects
 
+@memoize(timeout=timeouts.get('STATS_FRONTPAGE_TIMEOUT'))
+def get_all_before_score(category=None):
+    """Return list of all before_score."""
+    sql = text('''
+               SELECT project.id, project.name, project.short_name,project.created,
+                   project.description, project.info, project.updated, project.all_point, project.condition, project.complete,
+                   "user".fullname AS owner, project.category_id
+               FROM "user", project, project_stats ps
+               WHERE project.owner_id="user".id
+               AND "user".restrict=false
+               AND ps.project_id = project.id
+               AND ps.n_tasks!=ps.n_results
+               AND project.complete=true;
+               ''')
+
+    results = session.execute(sql)
+    projects = []
+    for row in results:
+        project = dict(id=row.id, name=row.name, short_name=row.short_name,
+                       created=row.created,
+                       updated=row.updated,
+                       description=row.description,
+                       owner=row.owner,
+                       last_activity=pretty_date(last_activity(row.id)),
+                       last_activity_raw=last_activity(row.id),
+                       overall_progress=overall_progress(row.id),
+                       n_tasks=n_tasks(row.id),
+                       n_volunteers=n_volunteers(row.id),
+                       info=row.info,
+                       all_point=row.all_point,
+                       condition=row.condition,
+                       category_id=row.category_id,
+                       complete=row.complete)
+        projects.append(Project().to_public_json(project)) #XXX
+    return projects
+
 
 def get_draft(category=None, page=1, per_page=5):
     """Return a list of draft project with a pagination."""
