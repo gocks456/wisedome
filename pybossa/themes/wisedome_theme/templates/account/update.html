@@ -28,11 +28,11 @@ label[for="ckan_api"]
             <section class="account update profile">
                 <h1>{{ _('Update your profile') }}</h1>
 
-                {{ render_form(form, action_url=url_for('account.update_profile', name=current_user.name), action_text=_('Save the changes'), btn_class='btn btn-primary', btn_name='btn', btn_value='Profile')}}
+                {{ render_form(form, action_url=url_for('account.update_profile', name=current_user.name), action_text='저장', btn_class='btn btn-primary', btn_name='btn', btn_value='Profile')}}
 
             </section>
             <section class="account update avatar">
-                <h2>{{_('Update your avatar')}}</h2>
+                <h2>프로필 사진</h2>
                 <div>
                     <img id="uploadPreview" style="max-width: 100%">
                 </div>
@@ -56,7 +56,7 @@ label[for="ckan_api"]
             <section class="account update password">
                 <h2 {% if password_form.errors %} name="password" {%endif%}>{{ _('Change your Password') }}</h2>
 
-                {{ render_form(password_form, action_url=url_for('account.update_profile', name=current_user.name), action_text=_('Save the changes'), btn_class='btn btn-primary', btn_name='btn', btn_value='Password')}}
+                {{ render_form(password_form, action_url=url_for('account.update_profile', name=current_user.name), action_text='저장', btn_class='btn btn-primary', btn_name='btn', btn_value='Password')}}
             </section>
             {% endif %}
             <section class="account update external-services" style="display:none">
@@ -65,7 +65,7 @@ label[for="ckan_api"]
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     {{ render_field(form.ckan_api) }}
                     <div class="form-actions">
-                        <button type="submit" name='btn' value="External" class="btn btn-primary" />{{ _('Save the changes') }}</button>
+                        <button type="submit" name='btn' value="External" class="btn btn-primary" />저장</button>
                     </div>
                 </form>
             </section>
@@ -88,12 +88,13 @@ label[for="ckan_api"]
                 </div>
             </section>
             <section class="account delete">
-                <h2>{{_('Delete your account')}}</h2>
+                <h2>계정 삭제</h2>
                 <div class="alert alert-danger">
-					<strong>{{ _('Danger Zone!') }}</strong> {{ _('By deleting your account, all your personal data will be removed from the server and third party services. Your contributions will be anonymized. This operation cannot be undone!') }}
+					<strong>{{ _('Danger Zone!') }}</strong>
+					계정 삭제시 모든 개인 정보와 포인트가 제거됩니다. 그리고 되돌릴 수 없습니다.
                 </div>
                 <div class="form-group">
-                    <input onkeyup="checkEmail(this.value)" class="form-control" id="delete" placeholder="Type your email to confirm that you want to delete it.">
+                    <input onkeyup="checkEmail(this.value)" class="form-control" id="delete" placeholder="이메일을 입력해주세요.">
                     <a id="deleteTrue"  class="btn btn-primary" style="margin-top:10px; display:none;" href="{{url_for('account.delete', name=current_user.name)}}">{{_('Delete')}}</a>
                 </div>
             </section>
