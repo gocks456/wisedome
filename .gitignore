@@ -4,6 +4,7 @@
 pybossa/__pycache__/
 venv
 .venv/
+/project_order/
 
 *.db
 *.pyc
