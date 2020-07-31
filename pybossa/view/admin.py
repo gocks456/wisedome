@@ -253,8 +253,9 @@ def users(user_id=None):
         [ensure_authorized_to('update', found_user) for found_user in found]
         if not found:
             markup = Markup('<strong>{}</strong> {} <strong>{}</strong>')
-            flash(markup.format(gettext("Ooops!"),
-                                gettext("We didn't find a user matching your query:"),
+            #flash(markup.format(gettext("Ooops!"),
+            #                    gettext("We didn't find a user matching your query:"),
+            flash(markup.format(gettext("일치하는 사용자를 찾을 수 없습니다 : "),
                                 form.user.data))
         response = dict(template='/admin/users.html', found=found, users=users,
                         title=gettext("Manage Admin Users"),
@@ -381,10 +382,12 @@ def categories():
                                     description=form.description.data)
                 project_repo.save_category(category)
                 cached_cat.reset()
-                msg = gettext("Category added")
+                #msg = gettext("Category added")
+                msg = gettext("카테고리 추가 완료")
                 flash(msg, 'success')
             else:
-                flash(gettext('Please correct the errors'), 'error')
+                #flash(gettext('Please correct the errors'), 'error')
+                flash(gettext('오류를 수정해주세요'), 'error')
         categories = cached_cat.get_all()
         n_projects_per_category = dict()
         for c in categories:
@@ -420,14 +423,16 @@ def del_category(id):
                     return handle_content_type(response)
                 if request.method == 'POST':
                     project_repo.delete_category(category)
-                    msg = gettext("Category deleted")
+                    #msg = gettext("Category deleted")
+                    msg = gettext("카테고리 삭제 완료")
                     flash(msg, 'success')
                     cached_cat.reset()
                     return redirect_content_type(url_for(".categories"))
             else:
-                msg = gettext('Sorry, it is not possible to delete the only'
-                              ' available category. You can modify it, '
-                              ' click the edit button')
+                #msg = gettext('Sorry, it is not possible to delete the only'
+                #              ' available category. You can modify it, '
+                #              ' click the edit button')
+                msg = gettext('죄송합니다. 하나의 카테고리는 반드시 존재 해야 합니다.')
                 flash(msg, 'warning')
                 return redirect_content_type(url_for('.categories'))
         else:
@@ -465,11 +470,13 @@ def update_category(id):
                                             short_name=slug)
                     project_repo.update_category(new_category)
                     cached_cat.reset()
-                    msg = gettext("Category updated")
+                    #msg = gettext("Category updated")
+                    msg = gettext("카테고리 업데이트 완료")
                     flash(msg, 'success')
                     return redirect_content_type(url_for(".categories"))
                 else:
-                    msg = gettext("Please correct the errors")
+                    #msg = gettext("Please correct the errors")
+                    msg = gettext("오류를 수정해주세요")
                     flash(msg, 'success')
                     response = dict(template='admin/update_category.html',
                                     title=gettext('Update Category'),
@@ -519,7 +526,8 @@ def new_announcement():
         return respond()
 
     if not form.validate():
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext("오류를 수정해주세요"), 'error')
         return respond()
 
     announcement = Announcement(title=form.title.data,
@@ -559,7 +567,8 @@ def update_announcement(id):
         return respond()
 
     if not form.validate():
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
         return respond()
 
     ensure_authorized_to('update', announcement)

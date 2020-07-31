@@ -140,7 +140,7 @@ msgstr "종료"
 
 #: themes/default/templates/account/_helpers.html:14
 msgid "tasks for the @PyBossa project:"
-msgstr "@PyBossa 프로젝트를 위한 일감"
+msgstr "@PyBossa 프로젝트를 위한 작업"
 
 #: themes/default/templates/account/_helpers.html:14
 msgid "Do you want to help?"
@@ -175,7 +175,7 @@ msgstr "점수로"
 
 #: themes/default/templates/account/_helpers.html:59
 msgid "contributed tasks"
-msgstr "참여 일감"
+msgstr "참여 작업"
 
 #: themes/default/templates/account/_helpers.html:67
 msgid "The user has not contributed to any tasks yet"
@@ -639,7 +639,7 @@ msgstr "갱신된 프로젝트"
 #: themes/default/templates/admin/dashboard.html:70
 #, fuzzy
 msgid "New tasks"
-msgstr "새로운 일감"
+msgstr "새로운 작업"
 
 #: themes/default/templates/admin/dashboard.html:79
 #, fuzzy
@@ -887,7 +887,7 @@ msgstr "Pybossa는 프로젝트별 통계를 제공합니다. 뿐만 아니라"
 
 #: themes/default/templates/home/_about.html:23
 msgid "general overview about the system like total number of users, tasks, etc"
-msgstr "사용자수, 일감수 등과 같은 일반적인 정보"
+msgstr "사용자수, 작업수 등과 같은 일반적인 정보"
 
 #: themes/default/templates/home/_about.html:25
 msgid "Check the global statistics"
@@ -983,7 +983,7 @@ msgstr "가장 활동적인 사용자"
 
 #: themes/default/templates/home/index.html:80
 msgid "Submitted Tasks"
-msgstr "제출된 일감"
+msgstr "제출된 작업"
 
 #: themes/default/templates/home/index.html:84
 #: themes/default/templates/projects/_helpers.html:39
@@ -999,7 +999,7 @@ msgstr "제출된 일감"
 #: themes/default/templates/projects/tasks.html:13
 #: themes/default/templates/projects/tasks_browse.html:62
 msgid "Tasks"
-msgstr "일감"
+msgstr "작업"
 
 #: themes/default/templates/home/search.html:7
 msgid "Search Results"
@@ -1120,7 +1120,7 @@ msgstr "프로젝트 상세사항 수정"
 #: themes/default/templates/projects/actions.html:10
 #: themes/default/templates/projects/tasks.html:33
 msgid "Edit the task presenter"
-msgstr "일감 보기 수정"
+msgstr "작업 보기 수정"
 
 #: themes/default/templates/projects/actions.html:11
 #: themes/default/templates/projects/importers/csv.html:14
@@ -1132,7 +1132,7 @@ msgstr "일감 보기 수정"
 #: themes/default/templates/projects/importers/twitter.html:14
 #: themes/default/templates/projects/importers/iiif.html:5
 msgid "Import tasks"
-msgstr "중요 일감"
+msgstr "중요 작업"
 
 #: themes/default/templates/projects/actions.html:12
 #: themes/default/templates/projects/settings.html:20
@@ -1229,14 +1229,14 @@ msgstr "프로젝트 삭제"
 #: themes/default/templates/projects/delete.html:14
 msgid "If you delete the project and its tasks, it will be gone forever!"
 msgstr ""
-"만약 프로젝트와 일감을 삭제하면 되돌릴 수 없습니다."
+"만약 프로젝트와 작업을 삭제하면 되돌릴 수 없습니다."
 
 #: themes/default/templates/projects/delete.html:20
 msgid ""
 "Are you sure you want to delete this project and all its tasks and "
 "associated task runs?"
 msgstr ""
-"정말 프로젝트와 그와 관련된 일감, 답변을 삭제하길 원하시나요?"
+"정말 프로젝트와 그와 관련된 작업, 답변을 삭제하길 원하시나요?"
 
 #: themes/default/templates/projects/delete.html:22
 #, fuzzy
@@ -1249,7 +1249,7 @@ msgstr "아니오, 삭제하지 마세요"
 
 #: themes/default/templates/projects/export.html:13
 msgid "Export All Tasks and Task Runs"
-msgstr "모든 일감과 답변 내보내기"
+msgstr "모든 작업과 답변 내보내기"
 
 #: themes/default/templates/projects/export.html:14
 msgid "You can export and download"
@@ -1263,7 +1263,7 @@ msgstr "모든 것이 가능합니다."
 msgid ""
 "Tasks and Task Runs (the submitted answers by the users) in CSV or JSON "
 "formats."
-msgstr "CSV나 JSON으로 작성된 일감과 답변"
+msgstr "CSV나 JSON으로 작성된 작업과 답변"
 
 #: themes/default/templates/projects/export.html:17
 msgid "Export in CSV format"
@@ -1411,7 +1411,7 @@ msgstr "제출"
 msgid ""
 "Sorry, you've contributed to all the tasks for this project, but this "
 "project still needs more volunteers, so please spread the word!"
-msgstr "죄송합니다. 당신은 이 프로젝트의 일감에 참여해왔습니다.그렇지만 이 프로젝트는 참여자가 더 필요합니다."
+msgstr "죄송합니다. 당신은 이 프로젝트의 작업에 참여해왔습니다.그렇지만 이 프로젝트는 참여자가 더 필요합니다."
 
 #: themes/default/templates/projects/publish.html:12
 #, fuzzy
@@ -1465,7 +1465,7 @@ msgstr "프로젝트 설정"
 #: themes/default/templates/projects/settings.html:19
 #: themes/default/templates/projects/task_settings.html:13
 msgid "Task Settings"
-msgstr "일감 설정"
+msgstr "작업 설정"
 
 #: themes/default/templates/projects/settings.html:21
 msgid "Write a blog post"
@@ -1486,7 +1486,7 @@ msgstr "익명의"
 
 #: themes/default/templates/projects/stats.html:47
 msgid "Average contribution time per task"
-msgstr "일감당 평균 참여시간"
+msgstr "작업 당 평균 참여시간"
 
 #: themes/default/templates/projects/stats.html:48
 #, fuzzy
@@ -1499,7 +1499,7 @@ msgstr "시간당 정답의 분포"
 
 #: themes/default/templates/projects/stats.html:86
 msgid "Completed Tasks in the last 15 days"
-msgstr "지난 15일간 완료된 일감"
+msgstr "지난 15일간 완료된 작업"
 
 #: themes/default/templates/projects/stats.html:86
 #: themes/default/templates/projects/stats.html:157
@@ -1575,7 +1575,7 @@ msgstr "상위 5 사용자"
 
 #: themes/default/templates/projects/task_autoimport_options.html:13
 msgid "Setup task autoimporter"
-msgstr "일감 자동들여오기 설정하기"
+msgstr "작업 자동들여오기 설정하기"
 
 #: themes/default/templates/projects/task_autoimport_options.html:16
 #: themes/default/templates/projects/task_import_options.html:16
@@ -1603,7 +1603,7 @@ msgstr ""
 #: themes/default/templates/projects/task_import_options.html:13
 #: themes/default/templates/projects/tasks.html:20
 msgid "Import Tasks"
-msgstr "일감 추가"
+msgstr "작업 추가"
 
 #: themes/default/templates/projects/task_import_options.html:17
 msgid "to import tasks..."
@@ -1663,7 +1663,7 @@ msgstr ""
 #: themes/default/templates/projects/task_priority.html:14
 #: themes/default/templates/projects/task_settings.html:22
 msgid "Task Priority"
-msgstr "일감 우선순위"
+msgstr "작업 우선순위"
 
 #: themes/default/templates/projects/task_priority.html:15
 msgid "You can change the"
@@ -1874,7 +1874,7 @@ msgstr "각 작업의 정보를 찾을 수 있습니다."
 #: themes/default/templates/projects/tasks_browse.html:29
 #: themes/default/templates/projects/tasks_browse.html:31
 msgid "Task"
-msgstr "일감"
+msgstr "작업"
 
 #: themes/default/templates/projects/tasks_browse.html:18
 msgid "This number identifies the task for the project and it is unique"
@@ -2487,15 +2487,15 @@ msgstr "지난 24시간 동안은 진행 중인 프로젝트가 없습니다."
 
 #: themes/default/templates/stats/global.html:135
 msgid "Tasks and Answers"
-msgstr "일감과 정답자"
+msgstr "작업과 답변"
 
 #: themes/default/templates/stats/global.html:138
 msgid "Number of Tasks"
-msgstr "일감 수"
+msgstr "작업 수"
 
 #: themes/default/templates/stats/global.html:139
 msgid "Number of Task Runs"
-msgstr "진행 중인 일감 수"
+msgstr "진행 중인 작업 수"
 
 #: themes/default/templates/stats/global.html:167
 msgid "Anonymous Volunteers"
@@ -2546,11 +2546,17 @@ msgstr "프로젝트 상세내용"
 #~ msgid "You must provide a description."
 #~ msgstr "Πρέπει να παραθέσετε περιγραφή"
 
-#~ msgid "Allow Anonymous Contributors"
-#~ msgstr "Επιτρέψτε Ανώνυμους Συνειρφέρωντες  "
+msgid "Allow Anonymous Contributors"
+msgstr "익명 사용자 기여 허용"
 
-#~ msgid "Category"
-#~ msgstr "Κατηγορία"
+msgid "Allow ZIP data download"
+msgstr "ZIP 다운로드 허용"
+
+msgid "Project with a password"
+msgstr "프로젝트 비밀번호 설정"
+
+msgid "Category"
+msgstr "카테고리"
 
 #~ msgid "Hide?"
 #~ msgstr "Ελαχιστοποίηση;"
@@ -2654,8 +2660,8 @@ msgstr "비밀번호 다시"
 msgid "Username"
 msgstr "별명"
 
-#~ msgid "Get email notifications"
-#~ msgstr "Θέλω να λαμβάνω ειδοποιήσεις μέσω του ηλεκτρονικού ταχυδρομείου "
+msgid "Get email notifications"
+msgstr "이메일 수신 허용"
 
 msgid "Language"
 msgstr "언어"
@@ -2663,8 +2669,8 @@ msgstr "언어"
 #~ msgid "CKAN API Key"
 #~ msgstr "CKAN API Κλειδί"
 
-#~ msgid "Privacy Mode"
-#~ msgstr "Λειτουργία προστασίας ιδιωτικού απορρήτου"
+msgid "Privacy Mode"
+msgstr "개인 정보 보호 모드"
 
 #~ msgid "English"
 #~ msgstr "Αγγλικά"
@@ -2681,17 +2687,17 @@ msgstr "언어"
 #~ msgid "Italian"
 #~ msgstr "Ιταλικά"
 
-#~ msgid "Current password"
-#~ msgstr "Τρέχοντας κωδικός πρόσβασης"
+msgid "Current password"
+msgstr "현재 비밀번호"
 
-#~ msgid "New password"
-#~ msgstr "Νέος κωδικός"
+msgid "New password"
+msgstr "새로운 비밀번호"
 
-#~ msgid "Repeat password"
-#~ msgstr "Επαναλάβετε τον κωδικό"
+msgid "Repeat password"
+msgstr "재입력"
 
-#~ msgid "Avatar"
-#~ msgstr "Είδωλο"
+msgid "Avatar"
+msgstr "프로필 사진"
 
 #~ msgid "This item already exists"
 #~ msgstr "Αυτό το αρχείο υπάρχει ήδη "
