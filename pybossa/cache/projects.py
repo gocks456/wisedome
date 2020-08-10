@@ -379,6 +379,7 @@ def get_all_complete(category=None):
 @memoize(timeout=timeouts.get('STATS_FRONTPAGE_TIMEOUT'))
 def get_all_before_score(category=None):
     """Return list of all before_score."""
+    """
     sql = text('''
                SELECT project.id, project.name, project.short_name,project.created,
                    project.description, project.info, project.updated, project.all_point, project.condition, project.complete,
@@ -387,9 +388,22 @@ def get_all_before_score(category=None):
                WHERE project.owner_id="user".id
                AND "user".restrict=false
                AND ps.project_id = project.id
-               AND ps.n_tasks!=ps.n_results
-               AND project.complete=true;
+               AND ps.n_tasks<ps.n_results
+               AND project.complete=true
                ''')
+    """
+    sql = text('''
+                SELECT project.id, project.name, project.short_name,project.created,
+                    project.description, project.info, project.updated, project.all_point, project.condition, project.complete,
+                    "user".fullname AS owner, project.category_id
+                FROM "user", project, task t
+                WHERE project.owner_id="user".id
+                AND project.id = t.project_id
+                AND "user".restrict=false
+                AND project.complete=true
+                GROUP BY project.id, owner
+                HAVING count(CASE WHEN (t.score_check = true)then 1 end) != count(t.id);
+                ''')
 
     results = session.execute(sql)
     projects = []
