@@ -45,9 +45,11 @@
 			<h4 class ='col-sm-8' style="margin-bottom:30px;">제한이 필요 없으시다면 빈칸으로 남겨주세요. </h4>
 		</div>
 
-        {{ render_field(form.category_id) }}
+		{{ render_field(form.category_id) }}
+		<div style="display:none;">
         {{ render_checkbox_field(form.allow_anonymous_contributors, class_="", tooltip=_('Check if you want to allow anonymous users contribute to your project')) }}
         {{ render_checkbox_field(form.zip_download, class_="", tooltip=_("Check if you want to disable anonymous users to download project's data")) }}
+		</div>
 		{{ render_checkbox_field(form.protect, id='protect') }}
         <div id='password'>{{ render_field(form.password) }}</div>
         {{ render_field(form.webhook) }}

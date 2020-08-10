@@ -28,17 +28,24 @@
     </div>
 </div>
 <div class="row">
-    <div id="users" class="col-md-6">
+    <!--<div id="users" class="col-md-6">
         {{ render_project_card_option(project, upload_method, title=_('Announcement'), explanation=_('Write new announcement'), link=url_for('admin.announcement'), link_action_text=_('Manage'), icon='user')}}
-    </div>
-	    <div id="exchange" class="col-md-6">
-        {{ render_project_card_option(project, upload_method, title=_('포인트'), explanation=_('포인트 관리'), link=url_for('admin.manage_exchange'), link_action_text=_('포인트 관리'), icon='krw')}}
+	</div>-->
+	<div id="point_log" class="col-md-6">
+        {{ render_project_card_option(project, upload_method, title=_('포인트'), explanation=_('포인트 로그'), link=url_for('admin.show_point_log'), link_action_text=_('포인트 로그'), icon='krw')}}
+	</div>
+	<div id="exchange" class="col-md-6">
+        {{ render_project_card_option(project, upload_method, title=_('환급'), explanation=_('환급 관리'), link=url_for('admin.manage_exchange'), link_action_text=_('환급 관리'), icon='krw')}}
 	</div>
 </div>
 <div class="row">
 	<div id="backup" class="col-md-6">
 		{{ render_project_card_option(project, upload_method, title=_('DB관리'), explanation=_('DB 백업 및 복원'), link=url_for('admin.back_up'), link_action_text=_('백업'), link_two=url_for('admin.restore'), link_action_text_two=_('복원'), icon='hdd-o')}}
 	</div>
+    <!--<div id="point_log" class="col-md-6">
+        {{ render_project_card_option(project, upload_method, title=_('포인트'), explanation=_('포인트 로그'), link=url_for('admin.show_point_log'), link_action_text=_('포인트 로그'), icon='krw')}}
+	</div>-->
+
 </div>
 <div class="row">
     <div class="col-md-12">

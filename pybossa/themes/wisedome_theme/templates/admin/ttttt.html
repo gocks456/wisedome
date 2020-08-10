@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% set active_page = "manage_exchange" %}
+{% set active_page = "point_log" %}
 {% set active_link = "admin" %}
 
 {% block content %}
@@ -14,121 +14,33 @@
 		<h2>환급요청관리</h2>	
 	</div>
 	<div class="col-sm-12 col-md-12">
-		<h3>환급대기</h3>
+		<h3>유저 포인트 내역</h3>
 		<div class="table-responsive">
-			<table id = "waiting" class="table table-hover">
-				<thead>
-					<tr style="background-color:lightgray">
-						<th><input type="checkbox" id="wait_allCheck"/></th>
-						<th>id</th>
-						<th>user</th>
-						<th>예금주</th>
-						<th>은행</th>
-						<th>계좌번호</th>
-						<th>포인트</th>
-						<th>요청일자</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for me in manage_exchange %}
-					<tr>
-						<td><input type="checkbox" name="wait_check" value={{me.id}}></td>
-						<td>{{me.id}}</td>
-						<td>{{me.user}}</td>
-						<td>{{me.account_holder}}</td>
-						<td>{{me.bank}}</td>
-						<td>{{me.account_number}}</td>
-						<td>{{me.point}}</td>
-						<td>{{me.request_time}} </td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			<button style="float:right; margin-top:10px;" type="button" onclick="DownToCsv('waiting','환급 대기',1)">전체다운로드</button>
-			<button style="float:right; margin-top:10px;" type="button" onclick="DownToCsvForChecked('waiting')">체크다운로드</button>
-		</div>
-
-		<h3>환급 처리 중</h3>
-		<div class="table-responsive">
-			<table id = "down_check_table" class="table table-hover">
-				<thead>
-					<tr style="background-color:lightgray">
-						<th><input type="checkbox" id="allcheck"/></th>
-						<th>id</th>
-						<th>user</th>
-						<th>예금주</th>
-						<th>은행</th>
-						<th>계좌번호</th>
-						<th>포인트</th>
-						<th>요청일자</th>
-						<th>수락</th>
-						<th style="width: 16%;">거절</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for me in down_check_exchange %}
-					<tr>
-						<td><input type="checkbox" name="down_check"/></td>
-						<td>{{me.id}}</td>
-						<td>{{me.user}}</td>
-						<td>{{me.account_holder}}</td>
-						<td>{{me.bank}}</td>
-						<td>{{me.account_number}}</td>
-						<td>{{me.point}}</td>
-						<td>{{me.request_time}} </td>
-						<td><form action="{{url_for('admin.manage_exchange',eid="Y"+me.id|string )}}">
-								<input type='int' value="{{me.id}}" style="display:none"/> <input type='submit' value="수락"/>
-							</form></td>
-							<td><form  action="{{url_for('admin.manage_exchange',eid="N1"+me.id|string )}}">
-									<input type='submit' value="계좌오류"/></form>
-								<form  action="{{url_for('admin.manage_exchange',eid="N2"+me.id|string )}}">
-									<input type='submit' value="악용유저"/></form>
-							</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			<form  style="margin-top:10px;" action="{{url_for('admin.manage_exchange',eid="AL"|string )}}">
-				<input type='submit' value="전체수락"/>
-			</form>
-			<form style="display:none;" name="form1">
-				<input type="text" id="eid">
-			</form>
-			<button type="button" id="check_accept">체크수락</button>
-		</div>
-
-
-		<h3>환급완료 내역</h3>
-		<div class="table-responsive">
-			<table id="all_exchange_history" class="table table-hover">
+			<table id ="all_user_point_history" class="table table-hover">
 				<thead>
 					<tr style="background-color:lightgray">
 						<th>이름</th>
-						<th>예금주</th>
-						<th>은행</th>
-						<th>계좌번호</th>
+						<th>내용</th>
 						<th>날짜</th>
 						<th>포인트</th>
-						<th>결과</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for eh in all_exchange_history %}
+					{% for ph in all_user_point_history %}
+					{% if ph.point != 0 %}
 					<tr>
-						<td>{{eh.name}}</td>
-						<td>{{eh.request_name}}</td>
-						<td>{{eh.bank}}</td>
-						<td>{{eh.account_number}}</td>
-						<td>{{eh.finish_time[0:10]}}</td>
-						<td>{{eh.point}}</td>
-						<td>{{eh.exchanged}}</td>
+						<td>{{ph.name}}</td>
+						<td>&lt;&nbsp;{{ph.category}}&nbsp;&gt; {{ph.project_name}}</td>
+						<td>{{ph.finish_time[0:10]}}</td>
+						<td>{{ph.point}}</td>
 					</tr>
+					{% endif %}
 					{% endfor %}
 				</tbody>
 			</table>
-	<!--		<button type="button" onclick="DownToCsv('all_exchange_history','환급완료 내역',0)">CSV로 다운받기</button>
-	-->
+			<button style="float:right; margin-top:10px;" type="button" onclick="DownToCsv('all_user_point_history','유저 포인트 내역',0)">CSV로 다운받기</button>
 		</div>
+
 
 	</div>
 
@@ -175,14 +87,18 @@
     $(function($){
         $("#down_check_table").dataTable( {
 			"order":[1,'desc'],
-			"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-			"columnDefs": [
-				{ "orderable" : false, "targets" : 0}]
+			"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
 		} );
     });
     $(function($){
         $("#all_exchange_history").dataTable( {
 			"order":[4,'desc'],
+			"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
+		} );
+    });
+    $(function($){
+        $("#all_user_point_history").dataTable( {
+			"order":[2,'desc'],
 			"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
 		} );
     });
