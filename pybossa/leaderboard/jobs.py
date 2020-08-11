@@ -21,6 +21,7 @@ from pybossa.core import db
 from pybossa.util import exists_materialized_view, refresh_materialized_view
 
 def leaderboard(info=None):
+    update_all_user_answer_rate()
     """Create or update leaderboard materialized view."""
     materialized_view = 'users_rank'
     materialized_view_idx = 'users_rank_idx'
@@ -65,13 +66,17 @@ def leaderboard(info=None):
 
 def update_all_user_answer_rate():
     from pybossa.cache import users as cached_users
+    import decimal
+    from pybossa.core import user_repo
 
-    sql = text('''
-               SELECT * FROM "user";
-               ''')
-    users = db.session.execute(sql)
+    #sql = text('''
+    #           SELECT id FROM "user";
+    #           ''')
+    #users = db.session.execute(sql)
+    users = user_repo.get_all()
     for user in users:
         answer_rate = cached_users.get_answer_rate(user)
+        user.answer_rate = answer_rate
         user_repo.update(user)
     return "Update AnswerRate"
 

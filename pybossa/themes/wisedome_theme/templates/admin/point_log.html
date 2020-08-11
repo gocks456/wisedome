@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% set active_page = "point_log" %}
+{% set active_link = "admin" %}
+
+{% block content %}
+
+
+<script src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}" type="text/javascript"></script>
+<script src="{{url_for('static', filename='js/add-js/datatables.min.js')}}" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+
+<div class="container">
+	<div class="col-sm-12 col-md-12">
+	</div>
+	<div class="col-sm-12 col-md-12">
+		<h3>유저 포인트 현황</h3>
+		<div class="table-responsive">
+			<table id ="all_user_point_management" class="table table-hover">
+				<thead>
+					<tr style="background-color:lightgray">
+						<th>user_id</th>
+						<th>이름</th>
+						<th>총 포인트</th>
+						<th>현 포인트</th>
+						<th>총 환급액</th>
+						<th>환급시도수</th>
+						<th>정상환급수</th>
+						<th>환급거절수</th>
+						<th>환급신청중</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for pm in point_management %}
+					<tr>
+						<td>{{pm.user_id}}</td>
+						<td>{{pm.name}}</td>
+						<td>{{pm.point_sum}}</td>
+						<td>{{pm.current_point}}</td>
+						<td>{{pm.exchange_sum}}</td>
+						<td>{{pm.count_exchange}}</td>
+						<td>{{pm.n_success}}</td>
+						<td>{{pm.n_failure}}</td>
+						<td>{{pm.n_todo}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+<!--			<button style="float:right; margin-top:10px;" type="button" onclick="DownToCsv('all_user_point_history','유저 포인트 내역',0)">CSV로 다운받기</button>
+-->
+		</div>
+
+		<h3>유저 포인트 내역</h3>
+		<div class="table-responsive">
+			<table id ="all_user_point_history" class="table table-hover">
+				<thead>
+					<tr style="background-color:lightgray">
+						<th>이름</th>
+						<th>내용</th>
+						<th>날짜</th>
+						<th>포인트</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for ph in all_user_point_history %}
+					{% if ph.point != 0 %}
+					<tr>
+						<td>{{ph.name}}</td>
+						<td>&lt;&nbsp;{{ph.category}}&nbsp;&gt; {{ph.project_name}}</td>
+						<td>{{ph.finish_time[0:10]}}</td>
+						<td>{% if ph.point == '(0)' %} 0 {% else %} {{ph.point}}{% endif %}</td>
+					</tr>
+					{% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
+<!--			<button style="float:right; margin-top:10px;" type="button" onclick="DownToCsv('all_user_point_history','유저 포인트 내역',0)">CSV로 다운받기</button>
+-->
+		</div>
+
+
+
+	</div>
+
+</div>   {# container #}
+
+
+<style type="text/css">
+ form{display:inline}
+</style>
+
+
+
+
+<script>
+
+    $(function($){
+        $("#all_user_point_history").dataTable( {
+			"order":[2,'desc'],
+			"lengthMenu": [ [20, 25, 50, -1], [20, 25, 50, "All"] ]
+		} );
+    });
+    $(function($){
+        $("#all_user_point_management").dataTable( {
+			"order":[0,'asc'],
+			"lengthMenu": [ [20, 25, 50, -1], [20, 25, 50, "All"] ]
+		} );
+    });
+
+</script>
+
+
+{% endblock %}

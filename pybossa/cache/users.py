@@ -134,10 +134,32 @@ def get_answer_rate(user):
     results = session.execute(sql, dict(user_id=user.id))
     answer_rate = 0
     for row in results:
-        answer_rate = (row.n_correct - row.n_no_score) / (row.n_tasks - row.n_no_score) * 100
+        if row.n_tasks - row.n_no_score > 0:
+            answer_rate = row.n_correct / (row.n_tasks - row.n_no_score) * 100
+        else:
+            answer_rate = 0
 
     return round(answer_rate, 1)
 
+def get_point_management():
+    sql = ('''
+           SELECT e.user_id, u.name, u.point_sum, current_point, sum(exchange_point) "exchange_sum", count(*) "count_exchange",
+           count (CASE WHEN e.exchanged = '정상환급' THEN 1 END) "n_success",
+           count (e.exchanged)-count (CASE WHEN e.exchanged = '정상환급' THEN 1 END) "n_failure",
+           count(*)-count(e.exchanged) "n_todo"
+           FROM exchange e ,"user" u
+           WHERE u.id = e.user_id
+           GROUP BY e.user_id,u.name,u.point_sum,current_point
+           ''')
+    results = session.execute(sql,dict())
+    point_management = []
+    for row in results:
+        temp = dict(user_id=row.user_id, name=row.name, point_sum=row.point_sum, current_point=row.current_point,
+                exchange_sum=row.exchange_sum, count_exchange=row.count_exchange, n_success=row.n_success,
+                n_failure=row.n_failure, n_todo=row.n_todo)
+        point_management.append(temp)
+
+    return point_management
 
 def get_user_point_history(user_id):
     """Return user point history."""
@@ -197,6 +219,26 @@ def get_user_point_history(user_id):
 
 
 #==============================================#
+#def get_all_user_point_history():
+#    """Return user point history."""
+#    sql = text('''
+#               SELECT u.id AS id, u.name AS uname, t.project_id AS project_id, p.name AS project_name, MAX(t.finish_time) AS finish_time,
+#               sum(t.point) AS point, p.short_name AS project_short_name, c.name AS category
+#               FROM "user" u, task_run t, project p, category c
+#               WHERE t.project_id = p.id AND t.user_id = u.id AND p.category_id = c.id
+#               GROUP BY t.project_id, u.id, p.name, p.short_name, c.name
+#               ORDER BY finish_time desc
+#               ''')
+#    results = session.execute(sql, dict())
+#    all_point_historys = []
+#    for row in results:
+#        all_point_history = dict(id=row.id, project_id=row.project_id, name=row.uname,
+#                project_name=row.project_name, finish_time=row.finish_time[0:10],
+#                            point=row.point, project_short_name=row.project_short_name, category=row.category)
+#        all_point_historys.append(all_point_history)
+#
+#    return all_point_historys
+
 def get_all_user_point_history():
     """Return user point history."""
     sql = text('''
@@ -206,16 +248,53 @@ def get_all_user_point_history():
                WHERE t.project_id = p.id AND t.user_id = u.id AND p.category_id = c.id
                GROUP BY t.project_id, u.id, p.name, p.short_name, c.name
                ORDER BY finish_time desc
+             ''')
+    results = session.execute(sql, dict())
+    point_historys = []
+    for row in results:
+        point_history = dict(id=row.id, name=row.uname,
+                project_name=row.project_name, finish_time=row.finish_time,
+                point=row.point, project_short_name=row.project_short_name, category=row.category)
+        point_historys.append(point_history)
+#================================================#
+    sql = text('''
+               SELECT e.user_id AS id, u.name AS uname, e.exchange_point, e.finish_time, e.exchanged
+               FROM exchange e, "user" u
+               WHERE finish_time IS NOT NULL AND exchanged != '정상환급'
+               AND e.user_id = u.id
                ''')
     results = session.execute(sql, dict())
-    all_point_historys = []
     for row in results:
-        all_point_history = dict(id=row.id, project_id=row.project_id, name=row.uname,
-                project_name=row.project_name, finish_time=row.finish_time[0:10],
-                            point=row.point, project_short_name=row.project_short_name, category=row.category)
-        all_point_historys.append(all_point_history)
+        exchange_point_history = dict(id=row.id, project_name="---" + str(row.exchange_point) + "포인트 "+row.exchanged, finish_time=row.finish_time, name=row.uname,
+                point="(0)", project_short_name="exchange", category="환급취소")
+        point_historys.append(exchange_point_history)
+#================================================#
+    sql = text('''
+               SELECT user_id AS id, u.name AS uname, exchange_point, finish_time
+               FROM exchange e, "user" u
+               WHERE finish_time IS NOT NULL AND exchanged = '정상환급'
+               AND e.user_id = u.id
+               ''')
+    results = session.execute(sql, dict())
+    for row in results:
+        exchange_point_history = dict(id=row.id, project_name="---" + str(row.exchange_point) + "포인트", finish_time=row.finish_time, name=row.uname,
+                point=int(row.exchange_point)*(-1), project_short_name="exchange", category="환급완료")
+        point_historys.append(exchange_point_history)
+#=============================================#
+    sql = text('''
+               SELECT user_id AS id, u.name AS uname, exchange_point, e.created
+               FROM exchange e, "user" u
+               WHERE finish_time IS NULL
+               AND e.user_id = u.id
+               ''')
+    results = session.execute(sql,dict())
+    for row in results:
+        exchange_point_history = dict(id=row.id, project_name="---" + str(row.exchange_point) + "포인트", finish_time = row.created, name=row.uname,
+                point=int(row.exchange_point)*(-1), project_short_name="exchange", category="환급신청")
+        point_historys.append(exchange_point_history)
 
-    return all_point_historys
+    return point_historys
+
 
 
 def get_manage_exchange():
