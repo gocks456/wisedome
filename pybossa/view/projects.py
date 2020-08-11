@@ -492,12 +492,15 @@ def new():
     markup = Markup('<i class="icon-bullhorn"></i> {} ' +
                     '<strong><a href="https://docs.pybossa.com"> {}' +
                     '</a></strong> {}')
+    '''
     flash(markup.format(
               gettext('프로젝트 생성 완료. 프로젝트 세부설정을 해주세요.')),
               #gettext('You can check the '),
               #gettext('Guide and Documentation'),
               #gettext('for adding tasks, a thumbnail, using PYBOSSA.JS, etc.')),
           'success')
+    '''
+    flash(gettext('프로젝트 생성 완료. 프로젝트 세부설정을 해주세요.'), 'success')
     auditlogger.add_log_entry(None, project, current_user)
 
     return redirect_content_type(url_for('.update',
@@ -643,7 +646,7 @@ def delete(short_name):
     project_repo.delete(project)
     auditlogger.add_log_entry(project, None, current_user)
     #flash(gettext('Project deleted!'), 'success')
-    flash(getttext('프로젝트 삭제 완료!'), 'success')
+    flash(gettext('프로젝트 삭제 완료!'), 'success')
     return redirect_content_type(url_for('account.profile', name=current_user.name))
 
 def condition_form(p_condition):
@@ -1049,7 +1052,6 @@ def task_presenter(short_name, task_id):
             prev_task_run = task_repo.get_task_run_prev(project.id, current_user.id, task_run.finish_time)
             if prev_task_run is None:
                 msg_1 = gettext('이전 Task가 존재하지 않습니다.')
-                markup = Markup('<i class="icon-ok"></i> {}')
                 flash(markup.format(msg_1), 'error')
                 return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
             return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = prev_task_run.task_id))
@@ -1057,7 +1059,6 @@ def task_presenter(short_name, task_id):
             prev_task_run = task_repo.get_answer_manage(project.id, current_user.id)
             if prev_task_run is None:
                 msg_1 = gettext('이전 Task가 존재하지 않습니다.')
-                markup = Markup('<i class="icon-ok"></i> {}')
                 flash(markup.format(msg_1), 'error')
                 return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
             elif task_run is None:
@@ -1068,19 +1069,16 @@ def task_presenter(short_name, task_id):
             next_task_run = task_repo.get_task_run_next(project.id, current_user.id, task_id)
             if next_task_run is None:
                 msg_1 = gettext('현재 수행 할 Task 입니다.')
-                markup = Markup('<i class="icon-ok"></i> {}')
                 flash(markup.format(msg_1), 'warning')
                 return redirect_content_type(url_for('.presenter', short_name = project.short_name))
             elif task_run is None:
                 msg_1 = gettext('현재 Task의 답변이 존재하지 않습니다.')
-                markup = Markup('<i class="icon-ok"></i> {}')
                 flash(markup.format(msg_1), 'error')
                 return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
             return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = next_task_run.task_id))
         elif request.args.get('data') == "delete":
             if task_run is None:
                 msg_1 = gettext('현재 Task의 답변이 존재하지 않습니다.')
-                markup = Markup('<i class="icon-ok"></i> {}')
                 flash(markup.format(msg_1), 'error')
                 return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id=task_id))
             task = task_repo.get_task(task_id)
@@ -1098,14 +1096,25 @@ def task_presenter(short_name, task_id):
     if request.method == "POST":
         if request.form.get('btn', None) == "Upload" :
             _file = request.files['avatar']
-            coordinates = (int(request.form['x1']), int(request.form['y1']),
-                           int(request.form['x2']), int(request.form['y2']))
+            _file.seek(0, os.SEEK_END)
+            size = _file.tell()
+            if size > 2000000:
+                flash(gettext("이미지의 크기가 2MB를 초과했습니다."), "error")
+                return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
+            elif size == 0:
+                flash(gettext("저장할 파일이 존재하지 않습니다."), "error")
+                return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
+            _file.seek(0)
             prefix = time.time()
             _file.filename = "%i_%i.png" % (current_user.id, prefix)
-            container = "project_%s/user_id_%i" % (short_name, current_user.id)
+            container = "project_%s/user_id_%i/%s" % (short_name, current_user.id, time.strftime('%Y-%m-%d', time.localtime(time.time())))
+            if not uploader.dir_size(container):
+                flash(gettext("하루 업로드 제한 초과"), "error")
+                return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
             uploader.upload_file(_file,
-                                 container=container,
-                                 coordinates=coordinates)
+                                 container=container)
+            flash(gettext("저장 완료!"), "success")
+            return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
 
     task = task_repo.get_task(id=task_id)
     if task is None:

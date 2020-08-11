@@ -114,6 +114,21 @@ def restore(time_range = 30):
     return handle_content_type(response)
 
 
+
+@blueprint.route('/point_log')
+@login_required
+@admin_required
+def show_point_log():
+    all_user_point_history = cached_users.get_all_user_point_history()
+    point_management = cached_users.get_point_management()
+    response = dict(template = '/admin/point_log.html',
+            all_user_point_history=all_user_point_history,
+            point_management=point_management
+            )
+    return handle_content_type(response)
+
+
+
 @blueprint.route('/manage_exchange')
 @blueprint.route('/manage_exchange/<eid>', methods=['GET', 'POST'])
 @login_required
@@ -148,13 +163,14 @@ def manage_exchange(eid=None):
                 exchange_repo.update(update_ex)
                 flash(gettext('환급성공'),'success')
             elif eid[0]=='N':
+                print(eid)
                 get_re = cached_users.get_requested_exchange_by_id(int(eid[2:]))
                 update_ex = exchange_repo.get(eid[2:])
                 point_repo.exchange(get_re['user_id'],((get_re['point'])*(-1)))
                 if (eid[1]=="1"):
                     update_ex.exchanged='계좌오류로 인한 취소'
-                elif (eid[2]=="2"):
-                    update_ex.exchanged='악성버그'
+                if (eid[1]=="2"):
+                    update_ex.exchanged='악용유저'
                 update_ex.finish_time = gettime()
                 exchange_repo.update(update_ex)
                 flash(gettext('환급거절'),'success')
@@ -164,9 +180,7 @@ def manage_exchange(eid=None):
                     exchange = exchange_repo.get(int(row))
                     exchange.down_check = True
                     exchange_repo.update(exchange)
-                print (eid)
                 return redirect(url_for('admin.manage_exchange'))
-            print ('aaaaa'+eid)
             return redirect_content_type(url_for('admin.manage_exchange'))
 
         return _show_exchange()
@@ -182,7 +196,7 @@ def _show_exchange():
     response = dict(template = '/admin/manage_exchange.html',
             manage_exchange=manage_exchange,
             down_check_exchange=down_check_exchange,
-            all_exchange_history=all_exchange_history
+            all_exchange_history=all_exchange_history,
             )
     return handle_content_type(response)
 

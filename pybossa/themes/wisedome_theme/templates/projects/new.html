@@ -16,15 +16,14 @@
         <form class="" method="post" action="{{ url_for('project.new')}}" enctype="multipart/form-data"}}>
         {{ form.hidden_tag() }}
         <fieldset>
-			{{ render_field(form.name, class_="span4", placeholder=_('프로젝트의 이름')) }}
-			{{ render_field(form.short_name, class_="span4", placeholder=_('프로젝트의 짧은 이름이나 키워드')) }}
-			{{ render_field(form.all_point, class_="span4", placeholder=_('지급할 총 포인트')) }}
-			{{ render_field(form.long_description, class_="span4", rows="13", placeholder=_('프로젝트의 설명을 적으세요
+			{{ render_field(form.name, class_="span4", placeholder='프로젝트의 이름') }}
+			{{ render_field(form.short_name, class_="span4", placeholder='프로젝트의 짧은 이름이나 키워드') }}
+			{{ render_field(form.all_point, class_="span4", placeholder='지급할 총 포인트') }}
+			{{ render_field(form.long_description, class_="span4", rows="13", placeholder='프로젝트의 설명을 적으세요
 	· 프로젝트 설명
 	· 프로젝트 방법
 	· 기타
-(마크다운 언어 사용이 가능합니다.)')
-			)}}
+(마크다운 언어 사용이 가능합니다.)')}}
 		</fieldset>
 		<div class ="row">
 			<h3 class ='col-sm-12'><strong>프로젝트 제한사항</strong></h3>
