@@ -227,7 +227,7 @@ def setup_repositories(app):
     helping_repo = HelpingMaterialRepository(db)
     page_repo = PageRepository(db)
 
-	#20.02.19. 추가내용
+    #20.02.19. 추가내용
     from pybossa.repositories import PointRepository
     global point_repo
     point_repo = PointRepository(db)
@@ -640,6 +640,12 @@ def setup_jinja2_filters(app):
     @app.template_filter('disqus_sso')
     def _disqus_sso(obj):  # pragma: no cover
         return get_disqus_sso(obj)
+
+    @app.template_filter('autoversion')
+    def autoversion_filter(filename):
+        fullpath = os.path.join(app.static_folder, filename[8:].split('?')[0])
+        newfilename = filename.split('?')[0] + '?ver=' + str(os.stat(fullpath).st_mtime)
+        return newfilename
 
 
 def setup_csrf_protection(app):
