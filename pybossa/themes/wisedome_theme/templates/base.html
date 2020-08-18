@@ -15,7 +15,7 @@
     {% assets filters="libsass", output="css/gen/pybossa.min.css",
               depends="sass/**/*.scss", 
               "sass/_pybossa.scss"%}
-		<link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}?ver=32">
+		<link rel="stylesheet" type="text/css" href="{{ ASSET_URL | autoversion }}">
     {% endassets %}
 
 	<!--<link rel="stylesheet" href="/static/css/styles.css?ver=30" >-->

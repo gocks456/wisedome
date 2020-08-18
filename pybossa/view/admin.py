@@ -148,7 +148,7 @@ def manage_exchange(eid=None):
                     exchange_repo.update(update_ex)
                     flash(gettext('환급성공'),'success')
             if eid[0]=='A':
-                manage_exchange = cached_users.get_manage_exchange()
+                manage_exchange = cached_users.get_down_check_exchange()
                 for m in manage_exchange:
                     update_ex = exchange_repo.get(m['id'])
                     update_ex.finish_time = gettime()
