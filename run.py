@@ -25,5 +25,6 @@ if __name__ == "__main__":  # pragma: no cover
 	app.run(host=app.config['HOST'], port=app.config['PORT'],
 	#app.run(host='0.0.0.0', port = 8000 ,
 			debug=app.config.get('DEBUG', True))
+            #debug=True)
 else:
 	app = create_app()

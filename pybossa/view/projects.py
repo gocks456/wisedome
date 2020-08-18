@@ -1052,14 +1052,14 @@ def task_presenter(short_name, task_id):
             prev_task_run = task_repo.get_task_run_prev(project.id, current_user.id, task_run.finish_time)
             if prev_task_run is None:
                 msg_1 = gettext('이전 Task가 존재하지 않습니다.')
-                flash(markup.format(msg_1), 'error')
+                flash(msg_1, 'error')
                 return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
             return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = prev_task_run.task_id))
         elif request.args.get('data') == "answer_manage":
             prev_task_run = task_repo.get_answer_manage(project.id, current_user.id)
             if prev_task_run is None:
                 msg_1 = gettext('이전 Task가 존재하지 않습니다.')
-                flash(markup.format(msg_1), 'error')
+                flash(msg_1, 'error')
                 return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
             elif task_run is None:
                 return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = prev_task_run.task_id))
@@ -1069,17 +1069,17 @@ def task_presenter(short_name, task_id):
             next_task_run = task_repo.get_task_run_next(project.id, current_user.id, task_id)
             if next_task_run is None:
                 msg_1 = gettext('현재 수행 할 Task 입니다.')
-                flash(markup.format(msg_1), 'warning')
+                flash(msg_1, 'warning')
                 return redirect_content_type(url_for('.presenter', short_name = project.short_name))
             elif task_run is None:
                 msg_1 = gettext('현재 Task의 답변이 존재하지 않습니다.')
-                flash(markup.format(msg_1), 'error')
+                flash(msg_1, 'error')
                 return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
             return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = next_task_run.task_id))
         elif request.args.get('data') == "delete":
             if task_run is None:
                 msg_1 = gettext('현재 Task의 답변이 존재하지 않습니다.')
-                flash(markup.format(msg_1), 'error')
+                flash(msg_1, 'error')
                 return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id=task_id))
             task = task_repo.get_task(task_id)
             if task.state == "completed":
