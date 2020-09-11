@@ -584,6 +584,8 @@ class OTPForm(Form):
 class SearchForm(Form):
     user = TextField(lazy_gettext('User'))
 
+class OrderSearchForm(Form):
+    project = TextField(lazy_gettext('Project'))
 
 class CategoryForm(Form):
     id = IntegerField(label=None, widget=HiddenInput())

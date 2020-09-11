@@ -347,7 +347,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
         "pagination": pagination,
         "active_cat": active_cat,
         "categories": categories,
-        "template": '/projects/index.html'}
+        "template": '/projects/index.html',
+        "csrf": generate_csrf()}
 
     if use_count:
         template_args.update({"count": count})
@@ -402,12 +403,37 @@ def historical_contributions(page):
                          desc, pre_ranked)
 
 
-@blueprint.route('/category/<string:category>/', defaults={'page': 1})
+@blueprint.route('/category/<string:category>/', defaults={'page': 1}, methods=['GET','POST'])
 @blueprint.route('/category/<string:category>/page/<int:page>/')
 def project_cat_index(category, page):
     """Show Projects that belong to a given category"""
     order_by = request.args.get('orderby', None)
     desc = bool(request.args.get('desc', False))
+
+    def sort_project(projects, value):
+        if value == 'popular':
+            # 인기순
+            return projects
+        projects = sorted(projects, key=lambda project: project[value], reverse=True)
+        return projects
+
+    if request.method == 'POST':
+        per_page = current_app.config['APPS_PER_PAGE']
+        value = request.form['value']
+        ranked_projects = cached_projects.get_all(category)
+        ranked_projects = sort_project(ranked_projects, value)
+
+        offset = (page - 1) * per_page
+        projects = ranked_projects[offset:offset+per_page]
+        n = datetime.datetime.now()
+        achieve = cached_users.get_category_achieve(current_user.id)
+        user_all_achieve(achieve)
+
+        render = render_template('/projects/ajax_index.html',
+                                 projects=projects, achieve=achieve, n_year=n.year)
+        response = dict(template=render)
+        return json.dumps(response)
+
     return project_index(page, cached_projects.get_all, category, False, True,
                          order_by, desc)
 
@@ -807,9 +833,21 @@ def update(short_name):
     return handle_content_type(response)
 
 
-@blueprint.route('/<short_name>/')
+@blueprint.route('/<short_name>/', methods=['GET', 'POST'])
+@login_required
 def details(short_name):
     project, owner, ps = project_by_shortname(short_name)
+
+    if request.method == 'POST':
+        user = user_repo.get(current_user.id)
+        if request.form['value'] == 'dislike':
+            user.like_projects.append(project.id)
+            user_repo.update(user)
+            return 'like'
+        elif request.form['value'] == 'like':
+            user.like_projects.remove(project.id)
+            user_repo.update(user)
+            return 'dislike'
 
     if project.needs_password():
         redirect_to_password = _check_if_redirect_to_password(project)
@@ -826,6 +864,12 @@ def details(short_name):
     project_sanitized, owner_sanitized = sanitize_project_owner(project, owner,
                                                                 current_user,
                                                                 ps)
+    like_project = 'dislike'
+    if current_user.like_projects != None:
+        for like_pro_id in current_user.like_projects:
+            if like_pro_id == project['id']:
+                like_project = 'like'
+
     template_args = {"project": project_sanitized,
                      "title": title,
                      "owner":  owner_sanitized,
@@ -835,7 +879,9 @@ def details(short_name):
                      "last_activity": ps.last_activity,
                      "n_completed_tasks": ps.n_completed_tasks,
                      "n_volunteers": ps.n_volunteers,
-                     "pro_features": pro}
+                     "pro_features": pro,
+                     "like_project": like_project,
+                     "csrf": generate_csrf()}
     if current_app.config.get('CKAN_URL'):
         template_args['ckan_name'] = current_app.config.get('CKAN_NAME')
         template_args['ckan_url'] = current_app.config.get('CKAN_URL')
@@ -1226,7 +1272,7 @@ def presenter(short_name):
     if project.info.get("tutorial") and \
             request.cookies.get(project.short_name + "tutorial") is None:
         resp = respond('/projects/tutorial.html')
-        resp.set_cookie(project.short_name + 'tutorial', 'seen')
+        #resp.set_cookie(project.short_name + 'tutorial', 'seen')
         return resp
     else:
         if has_no_presenter(project):
@@ -1580,6 +1626,12 @@ def show_stats(short_name):
                         pro_features=pro)
         return handle_content_type(response)
 
+    #백그라운드가 잘 작동할 시 안해도됨
+    stats.update_stats(project.id)
+
+    project_task = task_repo.get_task_by(project_id=project.id)
+    progress_rate = round((ps.n_task_runs / (ps.n_tasks * project_task.n_answers) * 100), 2)
+
     dates_stats = ps.info['dates_stats']
     hours_stats = ps.info['hours_stats']
     users_stats = ps.info['users_stats']
@@ -1626,8 +1678,10 @@ def show_stats(short_name):
     else:   # HTML
         handle_projectStats = json.dumps(projectStats)
 
-    response = dict(template='/projects/stats.html',
+    #response = dict(template='/projects/stats.html',
+    response = dict(template='/projects/orderer_stats.html',
                     title=title,
+                    progress_rate=progress_rate,
                     projectStats=handle_projectStats,
                     userStats=userStats,
                     project=project_sanitized,
@@ -2361,11 +2415,9 @@ def coowners(short_name):
         user = user_repo.get_by_name(query)
 
         if not user or user.id == current_user.id:
-            markup = Markup('<strong>{}</strong> {} <strong>{}</strong>')
             #flash(markup.format(gettext("Ooops!"),
             #                    gettext("We didn't find a user matching your query:"),
-            flash(markup.format(gettext("일치하는 사용자를 찾을 수 없습니다 : "),
-                                form.user.data))
+            flash(Markup(gettext("일치하는 사용자를 찾을 수 없습니다.")))
         else:
             found = user.to_public_json()
             found['is_coowner'] = user.id in project.owners_ids

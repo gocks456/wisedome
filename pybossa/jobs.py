@@ -683,6 +683,8 @@ def send_weekly_stats_project(project_id):
     # Max number of completed tasks
     n_completed_tasks = 0
     xy = list(zip(*dates_stats[3]['values']))
+    #Error나 이상한 값이나온다면 index를 3에서 4로 바꿀것
+    #OrdererStats 를 만들면서 index가 밀릴 수 있음
     n_completed_tasks = max(xy[1])
     # Most active day
     xy = list(zip(*dates_stats[0]['values']))

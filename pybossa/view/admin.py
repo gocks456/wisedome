@@ -266,11 +266,9 @@ def users(user_id=None):
                  if user.id != current_user.id]
         [ensure_authorized_to('update', found_user) for found_user in found]
         if not found:
-            markup = Markup('<strong>{}</strong> {} <strong>{}</strong>')
             #flash(markup.format(gettext("Ooops!"),
             #                    gettext("We didn't find a user matching your query:"),
-            flash(markup.format(gettext("일치하는 사용자를 찾을 수 없습니다 : "),
-                                form.user.data))
+            flash(Markup(gettext("일치하는 사용자를 찾을 수 없습니다.")))
         response = dict(template='/admin/users.html', found=found, users=users,
                         title=gettext("Manage Admin Users"),
                         form=form)

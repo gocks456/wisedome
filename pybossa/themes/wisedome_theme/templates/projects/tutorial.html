@@ -4,15 +4,35 @@
 
 {% block content %}
 
+<!--<link rel='stylesheet' href="{{url_for('static', filename='css/signature/signature-pad.css')}}">
+<link rel='stylesheet' href="{{url_for('static', filename='css/signature/ie9.css')}}">-->
+
 {{ project.info.tutorial | safe}}
 
 <div class="row">
-    <div class="col-md-12" style="text-align:center;padding-top:20px;">
-        <a id="start" href={{url_for('project.presenter', short_name = project.short_name)}}
-           class="btn btn-primary btn-lg"> 
-           <i class="icon-thumbs-up"></i> 
-           {{_('Start contributing')}}!</a>
-    </div>
+	<div class="col-md-12" style="text-align:center;padding-top:20px;">
+		<a id="start" href={{url_for('project.presenter', short_name = project.short_name)}}
+	 class="btn btn-primary btn-lg"> 
+			<i class="icon-thumbs-up"></i> 
+			{{_('Start contributing')}}!</a>
+	</div>
+
+	<div id="signature-pad" class="col-md-12 signature-pad">
+		<div class="signature-pad--body">
+			<canvas width="650" height="350" style="touch-action: none; border=">
+		</div>
+		<div class="signature-pad--footer">
+			<div class="signature-pad--actions">
+				<div>
+					<button type="button" class="button clear" data-action="clear">Clear</button>
+					<button type="button" class="button" data-action="undo">Undo</button>
+				</div>
+				<div>
+					<button type="button" class="button save" data-action="save-png">저장</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div id='PYBOSSA_USER_LOCALE' hidden>
@@ -22,6 +42,9 @@ en
 {{ current_user.locale }}
 {% endif %}
 </div>
+
+<script src="{{url_for('static', filename='js/add-js/signature/signature_pad.js')}}"></script>
+<script src="{{url_for('static', filename='js/add-js/signature/app.js')}}"></script>
 
 <script src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}"></script>
 <script>
