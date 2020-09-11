@@ -67,7 +67,8 @@ def create_db(db_host, database, db_port, user_name, user_password):
     con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     cur = con.cursor()
     cur.execute("CREATE DATABASE {} ;".format(database))
-    cur.execute("GRANT ALL PRIVILEGES ON DATABASE {} TO {} ;".format(database, user_name))
+    #cur.execute("GRANT ALL PRIVILEGES ON DATABASE {} TO {} ;".format(database, user_name))
+    #cur.execute("GRANT ALL PRIVILEGES ON DATABASE {} TO WiseDome ;".format(database))
     return database
 
 
