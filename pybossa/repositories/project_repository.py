@@ -17,7 +17,7 @@
 # along with PYBOSSA.  If not, see <http://www.gnu.org/licenses/>.
 
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import cast, Date
+from sqlalchemy import cast, Date, or_, func
 
 from pybossa.repositories import Repository
 from pybossa.model.project import Project
@@ -32,6 +32,13 @@ class ProjectRepository(Repository):
     #20.02.25. 수정사항
     def get_point(self, short_name):
         return self.db.session.query(Project).filter_by(short_name=short_name).all()
+
+    def search_by_name(self, keyword):
+        if len(keyword) == 0:
+            return []
+        keyword = '%' + keyword.lower() + '%'
+        return self.db.session.query(Project).filter(or_(func.lower(Project.name).like(keyword),
+                                  func.lower(Project.name).like(keyword))).all()
 
     # Methods for Project objects
     def get(self, id):

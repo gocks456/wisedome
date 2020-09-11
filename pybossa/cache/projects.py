@@ -25,6 +25,26 @@ from pybossa.cache import memoize, cache, delete_memoized, delete_cached
 
 session = db.slave_session
 
+#발주자 관리용 쿼리
+def get_orderer_projects():
+    sql = text('''SELECT id, name, short_name, owners_ids, info, all_point
+                  FROM project
+                  WHERE array_length(owners_ids, 1) > 1;''')
+    results = session.execute(sql)
+    projects = []
+    for row in results:
+        users_fullname = []
+        for i in range(1, len(row.owners_ids)):
+            sql = text('''SELECT fullname
+                          FROM "user"
+                          WHERE id = :owner_id;''')
+            user_result = session.execute(sql, dict(owner_id=row.owners_ids[i]))
+            for user in user_result:
+                users_fullname.append(user.fullname)
+
+        project = dict(id=row.id, name=row.name, short_name=row.short_name, info=row.info, all_point=row.all_point, users_fullname=users_fullname)
+        projects.append(project)
+    return projects
 
 @cache(timeout=timeouts.get('STATS_FRONTPAGE_TIMEOUT'),
        key_prefix="front_page_top_projects")
@@ -203,8 +223,8 @@ def last_activity(project_id):
 @memoize(timeout=timeouts.get('APP_TIMEOUT'))
 def average_contribution_time(project_id):
     sql = text('''SELECT
-        AVG(to_timestamp(finish_time, 'YYYY-MM-DD-THH24-MI-SS.US') -
-            to_timestamp(created, 'YYYY-MM-DD-THH24-MI-SS.US')) AS average_time
+        AVG(to_timestamp(finish_time, 'YYYY-MM-DD-HH24-MI-SS.US') -
+            to_timestamp(created, 'YYYY-MM-DD-HH24-MI-SS.US')) AS average_time
         FROM task_run
         WHERE project_id=:project_id;''')
 

@@ -19,8 +19,8 @@
 from sqlalchemy import Integer, Boolean, Unicode, Text, String, BigInteger, Numeric
 from sqlalchemy.schema import Column
 from sqlalchemy.orm import relationship, backref
-from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy.dialects.postgresql import JSONB, ARRAY
+from sqlalchemy.ext.mutable import MutableDict, MutableList
 from flask_login import UserMixin
 from flask import current_app
 
@@ -81,6 +81,8 @@ class User(db.Model, DomainObject, UserMixin):
     consent = Column(Boolean, default=False)
     info = Column(MutableDict.as_mutable(JSONB), default=dict())
     user_pref = Column(JSONB)
+    like_projects = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())
+    orderer = Column(Boolean, default=False)
 
     ## Relationships
     task_runs = relationship(TaskRun, backref='user')

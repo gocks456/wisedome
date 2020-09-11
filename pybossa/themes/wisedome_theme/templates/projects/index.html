@@ -6,6 +6,9 @@
 
 {% block content %}
 {% set n_featured = 0 %}
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <section class="project categories selector">
     <div class="container">
         <div class="row">
@@ -27,6 +30,13 @@
                 </ul>
             </div>
         </div>
+		<div class='option' id='btns'
+		{% if active_cat.short_name=="before_score" or active_cat.short_name=="complete" or active_cat.short_name=="draft" %}
+		style="display:none;" {% endif %}>
+			<button class='btn' value='updated'>최신순</button>
+			<button class='btn' value='all_point'>가격순</button>
+			<button class='btn' value='populer'>인기순</button>
+		</div>
             {% if active_cat.short_name=="featured"%} 
                 {% set title = _('Featured Projects') %}
 				{#{% set subheading =_('A special selection of the most interesting projects') %}#}
@@ -66,6 +76,8 @@
 												<p>{{subheading}}</p>
 												{% endif %}
 											</div>
+
+											<div id="project_list">
 											
 											{% for f in projects %}
 											{% if (f.condition.sex=='0') or (f.condition.sex == current_user.sex) or current_user.admin %}
@@ -126,6 +138,7 @@
 											{% endif %}
 											{% endif %}
 											{% endfor %}
+											</div> <!-- project_list -->
 										</div>
 									</div>
 									{% if container %}
@@ -142,4 +155,37 @@
     </div>
 </section>
 
+<script type="text/javascript" src="{{ url_for('static', filename='js/vendor/jquery-2.2.3.js') }}"></script>
+<script>
+	$(document).ready(function(){
+		var csrftoken = $('meta[name=csrf-token]').attr('content')
+
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken)
+				}
+			}
+		})
+		var url = window.location.href; 
+		$('.btn').off('click').on('click', function(evt) {
+			var value = $(this).attr("value");
+			$.ajax({
+				url: url,
+				data: { "value" : value },
+				type: 'POST',
+				success: function(res) {
+					$('#project_list').empty();
+					var Obj = JSON.parse(res);
+					console.log(Obj.template);
+					$('#project_list').append(Obj.template);
+				},
+				error: function(request, error){
+					console.log(request);
+					console.log(error);
+				}
+			})
+		});
+	})
+</script>
 {% endblock %}
