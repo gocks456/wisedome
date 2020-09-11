@@ -1,0 +1,18 @@
+{% extends "orderer/base.html" %}
+{% from "account/_helpers.html" import render_account_local_nav %}
+{% from "orderer/_helpers.html" import render_admin_user, render_project_card_user, render_project_card %}
+
+{% block rightbody %}
+<h1><strong>발주자 사이트:</strong> 발주한 프로젝트</h1>
+
+{% if projects %}
+<h1> </h1>
+<div class="row">
+	{% for project in projects %}
+	<div class="col-sm-4 col-md-4">
+		{{ render_project_card(current_user, project, upload_method, background=True)}}
+	</div>
+	{% endfor %}
+</div>
+{% endif %}
+{% endblock %}

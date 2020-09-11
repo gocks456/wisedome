@@ -249,7 +249,54 @@ def stats_dates(project_id, period='15 day'):
 
     dates_anon = _fill_empty_days(list(dates_anon.keys()), dates_anon)
 
-    return dates, dates_anon, dates_auth
+    dates_orderer = {}
+
+    sql = text('''
+                WITH myquery AS (
+                    SELECT TO_DATE(finish_time, 'YYYY-MM-DD\HH24:MI:SS.US')
+                    as d, COUNT(id)
+                    FROM task_run WHERE project_id=:project_id
+                    GROUP BY d)
+               SELECT to_char(d, 'YYYY-MM-DD') as d, count  from myquery;
+               ''').execution_options(stream=True)
+
+    results = session.execute(sql, dict(project_id=project_id))
+    d_task_run = {}
+    for row in results:
+        d_task_run[row.d] = row.count
+
+    sql = text('''
+               SELECT COUNT(id), n_answers FROM task WHERE project_id=:project_id GROUP BY n_answers;
+               ''')
+
+    results = session.execute(sql, dict(project_id=project_id))
+    require_task_run = 0
+    for row in results:
+        require_task_run = row.count * row.n_answers
+
+    completed = False
+
+    for row in d_task_run:
+        dates_orderer[row] = round(d_task_run[row] / require_task_run * 100, 2)
+        if dates_orderer[row] >= 100:
+            completed = True
+    def _fill_empty_days_orderer(days, obj, state=False):
+        base = datetime.datetime.today()
+        if state:
+            base = datetime.datetime.strptime(sorted(obj.keys(), reverse=True)[0], '%Y-%m-%d')
+        min_date = datetime.datetime.strptime(sorted(obj.keys())[0], '%Y-%m-%d')
+        diff = (base-min_date).days
+        for x in range(0, diff):
+            if diff > 30 and x > 30:
+                if x % 7 != 0:
+                    continue
+            tmp_date = base - datetime.timedelta(days=x)
+            if tmp_date.strftime('%Y-%m-%d') not in days:
+                obj[tmp_date.strftime('%Y-%m-%d')] = 0
+        return obj
+    dates_orderer = _fill_empty_days_orderer(list(dates_orderer.keys()), dates_orderer, completed)
+
+    return dates, dates_anon, dates_auth, dates_orderer
 
 
 @memoize(timeout=ONE_DAY)
@@ -395,13 +442,16 @@ def stats_hours(project_id, period='2 week'):
 
 
 @memoize(timeout=ONE_DAY)
-def stats_format_dates(project_id, dates, dates_anon, dates_auth):
+def stats_format_dates(project_id, dates, dates_anon, dates_auth, dates_orderer):
     """Format dates stats into a JSON format."""
     dayNewStats = dict(label=gettext("Anon + Auth"), values=[])
     dayCompletedTasks = dict(label=gettext("Completed Tasks"),
                              disabled="True", values=[])
     dayNewAnonStats = dict(label=gettext("Anonymous"), values=[])
     dayNewAuthStats = dict(label=gettext("Authenticated"), values=[])
+
+    dayOrdererStats = dict(label=gettext("Orderer Stats"),
+                             disabled="True", values=[])
 
     answer_dates = sorted(list(set(list(dates_anon.keys()) + list(dates_auth.keys()))))
     total = 0
@@ -411,6 +461,12 @@ def stats_format_dates(project_id, dates, dates_anon, dates_auth):
         # Total tasks completed per day
         total = total + dates[d]
         dayCompletedTasks['values'].append(
+            [int(time.mktime(time.strptime(d, "%Y-%m-%d")) * 1000), total])
+
+    total = 0
+    for d in sorted(dates_orderer.keys()):
+        total = total + dates_orderer[d]
+        dayOrdererStats['values'].append(
             [int(time.mktime(time.strptime(d, "%Y-%m-%d")) * 1000), total])
 
     for d in answer_dates:
@@ -428,7 +484,7 @@ def stats_format_dates(project_id, dates, dates_anon, dates_auth):
         dayNewAuthStats['values'].append(
             [int(time.mktime(time.strptime(d, "%Y-%m-%d")) * 1000), auth_ans])
 
-    return dayNewStats, dayNewAnonStats, dayNewAuthStats, \
+    return dayNewStats, dayNewAnonStats, dayNewAuthStats, dayOrdererStats, \
         dayCompletedTasks
 
 
@@ -525,15 +581,14 @@ def update_stats(project_id, period='2 week'):
     hours, hours_anon, hours_auth, max_hours, \
         max_hours_anon, max_hours_auth = stats_hours(project_id, period)
     users, anon_users, auth_users = stats_users(project_id, period)
-    dates, dates_anon, dates_auth = stats_dates(project_id, period)
-
+    dates, dates_anon, dates_auth, dates_orderer = stats_dates(project_id, period)
 
     sum(dates.values())
 
     sorted(iter(dates.items()), key=operator.itemgetter(0))
 
     dates_stats = stats_format_dates(project_id, dates,
-                                     dates_anon, dates_auth)
+                                     dates_anon, dates_auth, dates_orderer)
 
     hours_stats = stats_format_hours(project_id, hours, hours_anon, hours_auth,
                                      max_hours, max_hours_anon, max_hours_auth)

@@ -32,7 +32,7 @@
             </div>
             {% endif %}
 
-            {% if pro_features['better_stats_enabled'] %}
+			{% if pro_features['better_stats_enabled'] %} {# 작업 당 평균 참여 시간 #}
             <div id="card" class="row">
                 <div class="col-md-12">
                     <h2>{{_('Average contribution time per task') }}:</h2>
@@ -42,7 +42,7 @@
             {% endif %}
 
             <!-- Hour Stats CARD -->
-            <div id="card" class="row">
+			<div id="card" class="row"> {# 시간당 정답 분포 #}
                 <div class="col-md-12">
                     <h2>{{_('Distribution of Answers per Hour')}}</h2>
                     <div id="hourStats" style="margin:0;height:500px;">
