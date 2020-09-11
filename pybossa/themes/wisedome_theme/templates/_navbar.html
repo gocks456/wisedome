@@ -33,6 +33,10 @@
 					<!--<li><a href="{{ url_for('account.update_profile', name=current_user.name) }}"> {{ _('My Settings') }}</a></li>-->
 					<li><a href="{{ url_for('account.point', name=current_user.name) }}">포인트</a></li>
 					<li><a href="{{ url_for('account.achievement', name=current_user.name) }}">업적</a></li>
+					{% if current_user.orderer == True or current_user.admin == 1 %}
+                    <li class="divider"></li>
+					<li><a href="{{ url_for('orderer.index') }}">발주자 사이트</a></li>
+					{% endif %}
                     {% if current_user.admin == 1 %}
                     <li class="divider"></li>
 					<li><a href="{{ url_for('account.projects', name=current_user.name) }}"> {{ _('My Projects') }}</a></li>
