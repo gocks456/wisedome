@@ -30,9 +30,9 @@ session = db.slave_session
 def get_list_cat2():
     sql = text('''
                SELECT c.*
-               FROM category c, project p, project_stats ps
+               FROM category c, project p
                WHERE c.id = p.category_id
-               AND p.id = ps.project_id AND ps.n_tasks != ps.n_results AND p.complete = false
+               AND p.complete = false
                GROUP BY c.id
                ORDER BY c.id
                ''')
