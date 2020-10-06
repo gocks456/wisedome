@@ -82,7 +82,7 @@ class User(db.Model, DomainObject, UserMixin):
     info = Column(MutableDict.as_mutable(JSONB), default=dict())
     user_pref = Column(JSONB)
     like_projects = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())
-    orderer = Column(Boolean, default=False)
+    orderer = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())
 
     ## Relationships
     task_runs = relationship(TaskRun, backref='user')

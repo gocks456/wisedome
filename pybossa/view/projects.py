@@ -1272,7 +1272,7 @@ def presenter(short_name):
     if project.info.get("tutorial") and \
             request.cookies.get(project.short_name + "tutorial") is None:
         resp = respond('/projects/tutorial.html')
-        #resp.set_cookie(project.short_name + 'tutorial', 'seen')
+        resp.set_cookie(project.short_name + 'tutorial', 'seen')
         return resp
     else:
         if has_no_presenter(project):
@@ -2444,6 +2444,8 @@ def add_coowner(short_name, user_name=None):
         else:
             project.owners_ids.append(user.id)
             project_repo.update(project)
+            user.orderer.append(project.id)
+            user_repo.update(user)
             #flash(gettext('User was added to list of owners'), 'success')
             flash(gettext('관리자 목록에 추가하였습니다'), 'success')
         return redirect_content_type(url_for(".coowners", short_name=short_name))
@@ -2470,6 +2472,8 @@ def del_coowner(short_name, user_name=None):
         else:
             project.owners_ids.remove(user.id)
             project_repo.update(project)
+            user.orderer.remove(project.id)
+            user_repo.update(user)
             #flash(gettext('User was deleted from the list of owners'),
             #      'success')
             flash(gettext('관리자 목록에서 삭제하였습니다'), 'success')
