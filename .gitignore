@@ -5,6 +5,7 @@ pybossa/__pycache__/
 venv
 .venv/
 /project_order/
+.project_order/
 uploads
 pybossa/backup/
 
