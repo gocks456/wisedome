@@ -36,8 +36,8 @@ class TaskRepository(Repository):
     def get_answer_manage(self, project_id, user_id):
         return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).order_by(TaskRun.finish_time.desc()).first()
 
-    def get_task_run_prev(self, project_id, user_id, task_id):
-        return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).filter(TaskRun.finish_time<task_id).order_by(TaskRun.finish_time.desc()).first()
+    def get_task_run_prev(self, project_id, user_id, finish_time):
+        return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).filter(TaskRun.finish_time<finish_time).order_by(TaskRun.finish_time.desc()).first()
         #return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).filter(TaskRun.task_id<task_id).order_by(TaskRun.task_id.desc()).first()
 
     def get_task_run_next(self, project_id, user_id, task_id):

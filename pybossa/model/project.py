@@ -83,7 +83,13 @@ class Project(db.Model, DomainObject):
                              order_by='TaskRun.finish_time.desc()')
     category = relationship(Category)
     blogposts = relationship(Blogpost, cascade='all, delete-orphan', backref='project')
+
+    #발주자 컬럼
     owners_ids = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())
+
+    #계약서 컬럼
+    contractor_ids = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())
+
 
     option_sex = option_age_start = option_age_end = "0"
 

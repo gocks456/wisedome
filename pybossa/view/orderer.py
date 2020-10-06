@@ -43,6 +43,7 @@ from pybossa.util import redirect_content_type
 from pybossa.cache import projects as cached_projects
 from pybossa.cache import categories as cached_cat
 from pybossa.cache import users as cached_users
+from pybossa.cache import project_stats as stats
 from pybossa.auth import ensure_authorized_to
 from pybossa.core import announcement_repo, project_repo, user_repo, task_repo, project_stats_repo
 from pybossa.feed import get_update_feed
@@ -79,8 +80,6 @@ def index():
     else:
         flash(Markup(gettext("발주자가 아닙니다.")))
         return redirect_content_type(url_for('home.home'))
-    # orderer은 발주자 개인의 발주한 프로젝트 목록으로
-    # 둘다 아닐 때 X
 
 
 def gettime():
@@ -88,13 +87,24 @@ def gettime():
     return now.strftime('%Y-%m-%dT%H:%M:%S.%f')
 
 @blueprint.route('/admin', methods=['GET', 'POST']) #관리자 페이지
+@blueprint.route('/admin/add_coowner/<int:user_id>')
 @login_required
 @admin_required
-def admin():
+def admin(user_id=0):
     """Manage users of PYBOSSA."""
     form = OrderSearchForm(request.body)
 
-    projects = cached_projects.get_orderer_projects()
+    def get_projects():
+        projects = cached_projects.get_orderer_projects()
+        for row in projects:
+            task = task_repo.get_task_by(project_id=row['id'])
+            ps = stats.get_stats(row['id'], full=True)
+            row['progress_rate'] = 0.0
+            if ps.n_tasks != None and ps.n_tasks != 0 and task.n_answers != 0:
+                row['progress_rate'] = round((ps.n_task_runs / (ps.n_tasks * task.n_answers) * 100), 2)
+        return projects
+
+    projects = get_projects()
 
     if request.method == 'POST' and form.project.data:
         query = form.project.data
@@ -102,12 +112,43 @@ def admin():
                  if len(project.owners_ids) == 1]
         if not found:
             flash(Markup(gettext("일치하는 프로젝트를 찾을 수 없습니다.")))
+        for row in found:
+            task = task_repo.get_task_by(project_id=row.id)
+            ps = project_stats_repo.get(row.id)
+            row.progress_rate = 0.0
+            if ps != None and ps.n_tasks != 0:
+                row.progress_rate = round((ps.n_task_runs / (ps.n_tasks * task.n_answers) * 100), 2)
+
         response = dict(template='/orderer/admin.html', current_user=current_user, 
                         projects=projects, found=found, form=form)
         return handle_content_type(response)
 
+    if request.method == 'POST' and request.form['name']:
+        query = request.form['name']
+        found = [user for user in user_repo.search_by_name(query)]
+        if not found:
+            flash(Markup(gettext("일치하는 사용자를 찾을 수 없습니다.")))
+        response = dict(template='/orderer/found_user.html',
+                        found=found)
+        return handle_content_type(response)
+
+    if request.method == 'GET' and user_id != 0:
+        project_list = (request.args.getlist('projects'))
+        user = user_repo.get(user_id)
+        for project_name in project_list:
+            project = project_repo.get_by(name=project_name)
+            if user_id in project.owners_ids:
+                flash(gettext("이미 발주자입니다."), 'warning')
+            else:
+                project.owners_ids.append(user_id)
+                project_repo.update(project)
+                user.orderer.append(project.id)
+                user_repo.update(user)
+        flash(gettext("발주자 추가 완료!"), 'success')
+        return redirect_content_type(url_for('.index'))
+
     response = dict(template='/orderer/admin.html', current_user=current_user,
-                    projects=projects, found=[], form=form)
+            projects=projects, found=[], form=form, csrf=generate_csrf())
     return handle_content_type(response)
 
 @blueprint.route('/orderer', methods=['GET']) #발주자 페이지
