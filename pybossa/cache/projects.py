@@ -29,6 +29,7 @@ session = db.slave_session
 # 마감임박 프로젝트
 
 # 경쟁관계 TEST
+"""
 def get_users_task_run_count(project_id):
     sql = text('''SELECT "user".id, "user".name, COUNT(task_run.id) AS count
                   FROM "user", task_run
@@ -41,7 +42,19 @@ def get_users_task_run_count(project_id):
         user = dict(id=row.id, name=row.name, count=row.count)
         user_list.append(user)
     return user_list
+"""
 
+def get_users_task_run_count(project_id):
+    sql = text('''SELECT "user".id, "user".name, COUNT(task_run.id) AS count
+                  FROM "user", task_run
+                  WHERE "user".id = task_run.user_id
+                  GROUP BY "user".id;''')
+    results = session.execute(sql)
+    user_list = []
+    for row in results:
+        user = dict(id=row.id, name=row.name, count=row.count)
+        user_list.append(user)
+    return user_list
 
 #발주자 관리용 쿼리
 def get_orderer_projects():

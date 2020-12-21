@@ -15,18 +15,14 @@
 	margin:0 1em;
 }
   /***3. 진행중인 프로젝트****/
- 
-  .pro{
+  .container{
     width: 30%;
-    margin: 0.5em;
+    margin: 0.4em;
   }
-  .pro figcaption {
-    padding: 1em  ;
-    top: calc(80%);
-  }
-
   
-
+  .text {
+    padding: 5% 2.5% ;
+}
 
   /****가격별 정렬***/
   form{

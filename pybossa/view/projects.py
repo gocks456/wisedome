@@ -264,14 +264,12 @@ def index(page):
     desc = bool(request.args.get('desc', False))
 
     if request.method == 'POST':
-        print('aaaaa')
         projects = cached_projects.get_all_projects()
         projects = sort_project(projects, request.form['value'])
         n = datetime.datetime.now()
         render = render_template('/new_design/ajax_project_index.html', n_year=n.year,
                                  projects=projects)
         response = dict(template=render)
-        print(response)
         return json.dumps(response)
 
     # New Design
@@ -1175,7 +1173,6 @@ def task_presenter(short_name, task_id):
                 results.append(result)
             page = 10
             page_list = [results[i * page:(i + 1) * page] for i in range((len(results) + page - 1) // page)]
-            print(page_list)
             return json.dumps(page_list, ensure_ascii=False)
 
         # 답변 관리에서 원하는 답변을 리턴
@@ -1209,6 +1206,7 @@ def task_presenter(short_name, task_id):
         # 경쟁 관계
         if request.form.get('value', None) == "ranking":
             user_list = cached_projects.get_users_task_run_count(project.id)
+
             answer_count = 0
             user_answer_count = 0
             for user in user_list:
@@ -1222,7 +1220,6 @@ def task_presenter(short_name, task_id):
             temp = dict(average=average, user_answer_count=user_answer_count)
             res = []
             res.append(temp)
-            print(res)
             return json.dumps(res, ensure_ascii=False)
 
     task = task_repo.get_task(id=task_id)
@@ -1270,7 +1267,7 @@ def task_presenter(short_name, task_id):
 
 
     template_args = {"project": project_sanitized, "title": title, "owner": owner_sanitized, #"ex" : long_desc_ex, "htd" : long_desc_htd,
-                     "task_run": task_run, "csrf": generate_csrf()}
+                     "task_run": task_run, "n_tasks":ps.n_tasks, "csrf": generate_csrf()}
 
     def respond(tmpl):
         response = dict(template = tmpl, **template_args)

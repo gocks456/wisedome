@@ -47,30 +47,15 @@
 }	 
 
 
-
-
 /*3. 진행중인 프로젝트****/
 #project {
   padding: 3em 0;
-
 }
 
-.pro{
-  font-size: 1em;
-  margin: 1em 0.3em ;
+.container{
   width: 30%;
+  margin: 0.3em;
 }
-
-.pro img {
-  height:16.25em;
-}
-
-.pro figcaption {
-  top: calc(75%);
-  padding: 1em 0.5em ;
-}
-
-
 
 
 /**4.포인트킹***/

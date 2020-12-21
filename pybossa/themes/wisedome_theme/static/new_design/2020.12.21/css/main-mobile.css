@@ -1,0 +1,141 @@
+/***모바일 화면*****/
+
+/*메인배너*/
+#main{
+  padding: 2em 0.5em;
+
+  }
+
+.main-text{
+  width: 100%;
+  margin: 0 auto;
+	text-align: center;
+  display: block;
+  padding:0;
+}
+
+.main-banner{
+	width: 100%;
+  display: block;
+}
+
+.main-banner img {
+  width: 50%;
+  height: auto;
+  max-height: 350px;
+}
+
+#main h1 {
+  font-size: 2em;
+  line-height: 1.3em;
+  letter-spacing: 0.10em;
+  margin: 1em 0 0.5em 0;
+}
+#main p{
+  font-size: 0.8em;
+}
+
+#main hr{
+	width: 30px;
+	height:3px;
+  margin-left: 45%;
+  padding: 0;
+
+}
+
+#main .btn {
+  font-size: 0.7em;
+  padding: 0.5em 2em;
+  margin: 0 auto;
+  margin-bottom: 2em;
+}
+
+/**타이틀**/
+.title h1 {
+  font-size: 0.9em;}
+  
+hr {
+  width: 40px;
+  height: 4px;
+}
+
+/**카테고리별 프로젝트****/
+#category {
+  padding: 2em 0;
+}
+
+.ctg {
+  margin-right: 0.1em;
+  min-width: 70px;
+}
+
+ .ctg p {
+  font-size: 0.2em;
+  line-height: 2em;
+}	 
+
+  /********3. 진행중인 프로젝트**********/
+  #project {
+    padding: 2em 0;
+  }
+#project h5{
+  font-size: 0.8em;
+}  
+
+.pro{
+  width: 45%;
+  margin: 0.25em ;
+  max-height: 175px;
+}
+.pro img {
+  height:12.5em;
+}
+
+.level{
+  display: none;
+}
+
+.pro figcaption {
+  top: calc(83%);
+  padding: 0 0.5em;
+  text-align: center;
+}
+
+.pro h3{
+  font-size: 0.6em;
+}
+/******4. 포인트킹********/
+#PointRank{
+  padding: 2em 0;
+}
+
+.profile main{
+	padding: 0.5em;
+}
+
+.myFace img {
+    width:20%;}
+
+.profile-name{
+  font-size: 0.7em;
+}
+.profile-area{
+  font-size: 0.7em;
+}
+.star{
+  font-size: 0.7em;
+}
+.profile{
+	max-width: 350px;
+	max-height: 385px;
+}
+
+.swiper-button-prev,.swiper-button-next{
+  display: none;
+}
+
+
+/****footer**/
+#footer{
+  padding-top: 2em;
+}

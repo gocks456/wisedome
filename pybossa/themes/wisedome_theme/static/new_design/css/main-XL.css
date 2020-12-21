@@ -25,17 +25,11 @@ height:auto;
 }
 
 /*3. 진행중인 프로젝트**/
-.pro{
+.container{
   width: 30%;
-  margin: 0.5em;
+  margin: 0.4em;
 }
 
-.pro figcaption {
-  padding: 1em  ;
-  top: calc(80%);
-}
-
-  
 /**4.포인트킹***/
 
 .profile-name{
