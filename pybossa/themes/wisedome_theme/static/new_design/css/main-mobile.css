@@ -82,28 +82,16 @@ hr {
   font-size: 0.8em;
 }  
 
-.pro{
+.container{
   width: 45%;
-  margin: 0.25em ;
-  max-height: 175px;
-}
-.pro img {
-  height:12.5em;
+  margin: 0.1em ;
 }
 
-.level{
-  display: none;
+.project-img{
+  max-height: 7.5em;
 }
 
-.pro figcaption {
-  top: calc(83%);
-  padding: 0 0.5em;
-  text-align: center;
-}
 
-.pro h3{
-  font-size: 0.6em;
-}
 /******4. 포인트킹********/
 #PointRank{
   padding: 2em 0;
