@@ -392,7 +392,6 @@ class LoginForm(Form):
 
     """Login Form class for signin into PYBOSSA."""
 
-    #Test_SJ = SelectField(u'Test SelectField', choices=[('a', '손'), ('b', '석'), ('c', '준')])
     email = TextField(lazy_gettext('E-mail'),
                       [validators.Required(
                           message=lazy_gettext("The e-mail is required"))])
@@ -454,7 +453,7 @@ class RegisterForm(Form):
                             validators.EqualTo('confirm', err_msg_2)])
 
     confirm = PasswordField(lazy_gettext('Repeat Password'))
-    consent = BooleanField(false_values=("False", "false", '', '0', 0))
+    consent = BooleanField(false_values=("False", "false", '', '0', 0),validators=[validators.DataRequired("체크해주세요")])
     err_msg = lazy_gettext("생년월일과 성별을 체크해주세요.")
     birth = IntegerField([validators.Required(),
                               validators.NumberRange(

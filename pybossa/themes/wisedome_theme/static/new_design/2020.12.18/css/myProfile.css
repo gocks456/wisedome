@@ -1,0 +1,21 @@
+.my-border-bottom {
+   border-bottom: 1px solid #f2edf3;}
+.my-border-top {
+   border-top: 1px solid #f2edf3;}
+
+.answers{
+  text-align: center;
+  border-left: 1px solid #f2edf3;}
+  
+.answers button{  
+  min-width: 210px;
+  text-align: center;
+  letter-spacing: 0.25em;}     
+
+
+@media all and (max-width:1199px){
+  .answers{
+    border-left: none;}   
+  
+}
+    

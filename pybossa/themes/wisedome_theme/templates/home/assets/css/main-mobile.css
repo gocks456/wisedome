@@ -1,0 +1,181 @@
+/***모바일 화면*****/
+
+@media screen and (max-width: 480px) {
+
+/* Basic */
+
+body, input, select, textarea {
+  line-height: 1.5em;
+  font-size: 10.5pt;
+  letter-spacing:0;
+}
+
+h2, h3, h4, h5, h6 {
+  font-size: 1.2em;
+  letter-spacing: 0.05em;
+  margin: 0 0 1em 0;
+}
+
+
+  /* Header */
+  .homepage #header {
+    height: 30em;
+  }
+
+
+
+/* Wrapper */
+
+  .wrapper .title {
+    font-size: 0.9em;
+    width: 18em;
+    height: 2.5em;
+    top: -2.5em;
+    line-height: 2.5em;
+    margin-bottom: -2.5em;
+    margin-left: -9em;
+    padding-top: 0.5em;
+  }
+
+    .wrapper .title:before, .wrapper .title:after {
+      height: 15px;
+      bottom: -15px;
+      background-size: 100% 100%;
+    }
+
+.wrapper {
+	padding: 4em 0 0 0;	
+}
+
+
+/*메인배너*/
+#main h1 {
+  font-size: 1.2em;
+  letter-spacing: 0.20em;
+}
+
+#main p{
+  font-size: 0.85em;
+}
+
+#main button {
+  width: 30%;
+  padding: 0.3em 1em;
+  font-size: 0.85em;
+}
+
+
+/*************카테고리별 프로젝트*******/
+#category {
+  margin: 0.5em 0;
+}
+
+.category-image{
+padding: 1em 0;
+width: 25%;
+}
+
+#category .title{
+  padding-top: 0;
+}
+
+.title{
+  font-size: 1.3em;
+  padding-top: 0.5em;
+}
+
+hr {
+  width: 15%;
+  height: 5px;
+}
+
+  .ctg {
+		padding:0.5em ;
+	}
+
+
+
+  /********3. 진행중인 프로젝트**********/
+  #project {
+    padding: 2em 0.5em 1em 0.5em ; 
+  }
+  
+.pro img{
+  width: 100%;
+}
+
+.mobile-only{
+ display: none;
+}
+
+
+.pro .intext{ 
+	margin-top: -4.5em;
+  padding: 5em 1em 0 1em;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.level{ 
+  margin-bottom:1em;
+  margin: 0 auto;
+	width: 60px;
+	height: 20px;
+	line-height: 20px;
+}
+
+	
+
+/*******************4. 포인트킹***********************/
+#PointRank {
+    padding: 2em 0.5em 1em 0.5em ; 
+}
+
+#PointRank  hr{
+  width: 15%; 
+ }
+ 
+ .swiper-container {
+  height: 300px;
+}
+
+.profile main{
+	padding: 1em 0.5em
+}
+
+.myFace{
+  margin-top: 2em;
+  }
+.myFace img{
+  width: 25%;
+}
+
+.profile-name{
+  font-size: 0.9em;
+}
+.profile-area{
+  font-size: 0.5em;
+}
+.star{
+  font-size: 0.8em;
+}
+
+.swiper-button-prev,.swiper-button-next{
+  display: none;
+}
+
+/*****************footer*****************/
+#footer ul{
+display: none;
+}
+
+
+#footer main{
+  width: 100%;
+  margin-left: 10%;
+}
+
+
+
+}

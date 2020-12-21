@@ -1,0 +1,249 @@
+@media all and (max-width:99999px){
+
+  .controlbar{
+    margin:0 1em;
+    width: 10em;
+    height: 7px;
+    border-radius: 7px;
+    background: #ffffff;
+    outline: none;
+    -webkit-transition: .3s;
+    transition: opacity .3s;
+    -webkit-appearance: none;
+  }
+        
+  .controlbar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background:#b068ff;
+    cursor: pointer;
+  }
+  
+  .controlbar::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background:#b068ff;
+    cursor:pointer;
+  }
+  
+  /**우측에 답변들**/
+  .main-text p{
+    font-family: 'Times New Roman', Times, serif;}
+  
+  .answers{
+  text-align: center;
+  border-left: 2px solid #f2edf3;}
+
+  .answers button{  
+  width: 70%;
+  text-align: center;
+  margin-bottom: 1em ;
+  letter-spacing: 0.5em;
+  line-height: 1.5em;}
+
+
+/*****step1 의 답변 선택들*****/
+#Word2,#Word3,#Word4,#Word5,#Word6,#Word7,#Word8,#Word9,#Word10{
+  display: none;}
+
+.col-md-4{
+border-left: 2px solid #f2edf3; 
+text-align: center;}
+
+.col-md-4 h6{
+  color:  #1bcfb4;
+  margin-bottom: 1.5em;} 
+
+.list-group{
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;}
+
+.list-group-item{
+text-align: center;}
+
+.bold button{
+  font-weight: bold;}
+
+.crossline{
+  color:#435861;
+  text-decoration: line-through;}
+
+
+
+ /****step 2 답변선택부분**/
+ #step2-submit1,#step2-submit2,#step2-submit3,#step2-submit4,#step2-submit5,#step2-submit6{
+   display: none; }
+
+
+/****3. 사전적의미 영역***/
+.wordbook{
+width: 80%;
+margin: 0 auto;
+text-align: center;  
+border: 1px dashed #c3bdbd;
+border-radius: 0.5em;}
+
+
+.wordbook h5{
+  border-bottom: 1px dashed #c3bdbd;
+  padding: 1em 2em;
+  background-color:#c3bdbd;
+  color:#ffffff;}
+
+.wordcontents{
+  line-height: 1.75em;
+  padding: 1em 2em;}  
+  
+
+  /**최종답변제출*/
+  #final-submit{
+    display: none;}
+
+.btn-warning{
+  font-weight: bold;}
+  
+/*******답변 수정부분*********/  
+  .card-description span{
+    color: #fe7c96;
+    font-weight: bold;}
+
+  #manage-answer{
+    display: none;}
+  
+ #page2,#page3,#page4,#page5,#page6,#page7,#page8,#page9,#page10{
+   display: none;}  
+  
+
+  /**답변 재선택 부분**/
+  .reselect{
+    display: none;
+    font-weight: bold;}
+  
+  .reselect .btn{
+    width: 18%;
+    text-align: center;}
+  }
+  
+
+  /***노트북화면****/
+  @media all and (max-width:1280px){
+
+  .wordbook, .list-group, .answers button{
+    width: 100%; }
+
+  .answers button, #manage-answer-btn,.reselect button{ 
+  padding: 1em 0.5em;
+  font-size: 0.8em;
+  letter-spacing: 0.25em;}  
+  
+  }
+  
+
+  /**큰 태블릿****/
+  @media all and (max-width:991px){
+
+  #manage-answer-btn{
+     margin-top: 0;
+     margin-left: 0;}
+
+  }
+    
+  
+  /**태블릿 화면**/
+  @media all and (max-width:769px){
+  
+  .controlbar{
+   margin: 0;
+   width: 5em;}
+  
+  .text-adjust{
+  display: none;}  
+
+  .answers{
+    border-left: none;}  
+  
+  .col-md-4{
+   border-left: none;
+   margin-bottom: 2.5em;}  
+  
+  .card-body .btn-group{
+      margin-left: 0; } 
+      
+  #manage-answer-btn{
+  margin-left: 0;}
+  
+  .reselect{
+    text-align: center;
+    margin-bottom: 2.5em;}
+
+  .reselect button{
+    margin-bottom: 0.5em;
+  }  
+
+  .wordbook, .list-group, .answers button,.reselect .btn{
+    width: 75%; }
+ 
+ .answers button, #manage-answer-btn,.reselect button{ 
+   padding: 1em 0.5em;
+   letter-spacing: 0.5em;
+   line-height: 1.5em;}   
+   
+  .previous-question{
+    text-align: center;
+  }
+
+  .page-btn-group{
+    text-align: center;}
+
+
+
+  /**휴대폰화면***/
+  @media all and (max-width:575px){
+
+  
+  .card-description{
+    letter-spacing: 0.2em
+  }
+    
+  .wordbook, .list-group, .answers button,.reselect .btn{
+    width: 100%; }
+  
+  #manage-answer-btn{
+   margin: 0;}  
+  
+  .btn-group button{
+    padding: 0.8em;
+  }
+  
+  .object{
+    margin-bottom: 1em;
+  }
+  
+  .empty-default img{
+    width:40%;}
+  }
+  
+  
+  
+  
+  
+  @media all and (max-width:379px){
+  .controlbar::-webkit-slider-thumb {
+      width: 12px;
+      height: 12px;}
+      
+  .page-title {
+  font-size: 1em;}
+  
+  .btn-group button{
+    padding: 0.5em;
+  }
+  
+  
+    }    

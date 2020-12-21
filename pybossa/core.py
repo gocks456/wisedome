@@ -234,9 +234,11 @@ def setup_repositories(app):
     from pybossa.repositories import ExchangeRepository
     global exchange_repo
     exchange_repo = ExchangeRepository(db)
-    from pybossa.repositories import AchievementRepository
-    global achi_repo
-    achi_repo = AchievementRepository(db)
+    #from pybossa.repositories import AchievementRepository
+
+    # 2020.11.27. 업적 리뉴얼 예정
+    #global achi_repo
+    #achi_repo = AchievementRepository(db)
 
 
 def setup_error_email(app):
