@@ -1,0 +1,44 @@
+$purple : #8c83d3;
+$title-text-color:#164947;
+$myfont: 'S-CoreDream-2Light';
+
+
+@mixin title-hr { 
+  background-color:$purple;
+  border: none;}
+
+@mixin header-bg{
+  background:url("../images/cloud.jpg") ;
+  background-position: center center;
+  background-size: cover;
+}
+
+@mixin process-title{
+  text-align: center;
+  a, h5{
+    padding:0;
+    color: #00232C;
+    letter-spacing: 0.5em;
+    font-weight: 600; 
+  }
+}
+
+@mixin workarea-bg{
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 2px solid #C7E4E2;
+ }
+
+ @mixin second-btn{
+	border-radius: .5em;
+	border: 1px solid rgb(190, 190, 190);
+	color: #444;
+	background-color: #fff;
+	background:linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+	background-size: .65em auto, 100%;
+
+  &:hover{
+    border-color: #888;
+  }
+}

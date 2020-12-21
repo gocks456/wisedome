@@ -1,0 +1,180 @@
+@media all and (max-width:99999px){
+
+.controlbar{
+  margin:0 1em;
+  width: 10em;
+  height: 7px;
+  border-radius: 7px;
+  background: #ffffff;
+  outline: none;
+  -webkit-transition: .3s;
+  transition: opacity .3s;
+  -webkit-appearance: none;
+}
+      
+.controlbar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background:#b068ff;
+  cursor: pointer;
+}
+
+.controlbar::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background:#b068ff;
+  cursor:pointer;
+}
+
+/**객관/주관 답변들**/
+.main-text p{
+  font-family: 'Times New Roman', Times, serif;}
+
+.answers{
+  border-left: 2px solid #f2edf3;
+  text-align: center;}
+
+.answers button{  
+width: 70%;
+text-align: center;
+margin-bottom: 1em ;
+letter-spacing: 0.5em;}
+
+#manage-answer-btn{
+  margin-top: 5em;}
+
+
+/***답변관리- 10개 숫자번호들**/
+.card-body .btn-group{
+ margin-left: 2em; }
+
+.card-body .btn-group a{
+text-decoration: none; 
+color: grey;}
+ 
+.card-body .btn-group :hover a{
+  color:white;}
+
+.card-body .btn-group :visited a{
+color:white;
+background-color: #b068ff;}
+      
+.my-answer{
+  margin-top: 2em;
+ letter-spacing: 1em;
+ font-weight: bold;
+}
+
+#manage-answer{
+  display: none;}
+
+.my-answer span{
+  color: #b068ff;}
+
+
+/**답변 재선택 부분**/
+.reselect{
+  display: none;
+  letter-spacing: 1em;
+  font-weight: bold;}
+
+.reselect p, .reselect .btn{
+  display: inline-block;}
+.reselect .btn{
+  letter-spacing: 0.5em;
+  text-align: center;}
+}
+
+/***일반 모니터**/
+@media all and (max-width:1670px){
+  .answers button{  
+    width: 100%;
+    letter-spacing: 0.25em;}  
+}
+
+/***노트북화면****/
+@media all and (max-width:1280px){
+  .answers button,#manage-answer-btn{  
+    padding: 1em;
+    font-size: 0.8em;}  
+
+}
+
+/**큰 태블릿****/
+@media all and (max-width:991px){
+  .answers{
+    padding-top: 2em;
+    border-left: none;
+    text-align: left;}
+
+  .answers button, .reselect button{  
+    width: 25%;
+}  
+
+#manage-answer-btn{
+   margin-top: 0;
+   margin-left: 8em;}
+  }
+
+/**태블릿 화면**/
+@media all and (max-width:769px){
+  .answers button,.reselect button{  
+   width: 32%;} 
+
+.card-body .btn-group{
+    margin-left: 0; } 
+    
+#manage-answer-btn{
+margin-left: 0;
+
+}
+
+/**휴대폰화면***/
+@media all and (max-width:575px){
+  .controlbar{
+    margin: 0;
+    width: 5em;}
+
+.text-adjust{
+display: none;}
+
+.card-description{
+  letter-spacing: 0.25em
+}
+  
+.answers button,.reselect button{  
+width: 100%;} 
+
+#manage-answer-btn{
+ margin: 0;}  
+
+.btn-group button{
+  padding: 0.8em;
+}
+
+.large-number{
+ display: none;  
+}
+.object{
+  margin-bottom: 1em;
+}
+}
+
+@media all and (max-width:379px){
+.controlbar::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;}
+    
+.page-title {
+font-size: 1em;}
+
+.btn-group button{
+  padding: 0.5em;
+}
+
+
+  }    

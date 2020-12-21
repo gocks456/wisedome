@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인</title>
+
+<!-- fontawesome-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+<!--이페이지의 css-->
+<link rel="stylesheet" href="/static/new_design/css/login.css"/>	
+<script type="text/javascript" src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}"></script>
+
+</head>
+<body>
+
+<section id="left">
+
+<div class="text">
+  
+  <h3>인공지능 데이터 <br>수집 및 가공 플랫폼 </h3>
+  <p class="intro">와이즈돔은 인공지능에서 필요한 데이터를 크라우드 전문가와 협업하여 제작하는 플랫폼 입니다. 프로젝트 참여자는 획득한 포인트를 일정금액 이상이 되면 언제든 현금으로 전환할수 있습니다.</p>
+</div>
+
+</section>
+
+<!--로그인화면-->
+<section id="right">
+  
+<div class="login">
+	<a href="{{url_for('home.home')}}"><img src="/static/new_design/images/wisedome-logo.png" alt="logo"></a>
+  <h4>와이즈돔에 오신것을 환영합니다</h4>
+  {% from "_formhelpers.html" import render_form %}
+  {{ render_form(form, form_id="signin", action_text=_('Sign in'), btn_class="log")}}
+
+<!--
+  <form action="#" method="post"> 
+    <div class="form-group">
+      <i class="far fa-user icon"></i>
+      <input type="text" class="input-field" name="uname" placeholder="아이디" required>
+    </div>
+
+    <div class="form-group">
+      <i class="fas fa-lock icon"></i>
+      <input type="password" class="input-field" name="psw" placeholder="비밀번호" required>
+    </div>
+  </form>
+-->
+	   <!--
+       <div class="id1">
+         <input type="checkbox"  name="remember"> &nbsp; 아이디 저장하기
+       </div>
+
+	
+       <div class="id2">
+         <a href="#">아이디/비밀번호찾기</a>
+       </div>
+	   -->
+	  <!--
+      <button type="submit" class="login-btn">로그인</button>
+	  -->
+      <!--
+      <div class="log-group">
+        <button type="button" class="kakao-btn"><i class="fas fa-comment"></i>  카카오톡</button>
+        <button type="button" class="google-btn"><i class="fab fa-google"></i>  구 글</button>
+      </div>
+	  -->
+  <div class="register" >
+	  <span >아직회원이 아니시라구요? <a href="{{url_for('account.register')}}">지금 바로 가입하기</a></span>
+  </div>
+
+</div> 
+
+</section>
+
+
+<script>
+var div = $("label[for = 'email']").parent();
+$("label[for = 'email']").remove();
+var html = "<i class='fas fa-user icon'></i>" + div.html();
+div.html(html);
+$("#email").attr("placeholder", "이메일");
+
+var div = $("label[for = 'password']").parent();
+$("label[for = 'password']").remove();
+var html = "<i class='fas fa-user icon'></i>" + div.html();
+div.html(html);
+$("#password").attr("placeholder", "비밀번호");
+</script>
+
+<script>
+var btn = $(".log");
+btn.addClass("login-btn");
+
+
+</script>
+
+</body>
+</html>

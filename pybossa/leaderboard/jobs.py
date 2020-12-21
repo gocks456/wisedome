@@ -80,11 +80,15 @@ def update_all_user_answer_rate():
         user_repo.update(user)
     return "Update AnswerRate"
 
-def all_rank_achievement():
-    sql = '''
+# 2020.11.27. 업적 리뉴얼 예정
+    #sql = 
+    '''
                  SELECT id, point_sum, answer_rate
                  FROM users_rank
-          '''
+          
+    '''
+'''
+def all_rank_achievement():
     results = db.session.execute(sql)
     for row in results:
         achieve = ''
@@ -157,3 +161,5 @@ def update_achievement(user_id, achieve, achieve_id, category=None):
                 user_repo.update_achievement(user_id, achieve, achieve_id)
         return "Achievement add"
     return "Achieve Overlap"
+
+'''

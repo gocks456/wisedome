@@ -1,0 +1,227 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/new_design/css/myProfile.css">
+{% endblock %}
+
+{% block content %}
+
+{% macro render_user_thumbnail(user, upload_method) %}
+{% if user.info.avatar %}
+{% if upload_method == 'rackspace'%}
+{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onError="this.onerror=null;this.src='{{url_for('static', filename='new_design/images/user-default.png')}}';
+{% else %}
+{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar))}}" onError="this.onerror=null;this.src='{{url_for('static', filename='new_design/images/user-default.png')}}';
+{% endif %}
+{% else %}
+{{ url_for('static', filename='new_design/images/user-default.png')}}
+{% endif %}
+{% endmacro %}
+
+
+<div class="content-wrapper">
+
+	<div class="page-header">
+		<h3 class="page-title">마이페이지</h3>
+		<nav aria-label="breadcrumb">
+			<ul class="breadcrumb">
+				<li class="text-info"><i class="mdi mdi-trophy-variant mdi-18px"></i> 초급자 레벨</li>  
+			</ul>
+		</nav>
+	</div>
+
+	<!--프로필 보이는 영역-->
+	<div class="row">
+		<div class="col-xl-6 grid-margin stretch-card">
+			<div class="card bg-white">
+				<div class="card-body">
+
+					<div class="my-border-bottom text-center pb-4">
+						<img src="{{ render_user_thumbnail(user, upload_method) }}" alt="profile" class="img-lg rounded-circle mb-3">
+						<h6>{{current_user.fullname}} 님</h6> <!--닉네임-->
+						<p>{{current_user.name}}</p><!--부제목-->
+					</div>
+
+					<div class="my-border-bottom py-4">
+						<p> 나의 관심 작업분야</p>
+						<div> 
+							<!--
+							<label class="badge badge-outline-dark">이미지태깅</label>
+							<label class="badge badge-outline-dark">문장요약</label>
+							<label class="badge badge-outline-dark">사진찍기</label>
+							<label class="badge badge-outline-dark">감성분석</label>
+							<label class="badge badge-outline-dark">포인트 높은순</label>
+							-->
+						</div>
+					</div>
+
+					<div class="py-4">
+						<p class="clearfix">
+						<span class="float-left"><i  class="mdi mdi-human-male-female"></i>  성별</span>
+						<span class="float-right text-muted">
+							{% if current_user.sex == 'M' %}
+							남성
+							{% else %}
+							여성
+							{% endif %}
+						</span>
+						</p>
+						<p class="clearfix">
+						<span class="float-left"><i  class="mdi mdi-cake-variant"></i>  생년월일</span>
+						<span class="float-right text-muted" id="birth">
+						</span>
+						</p>
+						<!--
+						<p class="clearfix">
+						<span class="float-left"><i  class="mdi mdi-cellphone"></i>  연락처</span>
+						<span class="float-right text-muted">010-123-4567</span>
+						</p>
+						-->
+						<p class="clearfix">
+						<span class="float-left"><i  class="mdi mdi-mail-ru"></i>  이메일</span>
+						<span class="float-right text-muted">{{current_user.email_addr}}</span>
+						</p>
+					</div>
+
+					<div class="my-border-top text-center pt-4">    
+						<button class="btn btn-gradient-success btn-block" type="edit"><i  class="mdi mdi-account-circle"></i> &nbsp; 수정하기</button>  
+					</div>
+				</div><!--col lg-6-->
+			</div><!--card-->
+		</div><!--card-body-->
+
+
+		<!--이달의 통계-->     
+		<div class="col-xl-6 grid-margin stretch-card ">  
+			<div class="card bg-white ">
+				<div class="card-body">
+
+					<div class="my-border-bottom py-4">
+						<h6 class="font-weight-normal">이달의 작업건수 <i class="mdi mdi-database-plus mdi-1em float-right"></i></h6>
+						<h2 class="my-4">{{works_count}}건</h2>
+						<div class="progress progress-md flex-grow">
+							<div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow={{works_count|int}} style="width: {{works_count}}%;" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<!--<p class="card-text mt-3 text-right">지난달 대비 10% 증가함</p>-->
+					</div>
+
+					<div class="my-border-bottom py-4">
+						<h6 class="font-weight-normal">이달의 반려건수 <i class="mdi mdi-database-minus mdi-1em float-right"></i></h6>
+						<h2 class="my-4">{{return_count}}건</h2>
+						<div class="progress progress-md flex-grow">
+							<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow={{return_count|int}} style="width: {{return_count}}%;" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<!--<p class="card-text mt-3 text-right">지난달 대비 5% 감소함</p>-->
+					</div>
+
+					<div class="pt-4">
+						<h6 class="font-weight-normal">이달의 적립내역 <i class="mdi mdi-star-circle mdi-1em float-right"></i></h6>
+						<h2 class="my-3">{{point}} 포인트</h2>
+						<div class="progress progress-md flex-grow">
+							<div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow={{point|int}} style="width: {{point}}%;" aria-valuemin="0" aria-valuemax={{prev_point|int}}></div>
+						</div>
+						<!--<p class="card-text mt-3 text-right">지난달 대비 20% 증가함</p>-->
+					</div>
+				</div><!--col lg-6-->
+			</div><!--card-->
+		</div><!--card-body-->
+
+
+		<!--참여프로젝트-->
+		<div class="col-xl-12 grid-margin" >
+			<div class="card bg-white">
+				<div class="card-body ">
+					<h4 class="card-title "><i class="mdi mdi-view-list"></i>  &nbsp; 참여 프로젝트</h4>
+
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<thead>
+								<tr class="table-active">
+									<th> # </th>
+									<th> 프로젝트명</th>
+									<th> 진행률 </th>
+									<th> 포인트 </th>
+									<th> 마감일 </th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for i in range(0, projects_contrib|length ) %}
+								<tr>
+									<td> {{i+1}} </td>
+									<td> {{ projects_contrib[i].name }}</td>
+									<td>
+										<div class="progress">
+											<div class="progress-bar {% if i % 4 == 0 %}bg-info {% elif i % 4 == 1 %}bg-danger {% elif i % 4 == 2 %}bg-warning {% else %}bg-primary{% endif %}" role="progressbar" style="width:{{projects_contrib[i].overall_progress}}%" aria-valuenow={{projects_contrib[i].overall_progress|int}} aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+									</td>
+									<td> {{ projects_contrib[i].all_point }} </td>
+									<td> {{ projects_contrib[i].end_date[0:10] }}</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div><!--table responsive-->
+				</div><!--col-xl 12-->
+			</div><!--card-->
+		</div><!--card body-->
+
+
+		<!--포인트내역 -->
+		<div class="col-xl-12 grid-margin">
+			<div class="card bg-white">
+				<div class="card-body">
+					<h4 class="card-title "><i class="mdi mdi-star-circle"></i>  포인트 내역</h4>
+
+					<div class="row">
+						<div class="col-xl-9 d-inline-flex">
+
+							<div class="table-responsive">
+								<table class="table table-bordered table-xl-responsive">
+									<thead>
+										<tr class="table-active">
+											<th> # </th>
+											<th> 프로젝트명 </th>
+											<th> 적립건수</th>
+											<th> 적립액 </th>
+											<th> 지급일 </th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for i in range(0, point_history|length) %}
+										{% if point_history[i].point != 0 %}
+										<tr>
+											<td>{{i}}</td>
+											<td> {{ point_history[i].project_name }} </td>
+											<td> {{ point_history[i].count }} </td>
+											<td> {{ point_history[i].point }} </td>
+											<td> {{ point_history[i].finish_time[0:10] }} </td>
+										</tr>
+										{% endif %}
+										{% endfor %}
+									</tbody>
+								</table>
+							</div><!--table responsive-->
+						</div><!--col xl 9-->
+
+						<div class="col-xl-3 answers">  
+							<div class="my-4">
+								<h6 class="font-weight-normal"> <i class="mdi mdi-star-circle"></i>  환급가능한 보유포인트</h6>
+								<h2 class="py-4">{{current_user.current_point}}</h2>
+							</div>
+							<button type="button" class="btn btn-gradient-primary btn-block"><i class="mdi mdi-cash"></i>환급신청 </button>
+						</div><!--col xl 3-->
+					</div><!--row-->
+				</div><!--card body-->
+			</div><!--card-->
+		</div><!--col xl 12-->
+	</div>
+</div><!--contents wrapper-->
+
+<script src="/static/new_design/js/jquery.min.js"></script>
+	<script>
+		var birth = "{{current_user.birth}}";
+		var birth = birth.slice(0,4) + '.' + birth.slice(4,6) + '.' + birth.slice(6);
+		$("#birth").text(birth);
+	</script>
+
+	{% endblock %}

@@ -1,0 +1,54 @@
+@charset "UTF-8";
+/*********모바일 화면**************/
+.title h1 {
+  padding-bottom: 0.3em;
+}
+
+.title hr {
+  width: 40px;
+  height: 3px;
+}
+
+#header {
+  height: 7em;
+}
+
+.category-order {
+  font-size: 0.7em;
+}
+
+/***1.작업화면**/
+#contents {
+  padding: 3em 0;
+}
+
+#contents main {
+  margin: 1.5em 0.5em 1em 0.5em;
+  padding: 0;
+}
+
+#contents main .workspace {
+  padding: 2em 1em;
+}
+
+#contents main .workspace p {
+  font-size: 0.9em;
+}
+
+#contents main .process a, #contents main .process h5 {
+  font-size: 0.5em;
+}
+
+#contents main .btn-group button {
+  width: 40%;
+  margin: 1em 0.5em;
+  display: inline-block;
+}
+
+/**다음 이전페이지 버튼**/
+.page-btn-group li:hover {
+  border-color: #888;
+}
+
+
+/*# sourceMappingURL=project-text-S.css.map */

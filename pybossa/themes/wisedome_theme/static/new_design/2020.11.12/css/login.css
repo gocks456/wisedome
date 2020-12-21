@@ -1,0 +1,206 @@
+@import url("fontawesome-all.min.css");
+
+@font-face { font-family: 'S-CoreDream-2Light'; src: url('../css/font/SCDream2.otf') format('woff'); font-weight: normal; font-style: normal; }
+
+
+html, body, div {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+  vertical-align: baseline;}
+  
+  ol, ul, li {
+    list-style: none;
+  }
+
+  @-ms-viewport {
+		width: device-width;
+	}
+
+	body,html {
+    box-sizing: border-box;
+    font-family: 'S-CoreDream-2Light';
+    background-image: url("../images/login-bg.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+section{
+  float: left;
+  width: 50%;
+}
+
+#left{
+
+  height: 100vh;
+  display: table;
+}
+
+.text{
+color: white;
+font-size: 1.2em;
+font-family: 'S-CoreDream-2Light';
+text-align: justify;
+width: 100%;
+margin: 0 auto;
+display: table-cell;
+vertical-align: middle;
+padding: 0 30%;
+}
+
+.text img{
+  width: 50%;
+}
+.text h2{
+  line-height: 1.5em;
+}
+
+.text p{
+  line-height: 1.7em;
+  font-family: 'S-CoreDream-2Light';
+}
+
+
+/***로그인 양식***/
+#right{
+  height: 100vh;
+ display: table;
+ background: rgba(255, 255, 255, 0.7)
+}
+
+.login{
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 25%;
+  color: black;
+
+}
+
+.login h1{
+  text-align: center;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+button {
+  border-radius: 10px;
+  color: white;
+  padding: 14px 20px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.log{
+  background-color:#8c83d3;
+  font-family: 'S-CoreDream-2Light';
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.container {
+  padding: 16px;
+}
+
+span{
+  display: inline-block;
+  width: 48%;
+  padding-top: 16px;
+}
+
+span a {
+  text-decoration: none;
+}
+
+span a:hover{
+  color: #245f96
+}
+
+.psw{text-align: right;}
+
+
+
+
+
+/****************모바일**********************/
+@media screen and (max-width: 480px) {
+
+#left{display: none;}
+
+#right{
+  width: 100%;
+}
+
+.login{
+  padding: 0 10%;
+}
+label{
+  font-size: 0.6em;
+}
+
+span{
+  padding-top: 10px;
+  font-size: 0.6em;
+}
+
+}
+
+/******* 핸드폰 가로 **** 태블릿**************/
+@media (min-width:481px) and (max-width: 768px) {
+
+#left, #right{
+    height: 50%;
+    width: 100%;
+}
+
+.text{
+font-size: 0.7em;
+width: 100%;
+padding: 10% 25%;
+}
+
+.text img{
+  width: 25%;
+}
+
+.login{
+  padding:10% 20%;
+  font-size: 0.7em;
+}
+
+}
+
+/************노트북 작은 모니터 ***********/
+
+@media (min-width: 769px) and (max-width: 1280px) {
+  section{
+    float: left;
+    width: 50%;
+  }
+  .text{
+    font-size: 0.8em;
+    padding: 10% 25%;
+    }
+    
+  
+  .login{
+    padding:10% 20%;
+    font-size: 0.8em;
+  }
+  
+  
+}

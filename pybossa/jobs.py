@@ -66,6 +66,8 @@ def get_quarterly_date(now):
     execute_month = int(math.ceil(now.month / 3.0) * 3)
     execute_day = 31 if execute_month in [3, 12] else 30
     execute_date = datetime(now.year, execute_month, execute_day)
+    print(execute_date)
+
     return datetime.combine(execute_date, now.time())
 
 
@@ -143,6 +145,13 @@ def get_default_jobs():  # pragma: no cover
                timeout=timeout, queue='super')
     yield dict(name=news, args=[], kwargs={},
                timeout=timeout, queue='low')
+
+# 프로젝트 자동 마감
+#def project_deadline():
+    """마감 프로젝트 관리"""
+#    from pybossa.core import project_repo
+#    from pybossa.cache.projects
+#    projects = 
 
 def get_maintenance_jobs():
     """Return mantainance jobs."""

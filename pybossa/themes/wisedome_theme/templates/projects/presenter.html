@@ -63,6 +63,10 @@
         </div>
     </div>
     {% endif %}
+
+	<button name="answer-manager" value="answer_manager" class="btn" id="managetest">TEST</button>
+	<h2 id="ajaxtest"></h2>
+	<button name="modify" value="modify" class="btn" id="moditest">MODI</button>
 	
 	<form action="" method="GET">
 		<button name="data" value="answer_manage" class="btn btn-primary">답변 관리</button>
@@ -91,18 +95,18 @@
 		<button class="tablinks" onclick="openMenu(event, 'how_to_use')">이용방법 보기</button>
 	</div>
 	<div id="guide_line" class="tabcontent">
-		<h3>가이드라인</h3>
+		<h3>가이드라인</h3><br>
 		<p id = "gpid">{{project.long_description|markdown}}</p>
 	</div>
 
 	<div id="example" class="tabcontent">
-		<h3>예시</h3>
-		<p id="epid">DB에 추가하고 넣어주기</p> 
+		<h3>예시</h3><br>
+		<p id="epid">{{ ex}}</p> 
 	</div>
 
 	<div id="how_to_use" class="tabcontent">
-		<h3>이용방법</h3>
-		<p>DB에 추가하고 넣어주기</p>
+		<h3>이용방법</h3><br>
+		<p>{{ htd }}</p>
 	</div>
 
     <div id='PYBOSSA_USER_LOCALE' hidden>
@@ -114,11 +118,6 @@
 	</div>
 </div>
 
-<!--<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/swipe/styles.css')}}">
-<script type="text/javascript" src="{{url_for('static', filename='js/add-js/swipe/temp.js')}}"></script>-->
-	<!--<script type="text/javascript" src="{{url_for('static', filename='js/add-js/contourer/src/require.js')}}"></script>-->
-	<!--<script type="text/javascript" src="{{url_for('static', filename='js/add-js/contourer/src/temp.js')}}"></script>-->
-
 
 	<script>
 		var csrf = "{{ csrf_token() }}";
@@ -126,14 +125,63 @@
 	</script>
 
 
-	<script>
-		console.log("KKKKK");
-		var x = document.getElementById("gpid");
-		var y = document.getElementById("epid");
-		y.innerHTML = x.innerHTML;
+<script>
+	$(document).ready(function(){
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrf)
+				}
+			}
+		})
 
-		console.log(x.innerHTML);
-	</script>
+		$("#managetest").click(function(){
+			var url = window.location.href;
+			$.ajax({
+				url:url,
+				data: {"btn":$(this).val()},
+				type:'POST',
+				success: function(data) {
+					//console.log(data);
+					console.log(typeof(data));
+					json = JSON.parse(data);
+					console.log(typeof(json));
+					console.log(Object.keys(json));
+					console.log(json[0].task_run_info);
+					$('#ajaxtest').text(json[0].task_run_info);
+					$('#ajaxtest').attr('value',json[0].id);
+				},
+				error:function(request,error){
+					console.log(request);
+					console.log(error);
+				}
+			});
+		});
+		$("#moditest").click(function(){
+			console.log('aaaa');
+			var url = window.location.href;
+			console.log($('#ajaxtest').attr('value'));
+			$.ajax({
+				url:url,
+				data: {
+					"btn":$(this).val(),
+					"task_run_id":$('#ajaxtest').attr('value'),
+					"answer": "new_answer"
+				},
+				type:'POST',
+				success: function(data) {
+					console.log(data);
+				},
+				error:function(request,error){
+					console.log(request);
+					console.log(error);
+				}
+			});
+		});
+	});
+</script>
+
+
 
 <script>
 	function openMenu(evt, menuName) {

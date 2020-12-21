@@ -49,6 +49,8 @@ ONE_HOUR = 60 * 60
 HALF_HOUR = 30 * 60
 FIVE_MINUTES = 5 * 60
 
+SEVEN_DAYS = 24 * 60 * 60 * 7
+
 
 def get_key_to_hash(*args, **kwargs):
     """Return key to hash for *args and **kwargs."""

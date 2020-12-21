@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with PYBOSSA.  If not, see <http://www.gnu.org/licenses/>.
 """Home view for PYBOSSA."""
-from flask import current_app, abort
+from flask import current_app, abort, url_for
 from flask_login import current_user
 from pybossa.model.category import Category
 from flask import Blueprint
@@ -24,8 +24,12 @@ from flask import render_template
 from pybossa.cache import projects as cached_projects
 from pybossa.cache import users as cached_users
 from pybossa.cache import categories as cached_cat
-from pybossa.util import rank, handle_content_type
+from pybossa.util import rank, handle_content_type, redirect_content_type
 from jinja2.exceptions import TemplateNotFound
+
+# New Design
+from pybossa.core import project_repo
+from pybossa.cache import site_stats
 
 
 blueprint = Blueprint('home', __name__)
@@ -49,8 +53,18 @@ def home():
         user_id = current_user.id
         historical_projects = cached_users.projects_contributed(user_id, order_by='last_contribution')[:3]
         data['historical_contributions'] = historical_projects
-    response = dict(template='/home/index.html', **data)
-    return handle_content_type(response)
+
+    # 메인화면 Design Test
+    #response = dict(template='/home/index.html', **data)
+    #projects = project_repo.get_all()
+    projects = cached_projects.get_all_projects()
+    top_users = site_stats.get_top10_users_7_days()
+
+    if current_user.is_anonymous:
+        response = dict(template='/new_design/index.html', projects=projects, top_users=top_users )
+        return handle_content_type(response)
+    else:
+        return redirect_content_type(url_for('project.index'))
 
 
 @blueprint.route("about")
@@ -61,15 +75,15 @@ def about():
 
 @blueprint.route("faq")
 def faq():
-	"""Render the about template."""
-	response = dict(template="/custom/faq.html")
-	return handle_content_type(response)
+    """Render the about template."""
+    response = dict(template="/custom/faq.html")
+    return handle_content_type(response)
 
 #@blueprint.route("order")
 #def requset_order():
-#	"""Render the about template."""
-#	response = dict(template="/order/_order.html")
-#	return handle_content_type(response)
+#   """Render the about template."""
+#   response = dict(template="/order/_order.html")
+#   return handle_content_type(response)
 
 @blueprint.route("faq/orderer")
 def orderer():

@@ -1,0 +1,67 @@
+{% set active_link = "info" %}
+{% extends "/new_design/project_base.html" %}
+
+{% block projectcontent %}
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+{#<button class='btn' id='heart' value="{{ like_project }}"></button>#}
+
+<h4>할당된 총 포인트 : {{ project.all_point }}</h4>
+<hr/>
+    {% if project.long_description != project.description  %}
+	    {{ project.long_description | markdown }}
+    {% endif %}
+	
+
+
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/vendor/jquery-2.2.3.js') }}"></script>
+<script>
+	function heart_change() {
+		if ( $('#heart').val() == 'like' ) {
+			$('#heart').html('♥');
+		}
+		else if ( $('#heart').val() == 'dislike' ) {
+			$('#heart').html('♡');
+		}
+	}
+
+	$(document).ready(function(){
+		var csrftoken = $('meta[name=csrf-token]').attr('content')
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken)
+				}
+			}
+		})
+
+		heart_change();
+
+		var url = window.location.href; 
+		$('#heart').off('click').on('click', function(evt) {
+			var value = $(this).val();
+			$.ajax({
+				url: url,
+				type: 'POST',
+				data: { 'value' : value },
+				success: function(res) {
+					console.log(res);
+					console.log(typeof(res));
+					$('#heart').val(res);
+					heart_change();
+					$('#heart').blur();
+				},
+				error: function(request, error){
+					console.log(request);
+					console.log(error);
+				}
+			})
+		});
+	})
+</script>
+
+{% endblock %}

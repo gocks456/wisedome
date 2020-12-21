@@ -40,10 +40,3 @@ class AchievementRepository(Repository):
             name = achievement.__class__.__name__
             msg = '%s cannot be %s by %s' % (name, action, self.__class__.__name__)
             raise WrongObjectError(msg)
-
-
-
-
-
-
-
