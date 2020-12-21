@@ -90,6 +90,11 @@ class Project(db.Model, DomainObject):
     #계약서 컬럼
     contractor_ids = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())
 
+    end_date = Column(Text)
+
+    #마감기한
+    #deadline = Column(Text, default=make_timestamp)
+    #updated 에 원하는 시간만큼 더하는 방안으로 해야될 것으로 보임
 
     option_sex = option_age_start = option_age_end = "0"
 
@@ -141,7 +146,7 @@ class Project(db.Model, DomainObject):
                 'overall_progress', 'short_name', 'created', 'category_id',
                 'long_description', 'last_activity', 'last_activity_raw',
                 'n_task_runs', 'n_results', 'owner', 'updated', 'featured',
-                'owner_id', 'n_completed_tasks', 'n_blogposts', 'owners_ids', 'all_point', 'condition', 'complete']
+                'owner_id', 'n_completed_tasks', 'n_blogposts', 'owners_ids', 'all_point', 'condition', 'complete', 'end_date']
 
     @classmethod
     def public_info_keys(self):

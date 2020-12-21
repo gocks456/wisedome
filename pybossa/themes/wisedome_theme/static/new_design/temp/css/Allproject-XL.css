@@ -1,0 +1,77 @@
+/***작은 노트북화면**/
+
+#header {
+  height:15em;
+  }
+
+  .title hr{
+    width: 50px;
+  }
+  
+/***2. 카테고리별 프로젝트***/
+#category {
+	padding: 5em ;
+}
+
+.ctg {
+	width: 20%;
+  padding: 2em 1em;
+	margin:0 1em;
+}
+
+
+ /**프리미엄 프로젝트**/ 
+#premium main{
+	padding: 5em 1em ;
+}	
+.container-wrap{
+  margin: 1.5em 2em;
+}
+.premium-intext{
+  padding-top: 13em;
+    }
+
+.premium-intext h3{
+  font-size: 0.9em;
+}
+
+.premium-intext li{
+  font-size: 0.8em;
+}
+
+.swiper-pagination{
+	display:block;
+}	
+
+  /***3. 진행중인 프로젝트****/
+ 
+  #project { 
+   padding: 5em 1em;
+  }
+  .pro{
+    width: 30%;
+  }
+  .pro figcaption {
+    padding: 1em  ;
+    top: calc(80%);
+  }
+  .pro h3{
+    font-size: 1em;
+    }
+  
+
+  .level{ 
+    margin-bottom:0.5em;
+    width: 65px;
+    height: 17px;
+    line-height: 17px;
+    font-size:0.8em ;
+    }
+
+  /****가격별 정렬***/
+  form{
+    margin:0 10% 2% 75% ;
+    }
+    #orderlist {
+      font-size: 0.8em;
+    }

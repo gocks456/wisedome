@@ -85,6 +85,8 @@ def get_category_GPA():
         rank_categorys.append(rank_category)
     return rank_categorys
 
+# 2020.11.27. 업적 리뉴얼 예정
+"""
 def get_achievement(user_id, achievement_id):
     sql = text('''
                SELECT * FROM achievement WHERE user_id=:user_id AND achieve_id=:achieve_id;
@@ -123,6 +125,7 @@ def get_category_achieve(user_id):
         elif rank[0] == 'master':
             achieve[row.c_id] = 4
     return achieve
+"""
 
 def get_answer_rate(user):
     sql = text('''
@@ -165,7 +168,7 @@ def get_user_point_history(user_id):
     """Return user point history."""
     sql = text('''
                SELECT u.id AS id, t.project_id AS project_id, p.name AS project_name, MAX(t.finish_time) AS finish_time,
-               sum(t.point) AS point, p.short_name AS project_short_name, c.name AS category
+               sum(t.point) AS point, count(t.id) AS count, p.short_name AS project_short_name, c.name AS category
                FROM "user" u, task_run t, project p, category c
                WHERE t.project_id = p.id AND t.user_id = u.id AND p.category_id = c.id
                AND u.id =:user_id
@@ -176,7 +179,7 @@ def get_user_point_history(user_id):
     point_historys = []
     for row in results:
         point_history = dict(id=row.id, #project_id=row.project_id,
-                project_name=row.project_name, finish_time=row.finish_time,
+                project_name=row.project_name, finish_time=row.finish_time, count=row.count,
                             point=row.point, project_short_name=row.project_short_name, category=row.category)
         point_historys.append(point_history)
 #================================================#
@@ -517,7 +520,7 @@ def projects_contributed(user_id, order_by='name'):
                     (SELECT project_id, MAX(finish_time) as last_contribution  FROM task_run
                      WHERE user_id=:user_id GROUP BY project_id)
                SELECT * FROM project, projects_contributed
-               WHERE project.id=projects_contributed.project_id ORDER BY {} DESC;
+               WHERE project.id=projects_contributed.project_id AND project.complete = False ORDER BY {} DESC;
                '''.format(order_by))
     results = session.execute(sql, dict(user_id=user_id))
     projects_contributed = []

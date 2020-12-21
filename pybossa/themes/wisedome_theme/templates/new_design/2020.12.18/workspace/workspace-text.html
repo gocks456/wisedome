@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>문서작업</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/css/function/vendor.bundle.base.css">
+    <!--기본 css--->
+    <link rel="stylesheet" href="../../static/css/basic/dashboard-basic.css">
+    <link rel="stylesheet" href="../../static/css/basic/guideline.css">
+    <link rel="stylesheet" href="../../static/css/function/darkmode.css">
+    <!---현재 페이지에만 들어가는 css-->
+    <link rel="stylesheet" href="../../static/css/workspace-text.css">
+
+ 
+  </head>
+  <body>
+    <div class="container-scroller">
+         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo.png" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <div class="search-field d-none d-md-block">
+            <form class="d-flex align-items-center h-100" action="#">
+              <div class="input-group">
+                <div class="input-group-prepend bg-transparent">
+                  <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                </div>
+                <input type="text" class="form-control bg-transparent border-0" placeholder="검색어를 입력하세요">
+              </div>
+            </form>
+          </div>
+          <ul class="navbar-nav navbar-nav-right"><!---나의 프로필 사진과 설정--->
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="../../static/images/face5.jpg" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="mb-1">창원대학교</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item " href="#">
+                  <i class="mdi mdi mdi-account-circle mr-2 text-success"></i>  나의프로필 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i>  로그아웃 </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link"><!---스크린 확대 아이콘-->
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown"><!--메세지 확인 아이콘-->
+              <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <i class="mdi mdi-email-outline"></i>
+                <span class="count-symbol bg-warning"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                <h6 class="p-3 mb-0">메세지</h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <img src="../../static/images/face5.jpg" alt="image" class="profile-pic">
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column">
+                    <p class="preview-subject mb-1 ellipsis">메세지가 도착했습니다</ㅔ>
+                    <p class="mb-0 "> 1분전 </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <img src="../../static/images/face5.jpg" alt="image" class="profile-pic">
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column">
+                    <p class="preview-subject mb-1 ellipsis">프로필이 업데이트 되었습니다</p>
+                    <p class="mb-0"> 15분전 </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <img src="../../static/images/user-default.png" alt="image" class="profile-pic">
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column">
+                    <p class="preview-subject mb-1 ellipsis">작업물이 1건 반려되었습니다</p>
+                    <p class="mb-0"> 18분전</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <h6 class="p-3 mb-0 text-center ellipsis">4개의 새로운 메세지</h6>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown d-none d-md-block"><!--공지사항 아이콘-->
+              <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                <i class="mdi mdi-bell-outline"></i>
+                <span class="count-symbol bg-danger"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                <h6 class="p-3 mb-0">공지사항</h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-success">
+                      <i class="mdi mdi-calendar"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column">
+                    <h6 class="preview-subject mb-1 ">프로젝트 마감</h6>
+                    <p class="ellipsis mb-0"> 참여했던 프로젝트가 오늘 마감됩니다</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-warning">
+                      <i class="mdi mdi-settings"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column">
+                    <h6 class="preview-subject mb-1 ">설정</h6>
+                    <p class="ellipsis mb-0"> 비밀번호를 주기적으로 변경해주세요 </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-info">
+                      <i class="mdi mdi-link-variant"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column">
+                    <h6 class="preview-subject mb-1 ">새로운 프로젝트</h6>
+                    <p class="ellipsis mb-0"> 당신에게 적합한 새로운 프로젝트를 추천합니다 </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <h6 class="p-3 mb-0 text-center">모두보기</h6>
+              </div>
+            </li>
+            <li class="nav-item"><!--낮밤모드 화면설정 아이콘-->
+              <div class="nav-link">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch"></label> 
+                </div>
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span><!---모바일화면일때 햄버거버튼--->
+          </button>
+        </div>
+      </nav>
+
+      
+ <!----왼쪽 사이드바 ----->
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="../../static/images/face5.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">창원대학교</span>
+                  <span class="text-secondary text-small">초급자</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="../../index.html">
+                <span class="menu-title ">HOME</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">나의 프로젝트</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-ticket-account menu-icon"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="#">진행중 프로젝트</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#">새로운 프로젝트</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span class="menu-title">포인트</span>
+                <i class="mdi mdi-trophy-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span class="menu-title">답변관리</span>
+                <i class="mdi mdi-message-text menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span class="menu-title">질문게시판</span>
+                <i class="mdi mdi-human-greeting menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span class="menu-title">발주자 사이트</span>
+                <i class="mdi mdi-server-network menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+                <span class="menu-title">관리자 페이지</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-settings menu-icon"></i>
+              </a>
+              <div class="collapse" id="general-pages">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="#"> 상황판 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> 범주 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> 포인트</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> 환급 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> 사용자 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> 관리자 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> DB관리 </a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item sidebar-actions">
+              <span class="nav-link">
+                <div class="border-bottom"></div>
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4">
+                  <i class="mdi mdi-cash-multiple"></i> 포인트 전환</button>
+                  <br>
+                <div class="border-bottom"></div>
+              </span>
+            </li>
+          </ul>
+        </nav>
+<!---------------------------------------여기까지가 기본 nav --------------------------------------------->
+
+  <!-- 메인 작업화면 -->
+ <div class="main-panel">
+   <div class="content-wrapper">
+
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-heart"></i></span>  &nbsp;
+           객관/주관 분석하기
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <label for="controlbar controlbar-gradient-success"><i class="mdi mdi-format-size text-primary "></i> <span class="text-adjust">글자크기조절</span> 
+            <input type="range" min=10 max=30 value=10 class="controlbar" data-fs-target-class="textsize"/>
+            </label>
+        </ul>
+      </nav>
+    </div>
+
+
+<!------문제 들어가는 영역-------->
+<div class="row">
+  <div class="col-md-12 grid-margin">
+    <div class="card bg-white">
+      <div class="card-body"> <!----여기서부터 컨텐츠 내용물 들어옴(흰색바탕안에)-->
+        <h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 문장을 읽고 문장의 결과를 선택해주세요</h4>
+            <div class="row mt-4">
+              <div class="col-lg-9 main-text"><!----문제화면-->
+                <p class="textsize">듣기만 같은 길지 보배를 힘있다. 피어나기 구하지 얼마나 것은 피어나는 관현악이며, 주는 칼이다. 석가는 그들은 생생하며, 이것이야말로 것이다. 하는 가치를 동산에는 유소년에게서 운다. 것은 열락의 찬미를 구하지 앞이 몸이 것이다. 부패를 가슴에 설산에서 발휘하기 바이며, 무한한 그러므로 이성은 것이다. 풀밭에 두손을 인생의 있음으로써 보라. 피고, 위하여 천지는 우리 수 인생에 찾아다녀도, 가장 있다. 바이며, 생명을 것은 목숨을 있을 위하여서. 그림자는 하는 대중을 있을 대한 듣는다.
+                </p>
+              </div>
+              <div class="col-lg-3 answers">    <!---답변선택영역-->
+                <button type="radio" class="btn btn-primary"><i class="mdi mdi-cube-outline"></i> 객관적</button>
+                <button type="radio" class="btn btn-primary"><i class="mdi mdi-cube-unfolded"></i> 주관적</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="col-md-12 grid-margin" id="manage-answer-top">
+      <div class="card bg-white">
+        <div class="card-body ">
+    <h4 class="card-title "><i class="mdi mdi-format-list-numbered"></i>  &nbsp; 답변관리</h4>
+        <div class="row">
+    <div class="col-lg-9 d-inline-flex">
+      <p class="card-description mt-3"> 내가 풀었던 문제를 다시보고 답변을 수정할 수 있습니다. 답변을 수정하고 싶으면 버튼을 클릭해주세요 </p>
+    </div>
+    <div class="col-lg-3 answers">    <!---답변관리 선택 버튼-->
+      <button type="button" class="btn btn-inverse-info" id="manage-answer-btn"><i class="mdi mdi-file-multiple"></i>답변관리 </button>
+    </div>
+    </div>
+    </div>
+    </div>
+   </div>
+
+
+<div class="col-md-12 grid-margin" id="manage-answer"><!---나의 답변관리 영역-->
+  <div class="card bg-white">
+    <div class="card-body">
+      <h4 class="card-title"><i class="mdi mdi-message-text"></i> &nbsp; 나의답변</h4>
+
+      <div class="page-btn-group ">
+        <button class="btn btn-inverse-secondary btn-sm"><i class="mdi mdi-chevron-left"></i></button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page1')">1</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page2')">2</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page3')">3</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page4')">4</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page5')">5</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page6')">6</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page7')">7</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page8')" disabled>8</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page9')" disabled>9</button>
+        <button class="btn btn-inverse-secondary btn-sm "><i class="mdi mdi-chevron-right"></i></button>
+      </div>
+
+    <div class="row mt-4">
+      <div class="col-lg-9 main-text"> <!---이전 문제화면 뜨는곳-->
+
+        <div class="previous-question pageContents" id="page1"><!---1번문제화면-->
+          <p class="textsize">1번문제 여기에 나와주세요 아무거나 내용 입력해주세요</p> <!----내가 풀은 기존의 문제 내용-->
+         <div class="my-answer">
+          <p class="card-description">나의답변 <span> 주관적</span><!---내가 기존에 제출한 답변 --->
+          </p>
+        </div>
+        </div>
+  
+        <div class="previous-question pageContents" id="page2"><!---2번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">2번문제 - Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod quia quidem dignissimos magnam rerum, provident a quaerat! Quos soluta voluptatum, modi a laboriosam et assumenda voluptas dolorem explicabo voluptatibus facilis. </p> <!----내가 풀은 기존의 문제 내용-->
+         <div class="my-answer">
+          <p class="card-description">나의답변 <span> 객관적</span><!---내가 기존에 제출한 답변 --->
+          </p>
+        </div>
+        </div>
+
+        <div class="previous-question pageContents" id="page3"><!---3번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">3번문제 - 아무내용이나 입력일단 했습니다. 생명을 것은 목숨을 있을 위하여서. 그림자는 하는 대중을 있을 대한 듣는다</p> 
+         <div class="my-answer">
+          <p class="card-description">나의답변 <span> 객관적</span>
+          </p>
+        </div>
+        </div>
+   
+        <div class="previous-question pageContents" id="page4"><!---4번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">4번문제 - 4번문제 - It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed</p> 
+         <div class="my-answer">
+          <p class="card-description">나의답변 <span> 주관적</span>
+          </p>
+        </div>
+        </div>  
+        
+        <div class="previous-question pageContents" id="page5"><!---5번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">5번문제 - 실로 발휘하기 피에 풀밭에 대고, 때문이다. 끓는 인생을 인생에 갑 이것이다. 싸인 미인을 봄바람을 그들의 그들을 불러 보라. 낙원을 속에서 듣기만 싹이 만물은 대한 가슴에 끓는다. 무한한 두손을 실현에 살았으며, 봄바람을 눈이 이성은 아니더면, 있다. 수 용기가 평화스러운 부패뿐이다. 있을 얼마나 보내는 얼마나 위하여 심장의 목숨이 것이다.</p> 
+         <div class="my-answer">
+          <p class="card-description">나의답변 <span> 주관적</span>
+          </p>
+        </div>
+        </div>  
+
+       <!---6번문제화면(여기서부터 계속 반복)---->
+        <div class="previous-question pageContents" id="page6">
+         <p class="textsize"><!--여기안에 문제들어와야함---></p> 
+         <!--문제 푼내용이 없을떄 디폴트 이미지--푼 문제가 있으면 해당 태그가 보이지 않도록--->
+         <div class="empty-default">아직 푼 문제가 없네요 ㅠ</div>
+
+         <div class="my-answer">
+          <p class="card-description"> <span><!---기존에 선택한 답변 이곳에 떠야함 ---> </span>
+          </p>
+        </div>
+        </div>  
+       <!---7번문제화면(여기서부터 계속 반복)---->
+        <div class="previous-question pageContents" id="page7">
+          <p class="textsize"> </p> 
+          <div class="empty-default">문제부터 빨리 풀어야겟어요</div>
+         <div class="my-answer">
+          <p class="card-description"> <span><!---아직 답변없음 ---> </span>
+          </p>
+        </div>
+        </div> 
+        <!---8번문제화면(안푼문제라 버튼 비활성화 되어있음)---->
+        <div class="previous-question pageContents" id="page8">
+          <p class="textsize"></p>
+          <div class="empty-default">아이코~ 문제를 먼저풀어주세요 </div>
+         <div class="my-answer">
+          <p class="card-description">  <span><!---아직 답변없음 ---> </span>
+          </p>
+        </div>
+        </div>
+        <!---9번문제화면(안푼문제라 버튼 비활성화 되어있음)---->
+        <div class="previous-question pageContents" id="page9">
+          <p class="textsize"></p>
+          <div class="empty-default">어쩌나... </div>
+         <div class="my-answer">
+          <p class="card-description"> <span><!---아직 답변없음 ---> </span>
+          </p>
+        </div>
+        </div> 
+        
+
+
+
+ <!---답변 변경 버튼---->
+        <div class="reselect">   
+          <p class="card-description"> 답변변경</p>
+          <button type="radio" class="btn btn-outline-primary object" onclick="enableButton()"><i class="mdi mdi-cube-outline"></i> 객관적</button>
+          <button type="radio" class="btn btn-outline-primary" onclick="enableButton()"><i class="mdi mdi-cube-unfolded"></i> 주관적</button>
+        </div>
+      </div>
+
+      <div class="col-lg-3 answers"> <!--답변수정 및 제출 영역--->
+        <button type="edit" class="btn btn-danger" id="edit"><i class="mdi mdi-tooltip-edit"></i> 수정하기</button>
+        <button type="submit" class="btn btn-success " id="submit" disabled ><i class="mdi mdi-cloud-upload"></i>제출하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+   
+
+
+<!--------가이드 라인 영역 (페이지마다 반복되는 영역)-------->
+<div class="col-md-12 grid-margin">
+  <div class="card bg-white">
+    <div class="card-body">
+     
+      <div class="accordion mt-4">
+        <ul class="accordion__items">
+  
+          <li class="accordion__item">
+            <div class="accordion__title">
+              <h5> <i class="mdi mdi-cards-playing-outline"></i>   이용방법</h5>
+              <span class="accordion__icon"><img src="../../static/images/plus-24px.png" alt="plus icon"></span>
+            </div>
+            <div class="accordion__content"><!---이용방법에 대한 내용 첨부하기-->
+              <p>관측, 정황보고, 판단, 조사 등에 응용하는 애매한 용어를 말한다. 객관적 보고는 참이라고 할 수 있다; 주관적인 보고에서는 보고자의 편견과 기호가 개재되어, 그 보고는 참이 되질 못한다. 과학과 탐구는 객관성을 지향하지만, 빈번한 것은 참이라고 주장하는 객관적인 언명들에는 실제로는 주관적인 요소가 혼재되어 있다는 것이다. 전형적으로, 주관성에 대한 비난은 편견, 이기, 고의적 맹목 등에 대한 비난인 것이다. 이것은 연구자가 원하는 객관성의 기준에 도달하지 못했다는 것을 의미한다.					
+                </p>
+            </div>
+          </li>
+  
+          <li class="accordion__item">
+            <div class="accordion__title">
+              <h5> <i class="mdi mdi-assistant"></i>   예시보기</h5>
+              <span class="accordion__icon"><img src="../../static/images/plus-24px.png" alt="plus icon"></span>
+            </div>
+            <div class="accordion__content"><!---예시 내용 첨부하기-->
+              <p>유소년에게서 미인을 옷을 말이다. 위하여, 있는 불어 봄바람을 군영과 가치를 뿐이다. 위하여, 지혜는 뼈 황금시대를 이는 것이다. 아니더면, 하는 위하여, 사랑의 않는 운다. 가치를 때에, 풀이 구할 투명하되 것이다. 웅대한 돋고, 원질이 소리다.이것은 꽃이 행복스럽고 꾸며 말이다. 듣기만 않는 가슴이 길을 것은 남는 보라. 천고에 피가 청춘이 찾아다녀도, 구하지 새가 있음으로써 충분히 약동하다. 못할 이 대중을 어디 속에 무한한 살았으며, 듣는다. 부패를 곧 피는 속에 모래뿐일 커다란 역사를 청춘의 말이다. 피가 같지 없으면, 있으며, 이상을 것이다.</p>
+            </div>
+          </li>
+  
+          <li class="accordion__item">
+            <div class="accordion__title">
+              <h5><i class="mdi mdi-bell-ring"></i>   주의사항</h5>
+              <span class="accordion__icon"><img src="../../static/images/plus-24px.png" alt="plus icon"></span>
+            </div>
+            <div class="accordion__content"><!---주의사항 첨부하기-->
+              <p>앞이 더운지라 그림자는 살 불러 새 그들은 위하여, 그것을 피다. 하는 피에 앞이 희망의 위하여서 인도하겠다는 우리는 그들은 위하여서. 이것을 그러므로 부패를 구할 끓는 보는 속에 싸인 생의 이것이다. 유소년에게서 위하여 자신과 지혜는 할지니, 싸인 내려온 인생을 천고에 그리하였는가? 예수는 고동을 가치를 위하여서, 목숨이 밝은 그리하였는가? 그들은 일월과 그러므로 작고 그러므로 실현에 있는 것이다. 것이 이상 같은 못하다 따뜻한 이것이다. 그들은 커다란 투명하되 밥을 같은 것이다. 이상을 아름답고 청춘의 긴지라 그들은 이것을 인생을 것이다.
+                  <br><br>
+                같이, 노래하며 전인 얼마나 되려니와, 청춘이 이상은 있는가? 용기가 이상을 생명을 피고 황금시대를 끓는다. 길을 가치를 있는 더운지라 위하여 뿐이다. 목숨이 끓는 공자는 거친 보라. 얼마나 피어나는 생생하며, 용기가 청춘의 불러 할지라도 앞이 쓸쓸하랴? 영락과 피고, 몸이 뜨거운지라, 노년에게서 것은 밝은 아름다우냐? 군영과 사는가 위하여서 풀이 튼튼하며, 방지하는 우리 끓는다. 충분히 굳세게 그들의 사람은 청춘의 인간이 두손을 황금시대의 우리는 있는가? 천고에 품에 보이는 아니더면, 같은 얼음 이상의 천자만홍이 같으며, 교향악이다. 거친 못할 바이며, 눈에 날카로우나 용기가 인류의 간에 뿐이다.
+                </p>
+            </div>
+          </li>
+  
+          <li class="accordion__item">
+            <div class="accordion__title">
+              <h5><i class="mdi mdi-cash-multiple"></i>   포인트안내</h5>
+              <span class="accordion__icon"><img src="../../static/images/plus-24px.png" alt="plus icon"></span>
+            </div>
+            <div class="accordion__content"><!---포인트제도 첨부하기-->
+              <p>청춘의 소금이라 속잎나고, 얼마나 위하여서. 원질이 천하를 못하다 공자는 것이다.보라, 착목한는 안고, 듣는다. 바이며, 노년에게서 동력은 사막이다. 불러 얼음과 있는 크고 무엇을 설산에서 찾아 동산에는 칼이다. 끓는 너의 구하지 이상이 투명하되 동력은 청춘의 바로 이것이다. 피가 뜨고, 고행을 같이, 원대하고, 청춘의 영락과 봄바람이다. 굳세게 사람은 현저하게 이상은 있는 이상의 듣기만 부패뿐이다.</p>
+            </div>
+          </li>
+          <div class="accordion__title"></div>
+          </ul>
+        </div>  
+
+        </div>
+      </div>
+    </div>
+    
+
+</div>
+</div>
+
+
+
+   
+<!------------------------------------------- FOOTER -------------------------------->
+          <footer class="footer">
+            <div class="d-flex justify-content-center">
+              <span class="text-muted">Copyright © 2020 <a href="#" target="_blank">Data.ly</a>. All rights reserved.</span>
+              </div>
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+
+
+
+
+    <!-- plugins:js 기본 필수로 들어가는 JS파일-->
+    <script src="../../static/js/vendor.bundle.base.js"></script>
+    <script src="../../static/js/off-canvas.js"></script>
+    <script src="../../static/js/hoverable-collapse.js"></script>
+    <script src="../../static/js/misc.js"></script>
+    <script src="../../static/js/darkmode.js"></script>
+    <script src="../../static/js/accordion.js"></script>
+
+    <!-- 이 페이지에서만 필요한 js -->
+    <script src="../../static/js/workspace-text.js"></script>
+
+  </body>
+</html>

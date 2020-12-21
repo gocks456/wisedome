@@ -1,0 +1,55 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% import "projects/_helpers.html" as helper %}
+{% from "account/_helpers.html" import render_pagination %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/new_design/css/workspace-text.css">
+{% endblock %}
+
+{% block content %}
+
+{% if project %}
+
+<div class="content-wrapper">
+	<div class="row">
+		<!-- Projecta -->
+		<div class="col-md-12 grid-margin">
+			<div class="card bg-white">
+				<div class="card-body">
+					<div class="col-lg-9 d-inline-flex">
+						<h1><i class="mdi mdi-label"></i>&nbsp; {{project.name}}</h1>
+						{% if section %}
+						<h2>{{section}}</h2>
+						{% endif %}
+					</div>
+
+					<div class="col-lg-2 d-inline-flex">
+						{{helper.render_contribute_button(project)}}
+					</div>
+
+					{% if active_link == 'info' %}
+					<p><em>{{ overall_progress | round | int }}% 완료</em></p>
+					{% endif %}
+					{% block projectcontent %}{% endblock %}
+
+				</div>
+			</div>
+		</div>
+
+
+		<div id="ckan" style="display:none">
+			<h2>Data repository: {{ ckan_name | default('CKAN server') }}</h2>
+			<p><i class="icon-bar-chart" style="font-size:16px;"></i> <a href="{{ckan_url}}/dataset/{{project.short_name}}">Preview the data</a>
+			</p>
+			<p id="ckan_license" style="display:none"><strong>Data License</strong>: <span id="ckan_license_value"></span></p>
+		</div>
+	</div>
+	{% else %}
+	<div class="page-header">
+		<h1>{{ _('Sorry! This project does not exist.') }}</h1>
+	</div>
+	{% endif %}
+</div>
+{% endblock %}
