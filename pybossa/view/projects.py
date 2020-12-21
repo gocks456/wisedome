@@ -22,7 +22,7 @@ import json
 import os
 import math
 import requests
-from io import StringIO
+from io import StringIO, BytesIO
 import datetime
 
 from flask import Blueprint, request, url_for, flash, redirect, abort, Response, current_app
@@ -1157,6 +1157,11 @@ def task_presenter(short_name, task_id):
             if not uploader.dir_size(container):
                 flash(gettext("하루 업로드 제한 초과"), "error")
                 return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
+            from tempfile import SpooledTemporaryFile
+            stream = _file.stream
+            print(stream)
+            print(stream.__dict__)
+            print(stream._file)
             uploader.upload_file(_file,
                                  container=container)
             flash(gettext("저장 완료!"), "success")
@@ -1252,7 +1257,7 @@ def presenter(short_name):
         ensure_authorized_to('read', project)
 
     title = project_title(project, "Contribute")
-    template_args = {"project": project, "title": title, "owner": owner,
+    template_args = {"project": project, "title": title, "owner": owner, "current_user": current_user,
               "invite_new_volunteers": invite_new_volunteers(project, ps), "task_run":None, "csrf":generate_csrf()}
 
     if not project.allow_anonymous_contributors and current_user.is_anonymous:
@@ -1269,11 +1274,51 @@ def presenter(short_name):
     #       now!"
     msg = "익명의 사용자는 포인트를 얻을 수 없습니다."
 
-    if project.info.get("tutorial") and \
-            request.cookies.get(project.short_name + "tutorial") is None:
+    def Contract_upload():
+        import base64
+        from werkzeug.datastructures import FileStorage
+        from tempfile import SpooledTemporaryFile
+        
+        contract = base64.b64decode(request.form['contract'][22:]) # base64 -> Image
+
+        _file = FileStorage() # FileStorage 생성
+
+        stream = SpooledTemporaryFile() # 이미지를 저장할 임시 파일 생성
+        stream._max_size = 512000
+        stream.write(contract) # 임시 파일에 이미지 데이터 저장
+
+        # FileStorage에 값 추가
+        _file.stream = stream
+        _file.name = 'contract'
+        _file.filename = current_user.email_addr + ".png"
+        _file.headers = "Headers([('Content-Disposition', 'form-data; name='contract'; filename='temp.png''), ('Content-Type', 'image/png')])"
+        _file.seek(0, os.SEEK_END)
+        _file.seek(0)
+
+        # 저장할 경로 지정 및 File 저장
+        container = "project_%s/contract" % (project.name)
+        uploader.upload_file(_file, container=container)
+        flash(gettext("계약서 작성 완료!"), "success")
+        return
+
+    if request.method == "POST" and request.form['contract']:
+        if request.form["user_id"] in project.contractor_ids:
+            return respond('/projects/presenter.html')
+        Contract_upload()
+        project.contractor_ids.append(int(request.form['user_id']))
+        project_repo.update(project)
+        return "success"
+
+    #2020.09.22. 계약서 연결
+    if current_user.id not in project.contractor_ids and current_user.id not in project.owners_ids and current_user.admin:
         resp = respond('/projects/tutorial.html')
-        resp.set_cookie(project.short_name + 'tutorial', 'seen')
         return resp
+
+    #if project.info.get("tutorial") and \
+    #        request.cookies.get(project.short_name + "tutorial") is None:
+    #    resp = respond('/projects/tutorial.html')
+    #    resp.set_cookie(project.short_name + 'tutorial', 'seen')
+    #    return resp
     else:
         if has_no_presenter(project):
             #flash(gettext("Sorry, but this project is still a draft and does "
@@ -1281,6 +1326,25 @@ def presenter(short_name):
             flash(gettext("죄송합니다, 이 프로젝트는 임시 프로젝트입니다."), "error")
         return respond('/projects/presenter.html')
 
+@blueprint.route('/<short_name>/sertification', methods=['GET','POST'])
+def sertification(short_name):
+    if request.method == "POST" and request.form['passwd']:
+        user = user_repo.get(request.form['user_id'])
+        password = request.form['passwd']
+        if user.check_password(password):
+            return "success"
+        return "fail"
+
+    project, owner, ps = project_by_shortname(short_name)
+
+    if current_user.id not in project.contractor_ids and project.info['tutorial']:
+        response = dict(template='/projects/sertification.html', current_user=current_user,
+                        csrf=generate_csrf())
+        return handle_content_type(response)
+
+    project.contractor_ids.append(current_user.id)
+    project_repo.update(project)
+    return redirect_content_type(url_for('.presenter', short_name=project.short_name))
 
 @blueprint.route('/<short_name>/tutorial')
 def tutorial(short_name):
