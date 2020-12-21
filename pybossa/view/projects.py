@@ -66,13 +66,14 @@ from pybossa.importers import BulkImportException
 from pybossa.pro_features import ProFeatureHandler
 
 from pybossa.core import (project_repo, user_repo, task_repo, blog_repo,
-                          result_repo, webhook_repo, auditlog_repo, point_repo, achi_repo)
+                          result_repo, webhook_repo, auditlog_repo, point_repo)
 from pybossa.auditlogger import AuditLogger
 from pybossa.contributions_guard import ContributionsGuard
 from pybossa.default_settings import TIMEOUT
 from pybossa.exporter.csv_reports_export import ProjectReportCsvExporter
 
 from pybossa.backup.manage_postgres_db import *
+from sqlalchemy.sql import text
 
 blueprint = Blueprint('project', __name__)
 
@@ -237,7 +238,7 @@ def score(short_name):
         user_repo.update(user)
 
     score_check(result)
-    achievement_renewal()
+    #achievement_renewal()
     
     msg_1 = gettext('채점 및 포인트 갱신 완료!')
     markup = Markup('<i class="icon-ok"></i> {}')
@@ -245,29 +246,45 @@ def score(short_name):
     return redirect_content_type(url_for('.tasks',
                                              short_name=project.short_name))
 
-
+# 2020.11.27. 업적 리뉴얼 예정
+'''
 def achievement_renewal():
     from pybossa.leaderboard import jobs
     print(jobs.update_all_user_answer_rate())
     print(jobs.all_rank_achievement())
     print(jobs.category_rank_achievement())
     return "Success"
+'''
 
-
-@blueprint.route('/category/featured/', defaults={'page': 1})
+@blueprint.route('/category/featured/', defaults={'page': 1}, methods=['GET','POST'])
 @blueprint.route('/category/featured/page/<int:page>/')
-@login_required
 def index(page):
     """List projects in the system"""
     order_by = request.args.get('orderby', None)
     desc = bool(request.args.get('desc', False))
-    if cached_projects.n_count('featured') > 0:
-        return project_index(page, cached_projects.get_all_featured,
-                             'featured', True, False, order_by, desc)
-    else:
-        categories = cached_cat.get_list_cat2()
-        cat_short_name = categories[0]['short_name']
-        return redirect_content_type(url_for('.project_cat_index', category=cat_short_name))
+
+    if request.method == 'POST':
+        print('aaaaa')
+        projects = cached_projects.get_all_projects()
+        projects = sort_project(projects, request.form['value'])
+        n = datetime.datetime.now()
+        render = render_template('/new_design/ajax_project_index.html', n_year=n.year,
+                                 projects=projects)
+        response = dict(template=render)
+        print(response)
+        return json.dumps(response)
+
+    # New Design
+    return project_index(page, cached_projects.get_all_projects,
+                          '', True, False, order_by, desc)
+
+    #if cached_projects.n_count('featured') > 0:
+    #    return project_index(page, cached_projects.get_all_featured,
+    #                         'featured', True, False, order_by, desc)
+    #else:
+    #    categories = cached_cat.get_list_cat2()
+    #    cat_short_name = categories[0]['short_name']
+    #    return redirect_content_type(url_for('.project_cat_index', category=cat_short_name))
 
 def user_all_achieve(achieve):
     if current_user.achievement["all"] == "bronze_all":
@@ -282,6 +299,17 @@ def user_all_achieve(achieve):
         achieve[0] = 5
     return
 
+def sort_project(projects, value):
+    if value == 'lowPrice':
+        projects = sorted(projects, key=lambda project: project['all_point'])
+    elif value == 'highPrice':
+        projects = sorted(projects, key=lambda project: project['all_point'], reverse=True)
+    elif value == 'newest':
+        projects = sorted(projects, key=lambda project: project['updated'], reverse=True)
+    elif value == 'oldest':
+        projects = sorted(projects, key=lambda project: project['updated'], reverse=True)
+    return projects
+
 def project_index(page, lookup, category, fallback, use_count, order_by=None,
                   desc=False, pre_ranked=False):
     """Show projects of a category"""
@@ -294,13 +322,14 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
     offset = (page - 1) * per_page
     projects = ranked_projects[offset:offset+per_page]
     count = cached_projects.n_count(category)
+    feature_projects = cached_projects.get_all_featured('featured')
 
     if fallback and not projects:  # pragma: no cover
         return redirect(url_for('.index'))
 
     pagination = Pagination(page, per_page, count)
-#    categories = cached_cat.get_all()
-#    categories = cached_cat.get_list_cat()
+#   categories = cached_cat.get_all()
+#   categories = cached_cat.get_list_cat()
     categories = cached_cat.get_list_cat2()
     # Check for pre-defined categories featured and draft
     #featured_cat = Category(name='Featured',
@@ -336,18 +365,28 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
     if cached_projects.n_count('featured') > 0:
         categories.insert(0, featured_cat)
     n = datetime.datetime.now()
-    achieve = cached_users.get_category_achieve(current_user.id)
-    user_all_achieve(achieve)
+
+    # 2020.11.27. 업적 리뉴얼 예정
+    #achieve = cached_users.get_category_achieve(current_user.id)
+    #user_all_achieve(achieve)
+
+    # 2020.12.04. Login 했을 때 안했을 때 구별 (임시)
+    if current_user.is_anonymous:
+        template = '/new_design/AllProject.html'
+    else:
+        template = '/new_design/temp_dash.html'
 
     template_args = {
         "n_year": n.year,
-        "achieve": achieve,
+        #"achieve": achieve,
+        "feature_projects": feature_projects,
         "projects": projects,
         "title": gettext("Projects"),
         "pagination": pagination,
         "active_cat": active_cat,
         "categories": categories,
-        "template": '/projects/index.html',
+        "template": template,
+        #"template": '/new_design/AllProject.html',
         "csrf": generate_csrf()}
 
     if use_count:
@@ -402,38 +441,26 @@ def historical_contributions(page):
     return project_index(page, lookup, 'historical_contributions', False, True, order_by,
                          desc, pre_ranked)
 
-
 @blueprint.route('/category/<string:category>/', defaults={'page': 1}, methods=['GET','POST'])
 @blueprint.route('/category/<string:category>/page/<int:page>/')
-def project_cat_index(category, page):
+def project_cat_index(category=None, page=1):
     """Show Projects that belong to a given category"""
     order_by = request.args.get('orderby', None)
     desc = bool(request.args.get('desc', False))
 
-    def sort_project(projects, value):
-        if value == 'popular':
-            # 인기순
-            return projects
-        projects = sorted(projects, key=lambda project: project[value], reverse=True)
-        return projects
-
     if request.method == 'POST':
-        per_page = current_app.config['APPS_PER_PAGE']
-        value = request.form['value']
-        ranked_projects = cached_projects.get_all(category)
-        ranked_projects = sort_project(ranked_projects, value)
-
-        offset = (page - 1) * per_page
-        projects = ranked_projects[offset:offset+per_page]
+        projects = cached_projects.get_all(category)
+        if category == None:
+            projects = cached_projects.get_all_projects()
+        projects = sort_project(projects, request.form['value'])
         n = datetime.datetime.now()
-        achieve = cached_users.get_category_achieve(current_user.id)
-        user_all_achieve(achieve)
-
-        render = render_template('/projects/ajax_index.html',
-                                 projects=projects, achieve=achieve, n_year=n.year)
+        render = render_template('/new_design/ajax_project_index.html', n_year=n.year,
+                                 projects=projects)
         response = dict(template=render)
         return json.dumps(response)
-
+    if category == None:
+        return project_index(page, cached_projects.get_all_projects,
+                              '', True, False, order_by, desc)
     return project_index(page, cached_projects.get_all, category, False, True,
                          order_by, desc)
 
@@ -495,6 +522,9 @@ def new():
     condition_json["all_achieve"] = form.option_all_achieve.data
     condition_json["cat_achieve"] = form.option_cat_achieve.data
 
+    now = datetime.datetime.now()
+    end_date = now + datetime.timedelta(days=7)
+
     project = Project(name=form.name.data,
                       short_name=form.short_name.data,
                       description=_description_from_long_description(),
@@ -508,7 +538,8 @@ def new():
                       condition = condition_json,
 
                       category_id=category_by_default.id,
-                      owners_ids=[current_user.id])
+                      owners_ids=[current_user.id],
+                      end_date=end_date)
 
     project_repo.save(project)
 
@@ -715,6 +746,9 @@ def update(short_name):
         condition_json["all_achieve"] = form.option_all_achieve.data
         condition_json["cat_achieve"] = form.option_cat_achieve.data
 
+        # 임시 마감일
+        end_date = n + datetime.timedelta(days=7)
+
         if form.id.data == new_project.id:
             new_project.name = form.name.data
             new_project.short_name = form.short_name.data
@@ -729,6 +763,8 @@ def update(short_name):
             new_project.allow_anonymous_contributors = fuzzyboolean(form.allow_anonymous_contributors.data)
             new_project.category_id = form.category_id.data
             new_project.zip_download = fuzzyboolean(form.zip_download.data)
+            # 임시 마감일
+            new_project.end_date = end_date
 
         if fuzzyboolean(form.protect.data) and form.password.data:
             new_project.set_password(form.password.data)
@@ -856,7 +892,8 @@ def details(short_name):
     else:
         ensure_authorized_to('read', project)
 
-    template = '/projects/project.html'
+    #template = '/projects/project.html'
+    template = '/new_design/project_temp.html'
     pro = pro_features()
 
     title = project_title(project, None)
@@ -1093,52 +1130,6 @@ def task_presenter(short_name, task_id):
     project, owner, ps = project_by_shortname(short_name)
     task_run = task_repo.get_task_run_present(project.id, current_user.id, task_id)
 
-    if request.method =='GET':
-        if request.args.get('data') == "prev":
-            prev_task_run = task_repo.get_task_run_prev(project.id, current_user.id, task_run.finish_time)
-            if prev_task_run is None:
-                msg_1 = gettext('이전 Task가 존재하지 않습니다.')
-                flash(msg_1, 'error')
-                return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
-            return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = prev_task_run.task_id))
-        elif request.args.get('data') == "answer_manage":
-            prev_task_run = task_repo.get_answer_manage(project.id, current_user.id)
-            if prev_task_run is None:
-                msg_1 = gettext('이전 Task가 존재하지 않습니다.')
-                flash(msg_1, 'error')
-                return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
-            elif task_run is None:
-                return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = prev_task_run.task_id))
-            else:
-                return redirect_content_type(url_for('.presenter', short_name = project.short_name))
-        elif request.args.get('data') == "next":
-            next_task_run = task_repo.get_task_run_next(project.id, current_user.id, task_id)
-            if next_task_run is None:
-                msg_1 = gettext('현재 수행 할 Task 입니다.')
-                flash(msg_1, 'warning')
-                return redirect_content_type(url_for('.presenter', short_name = project.short_name))
-            elif task_run is None:
-                msg_1 = gettext('현재 Task의 답변이 존재하지 않습니다.')
-                flash(msg_1, 'error')
-                return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
-            return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = next_task_run.task_id))
-        elif request.args.get('data') == "delete":
-            if task_run is None:
-                msg_1 = gettext('현재 Task의 답변이 존재하지 않습니다.')
-                flash(msg_1, 'error')
-                return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id=task_id))
-            task = task_repo.get_task(task_id)
-            if task.state == "completed":
-                task.state = "ongoing"
-                task_repo.update(task)
-                result = result_repo.get_by_task_id(task_id)
-                result_repo.delete(result)
-            task_repo.delete(task_run)
-            msg_1 = gettext('현재 Task의 답변을 삭제하였습니다.')
-            markup = Markup('<i class="icon-ok"></i> {}')
-            flash(markup.format(msg_1), 'success')
-            return redirect_content_type(url_for('.task_presenter', short_name = project.short_name, task_id = task_id))
-
     if request.method == "POST":
         if request.form.get('btn', None) == "Upload" :
             _file = request.files['avatar']
@@ -1166,6 +1157,73 @@ def task_presenter(short_name, task_id):
                                  container=container)
             flash(gettext("저장 완료!"), "success")
             return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
+
+        # 프로젝트 진행 중 답변 관리를 눌렀을 때 (답변관리의 value로 바꿔주어야 함)
+        if request.form.get('btn', None) == "answer_manager":
+            session = db.slave_session
+            sql = text('''SELECT task_run.id AS id, task.info AS task_info, task_run.info AS task_run_info,
+                          DENSE_RANK() OVER(ORDER BY task_run.created) AS rank
+                          FROM task, task_run
+                          WHERE task_run.task_id = task.id
+                          AND task_run.user_id=:user_id
+                          AND task_run.project_id=:project_id
+                          ORDER BY task_run.finish_time;''')
+            temp = session.execute(sql, dict(user_id=current_user.id, project_id=project.id))
+            results = []
+            for row in temp:
+                result = dict(id=row.id, task_info=row.task_info, task_run_info=row.task_run_info, rank=row.rank)
+                results.append(result)
+            page = 10
+            page_list = [results[i * page:(i + 1) * page] for i in range((len(results) + page - 1) // page)]
+            print(page_list)
+            return json.dumps(page_list, ensure_ascii=False)
+
+        # 답변 관리에서 원하는 답변을 리턴
+        if request.form.get('btn', None) == "get_answer_data":
+            session = db.slave_session
+            sql = text('''SELECT task_run.id AS id, task.info AS task_info, task_run.info AS task_run_info,
+                          DENSE_RANK() OVER(ORDER BY task_run.created) AS rank
+                          FROM task, task_run
+                          WHERE task_run.task_id = task.id
+                          AND task_run.user_id=:user_id
+                          AND task_run.project_id=:project_id
+                          AND task_run.id =:id
+                          ORDER BY task_run.finish_time;''')
+            temp = session.execute(sql, dict(user_id=current_user.id, project_id=project.id, id=request.form["id"]))
+            results = []
+            for row in temp:
+                result = dict(id=row.id, task_info=row.task_info, task_run_info=row.task_run_info, rank=row.rank)
+                results.append(result)
+
+            return json.dumps(result, ensure_ascii=False)
+
+        # 답변 관리 후 수정 단계
+        if request.form.get('btn', None) == "modify":
+            task_run = task_repo.get_task_run(int(request.form["task_run_id"]))
+            old_answer = task_run.info
+            task_run.info = request.form["answer"]
+            task_repo.update(task_run)
+
+            return old_answer
+
+        # 경쟁 관계
+        if request.form.get('value', None) == "ranking":
+            user_list = cached_projects.get_users_task_run_count(project.id)
+            answer_count = 0
+            user_answer_count = 0
+            for user in user_list:
+                if user['id'] != current_user.id:
+                    answer_count += user['count']
+                else:
+                    user_answer_count = user['count']
+            average = 0
+            if answer_count != 0:
+                average = answer_count / (len(user_list) - 1)
+            temp = dict(average=average, user_answer_count=user_answer_count)
+            res = []
+            res.append(temp)
+            print(res)
+            return json.dumps(res, ensure_ascii=False)
 
     task = task_repo.get_task(id=task_id)
     if task is None:
@@ -1205,8 +1263,13 @@ def task_presenter(short_name, task_id):
     project_sanitized, owner_sanitized = sanitize_project_owner(project, owner,
                                                                 current_user,
                                                                 ps)
+    #long_desc_ex = project.long_description.split('## 예시')[1].split('## 이용방법 보기')[0]
+    #long_desc_htd = project.long_description.split('## 이용방법 보기')[1]
 
-    template_args = {"project": project_sanitized, "title": title, "owner": owner_sanitized,
+
+
+
+    template_args = {"project": project_sanitized, "title": title, "owner": owner_sanitized, #"ex" : long_desc_ex, "htd" : long_desc_htd,
                      "task_run": task_run, "csrf": generate_csrf()}
 
     def respond(tmpl):
@@ -1223,7 +1286,8 @@ def task_presenter(short_name, task_id):
         #flash(gettext("Sorry, but this project is still a draft and does "
         #              "not have a task presenter."), "error")
         flash(gettext("죄송합니다, 이 프로젝트는 임시 프로젝트입니다."), "error")
-    return respond('/projects/presenter.html')
+    #return respond('/projects/presenter.html')
+    return respond('/new_design/workspace/presenter.html')
 
 
 @blueprint.route('/<short_name>/presenter')
@@ -1325,7 +1389,7 @@ def presenter(short_name):
             #flash(gettext("Sorry, but this project is still a draft and does "
             #              "not have a task presenter."), "error")
             flash(gettext("죄송합니다, 이 프로젝트는 임시 프로젝트입니다."), "error")
-        return respond('/projects/presenter.html')
+        return respond('/new_design/workspace/presenter.html')
 
 @blueprint.route('/<short_name>/sertification', methods=['GET','POST'])
 def sertification(short_name):
@@ -1338,13 +1402,13 @@ def sertification(short_name):
 
     project, owner, ps = project_by_shortname(short_name)
 
-    if current_user.id not in project.contractor_ids and project.info['tutorial']:
+    if current_user.id not in project.contractor_ids and project.info['tutorial'] != "":
         response = dict(template='/projects/sertification.html', current_user=current_user,
                         csrf=generate_csrf())
         return handle_content_type(response)
-
-    project.contractor_ids.append(current_user.id)
-    project_repo.update(project)
+    elif current_user.id not in project.contractor_ids:
+        project.contractor_ids.append(current_user.id)
+        project_repo.update(project)
     return redirect_content_type(url_for('.presenter', short_name=project.short_name))
 
 @blueprint.route('/<short_name>/tutorial')

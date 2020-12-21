@@ -52,7 +52,7 @@ from pybossa.cache import users as cached_users
 from pybossa.cache import categories as cached_cat
 from pybossa.auth import ensure_authorized_to
 from pybossa.jobs import send_mail, export_userdata, delete_account
-from pybossa.core import user_repo, ldap, point_repo, exchange_repo, achi_repo
+from pybossa.core import user_repo, ldap, point_repo, exchange_repo
 from pybossa.feed import get_update_feed
 from pybossa.messages import *
 from pybossa import otp
@@ -175,11 +175,19 @@ def signin():
                 auth['facebook'] = True
             if ('google' in current_app.blueprints):  # pragma: no cover
                 auth['google'] = True
-        response = dict(template='account/signin.html',
+        #response = dict(template='account/signin.html',
+        #                title="Sign in",
+        #                form=form,
+        #                auth=auth,
+        #                next=request.args.get('next'))
+
+        # 로그인 New Design
+        response = dict(template='new_design/login.html',
                         title="Sign in",
                         form=form,
                         auth=auth,
                         next=request.args.get('next'))
+
         return handle_content_type(response)
     else:
         # User already signed in, so redirect to home page
@@ -337,7 +345,7 @@ def register():
         form = RegisterFormWithUserPrefMetadata(request.body)
         form.set_upref_mdata_choices()
 
-    msg = "I accept receiving emails from %s" % current_app.config.get('BRAND')
+    msg = "와이즈돔 이용약관에 동의합니다 (필수)"
     form.consent.label = msg
 
     if request.method == 'POST' and form.validate():
@@ -376,7 +384,7 @@ def register():
     if request.method == 'POST' and not form.validate():
         #flash(gettext('Please correct the errors'), 'error')
         flash(gettext("발생한 오류를 수정하세요."), 'error')
-    data = dict(template='account/register.html',
+    data = dict(template='new_design/register.html',
                 title=gettext("Register"), form=form)
     return handle_content_type(data)
 
@@ -436,8 +444,9 @@ def _create_account(user_data, ldap_disabled=True):
                                name=user_data['name'],
                                email_addr=user_data['email_addr'],
                                valid_email=True,
+                               # 2020.11.27. 업적 리뉴얼 예정
                                #20.02.26. 수정사항
-                               achievement={"all": "", "rank": "", "category": ""},
+                               #achievement={"all": "", "rank": "", "category": ""},
                                sex=user_data['sex'],
                                birth=user_data['birth'],
                                consent=user_data['consent'])
@@ -622,12 +631,15 @@ def _exchange_request(user):
                     can_update=False)
     return handle_content_type(response)
 
+# 2020.11.27. 업적 리뉴얼 예정
+"""
 @blueprint.route('/<name>/achievement/')
 @blueprint.route('/<name>/achievement/<string:achieve_id>/')
 @blueprint.route('/<name>/achievement/<string:achieve_id>/<string:category_name>/')
 @login_required
 def achievement(name, achieve_id='', category_name=''):
-    """ 업적 페이지 """
+    
+
     user = user_repo.get_by_name(name)
     achieve_dict = []
     if achieve_id != '':
@@ -646,7 +658,8 @@ def achievement(name, achieve_id='', category_name=''):
                               user=user,
                               achievement=achieve_dict)
     return handle_content_type(response)
-        
+"""
+
 @blueprint.route('/<name>/point')
 @login_required
 def point(name):
@@ -683,7 +696,6 @@ def _show_points(user):
 
 
 def _show_own_profile(user, form, current_user):
-    n_year = datetime.datetime.now().year
     user_dict = cached_users.get_user_summary(user.name, current_user)
     rank_and_score = cached_users.rank_and_score(user.id)
     user.rank = rank_and_score['rank']
@@ -694,6 +706,27 @@ def _show_own_profile(user, form, current_user):
     cached_users.get_user_summary(user.name)
     projects_answer_rate = cached_users.projects_answer_rate(user.id)
 
+    point_history = cached_users.get_user_point_history(current_user.id)
+    from operator import itemgetter
+    point_history = sorted(point_history, key=itemgetter('finish_time'), reverse=True)
+
+    from datetime import datetime, timedelta
+    now = datetime.now()
+    works_count = 0
+    return_count = 0
+    point = 0
+    prev_works_count = 0
+    prev_return_count = 0
+    prev_point = 0
+    for row in point_history:
+        time = datetime.strptime(row['finish_time'], '%Y-%m-%dT%H:%M:%S.%f')
+        if (now - time).days < 30:
+            works_count += row['count']
+            point += row['point']
+        elif (now - time).days < 60:
+            prev_works_count += row['count']
+            prev_point += row['point']
+
     for row in projects_contributed:
         for temp in projects_answer_rate:
             if(row['id'] == temp['id']):
@@ -701,13 +734,19 @@ def _show_own_profile(user, form, current_user):
                 row['n_tasks_rate']=temp['n_tasks_rate']
                 row['complete_check']=temp['complete_check']
 
-    response = dict(template='account/profile.html',
+    response = dict(template='new_design/account/myProfile.html',
                     title=gettext("Profile"),
-                    n_year=n_year,
                     user=user_dict,
                     projects_contrib=projects_contributed,
                     projects_published=projects_published,
                     projects_draft=projects_draft,
+                    point_history=point_history,
+                    works_count=works_count,
+                    return_count=return_count,
+                    point=point,
+                    prev_works_count=prev_works_count,
+                    prev_return_count=prev_return_count,
+                    prev_point=prev_point,
                     form=form,
                     can_update=True)
 

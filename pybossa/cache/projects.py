@@ -25,6 +25,24 @@ from pybossa.cache import memoize, cache, delete_memoized, delete_cached
 
 session = db.slave_session
 
+
+# 마감임박 프로젝트
+
+# 경쟁관계 TEST
+def get_users_task_run_count(project_id):
+    sql = text('''SELECT "user".id, "user".name, COUNT(task_run.id) AS count
+                  FROM "user", task_run
+                  WHERE "user".id = task_run.user_id
+                  AND task_run.project_id=:project_id
+                  GROUP BY "user".id;''')
+    results = session.execute(sql, dict(project_id=project_id))
+    user_list = []
+    for row in results:
+        user = dict(id=row.id, name=row.name, count=row.count)
+        user_list.append(user)
+    return user_list
+
+
 #발주자 관리용 쿼리
 def get_orderer_projects():
     sql = text('''SELECT id, name, short_name, owners_ids, info, all_point
@@ -270,7 +288,7 @@ def get_all_featured(category=None):
     sql = text(
         '''SELECT project.id, project.name, project.short_name, project.info,
                project.created, project.updated, project.description, project.all_point, project.condition, project.complete,
-               "user".fullname AS owner, project.category_id
+               "user".fullname AS owner, project.category_id, project.end_date
            FROM project, "user"
            WHERE project.featured=true
            AND "user".id=project.owner_id
@@ -294,7 +312,8 @@ def get_all_featured(category=None):
                        all_point=row.all_point,
                        condition=row.condition,
                        category_id=row.category_id,
-                       complete=row.complete)
+                       complete=row.complete,
+                       end_date=row.end_date)
         projects.append(Project().to_public_json(project))
     return projects
 
@@ -477,6 +496,42 @@ def n_count(category):
         count = row[0]
     return count
 
+@memoize(timeout=timeouts.get('APP_TIMEOUT'))
+def get_all_projects(category=None):
+    sql = text(
+        '''SELECT project.id, project.name, project.short_name,
+           project.description, project.info, project.created, project.updated, project.all_point, project.condition, project.complete,
+           project.category_id, project.featured, "user".fullname AS owner
+           FROM "user", project
+           WHERE
+           "user".id=project.owner_id
+           AND "user".restrict=false
+           AND project.published=true
+           AND project.complete=false
+           GROUP BY project.id, "user".id ORDER BY project.name;''')
+
+    results = session.execute(sql)
+    projects = []
+    for row in results:
+        project = dict(id=row.id,
+                       name=row.name, short_name=row.short_name,
+                       created=row.created,
+                       updated=row.updated,
+                       description=row.description,
+                       owner=row.owner,
+                       featured=row.featured,
+                       last_activity=pretty_date(last_activity(row.id)),
+                       last_activity_raw=last_activity(row.id),
+                       overall_progress=overall_progress(row.id),
+                       n_tasks=n_tasks(row.id),
+                       n_volunteers=n_volunteers(row.id),
+                       info=row.info,
+                       all_point=row.all_point,
+                       condition=row.condition,
+                       category_id=row.category_id,
+                       complete=row.complete)
+        projects.append(Project().to_public_json(project))
+    return projects
 
 @memoize(timeout=timeouts.get('APP_TIMEOUT'))
 def get_all(category):

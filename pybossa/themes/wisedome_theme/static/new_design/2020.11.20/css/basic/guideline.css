@@ -1,0 +1,112 @@
+/**큰모니터**/
+@media screen and (max-width: 99999px) {
+
+
+.accordion__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  font-size: 1em;
+  border-top: 1.5px solid #f2edf3;
+  padding: 1em 0;
+  text-indent: 1em;
+}
+.accordion__icon {
+  margin-right: 2em;
+  width: 24px;
+  height: 24px; 
+  background-repeat: no-repeat;
+  transform: rotate(0deg);
+  transition: all .4s ease-in-out;
+}
+.accordion__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all .8s ease-in-out;
+
+}
+.accordion__content p {
+  padding: 1em 4em ;
+  font-size: 1.1em;
+  line-height: 1.8em;
+}
+.active .accordion__content {
+  max-height: 999px;
+}
+.active .accordion__icon {
+  transform: rotate(45deg);
+}
+
+}
+
+/**작은 모니터**/
+@media screen and (max-width: 1280px){
+
+.accordion__content p {
+  font-size: 1em;
+  padding: 1em 2em ;
+}
+}
+
+/**큰 태블릿**/
+@media screen and (max-width: 991px){
+
+.container {
+  padding: 0 3em;
+}
+
+.accordion__title {
+  border-top: 1px solid #f2edf3;;
+  padding: 0.7em 0;
+  font-size: 0.9em;
+}
+.accordion__icon {
+  width: 24px;
+  height: 24px;
+}  
+}
+
+
+/***태블릿**/
+@media screen and (max-width: 769px){
+
+  .container .accordion__title {
+    font-size: 0.9em;
+  }
+  .accordion__icon {
+  width: 16px;
+  height: 16px;
+  }
+  .accordion__content p {
+    padding: 1em 1em ;
+    }
+    
+  .active .accordion__content {
+    max-height: 1000px;
+  }
+}
+
+
+
+/***핸드폰화면**/
+@media screen and (max-width: 575px){
+
+.accordion__title {
+  font-size: 0.8em;
+  text-indent: 0;
+}
+
+.accordion__content p {
+  padding: 1em 0.5em;
+}
+
+.active .accordion__content {
+  max-height: 9999px;
+}
+}
+
+
+
+
