@@ -92,12 +92,20 @@
 	</div>
 	<div id="guide_line" class="tabcontent">
 		<h3>가이드라인</h3>
+<<<<<<< HEAD
 		<p id ="guide_linep">{{project.long_description|markdown}}</p>
+=======
+		<p id = "gpid">{{project.long_description|markdown}}</p>
+>>>>>>> d6a7c268311142e8f5907602249c07511ddf1147
 	</div>
 
 	<div id="example" class="tabcontent">
 		<h3>예시</h3>
+<<<<<<< HEAD
 		<p id="examplep">DB에 추가하고 넣어주기</p> 
+=======
+		<p id="epid">DB에 추가하고 넣어주기</p> 
+>>>>>>> d6a7c268311142e8f5907602249c07511ddf1147
 	</div>
 
 	<div id="how_to_use" class="tabcontent">
@@ -123,6 +131,16 @@
 	<script>
 		var csrf = "{{ csrf_token() }}";
 		$("#csrf_token").val(csrf);
+	</script>
+
+
+	<script>
+		console.log("KKKKK");
+		var x = document.getElementById("gpid");
+		var y = document.getElementById("epid");
+		y.innerHTML = x.innerHTML;
+
+		console.log(x.innerHTML);
 	</script>
 
 <script>
