@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 <!--이페이지의 css-->
 <link rel="stylesheet" href="/static/new_design/css/login.css"/>	
+
 <script type="text/javascript" src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}"></script>
 
 </head>
@@ -30,8 +31,11 @@
 <div class="login">
 	<a href="{{url_for('home.home')}}"><img src="/static/new_design/images/wisedome-logo.png" alt="logo"></a>
   <h4>와이즈돔에 오신것을 환영합니다</h4>
-  {% from "_formhelpers.html" import render_form %}
-  {{ render_form(form, form_id="signin", action_text=_('Sign in'), btn_class="log")}}
+
+  {% from "/new_design/_formhelpers.html" import render_form %}
+
+  {{ render_form(form, form_id="signin", action_text=_('Sign in'), btn_class="login-btn")}}
+
 
 <!--
   <form action="#" method="post"> 
@@ -77,22 +81,15 @@
 <script>
 var div = $("label[for = 'email']").parent();
 $("label[for = 'email']").remove();
-var html = "<i class='fas fa-user icon'></i>" + div.html();
+var html = "<i class='far fa-user icon'></i>" + div.html();
 div.html(html);
 $("#email").attr("placeholder", "이메일");
 
 var div = $("label[for = 'password']").parent();
 $("label[for = 'password']").remove();
-var html = "<i class='fas fa-user icon'></i>" + div.html();
+var html = "<i class='fas fa-lock icon'></i>" + div.html();
 div.html(html);
 $("#password").attr("placeholder", "비밀번호");
-</script>
-
-<script>
-var btn = $(".log");
-btn.addClass("login-btn");
-
-
 </script>
 
 </body>

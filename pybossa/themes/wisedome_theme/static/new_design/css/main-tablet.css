@@ -1,4 +1,5 @@
-/**태블릿 스크린용 **/
+body{
+  font-family: 'S-CoreDream-3Regular', 'Apple Gothic' ;}
 
 /*메인배너*/
 #main{
@@ -32,6 +33,7 @@
 
 /**타이틀**/
 .title h1{
+  font-family:  'S-CoreDream-4Medium';
   font-size: 1em;}
 
 hr {

@@ -1,4 +1,4 @@
-/***모바일 화면*****/
+
 
 /*메인배너*/
 #main{
@@ -22,7 +22,7 @@
 .main-banner img {
   width: 50%;
   height: auto;
-  max-height: 350px;
+  max-height: 500px;
 }
 
 #main h1 {
@@ -52,6 +52,7 @@
 
 /**타이틀**/
 .title h1 {
+  font-family:  'S-CoreDream-4Medium';
   font-size: 0.9em;}
   
 hr {
@@ -65,13 +66,13 @@ hr {
 }
 
 .ctg {
-  margin-right: 0.1em;
-  min-width: 70px;
+  padding: 0;
+  margin: 0;
+  min-width: 80px;
 }
 
  .ctg p {
-  font-size: 0.2em;
-  line-height: 2em;
+  font-size: 0.7em;
 }	 
 
   /********3. 진행중인 프로젝트**********/
@@ -88,9 +89,12 @@ hr {
 }
 
 .project-img{
-  max-height: 7.5em;
+  max-height: 8em;
 }
 
+.container:hover .text{
+	opacity: 0;
+}
 
 /******4. 포인트킹********/
 #PointRank{
@@ -102,20 +106,19 @@ hr {
 }
 
 .myFace img {
-    width:20%;}
+    width:25%;}
 
 .profile-name{
-  font-size: 0.7em;
+  font-size: 0.75em;
+  padding: 0;
+  margin: 0;
 }
-.profile-area{
-  font-size: 0.7em;
-}
+
 .star{
   font-size: 0.7em;
 }
-.profile{
-	max-width: 350px;
-	max-height: 385px;
+.swiper-slide{
+	max-height: 350px;
 }
 
 .swiper-button-prev,.swiper-button-next{
