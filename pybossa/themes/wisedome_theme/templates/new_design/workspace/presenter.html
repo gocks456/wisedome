@@ -34,6 +34,7 @@
 			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-heart"></i></span> 
 			<!--감성 분석하기 /  프로젝트 이름 -->
 			{{project.name}}
+			<span>&nbsp;&nbsp; <span id="per"></span>% 완료</span>
 		</h3>
 		<nav aria-label="breadcrumb">
 			<ul class="breadcrumb">
@@ -141,7 +142,6 @@ $("#csrf_token").val(csrf);
 			}
 		});
 		setUserGraph();
-		//setInterval(setUserGraph, 10000);
 	});
 </script>
 
@@ -155,7 +155,11 @@ $("#csrf_token").val(csrf);
 			success: function(res) {
 				res = JSON.parse(res);
 				$("#answer_counts").text(res[0].user_answer_count);
-				$("#average").text(res[0].average);
+				$("#average").text(parseInt(res[0].average));
+				var n_tasks = {{n_tasks|int}};
+				$("#per").text(parseInt(res[0].user_answer_count/n_tasks*100));
+				if (n_tasks == 0)
+					$("#per").text(0);
 			},
 			error:function(request, error) {
 				console.log(request);

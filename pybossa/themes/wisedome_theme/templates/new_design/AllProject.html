@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Wisedome</title>
-  <link rel="stylesheet" href="/static/new_design/css/basic.css"/><!--NAV랑 footer-->
+  <link rel="stylesheet" href="/static/new_design/css/basic/basic.css"/><!--NAV랑 footer-->
   <link rel="stylesheet" href="/static/new_design/css/Allproject-XXL.css" media="screen and (max-width: 99999px)"/>
   <link rel="stylesheet" href="/static/new_design/css/Allproject-XL.css" media="screen and (max-width: 1280px)"/>
   <link rel="stylesheet" href="/static/new_design/css/Allproject-L.css" media="screen and (max-width: 991px)"/>
@@ -147,7 +147,7 @@
 
   <div class="ctg">	<!--이미지작업아이콘-->
 	<a href="{{url_for('project.project_cat_index', category='image')}}#category">
-		<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		<svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 595.281 841.891" enable-background="new 0 0 595.281 841.891"
 	 xml:space="preserve">
 <g>
@@ -167,7 +167,7 @@
 
   <div class="ctg">	<!--텍스트작업 아이콘-->
 	<a href="{{url_for('project.project_cat_index', category='text')}}#category">
-		<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		<svg version="1.1" id="Capa_3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		viewBox="0 0 595.281 841.891" enable-background="new 0 0 595.281 841.891"
 		xml:space="preserve">
  <g>
@@ -226,7 +226,7 @@
 
   <div class="ctg">	<!---비디오작업 아이콘-->
 	<a href="{{url_for('project.project_cat_index', category='vidio')}}#category">
-		<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		<svg version="1.1" id="Capa_4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		viewBox="0 0 595.281 841.891" enable-background="new 0 0 595.281 841.891"
 		xml:space="preserve">
  <path d="M570.48,271.609c-15.018-6.218-32.297-2.784-43.793,8.709l-76.547,76.555v-46.661c0-33.229-26.945-60.176-60.18-60.176
@@ -307,37 +307,36 @@
 
 
 
-<div id="project_list">
-{% for project in projects %}
-<figure class="pro zoom-in"> 
-	<img src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.short_name}}" >
+	{% for project in projects %}
+	<div class="container" onclick="location.href='{{ url_for('project.details', short_name=project.short_name) }}'" style="cursor:pointer;">
+		<img class="project-img" src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.short_name}}" >
 
-<figcaption class="intext">
-	<div class="level level-high">고 &nbsp;급 </div>
- <h3>{{project.name}}</h3>
-<div class="mobile-only">
-  <ul>
-	  <li><i class="fas fa-won-sign"></i>&nbsp;{{project.all_point}}</li>	
-	  <li>
-		  {% if project.condition.sex == '0' %} <i class="fas fa-male"></i><i class="fas fa-female"></i>    남녀무관
-		  {% elif project.condition.sex == 'M' %}<i class="fas fa-male"></i>    남성만
-		  {% elif project.condition.sex == 'F' %}<i class="fas fa-female"></i>    여성만
-		  {% endif %}
-	  </li>
-	  <li><i class="fas fa-user-friends"></i>
-		  {% if ( n_year - (project.condition.age_s / 10000) + 1 | int == 0 ) and (n_year-(project.condition.age_e / 10000) + 2 | int == 100) %}
-		  나이무관
-		  {% else %}
-		  {{ (n_year - (project.condition.age_s / 10000) + 1) | int}} ~ {{ (n_year - (project.condition.age_e / 10000) + 2) | int}}세
-		  {% endif %}
-	  </li>		
-  </ul>
-</div>
-</figcaption>
-<a href="{{ url_for('project.details', short_name=project.short_name) }}"></a> 
-</figure>
-{% endfor %}
-</div>
+		<div class="overlay">
+			<h3>{{project.name}}</h3>
+			<div class="text">
+				<br></br>
+				<div class="level level-easy">초 &nbsp;급 </div>
+				<ul>
+					<li><i class="fas fa-won-sign"></i>&nbsp;{{project.all_point}}</li>	
+					<li>
+						{% if project.condition.sex == '0' %} <i class="fas fa-male"></i><i class="fas fa-female"></i>    남녀무관
+						{% elif project.condition.sex == 'M' %}<i class="fas fa-male"></i>    남성만
+						{% elif project.condition.sex == 'F' %}<i class="fas fa-female"></i>    여성만
+						{% endif %}
+					</li>
+					<li><i class="fas fa-user-friends"></i>
+						{% if ( n_year - (project.condition.age_s / 10000) + 1 | int == 0 ) and (n_year-(project.condition.age_e / 10000) + 2 | int == 100) %}
+						나이무관
+						{% else %}
+						{{ (n_year - (project.condition.age_s / 10000) + 1) | int}} ~ {{ (n_year - (project.condition.age_e / 10000) + 2) | int}}세
+						{% endif %}
+					</li>		
+				</ul>
+				<p>{{project.description}}</p>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
 
 </main>
 <button id="next" type="button"><a href="#"> Next <i class="fas fa-angle-right"></i>      </a> </button>

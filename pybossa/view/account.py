@@ -509,6 +509,7 @@ def redirect_profile():
 
 @blueprint.route('/<name>/', methods=['GET'])
 def profile(name):
+
     """
     Get user profile.
 
@@ -632,7 +633,7 @@ def _exchange_request(user):
     return handle_content_type(response)
 
 # 2020.11.27. 업적 리뉴얼 예정
-"""
+'''
 @blueprint.route('/<name>/achievement/')
 @blueprint.route('/<name>/achievement/<string:achieve_id>/')
 @blueprint.route('/<name>/achievement/<string:achieve_id>/<string:category_name>/')
@@ -658,8 +659,7 @@ def achievement(name, achieve_id='', category_name=''):
                               user=user,
                               achievement=achieve_dict)
     return handle_content_type(response)
-"""
-
+'''
 @blueprint.route('/<name>/point')
 @login_required
 def point(name):
@@ -677,7 +677,6 @@ def point(name):
         return _show_public_profile(user, form)
     if current_user.is_authenticated and user.id == current_user.id:
         return _show_points(user)
-
 def _show_points(user):
     user_dict = cached_users.get_user_summary(user.name)
     projects_contributed = cached_users.public_projects_contributed_cached(user.id)
@@ -753,6 +752,7 @@ def _show_own_profile(user, form, current_user):
                     prev_return_count=prev_return_count,
                     prev_point=prev_point,
                     form=form,
+                    csrf=generate_csrf(),
                     can_update=True)
 
     return handle_content_type(response)
@@ -820,7 +820,7 @@ def update_profile(name):
     password_form = ChangePasswordForm()
 
     title_msg = "Update your profile: %s" % user.fullname
-
+    """
     if request.method == 'POST':
         # Update user avatar
         succeed = False
@@ -852,6 +852,36 @@ def update_profile(name):
                         title=title_msg,
                         show_passwd_form=show_passwd_form)
             return handle_content_type(data)
+    """
+    if request.method == 'POST':
+        """
+        acc_conf_dis = current_app.config.get('ACCOUNT_CONFIRMATION_DISABLED')
+        btn = request.form["btn"]
+        if btn == 'name_change':
+            new_name = request.form["value"]
+            if user_repo.get_by_name(new_name) == None or new_name == "":
+                user.name = new_name
+                user_repo.update(user)
+                cached_users.delete_user_summary(user.name)
+                return redirect_content_type(url_for('.update_profile',
+                                                 name=user.name),
+                                         status=SUCCESS)
+                #return user.name
+            else:
+                return '닉네임 중복'
+        """
+        if btn == 'pw_change':
+            now_pw = request.form["now_pw"]
+            new_pw = request.form["new_pw"]
+            if user.check_password(now_pw):
+                user.set_password(new_pw)
+                user_repo.update(user)
+                return "True"
+            else:
+                return "False"
+            
+
+            
 
     data = dict(template='/account/update.html',
                 form=update_form,

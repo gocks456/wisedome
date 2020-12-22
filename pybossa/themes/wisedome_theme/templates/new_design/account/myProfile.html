@@ -40,17 +40,49 @@
 						<img src="{{ render_user_thumbnail(user, upload_method) }}" alt="profile" class="img-lg rounded-circle mb-3">
 						<h6>{{current_user.fullname}} 님</h6> <!--닉네임-->
 						<p>{{current_user.name}}</p><!--부제목-->
+
+						<!--별명변경하는 팝업-->
+						<!--
+						<div class="text-center">    
+							<button class="btn btn-gradient-success " type="edit" data-toggle="modal" data-target="#editProfile" ><i  class="mdi mdi-account-circle"></i> &nbsp; 수정하기</button>  
+						</div>
+						-->
 					</div>
+
+					<div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editPw" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="editPw">나의정보 수정하기</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span></button>
+								</div>
+								<div class="modal-body">
+									<form>
+										<div class="form-group">
+											<label for="nickname" class="col-form-label">닉네임</label>
+											<input type="text" class="form-control" id="nickname">
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+									<button type="submit" class="btn btn-success" id="name_change">저장하기</button>
+								</div>
+							</div>
+						</div>
+					</div><!--프로필수정 팝업 여기까지-->           
+
 
 					<div class="my-border-bottom py-4">
 						<p> 나의 관심 작업분야</p>
 						<div> 
 							<!--
-							<label class="badge badge-outline-dark">이미지태깅</label>
-							<label class="badge badge-outline-dark">문장요약</label>
-							<label class="badge badge-outline-dark">사진찍기</label>
-							<label class="badge badge-outline-dark">감성분석</label>
-							<label class="badge badge-outline-dark">포인트 높은순</label>
+		   <label class="badge badge-outline-dark">이미지태깅</label>
+		   <label class="badge badge-outline-dark">문장요약</label>
+		   <label class="badge badge-outline-dark">사진찍기</label>
+		   <label class="badge badge-outline-dark">감성분석</label>
+		   <label class="badge badge-outline-dark">포인트 높은순</label>
 							-->
 						</div>
 					</div>
@@ -72,20 +104,56 @@
 						</span>
 						</p>
 						<!--
-						<p class="clearfix">
-						<span class="float-left"><i  class="mdi mdi-cellphone"></i>  연락처</span>
-						<span class="float-right text-muted">010-123-4567</span>
-						</p>
+		  <p class="clearfix">
+		  <span class="float-left"><i  class="mdi mdi-cellphone"></i>  연락처</span>
+		  <span class="float-right text-muted">010-123-4567</span>
+		  </p>
 						-->
 						<p class="clearfix">
 						<span class="float-left"><i  class="mdi mdi-mail-ru"></i>  이메일</span>
 						<span class="float-right text-muted">{{current_user.email_addr}}</span>
 						</p>
+
+						<p class="clearfix">
+						<span class="float-left"><i class="mdi mdi-lock"></i>비밀번호</span>
+						<button class="btn btn-secondary btn-sm float-right" type="edit" data-toggle="modal" data-target="#editpw">변경하기</button>
+						</p>
+
+						<!--비번 수정 팝업-->
+						<div class="modal fade" id="editpw" tabindex="-1" role="dialog" aria-labelledby="editPw" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="editPw">비밀번호 변경하기</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span></button>
+									</div>
+									<div class="modal-body">
+										<form>
+											<div class="form-group">
+												<label for="nickname" class="col-form-label">현재 비밀번호</label>
+												<input type="password" class="form-control" id="pw">
+											</div>
+											<div class="form-group">
+												<label for="new-pw" class="col-form-label">새로운 비밀번호</label>
+												<input type="password" class="form-control" id="new-pw1">
+											</div>
+											<div class="form-group">
+												<label for="new-pw" class="col-form-label">새로운 비밀번호 재입력</label>
+												<input type="password"  class="form-control" id="new-pw2">
+											</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+										<button type="submit" class="btn btn-success" id="pw_change">저장하기</button>
+									</div>
+								</div>
+							</div>
+						</div><!--비밀번호 변경 끝-->
+
 					</div>
 
-					<div class="my-border-top text-center pt-4">    
-						<button class="btn btn-gradient-success btn-block" type="edit"><i  class="mdi mdi-account-circle"></i> &nbsp; 수정하기</button>  
-					</div>
 				</div><!--col lg-6-->
 			</div><!--card-->
 		</div><!--card-body-->
@@ -218,10 +286,81 @@
 </div><!--contents wrapper-->
 
 <script src="/static/new_design/js/jquery.min.js"></script>
-	<script>
-		var birth = "{{current_user.birth}}";
-		var birth = birth.slice(0,4) + '.' + birth.slice(4,6) + '.' + birth.slice(6);
-		$("#birth").text(birth);
-	</script>
+<script>
+	var birth = "{{current_user.birth}}";
+var birth = birth.slice(0,4) + '.' + birth.slice(4,6) + '.' + birth.slice(6);
+$("#birth").text(birth);
+</script>
 
-	{% endblock %}
+<script>
+	var csrf = "{{ csrf_token() }}";
+$("#csrf_token").val(csrf);
+</script>
+
+
+<script>
+	$(document).ready(function(){
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrf)
+				}
+			}
+		});
+
+		$("#name_change").on('click', function(){
+			if ($("#nickname").val() == "")
+				return;
+			var url = window.location.href + 'update';
+			var nick = $("#nickname").val()
+			$.ajax({
+				url:url,
+				data: {"btn":"name_change", "value": nick},
+				type: 'POST',
+				success: function(res) {
+					if (res == "닉네임 중복") {
+						alert("동일한 닉네임이 존재합니다.");
+						return;
+					}
+					alert("닉네임 변경 완료!");
+				},
+				error:function(request, error) {
+					console.log(request);
+					console.log(error);
+				}
+			});
+		});	
+
+		$("#pw_change").on('click', function(){
+			if ($("#pw").val() == "")
+				return;
+			if ($("#new-pw1").val() != $("#new-pw2").val() || $("#new-pw1").val() == "") {
+				alert("새로운 비밀번호가 일치하지 않습니다.");
+				return;
+			}
+			var url = window.location.href + 'update';
+			console.log(url);
+			$.ajax({
+				url:url,
+				data: {"btn":"pw_change", "now_pw": $("#pw").val(), "new_pw": $("#new-pw1").val() },
+				type: 'POST',
+				success: function(res) {
+					if (res == "True") {
+						alert("비밀번호 변경 완료!");
+						window.location.href = "{{url_for('account.signin') }}";
+					}
+					else {
+						alert("현재 비밀번호가 일치하지 않습니다.");
+					}
+				},
+				error:function(request, error) {
+					console.log(request);
+					console.log(error);
+				}
+			});
+		});
+	});
+</script>
+
+
+{% endblock %}
