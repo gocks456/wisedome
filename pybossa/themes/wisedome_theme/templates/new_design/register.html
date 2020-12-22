@@ -40,7 +40,7 @@
 
 
     <div>
-				<h1>계정 생성</h1>
+				<h4>계정 생성</h4>
                 <div id="ageCheck" class="form-inline">
 					<h5> 16세 이상의 이용자만 이용할 수 있습니다.</h5>
 
@@ -176,7 +176,7 @@
                     <button onclick="checkAge()"  class="btn btn-primary" style="margin-top:0px">Check</button>
 					</p>
                 </div>
-				{% from "_formhelpers.html" import render_form %}
+				{% from "/new_design/_formhelpers.html" import render_form %}
                 {{ render_form(form, form_id="register", action_url=url_for('account.register'), btn_class="btn btn-primary btn-block" )}}
 
 				
@@ -347,7 +347,7 @@ function checkAge () {
 	$('#birth').val(user_birth);
 	$('#sex').val(sex);
 
-    if (sex==0 || yearsOld < 16){
+    if (sex==0 || yearsOld < 16 || user_birth.length != 8){
         modal_age.open();
     }
 	else alert("확인되었습니다.");
@@ -401,6 +401,8 @@ div.parent().css("margin-left","50px");
 
 var div = $("label[for = 'birth']").parent();
 div.css("margin-top","0px")
+
+$("button:contains('Submit')").text("가입하기");
 
 
 </script>

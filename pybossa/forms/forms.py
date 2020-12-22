@@ -394,12 +394,12 @@ class LoginForm(Form):
 
     email = TextField(lazy_gettext('E-mail'),
                       [validators.Required(
-                          message=lazy_gettext("The e-mail is required"))])
+                          message=lazy_gettext("이메일을 입력하세요."))])
 
     password = PasswordField(lazy_gettext('Password'),
                              [validators.Required(
                                  message=lazy_gettext(
-                                     "You must provide a password"))])
+                                     "비밀번호를 입력하세요."))])
 
 
 class RegisterForm(Form):
@@ -418,7 +418,7 @@ class RegisterForm(Form):
     #err_msg_2 = lazy_gettext("The user name is already taken")
     err_msg_2 = lazy_gettext("이미 등록된 별명 입니다.")
     #name = TextField(lazy_gettext('User name'),
-    name = StringField('별명 (설정하지 않을 시 이름으로 자동입력)',
+    name = StringField('별명',
                          [validators.Length(min=2, max=USER_NAME_MAX_LENGTH, message=err_msg),
                           pb_validator.NotAllowedChars(),
                           pb_validator.Unique(user_repo.get_by, 'name', err_msg_2),

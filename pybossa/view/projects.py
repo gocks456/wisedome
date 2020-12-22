@@ -1318,7 +1318,7 @@ def presenter(short_name):
         ensure_authorized_to('read', project)
 
     title = project_title(project, "Contribute")
-    template_args = {"project": project, "title": title, "owner": owner, "current_user": current_user,
+    template_args = {"project": project, "title": title, "owner": owner, "current_user": current_user, "n_tasks": ps.n_tasks,
               "invite_new_volunteers": invite_new_volunteers(project, ps), "task_run":None, "csrf":generate_csrf()}
 
     if not project.allow_anonymous_contributors and current_user.is_anonymous:

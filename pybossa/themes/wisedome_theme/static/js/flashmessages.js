@@ -2,9 +2,9 @@ function pybossaNotify(msg, showNotification, type){
     $("#pybossa-notification").remove();
     var div = $("<div/>");
     div.attr("id", "pybossa-notification");
-    var icon = $("<li/>");
-    var close = $("<li/>");
-    close.addClass("fa fa-2x fa-close pull-right");
+    var icon = $("<i/>");
+    var close = $("<i/>");
+    close.addClass("mdi mdi-window-close");
     close.on('click', function(){
         $("#pybossa-notification").addClass("hide-notification");
     });
@@ -12,7 +12,7 @@ function pybossaNotify(msg, showNotification, type){
         type = 'info';
     }
     if ((type === 'danger') || (type === 'error') || (type === 'warning') || (type == 'message')) {
-        icon.addClass("fa fa-2x fa-exclamation-triangle pull-left"); 
+        icon.addClass("mdi mdi-alert-circle"); 
     }
 
     if (type === 'message') {
@@ -20,15 +20,15 @@ function pybossaNotify(msg, showNotification, type){
     }
 
     if (type === 'info') {
-        icon.addClass("fa fa-2x fa-bullhorn pull-left"); 
+        icon.addClass("mdi mdi-comment-alert-outline"); 
     }
 
     if (type === 'success') {
-        icon.addClass("fa fa-2x fa-check pull-left"); 
+        icon.addClass("mdi mdi-checkbox-marked-circle-outline"); 
     }
 
     if (type === 'loading') {
-        icon.addClass("fa fa-2x fa-circle-o-notch fa-spin pull-left"); 
+        icon.addClass("mdi mdi-comment-alert-outline"); 
         type = 'info';
     }
 

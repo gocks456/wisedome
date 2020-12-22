@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<!--css파일-->
-		<link rel="stylesheet" href="/static/new_design/css/basic.css"/><!--메뉴/푸터 (모든페이지 필수)-->
+		<link rel="stylesheet" href="/static/new_design/css/basic/basic.css"/><!--메뉴/푸터 (모든페이지 필수)-->
 		<link rel="stylesheet" href="/static/new_design/css/swiper.min.css"/>
 		<link rel="stylesheet" href="/static/new_design/css/main-XXL.css" media="screen and (max-width: 99999px)">
 		<link rel="stylesheet" href="/static/new_design/css/main-XL.css" media="screen and (max-width: 1280px)">
@@ -316,7 +316,7 @@
 						{% for user in top_users %}
 						<div class="profile swiper-slide">
 							<main> 
-							<div class="myFace "><img src="{{ render_user_thumbnail(user, upload_method) }}" alt="{{user.name}}"></div>
+							<div class="myFace "><img src="{{render_user_thumbnail(user, upload_method)}}" alt="{{user.name}}"></div>
 							<div class="myProfile">
 								<span class="profile-name">{{user.name}} 님</span><br>  <!--프로필 고객 이름 -->
 								<span class="star"><!--고객등급 나타남(아래는 별 갯수4개를 의미함)-->

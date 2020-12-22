@@ -1,7 +1,7 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/new_design/css/basic.css"/><!--NAV랑 footer-->
+<link rel="stylesheet" href="/static/new_design/css/basic/basic.css"/><!--NAV랑 footer-->
 <link rel="stylesheet" href="/static/new_design/css/Allproject-XXL.css" media="screen and (max-width: 99999px)"/>
 <link rel="stylesheet" href="/static/new_design/css/Allproject-XL.css" media="screen and (max-width: 1280px)"/>
 <link rel="stylesheet" href="/static/new_design/css/Allproject-L.css" media="screen and (max-width: 991px)"/>
@@ -246,6 +246,22 @@
 		</div>
 
 
+<style>
+@media all{
+	.project-img {
+		height:17.5em;
+	}
+}
+@media (max-width:991px) {
+	.container:hover .text{
+		opacity: 0;}
+}
+@media (max-width:575px;){
+	.project-img {
+		height:7.5em;
+	}
+}
+</style>
 
 
 		<div class="col-md-12 grid-margin">
@@ -302,10 +318,10 @@
 
 						<main>
 
-
+						<div id="project-top">
 							{% for project in projects %}
 							<div class="container" onclick="location.href='{{ url_for('project.details', short_name=project.short_name) }}'" style="cursor:pointer;">
-								<img class="project-img"src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.short_name}}" >
+								<img class="project-img"src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.short_name}}">
 
 								<div class="overlay">
 									<h3>{{project.name}}</h3>
@@ -333,6 +349,7 @@
 								</div>
 							</div>
 							{% endfor %}
+						</div>
 
 
 						</main>
@@ -358,7 +375,7 @@
 <script src="/static/new_design/js/browser.min.js"></script>
 <script src="/static/new_design/js/breakpoints.min.js"></script>
 <script src="/static/new_design/js/util.js"></script>
-<script src="/static/new_design/js/main.js"></script>
+<!--<script src="/static/new_design/js/main.js"></script>-->
 <script src="/static/new_design/js/swiper.min.js"></script> 
 <script src="/static/new_design/js/swiper-breakpoint.js"></script>
 
