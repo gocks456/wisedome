@@ -103,6 +103,7 @@ def signin():
 
     """
     form = LoginForm(request.body)
+
     isLdap = current_app.config.get('LDAP_HOST', False)
     if (request.method == 'POST' and form.validate()
             and isLdap is False):

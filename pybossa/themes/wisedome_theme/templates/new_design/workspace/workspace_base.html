@@ -17,7 +17,7 @@
   </head>
   <body>
 
-	  {% macro render_user_thumbnail(user, upload_method) %}
+	  {% macro render_user_thumbnail(user, upload_method) -%}
 	  {% if user.info.avatar %}
 	  {% if upload_method == 'rackspace'%}
 	  {{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onError="this.onerror=null;this.src='{{url_for('static', filename='new_design/images/user-default.png')}}';
@@ -27,7 +27,7 @@
 	  {% else %}
 	  {{ url_for('static', filename='new_design/images/user-default.png')}}
 	  {% endif %}
-	  {% endmacro %}
+	  {%- endmacro %}
 
 
     <div class="container-scroller">
@@ -291,7 +291,7 @@
 	{% block content %}{% endblock %}
 
 <!-- FOOTER -->
-		<!-- footer 부분 css가 겹치는 오류로 인해 100%를 함 -->
+<!-- footer 부분 css가 겹치는 오류로 인해 100%를 함 -->
           <footer class="footer" style="width:100%;">
             <div class="d-flex justify-content-center">
               <span class="text-muted">Copyright © 2020 <a href="#" target="_blank">Data.ly</a>. All rights reserved.</span>
