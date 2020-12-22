@@ -1,0 +1,223 @@
+@import "variable";
+
+/****데스크탑 모니터 화면****/
+#header{
+  @include header-bg;
+  height: 15em;
+}
+
+
+    .title{
+      text-align: center;
+      margin: 0 auto;
+
+      h1 {
+        padding-bottom: 0.5em;
+        font-size: 1.5em;
+      }
+      
+      hr{
+        @include title-hr;
+        width: 70px;
+        height: 5px;
+      }
+    }
+  
+
+  .category-order {
+    margin: 2em 5em ;
+
+    li {
+      display: inline-block;
+      font-size: 0.9em;
+    }  
+  }
+  
+  
+
+/***이미지 선택하는 영역****/
+
+ #contents{
+  padding: 5em 0;
+  
+  main{
+    margin: 3em 10em ;
+   
+
+   .workcontainer{
+    width: 100%;
+    background-color: #C7E4E2;
+    border-radius: 10px;
+    height: auto;
+  
+    .process{
+      @include process-title();
+      font-size: 1em;
+      padding: 1.5em 0;
+    }
+  }
+  .workspace{
+    @include workarea-bg();
+    height: 100%;
+    }
+ }
+}
+
+
+
+  
+/*****코드따온것**/
+  .container {
+    padding: 50px 10%;
+  }
+  
+  .box {
+    position: relative;
+    background: #ffffff;
+    width: 100%;
+  }
+  
+  .box-header {
+    color: #444;
+    display: block;
+    padding: 10px;
+    position: relative;
+    border-bottom: 1px solid #f4f4f4;
+    margin-bottom: 10px;
+  }
+  
+  .box-tools {
+    position: absolute;
+    right: 10px;
+    top: 0;
+  }
+  
+  .dropzone-wrapper {
+    border: 2px dashed #91b0b3;
+    color: #92b0b3;
+    position: relative;
+    height: 400px;
+  }
+  
+  .dropzone-desc {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    width: 40%;
+    top: 50px;
+    font-size: 16px;
+  }
+  
+  .dropzone,
+  .dropzone:focus {
+    position: absolute;
+    outline: none !important;
+    width: 100%;
+    height: 400px;
+    cursor: pointer;
+    opacity: 0;
+  }
+  
+  .dropzone-wrapper:hover,
+  .dropzone-wrapper.dragover {
+    background: #ecf0f5;
+  }
+  
+  .preview-zone {
+    text-align: center;
+  }
+  
+  .preview-zone .box {
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+
+  .submit{
+    background-color: $purple;
+    font-size: 1.3em;
+    padding: 0.5em 4em;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    margin-top: 2em;
+  }
+
+  /*****내가 수정한코드***
+  .container {
+    padding: 3em 5em;
+    text-align: center;
+  }
+  
+  .box {
+    position: relative;
+    background: #ffffff;
+    width: 100%;
+  }
+  
+  .box-header {
+    display: block;
+    padding: 1em;
+    position: relative;
+    margin-bottom: 1em;
+  }
+  
+  .box-tools {
+    position: absolute;
+    right: 10px;
+    top: 0;
+ 
+    button{
+      @include second-btn();
+      padding: 0.5em;
+    }
+
+  }
+  
+  .dropzone-wrapper {
+    border: 2px dashed #91b0b3;
+    color: #92b0b3;
+    position: relative;
+    height:400px;
+  }
+  
+  .dropzone-desc {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    width: 40%;
+    top: 50px;
+    font-size: 16px;
+  }
+  
+  .dropzone,
+  .dropzone:focus {
+    position: absolute;
+    outline: none !important;
+    width: 100%;
+    height: 400px;
+    cursor: pointer;
+    opacity: 0;
+  }
+  
+  .dropzone-wrapper:hover,
+  .dropzone-wrapper.dragover {
+    background: #ecf0f5;
+  }
+  
+  .preview-zone {
+    text-align: center;
+  }
+  
+  .preview-zone .box {
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+  
+
+****/
