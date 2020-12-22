@@ -267,7 +267,7 @@ ul.actions {
 
 
 
-		/* Nav */
+/* Nav */
 #nav {
 	position: absolute;
 	display: block;
@@ -282,10 +282,8 @@ ul.actions {
 #nav > ul {
 display: inline-block;
 overflow: hidden;
-border-radius: 00.25em;
-box-shadow: inset 0px 0px 1px 1px rgba(255, 255, 255, 0.5);
 padding: 0.15em 1em ;
-background-color: white; 
+background-color: transparent;
 }
 
 #nav > ul > li {
@@ -294,7 +292,9 @@ list-style: none;
 text-align: center;
 padding-right: 0.5em;
 }
-
+#nav > ul > li:hover {
+	text-decoration: underline;
+}
 #nav > ul > li > ul {
 display: none; 
 }
@@ -302,7 +302,7 @@ display: none;
 #nav > ul > li > a, #nav > ul > li > span {
 font-family: 'S-CoreDream-2thin';
 display: block;
-color: grey;
+color: #164947;
 text-transform: uppercase;
 text-decoration: none;
 font-size: 0.6em;
@@ -318,7 +318,7 @@ outline: 0;
 }
 
 #nav > ul > li:hover > a {
-color: #164947
+color: #164947; 
 }
 
 #nav > ul > li.active > a, #nav > ul > li.active > span {
@@ -334,22 +334,19 @@ color: #164947;
 
 /**헤더메뉴 떨어질떄**/
 .dropotron {
-	background-color:white;
 	padding: 0.5em 1em ;
-	border-radius: 0.50em;
-	box-shadow: inset 0px 0px 1px 1px rgba(212, 205, 205, 0.5);
-	min-width: 10em;
+	border-radius: 0.25em;
+/*	box-shadow: inset 0px 0px 1px 1px rgba(212, 205, 205, 0.5);*/
+	min-width: 7.5em;
 	text-align: left;
 	list-style: none;
+
 }
 
 	.dropotron.level-0 {
-		margin-top: 3px;
+		margin-top: 1.5px;
 		margin-left: 0;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
 	}
-
 	/**마우스 올리면 떨어지는 메뉴*/
 	.dropotron a, .dropotron span{
 		-moz-transition: all .25s ease-in-out;
@@ -357,18 +354,21 @@ color: #164947;
 		-ms-transition: all .25s ease-in-out;
 		transition: all .25s ease-in-out;
 		display: block;
-		color:gray;
+		color:#164947;
 		text-transform: uppercase;
 		text-decoration: none;
 		font-size: 0.6em;
 		letter-spacing: 0.25em;
-		border-top: solid 1px rgba(117, 117, 117, 0.15);
+	/*	border-top: solid 1px rgba(117, 117, 117, 0.15);**/
 		line-height: 3em;
 		height: 3em;
-	
-	}
-	.dropotron li {
-		padding-left: 0.5em;  	
+		background-color: #fff;
+		opacity: 0.8;	
+		border-radius: 0.25em;}
+		
+	.dropotron li { 
+		text-align: center;	
+
 	}
 
 		.dropotron li:first-child a, .dropotron li:first-child span {
@@ -377,13 +377,13 @@ color: #164947;
 
 		.dropotron li:hover > a, .dropotron li:hover > span {
 			color:#164947;
-		}
-		
+		text-decoration: underline;}
 
 
 /********* Footer ***********/
 #footer {
-	background: #282b34 url("images/overlay.png");
+/**	background: #282b34 url("images/overlay.png");**/
+    background-color: #f7f6f6;
 	color: #eee;
 	color: rgba(255, 255, 255, 0.5);
 	padding-bottom: 0.5em;

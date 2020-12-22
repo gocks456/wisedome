@@ -54,15 +54,11 @@ hr {
   padding: 3em 0.5em;
 }
 
-  .pro {
-    margin: 1em 0.5em ;
+.container{
+    margin: 0.25em ;
     width: 45%;
     }
 
-      .mobile-only{
-        display: none;
-      }
-      
     
 /*****3.포인트킹******/   
  .myFace{

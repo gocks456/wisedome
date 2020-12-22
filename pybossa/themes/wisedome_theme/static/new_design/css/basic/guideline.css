@@ -35,7 +35,7 @@
   line-height: 1.8em;
 }
 .active .accordion__content {
-  max-height: 999px;
+  max-height: 2999px;
 }
 .active .accordion__icon {
   transform: rotate(45deg);

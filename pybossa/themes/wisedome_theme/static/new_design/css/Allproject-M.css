@@ -29,17 +29,14 @@ hr {
 
  /****진행중인 프로젝트**/
  #project {
-  padding: 3em 0.5em ;
+  padding: 3em 0.5em;
 }
 
-  .pro {
-    margin: 1em 0.5em ;
-    width: 45%;
-    }
-      .mobile-only{
-        display: none;
-      }
-      
+.container{
+  margin: 0.25em ;
+  width: 45%;
+  }
+
 
 /****가격별 정렬***/
 form{ 

@@ -1,0 +1,84 @@
+#header{
+  height: 8em;
+}
+
+/**타이틀**/
+.title h1{
+  font-size: 1.1em;
+}
+
+
+/***프리미엄 프로젝트***/
+
+#premium {
+  padding: 3em 0; 
+}	
+
+.swiper-button-next,.swiper-button-prev{
+  display: none;
+}
+
+
+/**2.카테고리별 프로젝트****/
+#category {
+  padding: 2em 0;
+}
+
+.ctg {
+  padding: 0.5em ;
+  margin-right: 0.1em;
+}
+
+.ctg p {
+  font-size: 0.25em;
+  line-height: 2em;
+}	 
+
+
+/****진행중인 프로젝트**/
+#project {
+  padding: 3em 0;
+
+}
+
+.pro{
+  font-size: 1em;
+  margin: 1em 0.3em ;
+  width: 30%;
+}
+
+.pro img {
+  height:16.25em;
+}
+
+
+.pro figcaption {
+top: calc(75%);
+padding: 1em 0.5em ;
+}
+
+.level{ 
+  font-size:0.6em ;
+  }
+
+/****가격별 정렬***/
+form{ 
+  margin: 1.5em 0 1em 75%; 
+}
+
+#orderlist, #project button{
+  width: 170px;
+  height: 35px;
+  font-size: 0.7em;}
+
+#mb-only{
+	display: none;
+}
+
+
+
+  #footer {
+    padding:3em 1em 1em 3em ;
+  }
+
+

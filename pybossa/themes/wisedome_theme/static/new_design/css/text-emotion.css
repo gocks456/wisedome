@@ -67,12 +67,15 @@
     cursor:pointer;}
   
   pre{
+    overflow: hidden;
+    white-space: pre-wrap;
     background-color: transparent;
     font-size: 1.2em;
     line-height: 2em;
     font-family: 'Times New Roman', Times, serif;}
 
   .highlight{
+    max-width: 100px;
     background-color: yellow;
     border-radius: 0.125em;} 
   
