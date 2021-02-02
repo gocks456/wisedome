@@ -99,8 +99,8 @@ def get_top5_projects_24_hours():
     sql = text('''SELECT project.id, project.name, project.short_name, project.info,
                COUNT(task_run.project_id) AS n_answers FROM project, task_run
                WHERE project.id=task_run.project_id
-               AND DATE(task_run.finish_time) > NOW() AT TIME ZONE 'utc' - INTERVAL '24 hour'
-               AND DATE(task_run.finish_time) <= NOW() AT TIME ZONE 'utc'
+               AND DATE(task_run.finish_time) > NOW() AT TIME ZONE 'ROK' - INTERVAL '24 hour'
+               AND DATE(task_run.finish_time) <= NOW() AT TIME ZONE 'ROK'
                GROUP BY project.id
                ORDER BY n_answers DESC LIMIT 5;''')
 
@@ -122,8 +122,8 @@ def get_top5_users_24_hours():
                "user".restrict,
                COUNT(task_run.project_id) AS n_answers FROM "user", task_run
                WHERE "user".restrict=false AND "user".id=task_run.user_id
-               AND DATE(task_run.finish_time) > NOW() AT TIME ZONE 'utc' - INTERVAL '24 hour'
-               AND DATE(task_run.finish_time) <= NOW() AT TIME ZONE 'utc'
+               AND DATE(task_run.finish_time) > NOW() AT TIME ZONE 'ROK' - INTERVAL '24 hour'
+               AND DATE(task_run.finish_time) <= NOW() AT TIME ZONE 'ROK'
                GROUP BY "user".id
                ORDER BY n_answers DESC LIMIT 5;''')
 

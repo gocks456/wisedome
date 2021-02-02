@@ -57,14 +57,30 @@ def home():
     # 메인화면 Design Test
     #response = dict(template='/home/index.html', **data)
     #projects = project_repo.get_all()
+
+    # 오픈한 모든 프로젝트
     projects = cached_projects.get_all_projects()
+    # 7일 간 top 10
     top_users = site_stats.get_top10_users_7_days()
+
 
     if current_user.is_anonymous:
         response = dict(template='/new_design/index.html', projects=projects, top_users=top_users )
         return handle_content_type(response)
     else:
-        return redirect_content_type(url_for('project.index'))
+        # 인기 프로젝트
+        popular_projects = cached_projects.get_popular_top5_projects()
+
+        # 참여중인 프로젝트 개수
+        n_ongoing_projects = len(cached_projects.get_ongoing_projects(current_user.id))
+
+        # 오픈한 모든 프로젝트 개수
+        n_projects = len(projects)
+
+        response = dict(template='/new_design/dashboard.html', projects=projects, n_projects=n_projects, n_ongoing_projects=n_ongoing_projects,
+                                                               popular_projects=popular_projects, feature_projects=tmp_projects)
+        return handle_content_type(response)
+#        return redirect_content_type(url_for('project.index'))
 
 
 @blueprint.route("about")

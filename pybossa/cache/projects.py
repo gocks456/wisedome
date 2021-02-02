@@ -56,6 +56,32 @@ def get_users_task_run_count(project_id):
         user_list.append(user)
     return user_list
 
+def get_ongoing_projects(user_id):
+    sql = text('''SELECT id, name, description
+                  FROM project
+                  WHERE published = True AND complete = False
+                  AND :user_id = ANY(contractor_ids);''')
+    results = session.execute(sql, dict(user_id=user_id))
+    projects = []
+    for row in results:
+        project = dict(id=row.id, name=row.name, description=row.description)
+        projects.append(project)
+    return projects
+
+def get_popular_top5_projects():
+    sql = text('''SELECT id, name, description, info
+                  FROM project
+                  WHERE published = True AND complete = False
+                  AND ARRAY_LENGTH(contractor_ids, 1) > 0
+                  ORDER BY contractor_ids DESC
+                  LIMIT 5;''')
+    results = session.execute(sql)
+    projects = []
+    for row in results:
+        project = dict(id=row.id, name=row.name, description=row.description, info=row.info)
+        projects.append(project)
+    return projects
+
 #발주자 관리용 쿼리
 def get_orderer_projects():
     sql = text('''SELECT id, name, short_name, owners_ids, info, all_point
@@ -511,6 +537,7 @@ def n_count(category):
 
 @memoize(timeout=timeouts.get('APP_TIMEOUT'))
 def get_all_projects(category=None):
+    # 공개된 프로젝트 전체
     sql = text(
         '''SELECT project.id, project.name, project.short_name,
            project.description, project.info, project.created, project.updated, project.all_point, project.condition, project.complete,

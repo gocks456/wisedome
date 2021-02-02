@@ -90,6 +90,7 @@ class UserRepository(Repository):
         self._validate_can_be('updated', new_user)
         try:
             self.db.session.merge(new_user)
+
             self.db.session.commit()
         except IntegrityError as e:
             self.db.session.rollback()
@@ -125,3 +126,15 @@ class UserRepository(Repository):
         if not ids:
             return []
         return self.db.session.query(User).filter(User.id.in_(ids)).all()
+
+
+    # Gmail AccessToken Update
+    def update_token(self, user):
+        self._validate_can_be('updated', user)
+        try:
+            flag_modified(user, "info")
+            self.db.session.add(user)
+            self.db.session.commit()
+        except IntegrityError as e:
+            self.db.session.rollback()
+            raise DBIntegrityError(e)

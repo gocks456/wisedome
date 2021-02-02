@@ -359,6 +359,8 @@ def setup_external_services(app):
     setup_twitter_login(app)
     setup_facebook_login(app)
     setup_google_login(app)
+    setup_gmail_login(app)
+    setup_kakao_login(app)
     setup_flickr_importer(app)
     setup_dropbox_importer(app)
     setup_twitter_importer(app)
@@ -412,6 +414,38 @@ def setup_google_login(app):
         print(inst)
         print("Google signin disabled")
         log_message = 'Google signin disabled: %s' % str(inst)
+        app.logger.info(log_message)
+
+def setup_gmail_login(app):
+    try:  # pragma: no cover
+        if (app.config['GMAIL_CLIENT_ID']
+                and app.config['GMAIL_CLIENT_SECRET']
+                and app.config.get('LDAP_HOST') is None):
+            gmail.init_app(app)
+            from pybossa.view.gmail import blueprint as gmail_bp
+            app.register_blueprint(gmail_bp, url_prefix='/gmail')
+    except Exception as inst:  # pragma: no cover
+        print(type(inst))
+        print(inst.args)
+        print(inst)
+        print("Gmail signin disabled")
+        log_message = 'Gmail signin disabled: %s' % str(inst)
+        app.logger.info(log_message)
+
+def setup_kakao_login(app):
+    try:  # pragma: no cover
+        if (app.config['KAKAO_CLIENT_ID']
+                and app.config['KAKAO_CLIENT_SECRET']
+                and app.config.get('LDAP_HOST') is None):
+            kakao.init_app(app)
+            from pybossa.view.kakao import blueprint as kakao_bp
+            app.register_blueprint(kakao_bp, url_prefix='/kakao')
+    except Exception as inst:  # pragma: no cover
+        print(type(inst))
+        print(inst.args)
+        print(inst)
+        print("Kakao signin disabled")
+        log_message = 'Kakao signin disabled: %s' % str(inst)
         app.logger.info(log_message)
 
 
