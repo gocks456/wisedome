@@ -231,3 +231,15 @@ class TaskRepository(Repository):
         uploader.delete_file(csv_tasks_filename, container)
         uploader.delete_file(json_taskruns_filename, container)
         uploader.delete_file(csv_taskruns_filename, container)
+
+    def get_all_info(self):
+        return self.db.session.query(Task.info).filter(Task.id > 175000).all()
+
+
+
+    def get_all_info2(self):
+        return self.db.session.query(Task).filter(Task.id > 214728).all()
+
+
+    def get_all_info3(self):
+        return self.db.session.query(Task.info).all()

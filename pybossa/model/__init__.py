@@ -51,6 +51,9 @@ class DomainObject(object):
     def to_public_json(self, data=None):
         """Return a dict that can be exported to JSON
         with only public attributes."""
+        import time
+
+        a1 = time.time()
 
         out = dict()
         if data is None:
@@ -91,9 +94,9 @@ class DomainObject(object):
 
 def make_timestamp():
     now = datetime.datetime.now()
-    time_gap = datetime.timedelta(hours=9)
-    now = now + time_gap
-    #한국 시간을 만들기 위해
+    #time_gap = datetime.timedelta(hours=9)
+    #now = now + time_gap
+    ##한국 시간을 만들기 위해
     return now.isoformat()
 
 

@@ -520,7 +520,7 @@ def projects_contributed(user_id, order_by='name'):
                     (SELECT project_id, MAX(finish_time) as last_contribution  FROM task_run
                      WHERE user_id=:user_id GROUP BY project_id)
                SELECT * FROM project, projects_contributed
-               WHERE project.id=projects_contributed.project_id AND project.complete = False ORDER BY {} DESC;
+               WHERE project.id=projects_contributed.project_id ORDER BY project.id;
                '''.format(order_by))
     results = session.execute(sql, dict(user_id=user_id))
     projects_contributed = []

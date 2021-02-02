@@ -216,7 +216,7 @@
 								{% for i in range(0, projects_contrib|length ) %}
 								<tr>
 									<td> {{i+1}} </td>
-									<td> {{ projects_contrib[i].name }}</td>
+									<td style = "cursor:pointer;"onclick = "location.href='{{url_for('project.details', short_name = projects_contrib[i].short_name)}}'"> {{ projects_contrib[i].name }}</td>
 									<td>
 										<div class="progress">
 											<div class="progress-bar {% if i % 4 == 0 %}bg-info {% elif i % 4 == 1 %}bg-danger {% elif i % 4 == 2 %}bg-warning {% else %}bg-primary{% endif %}" role="progressbar" style="width:{{projects_contrib[i].overall_progress}}%" aria-valuenow={{projects_contrib[i].overall_progress|int}} aria-valuemin="0" aria-valuemax="100"></div>
@@ -259,7 +259,7 @@
 										{% if point_history[i].point != 0 %}
 										<tr>
 											<td>{{i}}</td>
-											<td> {{ point_history[i].project_name }} </td>
+											<td style = "cursor:pointer;"onclick = "location.href='{{url_for('project.details', short_name = point_history[i].project_short_name)}}'"> {{ point_history[i].project_name }}</td>
 											<td> {{ point_history[i].count }} </td>
 											<td> {{ point_history[i].point }} </td>
 											<td> {{ point_history[i].finish_time[0:10] }} </td>
