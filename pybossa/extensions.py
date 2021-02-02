@@ -37,7 +37,7 @@ The objects are:
 
 """
 __all__ = ['sentinel', 'db', 'signer', 'mail', 'login_manager', 'facebook',
-           'twitter', 'google', 'misaka', 'babel', 'uploader', 'debug_toolbar',
+           'twitter', 'google', 'gmail', 'kakao', 'misaka', 'babel', 'uploader', 'debug_toolbar',
            'csrf', 'timeouts', 'ratelimits', 'user_repo', 'project_repo',
            'task_repo', 'announcement_repo', 'blog_repo', 'auditlog_repo', 'webhook_repo',
            'result_repo', 'newsletter', 'importer', 'flickr',
@@ -91,6 +91,12 @@ twitter = Twitter()
 
 from pybossa.oauth_providers import Google
 google = Google()
+
+from pybossa.oauth_providers import Gmail
+gmail = Gmail()
+
+from pybossa.oauth_providers import Kakao
+kakao = Kakao()
 
 from pybossa.oauth_providers import Flickr
 flickr = Flickr()

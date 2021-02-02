@@ -53,3 +53,18 @@
 		<button type="submit" name="{{btn_name}}" value="{{btn_value}}" class="{{ btn_class }}">{{ action_text }} </button>
 	</form>
 {%- endmacro %}
+
+
+{%- macro render_url_thumbnail(project, upload_method) %}
+{%- if project.info.container %}
+{%- if upload_method == 'rackspace'%}
+{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container)}}
+{%- else %}
+{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail))}}
+{% endif -%}
+{%- elif project.info.thumbnail %}
+{{project.info.thumbnail}}"
+{% else -%}
+{{url_for('static', filename='new_design/images/default-image.png')}}
+{% endif -%}
+{% endmacro -%}

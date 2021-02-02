@@ -20,6 +20,7 @@
 from .forms import (
     LoginForm,
     RegisterForm,
+    APIRegisterForm,
     UpdateProfileForm,
     ChangePasswordForm,
     ResetPasswordForm,

@@ -80,11 +80,35 @@ class Google(object):
             base_url='https://www.googleapis.com/oauth2/v1/',
             authorize_url='https://accounts.google.com/o/oauth2/auth',
             request_token_url=None,
-            request_token_params={'scope': 'profile email'},
+			request_token_params={'scope': ['profile', 'email']},
             access_token_url='https://accounts.google.com/o/oauth2/token',
             access_token_method='POST',
             consumer_key=app.config['GOOGLE_CLIENT_ID'],
             consumer_secret=app.config['GOOGLE_CLIENT_SECRET'])
+
+
+class Gmail(object):
+
+    """Class Gmail"""
+
+    def __init__(self, app=None):
+        """Init method."""
+        self.app = app
+        if app is not None:  # pragma: no cover
+            self.init_app(app)
+
+    def init_app(self, app):
+        """Init app using factories pattern."""
+        self.oauth = OAuth().remote_app(
+            'gmail',
+            base_url='https://www.googleapis.com/oauth2/v1/',
+            authorize_url='https://accounts.google.com/o/oauth2/auth?access_type=offline&include_granted_scopes=true',
+            request_token_url=None,
+			request_token_params={'scope': ['https://www.googleapis.com/auth/gmail.send', 'profile', 'email']},
+            access_token_url='https://accounts.google.com/o/oauth2/token?grant_type=authorization_code',
+            access_token_method='POST',
+            consumer_key=app.config['GMAIL_CLIENT_ID'],
+            consumer_secret=app.config['GMAIL_CLIENT_SECRET'])
 
 class Flickr(object):
 
@@ -104,3 +128,25 @@ class Flickr(object):
             consumer_key=app.config['FLICKR_API_KEY'],
             consumer_secret=app.config['FLICKR_SHARED_SECRET'],
             access_token_method='GET')
+
+
+
+class Kakao(object):
+
+    def __init__(self, app=None):
+        self.app = app
+        if app is not None:
+            self.init_app(app)
+
+    def init_app(self, app):  # pragma: no cover
+        """Init app using factories pattern."""
+        self.oauth = OAuth().remote_app(
+            'kakao',
+			base_url='https://kauth.kakao.com/oauth',
+			authorize_url='https://kauth.kakao.com/oauth/authorize',
+            request_token_url=None,
+			request_token_params={'scope': ['profile', 'account_email']},
+			access_token_url='https://kauth.kakao.com/oauth/token?redirect_uri=http://urd.nlp.wo.tc:8000/kakao/oauth_authorized',
+            access_token_method='POST',
+            consumer_key=app.config['KAKAO_CLIENT_ID'],
+            consumer_secret=app.config['KAKAO_CLIENT_SECRET'])

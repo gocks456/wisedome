@@ -1,310 +1,485 @@
-@font-face { font-family: 'S-CoreDream-2Light'; src: url('../css/font/SCDream2.otf') format('woff'); font-weight: normal; font-style: normal; }
-@-ms-viewport {
-  width: device-width;}
+@font-face {
+  font-family: "S-CoreDream-2Light";
+  src: url("../css/font/SCDream2.otf") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "S-CoreDream-3Medium";
+  src: url("../css/font/SCDream3.otf") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
-html, body, div {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font: inherit;
-  vertical-align: baseline;}
-  
-  ol, ul, li {
-    list-style: none;}
+html,
+body,
+div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
 
-  a {
-    text-decoration: none;}
+ol,
+ul,
+li {
+  list-style: none;
+}
 
-section{
+a {
+  text-decoration: none;
+}
+
+section {
   float: left;
-  width: 50%;}
+  width: 50%;
+}
 
 #left {
   box-sizing: border-box;
-  font-family: 'S-CoreDream-2Light';
+  font-family: "S-CoreDream-2Light";
   background-image: url("../images/office-dark.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
-  display: table;}
-
-.text{
-color: white;
-font-family: 'S-CoreDream-2Light';
-text-align: justify;
-width: 100%;
-margin: 0 auto;
-display: table-cell;
-vertical-align: middle;
-padding: 0 25%;}
-
-.text h3{
-  line-height: 1.5em;}
-
-.text p{
-  font-size: 0.9em;
-  line-height: 1.7em;}
-
-
-/***오른쪽 회원가입 양식***/
-#right{
-  height: 100vh;
   display: table;
-  font-family: 'S-CoreDream-2Light';
-  background: #f2edf3;}
+}
 
-.register-form{
-  text-align: left;
+.text {
+  color: white;
+  font-family: "S-CoreDream-2Light";
+  text-align: justify;
+  width: 100%;
+  margin: 0 auto;
   display: table-cell;
   vertical-align: middle;
-  padding: 2% 20%;}
+  padding: 0 25%;
+}
 
-.register-title p {
-  font-size: 0.8em;}  
+.text h3 {
+  line-height: 1.5em;
+}
 
+.text p {
+  font-size: 0.9em;
+  line-height: 1.7em;
+}
+
+/***오른쪽 회원가입 양식***/
+#right {
+  height: 100vh;
+  display: table;
+  font-family: "S-CoreDream-3Medium";
+  background: #f2edf3;
+}
+
+.register-form {
+  overflow: hidden;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 2% 15%;
+}
+
+.register-form h5 {
+  text-align: left;
+}
+
+#year {
+  width: 50%;
+}
+
+#month,
+#day {
+  width: 25%;
+}
+#sex {
+  width: 100%;
+}
 .form-group {
-  display: -ms-flexbox; 
+  position: relative;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  margin-top: 0.5em;}
+  margin-top: 0.5em;
+}
 
-input[type=text], input[type=password],input[type=email],input[type=number],input[type=tel],.select{
-  font-family: 'S-CoreDream-2Light';
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"] {
+  font-family: "S-CoreDream-3Medium";
   width: 100%;
-  height: 3em;
-  padding: 0.5em 1em ;
+  height: auto;
+  color: #888;
+  padding: 0.5em 1em 0.5em 3.5em;
+  font-size: 0.8em;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  border-top-right-radius: 0.25em;
-  border-bottom-right-radius: 0.25em;
-  background: #f2edf3;}
+  -webkit-border-radius: 0.25em;
+  border-radius: 0.25em;
+  background: #f2edf3;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
 
-  .input-field,select {
-    width: 100%;
-    outline: none;}
-  
-  .input-field:focus {
-    border: 1.5px solid #b66dff;}
+select {
+  font-family: "S-CoreDream-3Medium";
+  height: auto;
+  color: #888;
+  font-size: 0.8em;
+  padding: 0.5em 1em 0.5em 3em;
+  border: 1px solid #ccc;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 0.25em;
+  border-radius: 0.25em;
+  background: #f2edf3;
+}
 
-.number-confirm{
+.input-field:focus {
+  -webkit-border: 1px solid #b66dff;
+  border: 1px solid #b66dff;
+}
+
+.email-confirm {
   width: 35%;
   border-radius: 0.25em;
   border: 0;
-  font-family: 'S-CoreDream-2Light';
+  font-family: "S-CoreDream-2Light";
   background: linear-gradient(to right, #da8cff, #9a55ff);
   color: #fff;
-  letter-spacing: 0.25em;}
+  letter-spacing: 0.25em;
+}
 
- .icon {
-    padding: 0.55em 1em ;
-    font-size: 0.9em;
-    color:  #b66dff;
-    border-top-left-radius: 0.25em;
-    border-bottom-left-radius: 0.25em;
-    border: 1px solid #ccc;
-    border-right: none;
-    text-align: center;
-    min-width: 1em;
-    max-height: 2em;}
+.icon {
+  position: absolute;
+  top: 0.5em;
+  left: 1em;
+  font-size: 1em;
+  color: #b66dff;
+  text-align: center;
+  min-width: 1em;
+  max-height: 2em;
+}
 
-.select:focus{
-  border: 2px solid #b66dff;}
+.select:focus {
+  -webkit-border: 1px solid #b66dff;
+  border: 1px solid #b66dff;
+}
 
-#month, #date{
-  width: 50%;}  
-
-button{
+.btn-primary {
   border-radius: 0.25em;
   border: 0;
-  font-family: 'S-CoreDream-2Light';
+  font-family: "S-CoreDream-2Light";
   background: linear-gradient(to right, #da8cff, #9a55ff);
   color: #fff;
   letter-spacing: 0.25em;
   font-weight: bold;
   padding: 1em 2em;
-  margin: 1.5em 0;
+  margin-top: 1em;
   cursor: pointer;
-  width: 100%;}
+  width: 100%;
+}
 
-button:hover{
-  opacity: 0.8;}  
+.btn-primary,
+.btn-gradient-danger:hover {
+  opacity: 0.8;
+}
 
-input[type=checkbox] {
-    position: relative;}
+.btn-gradient-danger {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#ffbf96),
+    to(#fe7096)
+  );
+  background: linear-gradient(to right, #ffbf96, #fe7096);
+  border: 0;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  color: #fff;
+  letter-spacing: 0.25em;
+  font-weight: bold;
+  padding: 1em 2em;
+  margin-top: 1em;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 0.25em;
+  border: 0;
+  font-family: "S-CoreDream-2Light";
+}
 
-input[type="checkbox"]::before{
+input[type="checkbox"] li {
+  font-size: 0.7em;
+}
+
+input[type="checkbox"] {
+  border: none;
+  -webkit-border: none;
+  position: relative;
+}
+
+input[type="checkbox"]::before {
   content: "";
   display: block;
   position: absolute;
   top: 0;
   left: 0;
-  width: 15px;
-  height: 15px;
+  width: 0.75rem;
+  height: 0.75rem;
   border: 1.5px solid #b66dff;
   border-radius: 0.25em;
-  background-color: #f2edf3;}
+  background-color: #f2edf3;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
 
-input[type=checkbox]:checked:after {
+input[type="checkbox"]:checked:after {
   content: "";
   display: block;
-  width: 5px;
-  height: 10px;
+  width: 0.25rem;
+  height: 0.5rem;
+  -webkit-border: solid #b66dff;
   border: solid #b66dff;
+  -webkit-border-width: 0 2px 2px 0;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
   position: absolute;
-  top: 3px;
-  left: 6px;}
+  top: 2px;
+  left: 6px;
+}
 
-.agreefm{
-  font-size: 0.8em;
-  line-height: 1.5em;
-  margin-top: 1.5em;}
-.agreefm ul li{
-    margin: 0.3em 0;}
-.agreefm ul li:last-child{
-  text-indent: 30px;
-  margin-top: 1em;}  
+.agreefm ul li {
+  display: inline-block;
+  font-size: 0.75rem;
+}
 
-.register{
-  font-size: 0.8em;
+#read-detail {
+  color: #b66dff;
+}
+
+.register {
+  font-size: 0.75rem;
   margin-top: 1em;
-  text-align: center;}
+  text-align: center;
+}
 
+.register a {
+  color: #b66dff;
+}
 
-/**모달창 띄우기***/
-  .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 9; 
-    padding-top: 100px; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); }
-  
-  .modal-content {
-    background: #f2edf3;
-    margin: auto;
-    text-align: center;
-    padding: 2em;
-    border: 1px solid #888;
-    width: 50%; }
-  
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;}
-  
-  .close:hover,.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;  }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9;
+  padding-top: 5em;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
 
-  textarea{
-    width: 100%;
-    height: 25vh;}
+.modal-content {
+  background: #f2edf3;
+  margin: auto;
+  text-align: center;
+  padding: 2em;
+  border: 1px solid #888;
+  width: 50%;
+}
 
-  #alert {
-    color: red;
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+textarea {
+  text-align: left;
+  width: 100%;
+  height: 25vh;
+}
+
+#alert {
+  color: red;
+}
+
+#dialogoverlay,
+#emptyoverlay {
+  display: none;
+  opacity: 0.8;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: #555555;
+  width: 100%;
+  z-index: 10;
+}
+#dialogbox,
+#emptybox {
+  display: none;
+  position: fixed;
+  background: #fff;
+  border-radius: 0.25em;
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 10;
+}
+#dialogbox > div,
+#emptybox > div {
+  background: #fff;
+  margin: 8px;
+}
+#dialogboxhead,
+#emptyboxhead {
+  background: #555;
+  font-size: 1rem;
+  padding: 10px;
+  color: #ccc;
+}
+#dialogboxbody,
+#dialogtime,
+#emptyboxbody {
+  padding: 20px;
+  color: #888;
+}
+#dialogboxfoot,
+#emptyboxfoot {
+  padding: 10px;
+}
+
+#dialogtime {
+  color: red;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 1280px) {
+  section {
+    float: left;
+    width: 50%;
   }
 
-
-
-
-/******노트북 작은 모니터 *****/
-
-@media  (max-width: 1280px) {
-  section{
-    float: left;
-    width: 50%;}
- 
-  .text{
+  .text {
     font-size: 0.8em;
-    padding: 10% 25%;}
-    
-  .register-form{
-    padding: 0 15%;}
+    padding: 10% 25%;
+  }
 
- .agreefm ul{
-    padding: 0; }    
-  
+  .register-form {
+    padding: 0 10%;
+  }
 
-  
+  .agreefm ul {
+    padding: 0;
+  }
+  #dialogbox,
+  #emptybox {
+    width: 50%;
+  }
 }
-/******** 태블릿*********/
+
 @media screen and (max-width: 768px) {
+  #left,
+  #right {
+    width: 100%;
+  }
+  #left {
+    height: 20vh;
+  }
+  #right {
+    height: 80vh;
+  }
+  .text {
+    font-size: 0.7em;
+    width: 100%;
+    padding: 0 25%;
+  }
 
-#left, #right{
-    width: 100%;}
-#left{
-  height: 20vh;
+  .register-form {
+    padding: 10% 15%;
+    font-size: 0.9em;
+  }
+  .modal-content {
+    width: 75%;
+  }
+  #dialogbox,
+  #emptybox {
+    width: 75%;
+  }
 }
-#right{
-  height: 80vh;
-}
-.text{
-font-size: 0.7em;
-width: 100%;
-padding:0 25%;}
 
-.icon {
-  padding: 0.9em 1em ;}   
-
-.register-form{
-  padding:10% 20% ;
-  font-size: 0.7em;}
-
- .modal-content {
-    width: 75%; } 
-
-
-}
-
-/***********모바일****************/
 @media screen and (max-width: 575px) {
+  #left {
+    height: 15vh;
+  }
+  #right {
+    height: 85vh;
+  }
+  .text {
+    font-size: 0.5em;
+  }
+  .intro {
+    display: none;
+  }
+  .register-form {
+    padding: 5% 2.5%;
+  }
 
-  #left{
-    height: 15vh;}
-  #right{
-    height: 85vh;}
-  .text{
-    font-size: 0.5em;}
-  .intro{
-    display: none;} 
-  .icon {
-   padding: 0.9em 1em ;}    
-  .register-form{
-    padding:5% 10% }
-  
-input[type=text], input[type=password],input[type=email],input[type=number],input[type=tel],.select{
-      padding: 0.5em ;}
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"],
+  input[type="tel"],
+  select {
+    font-size: 0.9em;
+  }
 
-input[type="checkbox"]::before{
-     width: 10px;
-     height: 10px;}
-      
-input[type=checkbox]:checked:after {
-        width: 5px;
-        height: 5px;
-        top: 1px;
-        left: 3px;}
+  input[type="checkbox"]::before {
+    width: 10px;
+    height: 10px;
+  }
 
-        .agreefm{
-          font-size: 0.8em;
-          line-height: 1.5em;
-          margin-top: 1em;}
-
-        .agreefm ul li:last-child{
-          text-indent: 10px;
-          margin-top: 0.5em;}  
-
-
+  input[type="checkbox"]:checked:after {
+    width: 5px;
+    height: 5px;
+    top: 1px;
+    left: 3px;
+  }
+  .agreefm {
+    font-size: 0.8em;
+    line-height: 1.5em;
+  }
+  .agreefm ul li:last-child {
+    margin-top: 0.5em;
+  }
+  .modal-content {
+    width: 80%;
+  }
+  .signup h6 {
+    padding: 0;
+  }
+  #dialogbox,
+  #emptybox {
+    width: 95%;
+  }
 }

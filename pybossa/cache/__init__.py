@@ -122,6 +122,7 @@ def memoize(timeout=300):
                 sentinel.master.setex(key, timeout, pickle.dumps(output))
                 # ######
                 print(str(f.__name__))
+                sentinel.master.setex(key, timeout, pickle.dumps(output))
                 return output
             output = f(*args, **kwargs)
             return output

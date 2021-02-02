@@ -226,11 +226,15 @@ class TaskRepository(Repository):
         csv_tasks_filename = csv_exporter.download_name(project, 'task')
         json_taskruns_filename = json_exporter.download_name(project, 'task_run')
         csv_taskruns_filename = csv_exporter.download_name(project, 'task_run')
+
+        QnA_filename = json_exporter.download_name(project, 'QnA')
+
         container = "user_%s" % project.owner_id
         uploader.delete_file(json_tasks_filename, container)
         uploader.delete_file(csv_tasks_filename, container)
         uploader.delete_file(json_taskruns_filename, container)
         uploader.delete_file(csv_taskruns_filename, container)
+        uploader.delete_file(QnA_filename, container)
 
     def get_all_info(self):
         return self.db.session.query(Task.info).filter(Task.id > 175000).all()
@@ -243,3 +247,17 @@ class TaskRepository(Repository):
 
     def get_all_info3(self):
         return self.db.session.query(Task.info).all()
+
+
+    def get_QnA_data(self, project_id):
+        sql = '''
+              SELECT t.info AS question, json_agg(r.info) AS answers
+              FROM task t, task_run r WHERE t.id=r.task_id AND t.project_id=:project_id
+              GROUP BY t.id ORDER BY t.id;
+              '''
+        results = self.db.session.execute(sql, dict(project_id=project_id))
+        tmp = []
+        for row in results:
+            data = dict(question=row.question, answers=row.answers)
+            tmp.append(data)
+        return tmp
