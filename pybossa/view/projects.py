@@ -914,7 +914,8 @@ def details(short_name):
         ensure_authorized_to('read', project)
 
     #template = '/projects/project.html'
-    template = '/new_design/project_temp.html'
+    #template = '/new_design/project_temp.html'
+    template = 'new_design/workspace/projectDescription.html'
     pro = pro_features()
 
     title = project_title(project, None)
@@ -939,6 +940,8 @@ def details(short_name):
                      "n_volunteers": ps.n_volunteers,
                      "pro_features": pro,
                      "like_project": like_project,
+                     "min": 16,
+                     "max": 100,
                      "csrf": generate_csrf()}
     if current_app.config.get('CKAN_URL'):
         template_args['ckan_name'] = current_app.config.get('CKAN_NAME')
@@ -1179,42 +1182,38 @@ def task_presenter(short_name, task_id):
             flash(gettext("저장 완료!"), "success")
             return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
 
-        # 프로젝트 진행 중 답변 관리를 눌렀을 때 (답변관리의 value로 바꿔주어야 함)
-        if request.form.get('btn', None) == "answer_manager":
+
+        def get_task_run_by_rank(rank):
             session = db.slave_session
-            sql = text('''SELECT task_run.id AS id, task.info AS task_info, task_run.info AS task_run_info,
-                          DENSE_RANK() OVER(ORDER BY task_run.created) AS rank
+            sql = text('''SELECT * FROM
+                          (SELECT task_run.id AS id, task.info AS task_info, task_run.info AS task_run_info,
+                          DENSE_RANK() OVER(ORDER BY task_run.created) rank
                           FROM task, task_run
                           WHERE task_run.task_id = task.id
                           AND task_run.user_id=:user_id
                           AND task_run.project_id=:project_id
-                          ORDER BY task_run.finish_time;''')
-            temp = session.execute(sql, dict(user_id=current_user.id, project_id=project.id))
+                          ORDER BY task_run.finish_time) AS t_run
+                          WHERE rank =:rank;
+                          ''')
+            temp = session.execute(sql, dict(user_id=current_user.id, project_id=project.id, rank=rank))
             results = []
             for row in temp:
-                result = dict(id=row.id, task_info=row.task_info, task_run_info=row.task_run_info, rank=row.rank)
+                result = dict(id=row.id, task_info=row.task_info, task_run_info=row.task_run_info)
                 results.append(result)
-            page = 10
-            page_list = [results[i * page:(i + 1) * page] for i in range((len(results) + page - 1) // page)]
-            return json.dumps(page_list, ensure_ascii=False)
+            return results
+
+
+        # 프로젝트 진행 중 답변 관리를 눌렀을 때 (답변관리의 value로 바꿔주어야 함)
+        if request.form.get('btn', None) == "answer_manager":
+            count = task_repo.count_task_runs_with(project_id=project.id, user_id=current_user.id)
+            task_run = get_task_run_by_rank(count)
+            
+            res=dict(count=count, task_run=task_run)
+            return json.dumps(res, ensure_ascii=False)
 
         # 답변 관리에서 원하는 답변을 리턴
         if request.form.get('btn', None) == "get_answer_data":
-            session = db.slave_session
-            sql = text('''SELECT task_run.id AS id, task.info AS task_info, task_run.info AS task_run_info,
-                          DENSE_RANK() OVER(ORDER BY task_run.created) AS rank
-                          FROM task, task_run
-                          WHERE task_run.task_id = task.id
-                          AND task_run.user_id=:user_id
-                          AND task_run.project_id=:project_id
-                          AND task_run.id =:id
-                          ORDER BY task_run.finish_time;''')
-            temp = session.execute(sql, dict(user_id=current_user.id, project_id=project.id, id=request.form["id"]))
-            results = []
-            for row in temp:
-                result = dict(id=row.id, task_info=row.task_info, task_run_info=row.task_run_info, rank=row.rank)
-                results.append(result)
-
+            result = get_task_run_by_rank(request.form['id'])
             return json.dumps(result, ensure_ascii=False)
 
         # 답변 관리 후 수정 단계
@@ -1228,21 +1227,10 @@ def task_presenter(short_name, task_id):
 
         # 경쟁 관계
         if request.form.get('value', None) == "ranking":
-            user_list = cached_projects.get_users_task_run_count(project.id)
+            my_count = task_repo.count_task_runs_with(project_id=project.id, user_id=current_user.id)
+            people_count = task_repo.count_task_runs_with(project_id=project.id)
 
-            answer_count = 0
-            user_answer_count = 0
-            for user in user_list:
-                if user['id'] != current_user.id:
-                    answer_count += user['count']
-                else:
-                    user_answer_count = user['count']
-            average = 0
-            if answer_count != 0:
-                average = answer_count / (len(user_list) - 1)
-            temp = dict(average=average, user_answer_count=user_answer_count)
-            res = []
-            res.append(temp)
+            res = dict(my_count=my_count, people_count=people_count//len(project.contractor_ids))
             return json.dumps(res, ensure_ascii=False)
 
     task = task_repo.get_task(id=task_id)
@@ -1605,7 +1593,7 @@ def delete_tasks(short_name):
 def export_to(short_name):
     """Export Tasks and TaskRuns in the given format"""
     project, owner, ps = project_by_shortname(short_name)
-    supported_tables = ['task', 'task_run', 'result']
+    supported_tables = ['task', 'task_run', 'result', 'QnA']
 
     title = project_title(project, gettext("Export"))
 
@@ -1733,6 +1721,14 @@ def export_to(short_name):
         if task:
             ensure_authorized_to('read', task)
     if ty == 'task_run':
+        task_run = task_repo.get_task_run_by(project_id=project.id)
+        if task_run:
+            ensure_authorized_to('read', task_run)
+
+    if ty == 'QnA':
+        task = task_repo.get_task_by(project_id=project.id)
+        if task:
+            ensure_authorized_to('read', task)
         task_run = task_repo.get_task_run_by(project_id=project.id)
         if task_run:
             ensure_authorized_to('read', task_run)

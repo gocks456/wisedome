@@ -3,249 +3,108 @@
 {% import "account/_helpers.html" as account_helper %}
 {% block content %}
 
-<style type="text/css">
-#my_btn{
-	width: 100px;
-	background:#435861;
-	color:#fff;
-	border:none;
-	position:relative;
-	height:60px;
-	font-size:1.6em;
-	cursor:pointer;
-	transition:800ms ease all;
-	outline:none;
+<style>
+button{
+background:#00599a;
+color:#fff;
+border:none;
+position:relative;
+height:60px;
+font-size:1.6em;
+padding:0 2em;
+cursor:pointer;
+transition:800ms ease all;
+outline:none;
 }
-#my_btn:hover{
-	background:#fff;
-	color:#435861;
+button:hover{
+background:#fff;
+color:#00599a;
 }
-#my_btn:before,#my_btn:after{
-	content:'';
-	position:absolute;
-	top:0;
-	right:0;
-	height:2px;
-	width:0;
-	background: #435861;
-	transition:400ms ease all;
+button:before,button:after{
+content:'';
+position:absolute;
+top:0;
+right:0;
+height:2px;
+width:0;
+background: #00599a;
+transition:400ms ease all;
 }
-#my_btn:after{
-	right:inherit;
-	top:inherit;
-	left:0;
-	bottom:0;
+button:after{
+right:inherit;
+top:inherit;
+left:0;
+bottom:0;
 }
-#my_btn:hover:before,#my_btn:hover:after{
-	width:100%;
-	transition:800ms ease all;
+button:hover:before,button:hover:after{
+width:100%;
+transition:800ms ease all;
 }
 </style>
+<!--
+<section class="home top">
+<div id='home_header'>
+<video autoplay='' id='video-bg' loop='' muted='' playsinline=''>
+<source src='//assets1.flashfunders.com/assets/FF_Video_Reel-9e5486aa5c1bb8186828cebacfa314fd410cc008d19a642052f1206780eb51d9.mp4' type='video/mp4'>
+</video>
+<div id='filter-image'>
+<div class='hero'>
+<h1 class='sh'>Invest in Companies You Believe In</h1>
+<a class="btn-normal btn-medium hidden" id="home_start_invest" href="/browse">Start Investing</a>
+<a class="btn-normal btn-medium" id="home_join_newsletter" href="javascript:document.querySelector(&#39;#home_new_subscription #subscription_email&#39;).focus();">Join our newsletter</a>
+</div>
+</div>
+</div>
+</section>
+-->
+<section class="home featured">
+<div>
+  <div id="home-outer">
+    <div id="home-top-video">
+      <video autoplay loop muted width="100%">
+        <source src='//assets1.flashfunders.com/assets/FF_Video_Reel-9e5486aa5c1bb8186828cebacfa314fd410cc008d19a642052f1206780eb51d9.mp4' type="video/mp4" /> Your browser does not support the video tag. We suggest you upgrade your browser.
+      </video>
+      <div id="home-text">
+        <div><img src="/static/img/white_Data.ly.png" heifht='120px' width='120px'></div>
+        <h1>Data.ly</h1>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 
-<body class="homepage is-preload">
-	<div id="page-wrapper">
+<section class="home featured">
+    <div class="jumbotron">
+        <div class="container text-center firstfold">
+            {% if featured | count > 0 %}
+            {% set featured_project = featured | random %}
+			<h1><a href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{ featured_project.name }}</a></h1>
+            <p>{{ featured_project.description }}</p>
+			<a class="btn btn-primary" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute')}}</a> 
+            {% else %}
+			<!--<h1>{{_('Welcome to ')}} {{brand}}</h1>
+			<p>{{_("Data.ly는 인공지능에서 필요한 데이터를 Crowd와 전문가가 협업하여 제작하는 플랫폼입니다.")}}</p>-->
+			<p style="font-size:40px; text-align: center; line-height: 0pt;"><I><strong>Data.ly</strong></I></p>
+			<p><U>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</U></p>
+			<p style="font-size:30px;">인공지능에서 필요한 데이터를 Crowd와 전문가가 협업하여 제작하는 플랫폼</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
 
-		<!-- Header -->
-		<section id="header" class="wrapper curved">
-
-			<!-- main --메인배너---->
-			<div id="main">
-				<div class="main-text">
-					<h1>TOUCH FOR YOUR BUCKET LIST</h1>
-					<p>당신의 버킷리스트를 위해 지금 터치하세요 <br>
-					<img src="{{url_for('static',filename='img/lion.jpg')}}"width="33" height="33">
-					<button><a href="#">사용방법보기 &nbsp;<i class="fas fa-angle-right"></i></a></button>
-					</p>
-				</div>	
-				<div class="main-banner">
-					<picture>
-					<source srcset="images/banner-main.png" media="(min-width: 1280px)"/>
-						<source srcset="images/tablet/banner-main.png" media="(min-width: 768px)"/>
-							<img src="images/mobile/banner-mobile.png" alt="main banner" style="width:auto;">
-					</picture>
-				</div>	
-			</div>
-
-			<!-- Nav -->
-			<nav id="nav">
-
-				<ul>
-					<li class="dataly-logo"><img src="images/mobile/Logo-grey-small.png" alt="dataly logo"></li>
-					<li class="current"><a href="index.html">HOME</a></li>
-					<li><a href="#">SERVICE</a>
-						<ul>
-							<li><a href="#">회사소개</a></li>
-							<li><a href="#">이용방법</a></li>
-						</ul>
-					</li>
-					<li><a href="#">PROJECT</a></li>
-					<li><a href="#">CONTACT</a>
-						<ul>
-							<li><a href="#">공지사항</a></li>
-							<li><a href="#">이벤트</a></li>
-							<li><a href="#">파트너협약</a></li>
-							<li><a href="#">자주하는질문</a></li>
-							<li><a href="#">문의하기</a></li>
-						</ul>
-					</li>
-					<li><a href="login.html">LOGIN </a></li>
-				</ul>
-			</nav>
-		</section>
-	</div>
-
-	<!-------------------2. 카테고리별 프로젝트-------------->
-	<section id="category">
-
-		<div class="title">
-			<h1>카테고리별 프로젝트</h1>
-			<hr>
-		</div>  
-
-		<main class="all-category">
-
-		<div class="category-image">
-			<div class="ctg">
-				<img src="images/Circle-banner-1.png" alt="banner1" width="290" height="290">
-			</div>
-		</div>
-
-
-		<div class="category-image">
-			<div class="ctg">
-				<img src="images/Circle-banner-2.png" alt="banner2" width="290" height="290">
-			</div>
-		</div>
-
-		<div class="category-image">
-			<div class="ctg">
-				<img src="images/Circle-banner-3.png" alt="banner3" width="290" height="290">
-			</div>
-		</div>
-
-		<div class="category-image">
-			<div class="ctg">
-				<img src="images/Circle-banner-4.png" alt="banner4" width="290" height="290">
-			</div>
-		</div>
-
-		</main>
-	</section>
-
-	<!--------------3. 진행중인 프로젝트----------------->
-	<div class="bg">
-
-		<section id="project">
-
-
-			<div class="title">
-				<h1>진행중인 프로젝트</h1>
-				<hr>
-			</div> 
-
-			<main>
-
-			<div id="project-top">
-
-				<div class="pro"> 
-					<picture class="zoom-in">
-					<source srcset="images/project-1-L.png" media="(min-width: 1280px)" />	
-						<source srcset="images/tablet/project-1-M.jpg" media="(min-width: 768px)"/>	
-							<img src="images/mobile/project-1-S.png" alt="project1" >
-					</picture>
-							<div class="intext">
-								<div class="level level-high">고 &nbsp;급 </div>
-								<h3>대화내용을 듣고 받아적기</h3>
-								<div class="mobile-only"><h5><i class="fas fa-won-sign"></i>&nbsp;500</h5></div>	
-							</div>
-				</div>
-
-				<div class="pro">
-					<picture class="zoom-in">
-					<source srcset="images/project-2-L.png" media="(min-width: 1280px)" />
-						<source srcset="images/tablet/project-2-M.jpg" media="(min-width: 768px)"/>			
-							<img src="images/mobile/project-2-S.png" alt="project2" >
-					</picture>
-							<div class="intext">
-								<div class="level level-easy">초 &nbsp;급 </div>
-								<h2>이미지 찍어올리기</h2>
-								<div class="mobile-only"><h3><i class="fas fa-won-sign"></i>&nbsp;1500</h3></div>	
-							</div>
-				</div>
-
-				<div class="pro">
-					<picture class="zoom-in">
-					<source srcset="images/project-3-L.png" media="(min-width: 1280px)" />		
-						<source srcset="images/tablet/project-3-M.jpg" media="(min-width: 768px)"/>	
-							<img src="images/mobile/project-3-S.png" alt="project3" >
-					</picture>
-							<div class="intext">
-								<div class="level level-easy">초 &nbsp;급 </div>
-								<h2>객관/주관 분석하기</h2>
-								<div class="mobile-only"><h3><i class="fas fa-won-sign"></i>&nbsp;500</h3></div>	
-							</div>
-				</div>
-
-
-
-				<div class="pro">
-					<picture class="zoom-in">
-					<source srcset="images/project-4-L.png" media="(min-width: 1280px)" />	
-						<source srcset="images/tablet/project-4-M.jpg" media="(min-width: 768px)"/>		
-							<img src="images/mobile/project-4-S.png" alt="project4" >
-					</picture>
-							<div class="intext">
-								<div class="level level-high">고 &nbsp;급 </div>
-								<h2>이미지의 테두리 따기</h2>
-								<div class="mobile-only"><h3><i class="fas fa-won-sign"></i>&nbsp;500</h3></div>	
-							</div>
-				</div>
-
-				<div class="pro">
-					<picture class="zoom-in">
-					<source srcset="images/project-5-L.png" media="(min-width: 1280px)" />	
-						<source srcset="images/tablet/project-5-M.jpg" media="(min-width: 768px)"/>		
-							<img src="images/mobile/project-5-S.png" alt="project5" >
-					</picture>
-							<div class="intext">
-								<div class="level level-easy">초 &nbsp;급 </div>
-								<h2>대화내용을 듣고 받아적기</h2>
-								<div class="mobile-only"><h3><i class="fas fa-won-sign"></i>&nbsp;100</h3></div>	
-							</div>
-				</div>
-
-				<div class="pro">
-					<picture class="zoom-in">
-					<source srcset="images/project-6-L.png" media="(min-width: 1280px)" />		
-						<source srcset="images/tablet/project-6-M.jpg" media="(min-width: 768px)"/>	
-							<img src="images/mobile/project-6-S.png" alt="project6" >
-					</picture>
-							<div class="intext">
-								<div class="level level-middle">중 &nbsp;급 </div>
-								<h2>설문조사 작성하기</h2>
-								<div class="mobile-only"><h3><i class="fas fa-won-sign"></i>&nbsp;500</h3></div>	
-							</div>
-				</div>
-
-			</div>
-
-
-			<!----숨겨진 리스트-->
-			<div id="project-bottom">		
-
-				<div class="pro">
-					<picture class="zoom-in">
-					<source srcset="images/project-7-L.png" media="(min-width: 1280px)" />		
-						<source srcset="images/tablet/project-7-M.jpg" media="(min-width: 768px)"/>	
-							<img src="images/mobile/project-7-S.png" alt="ect8" >
-					</picture>
-							<div class="intext">
-								<div class="level level-easy">초 &nbsp;급 </div>
-								<h2>새로운 프로젝트</h2>
-								<div class="mobile-only"><h3><i class="fas fa-wli><i class="fas fa-coins"></i></i>&nbsp;&nbsp;<span>98,000</span>&nbsp;&nbsp;총적립금</li>
-									<li><i class="fas fa-hospan>&nbsp;&nbsp;멤버쉽가입</li>
-									<li><i class="fas fa-award"></i>&nbsp;&nbsp;<span>4</span>&nbsp;&nbsp;금주의 íhourglass-half"></i>&nbsp;&nbsp;<span>2020</span>&nbsp;&nbsp;멤버쉽가입</li>
-									<li><i class="fas fa-award"></i>&nbsp;&nbsp;<span>6</span>&nbsp;&nbsp;금주의 활동순위</li>
-
-									{% endblock %}
+{% if current_user.is_authenticated %}
+	{% if featured %}
+		{{ helper.render_grid_projects(featured, '참여가능 프로젝트', upload_method, current_user, section_class='home projects', readmore_text='Contribute', title_size='2') }}
+	{% endif %}
+	{% if historical_contributions %}
+		{{ helper.render_grid_projects(historical_contributions, '참여한 프로젝트', upload_method, current_user, section_class='home projects', title_size='2') }}
+	{% endif %}
+{% else %}
+	<p style="font-size:30px; text-align: center; padding-top:30px; padding-bottom:10px;">함께 하시겠습니까?</p>
+	<div style="text-align: center; padding-bottom:30px;" id="my_btn">
+		<button type="button" style="font-size:16.3px; width: 100px; height: 50px; border: 1px solid skyblue;
+									border-radius: 10px 10px 10px 10px;" onClick="location.href='http://urd.nlp.wo.tc:8000/account/signin'" >
+									<strong>참여</strong> </button></div>
+{% endif %}
+{% endblock %}
 

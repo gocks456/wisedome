@@ -1,21 +1,20 @@
 #pybossa-notification{
     width: 100%;
-    padding: 0.25em 1em;}
+    padding: 1em 1em;}
 
 .hide-notification{
-    display: none;}
+	display:none;}
 
 .mdi-checkbox-marked-circle-outline,.mdi-comment-alert-outline,.mdi-alert-circle,.mdi-alert-outline{
     font-size: 1.5em;}
 
 .mdi-window-close{
     float: right;
-    font-size: 1em;}
+    font-size: 1.5em;}
     
 .alert {
   position: relative;
   padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem; }
 .alert-success {
@@ -58,7 +57,7 @@
   .mdi-checkbox-marked-circle-outline,.mdi-comment-alert-outline,.mdi-alert-circle,.mdi-alert-outline{
     font-size: 1em;}
     #pybossa-notification{
-    padding: 0.25em 0.5em;}
+    padding: 0.5em 0.5em;}
     #pybossa-notification span{
       font-size: 0.8em;
     }

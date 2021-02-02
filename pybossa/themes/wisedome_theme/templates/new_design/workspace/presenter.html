@@ -11,6 +11,8 @@
 {% block content %}
 
 <script src="/static/js/gen/full.min.js"></script>
+<script src="/static/js/pybossa/pybossa.js"></script>
+<script src="/static/js/pybossa-player/dist/pybossa-player.min.js"></script>
 
 <!-- 메인 작업화면 -->
 <div class="content-wrapper">
@@ -156,12 +158,9 @@ $("#csrf_token").val(csrf);
 			type: 'POST',
 			success: function(res) {
 				res = JSON.parse(res);
-				$("#answer_counts").text(res[0].user_answer_count);
-				$("#average").text(parseInt(res[0].average));
-				var n_tasks = {{n_tasks|int}};
-				$("#per").text(parseInt(res[0].user_answer_count/n_tasks*100));
-				if (n_tasks == 0)
-					$("#per").text(0);
+				$("#answer_counts").text(res.my_count);
+				$("#average").text(res.people_count);
+
 			},
 			error:function(request, error) {
 				console.log(request);

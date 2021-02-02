@@ -218,7 +218,7 @@
               </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" href="{{ url_for('home.home') }}">진행중 프로젝트</a></li>
+					<li class="nav-item"> <a class="nav-link" href="{{ url_for('project.index') }}">진행중 프로젝트</a></li>
 					<!-- <li class="nav-item"> <a class="nav-link" href="#">새로운 프로젝트</a></li> -->
                 </ul>
               </div>
@@ -265,7 +265,8 @@
 					<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.manage_exchange') }}"> 환급 </a></li>
 					<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.export_users', format='csv') }}"> 사용자 CSV</a></li>
 					<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.export_users', format='json') }}"> 사용자 JSON</a></li>
-					<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.users') }}"> 관리자 </a></li>
+					<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.users') }}"> 관리자 목록</a></li>
+					<li class="nav-item"> <a class="nav-link" href="{{ url_for('gmail.login') }}"> Gmail 생성</a></li>
 					<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.back_up') }}"> DB백업 </a></li>
 					<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.restore') }}"> DB복원 </a></li>
                 </ul>
@@ -286,6 +287,10 @@
 <!--여기까지가 기본 nav -->
 
 	<div class="main-panel">
+		<link rel="stylesheet" href="/static/new_design/css/flash_messages.css">
+		<script type="text/javascript" src="/static/js/vendor/jquery-2.2.3.js"></script>
+		<script type="text/javascript" src="/static/js/flashmessages.js"></script>
+		{% include "_flash_messages.html" %}
 		<!-- block content는 main-panel 사이의 내용만 입력한다. -->
 
 	{% block content %}{% endblock %}

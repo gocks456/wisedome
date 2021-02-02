@@ -300,6 +300,7 @@ def stats_dates(project_id, period='15 day'):
         dates_orderer[row] = round(d_task_run[row] / require_task_run * 100, 2)
         if dates_orderer[row] >= 100:
             completed = True
+
     def _fill_empty_days_orderer(days, obj, state=False):
         base = datetime.datetime.today()
         min_date = datetime.datetime.today()

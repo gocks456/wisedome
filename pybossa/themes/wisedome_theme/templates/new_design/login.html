@@ -64,8 +64,13 @@
       <button type="submit" class="login-btn">로그인</button>
 	  -->
       <div class="log-group">
+<<<<<<< HEAD
 		  <!--<button type="button" class="kakao-btn"><i class="fas fa-comment"></i>  카카오톡</button>-->
 		  <button type="button" class="google-btn" onclick='location.href="{{url_for('google.login')}}"'><i class="fab fa-google"></i>  구 글</button>
+=======
+        <button type="button" class="kakao-btn" onclick="location.href='/kakao'"><i class="fas fa-comment"></i>  카카오톡</button>
+        <button type="button" class="google-btn" onclick="location.href='/google'"><i class="fab fa-google"></i>  구 글</button>
+>>>>>>> 16bfe80e28653e04fe65438313d6b38d4fecfb32
       </div>
   <div class="register" >
 	  <span >아직회원이 아니시라구요? <a href="{{url_for('account.register')}}">지금 바로 가입하기</a></span>
