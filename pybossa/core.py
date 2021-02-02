@@ -496,31 +496,31 @@ def setup_error_handlers(app):
     """Setup error handlers."""
     @app.errorhandler(400)
     def _bad_request(e):
-        response = dict(template='400.html', code=400,
+        response = dict(template='error_400.html', code=400,
                         description=BADREQUEST)
         return handle_content_type(response)
 
     @app.errorhandler(404)
     def _page_not_found(e):
-        response = dict(template='404.html', code=404,
+        response = dict(template='error_404.html', code=404,
                         description=NOTFOUND)
         return handle_content_type(response)
 
     @app.errorhandler(500)
     def _server_error(e):  # pragma: no cover
-        response = dict(template='500.html', code=500,
+        response = dict(template='error_500.html', code=500,
                         description=INTERNALSERVERERROR)
         return handle_content_type(response)
 
     @app.errorhandler(403)
     def _forbidden(e):
-        response = dict(template='403.html', code=403,
+        response = dict(template='error_403.html', code=403,
                         description=FORBIDDEN)
         return handle_content_type(response)
 
     @app.errorhandler(401)
     def _unauthorized(e):
-        response = dict(template='401.html', code=401,
+        response = dict(template='error_401.html', code=401,
                         description=UNAUTHORIZED)
         return handle_content_type(response)
 

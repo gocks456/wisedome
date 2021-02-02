@@ -31,39 +31,57 @@ from jinja2.exceptions import TemplateNotFound
 from pybossa.core import project_repo
 from pybossa.cache import site_stats
 
+from pybossa.core import task_repo
+
 
 blueprint = Blueprint('home', __name__)
 
-
+import time
 @blueprint.route('/')
 def home():
+    a1 = time.time()
     """Render home page with the cached projects and users."""
     page = 1
     per_page = current_app.config.get('APPS_PER_PAGE', 5)
+    print ("1)\t" + str(time.time() - a1))
+    a1 = time.time()
 
     # Add featured
-    tmp_projects = cached_projects.get_featured('featured', page, per_page)
+    tmp_projects = cached_projects.get_featured('featured', page, per_page)									# 얘 조금 느림
+    print ("2)\t" + str(time.time() - a1))
+    a1 = time.time()
+
     if len(tmp_projects) > 0:
         data = dict(featured=rank(tmp_projects))
     else:
         data = dict(featured=[])
+    print ("3)\t" + str(time.time() - a1))
+    """
     # Add historical contributions
     historical_projects = []
     if current_user.is_authenticated:
         user_id = current_user.id
-        historical_projects = cached_users.projects_contributed(user_id, order_by='last_contribution')[:3]
+        historical_projects = cached_users.projects_contributed(user_id, order_by='last_contribution')[:3]	# 이거 조금 느림
         data['historical_contributions'] = historical_projects
+    print ("4)\t" + str(time.time() - a1))
+    """
+    a1 = time.time()
 
     # 메인화면 Design Test
     #response = dict(template='/home/index.html', **data)
     #projects = project_repo.get_all()
     projects = cached_projects.get_all_projects()
+    print ("5a)\t" + str(time.time() - a1))
+    a1 = time.time()
     top_users = site_stats.get_top10_users_7_days()
-
+    print ("5b)\t" + str(time.time() - a1))
+    a1 = time.time()
     if current_user.is_anonymous:
         response = dict(template='/new_design/index.html', projects=projects, top_users=top_users )
+        print ("6a)\t" + str(time.time() - a1))
         return handle_content_type(response)
     else:
+        print ("6b)\t" + str(time.time() - a1))
         return redirect_content_type(url_for('project.index'))
 
 
@@ -79,6 +97,60 @@ def faq():
     response = dict(template="/custom/faq.html")
     return handle_content_type(response)
 
+@blueprint.route("loadtest")
+def lt():
+    import sys
+    
+    print ("@@@")
+    a1 = time.time()
+    get_all = task_repo.get_all_info()
+    print (str(time.time() - a1))
+    print ("@@@")
+    print (sys.getsizeof(get_all))
+    print ("@@@")
+    
+    print ("###")
+    a1 = time.time()
+    load_test = cached_projects.loadtest2()
+    print (str(time.time() - a1))
+    print ("###")
+    print (sys.getsizeof(load_test))
+    print ("###")
+	
+    return "AA"
+
+
+@blueprint.route("loadtest2")
+def lt2():
+    import sys
+    
+    print ("@@@")
+    a1 = time.time()
+    get_all = task_repo.get_all_info2()
+    print (str(time.time() - a1))
+    print ("@@@")
+    print (sys.getsizeof(get_all))
+    print ("@@@")
+    print (type(get_all[1]))
+    
+    return "BB"
+
+
+@blueprint.route("loadtest3")
+def lt3():
+    import sys
+    
+    print ("$$$")
+    a1 = time.time()
+    get_all = task_repo.get_all_info3()
+    print (str(time.time() - a1))
+    print ("$$$")
+    print (sys.getsizeof(get_all))
+    print ("$$$")
+    print (type(get_all[1]))
+    
+    return "CC"
+
 #@blueprint.route("order")
 #def requset_order():
 #   """Render the about template."""
@@ -87,15 +159,15 @@ def faq():
 
 @blueprint.route("faq/orderer")
 def orderer():
-	"""Render the about template."""
-	response = dict(template="/custom/faq_orderer.html")
-	return handle_content_type(response)
+    """Render the about template."""
+    response = dict(template="/custom/faq_orderer.html")
+    return handle_content_type(response)
 
 @blueprint.route("faq/worker")
 def worker():
-	"""Render the about template."""
-	response = dict(template="/custom/faq_worker.html")
-	return handle_content_type(response)
+    """Render the about template."""
+    response = dict(template="/custom/faq_worker.html")
+    return handle_content_type(response)
 
 @blueprint.route("search")
 def search():

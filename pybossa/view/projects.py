@@ -259,17 +259,25 @@ def achievement_renewal():
 @blueprint.route('/category/featured/', defaults={'page': 1}, methods=['GET','POST'])
 @blueprint.route('/category/featured/page/<int:page>/')
 def index(page):
+    print ("@@@@@INDEX@@@@@")
+    import time
+    a1 = time.time()
     """List projects in the system"""
     order_by = request.args.get('orderby', None)
     desc = bool(request.args.get('desc', False))
 
+    print("--1)\t" + str(time.time()-a1))
     if request.method == 'POST':
+        a1 = time.time()
         projects = cached_projects.get_all_projects()
         projects = sort_project(projects, request.form['value'])
+        print("--2)\t" + str(time.time()-a1))
+        a1 = time.time()
         n = datetime.datetime.now()
         render = render_template('/new_design/ajax_project_index.html', n_year=n.year,
                                  projects=projects)
         response = dict(template=render)
+        print("--3)\t" + str(time.time()-a1))
         return json.dumps(response)
 
     # New Design
@@ -310,10 +318,15 @@ def sort_project(projects, value):
 
 def project_index(page, lookup, category, fallback, use_count, order_by=None,
                   desc=False, pre_ranked=False):
+    print ("#####PROJECT_INDEX#####")
+    import time
+    a1 = time.time()
     """Show projects of a category"""
     per_page = current_app.config['APPS_PER_PAGE']
     ranked_projects = lookup(category)
 
+    print("----1)\t" + str(time.time()-a1))
+    a1 = time.time()
     if not pre_ranked:
         ranked_projects = rank(ranked_projects, order_by, desc)
 
@@ -322,6 +335,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
     count = cached_projects.n_count(category)
     feature_projects = cached_projects.get_all_featured('featured')
 
+    print("----2)\t" + str(time.time()-a1))
+    a1 = time.time()
     if fallback and not projects:  # pragma: no cover
         return redirect(url_for('.index'))
 
@@ -337,6 +352,10 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
     historical_contributions_cat = Category(name='Historical Contributions',
                                             short_name='historical_contributions',
                                             description='Projects previously contributed to')
+
+    print("----3)\t" + str(time.time()-a1))
+    a1 = time.time()
+
     if category == 'featured':
         active_cat = featured_cat
 
@@ -364,6 +383,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
         categories.insert(0, featured_cat)
     n = datetime.datetime.now()
 
+    print("----4)\t" + str(time.time()-a1))
+    a1 = time.time()
     # 2020.11.27. 업적 리뉴얼 예정
     #achieve = cached_users.get_category_achieve(current_user.id)
     #user_all_achieve(achieve)
@@ -386,6 +407,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
         "template": template,
         #"template": '/new_design/AllProject.html',
         "csrf": generate_csrf()}
+
+    print("----5)\t" + str(time.time()-a1))
 
     if use_count:
         template_args.update({"count": count})
@@ -1736,6 +1759,8 @@ def show_stats(short_name):
                                                                 owner,
                                                                 current_user,
                                                                 ps)
+    #sonst = cached_projects.get_redundancy(short_name)
+    #print (sonst)
 
     if not ((ps.n_tasks > 0) and (ps.n_task_runs > 0)):
         project = add_custom_contrib_button_to(project, get_user_id_or_ip(),
@@ -1803,8 +1828,8 @@ def show_stats(short_name):
     else:   # HTML
         handle_projectStats = json.dumps(projectStats)
 
-    #response = dict(template='/projects/stats.html',
-    response = dict(template='/projects/orderer_stats.html',
+    response = dict(template='/projects/stats.html',
+    #response = dict(template='/projects/orderer_stats.html',
                     title=title,
                     progress_rate=progress_rate,
                     projectStats=handle_projectStats,
