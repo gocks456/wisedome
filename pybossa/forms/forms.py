@@ -453,14 +453,48 @@ class RegisterForm(Form):
                             validators.EqualTo('confirm', err_msg_2)])
 
     confirm = PasswordField(lazy_gettext('Repeat Password'))
-    consent = BooleanField(false_values=("False", "false", '', '0', 0),validators=[validators.DataRequired("체크해주세요")])
+    #consent = BooleanField(false_values=("False", "false", '', '0', 0),validators=[validators.DataRequired("체크해주세요")])
     err_msg = lazy_gettext("생년월일과 성별을 체크해주세요.")
-    birth = IntegerField([validators.Required(),
-                              validators.NumberRange(
-                                  min=10000000, max=99999999,
-                                  message=lazy_gettext('생년월일과 성별을 체크해주세요.'))])
+    #birth = IntegerField([validators.Required(),
+    #                          validators.NumberRange(
+    #                              min=10000000, max=99999999,
+    #                              message=lazy_gettext('생년월일과 성별을 체크해주세요.'))], widget=HiddenInput())
+    year = TextField()
+    month = TextField()
+    day = TextField()
+    sex = TextField(label=None)
 
-    sex = TextField(label=None, widget=HiddenInput())
+
+class APIRegisterForm(Form):
+
+    err_msg = lazy_gettext("이름을 입력하세요.")
+    fullname = TextField(lazy_gettext('Full name'),
+                         [validators.Length(min=2, max=USER_FULLNAME_MAX_LENGTH, message=err_msg)])
+
+    err_msg = lazy_gettext("별명을 입력하세요.")
+    err_msg_2 = lazy_gettext("이미 등록된 별명 입니다.")
+    name = StringField('별명',
+                         [validators.Length(min=2, max=USER_NAME_MAX_LENGTH, message=err_msg),
+                          pb_validator.NotAllowedChars(),
+                          pb_validator.Unique(user_repo.get_by, 'name', err_msg_2),
+                          pb_validator.ReservedName('account', current_app)])
+
+    err_msg = lazy_gettext("이메일을 입력하세요.")
+    err_msg_2 = lazy_gettext("이미 등록된 이메일 입니다.")
+    email_addr = EmailField(lazy_gettext('Email Address'),
+                           [validators.Length(min=3,
+                                              max=EMAIL_MAX_LENGTH,
+                                              message=err_msg),
+                            validators.Email(),
+                            pb_validator.Unique(user_repo.get_by, 'email_addr', err_msg_2)])
+
+    year = TextField()
+    month = TextField()
+    day = TextField()
+    sex = TextField(label=None)
+    locale = TextField()
+    api_id = TextField()
+    api_token = TextField()
 
 class UpdateProfileForm(Form):
 

@@ -63,12 +63,10 @@
 	  <!--
       <button type="submit" class="login-btn">로그인</button>
 	  -->
-      <!--
       <div class="log-group">
-        <button type="button" class="kakao-btn"><i class="fas fa-comment"></i>  카카오톡</button>
-        <button type="button" class="google-btn"><i class="fab fa-google"></i>  구 글</button>
+        <button type="button" class="kakao-btn" onclick="location.href='/kakao'"><i class="fas fa-comment"></i>  카카오톡</button>
+        <button type="button" class="google-btn" onclick="location.href='/google'"><i class="fab fa-google"></i>  구 글</button>
       </div>
-	  -->
   <div class="register" >
 	  <span >아직회원이 아니시라구요? <a href="{{url_for('account.register')}}">지금 바로 가입하기</a></span>
   </div>

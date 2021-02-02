@@ -66,7 +66,7 @@ def get_quarterly_date(now):
     execute_month = int(math.ceil(now.month / 3.0) * 3)
     execute_day = 31 if execute_month in [3, 12] else 30
     execute_date = datetime(now.year, execute_month, execute_day)
-    print(execute_date)
+    #print(execute_date)
 
     return datetime.combine(execute_date, now.time())
 

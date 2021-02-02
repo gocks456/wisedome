@@ -65,6 +65,7 @@ class JsonExporter(Exporter):
         self._make_zip(project, "task")
         self._make_zip(project, "task_run")
         self._make_zip(project, "result")
+        self._make_zip(project, "QnA")
 
     def handle_zip(self, name, data, ty, user_id, project, ext, zipname=None):
         zipped_datafile = tempfile.NamedTemporaryFile()
@@ -72,7 +73,7 @@ class JsonExporter(Exporter):
         try:
             datafile = tempfile.NamedTemporaryFile(mode='w')
             try:
-                datafile.write(json.dumps(data))
+                datafile.write(json.dumps(data, ensure_ascii=False, indent='\t'))
                 datafile.flush()
                 _zip.write(datafile.name,
                            secure_filename('%s_%s.%s' % (name, ty, ext)))

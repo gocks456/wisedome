@@ -2,6 +2,7 @@ function pybossaNotify(msg, showNotification, type){
     $("#pybossa-notification").remove();
     var div = $("<div/>");
     div.attr("id", "pybossa-notification");
+    //div.attr("class", "content-wrapper");
     var icon = $("<i/>");
     var close = $("<i/>");
     close.addClass("mdi mdi-window-close");
@@ -45,7 +46,9 @@ function pybossaNotify(msg, showNotification, type){
     div.append(close);
     if (showNotification === true) {
         div.addClass("show-notification");
-        $("body").prepend(div);
+        //$("body").prepend(div);
+		$(".main-panel").prepend(div);
+
     }
     else {
         $("#pybossa-notification").addClass("hide-notification");

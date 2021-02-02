@@ -90,7 +90,7 @@ class Project(db.Model, DomainObject):
     #계약서 컬럼
     contractor_ids = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())
 
-    end_date = Column(Text)
+    end_date = Column(Text, default=make_timestamp)
 
     #마감기한
     #deadline = Column(Text, default=make_timestamp)

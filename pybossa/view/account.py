@@ -346,17 +346,20 @@ def register():
         form = RegisterFormWithUserPrefMetadata(request.body)
         form.set_upref_mdata_choices()
 
-    msg = "와이즈돔 이용약관에 동의합니다 (필수)"
-    form.consent.label = msg
+    #msg = "와이즈돔 이용약관에 동의합니다 (필수)"
+    #form.consent.label = msg
 
     if request.method == 'POST' and form.validate():
+        for f in form:
+            print(f)
         if current_app.config.upref_mdata:
             user_pref, metadata = get_user_pref_and_metadata(form.name.data, form)
             account = dict(fullname=form.fullname.data, name=form.name.data,
                            email_addr=form.email_addr.data,
                            password=form.password.data,
-                           consent=form.consent.data,
-                           sex=form.sex.data, birth=form.birth.data,
+                           #consent=form.consent.data,
+                           sex=form.sex.data, birth=(form.year.data + form.month.data + form.day.data),
+                           #sex=form.sex.data, birth=form.birth.data,
                            user_type=form.user_type.data)
             account['user_pref'] = user_pref
             account['metadata'] = metadata
@@ -364,8 +367,9 @@ def register():
             account = dict(fullname=form.fullname.data, name=form.name.data,
                            email_addr=form.email_addr.data,
                            password=form.password.data,
-                           consent=form.consent.data,
-                           sex=form.sex.data, birth=form.birth.data)
+                           #consent=form.consent.data,
+                           sex=form.sex.data, birth=(form.year.data + form.month.data + form.day.data))
+                           #sex=form.sex.data, birth=form.birth.data)
         confirm_url = get_email_confirmation_url(account)
 
 
@@ -385,8 +389,8 @@ def register():
     if request.method == 'POST' and not form.validate():
         #flash(gettext('Please correct the errors'), 'error')
         flash(gettext("발생한 오류를 수정하세요."), 'error')
-    data = dict(template='new_design/register.html',
-                title=gettext("Register"), form=form)
+    data = dict(template='new_design/register/register.html',
+                title=gettext("Register"), form=form, csrf=generate_csrf())
     return handle_content_type(data)
 
 
@@ -449,8 +453,8 @@ def _create_account(user_data, ldap_disabled=True):
                                #20.02.26. 수정사항
                                #achievement={"all": "", "rank": "", "category": ""},
                                sex=user_data['sex'],
-                               birth=user_data['birth'],
-                               consent=user_data['consent'])
+                               birth=user_data['birth'])#,
+                               #consent=user_data['consent'])
 
     if user_data.get('user_pref'):
         new_user.user_pref = user_data['user_pref']
@@ -573,17 +577,10 @@ def exchange(name):
     """
     user = user_repo.get_by_name(name)
 
-   # f = open("./pybossa/is_lock.py",'r')
-   # ff = f.read()
-   # f.close()
-
-    #print(ff[5])
-
     if not user:
         return abort(404)
     if current_user.name != name:
         return abort(403)
-
 
     if request.method == 'GET' and current_user.is_authenticated and user.id == current_user.id:
         return _exchange_request(user)
@@ -596,15 +593,11 @@ def exchange(name):
                             account_number = form.account_number.data,
                             exchange_point = form.exchange_point.data,
                             created = get_time())
-        response = dict(template='/account/exchange.html',
+        response = dict(template='new_design/account/exchange.html',
                 form=form,
                 name=name)
 
         if form.validate():
-#            if (ff[5]=="F"):
- #               flash(gettext('LOCKED'), 'error')
-  #              return handle_content_type(response)
-            a = form.exchange_point
             if (int(exchange.exchange_point) > int(current_user.current_point)):
                 flash(gettext('가지고 있는 포인트 이내에서 환급요청 하십시오!'), 'error')
                 return handle_content_type(response)
@@ -626,7 +619,7 @@ def _exchange_request(user):
     user_dict = cached_users.get_user_summary(user.name)
     form = ExchangeForm(obj=exchange_user)
     #form.request_name=current_user.fullname
-    response = dict(template='account/exchange.html',
+    response = dict(template='new_design/account/exchange.html',
                     title=gettext("Exchange"),
                     user=user_dict,
                     form = form,
