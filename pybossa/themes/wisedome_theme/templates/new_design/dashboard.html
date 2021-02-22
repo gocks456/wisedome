@@ -68,6 +68,7 @@
 					<div class="owl-carousel owl-theme full-width">
 
 						{% for project in feature_projects %}
+						<a href="{{url_for('project.details',short_name=project.short_name)}}">
 						<div class="item">
 							<div class="card text-white">
 								<img class="card-img" src="{{render_url_thumbnail(project, upload_method)}}" alt="{{project.name}}">
@@ -79,6 +80,7 @@
 								</div>
 							</div>
 						</div>
+						</a>
 						{% endfor %}
 
 
@@ -96,6 +98,7 @@
 
 
 						{% for project in popular_projects %}
+						<a href="{{url_for('project.details',short_name=project.short_name)}}">
 						<div class="item">
 							<div class="card text-white">
 								<img class="card-img" src="{{render_url_thumbnail(project, upload_method)}}" alt="{{project.name}}">
@@ -107,6 +110,7 @@
 								</div>
 							</div>
 						</div>
+						</a>
 						{% endfor %}
 
 

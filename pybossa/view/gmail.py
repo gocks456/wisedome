@@ -33,6 +33,7 @@ from pybossa.forms.account_view_forms import APIRegisterForm
 # Flask 0.8
 # See http://goo.gl/tbhgF for more info
 import requests
+import json
 
 blueprint = Blueprint('gmail', __name__)
 
@@ -87,7 +88,6 @@ def oauth_authorized():  # pragma: no cover
 			return redirect(url_for_app_type('home.home'))
 		return r.content
 
-	import json
 	access_token = resp['access_token']
 	session['oauth_token'] = access_token
 	user_data = json.loads(r.content)
@@ -101,7 +101,7 @@ def oauth_authorized():  # pragma: no cover
 		user_repo.save(user)
 		return redirect_content_type(url_for('home.home'))
 
-	refresh_token = '1//0eSkRiG8QjqEKCgYIARAAGA4SNwF-L9Irf9txAOhnMGqzov_LboyPS9pQeetSqdTEE50dC97yMelYvR6-m2bLSVmxDtJaxUrpvOM' #resp['refresh_token']
+	resp['refresh_token']
 
 	google_token = dict(oauth_token=access_token, refresh_token=refresh_token)
 
@@ -117,13 +117,9 @@ def oauth_authorized():  # pragma: no cover
 	return user_id
 
 
-from googleapiclient.discovery import build
 from apiclient import errors
-from httplib2 import Http
 from email.mime.text import MIMEText
 import base64
-from google.oauth2 import service_account
-import json
 
 def create_message(sender, to, subject, message_text):
 	"""Create a message for an email.

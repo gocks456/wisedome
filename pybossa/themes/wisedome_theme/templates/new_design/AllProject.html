@@ -62,27 +62,25 @@
 			<div class="swiper-slide ">
 				<a href="{{url_for('project.details', short_name=f_project.short_name)}}">
 					<img src="{{render_url_thumbnail(f_project, upload_method)}}" alt="{{f_project.name}}" >
-
 					<div class="premium-intext">
-            <ul>
-				<h3><span>[마감임박]</span>    {{f_project.name}}</h3>
-				<li><i class="fas fa-won-sign"></i>&nbsp;{{f_project.all_point}}</li>	
-				<li>
-					{% if f_project.condition.sex == '0' %} <i class="fas fa-male"></i><i class="fas fa-female"></i>    남녀무관
-					{% elif f_project.condition.sex == 'M' %}<i class="fas fa-male"></i>    남성만
-					{% elif f_project.condition.sex == 'F' %}<i class="fas fa-female"></i>    여성만
-					{% endif %}
-				</li>
-				<li><i class="fas fa-user-friends"></i>
-					{% if ( n_year - (f_project.condition.age_s / 10000) + 1 | int == 0 ) and (n_year-(f_project.condition.age_e / 10000) + 2 | int == 100) %}
-					나이무관
-					{% else %}
-					{{ (n_year - (f_project.condition.age_s / 10000) + 1) | int}} ~ {{ (n_year - (f_project.condition.age_e / 10000) + 2) | int}}세
-					{% endif %}
-				</li>		
-				<li><i class="fas fa-clock"></i>  마감기한 : {{f_project.updated}}</li>
-			</ul>
-
+		            <ul>
+						<h3><span>[마감임박]</span>    {{f_project.name}}</h3>
+						<li><i class="fas fa-won-sign"></i>&nbsp;{{f_project.all_point}}</li>	
+						<li>
+							{% if f_project.condition.sex == '0' %} <i class="fas fa-male"></i><i class="fas fa-female"></i>    남녀무관
+							{% elif f_project.condition.sex == 'M' %}<i class="fas fa-male"></i>    남성만
+							{% elif f_project.condition.sex == 'F' %}<i class="fas fa-female"></i>    여성만
+							{% endif %}
+						</li>
+						<li><i class="fas fa-user-friends"></i>
+							{% if ( n_year - (f_project.condition.age_s / 10000) + 1 | int == 0 ) and (n_year-(f_project.condition.age_e / 10000) + 2 | int == 100) %}
+							나이무관
+							{% else %}
+							{{ (n_year - (f_project.condition.age_s / 10000) + 1) | int}} ~ {{ (n_year - (f_project.condition.age_e / 10000) + 2) | int}}세
+							{% endif %}
+						</li>		
+						<li><i class="fas fa-clock"></i>  마감기한 : {{f_project.updated}}</li>
+					</ul>
 					</div>
 				</a> 
 			</div>
