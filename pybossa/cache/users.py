@@ -164,6 +164,19 @@ def get_point_management():
 
     return point_management
 
+def get_user_projects_points(user_id):
+    sql = text('''
+               SELECT SUM(t.point) AS points, p.name AS name, COUNT(t.id) AS count, MAX(t.finish_time) AS finish_time
+               FROM task_run t, project p
+               WHERE t.project_id=p.id AND t.user_id=:user_id GROUP BY p.id ORDER BY MAX(t.finish_time) DESC;
+               ''')
+    results = session.execute(sql, dict(user_id=user_id))
+    points = []
+    for row in results:
+        temp = dict(project_name=row.name, count=row.count, points=row.points, finish_time=row.finish_time)
+        points.append(temp)
+    return points
+
 def get_user_point_history(user_id):
     """Return user point history."""
     sql = text('''
@@ -430,7 +443,7 @@ def get_user_summary(name, current_user=None):
                SELECT "user".id, "user".name, "user".fullname, "user".created,
                "user".api_key, "user".twitter_user_id, "user".facebook_user_id,
                "user".google_user_id, "user".info, "user".admin,
-               "user".locale, "user".sex, "user".birth, "user".point_sum, "user".current_point, "user".achievement,
+               "user".locale, "user".sex, "user".birth, "user".achievement,
                "user".email_addr, COUNT(task_run.user_id) AS n_answers,
                "user".valid_email, "user".confirmation_email_sent, 
                "user".restrict
@@ -448,7 +461,7 @@ def get_user_summary(name, current_user=None):
                     google_user_id=row.google_user_id,
                     facebook_user_id=row.facebook_user_id,
                     info=row.info, admin=row.admin,
-                    locale=row.locale, sex=row.sex, birth=row.birth, point_sum=row.point_sum, current_point=row.current_point, achievement=row.achievement,
+                    locale=row.locale, sex=row.sex, birth=row.birth, achievement=row.achievement,
                     email_addr=row.email_addr, n_answers=row.n_answers,
                     valid_email=row.valid_email,
                     confirmation_email_sent=row.confirmation_email_sent,

@@ -163,7 +163,7 @@ def pro_features(owner=None):
 
 
 #20.02.25. 수정사항
-
+'''
 def marking(project):
     result = result_repo.get_mark_all(project.id)
 
@@ -245,7 +245,7 @@ def score(short_name):
     flash(markup.format(msg_1), 'success')
     return redirect_content_type(url_for('.tasks',
                                              short_name=project.short_name))
-
+'''
 # 2020.11.27. 업적 리뉴얼 예정
 '''
 def achievement_renewal():
@@ -258,6 +258,7 @@ def achievement_renewal():
 
 @blueprint.route('/category/featured/', defaults={'page': 1}, methods=['GET','POST'])
 @blueprint.route('/category/featured/page/<int:page>/')
+@login_required
 def index(page):
     """List projects in the system"""
     order_by = request.args.get('orderby', None)
@@ -369,10 +370,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
     #user_all_achieve(achieve)
 
     # 2020.12.04. Login 했을 때 안했을 때 구별 (임시)
-    if current_user.is_anonymous:
-        template = '/new_design/AllProject.html'
-    else:
-        template = '/new_design/temp_dash.html'
+    # 2021.02.18. 비로그인시 프로젝트 목록은 메인화면에 구성해준 것 만 확인
+    template = '/new_design/temp_dash.html'
 
     template_args = {
         "n_year": n.year,

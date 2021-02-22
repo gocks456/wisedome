@@ -82,7 +82,7 @@ class Project(db.Model, DomainObject):
                              cascade='all, delete-orphan',
                              order_by='TaskRun.finish_time.desc()')
     category = relationship(Category)
-    blogposts = relationship(Blogpost, cascade='all, delete-orphan', backref='project')
+    #blogposts = relationship(Blogpost, cascade='all, delete-orphan', backref='project')
 
     #발주자 컬럼
     owners_ids = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())

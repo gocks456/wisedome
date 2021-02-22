@@ -3,7 +3,7 @@
 
   var swiper = new Swiper('.swiper-container', {
     slidesPerView: 4,
-    spaceBetween: 40,
+    spaceBetween: 20,
     // init: false,
  /**   autoplay: {
       delay: 2000,
@@ -23,7 +23,7 @@ prevEl: '.swiper-button-prev',
 breakpoints: {
 1320: {
 slidesPerView: 4,
-spaceBetween: 30,
+spaceBetween: 20,
 },
 1280: {
   slidesPerView: 4,

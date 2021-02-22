@@ -37,29 +37,39 @@ class Blogpost(db.Model, DomainObject):
     #: UTC timestamp when the blogpost is updated 
     updated = Column(Text, default=make_timestamp)
     #: Project.ID for the Blogpost
-    project_id = Column(Integer, ForeignKey('project.id',
-                                            ondelete='CASCADE'),
-                        nullable=False)
+    #project_id = Column(Integer, ForeignKey('project.id',
+    #                                        ondelete='CASCADE'),
+    #                    nullable=False)
+
+    # 질문 유형: subject / 질문 주제:  category
+    subject = Column(Text, nullable=False)
+    category = Column(Text, nullable=False)
+
     #: User.ID for the Blogpost
+    # 글쓴이
     user_id = Column(Integer, ForeignKey('user.id'))
+
     #: Title of the Blogpost
+    # 제목
     title = Column(Unicode(length=255), nullable=False)
     #: Body of the Blogpost
+    # 내용
     body = Column(UnicodeText, nullable=False)
+
     #: media_url Heading picture or cover for blogpost
     info = Column(MutableDict.as_mutable(JSONB), default=dict())
     #: Media URL with cover photo for the blog post
     media_url = Column(Text)
     #: Published flag
-    published = Column(Boolean, nullable=False, default=False)
+    # 답변 유무
+    answer = Column(Boolean, nullable=False, default=False)
 
-    user_name= Column(Unicode(length=254))
 
     @classmethod
     def public_attributes(self):
         """Return a list of public attributes."""
-        return ['created', 'updated', 'project_id', 'id', 'user_id', 'user_name',
-                'title', 'body', 'media_url', 'published']
+        return ['created', 'updated', 'subject', 'category', 'id', 'user_id',
+                'title', 'body', 'media_url', 'answer']
 
     @classmethod
     def public_info_keys(self):

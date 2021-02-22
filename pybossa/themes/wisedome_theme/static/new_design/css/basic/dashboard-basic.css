@@ -2279,7 +2279,6 @@
 }
 
 html {
-  font-family: sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -6898,7 +6897,6 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   text-align: center;
 }
-
 .nav-justified > .nav-link,
 .nav-justified .nav-item {
   -ms-flex-preferred-size: 0;
@@ -7665,7 +7663,7 @@ input[type="button"].btn-block {
   content: "\F415";
 }
 .accordion .card .card-body {
-  font-size: 14px;
+  font-size: 0.85rem;
   padding: 0 2rem 2rem 2rem;
   font-family: "SCDream3", sans-serif;
   line-height: 1.5;
@@ -7926,7 +7924,7 @@ input[type="button"].btn-block {
 .page-link:hover {
   z-index: 2;
   color: #0056b3;
-  text-decoration: none;
+  text-decoration: none !important;
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
@@ -9754,6 +9752,14 @@ button.bg-dark:focus {
 .border,
 .loader-demo-box {
   border: 1px solid #707070 !important;
+}
+
+.my-border-bottom {
+  border-bottom: 1px solid #f2edf3;
+}
+
+.my-border-top {
+  border-top: 1px solid #f2edf3;
 }
 
 .border-top {
@@ -16596,7 +16602,7 @@ code {
 .form-check .form-check-label {
   display: block;
   margin-left: 1.75rem;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   line-height: 1.5;
 }
 .rtl .form-check .form-check-label {
@@ -16639,6 +16645,7 @@ code {
 }
 .form-check .form-check-label input[type="checkbox"] + .input-helper:before {
   content: "";
+  margin-top: 5px;
   width: 18px;
   height: 18px;
   border-radius: 2px;
@@ -16657,6 +16664,7 @@ code {
   -webkit-transition-duration: 250ms;
   transition-duration: 250ms;
   font-family: Material Design Icons;
+  margin-top: 5px;
   opacity: 0;
   filter: alpha(opacity=0);
   -webkit-transform: scale(0);
@@ -17066,6 +17074,7 @@ select.form-control {
 }
 select.form-control:focus {
   outline: 1px solid #ebedf2;
+  color: #c9c8c8;
 }
 select.form-control.border-primary {
   outline: 1px solid #b66dff;
@@ -17629,7 +17638,7 @@ dl li {
   -moz-transition: width 0.25s ease, background 0.25s ease;
   -ms-transition: width 0.25s ease, background 0.25s ease;
   background: #323641;
-  width: 260px;
+  width: 250px;
   height: 70px;
 }
 @media (max-width: 991px) {
@@ -18404,9 +18413,9 @@ dl li {
   min-height: calc(100vh - 70px);
   background: #323641;
   opacity: 1;
-  font-family: "SCDream3";
+  font-family: "SCDream2";
   padding: 0;
-  width: 260px;
+  width: 250px;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -18422,6 +18431,7 @@ dl li {
   -ms-flex-direction: column;
   flex-direction: column;
   margin-bottom: 60px;
+  position: fixed;
 }
 .sidebar .nav .nav-item {
   padding: 0 2.25rem;
@@ -18442,7 +18452,7 @@ dl li {
   align-items: center;
   white-space: nowrap;
   padding: 1.125rem 0 1.125rem 0;
-  color: #dbceddf5;
+  color: #fff;
   -webkit-transition-duration: 0.45s;
   transition-duration: 0.45s;
   transition-property: color;
@@ -18537,7 +18547,7 @@ dl li {
 }
 .sidebar .nav .nav-item.nav-profile .nav-link .nav-profile-badge {
   font-size: 1.125rem;
-  margin-left: auto;
+  margin-left: 1rem;
 }
 .rtl .sidebar .nav .nav-item.nav-profile .nav-link .nav-profile-badge {
   margin-left: 0;
@@ -18633,10 +18643,10 @@ dl li {
 .navbar.fixed-top + .page-body-wrapper {
   padding-top: 70px;
 }
-
+/***사이드바 감추기 했을때**/
 @media (min-width: 992px) {
   .sidebar-icon-only .navbar .navbar-brand-wrapper {
-    width: 70px;
+    width: 60px;
   }
   .sidebar-icon-only .navbar .navbar-brand-wrapper .brand-logo {
     display: none;
@@ -18645,10 +18655,10 @@ dl li {
     display: inline-block;
   }
   .sidebar-icon-only .navbar .navbar-menu-wrapper {
-    width: calc(100% - 70px);
+    width: calc(100% - 60px);
   }
   .sidebar-icon-only .sidebar {
-    width: 70px;
+    width: 60px;
   }
   .sidebar-icon-only .sidebar .nav {
     overflow: visible;
@@ -18656,6 +18666,7 @@ dl li {
   .sidebar-icon-only .sidebar .nav .nav-item {
     position: relative;
     padding: 0;
+    left: 10px;
   }
   .sidebar-icon-only .sidebar .nav .nav-item .nav-link {
     display: block;
@@ -18674,7 +18685,7 @@ dl li {
   }
   .sidebar-icon-only .sidebar .nav .nav-item .nav-link i.menu-icon {
     margin-right: 0;
-    margin-left: 0;
+    margin-left: 5px;
   }
   .sidebar-icon-only .sidebar .nav .nav-item .nav-link i.menu-arrow {
     display: none;
@@ -18717,14 +18728,15 @@ dl li {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background: #fcfcfc;
-    padding: 0.5rem 1.4rem;
-    left: 70px;
+    background: #323641;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    left: 50px;
     position: absolute;
     text-align: left;
     top: 0;
     bottom: 0;
-    width: 190px;
+    width: 150px;
     z-index: 1;
     line-height: 1.8;
   }
@@ -18735,7 +18747,7 @@ dl li {
     .nav-link
     .menu-title {
     left: auto;
-    right: 70px;
+    right: 60px;
     text-align: left;
   }
   .sidebar-icon-only
@@ -18753,13 +18765,13 @@ dl li {
     background: #fcfcfc;
     border-radius: 0 0 5px 0;
     position: absolute;
-    left: 70px;
+    left: 60px;
     width: 190px;
   }
   .rtl.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapse,
   .rtl.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapsing {
     left: auto;
-    right: 70px;
+    right: 60px;
     border-radius: 0 0 0 5px;
   }
   .sidebar-icon-only .sidebar .nav.sub-menu {
@@ -18784,7 +18796,7 @@ dl li {
     display: none;
   }
   .sidebar-icon-only .main-panel {
-    width: calc(100% - 70px);
+    width: calc(100% - 60px);
   }
 }
 
@@ -18861,6 +18873,26 @@ dl li {
   flex-grow: 1;
 }
 
+@media all and (max-width: 991px) {
+  /**여백사이즈 변경**/
+  .content-wrapper {
+    padding: 1.5rem;
+  }
+  .card .card-body {
+    padding: 1rem;
+  }
+  .accordion .card .card-body {
+    font-size: 0.85rem;
+    padding: 0 1.25rem 1.25rem 1.25rem;
+  }
+  .accordion .card .card-header {
+    padding: 1.5rem;
+  }
+  .accordion .card .card-header a {
+    padding-right: 1rem;
+  }
+}
+
 @media all and (max-width: 575px) {
   /**여백사이즈 변경**/
   .content-wrapper {
@@ -18869,6 +18901,7 @@ dl li {
   .page-titie {
     font-size: 1em;
   }
+
   .card .card-body {
     padding: 0.5rem;
   }
@@ -18880,7 +18913,7 @@ dl li {
   }
 
   .accordion .card .card-body {
-    font-size: 12px;
+    font-size: 0.7rem;
     padding: 0 0.2rem 0.2rem 0.2rem;
   }
   .accordion .card .card-header {

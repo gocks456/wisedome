@@ -3,8 +3,22 @@ from sqlalchemy.exc import IntegrityError
 from pybossa.repositories import Repository
 from pybossa.model.exchange import Exchange
 from pybossa.exc import WrongObjectError, DBIntegrityError
+from sqlalchemy import func, and_, desc
 
 class ExchangeRepository(Repository):
+
+	def get_exchange_log(self, user_id):
+		from pybossa.model.project import Project
+		from pybossa.model.task_run import TaskRun
+		from sqlalchemy.sql.expression import null
+		q1 = self.db.session.query(Project.name.label('name'), func.sum(TaskRun.point).label('point'), null().label('exchange'),
+				func.max(TaskRun.finish_time).label('time')).filter(and_(
+					Project.id==TaskRun.project_id, TaskRun.user_id==user_id)).group_by(Project.id, TaskRun.project_id)
+
+		q2 = self.db.session.query(Exchange.request_name.label('name'), null().label('point'), Exchange.exchange_point.label('exchange'),
+				Exchange.finish_time.label('time')).filter(Exchange.user_id==user_id)
+		return q1.union(q2).order_by(desc('time')).all()
+
 
 	def get(self, id):
 		return self.db.session.query(Exchange).get(id)

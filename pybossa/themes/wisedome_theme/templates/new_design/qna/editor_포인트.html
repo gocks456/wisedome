@@ -1,0 +1,96 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+
+{% block css %}
+<!--this page css-->
+<link rel="stylesheet" href="/static/new_design/css/qnaBoard.css">
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+	<div class="page-header">
+		<h3 class="page-title"> 질문하기 </h3>
+	</div>
+
+
+	<div class="row">
+
+		<div class="col-12">
+			<div class="card ">
+				<div class="card-body bg-white">
+
+					<div class="row">
+						<div class="col-sm-12 mx-auto">
+
+							<!--질문주제-->
+							<div class=" tab-content-custom-pill " >
+								<ul class="nav nav-pills nav-pills-custom justify-content-center">
+									<li class="nav-item">
+										<a class="nav-link " href="{{ url_for('home.write', category='회원가입') }}" > <i class="mdi mdi-wallet-membership"></i><br>회원가입 </a>  
+									</li>
+									<li class="nav-item">
+										<a class="nav-link active" href="{{ url_for('home.write', category='포인트') }}" > <i class="mdi mdi-ticket"></i><br> 포인트 </a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link " href="{{ url_for('home.write', category='프로젝트') }}" ><i class="mdi mdi-television-guide"></i><br> 프로젝트 </a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="{{ url_for('home.write', category='환급') }}" > <i class="mdi mdi-wallet-giftcard"></i><br> 환급</a>
+									</li>
+								</ul>
+							</div>
+
+							<div class="show active">
+								<div class="row grid-margin">
+									<div class="col-lg-12">
+										<div class="card bg-white">
+											<div class="card-body">
+
+												<form id="myQuestion">
+													<div class="card-title">질문제목</div>
+													<div class="form-group row">
+														<div class="col-sm-3">
+															<select class="form-control" id="subtitle">
+																<option selected>주제</option>
+																<option value="1">적립</option>
+																<option value="2">취소</option>
+																<option value="3">기타</option>
+															</select>
+														</div>
+														<div class="col-sm-9 ">
+															<input type="text" class="form-control input-title" id="myTitle" placeholder="제목을 입력하세요">
+														</div>
+													</div>
+												</form>
+												<div class="card-title">질문내용</div>
+												<div id="summernote"></div><!--editor template-->
+											</div><!--card body-->
+
+											<div class="btn-group editor-btn-group">
+												<a class="btn btn-gradient-secondary" id="myCancel" href="{{ url_for('home.qna', category='포인트') }}">취소하기</a> 
+												<a class="btn btn-gradient-primary" >글올리기</a>   
+											</div> 
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div> <!--col sm 12-->
+					</div><!--row-->
+				</div><!--card body-->
+			</div><!--card-->
+		</div><!--col 12-->
+	</div><!--row-->
+</div><!-- content-wrapper ends -->
+
+
+<script src="/static/new_design/js/plugin/vendor.bundle.base.js"></script>
+
+
+<!-- plugins:js this page only-->
+<script src="/static/new_design/js/plugin/summernote-bs4.min.js"></script>
+<script src="/static/new_design/js/plugin/summernote-ko-KR.js"></script>
+<!--text editor-->
+<script src="/static/new_design/js/editor.js"></script>
+{% endblock %}

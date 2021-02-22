@@ -12,7 +12,7 @@ class Exchange(db.Model, DomainObject):
 
     id = Column(Integer, primary_key=True)
 
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
 
     request_name = Column(Unicode(length=254), nullable=False)
 

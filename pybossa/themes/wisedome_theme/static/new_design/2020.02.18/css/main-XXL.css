@@ -1,0 +1,422 @@
+@font-face { font-family: 'S-CoreDream-2Light'; src: url('../css/font/SCDream2.otf') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'S-CoreDream-3Regular'; src: url('../css/font/SCDream3.otf') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'S-CoreDream-4Medium'; src: url('../css/font/SCDream4.otf') format('woff'); font-weight: normal; font-style: normal; }
+
+body{
+font-family: 'S-CoreDream-2Light', 'Apple Gothic' ;}
+
+section{
+	margin: 0 auto;}
+
+/* Header */
+#header {
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	-moz-align-items: center;
+	-webkit-align-items: center;
+	-ms-align-items: center;
+	align-items: center;
+	-moz-justify-content: center;
+	-webkit-justify-content: center;
+	-ms-justify-content: center;
+	justify-content: center;
+	position: relative;
+	padding: 0;
+	background-color:#C7E4E2; 
+}
+
+	#header:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.homepage #header {
+		height:auto;
+	}
+
+
+/* main */
+#main{
+padding: 5em 10em;
+display: table;
+max-width: 1920px;
+}
+
+.main-text{
+	width: 70%;
+	max-width: 550px;
+	padding-right: 2em;
+	text-align: left;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.main-banner{
+	text-align: center;
+	display:table-cell;
+	vertical-align:middle;}
+
+.main-banner img{
+width: 100%;
+max-width:600px ;
+}
+
+
+#main h1 {
+	margin: 1em 0;
+	color:#00232C;
+	margin: 0.6em 0;
+	font-size:2.5em;
+	letter-spacing: 0.20em;
+	line-height: 1.2em;
+	font-family: 'S-CoreDream-3Regular','Apple Gothic' ;
+}
+		
+#main h5{
+	font-size: 0.8em;
+}
+
+#main hr{
+	float: left;
+	width: 50px;
+	height:3px;
+	background-color: #b66dff;
+}
+
+#main p {
+color: #396361;
+font-size: 1em;
+line-height: 1.5em;
+}
+
+
+/*사용방법 보기 버튼효과*/
+#main .btn {
+ width: 40%;
+ min-width: 200px;
+ padding: 0.75em 2em;
+ border-radius: 10px;
+ display: block;
+ text-align: center;
+ margin-top: 1em;
+ text-decoration: none;
+ font-size: 0.8em;
+ background: linear-gradient(to right, #da8cff, #9a55ff);
+ color: #fff;
+ z-index: 9;
+ position: relative;
+}
+
+#main .btn:hover {
+opacity: 0.8;}
+
+
+/**타이틀 제목**/
+.title{
+	text-align: center;
+	margin: 0 auto;
+}
+
+.title h1 { 
+	font-family: 'S-CoreDream-2Light';
+	padding-bottom: 0.5em;
+	font-size: 1.2em;}
+
+hr{
+background-color:#b66dff;
+border: none;
+width: 70px;
+height: 5px;
+}
+
+
+/***2. 카테고리별 프로젝트***/
+#category {
+	max-width: 1920px;
+	padding: 4em 0;
+}
+.all-category{
+	margin: 0 auto;
+	text-align: center;
+}
+.ctg {
+	width: 20%;
+	max-width: 250px;
+	text-align: center;
+	padding:1em;
+	margin: 0 1.25em;
+	display: inline-block;
+}
+  
+.ctg p {
+	margin: 0 auto;
+	font-size: 1em;
+	color: #396361;
+}	
+	
+.ctg svg{
+	fill: #315057;
+	width: 50%;
+}	
+
+.ctg:hover svg, .ctg:hover p{
+	cursor: pointer;
+	fill: #4B93A3;
+    color: #4B93A3;}
+
+
+/******3. 진행중인 프로젝트********/
+#project {
+	max-width: 1920px;
+	text-align: center;
+	padding: 4em 0;}
+
+.bg {
+ background-color: #f7f6f6}
+
+#project main { 
+	width: 100%;
+	margin: 0 auto;}
+
+#project div {
+	box-sizing: border-box;}
+
+#project h5{ 
+	width: 90%;
+	font-size: 0.7em;
+	text-align: right;}
+
+#project-top, #project-bottom{ text-align: center;}
+
+
+
+/* 프로젝트 보기수정 2020.12.20**/
+.container {
+	position: relative;
+	width: 22%;
+	border-radius: 0.5em;
+	margin: 0.5em ;
+	display: inline-block;
+  }
+  
+  .project-img{
+	width: 17.5em;
+	height: 17.5em;
+	object-fit: cover;
+	display: block;
+	width: 100%;
+	border-radius: 0.5em;
+	-webkit-filter: brightness(65%);
+	filter: brightness(65%);}
+
+  .project-btn{
+    font-family: 'S-CoreDream-2Light';
+	padding: 0.5em 3em;
+	border-radius: .5em;
+	margin-top:1em;
+	background: -webkit-gradient(linear, left top, right top, from(#90caf9), color-stop(99%, #047edf));
+	background: linear-gradient(to right, #90caf9, #047edf 99%);
+	border: 0;
+	-webkit-transition: opacity 0.3s ease;
+	transition: opacity 0.3s ease; }
+  .project-btn a{color: #fff;}
+  .project-btn :hover{
+	opacity: .8;}
+
+  .overlay {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .8s ease;
+	border-radius: 0.5em;
+	background-color: transparent;
+	opacity: 1;
+  }
+  .overlay h3{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	font-weight: bold;
+	color: #fff;}
+
+  .container:hover .project-img {
+	-webkit-filter: brightness(50%);
+	filter: brightness(50%);
+  }
+
+  .text {
+	color:#555555;
+	position: absolute;
+	text-align: center;
+	padding: 15% 10% ;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .5s ease;
+	border-radius: 0.5em;
+	background-color:#fff;
+  }
+
+.container:hover .text{
+	opacity: 1;
+}
+
+.overlay .text ul li{
+font-size: 0.7em;
+display: inline;
+}
+.text p{
+	font-size: 0.8em;}
+
+.level{
+	text-align: center;
+	border-radius: 0.25em;
+	font-weight: 700;
+	display: block;
+	font-size: 0.7em;
+	width: 5em;
+	margin: 0 auto;
+	margin-bottom: 1em;
+}
+	
+.level-high{	background-color: #F0DFC5; color: #6e4303;}
+.level-middle{	background-color:#C5DCF0; color: #04549b;}
+.level-easy{	background-color:#C5F0D4; color:#038832;}
+
+
+.down-arrow{ 
+	margin: 0 auto;
+	font-size: 1.25em;
+	padding-top: 1em;
+}
+
+#project-bottom{display: none;}
+
+
+/**********4. 최다 포인트킹********/
+#PointRank {
+ position: relative;
+  padding: 4em 0;
+  max-width: 1920px;
+}
+
+#PointRank main { 
+	margin: 0 auto;
+	padding: 2em 0;
+}
+
+.swiper-container {
+	width: 100%;
+	height: 100%;}
+		
+    .swiper-slide {	
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+	  align-items: center;
+	  text-align: center;
+	  min-width: 190px;
+	  max-height: 400px;
+	  text-align: center;
+	  background-color:  #C7E4E2;
+	  border-radius: 0.5em;	
+  }
+
+
+.swiper-pagination{
+	padding-top: 2em;
+	display: none;
+}
+
+.profile main{
+	margin: 0 auto;
+	width: 100%;
+	padding: 2em 1em;
+	color:#5b5959;
+}
+
+.myFace img {
+	border-radius: 50%;
+	border: 1px solid white;
+	display: inline-block;
+	width:30%;
+}
+
+.myFace{
+display: block;
+margin: 2em 0 0 0;
+}
+
+.myProfile{
+	font-weight: bold;
+	text-align: center;
+    font-size: 0.8em;
+}
+
+.profile-area{
+	font-size: 0.7em;
+	font-weight: 500;
+}
+.star{
+	color: #b66dff;
+}
+
+.myRank{
+	background-color: white;
+	border-radius: 3%;
+	margin: 1em 0.7em;
+}
+
+.myRank ul{
+	padding: 0.7em ;
+}
+
+.myRank li{
+	text-align: left;
+	font-size: 0.6em;
+	color: darkslategray;
+	list-style: none;
+	border-bottom: 0.5px solid #cccccc;
+}
+.myRank li:last-child{
+	border:none;
+}
+
+.myRank span{
+	font-size: 1em;
+}
+.fa-star{
+	font-size: 0.8em;
+}
+.myRank .far{
+	font-size: 1em;
+}
+

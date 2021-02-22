@@ -18,7 +18,6 @@
 
 from sqlalchemy.exc import IntegrityError
 
-from pybossa.cache.projects import clean_project
 from pybossa.repositories import Repository
 from pybossa.model.blogpost import Blogpost
 from pybossa.exc import WrongObjectError, DBIntegrityError
@@ -28,6 +27,10 @@ class BlogRepository(Repository):
 
     def __init__(self, db):
         self.db = db
+
+    def get_category_blogposts(self, category):
+        return self.db.session.query(Blogpost.id, Blogpost.updated, Blogpost.subject, Blogpost.title, Blogpost.answer).filter_by(
+                    category=category).order_by(Blogpost.updated.desc()).all()
 
     def get_lately(self, user_id):
         return self.db.session.query(Blogpost.id).filter_by(user_id=user_id).order_by(Blogpost.created.desc()).first()
@@ -52,7 +55,6 @@ class BlogRepository(Repository):
         try:
             self.db.session.add(blogpost)
             self.db.session.commit()
-            clean_project(blogpost.project_id)
         except IntegrityError as e:
             self.db.session.rollback()
             raise DBIntegrityError(e)
@@ -62,7 +64,6 @@ class BlogRepository(Repository):
         try:
             self.db.session.merge(blogpost)
             self.db.session.commit()
-            clean_project(blogpost.project_id)
         except IntegrityError as e:
             self.db.session.rollback()
             raise DBIntegrityError(e)
@@ -73,7 +74,6 @@ class BlogRepository(Repository):
         blog = self.db.session.query(Blogpost).filter(Blogpost.id==blogpost.id).first()
         self.db.session.delete(blog)
         self.db.session.commit()
-        clean_project(project_id)
 
     def _validate_can_be(self, action, blogpost):
         if not isinstance(blogpost, Blogpost):

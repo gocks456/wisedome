@@ -4,8 +4,6 @@
   height:auto;
 }
 
-#main{
-   padding: 2em 5em;}
  
  #main h1 {
    margin: 0.75em 0;
@@ -55,6 +53,12 @@
 .container{
   width: 30%;
   margin: 0.3em;
+  padding: 0;
+}
+
+
+.container:hover .text{
+	opacity: 0;
 }
 
 
