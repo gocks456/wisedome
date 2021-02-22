@@ -17,7 +17,7 @@
 # along with PYBOSSA.  If not, see <http://www.gnu.org/licenses/>.
 
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import cast, Date, or_, func
+from sqlalchemy import cast, Date, or_, func, and_
 
 from pybossa.repositories import Repository
 from pybossa.model.project import Project
@@ -28,6 +28,17 @@ from pybossa.core import uploader
 
 
 class ProjectRepository(Repository):
+    
+    def get_contributed_projects(self, user_id):
+        from pybossa.model.project_stats import ProjectStats
+        from pybossa.model.task_run import TaskRun
+        return self.db.session.query(Project.name, ProjectStats.overall_progress,
+                func.sum(TaskRun.point).label('point'), func.max(TaskRun.finish_time).label('time')).filter(
+                        and_(Project.id==ProjectStats.project_id,
+                            Project.id==TaskRun.project_id,
+                            TaskRun.user_id==user_id)).group_by(Project.id, ProjectStats.overall_progress, TaskRun.project_id).order_by(func.max(TaskRun.finish_time).desc()).all()
+
+
 
     #20.02.25. 수정사항
     def get_point(self, short_name):

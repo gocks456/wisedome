@@ -6,13 +6,15 @@
 {% from "account/_helpers.html" import render_pagination %}
 
 {% block content %}
-<div class="container">
+<!--<div class="container">-->
+<div class="content-wrapper">
     {% if project %}
-    <div class="col-sm-3 col-md-3">
-		{#       {{ helper.render_project_local_nav(project, active_link, current_user, pro_features) }}#}
-    </div>
+	{#<div class="col-sm-3 col-md-3">
+		       {{ helper.render_project_local_nav(project, active_link, current_user, pro_features) }}
+	</div>#}
     <!-- Projecta -->
-    <div class="col-sm-9 col-md-9" style="min-height:400px">
+	{#<div class="col-sm-9 col-md-9" style="min-height:400px">#}
+	<div class="col-sm-12 col-md-12" style="min-height:400px">
         <div class="row">
             <div class="col-sm-8 col-md-8">
 				<h1><a href="{{url_for('project.details', short_name = project.short_name)}}">{{project.name}}</a></h1>

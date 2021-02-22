@@ -52,7 +52,7 @@ from pybossa.cache import users as cached_users
 from pybossa.cache import categories as cached_cat
 from pybossa.auth import ensure_authorized_to
 from pybossa.jobs import send_mail, export_userdata, delete_account
-from pybossa.core import user_repo, ldap, point_repo, exchange_repo
+from pybossa.core import user_repo, ldap, point_repo, exchange_repo, task_repo, project_repo
 from pybossa.feed import get_update_feed
 from pybossa.messages import *
 from pybossa import otp
@@ -599,9 +599,9 @@ def exchange(name):
                 name=name)
 
         if form.validate():
-            if (int(exchange.exchange_point) > int(current_user.current_point)):
-                flash(gettext('가지고 있는 포인트 이내에서 환급요청 하십시오!'), 'error')
-                return handle_content_type(response)
+            #if (int(exchange.exchange_point) > int(current_user.current_point)):
+            #    flash(gettext('가지고 있는 포인트 이내에서 환급요청 하십시오!'), 'error')
+            #    return handle_content_type(response)
             flash(gettext('환급요청성공'), 'success')
             point_repo.exchange(current_user.id,form.exchange_point.data)
             exchange_repo.save(exchange)
@@ -673,77 +673,45 @@ def point(name):
     if current_user.is_authenticated and user.id == current_user.id:
         return _show_points(user)
 def _show_points(user):
-    user_dict = cached_users.get_user_summary(user.name)
-    projects_contributed = cached_users.public_projects_contributed_cached(user.id)
     point_history = cached_users.get_user_point_history(current_user.id)
     from operator import itemgetter
     point_history = sorted(point_history, key=itemgetter('finish_time'), reverse=True)
     response = dict(template='account/point.html',
                     title=gettext("Point"),
-                    user=user_dict,
-                    projects_contrib=projects_contributed,
                     point_hist=point_history,
-                    c_name=cached_cat.get_all_name(),
                     can_update=False)
     return handle_content_type(response)
 
 
 
 def _show_own_profile(user, form, current_user):
-    user_dict = cached_users.get_user_summary(user.name, current_user)
-    rank_and_score = cached_users.rank_and_score(user.id)
-    user.rank = rank_and_score['rank']
-    user.score = rank_and_score['score']
-    user.total = cached_users.get_total_users()
-    projects_contributed = cached_users.public_projects_contributed_cached(user.id)
-    projects_published, projects_draft = _get_user_projects(user.id)
-    cached_users.get_user_summary(user.name)
-    projects_answer_rate = cached_users.projects_answer_rate(user.id)
 
-    point_history = cached_users.get_user_point_history(current_user.id)
-    from operator import itemgetter
-    point_history = sorted(point_history, key=itemgetter('finish_time'), reverse=True)
+    # 참여한 프로젝트
+    projects_contributed = project_repo.get_contributed_projects(current_user.id)
+    print(projects_contributed)
 
-    from datetime import datetime, timedelta
-    now = datetime.now()
-    works_count = 0
-    return_count = 0
-    point = 0
-    prev_works_count = 0
-    prev_return_count = 0
-    prev_point = 0
+    # 포인트 내역
+    point_history = exchange_repo.get_exchange_log(current_user.id)
 
-    if len(point_history) != 0:
-        for row in point_history:
-            time = datetime.strptime(row['finish_time'], '%Y-%m-%dT%H:%M:%S.%f')
-            if row['project_short_name'] != 'exchange':
-                if (now - time).days < 30:
-                    works_count += row['count']
-                    point += row['point']
-                elif (now - time).days < 60:
-                    prev_works_count += row['count']
-                    prev_point += row['point']
+    # 현재 포인트
+    current_point = point_repo.get_current_point(current_user.id).current_point
 
-        for row in projects_contributed:
-            for temp in projects_answer_rate:
-                if(row['id'] == temp['id']):
-                    row['n_correct_rate']=temp['n_correct_rate']
-                    row['n_tasks_rate']=temp['n_tasks_rate']
-                    row['complete_check']=temp['complete_check']
+    # 이번달 데이터
+    task_run_30days = task_repo.get_30days_task_run(current_user.id)
+    if task_run_30days == None:
+        projects_count_30days = 0
+        point_30days = 0
+    else:
+        projects_count_30days = task_run_30days.count
+        point_30days = task_run_30days.point
 
     response = dict(template='new_design/account/myProfile.html',
                     title=gettext("Profile"),
-                    user=user_dict,
                     projects_contrib=projects_contributed,
-                    projects_published=projects_published,
-                    projects_draft=projects_draft,
                     point_history=point_history,
-                    works_count=works_count,
-                    return_count=return_count,
-                    point=point,
-                    prev_works_count=prev_works_count,
-                    prev_return_count=prev_return_count,
-                    prev_point=prev_point,
+                    point=current_point,
+                    projects_count_30days=projects_count_30days,
+                    point_30days=point_30days,
                     form=form,
                     csrf=generate_csrf(),
                     can_update=True)
@@ -1091,26 +1059,30 @@ def forgot_password():
                 recovery_url = url_for_app_type('.reset_password',
                                                 key=key, _external=True)
                 msg['body'] = render_template(
-                    '/account/email/forgot_password.md',
+                    #'/account/email/forgot_password.md',
+                    '/new_design/register/password_reset.html',
                     user=user, recovery_url=recovery_url)
-                msg['html'] = render_template(
-                    '/account/email/forgot_password.html',
-                    user=user, recovery_url=recovery_url)
-            mail_queue.enqueue(send_mail, msg)
+                #msg['html'] = render_template(
+                #    '/account/email/forgot_password.html',
+                #    user=user, recovery_url=recovery_url)
+            #mail_queue.enqueue(send_mail, msg)
+            from pybossa.view.gmail import send_mail, create_message
+            msg = create_message(current_app.config['GMAIL'], user.email_addr, 'Wisedome 비밀번호 재설정', msg['body'])
+            send_mail(msg)
             #flash(gettext("We've sent you an email with account "
             #              "recovery instructions!"),
             #      'success')
-            flash(gettext('이메일을 전송하였습니다!', 'success'))
+            flash('이메일을 전송하였습니다!', 'success')
         else:
             #flash(gettext("We don't have this email in our records. "
             #              "You may have signed up with a different "
             #              "email or used Twitter, Facebook, or "
             #              "Google to sign-in"), 'error')
-            flash(gettext("이메일이 존재하지 않습니다.", 'error'))
+            flash("이메일이 존재하지 않습니다.", 'error')
     if request.method == 'POST' and not form.validate():
         #flash(gettext('Something went wrong, please correct the errors on the '
         #      'form'), 'error')
-        flash(gettext('입력한 이메일을 확인해주세요'), 'error')
+        flash('입력한 이메일을 확인해주세요', 'error')
     data = dict(template='/account/password_forgot.html',
                 form=form)
     return handle_content_type(data)

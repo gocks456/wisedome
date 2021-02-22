@@ -78,7 +78,7 @@ def format_user(user):
         id=user.id,
         name=user.name,
         fullname=user.fullname,
-        point_sum=user.point_sum,
+        #point_sum=user.point_sum,
         answer_rate=user.answer_rate,
         email_addr=user.email_addr,
         info=user.info,

@@ -93,6 +93,7 @@
 
 [data-theme="dark"] .content-wrapper .card .card-body #input_text,
 [data-theme="dark"] .content-wrapper .card .card-body input,
+[data-theme="dark"] .content-wrapper .card .card-body textarea,
 [data-theme="dark"] .content-wrapper .card .card-body select {
   color: #fff;
   background-color: #76767a;
@@ -140,12 +141,16 @@
 }
 
 [data-theme="dark"] .content-wrapper .card .card-body svg {
-  fill: #fff;
+  fill: #f2edf3;
 }
 
+[data-theme="dark"] .content-wrapper .card .card-body .modal-content,
+[data-theme="dark"] .content-wrapper .card .card-body .dataTables_wrapper .dataTables_paginate a,
 [data-theme="dark"] .content-wrapper .card .card-body table,
 [data-theme="dark"] .content-wrapper .card .card-body th,
 [data-theme="dark"] .content-wrapper .card .card-body td {
+  color: #fff;
+  background-color: #76767a;
   border-color: #555555 !important;
 }
 
@@ -267,7 +272,10 @@
   background-color: #76767a;
 }
 
-[data-theme="dark"] .bg-white .content-wrapper .card .card-body #input_text {
+[data-theme="dark"] .bg-white .content-wrapper .card .card-body #input_text,
+[data-theme="dark"] .bg-white .content-wrapper .card .card-body input,
+[data-theme="dark"] .bg-white .content-wrapper .card .card-body textarea,
+[data-theme="dark"] .bg-white .content-wrapper .card .card-body select {
   color: #fff;
   background-color: #323641;
   border-color: #555555;
@@ -301,6 +309,20 @@
 [data-theme="dark"] .bg-white .content-wrapper .card .card-body label {
   color: #fff;
   border-color: #555555;
+}
+
+[data-theme="dark"] .bg-white .content-wrapper .card .card-body svg {
+  fill: #f2edf3;
+}
+
+[data-theme="dark"] .bg-white .content-wrapper .card .card-body .modal-content,
+[data-theme="dark"] .bg-white .content-wrapper .card .card-body .dataTables_wrapper .dataTables_paginate a,
+[data-theme="dark"] .bg-white .content-wrapper .card .card-body table,
+[data-theme="dark"] .bg-white .content-wrapper .card .card-body th,
+[data-theme="dark"] .bg-white .content-wrapper .card .card-body td {
+  color: #fff;
+  background-color: #76767a;
+  border-color: #555555 !important;
 }
 
 [data-theme="dark"] .bg-white .content-wrapper .card .card-body svg {

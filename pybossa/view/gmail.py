@@ -101,7 +101,7 @@ def oauth_authorized():  # pragma: no cover
 		user_repo.save(user)
 		return redirect_content_type(url_for('home.home'))
 
-	resp['refresh_token']
+	refresh_token = resp['refresh_token']
 
 	google_token = dict(oauth_token=access_token, refresh_token=refresh_token)
 
@@ -131,7 +131,7 @@ def create_message(sender, to, subject, message_text):
 	Returns:
 		An object containing a base64url encoded email object.
 	"""
-	message = MIMEText(message_text)
+	message = MIMEText(message_text, 'html')
 	message['to'] = to
 	message['from'] = sender
 	message['subject'] = subject
@@ -187,24 +187,27 @@ def send(message, token):
 		return r.content
 
 
-@blueprint.route('/send_mail', methods=['POST'])
-def send_mail():
-	# mail 전송
-	
+@blueprint.route('/auth_msg', methods=['POST'])
+def auth_msg():
 	access_num = request.form['random_num']
 
 	if access_num == "0":
 		return "CAN'T SEND"
 
-	google_token = get_google_token()
 
 	EMAIL_FROM = current_app.config['GMAIL']
 	EMAIL_TO = request.form['email']
 	EMAIL_SUBJECT = 'Wisedome 이메일 인증'
-	EMAIL_CONTENT = '이메일 인증번호는 다음과 같습니다.\n\n인증번호: ' + access_num
+	EMAIL_CONTENT = '이메일 인증번호는 다음과 같습니다.<br><br>인증번호: ' + access_num
 
 	# Call the Gmail API
 	message = create_message(EMAIL_FROM, EMAIL_TO, EMAIL_SUBJECT, EMAIL_CONTENT)
+	return send_mail(message)
+
+
+def send_mail(message):
+	# mail 전송
+	google_token = get_google_token()
 
 	r = send(message, google_token['oauth_token'])
 

@@ -30,11 +30,9 @@ from flask import current_app
 
 
 class UserRepository(Repository):
+    
     def __init__(self, db):
         self.db = db
-
-    def get_current_point(self, user_id):
-        return self.db.session.query(User.current_point).filter_by(id=user_id).first()
 
     def update_achievement(self, user_id, achieve, achieve_id):
         user = self.db.session.query(User).get(user_id)

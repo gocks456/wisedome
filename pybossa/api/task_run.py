@@ -57,10 +57,9 @@ class TaskRunAPI(APIBase):
         task = task_repo.get_task(taskrun.task_id)
         guard = ContributionsGuard(sentinel.master)
 
-        self._validate_project_and_task(taskrun, task)
-
         self._add_is_featured(taskrun)
 
+        self._validate_project_and_task(taskrun, task)
         self._ensure_task_was_requested(task, guard)
         self._add_user_info(taskrun)
         self._add_created_timestamp(taskrun, task, guard)
@@ -68,7 +67,6 @@ class TaskRunAPI(APIBase):
     def _add_is_featured(self, taskrun):
         project=project_repo.get(taskrun.project_id)
         taskrun.is_featured = project.featured
-
 
     def _forbidden_attributes(self, data):
         for key in list(data.keys()):

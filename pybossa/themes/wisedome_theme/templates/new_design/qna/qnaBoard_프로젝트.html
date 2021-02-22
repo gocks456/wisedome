@@ -1,0 +1,95 @@
+{% extends "new_design/workspace/workspace_base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/new_design/css/qnaBoard.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="content-wrapper">
+	<div class="page-header">
+		<h3 class="page-title"> 주제별 질문게시판 - 프로젝트 </h3>
+	</div>
+
+	<div class="row">
+
+		<div class="col-12">
+			<div class="card ">
+				<div class="card-body bg-white">
+
+					<div class="row">
+						<div class="col-sm-12 mx-auto">
+
+
+							<!--질문주제-->
+							<div class="tab-content tab-content-custom-pill " >
+								<ul class="nav nav-pills nav-pills-custom justify-content-center pb-3">
+									<li class="nav-item">
+										<a class="nav-link" href="{{ url_for('home.qna', category='회원가입') }}" > <i class="mdi mdi-wallet-membership"></i><br>회원가입 </a>  
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="{{ url_for('home.qna', category='포인트') }}" > <i class="mdi mdi-ticket"></i><br> 포인트 </a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link active" href="{{ url_for('home.qna', category='프로젝트') }}" ><i class="mdi mdi-television-guide"></i><br> 프로젝트 </a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="{{ url_for('home.qna', category='환급') }}" > <i class="mdi mdi-wallet-giftcard"></i><br> 환급</a>
+									</li>
+								</ul>
+
+								<!--질문내용-->
+								<div class="tab-pane show active">
+									<div class="row">
+										<div class="col-12 table-responsive">
+											<table id="order-listing" class="table table-md-responsive">
+												<thead class="thead-light">
+													<tr>
+														<th>#</th>
+														<th class="tb-date">작성일</th>
+														<th class="tb-subject">질문유형</th>
+														<th>제목</th>
+														<th class="tb-status">답변상태</th>
+													</tr>
+												</thead>
+												<tbody>
+
+													{% for row in board_list %}
+													<tr onClick = "location.href='{{ url_for("home.qna_view", blog_id=row.id) }}'" style="cursor:pointer;">
+														<td>{{row.id}}</td>
+														<td th class="tb-date">{{row.updated[0:10]}}</td>
+														<td class="tb-subject">{{row.subject}}</td>
+														<td class="tb-title">{{row.title}}</td><!--해당 글보기 링크걸려있음-->
+														<td>
+															<label class="badge badge-info">{% if row.answer %}답변완료{% else %} 답변대기{% endif %}</label>
+														</td>
+													</tr>
+													{% endfor %}
+
+												</tbody>
+											</table>
+											<div class="text-right">
+												<a class="btn btn-gradient-primary" type="submit" id="editor-btn" href="{{ url_for('home.write', category='프로젝트') }}"> 글쓰기</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- content-wrapper ends -->
+	</div>
+</div>
+
+
+<!-- plugins:js this page only-->
+<script src="/static/new_design/js/qnaBoard.js"></script>
+<script src="/static/new_design/js/plugin/dataTable.js"></script>
+<script src="/static/new_design/js/plugin/jquery.dataTable.js"></script>
+
+{% endblock %}

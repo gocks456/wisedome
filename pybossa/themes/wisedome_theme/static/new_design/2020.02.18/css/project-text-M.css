@@ -1,0 +1,41 @@
+/** *태블릿 사이즈 화면***/
+
+.title h1 {
+  font-size: 1.3em;
+}
+
+#header{
+  background-position: center;
+  height: 10em;
+}
+
+
+.category-order {
+  margin: 1em 0.5em;  
+  font-size: 0.8em;
+}
+
+
+/***1.작업화면**/
+#contents main{
+padding:3em 2em;
+}
+
+.workspace{
+padding: 2em 1.5em;
+}
+
+.process a, .process h5{
+  font-size: 0.7em;
+ }
+ 
+.btn-group button{
+margin: 1.5em 1.5em 0 1.5em;
+padding: 0.6em 0;
+letter-spacing: 0.3em;
+}
+
+.btn-group img{
+width: 1em;
+}
+

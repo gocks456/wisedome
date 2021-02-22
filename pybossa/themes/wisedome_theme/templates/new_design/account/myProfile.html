@@ -37,7 +37,7 @@
 				<div class="card-body">
 
 					<div class="my-border-bottom text-center pb-4">
-						<img src="{{ render_user_thumbnail(user, upload_method) }}" alt="profile" class="img-lg rounded-circle mb-3">
+						<img src="{{ render_user_thumbnail(current_user, upload_method) }}" alt="profile" class="img-lg rounded-circle mb-3">
 						<h6>{{current_user.fullname}} 님</h6> <!--닉네임-->
 						<p>{{current_user.name}}</p><!--부제목-->
 
@@ -166,27 +166,27 @@
 
 					<div class="my-border-bottom py-4">
 						<h6 class="font-weight-normal">이달의 작업건수 <i class="mdi mdi-database-plus mdi-1em float-right"></i></h6>
-						<h2 class="my-4">{{works_count}}건</h2>
+						<h2 class="my-4">{{projects_count_30days}}건</h2>
 						<div class="progress progress-md flex-grow">
-							<div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow={{works_count|int}} style="width: {{works_count}}%;" aria-valuemin="0" aria-valuemax="100"></div>
+							<div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow={{projects_count_30days|int}} style="width: {{projects_count_30days}}%;" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 						<!--<p class="card-text mt-3 text-right">지난달 대비 10% 증가함</p>-->
 					</div>
 
 					<div class="my-border-bottom py-4">
 						<h6 class="font-weight-normal">이달의 반려건수 <i class="mdi mdi-database-minus mdi-1em float-right"></i></h6>
-						<h2 class="my-4">{{return_count}}건</h2>
+						<h2 class="my-4">0건</h2>
 						<div class="progress progress-md flex-grow">
-							<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow={{return_count|int}} style="width: {{return_count}}%;" aria-valuemin="0" aria-valuemax="100"></div>
+							<div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow=0 style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 						<!--<p class="card-text mt-3 text-right">지난달 대비 5% 감소함</p>-->
 					</div>
 
 					<div class="pt-4">
 						<h6 class="font-weight-normal">이달의 적립내역 <i class="mdi mdi-star-circle mdi-1em float-right"></i></h6>
-						<h2 class="my-3">{{point}} 포인트</h2>
+						<h2 class="my-3">{{point_30days}} 포인트</h2>
 						<div class="progress progress-md flex-grow">
-							<div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow={{point|int}} style="width: {{point}}%;" aria-valuemin="0" aria-valuemax={{prev_point|int}}></div>
+							<div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow={{point_30days|int}} style="width: {{point_30days}}%;" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 						<!--<p class="card-text mt-3 text-right">지난달 대비 20% 증가함</p>-->
 					</div>
@@ -208,8 +208,8 @@
 									<th> # </th>
 									<th> 프로젝트명</th>
 									<th> 진행률 </th>
-									<th> 포인트 </th>
-									<th> 마감일 </th>
+									<th> 적립포인트 </th>
+									<th> 최근참여일 </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -222,8 +222,8 @@
 											<div class="progress-bar {% if i % 4 == 0 %}bg-info {% elif i % 4 == 1 %}bg-danger {% elif i % 4 == 2 %}bg-warning {% else %}bg-primary{% endif %}" role="progressbar" style="width:{{projects_contrib[i].overall_progress}}%" aria-valuenow={{projects_contrib[i].overall_progress|int}} aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 									</td>
-									<td> {{ projects_contrib[i].all_point }} </td>
-									<td> {{ projects_contrib[i].end_date[0:10] }}</td>
+									<td> {{ projects_contrib[i].point }} </td>
+									<td> {{ projects_contrib[i].time[0:10] }}</td>
 								</tr>
 								{% endfor %}
 							</tbody>
@@ -248,23 +248,21 @@
 									<thead>
 										<tr class="table-active">
 											<th> # </th>
-											<th> 프로젝트명 </th>
-											<th> 적립건수</th>
+											<th> 설명 </th>
 											<th> 적립액 </th>
-											<th> 지급일 </th>
+											<th> 환급액 </th>
+											<th> 날짜 </th>
 										</tr>
 									</thead>
 									<tbody>
 										{% for i in range(0, point_history|length) %}
-										{% if point_history[i].point != 0 %}
 										<tr>
 											<td>{{i}}</td>
-											<td style = "cursor:pointer;"onclick = "location.href='{{url_for('project.details', short_name = point_history[i].project_short_name)}}'"> {{ point_history[i].project_name }}</td>
-											<td> {{ point_history[i].count }} </td>
-											<td> {{ point_history[i].point }} </td>
-											<td> {{ point_history[i].finish_time[0:10] }} </td>
+											<td> {% if point_history[i].name != None %} {{ point_history[i].name }} {% else %} - {% endif %}</td>
+											<td> {% if point_history[i].point != None %}{{ point_history[i].point }} {% else %} - {% endif %}</td>
+											<td> {% if point_history[i].exchange != None %}{{ point_history[i].exchange }} {% else %} - {% endif %} </td>
+											<td> {% if point_history[i].time != None %}{{ point_history[i].time[0:10] }} {% else %} - {% endif %} </td>
 										</tr>
-										{% endif %}
 										{% endfor %}
 									</tbody>
 								</table>
@@ -274,7 +272,7 @@
 						<div class="col-xl-3 answers">  
 							<div class="my-4">
 								<h6 class="font-weight-normal"> <i class="mdi mdi-star-circle"></i>  환급가능한 보유포인트</h6>
-								<h2 class="py-4">{{current_user.current_point}}</h2>
+								<h2 class="py-4">{{point}}</h2>
 							</div>
 							<button type="button" class="btn btn-gradient-primary btn-block"><i class="mdi mdi-cash"></i>환급신청 </button>
 						</div><!--col xl 3-->

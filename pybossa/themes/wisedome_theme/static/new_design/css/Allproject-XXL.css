@@ -179,12 +179,12 @@ color: white;
   }
   
   .project-img{
-	width: 17.5em;
-	height: 17.5em;
+	position: relative;
 	object-fit: cover;
 	display: block;
+	min-height: 100%;
+	max-width: 100%;
 	width: 100%;
-	height: auto;
 	border-radius: 0.5em;
 	-webkit-filter: brightness(65%);
 	filter: brightness(65%);
@@ -212,43 +212,50 @@ color: white;
 	transform: translate(-50%, -50%);
 	height: 100%;
 	width: 100%;
-	opacity: 0;
 	transition: .8s ease;
 	border-radius: 0.5em;
 	background-color: transparent;
-	opacity: 1;
+
   }
+
   .overlay h3{
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
+    font-size: 1.25em;
+	bottom: 10px;
+	left: 0;
+	padding: 10px;
+	margin-bottom: 0;
+	width: 100%; 
 	font-weight: bold;
 	color: #fff;}
 
-  .container:hover .project-img {
-	-webkit-filter: brightness(50%);
-	filter: brightness(50%);
-  }
+
+  .container:hover .overlay {
+	opacity: 1;}
 
   .text {
 	color:#555555;
 	position: absolute;
 	text-align: center;
-	padding: 10% 5% ;
+	padding: 2em ;
 	top: 0;
-	bottom: 0;
 	left: 0;
-	right: 0;
 	height: 100%;
 	width: 100%;
 	opacity: 0;
 	transition: .5s ease;
 	border-radius: 0.5em;
 	background-color:#f4f5f6;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+  
   }
+
+
+
+
+
+
 
 .container:hover .text{
 	opacity: 1;
