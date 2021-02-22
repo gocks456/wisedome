@@ -33,6 +33,7 @@ from pybossa.forms.account_view_forms import APIRegisterForm
 # Flask 0.8
 # See http://goo.gl/tbhgF for more info
 import requests
+import json
 
 blueprint = Blueprint('gmail', __name__)
 
@@ -87,7 +88,6 @@ def oauth_authorized():  # pragma: no cover
 			return redirect(url_for_app_type('home.home'))
 		return r.content
 
-	import json
 	access_token = resp['access_token']
 	session['oauth_token'] = access_token
 	user_data = json.loads(r.content)
@@ -101,7 +101,7 @@ def oauth_authorized():  # pragma: no cover
 		user_repo.save(user)
 		return redirect_content_type(url_for('home.home'))
 
-	refresh_token = '1//0eSkRiG8QjqEKCgYIARAAGA4SNwF-L9Irf9txAOhnMGqzov_LboyPS9pQeetSqdTEE50dC97yMelYvR6-m2bLSVmxDtJaxUrpvOM' #resp['refresh_token']
+	resp['refresh_token']
 
 	google_token = dict(oauth_token=access_token, refresh_token=refresh_token)
 
@@ -117,13 +117,9 @@ def oauth_authorized():  # pragma: no cover
 	return user_id
 
 
-from googleapiclient.discovery import build
 from apiclient import errors
-from httplib2 import Http
 from email.mime.text import MIMEText
 import base64
-from google.oauth2 import service_account
-import json
 
 def create_message(sender, to, subject, message_text):
 	"""Create a message for an email.
@@ -135,7 +131,7 @@ def create_message(sender, to, subject, message_text):
 	Returns:
 		An object containing a base64url encoded email object.
 	"""
-	message = MIMEText(message_text)
+	message = MIMEText(message_text, 'html')
 	message['to'] = to
 	message['from'] = sender
 	message['subject'] = subject
@@ -191,24 +187,27 @@ def send(message, token):
 		return r.content
 
 
-@blueprint.route('/send_mail', methods=['POST'])
-def send_mail():
-	# mail 전송
-	
+@blueprint.route('/auth_msg', methods=['POST'])
+def auth_msg():
 	access_num = request.form['random_num']
 
 	if access_num == "0":
 		return "CAN'T SEND"
 
-	google_token = get_google_token()
 
 	EMAIL_FROM = current_app.config['GMAIL']
 	EMAIL_TO = request.form['email']
 	EMAIL_SUBJECT = 'Wisedome 이메일 인증'
-	EMAIL_CONTENT = '이메일 인증번호는 다음과 같습니다.\n\n인증번호: ' + access_num
+	EMAIL_CONTENT = '이메일 인증번호는 다음과 같습니다.<br><br>인증번호: ' + access_num
 
 	# Call the Gmail API
 	message = create_message(EMAIL_FROM, EMAIL_TO, EMAIL_SUBJECT, EMAIL_CONTENT)
+	return send_mail(message)
+
+
+def send_mail(message):
+	# mail 전송
+	google_token = get_google_token()
 
 	r = send(message, google_token['oauth_token'])
 

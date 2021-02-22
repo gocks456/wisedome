@@ -1,0 +1,45 @@
+/****작은 터치 모니터 화면****/
+  
+  .title h1 {
+    padding-bottom: 0.5em;
+  }
+  
+  .title hr{
+    width: 50px;
+  }
+  
+  .category-order{
+    margin: 1em 0 0 1em; 
+    font-size: 0.9em;
+  }
+  
+  
+
+
+/***1.작업화면**/
+#contents{
+  padding:4em 0;
+}
+
+
+#contents main{
+padding:3em ;
+margin-top: 2em;
+margin:0;
+}
+
+.workspace{
+  padding: 2em 3em;
+  font-size: 1em;
+}
+.process a, .process h5{
+ font-size: 0.9em;
+}
+
+
+.btn-group button{
+  font-size: 1em;
+  margin: 1.5em 1.5em 0 1.5em;
+  padding: 0.7em 0;
+}
+

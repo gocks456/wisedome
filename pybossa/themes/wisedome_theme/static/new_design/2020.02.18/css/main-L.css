@@ -1,0 +1,70 @@
+
+
+.homepage #header {
+  height:auto;
+}
+
+#main{
+   padding: 2em 5em;}
+ 
+ #main h1 {
+   margin: 0.75em 0;
+   font-size: 2em;
+ }
+  .main-text{
+   width: 60%;
+   }
+   
+   .main-banner{
+     width: 40%;
+   }
+
+    
+  #main .btn {
+    width: 13em;
+    padding: 0.5em 1em;
+  }  
+  
+/**타이틀**/
+.title h1{
+  font-size: 1.1em;
+}
+
+
+/**2.카테고리별 프로젝트****/
+#category {
+	padding: 3em 0;
+}
+
+.ctg {
+  padding: 0.5em ;
+  margin-right: 0.1em;
+}
+
+.ctg p {
+  font-size: 0.25em;
+  line-height: 2em;
+}	 
+
+
+/*3. 진행중인 프로젝트****/
+#project {
+  padding: 3em 0;
+}
+
+.container{
+  width: 30%;
+  margin: 0.3em;
+}
+
+
+/**4.포인트킹***/
+  #PointRank{
+    padding: 3em 0; }
+
+.profile-name{
+  font-size: 0.9em;
+}
+.myRank li{
+  font-size: 0.6em;
+}

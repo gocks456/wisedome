@@ -1,141 +1,16 @@
-/* Owl-carousel */
-.owl-carousel img {
-  border-radius: 0.25em;
-  -webkit-filter: brightness(60%);
-  filter: brightness(60%);
-}
-
-.owl-carousel.full-width .owl-nav {
-  position: absolute;
-  top: 40%;
-  width: 100%;
-  margin-top: 0;
-}
-
-.owl-carousel.full-width .owl-nav .owl-prev,
-.owl-carousel.full-width .owl-nav .owl-next {
-  background: transparent;
-  color: #ffffff;
-}
-
-.owl-carousel.full-width .owl-nav .owl-prev i:before,
-.owl-carousel.full-width .owl-nav .owl-next i:before {
-  font-size: 1.875rem;
-  font-weight: normal;
-  line-height: 2;
-}
-
-.owl-carousel.full-width .owl-nav .owl-prev {
-  float: left;
-}
-
-.owl-carousel.full-width .owl-nav .owl-next {
-  float: right;
-}
-
-/* Portfolio */
-.portfolio-grid figure {
-  position: relative;
-  float: left;
-  overflow: hidden;
-  width: 100%;
-  text-align: center;
-  cursor: pointer;
-}
-
-.portfolio-grid figure img {
-  position: relative;
-  display: block;
-  min-height: 100%;
-  max-width: 100%;
-  width: 100%;
-  -webkit-filter: brightness(60%);
-  filter: brightness(60%);
-}
-
-.portfolio-grid figure figcaption {
-  padding: 2em;
-  color: #ffffff;
-  font-size: 1em;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.portfolio-grid figure figcaption:after,
-.portfolio-grid figure figcaption:before {
-  pointer-events: none;
-}
-
-.portfolio-grid figure.effect-text-in {
-  border-radius: 0.25rem;
-}
-
-.portfolio-grid figure.effect-text-in h4,
-.portfolio-grid figure.effect-text-in img {
-  -webkit-transition: -webkit-transform 0.35s;
-  transition: transform 0.35s;
-}
-
-.portfolio-grid figure.effect-text-in img {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.portfolio-grid figure.effect-text-in h4,
-.portfolio-grid figure.effect-text-in p {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  padding: 10px;
-  margin-bottom: 0;
-  width: 100%;
-}
-
-.portfolio-grid figure.effect-text-in p {
-  text-transform: none;
-  opacity: 0;
-  color: #fff;
-  background: #094751;
-  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-  transition: opacity 0.35s, transform 0.35s;
-  -webkit-transform: translate3d(0, 50px, 0);
-  transform: translate3d(0, 50px, 0);
-}
-
-.portfolio-grid figure.effect-text-in:hover img {
-  -webkit-transform: translate3d(0, -80px, 0);
-  transform: translate3d(0, -80px, 0);
-}
-
-.portfolio-grid figure.effect-text-in:hover h4 {
-  -webkit-transform: translate3d(0, -100px, 0);
-  transform: translate3d(0, -100px, 0);
-}
-
-.portfolio-grid figure.effect-text-in:hover p {
-  opacity: 1;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
 .bg-peach {
   color: #fff;
-  background-image: linear-gradient(-270deg, #feada6 0%, #f5efef 100%);
+  background-image: linear-gradient(-270deg, #d36474 0%, #ffc3a0 100%);
 }
 
 .bg-blue {
   color: #fff;
-  background-image: linear-gradient(-270deg, #93a5cf 0%, #e4efe9 100%);
+  background-image: linear-gradient(-270deg, #2580b3 0%, #cbbacc 100%);
 }
 
 .bg-purple {
   color: #fff;
-  background-image: linear-gradient(-270deg, #cd9cf2 0%, #f6f3ff 100%);
+  background-image: linear-gradient(-270deg, #3ba061 0%, #f5d100 100%);
 }
 
 .card-body a {
@@ -144,22 +19,36 @@
   padding: 0;
   margin: 0;
 }
-.fluid-container p {
+.icon-title {
   color: #343a40;
 }
-
+.carousel-title {
+  font-family: "SCDream3";
+}
+.card-img {
+  -webkit-filter: brightness(60%);
+  filter: brightness(60%);
+}
 svg {
   fill: #094751;
   width: 25%;
-  min-width: 2em;
+  min-width: 3.25em;
+  margin-bottom: 0.5rem;
 }
 
-.ctg:hover svg {
-  fill: #4b93a3;
+.card-col:hover svg,
+.card-col:hover p {
+  cursor: pointer;
+  fill: #b66dff;
+  color: #b66dff;
+}
+.icon-active {
+  fill: #b66dff;
+  color: #b66dff;
 }
 
 .card-col .card-body {
-  padding: 1.25em 0.5em;
+  padding: 1.5rem 0 0.5rem 0;
 }
 
 @media all and (max-width: 1280px) {
@@ -169,6 +58,9 @@ svg {
 }
 
 @media all and (max-width: 991px) {
+  .card-group .col-12 {
+    margin-bottom: 1rem;
+  }
 }
 @media all and (max-width: 769px) {
 }
@@ -219,4 +111,41 @@ svg {
   #dropdownMenuOutlineButton {
     padding: 0.5em;
   }
+}
+
+/**모든 프로젝트**/
+.card-group .card-body {
+  padding: 1.5rem 1rem 1rem 1rem;
+}
+.card-group a .card-img-top {
+  max-height: 200px;
+  display: block;
+  object-fit: cover;
+}
+.card-group .card {
+  transition: transform 1s;
+  -webkit-transition: transform 1s;
+  overflow: hidden;
+}
+.card-group .card a {
+  text-decoration: none;
+}
+
+.requirement {
+  list-style-type: none;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+
+.requirement button {
+  display: inline-block;
+  border: 1px solid #e2d9e4;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #84868b;
+  background: transparent;
+  text-decoration: none;
 }

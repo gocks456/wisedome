@@ -17,7 +17,7 @@
 <!-- 메인 작업화면 -->
 <div class="content-wrapper">
 
-	<!--경쟁자 진행상황보기 배너-->
+	{#<!--경쟁자 진행상황보기 배너-->
 	<input type="checkbox" id="popup">
 	<div class="wing">
 		<label for="popup" class="wing_label">
@@ -28,7 +28,7 @@
 				<p><span>{{current_user.fullname}}님</span>의 현재 답변완료수 <span id="answer_counts">0</span>개이며, 다른 사용자들의 평균 답변수는 <span id="average">0</span>개입니다. <br> &#10005;</p>
 			</div> 
 		</label> 
-	</div>
+	</div>#}
 
 
 	<div class="page-header">
@@ -38,14 +38,14 @@
 			{{project.name}}
 			<span>&nbsp;&nbsp; <span id="per"></span>% 완료</span>
 		</h3>
-		<nav aria-label="breadcrumb">
+		<!--<nav aria-label="breadcrumb">
 			<ul class="breadcrumb">
 				<label for="controlbar controlbar-gradient-success"><i class="mdi mdi-format-size text-primary "></i> <span class="text-adjust">글자크기조절</span> 
 					<input type="range" min=10 max=30 value=10 class="controlbar" data-fs-target-class="textsize"/>
 				</label> 
 				</li>
 			</ul>
-		</nav>
+		</nav>-->
 	</div>
 
 	<!--컨텐츠 들어가는 영역-->
@@ -145,7 +145,6 @@ $("#csrf_token").val(csrf);
 				}
 			}
 		});
-		setUserGraph();
 	});
 </script>
 

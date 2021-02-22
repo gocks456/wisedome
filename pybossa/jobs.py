@@ -149,9 +149,9 @@ def get_default_jobs():  # pragma: no cover
 # 프로젝트 자동 마감
 #def project_deadline():
     """마감 프로젝트 관리"""
-#    from pybossa.core import project_repo
-#    from pybossa.cache.projects
-#    projects = 
+    #from pybossa.core import project_repo
+    #from pybossa.cache.projects
+    #projects = 
 
 def get_maintenance_jobs():
     """Return mantainance jobs."""

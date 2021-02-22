@@ -1,0 +1,354 @@
+@font-face { font-family: 'S-CoreDream-2Light'; src: url('../css/font/SCDream2.otf') format('woff'); font-weight: normal; font-style: normal; }
+@-ms-viewport {width: device-width;}
+
+body{
+font-family: 'S-CoreDream-2Light';}
+
+section{
+  margin: 0 auto;
+}
+
+
+#header{
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	-moz-align-items: center;
+	-webkit-align-items: center;
+	-ms-align-items: center;
+	align-items: center;
+	-moz-justify-content: center;
+	-webkit-justify-content: center;
+	-ms-justify-content: center;
+	justify-content: center;
+	position: relative;
+	padding: 0;
+  background:url("../images/header-bg.jpg") ;
+  background-position: center top;
+  background-size: cover;
+  height: 10em;
+}
+
+
+.title{
+	text-align: center;
+	margin: 0 auto;
+}
+
+.title h1 {
+	padding-bottom: 0.5em;
+	font-size: 1.2em;
+}
+
+hr{
+width: 70px;
+background-color:#b66dff;
+height: 5px;
+border: none;
+}
+
+
+
+/********프리미엄 프로젝트*******/
+#premium { 
+    position: relative;
+	padding: 4em 0;
+	max-width: 2300px;
+	}
+	
+  .swiper-container {
+	width: 90%;}
+	
+  .swiper-slide {
+    text-align: left;
+    overflow: hidden;
+   border-radius: 10px;
+	max-height:400px ;
+	max-width: 400px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+		align-items: center;
+	}
+	
+	
+.swiper-slide img{
+	filter: brightness(65%) saturate(120%);
+	}
+
+.premium-intext{
+position: absolute;
+z-index: 999;
+left: 0;
+bottom: 0;
+color: white;
+	}
+
+  .premium-intext h3{
+		font-size: 1em;
+		color: white; }
+
+  .premium-intext h3 span{
+  color: yellow;
+	font-size: 0.5em;} 
+	
+  .premium-intext li{
+		display: inline-block;
+		font-size: 0.75em; }
+
+	
+.swiper-pagination{
+	display: none;
+}	
+
+/***2. 카테고리별 프로젝트***/
+#category {
+	padding: 4em 0;
+	background-color:#f4f5f6;
+	}
+	.all-category{
+		margin: 0 auto;
+		text-align: center;
+		max-width: 1920px;
+	}
+	.ctg {
+		width: 20%;
+		max-width: 250px;
+		border-radius: 50%;
+		text-align: center;
+		padding:1em;
+		margin: 0 1.25em;
+		display: inline-block;}
+	  
+		.ctg p {
+			margin: 0 auto;
+			font-size: 1em;
+			color: #396361;
+		}	
+			
+		.ctg svg{
+			fill: #315057;
+			width: 50%;
+		}	
+		
+		.ctg:hover svg, .ctg:hover p{
+			cursor: pointer;
+			fill: #4B93A3;
+			color: #4B93A3;}
+	
+
+	/*********3. 진행중인 프로젝트**************/
+#project { 
+	max-width: 1920px;
+	text-align: center;
+	padding: 4em 0;
+}
+
+#project main { 
+	width: 100%;
+	margin: 0 auto;
+}
+#project div {
+	box-sizing: border-box;
+}
+
+#project h5{ 
+	width: 90%;
+	font-size: 0.7em;
+	text-align: right;}
+
+#project-top, #project-bottom{ text-align: center;}
+
+
+/* 프로젝트 보기수정 2020.12.20**/
+.container {
+	position: relative;
+	width: 22%;
+	border-radius: 0.5em;
+	margin: 0.5em ;
+	display: inline-block;
+  }
+  
+  .project-img{
+	width: 17.5em;
+	height: 17.5em;
+	object-fit: cover;
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 0.5em;
+	-webkit-filter: brightness(65%);
+	filter: brightness(65%);
+  }
+  .project-btn{
+    font-family: 'S-CoreDream-2Light';
+	padding: 0.5em 3em;
+	border-radius: .5em;
+	margin-top:1em;
+	background: -webkit-gradient(linear, left top, right top, from(#90caf9), color-stop(99%, #047edf));
+	background: linear-gradient(to right, #90caf9, #047edf 99%);
+	border: 0;
+	-webkit-transition: opacity 0.3s ease;
+	transition: opacity 0.3s ease; }
+  .project-btn a{color: #fff;}
+  .project-btn :hover{
+	opacity: .8;}
+
+  .overlay {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .8s ease;
+	border-radius: 0.5em;
+	background-color: transparent;
+	opacity: 1;
+  }
+  .overlay h3{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	font-weight: bold;
+	color: #fff;}
+
+  .container:hover .project-img {
+	-webkit-filter: brightness(50%);
+	filter: brightness(50%);
+  }
+
+  .text {
+	color:#555555;
+	position: absolute;
+	text-align: center;
+	padding: 10% 5% ;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .5s ease;
+	border-radius: 0.5em;
+	background-color:#f4f5f6;
+  }
+
+.container:hover .text{
+	opacity: 1;
+}
+
+.overlay .text ul li{
+font-size: 0.7em;
+display: inline;
+}
+.text p{
+	font-size: 0.8em;}
+
+.level{
+	text-align: center;
+	border-radius: 0.25em;
+	font-weight: 700;
+	display: block;
+	font-size: 0.7em;
+	width: 5em;
+	margin: 0 auto;
+	margin-bottom: 1em;
+}
+
+.level-high{	background-color: #F0DFC5; color: #6e4303;}
+.level-middle{	background-color:#C5DCF0; color: #04549b;}
+.level-easy{	background-color:#C5F0D4; color:#038832;}
+
+
+/****가격별 정렬***/
+form{
+margin:0 10% 2% 80% ;
+}
+
+#orderlist {
+	width: 100%;
+	max-width: 100%;   
+	display: block;
+	font-size: 0.6em;
+	font-weight: 500;
+	color: #444;
+	line-height: 1.3;
+	padding: .6em 1.4em .5em .8em;
+	box-sizing: border-box;
+	margin: 0;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+	border-radius: 5px;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #fff;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+		linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+	background-repeat: no-repeat, repeat;
+	background-position: right .7em top 50%, 0 0;
+	background-size: .65em auto, 100%;
+	font-family: 'S-CoreDream-2Light';
+}
+
+#orderlist::-ms-expand {
+	display: none;
+}
+
+#orderlist:hover {
+	border-color: #888;
+}
+
+#orderlist:focus {
+	border-color: #aaa;
+	box-shadow: 0 0 2px 1px #245f96;
+	box-shadow: 0 0 0 3px -moz-mac-focusring;
+	color: #222; 
+	outline: none;
+}
+
+*[dir="rtl"] #orderlist, :root:lang(ar) #orderlist, :root:lang(iw) #orderlist {
+	background-position: left .7em top 50%, 0 0;
+	padding: .6em .8em .5em 1.4em;
+}
+
+#orderlist:disabled, #orderlist[aria-disabled=true] {
+	color: graytext;
+	background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+}
+
+#orderlist:disabled:hover, #orderlist[aria-disabled=true] {
+	border-color: #aaa;
+}
+
+#next{
+	padding: 0.5em 3em;
+	border-radius: .5em;
+	margin-top:1em;
+	border: 1px solid #b66dff;
+	background: transparent;
+}
+#next a {	
+	color: #b66dff;
+	text-decoration: none;}
+
+#mb-only{
+	display: none;
+}

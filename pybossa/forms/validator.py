@@ -150,8 +150,8 @@ class CheckPasswordStrength(object):
     def _get_message(self, uppercase=True, lowercase=True,
                      numeric=True, special=True):
         message = []
-        if uppercase:
-            message.append('one uppercase')
+        #if uppercase:
+        #    message.append('one uppercase')
         if lowercase:
             message.append('one lowercase')
         if numeric:

@@ -336,7 +336,7 @@ $(document).ready(function(){
 
 
 		$.ajax({
-			url: '{{url_for("gmail.send_mail")}}',
+			url: '{{url_for("gmail.auth_msg")}}',
 			data: {"random_num": random_num, "email": email},
 			type: 'POST',
 			success: function(res) {
@@ -367,7 +367,7 @@ $(document).ready(function(){
 		}
 
 		$.ajax({
-			url: '{{url_for("gmail.send_mail")}}',
+			url: '{{url_for("gmail.auth_msg")}}',
 			data: {"random_num": random_num, "email": email},
 			type: 'POST',
 			success: function(res) {

@@ -556,8 +556,8 @@ def check_password_strength(
     """
 
     required_chars = []
-    if uppercase:
-        required_chars.append(r'[A-Z]')
+    #if uppercase:
+    #    required_chars.append(r'[A-Z]')
     if lowercase:
         required_chars.append(r'[a-z]')
     if numeric:

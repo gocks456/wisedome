@@ -49,3 +49,31 @@ $('.remove-preview').on('click', function() {
   previewZone.addClass('hidden');
   reset(dropzone);
 });
+
+
+//이미지 파일 jpg, 또는 png만 가능
+var validateType = function(img){
+  return (['image/jpeg','image/jpg','image/png'].indexOf(img.type) > -1);
+}
+
+var validateName = function(fname){
+  let extensions = ['jpeg','jpg','png'];
+  let fparts = fname.split('.');
+  let fext = '';
+
+  if(fparts.length > 1){
+      fext = fparts[fparts.length-1];
+  }
+
+  let validated = false;
+  
+  if(fext != ''){
+      extensions.forEach(function(ext){
+          if(ext == fext){
+              validated = true;
+          }
+      });
+  }
+
+  return validated;
+}

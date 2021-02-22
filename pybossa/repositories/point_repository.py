@@ -6,6 +6,8 @@ from pybossa.model.user import User
 from pybossa.exc import WrongObjectError, DBIntegrityError
 
 class PointRepository(Repository):
+	def get_current_point(self, user_id):
+		return self.db.session.query(Point.current_point).filter_by(user_id=user_id).one()
 
 	def get(self, id):
 		return self.db.session.query(Point).get(id)
@@ -19,15 +21,17 @@ class PointRepository(Repository):
 	def update_point(self, task_sum, user_id):
 		point= self.db.session.query(Point).filter_by(user_id=user_id).one()
 		point.point_sum = point.point_sum + task_sum
-		point.current_point = point.point_sum - point.exchange
+		#point.current_point = point.point_sum - point.exchange
 		self.db.session.commit()
+
 
 	def exchange(self, user_id, exchange_point):
 		point= self.get_point(user_id)
-		point.exchange = point.exchange + exchange_point
-		point.current_point = point.point_sum - point.exchange
-		user=self.db.session.query(User).get(user_id)
-		user.current_point = point.current_point
+		#point.exchange = point.exchange + exchange_point
+		#point.current_point = point.point_sum - point.exchange
+		point.current_point = point.current_point - point.exchange
+		#user=self.db.session.query(User).get(user_id)
+		#user.current_point = point.current_point
 		self.db.session.commit()
 
 	def save(self, point):

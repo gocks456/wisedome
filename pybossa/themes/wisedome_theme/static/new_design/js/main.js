@@ -70,7 +70,6 @@
 	
 
 
-
 function arrow(x) {
 	x.classList.toggle("fa-chevron-up"); 
 }
@@ -120,22 +119,33 @@ $(document).ready(function(){
 $('#Capa_1').click(function() {
 	$(this).css('fill', '#4B93A3');
 	$('#Capa_2, #Capa_3, #Capa_4').css('fill','#315057');
-	//return false;
+	return false;
 });
 $('#Capa_2').click(function() {
 	$(this).css('fill', '#4B93A3');
 	$('#Capa_1, #Capa_3, #Capa_4').css('fill','#315057');
-	//return false;
+	return false;
 });
 $('#Capa_3').click(function() {
 	$(this).css('fill', '#4B93A3');
 	$('#Capa_2, #Capa_4, #Capa_1').css('fill','#315057');
-	//return false;
+	return false;
 });
 $('#Capa_4').click(function() {
 	$(this).css('fill', '#4B93A3');
 	$('#Capa_1, #Capa_2, #Capa_3').css('fill','#315057');
-	//return false;
+	return false;
 });
 
 
+
+
+//nav color change
+$(window).scroll(function(){
+	var scroll = $(window).scrollTop();
+	if(scroll < 300){
+		$('.fixed-top').css('background', 'transparent');
+	} else{
+		$('.fixed-top').css('background', 'rgba(23, 162, 184, 0.9)');
+	}
+});

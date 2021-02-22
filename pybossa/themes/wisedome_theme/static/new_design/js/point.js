@@ -65,6 +65,8 @@ $("input:text[numberOnly]").on("keyup", function() {
 
 
 
+
+
 // if input empty display warning
 const accountName = document.getElementById('userName');
 const bank = document.getElementById('bankAccount');
@@ -91,6 +93,8 @@ $(document).ready(function() {
   });
 })
 
+
+
 //agree to policy check
 $(document).ready(function(){
   $("#checkPolicy").change(function(){
@@ -98,12 +102,75 @@ $(document).ready(function(){
           $("#chkConfirm").css("display","none");
       }else{
         $("#chkConfirm").css("display","block");
+
       }
   });
 });
+
+
+
+//Register account
+$(function() {
+  $('#userName').on('keyup',function() {
+	  if( $(this).val() == "" ){
+		  $('.error-name').css("display","block");
+	  }
+	  else {
+		  $('.error-name').css("display","none");
+	  }
+  });
+});
+
+
+//bank account
+  $(document).ready(function() {
+	  if($('#bank option:selected').length == 0){
+		  $('.error-bank').css("display","block");
+	  }
+	  else {
+		  $('.error-bank').css("display","none");
+	  }
+  });
+
+//Register account
+$(function() {
+  $('#bankAccount').on('keyup',function() {
+	  if( $(this).val() == "" ){
+		  $('.error-account').css("display","block");
+	  }
+	  else {
+		  $('.error-account').css("display","none");
+	  }
+  });
+});
+
+
+
+//은행이름 젤 마지막단계에 띄우기
+  $(document).ready(function(){
+    $('#bank').on('change',function(){
+        //var optionValue = $(this).val();
+        //var optionText = $('#bank option[value="'+optionValue+'"]').text();
+        var optionText = $("#bank option:selected").text();
+        $('#bankName').html(optionText);
+    });
+});
+
+
+
+
 
 //name print
 function printName()  {
   const name = document.getElementById('userName').value;
   document.getElementById("result").innerText = name;
 }
+
+//금액 print
+function printTransferMoney()  {
+  const price = document.getElementById('price').value;
+  document.getElementById("transferMoney").innerText = price;
+}
+document.querySelector(".wizard .actions ul li:nth-child(2) a").addEventListener("click",printTransferMoney,false); 
+
+
