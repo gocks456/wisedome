@@ -144,7 +144,7 @@ def get_top5_users_7_days():
                "user".restrict, SUM(task_run.point) AS point, SUBSTRING("user".created, 0 ,5) AS created,
                COUNT(task_run.project_id) AS n_answers FROM "user", task_run
                WHERE "user".restrict=false AND "user".id=task_run.user_id
-               AND DATE(task_run.finish_time) > NOW() AT TIME ZONE 'ROK' - INTERVAL '7000 days'
+               AND DATE(task_run.finish_time) > NOW() AT TIME ZONE 'ROK' - INTERVAL '7 days'
                AND DATE(task_run.finish_time) <= NOW() AT TIME ZONE 'ROK'
                GROUP BY "user".id
                ORDER BY point DESC LIMIT 5;''')

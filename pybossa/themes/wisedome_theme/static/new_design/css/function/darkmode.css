@@ -3,8 +3,6 @@
   background-color: #323641 !important;
   /**nav메뉴**/
   /*컨텐츠**/
-  /**버튼색변경**/
-  /**푸터**/
 }
 
 [data-theme="dark"] h1,
@@ -76,7 +74,13 @@
   color: #fff !important;
 }
 
-[data-theme="dark"] .content-wrapper .wizard > .content .wizard > .steps .number,
+[data-theme="dark"]
+  .content-wrapper
+  .wizard
+  > .content
+  .wizard
+  > .steps
+  .number,
 [data-theme="dark"] .content-wrapper .wizard > .content .won {
   color: #151519 !important;
 }
@@ -107,8 +111,18 @@
 }
 
 [data-theme="dark"] .content-wrapper .card .card-body .answers .list-group-item,
-[data-theme="dark"] .content-wrapper .card .card-body .my-border-bottom .list-group-item,
-[data-theme="dark"] .content-wrapper .card .card-body .my-border-top .list-group-item {
+[data-theme="dark"]
+  .content-wrapper
+  .card
+  .card-body
+  .my-border-bottom
+  .list-group-item,
+[data-theme="dark"]
+  .content-wrapper
+  .card
+  .card-body
+  .my-border-top
+  .list-group-item {
   color: #ccc;
 }
 
@@ -122,7 +136,13 @@
   border-color: #555555;
 }
 
-[data-theme="dark"] .content-wrapper .card .card-body #nav-tabContent .wordbook p {
+[data-theme="dark"]
+  .content-wrapper
+  .card
+  .card-body
+  #nav-tabContent
+  .wordbook
+  p {
   color: #fff;
 }
 
@@ -145,7 +165,13 @@
 }
 
 [data-theme="dark"] .content-wrapper .card .card-body .modal-content,
-[data-theme="dark"] .content-wrapper .card .card-body .dataTables_wrapper .dataTables_paginate a,
+[data-theme="dark"]
+  .content-wrapper
+  .card
+  .card-body
+  .dataTables_wrapper
+  .dataTables_paginate
+  a,
 [data-theme="dark"] .content-wrapper .card .card-body table,
 [data-theme="dark"] .content-wrapper .card .card-body th,
 [data-theme="dark"] .content-wrapper .card .card-body td {
@@ -154,40 +180,53 @@
   border-color: #555555 !important;
 }
 
-[data-theme="dark"] .content-wrapper .card .card-body .accordion .accordion__content {
+[data-theme="dark"] .content-wrapper .card .card-body .accordion .card {
+  background-color: #323641;
+}
+
+[data-theme="dark"]
+  .content-wrapper
+  .card
+  .card-body
+  .accordion
+  .card
+  .card-header {
   color: #fff;
 }
 
-[data-theme="dark"] .content-wrapper .card .card-body .accordion .accordion__title {
+[data-theme="dark"]
+  .content-wrapper
+  .card
+  .card-body
+  .accordion
+  .card
+  .card-body {
+  color: #fff;
+}
+
+/**버튼색변경**/
+[data-theme="dark"].btn-outline-primary {
   border-color: #555555;
   color: #fff;
 }
 
-[data-theme="dark"] .content-wrapper .card .card-body .accordion .accordion__item:last-child {
-  border-color: #555555;
-}
-
-[data-theme="dark"] .btn-outline-primary {
-  border-color: #555555;
-  color: #fff;
-}
-
-[data-theme="dark"] .btn-inverse-primary {
+[data-theme="dark"].btn-inverse-primary {
   background-color: #8840d4;
   color: #fff;
 }
 
-[data-theme="dark"] #disable-submit {
+[data-theme="dark"]#disable-submit {
   color: #fff;
 }
 
-[data-theme="dark"] #manage-answer-btn {
+[data-theme="dark"]#manage-answer-btn {
   background-color: #62b1f1;
   color: #fff;
 }
 
-[data-theme="dark"] footer {
-  border-color: #33333d;
+/**푸터**/
+[data-theme="dark"].footer {
+  border-color: #555555;
   background-color: #151519;
 }
 
@@ -257,13 +296,28 @@
   color: #fff;
 }
 
-[data-theme="dark"] .bg-white .content-wrapper .page-header .page-title .controlbar,
-[data-theme="dark"] .bg-white .content-wrapper .page-header .breadcrumb .controlbar {
+[data-theme="dark"]
+  .bg-white
+  .content-wrapper
+  .page-header
+  .page-title
+  .controlbar,
+[data-theme="dark"]
+  .bg-white
+  .content-wrapper
+  .page-header
+  .breadcrumb
+  .controlbar {
   background-color: #76767a;
 }
 
 [data-theme="dark"] .bg-white .content-wrapper .card .card-body .card-title,
-[data-theme="dark"] .bg-white .content-wrapper .card .card-body .card-description,
+[data-theme="dark"]
+  .bg-white
+  .content-wrapper
+  .card
+  .card-body
+  .card-description,
 [data-theme="dark"] .bg-white .content-wrapper .card .card-body .main-text {
   color: #fff;
 }
@@ -282,7 +336,12 @@
 }
 
 [data-theme="dark"] .bg-white .content-wrapper .card .card-body .answers,
-[data-theme="dark"] .bg-white .content-wrapper .card .card-body .my-border-bottom,
+[data-theme="dark"]
+  .bg-white
+  .content-wrapper
+  .card
+  .card-body
+  .my-border-bottom,
 [data-theme="dark"] .bg-white .content-wrapper .card .card-body .my-border-top {
   border-color: #555555;
 }
@@ -293,11 +352,23 @@
   color: #fff;
 }
 
-[data-theme="dark"] .bg-white .content-wrapper .card .card-body #nav-tabContent {
+[data-theme="dark"]
+  .bg-white
+  .content-wrapper
+  .card
+  .card-body
+  #nav-tabContent {
   border-color: #555555;
 }
 
-[data-theme="dark"] .bg-white .content-wrapper .card .card-body #nav-tabContent .wordbook p {
+[data-theme="dark"]
+  .bg-white
+  .content-wrapper
+  .card
+  .card-body
+  #nav-tabContent
+  .wordbook
+  p {
   color: #fff;
 }
 
@@ -316,7 +387,14 @@
 }
 
 [data-theme="dark"] .bg-white .content-wrapper .card .card-body .modal-content,
-[data-theme="dark"] .bg-white .content-wrapper .card .card-body .dataTables_wrapper .dataTables_paginate a,
+[data-theme="dark"]
+  .bg-white
+  .content-wrapper
+  .card
+  .card-body
+  .dataTables_wrapper
+  .dataTables_paginate
+  a,
 [data-theme="dark"] .bg-white .content-wrapper .card .card-body table,
 [data-theme="dark"] .bg-white .content-wrapper .card .card-body th,
 [data-theme="dark"] .bg-white .content-wrapper .card .card-body td {
@@ -329,12 +407,35 @@
   fill: #fff;
 }
 
-[data-theme="dark"] .bg-white .content-wrapper .card .card-body .accordion .accordion__content {
+[data-theme="dark"]
+  .bg-white
+  .content-wrapper
+  .card
+  .card-body
+  .accordion
+  .card {
+  background-color: #323641;
+}
+
+[data-theme="dark"]
+  .bg-white
+  .content-wrapper
+  .card
+  .card-body
+  .accordion
+  .card
+  .card-header {
   color: #fff;
 }
 
-[data-theme="dark"] .bg-white .content-wrapper .card .card-body .accordion .accordion__title {
-  border-color: #555555;
+[data-theme="dark"]
+  .bg-white
+  .content-wrapper
+  .card
+  .card-body
+  .accordion
+  .card
+  .card-body {
   color: #fff;
 }
 
@@ -358,8 +459,8 @@
   border-color: #555555;
 }
 
-[data-theme="dark"] .bg-white footer {
-  border-color: #33333d;
+[data-theme="dark"] .bg-white .footer {
+  border-color: #555555;
   background-color: #151519;
 }
 /*# sourceMappingURL=darkmode.css.map */

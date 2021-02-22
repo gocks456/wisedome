@@ -3183,7 +3183,9 @@ pre code {
   -ms-flex-order: 12;
   order: 12;
 }
-
+.col-half-offset{
+  margin-left:4.166666667%
+}
 .offset-1 {
   margin-left: 8.33333%;
 }
@@ -7626,7 +7628,8 @@ input[type="button"].btn-block {
 .accordion .card .card-header {
   background-color: transparent;
   border: none;
-  padding: 2rem;
+  padding: 1.5rem 2rem;
+  cursor: pointer;
 }
 .accordion .card .card-header * {
   font-family: "SCDream3", sans-serif;
@@ -14069,7 +14072,7 @@ code {
 
 /* Footer */
 .footer {
-  background: #f2edf3;
+  background: #f2edf3 !important;
   border-top: 1px solid #e7dee9;
   padding: 20px 1rem;
   transition: all 0.25s ease;

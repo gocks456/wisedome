@@ -150,6 +150,9 @@ svg {
   padding: 5rem 2.5rem 2.5rem 2.5rem;
   background: #f7f6f6;
 }
+.project-wrapper .col-md-8 {
+  padding-bottom: 2rem;
+}
 .card-group {
   max-width: 1920px;
   margin: 0 auto;
@@ -158,14 +161,16 @@ svg {
   padding: 1.5rem 1rem 1rem 1rem;
 }
 .card-group a .card-img-top {
-  max-height: 200px;
   display: block;
   object-fit: cover;
+  width: 100%;
+  height: 300px;
 }
 .card-group .card {
   transition: transform 1s;
   -webkit-transition: transform 1s;
   overflow: hidden;
+  margin-top: 1.5rem;
 }
 .card-group .card a {
   text-decoration: none;

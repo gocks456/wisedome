@@ -114,44 +114,6 @@
 						<span class="float-right text-muted">{{current_user.email_addr}}</span>
 						</p>
 
-						<p class="clearfix">
-						<span class="float-left"><i class="mdi mdi-lock"></i>비밀번호</span>
-						<button class="btn btn-secondary btn-sm float-right" type="edit" data-toggle="modal" data-target="#editpw">변경하기</button>
-						</p>
-
-						<!--비번 수정 팝업-->
-						<div class="modal fade" id="editpw" tabindex="-1" role="dialog" aria-labelledby="editPw" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="editPw">비밀번호 변경하기</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span></button>
-									</div>
-									<div class="modal-body">
-										<form>
-											<div class="form-group">
-												<label for="nickname" class="col-form-label">현재 비밀번호</label>
-												<input type="password" class="form-control" id="pw">
-											</div>
-											<div class="form-group">
-												<label for="new-pw" class="col-form-label">새로운 비밀번호</label>
-												<input type="password" class="form-control" id="new-pw1">
-											</div>
-											<div class="form-group">
-												<label for="new-pw" class="col-form-label">새로운 비밀번호 재입력</label>
-												<input type="password"  class="form-control" id="new-pw2">
-											</div>
-										</form>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-										<button type="submit" class="btn btn-success" id="pw_change">저장하기</button>
-									</div>
-								</div>
-							</div>
-						</div><!--비밀번호 변경 끝-->
-
 					</div>
 
 				</div><!--col lg-6-->
@@ -168,7 +130,7 @@
 						<h6 class="font-weight-normal">이달의 작업건수 <i class="mdi mdi-database-plus mdi-1em float-right"></i></h6>
 						<h2 class="my-4">{{projects_count_30days}}건</h2>
 						<div class="progress progress-md flex-grow">
-							<div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow={{projects_count_30days|int}} style="width: {{projects_count_30days}}%;" aria-valuemin="0" aria-valuemax="100"></div>
+							<div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow={{projects_count_30days.replace(',' , '')|int}} style="width: {{projects_count_30days.replace(',' , '')|int}}%;" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 						<!--<p class="card-text mt-3 text-right">지난달 대비 10% 증가함</p>-->
 					</div>
@@ -186,7 +148,7 @@
 						<h6 class="font-weight-normal">이달의 적립내역 <i class="mdi mdi-star-circle mdi-1em float-right"></i></h6>
 						<h2 class="my-3">{{point_30days}} 포인트</h2>
 						<div class="progress progress-md flex-grow">
-							<div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow={{point_30days|int}} style="width: {{point_30days}}%;" aria-valuemin="0" aria-valuemax="100"></div>
+							<div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow={{point_30days.replace(',' , '')|int}} style="width: {{point_30days.replace(',' , '')|int}}%;" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 						<!--<p class="card-text mt-3 text-right">지난달 대비 20% 증가함</p>-->
 					</div>
@@ -233,7 +195,7 @@
 			</div><!--card-->
 		</div><!--card body-->
 
-
+		{#
 		<!--포인트내역 -->
 		<div class="col-xl-12 grid-margin">
 			<div class="card bg-white">
@@ -280,6 +242,10 @@
 				</div><!--card body-->
 			</div><!--card-->
 		</div><!--col xl 12-->
+		#}
+
+
+
 	</div>
 </div><!--contents wrapper-->
 

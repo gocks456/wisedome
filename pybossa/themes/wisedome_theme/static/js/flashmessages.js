@@ -1,4 +1,7 @@
 function pybossaNotify(msg, showNotification, type){
+	if (msg=='로그아웃 완료')
+		return;
+
     $("#pybossa-notification").remove();
     var div = $("<div/>");
     div.attr("id", "pybossa-notification");
@@ -40,6 +43,9 @@ function pybossaNotify(msg, showNotification, type){
     if (type === 'error') {
         type = 'danger';
     }
+	// 추가
+	div.addClass("alert");
+
     div.addClass("alert-" + type);
     div.prepend(icon);
     div.append(text);
@@ -47,7 +53,7 @@ function pybossaNotify(msg, showNotification, type){
     if (showNotification === true) {
         div.addClass("show-notification");
         //$("body").prepend(div);
-		$(".main-panel").prepend(div);
+		$(".flash_messages").prepend(div);
 
     }
     else {
