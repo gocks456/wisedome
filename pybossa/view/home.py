@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with PYBOSSA.  If not, see <http://www.gnu.org/licenses/>.
 """Home view for PYBOSSA."""
-from flask import current_app, abort, url_for
+from flask import current_app, abort, url_for, request
 from flask_login import current_user
 from pybossa.model.category import Category
 from flask import Blueprint
@@ -28,11 +28,10 @@ from pybossa.util import rank, handle_content_type, redirect_content_type
 from jinja2.exceptions import TemplateNotFound
 
 # New Design
-from pybossa.core import project_repo
+from pybossa.core import project_repo, task_repo, blog_repo, user_repo
 from pybossa.cache import site_stats
-
-from pybossa.core import task_repo
-
+from flask_wtf.csrf import generate_csrf
+from pybossa.model.blogpost import Blogpost
 
 blueprint = Blueprint('home', __name__)
 
@@ -74,12 +73,11 @@ def home():
     # 오픈한 모든 프로젝트
     projects = cached_projects.get_all_projects()
 
-    # 7일 간 top 10
-    top_users = site_stats.get_top10_users_7_days()
-
 
     if current_user.is_anonymous:
-        response = dict(template='/new_design/index.html', projects=projects, top_users=top_users )
+        # 7일 간 top 5
+        top_users = site_stats.get_top5_users_7_days()
+        response = dict(template='/new_design/index2.html', projects=projects, top_users=top_users )
         return handle_content_type(response)
     else:
         # 인기 프로젝트
@@ -97,16 +95,43 @@ def home():
 #        return redirect_content_type(url_for('project.index'))
 
 
-@blueprint.route("about")
-def about():
-    """Render the about template."""
-    response = dict(template="/home/about.html")
+@blueprint.route("qna", defaults={'category':'회원가입'})
+@blueprint.route("qna/<category>")
+def qna(category):
+
+    board_list = blog_repo.get_category_blogposts(category)
+    response = dict(template="new_design/qna/qnaBoard_"+category+".html", board_list=board_list)
+    return handle_content_type(response)
+
+@blueprint.route("qna/view/<int:blog_id>")
+def qna_view(blog_id):
+    blog = blog_repo.get(blog_id)
+    user = user_repo.get(blog.user_id)
+    response = dict(template="new_design/qna/viewQnA.html", blog=blog, user=user)
+    return handle_content_type(response)
+    
+@blueprint.route("qna/write/<category>", methods=['GET', 'POST'])
+def write(category):
+    if request.method == "POST":
+        print(request.form.get('body'))
+        print(request.form.get('title'))
+        print(request.form.get('subject'))
+        blog = Blogpost(
+                    title=request.form.get('title'),
+                    body=request.form.get('body'),
+                    subject=request.form.get('subject'),
+                    category=category,
+                    user_id=current_user.id
+                    )
+        blog_repo.save(blog)
+        return 'success'
+    response = dict(template="new_design/qna/editor_"+category+".html", csrf=generate_csrf())
     return handle_content_type(response)
 
 @blueprint.route("faq")
 def faq():
     """Render the about template."""
-    response = dict(template="/custom/faq.html")
+    response = dict(template="/new_design/faq.html")
     return handle_content_type(response)
 
 @blueprint.route("sontest")
@@ -191,12 +216,3 @@ def search():
     """Render search results page."""
     response = dict(template="/home/search.html")
     return handle_content_type(response)
-
-@blueprint.route("results")
-def result():
-    """Render a results page."""
-    try:
-        response = dict(template="/home/_results.html")
-        return handle_content_type(response)
-    except TemplateNotFound:
-        return abort(404)

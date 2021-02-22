@@ -24,6 +24,24 @@ a {
 #bankAccount {
   max-width: 40em;
 }
+
+option,
+#bank {
+  color: #343a40;
+}
+/**에러메세지*/
+.error-name,
+.error-bank,
+.error-account {
+  color: orangered;
+  font-size: 0.75rem;
+}
+
+.success-bank {
+  display: none;
+  color: green;
+  font-size: 0.75rem;
+}
 #price {
   text-align: right;
   font-size: 1.25em;
@@ -45,8 +63,8 @@ a {
   font-size: 0.85rem;
 }
 #chkConfirm {
-  display: none;
-  text-align: center;
+  display: block;
+  text-align: left;
   color: red;
   font-size: 0.75rem;
 }
@@ -161,7 +179,6 @@ a {
   background-color: #a347ff;
   border-color: #9d3aff;
 }
-
 .wizard > .actions a:focus,
 .wizard > .actions a.focus {
   color: #fff;
@@ -465,6 +482,7 @@ a {
   float: left;
   text-align: center;
 }
+
 @media (max-width: 767px) {
   .wizard > .steps > ul > li {
     width: 50%;
@@ -615,15 +633,20 @@ a {
   display: inline-block;
   text-align: right;
 }
+
+/**page next - previous btn**/
 .wizard > .actions > ul > li {
   float: left;
   margin: 0 0.5em;
+}
+.wizard > .actions > ul > li:nth-child(2) a {
 }
 .wizard.vertical > .steps {
   display: inline;
   float: left;
   width: 30%;
 }
+
 @media (max-width: 767px) {
   .wizard.vertical > .steps {
     width: 42%;

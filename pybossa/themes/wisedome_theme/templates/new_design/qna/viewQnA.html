@@ -1,0 +1,101 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/new_design/css/viewQnA.css">
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+	<div class="page-header">
+		<h3 class="page-title"> 게시판 글보기 </h3>
+	</div>
+
+	<div class="row">
+		<div class="col-12">
+			<div class="card ">
+				<div class="card-body bg-white">
+					<div class="message-body">
+
+						{% macro render_user_thumbnail(user, upload_method) -%}
+						{% if user.info.avatar %}
+						{% if upload_method == 'rackspace'%}
+						{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onError="this.onerror=null;this.src='{{url_for('static', filename='new_design/images/user-default.png')}}';
+						{% else %}
+						{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar))}}" onError="this.onerror=null;this.src='{{url_for('static', filename='new_design/images/user-default.png')}}';
+						{% endif %}
+						{% else %}
+						{{ url_for('static', filename='new_design/images/user-default.png')}}
+						{% endif %}
+						{%- endmacro %}
+
+
+						<div class="sender-details my-border-bottom">
+							<img class="img-sm rounded-circle" src="{{ render_user_thumbnail(user, upload_method) }}" alt="">
+							<div class="details col-10">
+								<h4 class="msg-subject">{{blog.title}} </h4> <!---게시물 제목-->
+								<p class="writer-nickname"> {{user.name}} <!--글쓴이 별명--> <span class="level-badge">초급자</span> </p>
+								<p class="sender-email"><i class="mdi mdi-delettext-primary"></i>  {{blog.updated[0:16].replace('T', ' ')}}</p> <!---글작성 날짜 및 시간-->
+							</div>
+							<div class="col-2 status">
+								<label class="badge badge-info">{% if blog.answer %}답변완료{% else %}답변대기{% endif %}</label>
+							</div>
+						</div>
+
+						<div class="message-content "> <!--게시물 내용 보여지는곳-->
+							{{ blog.body|safe}}
+						</div>
+
+						<div class="mail-view col-12 bg-white">
+							<div class="row my-border-bottom">
+
+								<div class="col-xl-6 col-sm-5 mb-3 mt-3">
+									<div class="d-flex justify-content-start">
+										<button type="button" class="btn btn-sm btn-outline-secondary"><i class="mdi mdi-share"></i>  공유하기</button> 
+									</div>
+								</div>
+
+								<div class="col-xl-4 offset-xl-2 col-sm-7 mb-3 mt-3">
+									<div class="btn-group d-flex justify-content-end">
+										<!--<button type="button" class="btn btn-sm btn-outline-primary" id="heartIcon"><i class="mdi mdi-heart-outline" ></i> 좋아요</button>-->
+										<button type="button" class="btn btn-sm btn-outline-primary" id="addComment"><i class="mdi mdi-comment-processing-outline"></i>  댓글달기</button>
+									</div>
+								</div> 
+							</div>
+						</div> 
+
+						<!--댓글섹션-->
+						<div class="comment-view col-12 bg-white">
+							<div class="row">
+
+								<div class="col-12 comment-area" >
+									<div class="details">
+										<i class="mdi mdi-subdirectory-arrow-right "></i>
+										<img class="img-sm rounded-circle mr-3" src="/static/new_design/images/man.jpg"><!--댓글쓴사람 프로필이미지-->
+										<p class="writer-nickname">꿈나무</p><!---댓글쓴사람 닉네임-->
+										<p class="sender-email"><i class="mdi mdi-delettext-primary"></i> 2012/08/03 10:31</p><!--댓글 쓴 날짜-->
+										<p id="displayComment" class="mr-5"></p> <!--댓글내용 입력하면 자동으로 올라옴-->
+									</div>
+								</div>
+
+								<div class="col-sm-9 col-7 d-flex justify-content-start">
+									<textarea id="comment-input" rows="1" placeholder="...."></textarea>
+								</div>
+
+								<div class="col-sm-3 col-5 d-flex justify-content-end">
+									<button type="submit" class="btn btn-inverse-success" id="submitComment" disabled="true"><i class="mdi mdi-arrow-up-bold-circle"></i>   등록하기 </button>
+								</div>
+							</div>
+						</div>
+
+
+					</div><!--message body-->         
+
+				</div><!--card body-->
+			</div><!--card-->
+		</div><!--col 12-->
+	</div><!--row-->
+</div><!-- content-wrapper ends -->
+
+<!-- plugins:js this page only-->
+<script src="/static/new_design/js/viewQnA.js"></script>
+{% endblock %}

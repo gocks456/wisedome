@@ -1,0 +1,33 @@
+/***작은 노트북화면**/
+
+  .title hr{
+    width: 50px;
+  }
+  
+
+ /**프리미엄 프로젝트**/ 
+
+.swiper-pagination{
+	display:block;
+}	
+/***2. 카테고리별 프로젝트***/
+.ctg {
+	margin:0 1em;
+}
+  /***3. 진행중인 프로젝트****/
+  .container{
+    width: 30%;
+    margin: 0.4em;
+  }
+  
+  .text {
+    padding: 5% 2.5% ;
+}
+
+  /****가격별 정렬***/
+  form{
+    margin:0 10% 2% 75% ;
+    }
+    #orderlist {
+      font-size: 0.8em;
+    }

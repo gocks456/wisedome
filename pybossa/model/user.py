@@ -57,8 +57,8 @@ class User(db.Model, DomainObject, UserMixin):
     #20.02.18. User 성별 추가 male = M / female = F
     sex = Column(Unicode(length=1), nullable=False)
     birth = Column(Integer)
-    point_sum = Column(Integer, default=0)
-    current_point = Column(Integer, default=0)
+    #point_sum = Column(Integer, default=0)
+    #current_point = Column(Integer, default=0)
     answer_rate = Column(Numeric(4,1), default=0)
     achievement = Column(JSONB)
     
@@ -111,7 +111,7 @@ class User(db.Model, DomainObject, UserMixin):
     @classmethod
     def public_attributes(self):
         """Return a list of public attributes."""
-        return ['created', 'name', 'fullname', 'info', 'point_sum', 'answer_rate', 'current_point', 'achievement',
+        return ['created', 'name', 'fullname', 'info', 'answer_rate', 'achievement',
                 'n_answers', 'registered_ago', 'rank', 'score', 'locale']
 
     @classmethod

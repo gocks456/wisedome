@@ -276,6 +276,7 @@
 				$('#project_list').empty();
 				var Obj = JSON.parse(res);
 				$('#project_list').append(Obj.template);
+				console.log(Obj.template);
 			},
 			error: function(request, error){
 				console.log(request);
