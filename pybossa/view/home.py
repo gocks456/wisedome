@@ -73,27 +73,15 @@ def home():
 
     # 오픈한 모든 프로젝트
     projects = cached_projects.get_all_projects()
-<<<<<<< HEAD
-    print ("5a)\t" + str(time.time() - a1))
-    a1 = time.time()
-    top_users = site_stats.get_top10_users_7_days()
-    print ("5b)\t" + str(time.time() - a1))
-    a1 = time.time()
-=======
+
     # 7일 간 top 10
     top_users = site_stats.get_top10_users_7_days()
 
 
->>>>>>> 16bfe80e28653e04fe65438313d6b38d4fecfb32
     if current_user.is_anonymous:
         response = dict(template='/new_design/index.html', projects=projects, top_users=top_users )
-        print ("6a)\t" + str(time.time() - a1))
         return handle_content_type(response)
     else:
-<<<<<<< HEAD
-        print ("6b)\t" + str(time.time() - a1))
-        return redirect_content_type(url_for('project.index'))
-=======
         # 인기 프로젝트
         popular_projects = cached_projects.get_popular_top5_projects()
 
@@ -107,7 +95,6 @@ def home():
                                                                popular_projects=popular_projects, feature_projects=tmp_projects)
         return handle_content_type(response)
 #        return redirect_content_type(url_for('project.index'))
->>>>>>> 16bfe80e28653e04fe65438313d6b38d4fecfb32
 
 
 @blueprint.route("about")
@@ -122,18 +109,23 @@ def faq():
     response = dict(template="/custom/faq.html")
     return handle_content_type(response)
 
+@blueprint.route("sontest")
+def st():
+    task_repo.ttest()
+    return "KKKK"
+
 @blueprint.route("loadtest")
 def lt():
     import sys
     
     print ("@@@")
     a1 = time.time()
-    get_all = task_repo.get_all_info()
+    get_all = task_repo.get_all_info2()
     print (str(time.time() - a1))
     print ("@@@")
     print (sys.getsizeof(get_all))
     print ("@@@")
-    
+    """
     print ("###")
     a1 = time.time()
     load_test = cached_projects.loadtest2()
@@ -141,7 +133,7 @@ def lt():
     print ("###")
     print (sys.getsizeof(load_test))
     print ("###")
-	
+    """
     return "AA"
 
 

@@ -532,6 +532,7 @@ def profile(name):
         form.set_upref_mdata_choices()
 
     if current_user.is_anonymous or (user.id != current_user.id):
+        return abort(403)
         return _show_public_profile(user, form)
     if current_user.is_authenticated and user.id == current_user.id:
         return _show_own_profile(user, form, current_user)
@@ -711,8 +712,6 @@ def _show_own_profile(user, form, current_user):
     prev_works_count = 0
     prev_return_count = 0
     prev_point = 0
-
-    print(point_history)
 
     if len(point_history) != 0:
         for row in point_history:

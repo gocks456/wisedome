@@ -242,12 +242,31 @@ class TaskRepository(Repository):
 
 
     def get_all_info2(self):
-        return self.db.session.query(Task).filter(Task.id > 214728).all()
+        result = self.db.session.query(Task).filter(Task.id > 209728)
+        results = result.all()
+        print ("result : ")
+        print (result)
+        print ("results : ")
+        print (results)
+        print ("type")
+        print ("result | results")
+        print (str(type(result))+" | "+str(type(results)))
+        print ("len : " + str(len(results)))
+        return results
 
 
     def get_all_info3(self):
         return self.db.session.query(Task.info).all()
 
+    def ttest(self):
+        from pybossa.model.user import User
+        from sqlalchemy import and_
+        result = self.db.session.query(TaskRun.user_id, User.name).filter(and_(
+                TaskRun.project_id == 78, User.id == TaskRun.user_id)).group_by(TaskRun.user_id,User.name)
+        print (result)
+        for i in result.all():
+            print (i)
+        return
 
     def get_QnA_data(self, project_id):
         sql = '''

@@ -80,7 +80,7 @@ def get_ongoing_projects(user_id):
     return projects
 
 def get_popular_top5_projects():
-    sql = text('''SELECT id, name, description, info
+    sql = text('''SELECT id, name, description, info, short_name
                   FROM project
                   WHERE published = True AND complete = False
                   AND ARRAY_LENGTH(contractor_ids, 1) > 0
@@ -89,7 +89,7 @@ def get_popular_top5_projects():
     results = session.execute(sql)
     projects = []
     for row in results:
-        project = dict(id=row.id, name=row.name, description=row.description, info=row.info)
+        project = dict(id=row.id, name=row.name, description=row.description, short_name = row.short_name, info=row.info)
         projects.append(project)
     return projects
 

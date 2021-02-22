@@ -71,6 +71,7 @@
 		</div> <!--col-12-->
 	</div> <!--row-->
 
-	{{project.long_description|safe}}
-
+	<div class="card bg-white">
+		{{project.long_description|safe|markdown}}
+	</div>
 	{% endblock %}
