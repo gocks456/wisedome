@@ -274,16 +274,8 @@ def index(page):
         return json.dumps(response)
 
     # New Design
-    return project_index(page, cached_projects.get_all_projects,
-                          '', True, False, order_by, desc)
-
-    #if cached_projects.n_count('featured') > 0:
-    #    return project_index(page, cached_projects.get_all_featured,
-    #                         'featured', True, False, order_by, desc)
-    #else:
-    #    categories = cached_cat.get_list_cat2()
-    #    cat_short_name = categories[0]['short_name']
-    #    return redirect_content_type(url_for('.project_cat_index', category=cat_short_name))
+    return project_index(page, cached_projects.get_all_featured,
+                          'featured', True, False, order_by, desc)
 
 def user_all_achieve(achieve):
     if current_user.achievement["all"] == "bronze_all":
@@ -321,69 +313,33 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
     offset = (page - 1) * per_page
     projects = ranked_projects[offset:offset+per_page]
     count = cached_projects.n_count(category)
-    feature_projects = cached_projects.get_all_featured('featured')
-
-    if fallback and not projects:  # pragma: no cover
-        return redirect(url_for('.index'))
-
-    pagination = Pagination(page, per_page, count)
-#   categories = cached_cat.get_all()
-#   categories = cached_cat.get_list_cat()
-    categories = cached_cat.get_list_cat2()
-    # Check for pre-defined categories featured and draft
-    #featured_cat = Category(name='Featured',
-    featured_cat = Category(name='긴급',
-                            short_name='featured',
-                            description='Featured projects')
-    historical_contributions_cat = Category(name='Historical Contributions',
-                                            short_name='historical_contributions',
-                                            description='Projects previously contributed to')
-    if category == 'featured':
-        active_cat = featured_cat
-
-    elif category == 'before_score':
-        active_cat = Category(name='Before_score',
-                              short_name='before_score',
-                              description='Need to Score projects')
-    elif category == 'draft':
-        active_cat = Category(name='Draft',
-                              short_name='draft',
-                              description='Draft projects')
-    elif category == 'complete':
-        active_cat = Category(name='Complete',
-                              short_name='complete',
-                              description='Complete projects')
-    elif category == 'historical_contributions':
-        active_cat = historical_contributions_cat
-    else:
-        active_cat = project_repo.get_category_by(short_name=category)
-
-    if current_app.config.get('HISTORICAL_CONTRIBUTIONS_AS_CATEGORY'):
-        categories.insert(0, historical_contributions_cat)
-    # Check if we have to add the section Featured to local nav
-    if cached_projects.n_count('featured') > 0:
-        categories.insert(0, featured_cat)
-    n = datetime.datetime.now()
 
     # 2020.11.27. 업적 리뉴얼 예정
     #achieve = cached_users.get_category_achieve(current_user.id)
     #user_all_achieve(achieve)
 
+    if category == 'featured':
+        ko_cat = '프리미엄'
+    elif category == 'sound':
+        ko_cat = '음성'
+    elif category == 'image':
+        ko_cat = '이미지'
+    elif category == 'text':
+        ko_cat = '텍스트'
+    elif category == 'vidio':
+        print(projects)
+        ko_cat = '비디오'
+
     # 2020.12.04. Login 했을 때 안했을 때 구별 (임시)
     # 2021.02.18. 비로그인시 프로젝트 목록은 메인화면에 구성해준 것 만 확인
-    template = '/new_design/temp_dash.html'
+    template = '/new_design/workspace/projectList.html'
 
     template_args = {
-        "n_year": n.year,
         #"achieve": achieve,
-        "feature_projects": feature_projects,
         "projects": projects,
-        "title": gettext("Projects"),
-        "pagination": pagination,
-        "active_cat": active_cat,
-        "categories": categories,
+        "category": category,
+        "ko_cat": ko_cat,
         "template": template,
-        #"template": '/new_design/AllProject.html',
         "csrf": generate_csrf()}
 
     if use_count:
@@ -456,8 +412,7 @@ def project_cat_index(category=None, page=1):
         response = dict(template=render)
         return json.dumps(response)
     if category == None:
-        return project_index(page, cached_projects.get_all_projects,
-                              '', True, False, order_by, desc)
+        return redirect_content_type(url_for('.index'))
     return project_index(page, cached_projects.get_all, category, False, True,
                          order_by, desc)
 
@@ -890,7 +845,6 @@ def details(short_name):
         ensure_authorized_to('read', project)
 
     #template = '/projects/project.html'
-    #template = '/new_design/project_temp.html'
     template = 'new_design/workspace/projectDescription.html'
     pro = pro_features()
 

@@ -1,8 +1,6 @@
 .head-wrapper {
-  background: url("../images/feather.jpg");
-  background-position: left center;
-  background-size: auto;
-  height: 15rem;
+  background: #f2edf3;
+  height: auto;
 }
 #nav > ul > li > a {
   color: #dbceddf5 !important;
@@ -29,19 +27,15 @@
   margin-top: 7.5rem;
 }
 input[type="text"] {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: 0;
 }
-input[type="text"]:focus {
-  border: 1.5px solid #b66dff;
-}
+
 .page-title {
   text-align: center;
   font-size: 2.25rem;
   padding-bottom: 1rem;
-  font-family: "SCDream2";
+  font-family: "SCDream3";
   letter-spacing: 0.25rem;
-  color: #fff;
 }
 #find {
   padding: 0 0.25rem;
@@ -51,7 +45,9 @@ input[type="text"]:focus {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-
+.content-wrapper .card .card-body {
+  background-color: #e5f1f0;
+}
 /**질문**/
 .accordion .card .card-header,
 .accordion .card .card-body {

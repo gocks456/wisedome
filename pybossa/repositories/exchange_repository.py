@@ -15,9 +15,13 @@ class ExchangeRepository(Repository):
 				func.max(TaskRun.finish_time).label('time')).filter(and_(
 					Project.id==TaskRun.project_id, TaskRun.user_id==user_id)).group_by(Project.id, TaskRun.project_id)
 
-		q2 = self.db.session.query(Exchange.request_name.label('name'), null().label('point'), Exchange.exchange_point.label('exchange'),
-				Exchange.finish_time.label('time')).filter(Exchange.user_id==user_id)
+		q2 = self.db.session.query(Exchange.exchanged.label('name'), null().label('point'), Exchange.exchange_point.label('exchange'),
+				Exchange.finish_time.label('time')).filter(and_(Exchange.user_id==user_id, Exchange.exchanged!=None))
 		return q1.union(q2).order_by(desc('time')).all()
+
+
+	def get_exchanging(self, user_id):
+		return self.db.session.query(Exchange).filter(Exchange.exchanged==None).order_by(desc(Exchange.created)).all()
 
 
 	def get(self, id):

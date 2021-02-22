@@ -22,7 +22,7 @@ class Exchange(db.Model, DomainObject):
 
     exchange_point = Column(Integer)
 
-    created = Column(Text) #, default=make_timestamp)
+    created = Column(Text, default=make_timestamp)
 
     finish_time = Column(Text) #, default='F')
 

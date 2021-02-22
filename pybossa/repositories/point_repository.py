@@ -27,11 +27,7 @@ class PointRepository(Repository):
 
 	def exchange(self, user_id, exchange_point):
 		point= self.get_point(user_id)
-		#point.exchange = point.exchange + exchange_point
-		#point.current_point = point.point_sum - point.exchange
-		point.current_point = point.current_point - point.exchange
-		#user=self.db.session.query(User).get(user_id)
-		#user.current_point = point.current_point
+		point.current_point = point.current_point - exchange_point
 		self.db.session.commit()
 
 	def save(self, point):

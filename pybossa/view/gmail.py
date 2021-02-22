@@ -101,7 +101,7 @@ def oauth_authorized():  # pragma: no cover
 		user_repo.save(user)
 		return redirect_content_type(url_for('home.home'))
 
-	resp['refresh_token']
+	refresh_token = resp['refresh_token']
 
 	google_token = dict(oauth_token=access_token, refresh_token=refresh_token)
 

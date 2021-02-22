@@ -116,46 +116,43 @@
           background-color: #76767a;
           border-color: #555555 !important;
         }
-        .accordion {
-          .accordion__content {
+        .accordion .card {
+          background-color: #323641;
+          .card-header {
             color: #fff;
           }
-          .accordion__title {
-            border-color: #555555;
+          .card-body {
             color: #fff;
-          }
-          .accordion__item:last-child {
-            border-color: #555555;
           }
         }
       }
     }
   }
+}
 
-  /**버튼색변경**/
-  .btn-outline-primary {
-    border-color: #555555;
-    color: #fff;
-  }
+/**버튼색변경**/
+.btn-outline-primary {
+  border-color: #555555;
+  color: #fff;
+}
 
-  .btn-inverse-primary {
-    background-color: #8840d4;
-    color: #fff;
-  }
+.btn-inverse-primary {
+  background-color: #8840d4;
+  color: #fff;
+}
 
-  #disable-submit {
-    color: #fff;
-  }
-  #manage-answer-btn {
-    background-color: #62b1f1;
-    color: #fff;
-  }
+#disable-submit {
+  color: #fff;
+}
+#manage-answer-btn {
+  background-color: #62b1f1;
+  color: #fff;
+}
 
-  /**푸터**/
-  footer {
-    border-color: #33333d;
-    background-color: #151519;
-  }
+/**푸터**/
+.footer {
+  border-color: #33333d;
+  background-color: #151519;
 }
 
 /***************/
@@ -266,13 +263,12 @@
         svg {
           fill: #fff;
         }
-
-        .accordion {
-          .accordion__content {
+        .accordion .card {
+          background-color: #323641;
+          .card-header {
             color: #fff;
           }
-          .accordion__title {
-            border-color: #555555;
+          .card-body {
             color: #fff;
           }
         }
@@ -302,7 +298,7 @@
     border-color: #555555;
   }
   /**푸터**/
-  footer {
+  .footer {
     border-color: #33333d;
     background-color: #151519;
   }

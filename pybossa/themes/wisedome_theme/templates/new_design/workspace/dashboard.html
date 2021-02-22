@@ -1,0 +1,170 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_page = 'home' %}
+
+{% block css %}
+<!---현재 페이지에만 들어가는 css-->
+<link rel="stylesheet" href="/static/new_design/css/dashboard.css">
+<link rel="stylesheet" href="/static/new_design/css/function/owl.carousel.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+
+	<div class="page-header">
+		<h3 class="page-title">
+			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-home"></i></span>  &nbsp;대시보드
+		</h3>
+	</div>
+
+	<!--3색 컬러별 프로젝트-->
+	<div class="row">
+		<div class="col-md-4 stretch-card grid-margin">
+			<div class="card bg-blue card-img-holder">
+				<div class="card-body">
+					<h4 class=" mb-3">참여중인 프로젝트 
+						<i class="mdi mdi-chart-areaspline mdi-24px float-right"></i>
+					</h4>
+					<h2 class="mb-3">
+						 {{n_ongoing_projects}} 건  
+						<!--a태그안에다 자동으로 뜨도록 걸어주세요-->
+					</h2>
+					<h6 class="card-text">Level : 초급자</h6>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 stretch-card grid-margin">
+			<div class="card bg-peach card-img-holder ">
+				<div class="card-body">
+					<a href="{{ url_for('project.index') }}">
+						<h4 class="mb-3">참여가능 프로젝트 
+							<i class="mdi mdi-import mdi-24px float-right"></i>
+						</h4>
+						<h2 class="mb-3">
+							{{n_projects}} 건
+						</h2>
+					</a>
+					<!--<h6 class="card-text">마감일 : 2021.12.31</h6>-->
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 stretch-card grid-margin">
+			<div class="card bg-purple card-img-holder ">
+				<div class="card-body">
+					<h4 class="mb-3"> 보유포인트 
+						<i class="mdi mdi-crown mdi-24px float-right"></i>
+					</h4>
+					<h2 class="mb-3">
+						<a href="#">{{point.current_point}} </a> 
+					</h2>
+					<h6 class="card-text" id="currentDate"></h6>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% from "/new_design/_formhelper.html" import render_url_thumbnail %}
+
+	{% if n_ongoing_projects|int > 4 %}
+
+	<!--마감임박 프로젝트 -->
+	<div class="row">
+		<div class="col-12 grid-margin stretch-card">
+			<div class="card bg-white">
+				<div class="card-body">
+					<h4 class="card-title"> 마감임박 프로젝트</h4>
+					<div class="owl-carousel owl-theme full-width">
+
+						{% for i in range(0, 4) %}
+						<div class="item">
+							<div class="card text-white ">
+								<a href=" {{ url_for('project.details', short_name=projects[i].short_name) }}"><!--해당프로젝트 상세설명 페이지로 링크걸기-->
+									<img class="card-img" src="{{ render_url_thumbnail(projects[i], upload_method) }}" alt="{{projects[i].name}}">
+									<div class="card-img-overlay d-flex">
+										<div class="mt-auto text-center w-100">
+											<h4 class="carousel-title">{{projects[i].name}}</h4>
+											{{ loop_num}}
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						{% endfor %}
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+
+
+	<!--참여한 프로젝트-->
+	<div class="page-header">
+		<h3 class="page-title">
+			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-apps"></i></span>  &nbsp;참여한 프로젝트
+		</h3>
+		<div class="wrapper d-flex align-items-center">
+			<div class="dropdown">
+				<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 정렬하기 </button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton">
+					<a class="dropdown-item" href="#">최저가격순</a>
+					<a class="dropdown-item" href="#">최고가격순</a>
+					<a class="dropdown-item" href="#">최신순</a>
+					<a class="dropdown-item" href="#">마감임박순</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row product-item-wrapper">
+				<div class="card-group" style="width:100%;">
+
+					{% if n_ongoing_projects|int != 0 %}
+					{% for project in projects %}
+					<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3"><!--col-lg-3 이라는 태그 추가함 02.19-->
+						<div class="card bg-white shadow-sm">
+							<a href="!#">
+								<img class="card-img-top bd-placeholder-img" src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.name}}"><!--height 과 width값 삭제함 02.19-->
+								<div class="card-body">
+									<h5 class="card-title">{{ project.name }}</h5>
+									<div class="d-flex justify-content-between align-items-center">
+										<div class="btn-group requirement">
+											<button>나이무관</button>
+											<button>성별무관</button>
+										</div>
+										<small class="text-muted ">{{ project.all_point }}P</small>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					{% endfor %}
+					{% else %}
+					<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3"><!--col-lg-3 이라는 태그 추가함 02.19-->
+						<div class="card bg-white shadow-sm">
+							<div class="card-body">
+								<h5>참여한 프로젝트가 없습니다.</h5>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+
+<!--this page js-->
+<script src="/static/new_design/js/plugin/owl.carousel.min.js"></script>
+<script src="/static/new_design/js/plugin/owl.carousel.js"></script>
+<script src="/static/new_design/js/dashboard.js"></script>
+
+{% endblock %}
