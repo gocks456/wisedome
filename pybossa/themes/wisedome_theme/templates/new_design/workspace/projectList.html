@@ -1,0 +1,201 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_page = 'project' %}
+
+{% block css %}
+<!---현재 페이지에만 들어가는 css-->
+<link rel="stylesheet" href="/static/new_design/css/dashboard.css">
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+
+
+	<!--카테고리별 프로젝트-->
+	<div class="row">
+		<div class="col-12 grid-margin">
+			<div class="card bg-white icon-group">
+				<div class="row">
+
+					<div class="card-col col" id="premium-icon">
+						<div class="card-body">
+							<div class="d-flex align-items-center justify-content-center flex-column"
+								onclick="location.href='{{ url_for("project.index")}}'">
+								<svg id="card-icon1"  enable-background="new 0 0 24 24" viewBox="0 0 24 24" 
+									{% if category=='featured' %}
+									class="icon-active"
+									{% endif %}
+									 ><g><path d="m3.7 1.762 2.392 6.675h-6.092z"/></g>
+									<g><path d="m11.06 1.823-3.762 5.444-2.228-6.207h5.468z"/></g><g><path d="m15.649 8.437h-7.298l3.649-5.261z"/></g><g><path d="m18.93 1.06-2.218 6.207-3.772-5.444.522-.763z"/></g><g><path d="m24 8.437h-6.082l2.392-6.675z"/></g><g><path d="m11.315 23.06-.184-.224-10.906-12.872h6.409l4.548 12.719z"/></g><g><path d="m15.741 9.964-3.741 10.45-3.741-10.45z"/></g><g><path d="m23.775 9.964-10.906 12.872-.184.214.122-.356 4.559-12.73z"/></g></svg>
+								<p class="icon-title iconTitle1
+									{% if category=='featured' %}
+									icon-active
+									{% endif %}">프리미엄</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-col col" id="voice-icon">
+						<div class="card-body">
+							<div class="d-flex align-items-center justify-content-center flex-column"
+								onclick="location.href='{{ url_for("project.project_cat_index", category="sound")}}'">
+								<svg id="card-icon2"  viewBox="0 0 487.336 487.335"
+									{% if category=='sound' %}
+									class="icon-active"
+									{% endif %}
+								><g><g><path d="M243.573,24.136C109.269,24.76,0,134.531,0,268.832c0,40.784,10.226,80.992,29.563,116.62v-64.692
+								c0-11.925,4.243-22.984,11.683-32.471c-0.616-6.453-0.933-12.946-0.933-19.457c0-112.177,91.265-203.861,203.261-204.382
+								c112.183,0.519,203.447,92.205,203.447,204.382c0,7.21-0.4,14.396-1.156,21.533c6.467,9.01,10.116,19.33,10.116,30.395v67.975
+								c20.508-36.43,31.354-77.864,31.354-119.902C487.336,134.531,378.067,24.76,243.573,24.136z"/>
+									<path d="M44.578,310.312c-1.03,3.373-1.578,6.867-1.578,10.449v62.352v29.023c0,28.199,33.586,51.063,75.019,51.063h31.586V269.7
+									h-31.586C81.848,269.699,51.665,287.121,44.578,310.312z"/>
+									<path d="M442.543,412.136v-30.037v-61.338c0-2.201-0.229-4.367-0.626-6.496c-4.69-25.133-36.196-44.565-74.394-44.565h-31.586
+									v193.5h31.587C408.958,463.199,442.543,440.335,442.543,412.136z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+								<p class="icon-title iconTitle2"
+									{% if category=='sound' %}
+									icon-active
+									{% endif %}>음성작업</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-col col" id="img-icon">
+						<div class="card-body">
+							<div class="d-flex align-items-center justify-content-center flex-column"
+								onclick="location.href='{{ url_for("project.project_cat_index", category="image")}}'">
+								<svg id="card-icon3"  viewBox="0 0 471.04 471.04" style="enable-background:new 0 0 471.04 471.04;"
+									{% if category=='image' %}
+									class="icon-active"
+									{% endif %}
+									> <g><g>
+									<path d="M414.72,112.64h-49.152l-27.136-40.96c-10.24-15.36-28.16-24.576-46.592-24.576H179.2
+									c-18.432,0-36.352,9.216-46.592,24.576l-27.136,40.96H56.32C25.088,112.64,0,137.728,0,168.96v198.656
+									c0,31.232,25.088,56.32,56.32,56.32h358.4c31.232,0,56.32-25.088,56.32-56.32V168.96C471.04,137.728,445.952,112.64,414.72,112.64
+									z M235.52,377.856c-70.144,0-126.976-56.832-126.976-126.976c0-70.144,56.832-126.464,126.976-126.464
+									s126.976,56.832,126.976,126.976C362.496,321.024,305.664,377.856,235.52,377.856z M407.552,192c-0.512,0-1.024,0-2.048,0h-20.48
+									c-9.216-0.512-16.384-8.192-15.872-17.408c0.512-8.704,7.168-15.36,15.872-15.872h20.48c9.216-0.512,16.896,6.656,17.408,15.872
+									C423.424,183.808,416.768,191.488,407.552,192z"/></g></g><g><g>
+									<path d="M235.52,180.736c-38.912,0-70.656,31.744-70.656,70.656s31.744,70.144,70.656,70.144s70.656-31.744,70.656-70.656
+									C306.176,211.968,274.432,180.736,235.52,180.736z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+								<p class="icon-title iconTitle3"
+									{% if category=='image' %}
+									icon-active
+									{% endif %}>이미지작업</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-col col" id="text-icon">
+						<div class="card-body">
+							<div class="d-flex align-items-center justify-content-center flex-column"
+								onclick="location.href='{{ url_for("project.project_cat_index", category="text")}}'">
+								<svg id="card-icon4" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
+									{% if category=='text' %}
+									class="icon-active"
+									{% endif %}
+									><g><g><path d="M392,151V0H0v437c0,41.355,33.645,75,75,75h362.002C478.356,511.999,512,478.354,512,437V151H392z M75,482c-24.813,0-45-20.187-45-45V30h332c0,12.292,0,394.723,0,407c0,16.871,5.603,32.456,15.041,45H75z M482,437c0,24.813-20.187,45-45,45s-45-20.187-45-45V181h30v271h30V181h30V437z"/></g></g><g><g><path d="M60,61v45h30V91h30v90H90v30c9.503,0,80.659,0,90,0v-30h-30V91h30v15h30V61H60z"/></g></g><g><g><rect x="60" y="241" width="272" height="30"/></g></g><g><g><rect x="60" y="301" width="272" height="30"/></g></g><g><g><rect x="60" y="362" width="272" height="30"/></g></g><g><g><rect x="60" y="422" width="272" height="30"/></g></g><g><g><rect x="241" y="61" width="91" height="30"/></g></g><g><g><rect x="241" y="121" width="91" height="30"/></g></g><g><g><rect x="241" y="181" width="91" height="30"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+								<p class="icon-title iconTitle4"
+									{% if category=='text' %}
+									icon-active
+									{% endif %}>텍스트작업</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-col col" id="video-icon">
+						<div class="card-body">
+							<div class="d-flex align-items-center justify-content-center flex-column"
+								onclick="location.href='{{ url_for("project.project_cat_index", category="vidio")}}'">
+								<svg id="card-icon5" viewBox="0 0 298 298" style="enable-background:new 0 0 298 298;"
+									{% if category=='vidio' %}
+									class="icon-active"
+									{% endif %}
+									><path d="M298,33c0-13.255-10.745-24-24-24H24C10.745,9,0,19.745,0,33v232c0,13.255,10.745,24,24,24h250c13.255,0,24-10.745,24-24V33z M91,39h43v34H91V39z M61,259H30v-34h31V259z M61,73H30V39h31V73z M134,259H91v-34h43V259z M123,176.708v-55.417c0-8.25,5.868-11.302,12.77-6.783l40.237,26.272c6.902,4.519,6.958,11.914,0.056,16.434l-40.321,26.277C128.84,188.011,123,184.958,123,176.708z M207,259h-43v-34h43V259z M207,73h-43V39h43V73z M268,259h-31v-34h31V259z M268,73h-31V39h31V73z"/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+								<p class="icon-title iconTitle5"
+									{% if category=='vidio' %}
+									icon-active
+									{% endif %}>비디오작업</p>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--모든프로젝트-->
+	<div class="page-header">
+		<h3 class="page-title">
+			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-apps"></i></span>  &nbsp; {{ko_cat}} 프로젝트
+		</h3>
+
+		<!--
+		<div class="wrapper d-flex align-items-center">
+			<div class="dropdown">
+				<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 정렬하기 </button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton">
+					<a class="dropdown-item" href="#">최저가격순</a>
+					<a class="dropdown-item" href="#">최고가격순</a>
+					<a class="dropdown-item" href="#">최신순</a>
+					<a class="dropdown-item" href="#">마감임박순</a>
+				</div>
+			</div>
+		</div>
+		-->
+	</div>
+
+	{% from "/new_design/_formhelper.html" import render_url_thumbnail %}
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row product-item-wrapper">
+				<div class="card-group" style="width:100%;">
+
+
+					{% if projects != [] %}
+					{% for project in projects %}
+					<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+						<div class="card bg-white shadow-sm">
+							<a href="{{ url_for('project.details', short_name=project.short_name) }}">
+								<img class="card-img-top bd-placeholder-img" src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.name}}">
+								<div class="card-body">
+									<h5 class="card-title">{{ project.name }}</h5>
+									<div class="d-flex justify-content-between align-items-center">
+										<div class="btn-group requirement">
+											<button>나이무관</button>
+											<button>성별무관</button>
+										</div>
+										<small class="text-muted ">{{ project.all_point }}P</small>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					{% endfor %}
+					{% else %}
+
+					<div class="col-md-4 col-sm-6 col-12">
+						<div class="card bg-white shadow-sm">
+							<div class="card-body">
+								<h5>준비된 {{ko_cat}} 프로젝트가 없습니다.</h5>
+							</div>
+
+						</div>
+					</div>
+
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+
+<!--this page js-->
+<script src="/static/new_design/js/projectList.js"></script>
+
+{% endblock %}

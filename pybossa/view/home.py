@@ -28,7 +28,7 @@ from pybossa.util import rank, handle_content_type, redirect_content_type
 from jinja2.exceptions import TemplateNotFound
 
 # New Design
-from pybossa.core import project_repo, task_repo, blog_repo, user_repo
+from pybossa.core import project_repo, task_repo, blog_repo, user_repo, point_repo
 from pybossa.cache import site_stats
 from flask_wtf.csrf import generate_csrf
 from pybossa.model.blogpost import Blogpost
@@ -38,23 +38,17 @@ blueprint = Blueprint('home', __name__)
 import time
 @blueprint.route('/')
 def home():
-    a1 = time.time()
     """Render home page with the cached projects and users."""
     page = 1
     per_page = current_app.config.get('APPS_PER_PAGE', 5)
-    print ("1)\t" + str(time.time() - a1))
-    a1 = time.time()
 
     # Add featured
     tmp_projects = cached_projects.get_featured('featured', page, per_page)									# 얘 조금 느림
-    print ("2)\t" + str(time.time() - a1))
-    a1 = time.time()
 
     if len(tmp_projects) > 0:
         data = dict(featured=rank(tmp_projects))
     else:
         data = dict(featured=[])
-    print ("3)\t" + str(time.time() - a1))
     """
     # Add historical contributions
     historical_projects = []
@@ -64,13 +58,13 @@ def home():
         data['historical_contributions'] = historical_projects
     print ("4)\t" + str(time.time() - a1))
     """
-    a1 = time.time()
 
     # 메인화면 Design Test
     #response = dict(template='/home/index.html', **data)
     #projects = project_repo.get_all()
 
     # 오픈한 모든 프로젝트
+	# 개수 지정할 필요있음
     projects = cached_projects.get_all_projects()
 
 
@@ -79,18 +73,23 @@ def home():
         top_users = site_stats.get_top5_users_7_days()
         response = dict(template='/new_design/index2.html', projects=projects, top_users=top_users )
         return handle_content_type(response)
-    else:
-        # 인기 프로젝트
-        popular_projects = cached_projects.get_popular_top5_projects()
-
-        # 참여중인 프로젝트 개수
-        n_ongoing_projects = len(cached_projects.get_ongoing_projects(current_user.id))
-
-        # 오픈한 모든 프로젝트 개수
+    else: 
+        # 오픈된 모든 프로젝트 개수
         n_projects = len(projects)
 
-        response = dict(template='/new_design/dashboard.html', projects=projects, n_projects=n_projects, n_ongoing_projects=n_ongoing_projects,
-                                                               popular_projects=popular_projects, feature_projects=tmp_projects)
+        # 인기 프로젝트
+        #popular_projects = cached_projects.get_popular_top5_projects()
+        projects = project_repo.get_contributed_projects_all(current_user.id)
+
+        # 참여중인 프로젝트 개수
+        n_ongoing_projects = len(projects)
+        #len(cached_projects.get_ongoing_projects(current_user.id))
+
+        current_point = point_repo.get_current_point(current_user.id)
+
+        response = dict(template='/new_design/workspace/dashboard.html', n_projects=n_projects, n_ongoing_projects=n_ongoing_projects,
+                                                               point=current_point, projects=projects
+                                                               )
         return handle_content_type(response)
 #        return redirect_content_type(url_for('project.index'))
 

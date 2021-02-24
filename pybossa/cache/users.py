@@ -146,13 +146,15 @@ def get_answer_rate(user):
 
 def get_point_management():
     sql = ('''
-           SELECT e.user_id, u.name, u.point_sum, current_point, sum(exchange_point) "exchange_sum", count(*) "count_exchange",
+           SELECT e.user_id, u.name, p.point_sum, p.current_point,
+           SUM(CASE WHEN e.exchanged = '정상환급' THEN exchange_point ELSE 0 END) "exchange_sum",
+		   count(*) "count_exchange",
            count (CASE WHEN e.exchanged = '정상환급' THEN 1 END) "n_success",
            count (e.exchanged)-count (CASE WHEN e.exchanged = '정상환급' THEN 1 END) "n_failure",
            count(*)-count(e.exchanged) "n_todo"
-           FROM exchange e ,"user" u
-           WHERE u.id = e.user_id
-           GROUP BY e.user_id,u.name,u.point_sum,current_point
+           FROM exchange e ,"user" u, point p
+           WHERE u.id = e.user_id AND u.id = p.user_id
+           GROUP BY e.user_id,u.name,p.point_sum,p.current_point
            ''')
     results = session.execute(sql,dict())
     point_management = []

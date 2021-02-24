@@ -61,6 +61,7 @@ def get_kakao_token():  # pragma: no cover
 def oauth_authorized():  # pragma: no cover
     """Authorize Oauth."""
     resp = kakao.oauth.authorized_response()
+    print(resp)
 
     if resp is None or request.args.get('error'):
         flash('You denied the request to sign in.', 'error')
@@ -99,6 +100,10 @@ def oauth_authorized():  # pragma: no cover
 
     if user_data["kakao_account"]["email_needs_agreement"]:
         form = APIRegisterForm(request.body)
+        form.locale.data = "ko"
+        form.api_id.data = user_data["id"]
+        form.api_token.data = access_token
+
         data = dict(template='new_design/register/kakao_no_email.html', form=form)
         return handle_content_type(data)
 
@@ -129,6 +134,7 @@ def register():
                     birth=(form.year.data + form.month.data + form.day.data),
                     locale=form.locale.data,
                     info=info)
+        print(user)
         user_repo.save(user)
         _create_point(user.id)
         return _sign_in_user(user)
