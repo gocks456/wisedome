@@ -29,16 +29,23 @@ from pybossa.core import uploader
 
 class ProjectRepository(Repository):
     
-    def get_contributed_projects(self, user_id):
+    # 프로필 / 최근 참여한 프로젝트 top 10
+    def get_contributed_projects_top10(self, user_id):
         from pybossa.model.project_stats import ProjectStats
         from pybossa.model.task_run import TaskRun
-        return self.db.session.query(Project.name, ProjectStats.overall_progress,
+        return self.db.session.query(Project.name, ProjectStats.overall_progress, Project.short_name,
                 func.sum(TaskRun.point).label('point'), func.max(TaskRun.finish_time).label('time')).filter(
                         and_(Project.id==ProjectStats.project_id,
                             Project.id==TaskRun.project_id,
-                            TaskRun.user_id==user_id)).group_by(Project.id, ProjectStats.overall_progress, TaskRun.project_id).order_by(func.max(TaskRun.finish_time).desc()).all()
+                            TaskRun.user_id==user_id)).group_by(Project.id, ProjectStats.overall_progress, TaskRun.project_id).order_by(func.max(TaskRun.finish_time).desc()).limit(10).all()
 
 
+    # 대시보드 / 참여한 프로젝트 (종료된 프로젝트 X)
+    def get_contributed_projects_all(self, user_id):
+        from pybossa.model.task_run import TaskRun
+        return self.db.session.query(Project.name, Project.short_name, Project.condition, Project.all_point, Project.info, Project.short_name).filter(
+                        and_(Project.id==TaskRun.project_id, Project.complete==False,
+                            TaskRun.user_id==user_id)).group_by(Project.id, TaskRun.project_id).order_by((Project.end_date).desc()).all()
 
     #20.02.25. 수정사항
     def get_point(self, short_name):

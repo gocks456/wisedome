@@ -127,14 +127,14 @@ def signin():
             if method == 'local':
                 #msg = gettext("Ooops, Incorrect email/password")
                 msg = gettext("비밀번호가 일치하지 않습니다.")
-                flash(msg, 'error')
+                flash(msg, 'warning')
             else:
-                flash(msg, 'info')
+                flash(msg, 'warning')
         else:
             #msg = gettext("Ooops, we didn't find you in the system, \
             #              did you sign up?")
             msg = gettext("존재하지 않는 아이디입니다.")
-            flash(msg, 'info')
+            flash(msg, 'warning')
 
 
     if (request.method == 'POST' and form.validate()
@@ -587,44 +587,35 @@ def exchange(name):
         return _exchange_request(user)
 
     if request.method == 'POST':
-        form = ExchangeForm(request.body)
-        exchange = model.exchange.Exchange(user_id = current_user.id,
-                            request_name = form.request_name.data,
-                            bank = form.bank.data,
-                            account_number = form.account_number.data,
-                            exchange_point = form.exchange_point.data,
-                            created = get_time())
-        response = dict(template='new_design/account/exchange.html',
-                form=form,
-                name=name)
+        exchange = model.exchange.Exchange(user_id = user.id,
+                            request_name = request.form['request_name'],
+                            bank = request.form['bank'],
+                            account_number = request.form['account_number'],
+                            exchange_point = int(request.form['exchange_point'].replace(',' , '')))
 
-        if form.validate():
-            #if (int(exchange.exchange_point) > int(current_user.current_point)):
-            #    flash(gettext('가지고 있는 포인트 이내에서 환급요청 하십시오!'), 'error')
-            #    return handle_content_type(response)
+        current_point = point_repo.get_current_point(user.id).current_point
+        if (int(exchange.exchange_point) > int(current_point)):
+            flash(gettext('가지고 있는 포인트 이내에서 환급요청 하십시오!'), 'error')
+            return 'fail'
+        else:
             flash(gettext('환급요청성공'), 'success')
-            point_repo.exchange(current_user.id,form.exchange_point.data)
+            point_repo.exchange(user.id, exchange.exchange_point)
             exchange_repo.save(exchange)
-            return redirect_content_type(url_for('.point',
-                                                 name=current_user.name))
-
-        flash(gettext('환급 요청 실패'), 'error')
-        return handle_content_type(response)
-
-def get_time():
-    now = datetime.datetime.now()
-    return now.strftime('%Y-%m-%dT%H:%M:%S.%f')
+            return 'success'
 
 def _exchange_request(user):
-    exchange_user = model.exchange.Exchange(request_name = current_user.fullname)
-    user_dict = cached_users.get_user_summary(user.name)
-    form = ExchangeForm(obj=exchange_user)
-    #form.request_name=current_user.fullname
+    current_point = format(point_repo.get_current_point(user.id).current_point, ",")
+    point_log = exchange_repo.get_exchange_log(user.id)
+    exchanging = exchange_repo.get_exchanging(user.id)
+    print(exchanging)
+
     response = dict(template='new_design/account/exchange.html',
                     title=gettext("Exchange"),
-                    user=user_dict,
-                    form = form,
-                    can_update=False)
+                    user=user,
+                    current_point=current_point,
+                    point_log=point_log,
+                    exchanging=exchanging,
+                    csrf=generate_csrf())
     return handle_content_type(response)
 
 # 2020.11.27. 업적 리뉴얼 예정
@@ -687,14 +678,10 @@ def _show_points(user):
 def _show_own_profile(user, form, current_user):
 
     # 참여한 프로젝트
-    projects_contributed = project_repo.get_contributed_projects(current_user.id)
-    print(projects_contributed)
-
-    # 포인트 내역
-    point_history = exchange_repo.get_exchange_log(current_user.id)
+    projects_contributed = project_repo.get_contributed_projects_top10(current_user.id)
 
     # 현재 포인트
-    current_point = point_repo.get_current_point(current_user.id).current_point
+    current_point = format(point_repo.get_current_point(current_user.id).current_point, ",")
 
     # 이번달 데이터
     task_run_30days = task_repo.get_30days_task_run(current_user.id)
@@ -708,7 +695,6 @@ def _show_own_profile(user, form, current_user):
     response = dict(template='new_design/account/myProfile.html',
                     title=gettext("Profile"),
                     projects_contrib=projects_contributed,
-                    point_history=point_history,
                     point=current_point,
                     projects_count_30days=projects_count_30days,
                     point_30days=point_30days,
@@ -1060,7 +1046,7 @@ def forgot_password():
                                                 key=key, _external=True)
                 msg['body'] = render_template(
                     #'/account/email/forgot_password.md',
-                    '/new_design/register/password_reset.html',
+                    '/new_design/email/password_reset.html',
                     user=user, recovery_url=recovery_url)
                 #msg['html'] = render_template(
                 #    '/account/email/forgot_password.html',

@@ -520,10 +520,13 @@ def url_for_other_page(page):
     args['page'] = page
     return url_for(request.endpoint, **args)
 
+def number_format(value):
+    return '{:,}'.format(value)
 
 def setup_jinja(app):
     """Setup jinja."""
     app.jinja_env.globals['url_for_other_page'] = url_for_other_page
+    app.jinja_env.filters['number_format'] = number_format
 
 
 def setup_error_handlers(app):

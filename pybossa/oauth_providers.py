@@ -146,7 +146,7 @@ class Kakao(object):
 			authorize_url='https://kauth.kakao.com/oauth/authorize',
             request_token_url=None,
 			request_token_params={'scope': ['profile', 'account_email']},
-			access_token_url='https://kauth.kakao.com/oauth/token?redirect_uri=http://urd.nlp.wo.tc:8000/kakao/oauth_authorized',
+			access_token_url='https://kauth.kakao.com/oauth/token?redirect_uri=http://wisedome.kr/kakao/oauth_authorized',
             access_token_method='POST',
             consumer_key=app.config['KAKAO_CLIENT_ID'],
             consumer_secret=app.config['KAKAO_CLIENT_SECRET'])

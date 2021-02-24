@@ -43,7 +43,7 @@
 											<a class="dropdown-item" href="#">이벤트</a>
 											<a class="dropdown-item" href="#">파트너협약</a>
 											<a class="dropdown-item" href="{{ url_for('home.faq') }}">자주하는질문</a>
-											<a class="dropdown-item" href="#">문의하기</a>
+											<a class="dropdown-item" href="{{ url_for('home.qna')}}">문의하기</a>
 										</div>
 									</li>
 									<li class="nav-item"><a  class="nav-link" href="{{ url_for('account.signin') }}">LOGIN </a></li>
@@ -318,7 +318,7 @@
 								{% endif %}
 								{% endmacro %}
 								<div class="owl-carousel owl-theme loop">
-
+									{#
 									{% for user in top_users %}
 
 									<!--새로 디자인한 프로필 -->
@@ -343,7 +343,7 @@
 									</div>
 
 									{% endfor %}
-
+									#}
 
 
 								</div>

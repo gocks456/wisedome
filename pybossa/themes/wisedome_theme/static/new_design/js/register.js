@@ -53,7 +53,7 @@ function CustomAlert(){
         emptybox.style.display = "block";
         document.getElementById('emptyboxhead').innerHTML = "이메일 입력";
         document.getElementById('emptyboxbody').innerHTML = '<h4>올바른 이메일을 입력해주시기 바랍니다</h4>';
-        document.getElementById('emptyboxfoot').innerHTML = '<button onclick="Alert.ok()" class="btn-primary" >확   인</button>';
+        document.getElementById('emptyboxfoot').innerHTML = '<button type="button" onclick="Alert.ok()" class="btn-primary" >확   인</button>';
       }
       else{
         if (screen.width >= 768) {  dialogbox.style.left = (winW/2) - (550 * .5)+"px";}
@@ -64,7 +64,7 @@ function CustomAlert(){
         document.getElementById('dialogboxhead').innerHTML = "이메일인증";
         document.getElementById('timer').innerHTML = `${05} : ${00} `;  startTimer();
         document.getElementById('dialogboxbody').innerHTML ='<img src="../static/images/mail.svg" style="width: 15%;" >'+ '<h4>입력해주신 이메일로 인증번호가 전송되었습니다</h4>' + '<input type="text" class="input-field" placeholder="인증번호를 입력하세요" style="background:#fff;">';
-        document.getElementById('dialogOk').innerHTML = '<button onclick="Alert.ok()" class="btn-primary" style="width:48%; float: left;  margin-bottom:1rem;" >확 인</button>';
+        document.getElementById('dialogOk').innerHTML = '<button type="button" onclick="Alert.ok()" class="btn-primary" style="width:48%; float: left;  margin-bottom:1rem;" >확 인</button>';
       }
   }
 this.ok = function(){

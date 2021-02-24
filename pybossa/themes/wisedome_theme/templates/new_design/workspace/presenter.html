@@ -1,4 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_page = 'project' %}
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="/static/new_design/css/basic/guideline.css">
@@ -36,7 +37,7 @@
 			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-heart"></i></span> 
 			<!--감성 분석하기 /  프로젝트 이름 -->
 			{{project.name}}
-			<span>&nbsp;&nbsp; <span id="per"></span>% 완료</span>
+			<!-- <span>&nbsp;&nbsp; <span id="per"></span>% 완료</span> -->
 		</h3>
 		<!--<nav aria-label="breadcrumb">
 			<ul class="breadcrumb">

@@ -2,6 +2,7 @@
 <!--this page css-->
 {% block css %}
 <link rel="stylesheet" href="/static/new_design/css/point.css">
+<link rel="stylesheet" href="/static/new_design/css/pointTable.css">
 {% endblock %}
 
 {% block content %}
@@ -34,7 +35,7 @@
 								</div>
 								<div class="form-check">
 									<label class="form-check-label">위의 내용을 모두 숙지하였으며 이용에 동의합니다
-										<input type="checkbox" class="form-check-input" id="checkPolicy" checked> 
+										<input type="checkbox" class="form-check-input" id="checkPolicy"> 
 									</label>
 								</div>
 							</section>
@@ -44,12 +45,6 @@
 								<div class="subtitle ">
 									<h5>은행계좌 등록</h5>
 								</div>
-
-								<div class="form-check">
-									<label class="form-check-label ">
-										<input type="checkbox" class="form-check-input"> 기존에 사용했던 계좌 사용하기
-									</label>
-								</div> 
 
 								<div class="form-group row">
 									<label for="userName" class="col-sm-3 col-form-label">예금주</label>
@@ -98,7 +93,7 @@
 								<div class="form-group row"> 
 									<label for="bankAccount" class="col-sm-3 col-form-label">계좌번호</label>  
 									<div class="col-sm-9">
-										<input id="bankAccount" name="bankaccount" type="text" numberOnly class="form-control" placeholder=" - 없이 숫자만 입력" required >
+										<input id="bankAccount" name="bankaccount" type="text" numberOnly class="form-control" placeholder=" - 없이 숫자만 입력" required onchange='bankNum()'>
 									</div>
 								</div>
 							</section>
@@ -110,7 +105,7 @@
 										<form class="forms-sample">
 											<div class="my-3 text-center ">
 												<h5><i class="mdi mdi-star"></i> 환급가능한 나의 보유포인트  <i class="mdi mdi-star "></i> </h5> 
-												<h2 class="py-4 mypoints">32,150</h2>
+												<h2 class="py-4 mypoints">{{current_point}}</h2>
 											</div>
 											<div class="form-group ">
 												<div class="input-group input-money">
@@ -123,7 +118,7 @@
 													</div>
 												</div>
 												<br>
-												<p class="point-policy">100원 단위로 입금이 가능합니다</p>
+												<p class="point-policy">1,000원 단위로 입금이 가능합니다</p>
 											</div>
 									</div>
 								</div>
@@ -134,14 +129,18 @@
 								<div class="col-xl-8 offset-xl-2 col-md-12 py-4 text-center" id="confirm-page">
 									<i class="mdi mdi-checkbox-marked-circle-outline text-success"></i>
 									<br>
-									<h4 id='result'></h4><h4> 님 <br>
-										입금신청이 완료되었습니다</h4>
+									<h4>예금주 : <h4 id='result'></h4>
 									<br><br>
+									<h4>계좌 : </h4><h4 id='bankName'></h4> <h4 id='bankNum'></h4>
+									<br><br>
+									<h4>신청 금액 : </h4><h4 id='transferMoney'></h4>
+									<br><br>
+									<p>최종 확인 후 완료버튼을 누르세요</p>
 									<p>은행영업일 기준으로 3~4일 이내로 입금 예정입니다</p>
 								</div>
 
 								<div id="finish">
-									<button class="btn btn-gradient-success"><a href="../workspace/dashboard.html">대시보드로 돌아가기</a></button>
+									<button class="btn btn-gradient-success"><a href="{{ url_for('home.home') }}">대시보드로 돌아가기</a></button>
 								</div>
 
 								<div class="col-xl-8 offset-xl-2 col-md-12 py-4 text-center" id="fail-page">
@@ -169,52 +168,42 @@
 					<h4 class="card-title "><i class="mdi mdi-star-circle"></i>  포인트 내역</h4>
 
 					<div class="table-responsive">
-						<table class="table table-bordered table-xl-responsive">
-							<thead>
+						<table class="table table-bordered table-xl-responsive" id="point-table">
+							<thead class="thead-light">
 								<tr class="table-active">
 									<th> # </th>
-									<th> 프로젝트명 </th>
-									<th> 환전액 </th>
-									<th> 적립액 </th>
-									<th> 지급일 </th>
+									<th> 설명 </th>
+									<th> 적립 </th>
+									<th> 환급 </th>
+									<th class="tb-date"> 날짜 </th>
 								</tr>
 							</thead>
 							<tbody>
+								{% if exchanging|length != 0 %}
+								{% for row in exchanging %}
 								<tr>
-									<td> 1 </td>
-									<td> 감정분석하기 </td>
-									<td> 26 </td>
-									<td> 7,700 </td>
-									<td>2020.11.15 </td>
+									<td> # 환급대기</td>
+									<td> 계좌 : {{row.bank}} | {{row.account_number}} </td>
+									<td> - </td>
+									<td> {{row.exchange_point | number_format}} </td>
+									<td> {{row.created[0:10]}}</td>
 								</tr>
+								{% endfor %}
+								{% endif %}
+										
+								
+								{% if point_log|length != 0 %}
+								{% for i in range (0, point_log|length) %}
 								<tr>
-									<td> 2 </td>
-									<td> 이미지 바운딩</td>
-									<td> 9 </td>
-									<td> 1,050 </td>
-									<td> 2020.10.01 </td>
+									<td> {{i+1}} </td>
+									<td> {{point_log[i].name}} </td>
+									<td> {% if point_log[i].point != None %}{{point_log[i].point | number_format}} {% else %} - {% endif %}</td>
+									<td> {% if point_log[i].exchange != None %}{{point_log[i].exchange | number_format}} {% else %} - {% endif %}</td>
+									<td> {{point_log[i].time[0:10]}} </td>
 								</tr>
-								<tr>
-									<td> 3 </td>
-									<td> 형태소 선택 </td>
-									<td> 49 </td>
-									<td> 18,000 </td>
-									<td> 2020.09.23 </td>
-								</tr>
-								<tr>
-									<td> 4 </td>
-									<td> 문장요약</td>
-									<td> 105 </td>
-									<td> 84,230</td>
-									<td> 2020.08.15 </td>
-								</tr>
-								<tr>
-									<td> 5 </td>
-									<td> 객관/주관 선택 </td>
-									<td> 152 </td>
-									<td> 17,400</td>
-									<td> 2020.07.13 </td>
-								</tr>
+
+								{% endfor %}
+								{% endif %}
 							</tbody>
 						</table>
 					</div><!--table responsive-->
@@ -231,5 +220,54 @@
 <!-- plugins:js this page only-->
 <script src="/static/new_design/js/wizard.jquery.steps.js"></script>
 <script src="/static/new_design/js/point.js"></script>
+<script src="/static/new_design/js/plugin/dataTable.js"></script>
+<script src="/static/new_design/js/plugin/jquery.dataTable.js"></script>
+<script src="/static/new_design/js/pointTable.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$(this).scrollTop(0);
+			$.ajaxSetup({
+				beforeSend: function(xhr, settings) {
+					if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+						xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token() }}")
+					}
+				}
+			});
+			var finish_btn = $("a:contains('완료')");
+
+			$(finish_btn).on('click', function() {
+				var request_name = $("#result").text();
+				var bank = $("#bankName").text();
+				var account_number = $("#bankNum").text();
+				var exchange_point = $("#transferMoney").text();
+
+				console.log(request_name);
+				console.log(bank);
+				console.log(account_number);
+				console.log(exchange_point);
+				if (request_name != '' && bank != '' && account_number != '' && exchange_point != '' ) {
+					$.ajax({
+						url: window.location.href,
+						data: {
+							"request_name": request_name,
+							"bank":bank,
+							"account_number":account_number,
+							"exchange_point":exchange_point
+						},
+						type: 'POST',
+						success: function(res) {
+							location.reload();
+						},
+						error:function(request, error) {
+							console.log(request);
+							console.log(error);
+						}
+					});
+				}
+			});
+			console.log('hhhh');
+		});
+	</script>
 
 {% endblock %}
