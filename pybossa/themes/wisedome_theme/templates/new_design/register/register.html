@@ -309,7 +309,6 @@ $(document).ready(function(){
 
 
 		random_num = Math.floor(Math.random()*(999999-100000+1)) + 100000;
-		console.log(random_num);
 
 		var email = $('#email_addr').val();
 
@@ -341,7 +340,6 @@ $(document).ready(function(){
 	$("#dialogResend").on('click', '#re-send-email', function(){
 
 		random_num = Math.floor(Math.random()*(999999-100000+1)) + 100000;
-		console.log(random_num);
 
 		var email = $('#email_addr').val();
 
@@ -369,18 +367,8 @@ $(document).ready(function(){
 	});
 
 
-	$("#dialogOk").on('click', '#email_check', function(){
+	$("#dialogOk").on('click', function(){
 		var auth_num = $("#auth_num").val();
-		console.log(auth_num);
-		console.log(random_num);
-
-		if ($("#timer").text() > "0:00") {
-			console.log('성공');
-		}
-		else {
-			console.log('실패');
-		}
-
 
 		if(auth_num == random_num && $("#dialogtime").text() != "인증시간이 초과되었습니다" ) {
 

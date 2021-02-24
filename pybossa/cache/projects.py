@@ -536,7 +536,7 @@ def n_count(category):
     return count
 
 @memoize(timeout=timeouts.get('APP_TIMEOUT'))
-def get_all_projects(category=None):
+def get_projects_limit(limit='all', category=None):
     # 공개된 프로젝트 전체
     sql = text(
         '''SELECT project.id, project.name, project.short_name,
@@ -548,9 +548,11 @@ def get_all_projects(category=None):
            AND "user".restrict=false
            AND project.published=true
            AND project.complete=false
-           GROUP BY project.id, "user".id ORDER BY project.name;''')
+           GROUP BY project.id, "user".id
+           ORDER BY project.end_date DESC
+		   LIMIT :limit;''')
 
-    results = session.execute(sql)
+    results = session.execute(sql, dict(limit=limit))
     projects = []
     for row in results:
         project = dict(id=row.id,
