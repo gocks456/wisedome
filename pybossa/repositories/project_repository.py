@@ -28,6 +28,50 @@ from pybossa.core import uploader
 
 
 class ProjectRepository(Repository):
+
+    # 마감 임박 프로젝트 업데이트(7일 이내 프로젝트)
+    def update_end_date_7days(self):
+        from datetime import datetime, timedelta
+        time = datetime.now()
+        after_7days = time + timedelta(days=7)
+
+        f = open('end_date.txt', mode='at', encoding='utf-8')
+
+        f.write('현재 시간: ' + time.strftime('%y/%m/%d %H:%M:%S'))
+
+        test1 = self.db.session.query(Project).filter(and_(time <= cast(Project.end_date, Date),
+                                                   after_7days >= cast(Project.end_date, Date),
+                                                   Project.published == True)).all()
+        f.write('\n\n마감임박한 프로젝트들\n')
+        for i in test1:
+            f.write(i.name + '\n')
+
+        # featured True
+        self.db.session.query(Project).filter(and_(time <= cast(Project.end_date, Date),
+                                                   after_7days >= cast(Project.end_date, Date),
+                                                   Project.published == True)).update({'featured': True}, synchronize_session='fetch')
+        
+        test2 = self.db.session.query(Project).filter(and_(
+                time>cast(Project.end_date, Date), Project.complete==False)).all()
+        f.write('\n\n -----------------\n\n마감 된 프로젝트들\n')
+        for i in test2:
+            f.write(i.name + '\n')
+        # 마감
+        self.db.session.query(Project).filter(and_(
+                time>cast(Project.end_date, Date), Project.complete==False)).update({'published':False}, synchronize_session='fetch')
+
+        f.write('\n\n-----------------\n\n')
+        f.close()
+        
+        self.db.session.commit()
+        return
+
+
+    # 공개된 프로젝트 수
+    def get_count_published_projects(self):
+        return self.db.session.query(func.count(Project.id).label('count')).filter(
+                 and_(Project.published==True, Project.complete==False)).one()
+
     
     # 프로필 / 최근 참여한 프로젝트 top 10
     def get_contributed_projects_top10(self, user_id):
@@ -43,7 +87,7 @@ class ProjectRepository(Repository):
     # 대시보드 / 참여한 프로젝트 (종료된 프로젝트 X)
     def get_contributed_projects_all(self, user_id):
         from pybossa.model.task_run import TaskRun
-        return self.db.session.query(Project.name, Project.short_name, Project.condition, Project.all_point, Project.info).filter(
+        return self.db.session.query(Project.name, Project.short_name, Project.condition, Project.all_point, Project.updated, Project.end_date,  Project.info).filter(
                         and_(Project.id==TaskRun.project_id, Project.complete==False,
                             TaskRun.user_id==user_id)).group_by(Project.id, TaskRun.project_id).order_by((Project.end_date).desc()).all()
 

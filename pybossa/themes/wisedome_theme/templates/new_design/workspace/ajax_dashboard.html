@@ -1,0 +1,32 @@
+
+{% from "/new_design/_formhelper.html" import render_url_thumbnail %}
+
+{% if projects|length != 0 %}
+{% for project in projects %}
+<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3"><!--col-lg-3 이라는 태그 추가함 02.19-->
+	<div class="card bg-white shadow-sm">
+		<a href="{{ url_for('project.details', short_name=project.short_name) }}">
+			<img class="card-img-top bd-placeholder-img" src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.name}}"><!--height 과 width값 삭제함 02.19-->
+			<div class="card-body">
+				<h5 class="card-title">{{ project.name }}</h5>
+				<div class="d-flex justify-content-between align-items-center">
+					<div class="badge-group">
+						<div class="badge">나이무관</div>
+						<div class="badge">성별무관</div>
+					</div>
+					<small class="text-muted ">{{ project.all_point }}P</small>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+{% endfor %}
+{% else %}
+<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3"><!--col-lg-3 이라는 태그 추가함 02.19-->
+	<div class="card bg-white shadow-sm">
+		<div class="card-body">
+			<h5>참여한 프로젝트가 없습니다.</h5>
+		</div>
+	</div>
+</div>
+{% endif %}

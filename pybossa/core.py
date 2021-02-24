@@ -275,7 +275,7 @@ def setup_logging(app):
 def setup_login_manager(app):
     """Setup login manager."""
     login_manager.login_view = 'account.signin'
-    login_manager.login_message = "Please sign in to access this page."
+    login_manager.login_message = "로그인이 필요합니다."
 
     @login_manager.user_loader
     def _load_user(username):
@@ -740,7 +740,7 @@ def setup_scheduled_jobs(app):  # pragma: no cover
     MINUTE = 60
     HOUR = 60 * 60
     MONTH = 30 * (24 * HOUR)
-    first_quaterly_execution = get_quarterly_date(datetime.utcnow())
+    first_quaterly_execution = get_quarterly_date(datetime.now())
     JOBS = [dict(name=enqueue_periodic_jobs, args=['email'], kwargs={},
                  interval=(1 * MINUTE), timeout=(10 * MINUTE)),
             dict(name=enqueue_periodic_jobs, args=['maintenance'], kwargs={},

@@ -99,6 +99,10 @@ def oauth_authorized():  # pragma: no cover
 
     if user_data["kakao_account"]["email_needs_agreement"]:
         form = APIRegisterForm(request.body)
+        form.locale.data = "ko"
+        form.api_id.data = user_data["id"]
+        form.api_token.data = access_token
+
         data = dict(template='new_design/register/kakao_no_email.html', form=form)
         return handle_content_type(data)
 

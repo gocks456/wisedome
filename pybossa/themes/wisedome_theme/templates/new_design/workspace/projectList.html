@@ -130,7 +130,6 @@
 			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-apps"></i></span>  &nbsp; {{ko_cat}} 프로젝트
 		</h3>
 
-		<!--
 		<div class="wrapper d-flex align-items-center">
 			<div class="dropdown">
 				<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 정렬하기 </button>
@@ -142,7 +141,6 @@
 				</div>
 			</div>
 		</div>
-		-->
 	</div>
 
 	{% from "/new_design/_formhelper.html" import render_url_thumbnail %}
@@ -150,7 +148,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row product-item-wrapper">
-				<div class="card-group" style="width:100%;">
+				<div class="card-group" id="ajax-project-list" style="width:100%;">
 
 
 					{% if projects != [] %}
@@ -162,9 +160,9 @@
 								<div class="card-body">
 									<h5 class="card-title">{{ project.name }}</h5>
 									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group requirement">
-											<button>나이무관</button>
-											<button>성별무관</button>
+										<div class="badge-group">
+											<div class="badge">나이무관</div>
+											<div class="badge">성별무관</div>
 										</div>
 										<small class="text-muted ">{{ project.all_point }}P</small>
 									</div>
@@ -197,5 +195,37 @@
 
 <!--this page js-->
 <script src="/static/new_design/js/projectList.js"></script>
+
+
+<script>
+	$(document).ready(function() {
+		var csrf = "{{ csrf_token() }}";
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X_CSRFToken", csrf)
+				}
+			}});
+	});
+
+$(".dropdown-item").click(function(){
+	$.ajax({
+		url:window.location.href,
+		data: {
+			"value": $(this).text()
+		},
+		type: 'POST',
+		success: function(res) {
+			console.log(res);
+			$('#ajax-project-list').html(res);
+		},
+		error: function(request, error) {
+			console.log(request);
+			console.log(error);
+		}
+	});
+});
+</script>
+
 
 {% endblock %}
