@@ -102,9 +102,10 @@ def qna_view(blog_id):
         from pybossa.model.blog_comment import BlogComment
         comment = BlogComment(
                        body=request.form.get('body'),
-                       user_id=current_user.id,
                        blog_id=blog_id
                        )
+        if not current_user.is_anonymous:
+            comment.user_id = current_user.id
         blog_repo.save_comment(comment)
         return 'save'
     blog = blog_repo.get(blog_id)
@@ -116,18 +117,18 @@ def qna_view(blog_id):
 @blueprint.route("qna/write/<category>", methods=['GET', 'POST'])
 def write(category):
     if request.method == "POST":
-        print(request.form.get('body'))
-        print(request.form.get('title'))
-        print(request.form.get('subject'))
-        blog = Blogpost(
-                    title=request.form.get('title'),
-                    body=request.form.get('body'),
-                    subject=request.form.get('subject'),
-                    category=category,
-                    user_id=current_user.id
-                    )
-        blog_repo.save(blog)
-        return 'success'
+        if request.form.get('title') != '' and request.form.get('body') != '<p><br></p>' and request.form.get('subject') != '주제':
+            blog = Blogpost(
+                        title=request.form.get('title'),
+                        body=request.form.get('body'),
+                        subject=request.form.get('subject'),
+                        category=category
+                        )
+            if not current_user.is_anonymous:
+                blog.user_id = current_user.id
+            blog_repo.save(blog)
+            return 'success'
+        return 'fail'
     response = dict(template="new_design/qna/editor_"+category+".html", csrf=generate_csrf())
     return handle_content_type(response)
 

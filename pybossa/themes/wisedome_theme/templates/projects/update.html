@@ -33,6 +33,12 @@
 		{{ render_field(form.all_point, class_="input-xlarge") }}
         {{ render_field(form.description, class_="input-xlarge", placeholder='프로젝트에 대한 간단한 설명을 입력하시오.') }}
 		{{ render_field(form.long_description, class_="input-xlarge", placeholder='프로젝트에 대한 자세한 설명을 입력하시오.(마크다운 사용 가능)') }}
+		<div class="form-group input-xlarge">
+			<label for="end_date" class="control-label">
+				<label for="end_date">프로젝트 마감기한</label>
+			</label>
+			<input class='form-control' type='date' id='end_date' name='end_date' value=''>
+		</div>
 		<div class ="row">
 			<h3 class ='col-sm-12'><strong>프로젝트 제한사항</strong></h3>
 			{{ render_field(form.option_sex, class_="col-sm-3") }}

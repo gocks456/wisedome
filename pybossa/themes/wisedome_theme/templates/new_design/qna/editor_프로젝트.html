@@ -100,7 +100,7 @@
 		$.ajaxSetup({
 			beforeSend: function(xhr, settings) {
 				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
-					xhr.setRequestHeader("X_CSRFToken", csrf)
+					xhr.setRequestHeader("X-CSRFToken", csrf)
 				}
 			}});
 	});
@@ -114,7 +114,11 @@ $(".btn-gradient-primary").click(function(){
 		},
 		type: 'POST',
 		success: function(res) {
-			console.log(res);
+			if (res == 'fail') {
+				alert('모든 내용을 입력해주세요.');
+				return;
+			}
+
 			window.location.href = "{{ url_for('home.qna', category='프로젝트') }}";
 		},
 		error: function(request, error) {

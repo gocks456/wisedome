@@ -128,9 +128,9 @@
 
 					<div class="my-border-bottom py-4">
 						<h6 class="font-weight-normal">이달의 작업건수 <i class="mdi mdi-database-plus mdi-1em float-right"></i></h6>
-						<h2 class="my-4">{{projects_count_30days}}건</h2>
+						<h2 class="my-4">{{projects_count_30days|number_format}}건</h2>
 						<div class="progress progress-md flex-grow">
-							<div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow={{projects_count_30days.replace(',' , '')|int}} style="width: {{projects_count_30days.replace(',' , '')|int}}%;" aria-valuemin="0" aria-valuemax="100"></div>
+							<div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow={{projects_count_30days}} style="width: {{projects_count_30days}}%;" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 						<!--<p class="card-text mt-3 text-right">지난달 대비 10% 증가함</p>-->
 					</div>
@@ -146,9 +146,9 @@
 
 					<div class="pt-4">
 						<h6 class="font-weight-normal">이달의 적립내역 <i class="mdi mdi-star-circle mdi-1em float-right"></i></h6>
-						<h2 class="my-3">{{point_30days}} 포인트</h2>
+						<h2 class="my-3">{{point_30days|number_format}} 포인트</h2>
 						<div class="progress progress-md flex-grow">
-							<div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow={{point_30days.replace(',' , '')|int}} style="width: {{point_30days.replace(',' , '')|int}}%;" aria-valuemin="0" aria-valuemax="100"></div>
+							<div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow={{point_30days}} style="width:{{point_30days / 100}}%;" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 						<!--<p class="card-text mt-3 text-right">지난달 대비 20% 증가함</p>-->
 					</div>

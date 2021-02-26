@@ -19,13 +19,13 @@
 	<!--3색 컬러별 프로젝트-->
 	<div class="row">
 		<div class="col-md-4 stretch-card grid-margin">
-			<div class="card bg-blue card-img-holder">
+			<div class="card bg-blue card-img-holder" id='contrib_btn' style="cursor:pointer;">
 				<div class="card-body">
 					<h4 class=" mb-3">참여중인 프로젝트 
 						<i class="mdi mdi-chart-areaspline mdi-24px float-right"></i>
 					</h4>
 					<h2 class="mb-3">
-						 {{n_ongoing_projects}} 건  
+						 {{n_ongoing_projects|number_format}} 건  
 						<!--a태그안에다 자동으로 뜨도록 걸어주세요-->
 					</h2>
 					<h6 class="card-text">Level : 초급자</h6>
@@ -33,28 +33,26 @@
 			</div>
 		</div>
 		<div class="col-md-4 stretch-card grid-margin">
-			<div class="card bg-peach card-img-holder ">
+			<div class="card bg-peach card-img-holder" onclick="location.href='{{ url_for("project.index") }}'" style="cursor:pointer;">
 				<div class="card-body">
-					<a href="{{ url_for('project.index') }}">
 						<h4 class="mb-3">참여가능 프로젝트 
 							<i class="mdi mdi-import mdi-24px float-right"></i>
 						</h4>
 						<h2 class="mb-3">
-							{{n_projects}} 건
+							{{n_projects|number_format}} 건
 						</h2>
-					</a>
 					<!--<h6 class="card-text">마감일 : 2021.12.31</h6>-->
 				</div>
 			</div>
 		</div>
 		<div class="col-md-4 stretch-card grid-margin">
-			<div class="card bg-purple card-img-holder ">
+			<div class="card bg-purple card-img-holder" onclick="location.href='{{ url_for("account.exchange", name=current_user.name) }}'" style="cursor:pointer;">
 				<div class="card-body">
 					<h4 class="mb-3"> 보유포인트 
 						<i class="mdi mdi-crown mdi-24px float-right"></i>
 					</h4>
 					<h2 class="mb-3">
-						<a href="#">{{point.current_point}} </a> 
+						<a href="#">{{point.current_point|number_format}} </a> 
 					</h2>
 					<h6 class="card-text" id="currentDate"></h6>
 				</div>
@@ -67,7 +65,7 @@
 	{% if n_ongoing_projects|int > 4 %}
 
 	<!--마감임박 프로젝트 -->
-	<div class="row">
+	<div class="row" id="contrib_position">
 		<div class="col-12 grid-margin stretch-card">
 			<div class="card bg-white">
 				<div class="card-body">
@@ -102,7 +100,7 @@
 	<!--참여한 프로젝트-->
 	<div class="page-header">
 		<h3 class="page-title">
-			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-apps"></i></span>  &nbsp;참여한 프로젝트
+			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-apps"></i></span>  &nbsp;참여중인 프로젝트
 		</h3>
 		<div class="wrapper d-flex align-items-center">
 			<div class="dropdown">
@@ -173,7 +171,7 @@
 		$.ajaxSetup({
 			beforeSend: function(xhr, settings) {
 				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
-					xhr.setRequestHeader("X_CSRFToken", csrf)
+					xhr.setRequestHeader("X-CSRFToken", csrf)
 				}
 			}});
 	});
@@ -193,6 +191,11 @@ $(".dropdown-item").click(function(){
 			console.log(error);
 		}
 	});
+});
+
+$("#contrib_btn").click(function() {
+	var offset = $("#contrib_position").offset();
+	$("html").animate({scrollTop: offset.top}, 1000);
 });
 </script>
 

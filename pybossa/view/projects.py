@@ -381,8 +381,9 @@ def new():
     condition_json["all_achieve"] = form.option_all_achieve.data
     condition_json["cat_achieve"] = form.option_cat_achieve.data
 
+    # 마감기한 생성: 생성일 + 7일
     now = datetime.datetime.now()
-    end_date = now + datetime.timedelta(days=7)
+    end_date = now + datetime.timedelta(days=7).isoformat()
 
     project = Project(name=form.name.data,
                       short_name=form.short_name.data,
@@ -605,8 +606,6 @@ def update(short_name):
         condition_json["all_achieve"] = form.option_all_achieve.data
         condition_json["cat_achieve"] = form.option_cat_achieve.data
 
-        # 임시 마감일
-        end_date = n + datetime.timedelta(days=7)
 
         if form.id.data == new_project.id:
             new_project.name = form.name.data
@@ -622,7 +621,8 @@ def update(short_name):
             new_project.allow_anonymous_contributors = fuzzyboolean(form.allow_anonymous_contributors.data)
             new_project.category_id = form.category_id.data
             new_project.zip_download = fuzzyboolean(form.zip_download.data)
-            # 임시 마감일
+            # 마감일
+            end_date = datetime.datetime.combine(form.end_date.data, datetime.datetime.min.time()).isoformat()+'.000000'
             new_project.end_date = end_date
 
         if fuzzyboolean(form.protect.data) and form.password.data:
@@ -660,7 +660,6 @@ def update(short_name):
             project.category_id = categories[0].id
         form.populate_obj(project)
         form.protect.data = project.needs_password()
-
 
     if request.method == 'POST':
         upload_form = AvatarUploadForm()

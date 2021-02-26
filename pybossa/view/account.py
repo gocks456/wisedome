@@ -688,8 +688,8 @@ def _show_own_profile(user, form, current_user):
         projects_count_30days = 0
         point_30days = 0
     else:
-        projects_count_30days = format(task_run_30days.count, ",")
-        point_30days = format(task_run_30days.point, ",")
+        projects_count_30days = task_run_30days.count
+        point_30days = task_run_30days.point
 
     response = dict(template='new_design/account/myProfile.html',
                     title=gettext("Profile"),
