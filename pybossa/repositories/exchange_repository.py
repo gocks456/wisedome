@@ -21,7 +21,7 @@ class ExchangeRepository(Repository):
 
 
 	def get_exchanging(self, user_id):
-		return self.db.session.query(Exchange).filter(Exchange.exchanged==None).order_by(desc(Exchange.created)).all()
+		return self.db.session.query(Exchange).filter(and_(Exchange.user_id==user_id, Exchange.exchanged==None)).order_by(desc(Exchange.created)).all()
 
 
 	def get(self, id):
