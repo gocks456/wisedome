@@ -8,10 +8,9 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="content-wrapper">
 	<div class="page-header">
-		<h3 class="page-title"> 질문하기 </h3>
+		<h3 class="page-title"> <a href="{{url_for('home.qna', category='point')}}">질문하기</a></h2>
 	</div>
 
 
@@ -28,16 +27,16 @@
 							<div class=" tab-content-custom-pill " >
 								<ul class="nav nav-pills nav-pills-custom justify-content-center">
 									<li class="nav-item">
-										<a class="nav-link " href="{{ url_for('home.write', category='회원가입') }}" > <i class="mdi mdi-wallet-membership"></i><br>회원가입 </a>  
+										<a class="nav-link " href="{{ url_for('home.write', category='register') }}" > <i class="mdi mdi-wallet-membership"></i><br>회원가입 </a>  
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="{{ url_for('home.write', category='포인트') }}" > <i class="mdi mdi-ticket"></i><br> 포인트 </a>
+										<a class="nav-link active" href="{{ url_for('home.write', category='point') }}" > <i class="mdi mdi-ticket"></i><br> 포인트 </a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link active" href="{{ url_for('home.write', category='프로젝트') }}" ><i class="mdi mdi-television-guide"></i><br> 프로젝트 </a>
+										<a class="nav-link " href="{{ url_for('home.write', category='project') }}" ><i class="mdi mdi-television-guide"></i><br> 프로젝트 </a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="{{ url_for('home.write', category='환급') }}" > <i class="mdi mdi-wallet-giftcard"></i><br> 환급</a>
+										<a class="nav-link" href="{{ url_for('home.write', category='exchange') }}" > <i class="mdi mdi-wallet-giftcard"></i><br> 환급</a>
 									</li>
 								</ul>
 							</div>
@@ -54,10 +53,9 @@
 														<div class="col-sm-3">
 															<select class="form-control" id="subtitle">
 																<option selected>주제</option>
-																<option >진행상황</option>
-																<option >반려</option>
-																<option >검수</option>
-																<option >기타</option>
+																<option value="1">적립</option>
+																<option value="2">취소</option>
+																<option value="3">기타</option>
 															</select>
 														</div>
 														<div class="col-sm-9 ">
@@ -70,7 +68,7 @@
 											</div><!--card body-->
 
 											<div class="btn-group editor-btn-group">
-												<a class="btn btn-gradient-secondary" id="myCancel" href="{{ url_for('home.qna', category='프로젝트') }}">취소하기</a> 
+												<a class="btn btn-gradient-secondary" id="myCancel" href="{{ url_for('home.qna', category='point') }}">취소하기</a> 
 												<a class="btn btn-gradient-primary" >글올리기</a>   
 											</div> 
 										</div>
@@ -86,11 +84,48 @@
 	</div><!--row-->
 </div><!-- content-wrapper ends -->
 
+
 <script src="/static/new_design/js/plugin/vendor.bundle.base.js"></script>
+
 
 <!-- plugins:js this page only-->
 <script src="/static/new_design/js/plugin/summernote-bs4.min.js"></script>
 <script src="/static/new_design/js/plugin/summernote-ko-KR.js"></script>
 <!--text editor-->
 <script src="/static/new_design/js/editor.js"></script>
+
+	$(document).ready(function() {
+
+<script>
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrf)
+				}
+			}
+		});
+	});
+
+
+
+$(".btn-gradient-primary").click(function(){
+	$.ajax({
+		url:window.location.href,
+		data: {"title": $("#myTitle").val(),
+			"body": $(".note-editable").html(),
+			"subject": $("#subtitle").val()
+		},
+		type: 'POST',
+		success: function(res) {
+			console.log(res);
+			window.location.href = "{{ url_for('home.qna', category='poiot') }}";
+		},
+		error: function(request, error) {
+			console.log(request);
+			console.log(error);
+		}
+	});
+});
+</script>
+
 {% endblock %}

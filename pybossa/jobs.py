@@ -45,7 +45,7 @@ def schedule_job(function, scheduler):
             return msg
     # If job was scheduled, it exists up here, else it continues
     job = scheduler.schedule(
-        scheduled_time=(function.get('scheduled_time') or datetime.utcnow()),
+        scheduled_time=(function.get('scheduled_time') or datetime.now()),
         func=function['name'],
         args=function['args'],
         kwargs=function['kwargs'],
@@ -63,10 +63,13 @@ def get_quarterly_date(now):
     """Get quarterly date."""
     if not isinstance(now, datetime):
         raise TypeError('Expected %s, got %s' % (type(datetime), type(now)))
+    print('now', now)
     execute_month = int(math.ceil(now.month / 3.0) * 3)
+    print('month', execute_month)
     execute_day = 31 if execute_month in [3, 12] else 30
+    print('day', execute_day)
     execute_date = datetime(now.year, execute_month, execute_day)
-    #print(execute_date)
+    print(execute_date)
 
     return datetime.combine(execute_date, now.time())
 
@@ -147,11 +150,18 @@ def get_default_jobs():  # pragma: no cover
                timeout=timeout, queue='low')
 
 # 프로젝트 자동 마감
-#def project_deadline():
+def project_deadline():
     """마감 프로젝트 관리"""
-    #from pybossa.core import project_repo
-    #from pybossa.cache.projects
-    #projects = 
+    from pybossa.core import project_repo
+    import pybossa.cache.projects as cached_projects
+
+    # 1. 모든프로젝트 (공개된) 가져옴 +  2. end_date 확인
+	# 3. 1주일 안에 끝날 프로젝트 마감임박
+	# 4. end_date가 지나면 공개 끊음
+    projects = project_repo.update_end_date_7days()
+
+	# 5. 관리자는 끝난 프로젝트를 두 분류로 받음 (정상 종료, 마감 종료)
+	# 6. 재오픈 or 종료
 
 def get_maintenance_jobs():
     """Return mantainance jobs."""
@@ -199,6 +209,9 @@ def get_project_jobs(queue):
     from pybossa.core import project_repo
     from pybossa.cache import projects as cached_projects
     timeout = current_app.config.get('TIMEOUT')
+
+    yield dict(name=project_deadline, args=[], kwargs={},
+               timeout=timeout, queue='midium')
     if queue == 'super':
         projects = cached_projects.get_from_pro_user()
     elif queue == 'high':

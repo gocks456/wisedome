@@ -179,7 +179,7 @@ def push_webhook(project_obj, task_id, result_id):
                        project_id=project_obj['id'],
                        task_id=task_id,
                        result_id=result_id,
-                       fired_at=datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"))
+                       fired_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         webhook_queue.enqueue(webhook, project_obj['webhook'], payload)
 
 

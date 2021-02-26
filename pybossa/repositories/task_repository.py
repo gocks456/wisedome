@@ -49,7 +49,6 @@ class TaskRepository(Repository):
         if self.is_task_completed(task_id) != 'completed':
             return
 
-        print('완료')
         answer_data = self.db.session.query(func.count(TaskRun.user_id).label('count'), func.array_agg(TaskRun.id).label('task_id')).filter(
                and_(TaskRun.project_id==project_id), (TaskRun.task_id==task_id)).group_by(TaskRun.info).order_by(desc('count')).first()
         from pybossa.model.project import Project
@@ -60,6 +59,9 @@ class TaskRepository(Repository):
         point = project_data.point
         if project_data.featured:
             point = project_data.point * 1.1
+
+        # 포인트 초기화
+        self.db.session.query(TaskRun).filter(TaskRun.task_id==task_id).update({'point': 0})
 
         if (answer_data.count >= 1 and project_data.n_answers == 1) or (answer_data.count == 1 and project_data.n_answers != 1):
             # 반복수가 1 일 때 답변 수가 1 이상

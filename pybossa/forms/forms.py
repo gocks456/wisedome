@@ -553,8 +553,8 @@ class ChangePasswordForm(Form):
     #current_password = PasswordField(lazy_gettext('Current password'))
     current_password = PasswordField(lazy_gettext('현재 비밀번호'))
 
-    err_msg = lazy_gettext("Password cannot be empty")
-    err_msg_2 = lazy_gettext("Passwords must match")
+    err_msg = lazy_gettext("비밀번호를 입력하세요.")
+    err_msg_2 = lazy_gettext("비밀번호가 일치하지 않습니다.")
     if enable_strong_password:
         new_password = PasswordField(
                         lazy_gettext('New Password'),
@@ -576,8 +576,8 @@ class ResetPasswordForm(Form):
 
     """Class for resetting user's password."""
 
-    err_msg = lazy_gettext("Password cannot be empty")
-    err_msg_2 = lazy_gettext("Passwords must match")
+    err_msg = lazy_gettext("비밀번호를 입력하세요.")
+    err_msg_2 = lazy_gettext("비밀번호가 일치하지않습니다.")
     if enable_strong_password:
         new_password = PasswordField(
                         lazy_gettext('New Password'),

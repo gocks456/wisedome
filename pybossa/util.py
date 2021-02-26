@@ -414,7 +414,7 @@ def _last_activity_points(project):
         last_activity_datetime, '%Y-%m-%dT%H:%M:%S')
     most_recent = max(updated, last_activity)
 
-    days_since_modified = (datetime.utcnow() - most_recent).days
+    days_since_modified = (datetime.now() - most_recent).days
 
     if days_since_modified < 1:
         return 50
@@ -568,11 +568,17 @@ def check_password_strength(
     pwd_len = len(password)
     if pwd_len < min_len or pwd_len > max_len:
         message = lazy_gettext(
-                    'Password must be between {0} and {1} characters'
+                    #'Password must be between {0} and {1} characters'
+                    '비밀번호의 길이는 {0} ~ {1}자 입니다.'
                     .format(min_len, max_len))
         return False, message
 
+    if ' ' in password:
+        message = lazy_gettext('비밀번호에 공백이 있습니다.')
+        return False, message
+
     valid = all(re.search(ch, password) for ch in required_chars)
+
     if not valid:
         return False, message
     else:

@@ -7,7 +7,7 @@
 {% block content %}
 <div class="content-wrapper">
 	<div class="page-header">
-		<h3 class="page-title"> 게시판 글보기 </h3>
+		<h3 class="page-title"> <a href="{{url_for('home.qna')}}">게시판 글보기</a></h2>
 	</div>
 
 	<div class="row">
@@ -57,7 +57,7 @@
 								<div class="col-xl-4 offset-xl-2 col-sm-7 mb-3 mt-3">
 									<div class="btn-group d-flex justify-content-end">
 										<!--<button type="button" class="btn btn-sm btn-outline-primary" id="heartIcon"><i class="mdi mdi-heart-outline" ></i> 좋아요</button>-->
-										<!--<button type="button" class="btn btn-sm btn-outline-primary" id="addComment"><i class="mdi mdi-comment-processing-outline"></i>  댓글달기</button>-->
+										<button type="button" class="btn btn-sm btn-outline-primary" id="addComment"><i class="mdi mdi-comment-processing-outline"></i>  댓글달기</button>
 									</div>
 								</div> 
 							</div>
@@ -68,17 +68,20 @@
 							<div class="row">
 
 								<div class="col-12 comment-area" >
+
+									{% for row in blog_comment %}
 									<div class="details">
 										<i class="mdi mdi-subdirectory-arrow-right "></i>
-										<img class="img-sm rounded-circle mr-3" src="/static/new_design/images/man.jpg"><!--댓글쓴사람 프로필이미지-->
-										<p class="writer-nickname">꿈나무</p><!---댓글쓴사람 닉네임-->
-										<p class="sender-email"><i class="mdi mdi-delettext-primary"></i> 2012/08/03 10:31</p><!--댓글 쓴 날짜-->
-										<p id="displayComment" class="mr-5"></p> <!--댓글내용 입력하면 자동으로 올라옴-->
+										<img class="img-sm rounded-circle mr-3" src="{{ render_user_thumbnail(row, upload_method) }}"><!--댓글쓴사람 프로필이미지-->
+										<p class="writer-nickname">{{ row.name }}</p><!---댓글쓴사람 닉네임-->
+										<p class="sender-email"><i class="mdi mdi-delettext-primary"></i> {{ row.updated[0:16].replace('T', ' ') }}</p><!--댓글 쓴 날짜-->
+										<p id="displayComment" class="mr-5">{{ row.body }}</p> <!--댓글내용 입력하면 자동으로 올라옴-->
 									</div>
+									{% endfor %}
 								</div>
 
 								<div class="col-sm-9 col-7 d-flex justify-content-start">
-									<textarea id="comment-input" rows="1" placeholder="...."></textarea>
+									<textarea id="comment-input" rows="1" placeholder="댓글을 입력하세요"></textarea>
 								</div>
 
 								<div class="col-sm-3 col-5 d-flex justify-content-end">
@@ -98,4 +101,35 @@
 
 <!-- plugins:js this page only-->
 <script src="/static/new_design/js/viewQnA.js"></script>
+
+<script>
+	$(document).ready(function() {
+		var csrf = "{{ csrf_token() }}";
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X_CSRFToken", csrf)
+				}
+			}});
+	});
+
+$("#submitComment").click(function(){
+	$.ajax({
+		url:window.location.href,
+		data: {
+			"body": $("#comment-input").val()
+		},
+		type: 'POST',
+		success: function(res) {
+			console.log(res);
+		},
+		error: function(request, error) {
+			console.log(request);
+			console.log(error);
+		}
+	});
+});
+</script>
+
+
 {% endblock %}
