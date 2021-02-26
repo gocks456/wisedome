@@ -68,7 +68,11 @@
 											</div><!--card body-->
 
 											<div class="btn-group editor-btn-group">
+<<<<<<< HEAD:pybossa/themes/wisedome_theme/templates/new_design/qna/editor_register.html
 												<a class="btn btn-gradient-secondary" id="myCancel" href="{{ url_for('home.qna', category='register') }}">취소하기</a> 
+=======
+												<a class="btn btn-gradient-secondary" id="myCancel" href="{{ url_for('home.qna', category='회원가입') }}">취소하기</a> 
+>>>>>>> f39bd2849f1840b6b267794cac9a3fac7297c8c9:pybossa/themes/wisedome_theme/templates/new_design/qna/editor_회원가입.html
 												<a class="btn btn-gradient-primary" >글올리기</a>   
 											</div> 
 										</div>
@@ -102,8 +106,8 @@
 					xhr.setRequestHeader("X-CSRFToken", csrf)
 				}
 			}});
-	});
 
+<<<<<<< HEAD:pybossa/themes/wisedome_theme/templates/new_design/qna/editor_register.html
 $(".btn-gradient-primary").click(function(){
 	$.ajax({
 		url:window.location.href,
@@ -121,8 +125,31 @@ $(".btn-gradient-primary").click(function(){
 			console.log(request.status);
 			console.log(error);
 		}
+=======
+		$(".btn-gradient-primary").click(function(){
+
+			$.ajax({
+				url:window.location.href,
+				data: {"title": $("#myTitle").val(),
+					"body": $(".note-editable").html(),
+					"subject": $("#subtitle").val()
+				},
+				type: 'POST',
+				success: function(res) {
+					if (res == 'fail') {
+						alert('모든 내용을 입력해주세요.');
+						return;
+					}
+					window.location.href = "{{ url_for('home.qna', category='회원가입') }}";
+				},
+				error: function(request, error) {
+					console.log(request);
+					console.log(error);
+				}
+			});
+		});
+>>>>>>> f39bd2849f1840b6b267794cac9a3fac7297c8c9:pybossa/themes/wisedome_theme/templates/new_design/qna/editor_회원가입.html
 	});
-});
 </script>
 
 {% endblock %}
