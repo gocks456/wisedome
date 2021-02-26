@@ -20,7 +20,7 @@ from flask import current_app
 from flask_wtf import Form
 from flask_wtf.file import FileField, FileRequired
 from wtforms import IntegerField, DecimalField, TextField, BooleanField, SelectField, validators, TextAreaField, PasswordField, FieldList, SelectMultipleField, StringField
-from wtforms.fields.html5 import EmailField, URLField
+from wtforms.fields.html5 import EmailField, URLField, DateField
 from wtforms.widgets import HiddenInput
 from flask_babel import lazy_gettext, gettext
 from pybossa.core import project_repo, user_repo
@@ -118,6 +118,8 @@ class ProjectUpdateForm(ProjectForm):
     id = IntegerField(label=None, widget=HiddenInput())
     #20.03.02. 수정사항
     all_point = TextField(lazy_gettext('포인트'))
+
+    end_date = DateField(lazy_gettext('마감일자'))
 
     description = TextAreaField(lazy_gettext('Description'),
                             [validators.Required(

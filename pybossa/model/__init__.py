@@ -91,9 +91,6 @@ class DomainObject(object):
 
 def make_timestamp():
     now = datetime.datetime.now()
-    time_gap = datetime.timedelta(hours=9)
-    now = now + time_gap
-    #한국 시간을 만들기 위해
     return now.isoformat()
 
 

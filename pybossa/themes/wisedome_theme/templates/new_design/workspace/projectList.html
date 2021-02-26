@@ -203,7 +203,7 @@
 		$.ajaxSetup({
 			beforeSend: function(xhr, settings) {
 				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
-					xhr.setRequestHeader("X_CSRFToken", csrf)
+					xhr.setRequestHeader("X-CSRFToken", csrf)
 				}
 			}});
 	});
@@ -216,7 +216,6 @@ $(".dropdown-item").click(function(){
 		},
 		type: 'POST',
 		success: function(res) {
-			console.log(res);
 			$('#ajax-project-list').html(res);
 		},
 		error: function(request, error) {
