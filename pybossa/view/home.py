@@ -87,25 +87,37 @@ def sort_project(projects, value):
     return projects
 
 
+def trans_category(category):
+    if category == 'register':
+        return '회원가입'
+    elif category == 'point':
+        return '포인트'
+    elif category == 'project':
+        return '프로젝트'
+    elif category == 'exchange':
+        return '환급'
 
-@blueprint.route("qna", defaults={'category':'회원가입'})
+
+@blueprint.route("qna", defaults={'category':'register'})
 @blueprint.route("qna/<category>")
 def qna(category):
 
-    board_list = blog_repo.get_category_blogposts(category)
+    cat_name = trans_category(category)
+    board_list = blog_repo.get_category_blogposts(cat_name)
     response = dict(template="new_design/qna/qnaBoard_"+category+".html", board_list=board_list)
     return handle_content_type(response)
 
 @blueprint.route("qna/view/<int:blog_id>", methods=['GET', 'POST'])
 def qna_view(blog_id):
     if request.method == "POST":
+        if current_user.is_anonymous:
+            return 'register'
         from pybossa.model.blog_comment import BlogComment
         comment = BlogComment(
                        body=request.form.get('body'),
-                       blog_id=blog_id
+                       blog_id=blog_id,
+                       user_id=current_user.id
                        )
-        if not current_user.is_anonymous:
-            comment.user_id = current_user.id
         blog_repo.save_comment(comment)
         return 'save'
     blog = blog_repo.get(blog_id)
@@ -116,13 +128,14 @@ def qna_view(blog_id):
     
 @blueprint.route("qna/write/<category>", methods=['GET', 'POST'])
 def write(category):
+    cat_name = trans_category(category)
     if request.method == "POST":
         if request.form.get('title') != '' and request.form.get('body') != '<p><br></p>' and request.form.get('subject') != '주제':
             blog = Blogpost(
                         title=request.form.get('title'),
                         body=request.form.get('body'),
                         subject=request.form.get('subject'),
-                        category=category
+                        category=cat_name
                         )
             if not current_user.is_anonymous:
                 blog.user_id = current_user.id
