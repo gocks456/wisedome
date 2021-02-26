@@ -8,7 +8,7 @@
 
 <div class="content-wrapper">
 	<div class="page-header">
-		<h3 class="page-title"> 주제별 질문게시판 - 포인트 </h3>
+		<h3 class="page-title"> 주제별 질문게시판 - 프로젝트 </h3>
 	</div>
 
 	<div class="row">
@@ -25,16 +25,16 @@
 							<div class="tab-content tab-content-custom-pill " >
 								<ul class="nav nav-pills nav-pills-custom justify-content-center pb-3">
 									<li class="nav-item">
-										<a class="nav-link" href="{{ url_for('home.qna', category='회원가입') }}" > <i class="mdi mdi-wallet-membership"></i><br>회원가입 </a>  
+										<a class="nav-link" href="{{ url_for('home.qna', category='register') }}" > <i class="mdi mdi-wallet-membership"></i><br>회원가입 </a>  
 									</li>
 									<li class="nav-item">
-										<a class="nav-link active" href="{{ url_for('home.qna', category='포인트') }}" > <i class="mdi mdi-ticket"></i><br> 포인트 </a>
+										<a class="nav-link" href="{{ url_for('home.qna', category='point') }}" > <i class="mdi mdi-ticket"></i><br> 포인트 </a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="{{ url_for('home.qna', category='프로젝트') }}" ><i class="mdi mdi-television-guide"></i><br> 프로젝트 </a>
+										<a class="nav-link active" href="{{ url_for('home.qna', category='project') }}" ><i class="mdi mdi-television-guide"></i><br> 프로젝트 </a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="{{ url_for('home.qna', category='환급') }}" > <i class="mdi mdi-wallet-giftcard"></i><br> 환급</a>
+										<a class="nav-link" href="{{ url_for('home.qna', category='exchange') }}" > <i class="mdi mdi-wallet-giftcard"></i><br> 환급</a>
 									</li>
 								</ul>
 
@@ -69,7 +69,7 @@
 												</tbody>
 											</table>
 											<div class="text-right">
-												<a class="btn btn-gradient-primary" type="submit" id="editor-btn" href="{{ url_for('home.write', category='포인트') }}"> 글쓰기</a>
+												<a class="btn btn-gradient-primary" type="submit" id="editor-btn" href="{{ url_for('home.write', category='project') }}"> 글쓰기</a>
 											</div>
 										</div>
 									</div>

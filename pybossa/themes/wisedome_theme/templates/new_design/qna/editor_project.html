@@ -1,12 +1,14 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
 
 {% block css %}
+<!--this page css-->
 <link rel="stylesheet" href="/static/new_design/css/qnaBoard.css">
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
+
 <div class="content-wrapper">
 	<div class="page-header">
 		<h3 class="page-title"> 질문하기 </h3>
@@ -26,16 +28,16 @@
 							<div class=" tab-content-custom-pill " >
 								<ul class="nav nav-pills nav-pills-custom justify-content-center">
 									<li class="nav-item">
-										<a class="nav-link active" href="{{ url_for('home.write', category='회원가입') }}" > <i class="mdi mdi-wallet-membership"></i><br>회원가입 </a>  
+										<a class="nav-link " href="{{ url_for('home.write', category='register') }}" > <i class="mdi mdi-wallet-membership"></i><br>회원가입 </a>  
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="{{ url_for('home.write', category='포인트') }}" > <i class="mdi mdi-ticket"></i><br> 포인트 </a>
+										<a class="nav-link" href="{{ url_for('home.write', category='point') }}" > <i class="mdi mdi-ticket"></i><br> 포인트 </a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link " href="{{ url_for('home.write', category='프로젝트') }}" ><i class="mdi mdi-television-guide"></i><br> 프로젝트 </a>
+										<a class="nav-link active" href="{{ url_for('home.write', category='project') }}" ><i class="mdi mdi-television-guide"></i><br> 프로젝트 </a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="{{ url_for('home.write', category='환급') }}" > <i class="mdi mdi-wallet-giftcard"></i><br> 환급</a>
+										<a class="nav-link" href="{{ url_for('home.write', category='exchange') }}" > <i class="mdi mdi-wallet-giftcard"></i><br> 환급</a>
 									</li>
 								</ul>
 							</div>
@@ -52,10 +54,10 @@
 														<div class="col-sm-3">
 															<select class="form-control" id="subtitle">
 																<option selected>주제</option>
-																<option value="1">가입</option>
-																<option value="2">탈퇴</option>
-																<option value="3">본인인증</option>
-																<option value="4">기타</option>
+																<option >진행상황</option>
+																<option >반려</option>
+																<option >검수</option>
+																<option >기타</option>
 															</select>
 														</div>
 														<div class="col-sm-9 ">
@@ -68,7 +70,7 @@
 											</div><!--card body-->
 
 											<div class="btn-group editor-btn-group">
-												<a class="btn btn-gradient-secondary" id="myCancel" href="{{ url_for('home.qna', category='회원가입') }}">취소하기</a> 
+												<a class="btn btn-gradient-secondary" id="myCancel" href="{{ url_for('home.qna', category='project') }}">취소하기</a> 
 												<a class="btn btn-gradient-primary" >글올리기</a>   
 											</div> 
 										</div>
@@ -84,9 +86,8 @@
 	</div><!--row-->
 </div><!-- content-wrapper ends -->
 
-
-
 <script src="/static/new_design/js/plugin/vendor.bundle.base.js"></script>
+
 <!-- plugins:js this page only-->
 <script src="/static/new_design/js/plugin/summernote-bs4.min.js"></script>
 <script src="/static/new_design/js/plugin/summernote-ko-KR.js"></script>
@@ -102,30 +103,31 @@
 					xhr.setRequestHeader("X-CSRFToken", csrf)
 				}
 			}});
-
-		$(".btn-gradient-primary").click(function(){
-
-			$.ajax({
-				url:window.location.href,
-				data: {"title": $("#myTitle").val(),
-					"body": $(".note-editable").html(),
-					"subject": $("#subtitle").val()
-				},
-				type: 'POST',
-				success: function(res) {
-					if (res == 'fail') {
-						alert('모든 내용을 입력해주세요.');
-						return;
-					}
-					window.location.href = "{{ url_for('home.qna', category='회원가입') }}";
-				},
-				error: function(request, error) {
-					console.log(request);
-					console.log(error);
-				}
-			});
-		});
 	});
+
+$(".btn-gradient-primary").click(function(){
+	$.ajax({
+		url:window.location.href,
+		data: {"title": $("#myTitle").val(),
+			"body": $(".note-editable").html(),
+			"subject": $("#subtitle").val()
+		},
+		type: 'POST',
+		success: function(res) {
+			if (res == 'fail') {
+				alert('모든 내용을 입력해주세요.');
+				return;
+			}
+
+			window.location.href = "{{ url_for('home.qna', category='project') }}";
+		},
+		error: function(request, error) {
+			console.log(request);
+			console.log(error);
+		}
+	});
+});
 </script>
+
 
 {% endblock %}
