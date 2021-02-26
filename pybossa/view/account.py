@@ -1000,7 +1000,7 @@ def reset_password():
     if request.method == 'POST' and not form.validate():
         #flash(gettext('Please correct the errors'), 'error')
         flash(gettext('오류를 수정해주세요'), 'error')
-    response = dict(template='/account/password_reset.html', form=form)
+    response = dict(template='/new_design/register/findPassword2.html', form=form)
     return handle_content_type(response)
 
 
@@ -1012,65 +1012,31 @@ def forgot_password():
     Returns a Jinja2 template.
 
     """
-    form = ForgotPasswordForm(request.body)
-    if form.validate_on_submit():
-        user = user_repo.get_by(email_addr=form.email_addr.data)
+    if request.method == "POST":
+        user = user_repo.get_by(email_addr=request.form["email_addr"])
         if user and user.email_addr:
-            msg = dict(subject='Account Recovery',
-                       recipients=[user.email_addr])
-            if user.twitter_user_id:
-                msg['body'] = render_template(
-                    '/account/email/forgot_password_openid.md',
-                    user=user, account_name='Twitter')
-                msg['html'] = render_template(
-                    '/account/email/forgot_password_openid.html',
-                    user=user, account_name='Twitter')
-            elif user.facebook_user_id:
-                msg['body'] = render_template(
-                    '/account/email/forgot_password_openid.md',
-                    user=user, account_name='Facebook')
-                msg['html'] = render_template(
-                    '/account/email/forgot_password_openid.html',
-                    user=user, account_name='Facebook')
-            elif user.google_user_id:
-                msg['body'] = render_template(
-                    '/account/email/forgot_password_openid.md',
-                    user=user, account_name='Google')
-                msg['html'] = render_template(
-                    '/account/email/forgot_password_openid.html',
-                    user=user, account_name='Google')
-            else:
-                userdict = {'user': user.name, 'password': user.passwd_hash}
-                key = signer.dumps(userdict, salt='password-reset')
-                recovery_url = url_for_app_type('.reset_password',
-                                                key=key, _external=True)
-                msg['body'] = render_template(
-                    #'/account/email/forgot_password.md',
-                    '/new_design/email/password_reset.html',
-                    user=user, recovery_url=recovery_url)
-                #msg['html'] = render_template(
-                #    '/account/email/forgot_password.html',
-                #    user=user, recovery_url=recovery_url)
-            #mail_queue.enqueue(send_mail, msg)
+            if user.fullname != request.form["fullname"]:
+                flash('입력하신 이름의 이메일이 존재하지 않습니다.', 'error')
+                data = dict(template='/new_design/register/findPassword.html', csrf=generate_csrf())
+                return handle_content_type(data)
+            msg = dict(title = 'Wisedome 비빌번호 재설정')
+            userdict = {'user': user.name, 'password': user.passwd_hash}
+            key = signer.dumps(userdict, salt='password-reset')
+            recovery_url = url_for_app_type('.reset_password',
+                                            key=key, _external=True)
+            msg['body'] = render_template(
+                #'/account/email/forgot_password.md',
+                '/new_design/email/password_reset.html',
+                user=user, recovery_url=recovery_url)
+
             from pybossa.view.gmail import send_mail, create_message
-            msg = create_message(current_app.config['GMAIL'], user.email_addr, 'Wisedome 비밀번호 재설정', msg['body'])
+            msg = create_message(current_app.config['GMAIL'], user.email_addr, msg['title'], msg['body'])
             send_mail(msg)
-            #flash(gettext("We've sent you an email with account "
-            #              "recovery instructions!"),
-            #      'success')
             flash('이메일을 전송하였습니다!', 'success')
         else:
-            #flash(gettext("We don't have this email in our records. "
-            #              "You may have signed up with a different "
-            #              "email or used Twitter, Facebook, or "
-            #              "Google to sign-in"), 'error')
             flash("이메일이 존재하지 않습니다.", 'error')
-    if request.method == 'POST' and not form.validate():
-        #flash(gettext('Something went wrong, please correct the errors on the '
-        #      'form'), 'error')
-        flash('입력한 이메일을 확인해주세요', 'error')
-    data = dict(template='/account/password_forgot.html',
-                form=form)
+
+    data = dict(template='/new_design/register/findPassword.html', csrf=generate_csrf())
     return handle_content_type(data)
 
 

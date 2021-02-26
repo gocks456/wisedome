@@ -162,90 +162,6 @@ def pro_features(owner=None):
     return pro
 
 
-#20.02.25. 수정사항
-'''
-def marking(project):
-    result = result_repo.get_mark_all(project.id)
-
-    for result_idx in result:
-        sentence = {}
-        for idx in result_idx.task_run_ids:
-            task_run = task_repo.get_task_run(idx)
-
-            if task_run.info in sentence:
-                sentence[task_run.info] = sentence[task_run.info] + 1
-            else:
-                sentence[task_run.info] = 1
-
-        sort_sen = sorted(sentence, key=lambda k : sentence[k], reverse=True)
-
-        for idx in result_idx.task_run_ids:
-            task_run = task_repo.get_task_run(idx)
-            if task_run.info == sort_sen[0]:
-               task_run.score_mark=True
-               task_repo.update(task_run)
-        
-        result_idx.info=sort_sen[0]
-        result_repo.update(result_idx)
-
-    return result
-
-def score_check(result):
-    for result_idx in result:
-        for idx in result_idx.task_run_ids:
-            task_run = task_repo.get_task_run(idx)
-
-            if task_run.completed_score==False:
-                task_run.completed_score=True
-                task_repo.update(task_run)
-
-@blueprint.route('/<short_name>/score', methods=['GET', 'POST'])
-@admin_required
-def score(short_name):
-    project = project_repo.get_by_shortname(short_name)
-    all_point = project.all_point
-
-    if all_point == 0 :
-        msg_1 = gettext('포인트를 설정해 주세요.')
-        markup = Markup('<i class="icon-ok"></i> {}')
-        flash(markup.format(msg_1), 'error')
-        return redirect_content_type(url_for('.tasks',
-                                                 short_name=project.short_name))
-
-    result = marking(project)
-
-    if result == None or result == []:
-        msg_1 = gettext('완료된 작업이 없습니다.')
-        markup = Markup('<i class="icon-ok"></i> {}')
-        flash(markup.format(msg_1), 'error')
-        return redirect_content_type(url_for('.tasks',
-                                                 short_name=project.short_name))
-
-    task_count = task_repo.count_task(project.id)
-    task = task_repo.redundancy(project.id)
-    task_point = all_point // task_count
-
-    task_repo.save_point(project.id, task_point)
-
-    yes_task = task_repo.get_task_Yes(project.id)
-
-    for task_run in yes_task:
-        user = user_repo.get(task_run.user_id)
-        point_repo.update_point(task_run.point_sum, user.id)
-        point = point_repo.get_point(user.id)
-        user.point_sum = point.point_sum
-        user.current_point = point.current_point
-        user_repo.update(user)
-
-    score_check(result)
-    #achievement_renewal()
-    
-    msg_1 = gettext('채점 및 포인트 갱신 완료!')
-    markup = Markup('<i class="icon-ok"></i> {}')
-    flash(markup.format(msg_1), 'success')
-    return redirect_content_type(url_for('.tasks',
-                                             short_name=project.short_name))
-'''
 # 2020.11.27. 업적 리뉴얼 예정
 '''
 def achievement_renewal():
@@ -266,13 +182,10 @@ def index(page):
     desc = bool(request.args.get('desc', False))
 
     if request.method == 'POST':
-        projects = cached_projects.get_all_projects()
+        projects = cached_projects.get_all_featured()
         projects = sort_project(projects, request.form['value'])
-        n = datetime.datetime.now()
-        render = render_template('/new_design/ajax_project_index.html', n_year=n.year,
-                                 projects=projects)
-        response = dict(template=render)
-        return json.dumps(response)
+        render = render_template('/new_design/workspace/ajax_projectList.html', projects=projects)
+        return 'ddd'#render
 
     # New Design
     return project_index(page, cached_projects.get_all_featured,
@@ -292,14 +205,14 @@ def user_all_achieve(achieve):
     return
 
 def sort_project(projects, value):
-    if value == 'lowPrice':
+    if value == '최저가격순':
         projects = sorted(projects, key=lambda project: project['all_point'])
-    elif value == 'highPrice':
+    elif value == '최고가격순':
         projects = sorted(projects, key=lambda project: project['all_point'], reverse=True)
-    elif value == 'newest':
+    elif value == '최신순':
         projects = sorted(projects, key=lambda project: project['updated'], reverse=True)
-    elif value == 'oldest':
-        projects = sorted(projects, key=lambda project: project['updated'], reverse=True)
+    elif value == '마감임박순':
+        projects = sorted(projects, key=lambda project: project['end_date'], reverse=True)
     return projects
 
 def project_index(page, lookup, category, fallback, use_count, order_by=None,
@@ -404,14 +317,9 @@ def project_cat_index(category=None, page=1):
 
     if request.method == 'POST':
         projects = cached_projects.get_all(category)
-        if category == None:
-            projects = cached_projects.get_all_projects()
         projects = sort_project(projects, request.form['value'])
-        n = datetime.datetime.now()
-        render = render_template('/new_design/ajax_project_index.html', n_year=n.year,
-                                 projects=projects)
-        response = dict(template=render)
-        return json.dumps(response)
+        render = render_template('/new_design/workspace/ajax_projectList.html', projects=projects)
+        return render
     if category == None:
         return redirect_content_type(url_for('.index'))
     return project_index(page, cached_projects.get_all, category, False, True,
@@ -1153,6 +1061,9 @@ def task_presenter(short_name, task_id):
             old_answer = task_run.info
             task_run.info = request.form["answer"]
             task_repo.update(task_run)
+
+            # 답변 수정 후 포인트 업데이트
+            task_repo.task_update_point(project.id, task_run.task_id)
 
             return old_answer
 

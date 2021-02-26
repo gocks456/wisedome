@@ -54,7 +54,7 @@ class NotAllowedChars(object):
 
     def __init__(self, message=None):
         if not message:
-            self.message = lazy_gettext('%sand space symbols are forbidden'
+            self.message = lazy_gettext('%s와 공백은 지원하지않습니다.'#'%sand space symbols are forbidden'
                                         % self.not_valid_chars)
         else:  # pragma: no cover
             self.message = message
@@ -153,14 +153,17 @@ class CheckPasswordStrength(object):
         #if uppercase:
         #    message.append('one uppercase')
         if lowercase:
-            message.append('one lowercase')
+            #message.append('one lowercase')
+            message.append('영어 소문자')
         if numeric:
-            message.append('one numeric ')
+            #message.append('one numeric ')
+            message.append('숫자')
         if special:
-            message.append('one special !@$%^&*#')
+            #message.append('one special !@$%^&*#')
+            message.append('특수문자(!@$%^&*#)')
 
         if message:
-            return 'Password must contain at least {} character.'\
+            return '비밀번호는 {}를 모두 포함하여야 합니다.'\
                 .format(', '.join(message))
         return None
 

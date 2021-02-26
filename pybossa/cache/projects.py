@@ -539,9 +539,7 @@ def n_count(category):
     return count
 
 @memoize(timeout=timeouts.get('APP_TIMEOUT'))
-def get_all_projects(category=None):
-    import time
-    a1 = time.time()
+def get_projects_limit(limit='all', category=None):
     # 공개된 프로젝트 전체
     sql = text(
         '''SELECT project.id, project.name, project.short_name,
@@ -553,12 +551,11 @@ def get_all_projects(category=None):
            AND "user".restrict=false
            AND project.published=true
            AND project.complete=false
-           GROUP BY project.id, "user".id ORDER BY project.name;''')
+           GROUP BY project.id, "user".id
+           ORDER BY project.end_date DESC
+		   LIMIT :limit;''')
 
-    results = session.execute(sql)
-    print ("@@@ 1)\t" + str(time.time()-a1))
-    print (results)
-    a1 = time.time()
+    results = session.execute(sql, dict(limit=limit))
     projects = []
     for row in results:
         project = dict(id=row.id,
@@ -580,7 +577,6 @@ def get_all_projects(category=None):
                        complete=row.complete)
         projects.append(Project().to_public_json(project))
   
-    print ("@@@ 2)\t" + str(time.time()-a1))
     return projects
 
 def loadtest2():

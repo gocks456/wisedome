@@ -35,51 +35,31 @@ from pybossa.model.blogpost import Blogpost
 
 blueprint = Blueprint('home', __name__)
 
-import time
-@blueprint.route('/')
+@blueprint.route('/', methods=["GET", "POST"])
 def home():
     """Render home page with the cached projects and users."""
-    page = 1
-    per_page = current_app.config.get('APPS_PER_PAGE', 5)
-
-    # Add featured
-    tmp_projects = cached_projects.get_featured('featured', page, per_page)									# 얘 조금 느림
-
-    if len(tmp_projects) > 0:
-        data = dict(featured=rank(tmp_projects))
-    else:
-        data = dict(featured=[])
-    """
-    # Add historical contributions
-    historical_projects = []
-    if current_user.is_authenticated:
-        user_id = current_user.id
-        historical_projects = cached_users.projects_contributed(user_id, order_by='last_contribution')[:3]	# 이거 조금 느림
-        data['historical_contributions'] = historical_projects
-    print ("4)\t" + str(time.time() - a1))
-    """
-
-    # 메인화면 Design Test
-    #response = dict(template='/home/index.html', **data)
-    #projects = project_repo.get_all()
-
-    # 오픈한 모든 프로젝트
-	# 개수 지정할 필요있음
-    projects = cached_projects.get_all_projects()
-
+    #project_repo.update_end_date_7days()
 
     if current_user.is_anonymous:
+        # 오픈한 모든 프로젝트
+        # 개수 지정할 필요있음
+        projects = cached_projects.get_projects_limit(8)
+
         # 7일 간 top 5
         top_users = site_stats.get_top5_users_7_days()
         response = dict(template='/new_design/index2.html', projects=projects, top_users=top_users )
         return handle_content_type(response)
     else: 
         # 오픈된 모든 프로젝트 개수
-        n_projects = len(projects)
+        n_projects = project_repo.get_count_published_projects().count
 
-        # 인기 프로젝트
-        #popular_projects = cached_projects.get_popular_top5_projects()
+        # 참여한 프로젝트 전체
         projects = project_repo.get_contributed_projects_all(current_user.id)
+
+        if request.method == 'POST':
+            projects = sort_project(projects, request.form['value'])
+            render = render_template('/new_design/workspace/ajax_dashboard.html', projects=projects)
+            return render
 
         # 참여중인 프로젝트 개수
         n_ongoing_projects = len(projects)
@@ -94,7 +74,20 @@ def home():
 #        return redirect_content_type(url_for('project.index'))
 
 
-@blueprint.route("qna", defaults={'category':'회원가입'})
+def sort_project(projects, value):
+    if value == '최저가격순':
+        projects = sorted(projects, key=lambda project: project.all_point)
+    elif value == '최고가격순':
+        projects = sorted(projects, key=lambda project: project.all_point, reverse=True)
+    elif value == '최신순':
+        projects = sorted(projects, key=lambda project: project.updated, reverse=True)
+    elif value == '마감임박순':
+        projects = sorted(projects, key=lambda project: project.end_date, reverse=True)
+    return projects
+
+
+
+@blueprint.route("qna", defaults={'category':'register'})
 @blueprint.route("qna/<category>")
 def qna(category):
 
@@ -102,11 +95,21 @@ def qna(category):
     response = dict(template="new_design/qna/qnaBoard_"+category+".html", board_list=board_list)
     return handle_content_type(response)
 
-@blueprint.route("qna/view/<int:blog_id>")
+@blueprint.route("qna/view/<int:blog_id>", methods=['GET', 'POST'])
 def qna_view(blog_id):
+    if request.method == "POST":
+        from pybossa.model.blog_comment import BlogComment		# 익명은 댓글 못달게 바꾸기
+        comment = BlogComment(
+                       body=request.form.get('body'),
+                       user_id=current_user.id,
+                       blog_id=blog_id
+                       )
+        blog_repo.save_comment(comment)
+        return 'save'
     blog = blog_repo.get(blog_id)
     user = user_repo.get(blog.user_id)
-    response = dict(template="new_design/qna/viewQnA.html", blog=blog, user=user)
+    blog_comment = blog_repo.get_comment(blog_id)
+    response = dict(template="new_design/qna/viewQnA.html", blog=blog, user=user, blog_comment=blog_comment, csrf=generate_csrf())
     return handle_content_type(response)
     
 @blueprint.route("qna/write/<category>", methods=['GET', 'POST'])
@@ -114,7 +117,9 @@ def write(category):
     if request.method == "POST":
         print(request.form.get('body'))
         print(request.form.get('title'))
-        print(request.form.get('subject'))
+        print(request.form.get('subject'))					# 익명이 글 쓰면 익명이라고 적어주기
+
+        print ("###################\n"+current_user+"#######################")
         blog = Blogpost(
                     title=request.form.get('title'),
                     body=request.form.get('body'),
