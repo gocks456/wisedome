@@ -1,4 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_wisedome = "qna" %}
 
 {% block css %}
 <link rel="stylesheet" href="/static/new_design/css/qnaBoard.css">
@@ -9,7 +10,7 @@
 {% block content %}
 <div class="content-wrapper">
 	<div class="page-header">
-		<h3 class="page-title"> 질문하기 </h3>
+		<h3 class="page-title"> <a href="{{url_for('home.qna', category='register')}}">질문하기</a></h2>
 	</div>
 
 
@@ -104,6 +105,30 @@
 			}});
 
 		$(".btn-gradient-primary").click(function(){
+			console.log($(".note-editable").text());
+			temp = $(".note-editable").text().toLowerCase();
+			if (temp.match('script') == 'script' || temp.match('js') == 'js'){
+				alert('보안 위반 사항입니다.');
+				return;
+			}
+			temp = $("#myTitle").text().toLowerCase();
+			if (temp.match('script') == 'script' || temp.match('js') == 'js'){
+				alert('보안 위반 사항입니다.');
+				return;
+			}
+			if (temp.length == 0) {
+				alert('내용을 입력하세요.');
+				return;
+			}
+			if ($("#subtitle").val() == '주제') {
+				alert('주제를 선택하세요.');
+				return;
+			}
+			if ($("#myTitle").val().replace(/(\s*)/g, "") == "") {
+				alert('제목을 입력하세요.');
+				return;
+			}
+
 
 			$.ajax({
 				url:window.location.href,

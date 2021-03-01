@@ -102,7 +102,7 @@ class Gmail(object):
         self.oauth = OAuth().remote_app(
             'gmail',
             base_url='https://www.googleapis.com/oauth2/v1/',
-            authorize_url='https://accounts.google.com/o/oauth2/auth?access_type=offline&include_granted_scopes=true',
+            authorize_url='https://accounts.google.com/o/oauth2/auth?access_type=offline&include_granted_scopes=true&prompt=consent',
             request_token_url=None,
 			request_token_params={'scope': ['https://www.googleapis.com/auth/gmail.send', 'profile', 'email']},
             access_token_url='https://accounts.google.com/o/oauth2/token?grant_type=authorization_code',
@@ -146,7 +146,7 @@ class Kakao(object):
 			authorize_url='https://kauth.kakao.com/oauth/authorize',
             request_token_url=None,
 			request_token_params={'scope': ['profile', 'account_email']},
-			access_token_url='https://kauth.kakao.com/oauth/token?redirect_uri=http://urd.nlp.wo.tc:8000/kakao/oauth_authorized',
+			access_token_url='https://kauth.kakao.com/oauth/token?redirect_uri=http://wisedome.kr/kakao/oauth_authorized',
             access_token_method='POST',
             consumer_key=app.config['KAKAO_CLIENT_ID'],
             consumer_secret=app.config['KAKAO_CLIENT_SECRET'])

@@ -1,5 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
-{% set active_page = 'project' %}
+{% set active_wisedome = 'project' %}
 
 {% block css %}
 <!---현재 페이지에만 들어가는 css-->
@@ -16,7 +16,7 @@
 			<div class="card bg-white icon-group">
 				<div class="row">
 
-					<div class="card-col col" id="premium-icon">
+					<div class="card-col" id="premium-icon">
 						<div class="card-body">
 							<div class="d-flex align-items-center justify-content-center flex-column"
 								onclick="location.href='{{ url_for("project.index")}}'">
@@ -34,7 +34,7 @@
 						</div>
 					</div>
 
-					<div class="card-col col" id="voice-icon">
+					<div class="card-col" id="voice-icon">
 						<div class="card-body">
 							<div class="d-flex align-items-center justify-content-center flex-column"
 								onclick="location.href='{{ url_for("project.project_cat_index", category="sound")}}'">
@@ -53,12 +53,12 @@
 								<p class="icon-title iconTitle2"
 									{% if category=='sound' %}
 									icon-active
-									{% endif %}>음성작업</p>
+									{% endif %}>음성</p>
 							</div>
 						</div>
 					</div>
 
-					<div class="card-col col" id="img-icon">
+					<div class="card-col" id="img-icon">
 						<div class="card-body">
 							<div class="d-flex align-items-center justify-content-center flex-column"
 								onclick="location.href='{{ url_for("project.project_cat_index", category="image")}}'">
@@ -79,12 +79,12 @@
 								<p class="icon-title iconTitle3"
 									{% if category=='image' %}
 									icon-active
-									{% endif %}>이미지작업</p>
+									{% endif %}>이미지</p>
 							</div>
 						</div>
 					</div>
 
-					<div class="card-col col" id="text-icon">
+					<div class="card-col" id="text-icon">
 						<div class="card-body">
 							<div class="d-flex align-items-center justify-content-center flex-column"
 								onclick="location.href='{{ url_for("project.project_cat_index", category="text")}}'">
@@ -96,12 +96,12 @@
 								<p class="icon-title iconTitle4"
 									{% if category=='text' %}
 									icon-active
-									{% endif %}>텍스트작업</p>
+									{% endif %}>텍스트</p>
 							</div>
 						</div>
 					</div>
 
-					<div class="card-col col" id="video-icon">
+					<div class="card-col" id="video-icon">
 						<div class="card-body">
 							<div class="d-flex align-items-center justify-content-center flex-column"
 								onclick="location.href='{{ url_for("project.project_cat_index", category="vidio")}}'">
@@ -113,7 +113,7 @@
 								<p class="icon-title iconTitle5"
 									{% if category=='vidio' %}
 									icon-active
-									{% endif %}>비디오작업</p>
+									{% endif %}>비디오</p>
 							</div>
 						</div>
 					</div>
@@ -134,10 +134,10 @@
 			<div class="dropdown">
 				<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 정렬하기 </button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton">
-					<a class="dropdown-item" href="#">최저가격순</a>
-					<a class="dropdown-item" href="#">최고가격순</a>
-					<a class="dropdown-item" href="#">최신순</a>
-					<a class="dropdown-item" href="#">마감임박순</a>
+					<a class="dropdown-item" >최저가격순</a>
+					<a class="dropdown-item" >최고가격순</a>
+					<a class="dropdown-item" >최신순</a>
+					<a class="dropdown-item" >마감임박순</a>
 				</div>
 			</div>
 		</div>
@@ -164,7 +164,7 @@
 											<div class="badge">나이무관</div>
 											<div class="badge">성별무관</div>
 										</div>
-										<small class="text-muted ">{{ project.all_point }}P</small>
+										<small class="text-muted ">{{ project.all_point|number_format }}P</small>
 									</div>
 								</div>
 							</a>
@@ -197,28 +197,31 @@
 <script src="/static/new_design/js/projectList.js"></script>
 
 
+
 <script>
-	$(document).ready(function() {
+	$(document).ready(function(){
 		var csrf = "{{ csrf_token() }}";
 		$.ajaxSetup({
 			beforeSend: function(xhr, settings) {
 				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
 					xhr.setRequestHeader("X-CSRFToken", csrf)
 				}
-			}});
+			}
+		});
 	});
+
 
 $(".dropdown-item").click(function(){
 	$.ajax({
-		url:window.location.href,
+		url: window.location.href,
 		data: {
 			"value": $(this).text()
 		},
-		type: 'POST',
+	type: 'post',
 		success: function(res) {
 			$('#ajax-project-list').html(res);
 		},
-		error: function(request, error) {
+		error: function(request, status, error) {
 			console.log(request);
 			console.log(error);
 		}

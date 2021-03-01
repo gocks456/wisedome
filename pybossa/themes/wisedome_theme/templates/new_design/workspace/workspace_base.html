@@ -34,7 +34,7 @@
 			<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 				<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
 					<a class="navbar-brand brand-logo" href="{{ url_for('home.home') }}"><img src="/static/new_design/images/wisedome-logo-white.png" alt="logo" /></a>
-					<a class="navbar-brand brand-logo-mini" href="{{ url_for('home.home') }}"><img src="/static/new_design/images/wisedome-logo.png" alt="logo" /></a>
+					<a class="navbar-brand brand-logo-mini" href="{{ url_for('home.home') }}"><img src="/static/new_design/images/Symbol-grey.png" alt="logo" /></a>
 				</div>
 				<div class="navbar-menu-wrapper d-flex align-items-stretch">
 					<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -70,106 +70,16 @@
 							</a>
 						</li>
 
-						{#
-						<li class="nav-item dropdown"><!--메세지 확인 아이콘-->
-							<a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-								<i class="mdi mdi-email-outline"></i>
-								<span class="count-symbol bg-warning"></span>
-							</a>
-							<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-								<h6 class="p-3 mb-0">메세지</h6>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item preview-item">
-									<div class="preview-thumbnail">
-										<img src="/static/new_design/images/face5.jpg" alt="image" class="profile-pic">
-									</div>
-									<div class="preview-item-content d-flex align-items-start flex-column">
-										<p class="preview-subject mb-1 ellipsis">메세지가 도착했습니다</ㅔ>
-										<p class="mb-0 "> 1분전 </p>
-									</div>
-								</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item preview-item">
-									<div class="preview-thumbnail">
-										<img src="/static/new_design/images/face5.jpg" alt="image" class="profile-pic">
-									</div>
-									<div class="preview-item-content d-flex align-items-start flex-column">
-										<p class="preview-subject mb-1 ellipsis">프로필이 업데이트 되었습니다</p>
-										<p class="mb-0"> 15분전 </p>
-									</div>
-								</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item preview-item">
-									<div class="preview-thumbnail">
-										<img src="/static/new_design/images/user-default.png" alt="image" class="profile-pic">
-									</div>
-									<div class="preview-item-content d-flex align-items-start flex-column">
-										<p class="preview-subject mb-1 ellipsis">작업물이 1건 반려되었습니다</p>
-										<p class="mb-0"> 18분전</p>
-									</div>
-								</a>
-								<div class="dropdown-divider"></div>
-								<h6 class="p-3 mb-0 text-center ellipsis">4개의 새로운 메세지</h6>
+						<!-- 다크모드
+						<li class="nav-item">
+							<div class="nav-link">
+								<div class="custom-control custom-switch">
+									<input type="checkbox" class="custom-control-input" id="darkSwitch">
+									<label class="custom-control-label" for="darkSwitch"></label> 
+								</div>
 							</div>
 						</li>
-						#}
-
-						{#
-						<li class="nav-item dropdown"><!--공지사항 아이콘-->
-							<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-								<i class="mdi mdi-bell-outline"></i>
-								<span class="count-symbol bg-danger"></span>
-							</a>
-							<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-								<h6 class="p-3 mb-0">공지사항</h6>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item preview-item">
-									<div class="preview-thumbnail">
-										<div class="preview-icon bg-success">
-											<i class="mdi mdi-calendar"></i>
-										</div>
-									</div>
-									<div class="preview-item-content d-flex align-items-start flex-column">
-										<h6 class="preview-subject mb-1 ">프로젝트 마감</h6>
-										<p class="ellipsis mb-0"> 참여했던 프로젝트가 오늘 마감됩니다</p>
-									</div>
-								</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item preview-item">
-									<div class="preview-thumbnail">
-										<div class="preview-icon bg-warning">
-											<i class="mdi mdi-settings"></i>
-										</div>
-									</div>
-									<div class="preview-item-content d-flex align-items-start flex-column">
-										<h6 class="preview-subject mb-1 ">설정</h6>
-										<p class="ellipsis mb-0"> 비밀번호를 주기적으로 변경해주세요 </p>
-									</div>
-								</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item preview-item">
-									<div class="preview-thumbnail">
-										<div class="preview-icon bg-info">
-											<i class="mdi mdi-link-variant"></i>
-										</div>
-									</div>
-									<div class="preview-item-content d-flex align-items-start flex-column">
-										<h6 class="preview-subject mb-1 ">새로운 프로젝트</h6>
-										<p class="ellipsis mb-0"> 당신에게 적합한 새로운 프로젝트를 추천합니다 </p>
-									</div>
-								</a>
-								<div class="dropdown-divider"></div>
-								<h6 class="p-3 mb-0 text-center">모두보기</h6>
-							</div>
-							#}
-							<li class="nav-item">
-								<div class="nav-link">
-									<div class="custom-control custom-switch">
-										<input type="checkbox" class="custom-control-input" id="darkSwitch">
-										<label class="custom-control-label" for="darkSwitch"></label> 
-									</div>
-								</div>
-							</li>
+						-->
 
 					</ul>
 					<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
@@ -200,28 +110,28 @@
 						</li>
 						{% endif %}
 
-						<li class="nav-item {% if active_page == 'home' %} active {% endif %}">
+						<li class="nav-item {% if active_wisedome == 'home' %} active {% endif %}">
 							<a class="nav-link" href="{{ url_for('home.home') }}">
 								<span class="menu-title ">HOME</span>
 								<i class="mdi mdi-home menu-icon"></i>
 							</a>
 						</li>
 
-						<li class="nav-item {% if active_page == 'project' %} active {% endif %}">
+						<li class="nav-item {% if active_wisedome == 'project' %} active{% endif %}">
 							<a class="nav-link" href="{{ url_for('project.index') }}">
 								<span class="menu-title">프로젝트</span>
 								<i class="mdi mdi-apps menu-icon"></i>
 							</a>
 						</li>
 
-						{#<li class="nav-item {% if active_page == 'point' %} active {% endif %}">
+						{#<li class="nav-item {% if active_wisedome == 'point' %} active {% endif %}">
 							<a class="nav-link" href="{{ url_for('home.faq') }}">
 								<span class="menu-title">FAQ</span>
 								<i class="mdi mdi-trophy-variant menu-icon"></i>
 							</a>
 						</li>#}
 
-						<li class="nav-item {% if active_page == 'qna' %} active {% endif %}">
+						<li class="nav-item {% if active_wisedome == 'qna' %} active {% endif %}">
 							<a class="nav-link" href="{{ url_for('home.qna') }}">
 								<span class="menu-title">질문게시판</span>
 								<i class="mdi mdi-human-greeting menu-icon"></i>
@@ -287,7 +197,7 @@
 					<!-- FOOTER -->
 					<footer class="footer bg-white">
 						<div class="d-flex justify-content-center">
-							<span class="text-muted">Copyright © 2020 <a href="#" target="_blank">Data.ly</a>. All rights reserved.</span>
+							<span class="text-muted">Copyright © 2021 <a href="{{url_for('home.home')}}">Wisedome</a> All rights reserved.</span>
 						</div>
 					</footer>
 					<!-- partial -->

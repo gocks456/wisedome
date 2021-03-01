@@ -104,8 +104,8 @@ class ExchangeForm(Form):
     exchange_point = IntegerField(lazy_gettext('환급신청 포인트'),
                              [validators.Required(),
                               validators.NumberRange(
-                                  min=1, max=10000,
-                                  message=lazy_gettext('최대10,000 POINT까지 환전신청 가능합니다.'))])
+                                  min=1, max=1000000,
+                                  message=lazy_gettext('최대1,000,000 POINT까지 환전신청 가능합니다.'))])
 '''                              [validators.Required(),
                                validators.NumberRange(
                                    min=1, max=1000,

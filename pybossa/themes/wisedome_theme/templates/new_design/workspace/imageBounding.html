@@ -1,0 +1,63 @@
+
+<link rel="stylesheet" href="../../static/css/workspace-img.css">
+
+
+<!-- 메인 작업화면 -->
+<div class="content-wrapper image-area">
+
+	<div class="page-header">
+		<h3 class="page-title">
+			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-crop"></i></span>  &nbsp;
+			이미지 바운딩하기
+		</h3>
+	</div>
+
+
+	<!------문제 들어가는 영역------>
+	<div class="row">
+		<div class="col-md-12 grid-margin">
+			<div class="card bg-white ">
+				<div class="card-body "> 
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; STEP1. 정확한 지점에 맞게 바운딩을 해주세요</h4>
+					<div class="row mt-4 ">
+						<div class="col-lg-9 bounding">  <!-- 이 안에 선택한 이미지 뜨는곳-->
+							<img src="../../static/images/trees.jpg" alt="">  
+						</div>
+
+						<div class="col-lg-3 answers">    <!-- 답변선택영역-->
+							<p class="card-description text-left">STEP2. 이 바운딩 박스에 해당하는 적절한 태그명을 선택 해주세요</p>
+							<button type="radio" class="btn btn-outline-primary" onclick="taggedButton()">숲속의 나무</button>
+							<button type="radio" class="btn btn-outline-primary" onclick="taggedButton()">초원의 양떼들</button>
+							<button type="radio" class="btn btn-outline-primary" onclick="taggedButton()">목장과 소년</button>
+							<button type="submit" class="btn btn-success" id="submit" disabled><i class="mdi mdi-cloud-upload"></i>제출하기 </button>
+							<button class="btn" id="disable-submit"><i class="mdi mdi mdi-comment-alert-outline"></i>작업불가 </button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!---작업불가사유 적는 칸 뜨는곳-->
+		<div class="col-md-12 grid-margin" id="disable-reason">
+			<div class="card bg-white">
+				<div class="card-body">
+					<h4 class="card-title"><i class="mdi mdi-message-text"></i> &nbsp; 작업불가 사유</h4>
+					<div class="row">
+						<div class="col-lg-9 d-inline-flex">
+							<!---사유 입력란-->
+							<textarea id="input_text" class="text-typing" rows="1"></textarea>
+						</div>  
+						<div class="col-lg-3 answers"> 
+							<button type="submit" class="btn btn-danger " id="disable-reason-btn" disabled ><i class="mdi mdi-cloud-upload"></i>사유제출하기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- 이 페이지에서만 필요한 js -->
+<script src="../../static/js/workspace-img.js"></script>
+

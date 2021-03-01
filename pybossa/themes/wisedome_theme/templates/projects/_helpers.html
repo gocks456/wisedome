@@ -210,7 +210,8 @@
 
 {% macro render_contribute_button(project, n_task_runs) %}
     {% if project['contrib_button'] == 'completed' %}
-    <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right">{{ _('Done! View results') }}</a>
+	<!--<a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right">{{ _('Done! View results') }}</a>-->
+    <a href="{{url_for('home.home')}}" class="btn btn-primary btn-contribute pull-right">DONE! GO HOME</a>
     {% endif %}
     {% if project['contrib_button'] == 'can_contribute' %}
     <a href="{{ url_for('project.sertification', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right">{{ _('Start Contributing Now!') }}</a>

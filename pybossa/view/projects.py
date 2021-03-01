@@ -1221,8 +1221,7 @@ def presenter(short_name):
         return "success"
 
     #2020.09.22. 계약서 연결
-    #if current_user.id not in project.contractor_ids and current_user.id not in project.owners_ids and current_user.admin:
-    if current_user.id not in project.contractor_ids:
+    if current_user.id not in project.contractor_ids and current_user.id not in project.owners_ids and current_user.admin:
         resp = respond('/projects/tutorial.html')
         return resp
 
@@ -1595,6 +1594,8 @@ def show_stats(short_name):
                                                                 owner,
                                                                 current_user,
                                                                 ps)
+    #sonst = cached_projects.get_redundancy(short_name)
+    #print (sonst)
 
     if not ((ps.n_tasks > 0) and (ps.n_task_runs > 0)):
         project = add_custom_contrib_button_to(project, get_user_id_or_ip(),
@@ -1662,8 +1663,8 @@ def show_stats(short_name):
     else:   # HTML
         handle_projectStats = json.dumps(projectStats)
 
-    #response = dict(template='/projects/stats.html',
-    response = dict(template='/projects/orderer_stats.html',
+    response = dict(template='/projects/stats.html',
+    #response = dict(template='/projects/orderer_stats.html',
                     title=title,
                     progress_rate=progress_rate,
                     projectStats=handle_projectStats,

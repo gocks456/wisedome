@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>모든프로젝트</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/css/function/vendor.bundle.base.css">
+    <!--기본 css--->
+    <link rel="stylesheet" href="../../static/css/basic/dashboard-basic.css">
+    <link rel="stylesheet" href="../../static/css/function/darkmode.css">
+    <!---현재 페이지에만 들어가는 css-->
+    <link rel="stylesheet" href="../../static/css/dashboard.css">
+
+ 
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo-white.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo.png" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" >
+            <span class="mdi mdi-format-horizontal-align-left " onclick="intend(this)"></span><!--아이콘버튼 사이드바 펼침 및 닫기 아이콘-->
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="../../static/images/face5.jpg" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="mb-1">창원대</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item " href="../workspace/myProfile.html">
+                  <i class="mdi mdi mdi-account-circle mr-2 text-success"></i>  마이페이지 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i>  로그아웃 </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+                 <!--기존에 있던, 메일함 알림 아이콘 삭제, 및 검색기능 삭제-->
+            <li class="nav-item">
+              <div class="nav-link">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch"></label> 
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      
+ <!--왼쪽 사이드바 -->
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav ">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="../../static/images/face5.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">창원대</span>
+                  <span class="text-secondary text-small">초급자</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./dashboard.html">
+                <span class="menu-title ">홈</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="./projectList.html"><!--프로젝트 리스트 보기 링크 걸어놓음-->
+                <span class="menu-title">프로젝트</span>
+                <i class="mdi mdi-apps menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <span class="menu-title">포인트</span>
+                <i class="mdi mdi-trophy-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./qnaBoard1.html"><!--질문게시판 링크 걸어놓음-->
+                <span class="menu-title">질문게시판</span>
+                <i class="mdi mdi-human-greeting menu-icon"></i>
+              </a>
+            </li>
+
+            <li class="nav-item sidebar-actions">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <div class="border-bottom"></div>
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4 reward-btn">
+                  <i class="mdi mdi-cash-multiple"></i> 포인트 전환</button>
+                  <br>
+                <div class="border-bottom"></div>
+              </a>
+            </li>
+          </ul>
+        </nav><!--여기까지가 기본 nav-->
+
+
+
+ <div class="main-panel">
+   <div class="content-wrapper">
+
+
+
+<!--카테고리별 프로젝트-->
+<div class="row">
+<div class="col-12 grid-margin">
+  <div class="card bg-white icon-group ">
+    <div class="row">
+
+      <div class="card-col" id="premium-icon">  <!--col 태그 삭제 02.28-->
+        <div class="card-body">
+           <div class="d-flex align-items-center justify-content-center flex-column">
+           <svg id="card-icon1"  enable-background="new 0 0 24 24" viewBox="0 0 24 24" ><g><path d="m3.7 1.762 2.392 6.675h-6.092z"/></g>
+              <g><path d="m11.06 1.823-3.762 5.444-2.228-6.207h5.468z"/></g><g><path d="m15.649 8.437h-7.298l3.649-5.261z"/></g><g><path d="m18.93 1.06-2.218 6.207-3.772-5.444.522-.763z"/></g><g><path d="m24 8.437h-6.082l2.392-6.675z"/></g><g><path d="m11.315 23.06-.184-.224-10.906-12.872h6.409l4.548 12.719z"/></g><g><path d="m15.741 9.964-3.741 10.45-3.741-10.45z"/></g><g><path d="m23.775 9.964-10.906 12.872-.184.214.122-.356 4.559-12.73z"/></g></svg>
+             <p class="icon-title iconTitle1">프리미엄</p>
+           </div>
+        </div>
+      </div>
+
+      <div class="card-col" id="voice-icon"><!--col 태그 삭제 02.28-->
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-center flex-column">
+          <svg id="card-icon2"  viewBox="0 0 487.336 487.335"><g><g><path d="M243.573,24.136C109.269,24.76,0,134.531,0,268.832c0,40.784,10.226,80.992,29.563,116.62v-64.692
+			c0-11.925,4.243-22.984,11.683-32.471c-0.616-6.453-0.933-12.946-0.933-19.457c0-112.177,91.265-203.861,203.261-204.382
+			c112.183,0.519,203.447,92.205,203.447,204.382c0,7.21-0.4,14.396-1.156,21.533c6.467,9.01,10.116,19.33,10.116,30.395v67.975
+			c20.508-36.43,31.354-77.864,31.354-119.902C487.336,134.531,378.067,24.76,243.573,24.136z"/>
+		<path d="M44.578,310.312c-1.03,3.373-1.578,6.867-1.578,10.449v62.352v29.023c0,28.199,33.586,51.063,75.019,51.063h31.586V269.7
+			h-31.586C81.848,269.699,51.665,287.121,44.578,310.312z"/>
+		<path d="M442.543,412.136v-30.037v-61.338c0-2.201-0.229-4.367-0.626-6.496c-4.69-25.133-36.196-44.565-74.394-44.565h-31.586
+			v193.5h31.587C408.958,463.199,442.543,440.335,442.543,412.136z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+         <p class="icon-title iconTitle2">음성작업</p>
+           </div>
+        </div>
+      </div>
+
+      <div class="card-col " id="img-icon"> <!--col 태그 삭제 02.28-->
+        <div class="card-body">
+           <div class="d-flex align-items-center justify-content-center flex-column">
+            <svg id="card-icon3"  viewBox="0 0 471.04 471.04" style="enable-background:new 0 0 471.04 471.04;"> <g><g>
+             <path d="M414.72,112.64h-49.152l-27.136-40.96c-10.24-15.36-28.16-24.576-46.592-24.576H179.2
+               c-18.432,0-36.352,9.216-46.592,24.576l-27.136,40.96H56.32C25.088,112.64,0,137.728,0,168.96v198.656
+               c0,31.232,25.088,56.32,56.32,56.32h358.4c31.232,0,56.32-25.088,56.32-56.32V168.96C471.04,137.728,445.952,112.64,414.72,112.64
+               z M235.52,377.856c-70.144,0-126.976-56.832-126.976-126.976c0-70.144,56.832-126.464,126.976-126.464
+               s126.976,56.832,126.976,126.976C362.496,321.024,305.664,377.856,235.52,377.856z M407.552,192c-0.512,0-1.024,0-2.048,0h-20.48
+               c-9.216-0.512-16.384-8.192-15.872-17.408c0.512-8.704,7.168-15.36,15.872-15.872h20.48c9.216-0.512,16.896,6.656,17.408,15.872
+               C423.424,183.808,416.768,191.488,407.552,192z"/></g></g><g><g>
+             <path d="M235.52,180.736c-38.912,0-70.656,31.744-70.656,70.656s31.744,70.144,70.656,70.144s70.656-31.744,70.656-70.656
+               C306.176,211.968,274.432,180.736,235.52,180.736z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+               <p class="icon-title iconTitle3">이미지작업</p>
+              </div>
+             </a>
+           </div>
+         </div>
+
+      <div class="card-col" id="text-icon"><!--col 태그 삭제 02.28-->
+       <div class="card-body">
+         <div class="d-flex align-items-center justify-content-center flex-column">
+          <svg id="card-icon4" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"><g><g><path d="M392,151V0H0v437c0,41.355,33.645,75,75,75h362.002C478.356,511.999,512,478.354,512,437V151H392z M75,482c-24.813,0-45-20.187-45-45V30h332c0,12.292,0,394.723,0,407c0,16.871,5.603,32.456,15.041,45H75z M482,437c0,24.813-20.187,45-45,45s-45-20.187-45-45V181h30v271h30V181h30V437z"/></g></g><g><g><path d="M60,61v45h30V91h30v90H90v30c9.503,0,80.659,0,90,0v-30h-30V91h30v15h30V61H60z"/></g></g><g><g><rect x="60" y="241" width="272" height="30"/></g></g><g><g><rect x="60" y="301" width="272" height="30"/></g></g><g><g><rect x="60" y="362" width="272" height="30"/></g></g><g><g><rect x="60" y="422" width="272" height="30"/></g></g><g><g><rect x="241" y="61" width="91" height="30"/></g></g><g><g><rect x="241" y="121" width="91" height="30"/></g></g><g><g><rect x="241" y="181" width="91" height="30"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+            <p class="icon-title iconTitle4">텍스트작업</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-col " id="video-icon"><!--col 태그 삭제 02.28-->
+       <div class="card-body">
+         <div class="d-flex align-items-center justify-content-center flex-column">
+            <svg id="card-icon5" viewBox="0 0 298 298" style="enable-background:new 0 0 298 298;"><path d="M298,33c0-13.255-10.745-24-24-24H24C10.745,9,0,19.745,0,33v232c0,13.255,10.745,24,24,24h250c13.255,0,24-10.745,24-24V33z M91,39h43v34H91V39z M61,259H30v-34h31V259z M61,73H30V39h31V73z M134,259H91v-34h43V259z M123,176.708v-55.417c0-8.25,5.868-11.302,12.77-6.783l40.237,26.272c6.902,4.519,6.958,11.914,0.056,16.434l-40.321,26.277C128.84,188.011,123,184.958,123,176.708z M207,259h-43v-34h43V259z M207,73h-43V39h43V73z M268,259h-31v-34h31V259z M268,73h-31V39h31V73z"/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+            <p class="icon-title iconTitle5">비디오작업</p>
+           </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+ </div>
+</div>
+
+<!--모든프로젝트-->
+  <div class="page-header">
+    <h3 class="page-title">
+      <span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-apps"></i></span>  &nbsp;모든 프로젝트
+    </h3>
+    <div class="wrapper d-flex align-items-center">
+      <div class="dropdown">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 정렬하기 </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton">
+          <a class="dropdown-item" href="#">최저가격순</a>
+          <a class="dropdown-item" href="#">최고가격순</a>
+          <a class="dropdown-item" href="#">최신순</a>
+          <a class="dropdown-item" href="#">마감임박순</a>
+        </div>
+      </div>
+    </div>
+   </div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="row product-item-wrapper">
+      <div class="card-group">
+  
+  <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+    <div class="card bg-white shadow-sm">
+      <a href="!#">
+      <img class="card-img-top bd-placeholder-img" src="../../static/images/project-2.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">주제에 맞는 이미지 수집하기</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="badge-group ">
+            <div class="badge">나이무관</div>
+            <div class="badge">성별무관</div>
+          </div>
+          <small class="text-muted ">1,000P</small>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+    <div class="card bg-white shadow-sm">
+      <a href="!#">
+      <img class="card-img-top bd-placeholder-img" src="../../static/images/project-6.png"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">설문조사 참여하기</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="badge-group ">
+            <div class="badge">나이무관</div>
+            <div class="badge">성별무관</div>
+          </div>
+          <small class="text-muted ">500P</small>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+    <div class="card bg-white shadow-sm">
+      <a href="!#">
+      <img class="card-img-top bd-placeholder-img" src="../../static/images/project-4.png"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">이미지 태깅하기</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="badge-group ">
+            <div class="badge">나이무관</div>
+            <div class="badge">성별무관</div>
+          </div>
+          <small class="text-muted ">700P</small>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class=" col-lg-3 col-md-4 col-sm-6 col-12">
+    <div class="card bg-white shadow-sm">
+      <a href="!#">
+      <img class="card-img-top bd-placeholder-img" src="../../static/images/project-5.png"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">듣고 요약문 선택하기</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="badge-group ">
+            <div class="badge">나이무관</div>
+            <div class="badge">성별무관</div>
+          </div>
+          <small class="text-muted ">500P</small>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+    <div class="card bg-white shadow-sm">
+      <a href="!#">
+      <img class="card-img-top bd-placeholder-img" src="../../static/images/project-3.png"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">객관/주관 선택하기</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="badge-group ">
+            <div class="badge">나이무관</div>
+            <div class="badge">성별무관</div>
+          </div>
+          <small class="text-muted ">500P</small>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class=" col-lg-3 col-md-4 col-sm-6 col-12">
+    <div class="card bg-white shadow-sm">
+      <a href="!#">
+      <img class="card-img-top bd-placeholder-img" src="../../static/images/project-1.jpg"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">글을 읽고 요약하기</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="badge-group ">
+            <div class="badge">나이무관</div>
+            <div class="badge">성별무관</div>
+          </div>
+          <small class="text-muted ">500P</small>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+  
+
+         
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+
+
+   
+<!-- FOOTER-->
+<footer class="footer bg-white">
+  <div class="d-flex justify-content-center">
+      <span class="text-muted">Copyright © 2020  Data.ly. All rights reserved.</span>
+    </div>
+</footer>
+
+<!-- partial -->
+</div><!-- main-panel ends -->
+</div><!-- page-body-wrapper ends -->
+</div><!-- container-scroller -->
+
+
+
+<!-- plugins:js 기본 필수로 들어가는 JS파일-->
+<script src="../../static/js/plugin/vendor.bundle.base.js"></script>
+<script src="../../static/js/plugin/off-canvas.js"></script>
+<script src="../../static/js/plugin/hoverable-collapse.js"></script>
+<script src="../../static/js/plugin/misc.js"></script>
+<script src="../../static/js/darkmode.js"></script>
+<!--this page js-->
+<script src="../../static/js/projectList.js"></script>
+
+
+</body>
+</html>

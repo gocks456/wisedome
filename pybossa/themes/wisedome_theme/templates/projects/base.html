@@ -17,7 +17,7 @@
 	<div class="col-sm-12 col-md-12" style="min-height:400px">
         <div class="row">
             <div class="col-sm-8 col-md-8">
-				<h1>{{project.name}}</h1>
+				<h1><a href="{{url_for('project.details', short_name = project.short_name)}}">{{project.name}}</a></h1>
                 {% if section %}
                 <h2>{{section}}</h2>
                 {% endif %}

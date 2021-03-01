@@ -288,31 +288,25 @@ class Pagination(object):
 
 def get_user_signup_method(user):
     """Return which OAuth sign up method the user used."""
-    msg = 'Sorry, there is already an account with the same e-mail.'
     if user.info:
         # Google
         if user.info.get('google_token'):
-            msg += " <strong>It seems like you signed up with your Google account.</strong>"
-            msg += "<br/>You can try and sign in by clicking in the Google button."
+            msg = "구글 계정으로 회원가입하였습니다. 하단의 구글 버튼을 통해 로그인하세요."
             return (msg, 'google')
-        # Facebook
-        elif user.info.get('facebook_token'):
-            msg += " <strong>It seems like you signed up with your Facebook account.</strong>"
-            msg += "<br/>You can try and sign in by clicking in the Facebook button."
-            return (msg, 'facebook')
+        # Kakao
+        elif user.info.get('kakao_token'):
+            msg = "카카오 계정으로 회원가입하였습니다. 하단의 카카오톡 버튼을 통해 로그인하세요."
+            return (msg, 'kakao')
         # Twitter
         elif user.info.get('twitter_token'):
-            msg += " <strong>It seems like you signed up with your Twitter account.</strong>"
-            msg += "<br/>You can try and sign in by clicking in the Twitter button."
+            msg = " <strong>It seems like you signed up with your Twitter account.</strong>"
             return (msg, 'twitter')
         # Local account
         else:
-            msg += " <strong>It seems that you created an account locally.</strong>"
-            msg += " <br/>You can reset your password if you don't remember it."
+            msg = "비밀번호가 기억이 나지 않는다면 하단의 재설정을 이용해주세요."
             return (msg, 'local')
     else:
-        msg += " <strong>It seems that you created an account locally.</strong>"
-        msg += " <br/>You can reset your password if you don't remember it."
+        msg = "비밀번호가 기억이 나지 않는다면 하단의 재설정을 이용해주세요."
         return (msg, 'local')
 
 

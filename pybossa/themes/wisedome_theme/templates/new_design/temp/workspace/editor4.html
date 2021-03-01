@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>질문하기</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/css/function/vendor.bundle.base.css">
+    <!--css--->
+    <link rel="stylesheet" href="../../static/css/basic/dashboard-basic.css">
+    <link rel="stylesheet" href="../../static/css/function/darkmode.css">
+    <!--this page css-->
+    <link rel="stylesheet" href="../../static/css/qnaBoard.css">
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    
+ 
+</head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo-white.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo.png" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" >
+            <span class="mdi mdi-format-horizontal-align-left " onclick="intend(this)"></span><!--아이콘버튼 사이드바 펼침 및 닫기 아이콘-->
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="../../static/images/face5.jpg" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="mb-1">창원대</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item " href="../workspace/myProfile.html">
+                  <i class="mdi mdi mdi-account-circle mr-2 text-success"></i>  마이페이지 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i>  로그아웃 </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+                 <!--기존에 있던, 메일함 알림 아이콘 삭제, 및 검색기능 삭제-->
+            <li class="nav-item">
+              <div class="nav-link">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch"></label> 
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      
+ <!--왼쪽 사이드바 -->
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav ">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="../../static/images/face5.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">창원대</span>
+                  <span class="text-secondary text-small">초급자</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./dashboard.html">
+                <span class="menu-title ">홈</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="./projectList.html"><!--프로젝트 리스트 보기 링크 걸어놓음-->
+                <span class="menu-title">프로젝트</span>
+                <i class="mdi mdi-apps menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <span class="menu-title">포인트</span>
+                <i class="mdi mdi-trophy-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./qnaBoard1.html"><!--질문게시판 링크 걸어놓음-->
+                <span class="menu-title">질문게시판</span>
+                <i class="mdi mdi-human-greeting menu-icon"></i>
+              </a>
+            </li>
+
+            <li class="nav-item sidebar-actions">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <div class="border-bottom"></div>
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4 reward-btn">
+                  <i class="mdi mdi-cash-multiple"></i> 포인트 전환</button>
+                  <br>
+                <div class="border-bottom"></div>
+              </a>
+            </li>
+          </ul>
+        </nav><!--여기까지가 기본 nav-->
+
+
+               
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        <h3 class="page-title"> 질문하기 </h3>
+      </div>
+
+
+      <div class="row">
+  
+        <div class="col-12">
+          <div class="card ">
+            <div class="card-body bg-white">
+
+              <div class="row">
+                <div class="col-sm-12 mx-auto">
+
+                  <!--질문주제-->
+                  <div class=" tab-content-custom-pill " >
+                    <ul class="nav nav-pills nav-pills-custom justify-content-center">
+                      <li class="nav-item">
+                        <a class="nav-link " href="./qnaBoard1.html" > <i class="mdi mdi-wallet-membership"></i><br>회원가입 </a>  
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="./qnaBoard2.html" > <i class="mdi mdi-ticket"></i><br> 포인트 </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link " href="./qnaBoard3.html" ><i class="mdi mdi-television-guide"></i><br> 프로젝트 </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" href="./qnaBoard4.html" > <i class="mdi mdi-wallet-giftcard"></i><br> 환급</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                    <div class="show active">
+                      <div class="row grid-margin">
+                        <div class="col-lg-12">
+                          <div class="card bg-white">
+                            <div class="card-body">
+
+                            <form id="myQuestion">
+                              <div class="card-title">질문제목</div>
+                              <div class="form-group row">
+                                <div class="col-sm-3">
+                                  <select class="form-control" id="subtitle">
+                                    <option selected>주제</option>
+                                    <option value="1">환급일정</option>
+                                    <option value="2">환급액</option>
+                                    <option value="3">환급지연</option>
+                                    <option value="4">기타</option>
+                                   </select>
+                                  </div>
+                                  <div class="col-sm-9 ">
+                                    <input type="text" class="form-control input-title" id="myTitle" placeholder="제목을 입력하세요">
+                                  </div>
+                                </div>
+                              </form>
+                              <div class="card-title">질문내용</div>
+                                <div id="summernote"></div><!--글자편집 플러그인-->
+                             </div><!--card body-->
+
+                              <div class="btn-group editor-btn-group">
+                               <button class="btn btn-gradient-secondary" id="myCancel">취소하기</button> 
+                               <button class="btn btn-gradient-primary" >글올리기</button>   
+                              </div> 
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                
+                </div> <!--col sm 12-->
+              </div><!--row-->
+            </div><!--card body-->
+          </div><!--card-->
+        </div><!--col 12-->
+      </div><!--row-->
+    </div><!-- content-wrapper ends -->
+
+
+<!-- FOOTER -->
+ <footer class="footer bg-white">
+    <div class="text-center">
+      <span class="text-muted">Copyright © 2020 <a href="#" target="_blank">BootstrapDash</a>. All rights reserved.</span>
+    </div>
+  </footer>
+
+</div> <!-- main-panel ends -->
+</div><!-- page-body-wrapper ends -->
+</div> <!-- container-scroller -->
+<script>
+
+  
+</script>
+<!-- plugins:js-->
+<script src="../../static/js/plugin/vendor.bundle.base.js"></script>
+<script src="../../static/js/plugin/off-canvas.js"></script>
+<script src="../../static/js/plugin/hoverable-collapse.js"></script>
+<script src="../../static/js/plugin/misc.js"></script>
+<script src="../../static/js/darkmode.js"></script>
+
+<!-- plugins:js this page only-->
+<script src="../../static/js/plugin/summernote-bs4.min.js"></script>
+<script src="../../static/js/plugin/summernote-ko-KR.js"></script>
+<!--text editor-->
+<script src="../../static/js/editor.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 function pybossaNotify(msg, showNotification, type){
-	if (msg=='로그아웃 완료')
+	if (msg=='로그아웃 완료' || msg=='발생한 오류를 수정하세요.')
 		return;
 
     $("#pybossa-notification").remove();

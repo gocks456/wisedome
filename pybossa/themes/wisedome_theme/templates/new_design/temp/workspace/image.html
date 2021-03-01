@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>이미지 작업</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/css/function/vendor.bundle.base.css">
+    <!--기본 css--->
+    <link rel="stylesheet" href="../../static/css/basic/dashboard-basic.css">
+    <link rel="stylesheet" href="../../static/css/basic/guideline.css">
+    <link rel="stylesheet" href="../../static/css/function/darkmode.css">
+    <!---현재 페이지에만 들어가는 css-->
+    <link rel="stylesheet" href="../../static/css/function/swiper.min.css">
+    <link rel="stylesheet" href="../../static/css/workspace-img.css">
+ 
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo-white.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo.png" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" >
+            <span class="mdi mdi-format-horizontal-align-left " onclick="intend(this)"></span><!--아이콘버튼 사이드바 펼침 및 닫기 아이콘-->
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="../../static/images/face5.jpg" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="mb-1">창원대</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item " href="../workspace/myProfile.html">
+                  <i class="mdi mdi mdi-account-circle mr-2 text-success"></i>  마이페이지 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i>  로그아웃 </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+                 <!--기존에 있던, 메일함 알림 아이콘 삭제, 및 검색기능 삭제-->
+            <li class="nav-item">
+              <div class="nav-link">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch"></label> 
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      
+ <!--왼쪽 사이드바 -->
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav ">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="../../static/images/face5.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">창원대</span>
+                  <span class="text-secondary text-small">초급자</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./dashboard.html">
+                <span class="menu-title ">홈</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="./projectList.html"><!--프로젝트 리스트 보기 링크 걸어놓음-->
+                <span class="menu-title">프로젝트</span>
+                <i class="mdi mdi-apps menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <span class="menu-title">포인트</span>
+                <i class="mdi mdi-trophy-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./qnaBoard1.html"><!--질문게시판 링크 걸어놓음-->
+                <span class="menu-title">질문게시판</span>
+                <i class="mdi mdi-human-greeting menu-icon"></i>
+              </a>
+            </li>
+
+            <li class="nav-item sidebar-actions">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <div class="border-bottom"></div>
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4 reward-btn">
+                  <i class="mdi mdi-cash-multiple"></i> 포인트 전환</button>
+                  <br>
+                <div class="border-bottom"></div>
+              </a>
+            </li>
+          </ul>
+        </nav><!--여기까지가 기본 nav-->
+
+  <!-- 메인 작업화면 -->
+ <div class="main-panel ">
+   <div class="content-wrapper image-area">
+
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-crop"></i></span>  &nbsp;
+        이미지 바운딩하기
+      </h3>
+    </div>
+
+
+<!------문제 들어가는 영역-------->
+<div class="row">
+  <div class="col-md-12 grid-margin">
+    <div class="card bg-white ">
+      <div class="card-body "> 
+        <h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 바운딩이 가장 적절하게 된 이미지를 선택해주세요</h4>
+            <div class="row mt-4 ">
+              <div class="col-xl-9 ">
+
+                <!----이미지선택 영역-->  
+               <div class="swiper-container">
+                 <div class="swiper-wrapper">
+	               	 <!----이안에 태깅된 이미지작업물을 띄워주는 DB가 들어와야합니다-->
+                   <div class="swiper-slide" >  <!---여기서 부터 이미지1-->
+                    <input type="radio" class="radio_item" id="check1" name="item" onclick="enableButton()">
+                    <label for="check1" class="label_item"><img src="../../static/images/car1.jpg"></label>
+                   </div>
+                   
+                	<div class="swiper-slide"> <!---여기서 부터 이미지-2--->
+                  <input type="radio" class="radio_item" id="check2" name="item" onclick="enableButton()">
+                  <label for="check2" class="label_item"><img src="../../static/images/car2.jpg"></label>
+                  </div>
+                  <div class="swiper-slide"> <!---여기서 부터 이미지3---->
+                  <input type="radio" class="radio_item" id="check3" name="item" onclick="enableButton()">
+                  <label for="check3" class="label_item"><img src="../../static/images/car3.jpg"></label>
+                  </div>
+                  <div class="swiper-slide"> <!---여기서 부터 이미지4---->
+                  <input type="radio" class="radio_item" id="check4" name="item" onclick="enableButton()">
+                  <label for="check4" class="label_item"><img src="../../static/images/car4.jpg"> </label>
+	            	</div>
+              </div>
+        <!-- Add Pagination -->
+         <div class="swiper-pagination"></div>
+         </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+
+     <div class="col-xl-3 bounding-answers">    <!---답변선택영역-->
+      <p class="card-description">바운딩을 하고자하는 이미지를 먼저 클릭해주세요</p>
+       <a href="./imageBounding.html"><button type="radio" type="submit"  class="btn btn-primary" id="bounding-start" disabled><i class="mdi mdi-ungroup"></i> 바운딩시작</button></a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+
+<!--가이드 라인 영역 -->
+<div class="col-md-12">
+  <div class="card bg-white">
+    <div class="card-body">
+     
+      <div id="accordion-1" class="accordion ">
+        <div class="card">
+          <div class="card-header " id="headingOne">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> <h6> <i class="mdi mdi-cards-playing-outline"></i>   이용방법</h6></a>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion-1">
+            <div class="card-body"> 
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate voluptas aut enim doloremque consectetur obcaecati quasi ullam numquam. Repellendus maxime laborum ut dolor iusto nesciunt aspernatur eius ullam ipsam alias.
+             </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">   <h6> <i class="mdi mdi-assistant"></i>   예시보기</h6> </a>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-1">
+            <div class="card-body"> Lorem ipsum dolor sit amet consectetur adipisicing elit. A soluta blanditiis minus itaque, molestiae id amet exercitationem quidem molestias pariatur quam sequi accusamus nulla. Tempora aliquid modi aliquam ab enim.
+            </div>
+          </div>
+        </div>
+         
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+    
+
+</div>
+</div>
+
+   <!-- partial -->
+  </div><!-- main-panel ends -->
+
+   
+<!------------------------------------------- FOOTER -------------------------------->
+          <footer class="footer bg-white">
+            <div class="d-flex justify-content-center">
+              <span class="text-muted">Copyright © 2020 <a href="#" target="_blank">Data.ly</a>. All rights reserved.</span>
+              </div>
+          </footer>
+       
+      </div><!-- page-body-wrapper ends -->
+
+
+
+    <!-- plugins:js 기본 필수로 들어가는 JS파일-->
+    <script src="../../static/js/plugin/vendor.bundle.base.js"></script>
+    <script src="../../static/js/plugin/off-canvas.js"></script>
+    <script src="../../static/js/plugin/hoverable-collapse.js"></script>
+    <script src="../../static/js/plugin/misc.js"></script>
+    <script src="../../static/js/darkmode.js"></script>
+
+
+    <!-- 이 페이지에서만 필요한 js -->
+    <script src="../../static/js/swiper.min.js"></script> <!-- Swiper JS -->
+    <script src="../../static/js/plugin/breakpoints.min.js"></script>
+    <script src="../../static/js/workspace-img.js"></script>
+  
+  </body>
+</html>

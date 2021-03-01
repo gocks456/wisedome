@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="kr">
+
+	<head>
+		<meta charset = "utf-8">
+		<title>
+			COSDAQ-Indicator
+		</title>
+
+		<header>
+			<nav>
+				<a href="/hello">COSDAQ-Indicator</a>
+				<a href="/hello" target="_blank">About(새 창에 띄우기)</a>
+			</nav>
+			<hr/>
+		</header>
+
+		<input type = "button" value = "night" onclick = "
+	   document.querySelector('body').style.backgroundColor = 'black';
+	   document.querySelector('body').style.color = 'white';
+	   ">
+		<input type = "button" value = "day" onclick = "
+	   document.querySelector('body').style.backgroundColor = 'white';
+	   document.querySelector('body').style.color = 'black';
+	   ">
+		<hr/>
+		<hr/>
+
+		{% block content %}{% endblock %}
+	</head>
+
+	<body>
+		<main role="main">
+		</main>
+	</body>
+</html>

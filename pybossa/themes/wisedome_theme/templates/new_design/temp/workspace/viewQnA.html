@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>게시판 글보기</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/css/function/vendor.bundle.base.css">
+    <!--css--->
+    <link rel="stylesheet" href="../../static/css/basic/dashboard-basic.css">
+    <link rel="stylesheet" href="../../static/css/function/darkmode.css">
+    <!--this page css-->
+    <link rel="stylesheet" href="../../static/css/viewQnA.css">
+
+    
+</head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo-white.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo.png" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" >
+            <span class="mdi mdi-format-horizontal-align-left " onclick="intend(this)"></span><!--아이콘버튼 사이드바 펼침 및 닫기 아이콘-->
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="../../static/images/face5.jpg" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="mb-1">창원대</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item " href="../workspace/myProfile.html">
+                  <i class="mdi mdi mdi-account-circle mr-2 text-success"></i>  마이페이지 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i>  로그아웃 </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+                 <!--기존에 있던, 메일함 알림 아이콘 삭제, 및 검색기능 삭제-->
+            <li class="nav-item">
+              <div class="nav-link">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch"></label> 
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      
+ <!--왼쪽 사이드바 -->
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav ">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="../../static/images/face5.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">창원대</span>
+                  <span class="text-secondary text-small">초급자</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./dashboard.html">
+                <span class="menu-title ">홈</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="./projectList.html"><!--프로젝트 리스트 보기 링크 걸어놓음-->
+                <span class="menu-title">프로젝트</span>
+                <i class="mdi mdi-apps menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <span class="menu-title">포인트</span>
+                <i class="mdi mdi-trophy-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./qnaBoard1.html"><!--질문게시판 링크 걸어놓음-->
+                <span class="menu-title">질문게시판</span>
+                <i class="mdi mdi-human-greeting menu-icon"></i>
+              </a>
+            </li>
+
+            <li class="nav-item sidebar-actions">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <div class="border-bottom"></div>
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4 reward-btn">
+                  <i class="mdi mdi-cash-multiple"></i> 포인트 전환</button>
+                  <br>
+                <div class="border-bottom"></div>
+              </a>
+            </li>
+          </ul>
+        </nav><!--여기까지가 기본 nav-->
+
+               
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        <h3 class="page-title"> 게시판 글보기 </h3>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card ">
+            <div class="card-body bg-white">
+              <div class="message-body">
+
+              <div class="sender-details my-border-bottom">
+                <img class="img-sm rounded-circle" src="../../static/images/lion.jpg" alt="">
+                  <div class="details col-10">
+                   <h4 class="msg-subject">인증문자가 안들어오네요 ㅠㅠ </h4> <!---게시물 제목-->
+                   <p class="writer-nickname"> 라이언 <!--글쓴이 별명--> <span class="level-badge">초급자</span> </p>
+                   <p class="sender-email"><i class="mdi mdi-delettext-primary"></i>  2012/08/03 10:31</p> <!---글작성 날짜 및 시간-->
+                  </div>
+                 <div class="col-2 status">
+                  <label class="badge badge-info">답변대기</label>
+                </div>
+              </div>
+              
+           <div class="message-content "> <!--게시물 내용 보여지는곳-->
+             <p>안녕하세요</p>
+             <p>영원히 내려온 대고, 같이, 군영과 착목한는 하여도 봄바람이다. 피가 그들에게 황금시대를 방지하는 있다. 못할 일월과 영원히 용기가 이상 같은 인생을 청춘의 피다. 가치를 우리의 있음으로써 커다란 보이는 아니더면, 것은 그리하였는가? 충분히 위하여, 청춘의 대고, 위하여서. 동력은 것은 찾아다녀도, 방황하였으며, 피가 투명하되 천하를 싶이 인도하겠다는 철환하였는가? 위하여서 있음으로써 할지니, 지혜는 풀이 피가 그리하였는가? 속에서 내는 그것을 힘차게 어디 사는가 가슴에 것이다. 실현에 위하여 동산에는 날카로우나 칼이다. 
+              </p>
+              <p>답변부탁드립니다. 감사합니다.</p>
+           </div>
+               
+          <div class="mail-view col-12 bg-white">
+            <div class="row my-border-bottom">
+
+              <div class="col-xl-6 col-sm-5 mb-3 mt-3">
+                <div class="d-flex justify-content-start">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><i class="mdi mdi-share"></i>  공유하기</button> 
+                </div>
+              </div>
+
+              <div class="col-xl-4 offset-xl-2 col-sm-7 mb-3 mt-3">
+                <div class="btn-group d-flex justify-content-end">
+                  <button type="button" class="btn btn-sm btn-outline-primary" id="heartIcon"><i class="mdi mdi-heart-outline" ></i> 좋아요</button>
+                  <button type="button" class="btn btn-sm btn-outline-primary" id="addComment"><i class="mdi mdi-comment-processing-outline"></i>  댓글달기</button>
+                </div>
+               </div> 
+               </div>
+             </div> 
+
+          <!--댓글섹션-->
+            <div class="comment-view col-12 bg-white">
+             <div class="row">
+
+             <div class="col-12 comment-area" >
+                <div class="details">
+                   <i class="mdi mdi-subdirectory-arrow-right "></i>
+                  <img class="img-sm rounded-circle mr-3" src="../../static/images/man.jpg"><!--댓글쓴사람 프로필이미지-->
+                  <p class="writer-nickname">꿈나무</p><!---댓글쓴사람 닉네임-->
+                  <p class="sender-email"><i class="mdi mdi-delettext-primary"></i> 2012/08/03 10:31</p><!--댓글 쓴 날짜-->
+                  <p id="displayComment" class="mr-5"></p> <!--댓글내용 입력하면 자동으로 올라옴-->
+               </div>
+             </div>
+
+              <div class="col-sm-9 col-7 d-flex justify-content-start">
+                <textarea id="comment-input" rows="1" placeholder="...."></textarea>
+              </div>
+
+            <div class="col-sm-3 col-5 d-flex justify-content-end">
+              <button type="submit" class="btn btn-inverse-success" id="submitComment" disabled="true"><i class="mdi mdi-arrow-up-bold-circle"></i>   등록하기 </button>
+            </div>
+          </div>
+          </div>
+
+
+           </div><!--message body-->         
+             
+        </div><!--card body-->
+      </div><!--card-->
+    </div><!--col 12-->
+   </div><!--row-->
+ </div><!-- content-wrapper ends -->
+
+
+<!-- FOOTER -->
+ <footer class="footer bg-white">
+    <div class="text-center">
+      <span class="text-muted">Copyright © 2020  Data.ly. All rights reserved.</span>
+    </div>
+  </footer>
+
+</div> <!-- main-panel ends -->
+</div><!-- page-body-wrapper ends -->
+</div> <!-- container-scroller -->
+<script>
+
+  
+</script>
+<!-- plugins:js-->
+<script src="../../static/js/plugin/vendor.bundle.base.js"></script>
+<script src="../../static/js/plugin/off-canvas.js"></script>
+<script src="../../static/js/plugin/hoverable-collapse.js"></script>
+<script src="../../static/js/plugin/misc.js"></script>
+<script src="../../static/js/darkmode.js"></script>
+
+<!-- plugins:js this page only-->
+<script src="../../static/js/viewQnA.js"></script>
+</body>
+</html>
