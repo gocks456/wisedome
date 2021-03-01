@@ -1,4 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_wisedome = "qna" %}
 
 {% block css %}
 <!--this page css-->
@@ -53,9 +54,9 @@
 														<div class="col-sm-3">
 															<select class="form-control" id="subtitle">
 																<option selected>주제</option>
-																<option value="1">적립</option>
-																<option value="2">취소</option>
-																<option value="3">기타</option>
+																<option value="적립">적립</option>
+																<option value="취소">취소</option>
+																<option value="기타">기타</option>
 															</select>
 														</div>
 														<div class="col-sm-9 ">
@@ -94,9 +95,10 @@
 <!--text editor-->
 <script src="/static/new_design/js/editor.js"></script>
 
-	$(document).ready(function() {
 
 <script>
+	$(document).ready(function() {
+		var csrf = "{{ csrf_token() }}"
 		$.ajaxSetup({
 			beforeSend: function(xhr, settings) {
 				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {

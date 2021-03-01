@@ -1,5 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
-{% set active_page = 'home' %}
+{% set active_wisedome = 'home' %}
 
 {% block css %}
 <!---현재 페이지에만 들어가는 css-->
@@ -135,7 +135,7 @@
 											<div class="badge">나이무관</div>
 											<div class="badge">성별무관</div>
 										</div>
-										<small class="text-muted ">{{ project.all_point }}P</small>
+										<small class="text-muted ">{{ project.all_point|number_format}}P</small>
 									</div>
 								</div>
 							</a>

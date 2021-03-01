@@ -63,7 +63,7 @@ function CustomAlert(){
         dialogbox.style.display = "block";
         document.getElementById('dialogboxhead').innerHTML = "이메일인증";
         document.getElementById('timer').innerHTML = `${05} : ${00} `;  startTimer();
-        document.getElementById('dialogboxbody').innerHTML ='<img src="../static/images/mail.svg" style="width: 15%;" >'+ '<h4>입력해주신 이메일로 인증번호가 전송되었습니다</h4>' + '<input type="text" id="auth_num" class="input-field" placeholder="인증번호를 입력하세요" style="background:#fff;">';
+        document.getElementById('dialogboxbody').innerHTML ='<img src="/static/new_design/images/mail.svg" style="width: 15%;" >'+ '<h4>입력해주신 이메일로 인증번호가 전송되었습니다</h4>' + '<input type="text" id="auth_num" class="input-field" placeholder="인증번호를 입력하세요" style="background:#fff;">';
         document.getElementById('dialogOk').innerHTML = '<button onclick="Alert.ok()" type="button" class="btn-primary" style="width:48%; float: left;  margin-bottom:1rem;" >확 인</button>';
       }
   }

@@ -1,4 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_wisedome = "qna" %}
 
 {% block css %}
 <link rel="stylesheet" href="/static/new_design/css/qnaBoard.css">
@@ -52,10 +53,10 @@
 														<div class="col-sm-3">
 															<select class="form-control" id="subtitle">
 																<option selected>주제</option>
-																<option value="1">가입</option>
-																<option value="2">탈퇴</option>
-																<option value="3">본인인증</option>
-																<option value="4">기타</option>
+																<option value="가입">가입</option>
+																<option value="탈퇴">탈퇴</option>
+																<option value="본인인증">본인인증</option>
+																<option value="기타">기타</option>
 															</select>
 														</div>
 														<div class="col-sm-9 ">
@@ -68,11 +69,7 @@
 											</div><!--card body-->
 
 											<div class="btn-group editor-btn-group">
-<<<<<<< HEAD:pybossa/themes/wisedome_theme/templates/new_design/qna/editor_register.html
 												<a class="btn btn-gradient-secondary" id="myCancel" href="{{ url_for('home.qna', category='register') }}">취소하기</a> 
-=======
-												<a class="btn btn-gradient-secondary" id="myCancel" href="{{ url_for('home.qna', category='회원가입') }}">취소하기</a> 
->>>>>>> f39bd2849f1840b6b267794cac9a3fac7297c8c9:pybossa/themes/wisedome_theme/templates/new_design/qna/editor_회원가입.html
 												<a class="btn btn-gradient-primary" >글올리기</a>   
 											</div> 
 										</div>
@@ -107,25 +104,6 @@
 				}
 			}});
 
-<<<<<<< HEAD:pybossa/themes/wisedome_theme/templates/new_design/qna/editor_register.html
-$(".btn-gradient-primary").click(function(){
-	$.ajax({
-		url:window.location.href,
-		data: {"title": $("#myTitle").val(),
-			"body": $(".note-editable").html(),
-			"subject": $("#subtitle").val()
-		},
-		type: 'POST',
-		success: function(res) {
-			console.log(res);
-			window.location.href = "{{ url_for('home.qna', category='register') }}";
-		},
-		error: function(request, error) {
-			console.log(request);
-			console.log(request.status);
-			console.log(error);
-		}
-=======
 		$(".btn-gradient-primary").click(function(){
 
 			$.ajax({
@@ -140,7 +118,7 @@ $(".btn-gradient-primary").click(function(){
 						alert('모든 내용을 입력해주세요.');
 						return;
 					}
-					window.location.href = "{{ url_for('home.qna', category='회원가입') }}";
+					window.location.href = "{{ url_for('home.qna', category='register') }}";
 				},
 				error: function(request, error) {
 					console.log(request);
@@ -148,7 +126,6 @@ $(".btn-gradient-primary").click(function(){
 				}
 			});
 		});
->>>>>>> f39bd2849f1840b6b267794cac9a3fac7297c8c9:pybossa/themes/wisedome_theme/templates/new_design/qna/editor_회원가입.html
 	});
 </script>
 

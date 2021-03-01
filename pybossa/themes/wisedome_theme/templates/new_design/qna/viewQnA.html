@@ -1,4 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_wisedome = "qna" %}
 
 {% block css %}
 <link rel="stylesheet" href="/static/new_design/css/viewQnA.css">
@@ -30,10 +31,11 @@
 
 
 						<div class="sender-details my-border-bottom">
-							<img class="img-sm rounded-circle" src="{{ render_user_thumbnail(user, upload_method) }}" alt="">
+							<img class="img-sm rounded-circle" src="{% if user == None %}{{ url_for('static', filename='new_design/images/user-default.png')}}
+							{% else %} {{ render_user_thumbnail(user, upload_method) }} {% endif %}" alt="">
 							<div class="details col-10">
 								<h4 class="msg-subject">{{blog.title}} </h4> <!---게시물 제목-->
-								<p class="writer-nickname"> {{user.name}} <!--글쓴이 별명--> <span class="level-badge">초급자</span> </p>
+								<p class="writer-nickname"> {% if user == None %}비회원{% else %}{{user.name}}{% endif %} <!--글쓴이 별명--> <span class="level-badge">초급자</span> </p>
 								<p class="sender-email"><i class="mdi mdi-delettext-primary"></i>  {{blog.updated[0:16].replace('T', ' ')}}</p> <!---글작성 날짜 및 시간-->
 							</div>
 							<div class="col-2 status">
@@ -57,17 +59,17 @@
 								<div class="col-xl-4 offset-xl-2 col-sm-7 mb-3 mt-3">
 									<div class="btn-group d-flex justify-content-end">
 										<!--<button type="button" class="btn btn-sm btn-outline-primary" id="heartIcon"><i class="mdi mdi-heart-outline" ></i> 좋아요</button>-->
-										<button type="button" class="btn btn-sm btn-outline-primary" id="addComment"><i class="mdi mdi-comment-processing-outline"></i>  댓글달기</button>
+										<!--<button type="button" class="btn btn-sm btn-outline-primary" id="addComment"><i class="mdi mdi-comment-processing-outline"></i>  댓글달기</button>-->
 									</div>
 								</div> 
 							</div>
 						</div> 
 
 						<!--댓글섹션-->
-						<div class="comment-view col-12 bg-white">
+						<div class="comment-view col-12 bg-white" style="display:block;">
 							<div class="row">
 
-								<div class="col-12 comment-area" >
+								<div class="col-12 comment-area" style="display:block;" >
 
 									{% for row in blog_comment %}
 									<div class="details">
@@ -85,7 +87,7 @@
 								</div>
 
 								<div class="col-sm-3 col-5 d-flex justify-content-end">
-									<button type="submit" class="btn btn-inverse-success" id="submitComment" disabled="true"><i class="mdi mdi-arrow-up-bold-circle"></i>   등록하기 </button>
+									<button type="submit" class="btn btn-inverse-success" id="saveComment"><i class="mdi mdi-arrow-up-bold-circle"></i>   등록하기 </button>
 								</div>
 							</div>
 						</div>
@@ -113,7 +115,7 @@
 			}});
 	});
 
-$("#submitComment").click(function(){
+$("#saveComment").click(function(){
 	if ($("#comment-input").val() == '')
 		return;
 	$.ajax({
@@ -123,7 +125,11 @@ $("#submitComment").click(function(){
 		},
 		type: 'POST',
 		success: function(res) {
-			console.log(res);
+			if (res == "register") {
+				alert('댓글 작성은 회원만 가능합니다.');
+				return;
+			}
+			location.reload();
 		},
 		error: function(request, error) {
 			console.log(request);

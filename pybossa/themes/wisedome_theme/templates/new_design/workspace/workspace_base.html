@@ -200,28 +200,28 @@
 						</li>
 						{% endif %}
 
-						<li class="nav-item {% if active_page == 'home' %} active {% endif %}">
+						<li class="nav-item {% if active_wisedome == 'home' %} active {% endif %}">
 							<a class="nav-link" href="{{ url_for('home.home') }}">
 								<span class="menu-title ">HOME</span>
 								<i class="mdi mdi-home menu-icon"></i>
 							</a>
 						</li>
 
-						<li class="nav-item {% if active_page == 'project' %} active {% endif %}">
+						<li class="nav-item {% if active_wisedome == 'project' %} active{% endif %}">
 							<a class="nav-link" href="{{ url_for('project.index') }}">
 								<span class="menu-title">프로젝트</span>
 								<i class="mdi mdi-apps menu-icon"></i>
 							</a>
 						</li>
 
-						{#<li class="nav-item {% if active_page == 'point' %} active {% endif %}">
+						{#<li class="nav-item {% if active_wisedome == 'point' %} active {% endif %}">
 							<a class="nav-link" href="{{ url_for('home.faq') }}">
 								<span class="menu-title">FAQ</span>
 								<i class="mdi mdi-trophy-variant menu-icon"></i>
 							</a>
 						</li>#}
 
-						<li class="nav-item {% if active_page == 'qna' %} active {% endif %}">
+						<li class="nav-item {% if active_wisedome == 'qna' %} active {% endif %}">
 							<a class="nav-link" href="{{ url_for('home.qna') }}">
 								<span class="menu-title">질문게시판</span>
 								<i class="mdi mdi-human-greeting menu-icon"></i>
@@ -287,7 +287,7 @@
 					<!-- FOOTER -->
 					<footer class="footer bg-white">
 						<div class="d-flex justify-content-center">
-							<span class="text-muted">Copyright © 2020 <a href="#" target="_blank">Data.ly</a>. All rights reserved.</span>
+							<span class="text-muted">Copyright © 2020 Data.ly. All rights reserved.</span>
 						</div>
 					</footer>
 					<!-- partial -->
