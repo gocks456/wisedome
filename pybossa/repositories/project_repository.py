@@ -31,6 +31,7 @@ class ProjectRepository(Repository):
 
     # 마감 임박 프로젝트 업데이트(7일 이내 프로젝트)
     def update_end_date_7days(self):
+        print('마감임박테스트')
         from datetime import datetime, timedelta
         time = datetime.now()
         after_7days = time + timedelta(days=7)
@@ -77,7 +78,7 @@ class ProjectRepository(Repository):
     def get_contributed_projects_top10(self, user_id):
         from pybossa.model.project_stats import ProjectStats
         from pybossa.model.task_run import TaskRun
-        return self.db.session.query(Project.name, ProjectStats.overall_progress,
+        return self.db.session.query(Project.name, ProjectStats.overall_progress, Project.short_name,
                 func.sum(TaskRun.point).label('point'), func.max(TaskRun.finish_time).label('time')).filter(
                         and_(Project.id==ProjectStats.project_id,
                             Project.id==TaskRun.project_id,

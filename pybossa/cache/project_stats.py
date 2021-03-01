@@ -53,6 +53,7 @@ def stats_users(project_id, period=None):
 
     # Get Authenticated Users
     params = dict(project_id=project_id)
+    """
     sql = text('''SELECT task_run.user_id AS user_id,
                COUNT(task_run.id) as n_tasks FROM task_run
                WHERE task_run.user_id IS NOT NULL AND
@@ -60,8 +61,17 @@ def stats_users(project_id, period=None):
                task_run.project_id=:project_id
                GROUP BY task_run.user_id ORDER BY n_tasks DESC
                LIMIT 5;''')\
+    """
+    sql = text('''SELECT task_run.user_id AS user_id,
+               COUNT(task_run.id) as n_tasks FROM task_run
+               WHERE task_run.user_id IS NOT NULL AND
+               task_run.user_ip IS NULL AND
+               task_run.project_id=:project_id
+               GROUP BY task_run.user_id ORDER BY n_tasks DESC
+               ;''')\
         .execution_options(stream=True)
     if period:
+        """
         sql = text('''SELECT task_run.user_id AS user_id,
                    COUNT(task_run.id) as n_tasks FROM task_run
                    WHERE task_run.user_id IS NOT NULL AND
@@ -71,6 +81,16 @@ def stats_users(project_id, period=None):
                    >= NOW() AT TIME ZONE 'utc' - :period ::INTERVAL
                    GROUP BY task_run.user_id ORDER BY n_tasks DESC
                    LIMIT 5;''')\
+        """
+        sql = text('''SELECT task_run.user_id AS user_id,
+                   COUNT(task_run.id) as n_tasks FROM task_run
+                   WHERE task_run.user_id IS NOT NULL AND
+                   task_run.user_ip IS NULL AND
+                   task_run.project_id=:project_id AND
+                   TO_DATE(task_run.finish_time, 'YYYY-MM-DD\THH24:MI:SS.US')
+                   >= NOW() AT TIME ZONE 'utc' - :period ::INTERVAL
+                   GROUP BY task_run.user_id ORDER BY n_tasks DESC
+                   ;''')\
             .execution_options(stream=True)
         params['period'] = period
 
@@ -469,7 +489,8 @@ def stats_format_dates(project_id, dates, dates_anon, dates_auth, dates_orderer)
     for d in sorted(dates_orderer.keys()):
         total = total + dates_orderer[d]
         dayOrdererStats['values'].append(
-            [int(time.mktime(time.strptime(d, "%Y-%m-%d")) * 1000), total])
+            #[int(time.mktime(time.strptime(d, "%Y-%m-%d")) * 1000), total])		/////// 20210104 시간 테스트
+            [int(time.mktime(time.strptime(d+"-9", "%Y-%m-%d-%H")) * 1000), total])
 
     for d in answer_dates:
         anon_ans = dates_anon[d] if d in list(dates_anon.keys()) else 0

@@ -1,4 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_wisedome = "qna" %}
 
 {% block css %}
 <!--this page css-->
@@ -10,7 +11,7 @@
 {% block content %}
 <div class="content-wrapper">
 	<div class="page-header">
-		<h3 class="page-title"> 질문하기 </h3>
+		<h3 class="page-title"> <a href="{{url_for('home.qna', category='point')}}">질문하기</a></h2>
 	</div>
 
 
@@ -94,16 +95,20 @@
 <!--text editor-->
 <script src="/static/new_design/js/editor.js"></script>
 
+
 <script>
 	$(document).ready(function() {
-		var csrf = "{{ csrf_token() }}";
+		var csrf = "{{ csrf_token() }}"
 		$.ajaxSetup({
 			beforeSend: function(xhr, settings) {
 				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
-					xhr.setRequestHeader("X_CSRFToken", csrf)
+					xhr.setRequestHeader("X-CSRFToken", csrf)
 				}
-			}});
+			}
+		});
 	});
+
+
 
 $(".btn-gradient-primary").click(function(){
 	$.ajax({

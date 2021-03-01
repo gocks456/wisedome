@@ -44,10 +44,21 @@ def get_users_task_run_count(project_id):
     return user_list
 """
 
+def get_redundancy(short_name):
+    sql = text('''SELECT MAX(t.n_answers)
+                  FROM task t, project p
+                  WHERE p.id = t.project_id
+                  AND p.short_name = :short_name''')
+    result = session.execute(sql)
+    print (result)
+    return
+
+
 def get_users_task_run_count(project_id):
     sql = text('''SELECT "user".id, "user".name, COUNT(task_run.id) AS count
                   FROM "user", task_run
                   WHERE "user".id = task_run.user_id
+                  AND task_run.project_id > 116
                   GROUP BY "user".id;''')
     results = session.execute(sql)
     user_list = []
@@ -69,7 +80,7 @@ def get_ongoing_projects(user_id):
     return projects
 
 def get_popular_top5_projects():
-    sql = text('''SELECT id, name, description, info
+    sql = text('''SELECT id, name, description, info, short_name
                   FROM project
                   WHERE published = True AND complete = False
                   AND ARRAY_LENGTH(contractor_ids, 1) > 0
@@ -78,7 +89,7 @@ def get_popular_top5_projects():
     results = session.execute(sql)
     projects = []
     for row in results:
-        project = dict(id=row.id, name=row.name, description=row.description, info=row.info)
+        project = dict(id=row.id, name=row.name, description=row.description, short_name = row.short_name, info=row.info)
         projects.append(project)
     return projects
 
@@ -565,6 +576,17 @@ def get_projects_limit(limit='all', category=None):
                        category_id=row.category_id,
                        complete=row.complete)
         projects.append(Project().to_public_json(project))
+  
+    return projects
+
+def loadtest2():
+    sql = text('''SELECT id, info FROM task where id > 175000''')
+    results = session.execute(sql)
+    projects = []
+    for row in results:
+        project = dict(id=row.id,
+                       info=row.info)
+        projects.append(project)
     return projects
 
 @memoize(timeout=timeouts.get('APP_TIMEOUT'))

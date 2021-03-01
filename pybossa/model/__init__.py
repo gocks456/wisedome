@@ -51,6 +51,9 @@ class DomainObject(object):
     def to_public_json(self, data=None):
         """Return a dict that can be exported to JSON
         with only public attributes."""
+        import time
+
+        a1 = time.time()
 
         out = dict()
         if data is None:

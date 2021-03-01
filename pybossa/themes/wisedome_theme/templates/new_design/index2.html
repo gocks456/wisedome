@@ -18,35 +18,40 @@
 
 	</head>
 	<body>
-		<div class="container-scroller">
-			<div class="banner-wrapper">
+		<div id="mini-notification" class="alert-info alert show-notification flash_message" style="left:0; margin:0 auto;">
+			<i class="mdi mdi-comment-alert-outline"></i><span> 이 사이트는 Google Chrome에 최적화 되어있습니다</span><i class="mdi mdi-window-close" id="flash_close"></i>
+		</div>
+
+		<div class="banner-wrapper">
+			<div class="container-scroller">
 				<!--여기서부터 nav-->
 				<div class="row">
 					<div class="col-lg-12">
 						<nav class="navbar fixed-top navbar-expand-lg">
-							<a class="navbar-brand" href="./index.html"><img src="/static/new_design/images/wisedome-logo.png" alt="logo" ></a>
+							<a class="navbar-brand" href="{{url_for('home.home')}}"><img src="/static/new_design/images/wisedome-logo.png" alt="logo" ></a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="mdi mdi-menu"></span></button>
 							<div class="collapse navbar-collapse justify-content-lg-end justify-content-md-start" id="navbarSupportedContent">
-								<ul class="navbar-nav">
-									<li class="nav-item active"><a class="nav-link" href="/">HOME</a></li>
-									<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SERVICE </a>
+								<ul class="navbar-nav" style="margin-left : 20px">
+									<li class="nav-item active"><a class="nav-link" href="{{ url_for('home.aboutus')}}">회사소개</a></li>
+									<!--<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SERVICE </a>
 										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 											<a class="dropdown-item" href="#">회사소개</a>
 											<a class="dropdown-item" href="#">이용방법</a>
 										</div>
-									</li>
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('project.index') }}">PROJECT</a></li>
-									<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CONTACT </a>
+									</li>-->
+									<li class="nav-item"><a class="nav-link" href="{{ url_for('project.index') }}">프로젝트</a></li>
+									{#<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CONTACT </a>
 										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 											<a class="dropdown-item" href="#">공지사항</a>
 											<a class="dropdown-item" href="#">이벤트</a>
 											<a class="dropdown-item" href="#">파트너협약</a>
 											<a class="dropdown-item" href="{{ url_for('home.faq') }}">자주하는질문</a>
-											<a class="dropdown-item" href="#">문의하기</a>
+											<a class="dropdown-item" href="{{ url_for('home.qna')}}">문의하기</a>
 										</div>
-									</li>
-									<li class="nav-item"><a  class="nav-link" href="{{ url_for('account.signin') }}">LOGIN </a></li>
+									</li>#}
+									<li class="nav-item"><a  class="nav-link" href="{{ url_for('home.faq') }}">자주하는질문 </a></li>
+									<li class="nav-item"><a  class="nav-link" href="{{ url_for('account.signin') }}">로그인 </a></li>
 								</ul>
 							</div>
 						</nav>
@@ -81,10 +86,10 @@
 
 					<div class="row pt-4">
 
-						<div class="col-sm-3" id="voice-icon">
+						<div class="col-sm-3 col-6" id="voice-icon">
 							<div class="card card-icon-top">
 								<div class="card-body text-center">
-									<a type="button" data-toggle="modal" data-target="#voiceProject">
+									<a data-toggle="modal" data-target="#voiceProject">
 										<svg id="card-icon2"  viewBox="0 0 487.336 487.335"><g><g><path d="M243.573,24.136C109.269,24.76,0,134.531,0,268.832c0,40.784,10.226,80.992,29.563,116.62v-64.692
 										c0-11.925,4.243-22.984,11.683-32.471c-0.616-6.453-0.933-12.946-0.933-19.457c0-112.177,91.265-203.861,203.261-204.382
 										c112.183,0.519,203.447,92.205,203.447,204.382c0,7.21-0.4,14.396-1.156,21.533c6.467,9.01,10.116,19.33,10.116,30.395v67.975
@@ -120,10 +125,10 @@
 							</div>
 						</div>
 
-						<div class="col-sm-3" id="img-icon">
+						<div class="col-sm-3 col-6" id="img-icon">
 							<div class="card card-icon-top">
 								<div class="card-body text-center">
-									<a type="button" data-toggle="modal" data-target="#imgProject">
+									<a data-toggle="modal" data-target="#imgProject">
 										<svg id="card-icon3"  viewBox="0 0 471.04 471.04" style="enable-background:new 0 0 471.04 471.04;"> <g><g>
 											<path d="M414.72,112.64h-49.152l-27.136-40.96c-10.24-15.36-28.16-24.576-46.592-24.576H179.2
 											c-18.432,0-36.352,9.216-46.592,24.576l-27.136,40.96H56.32C25.088,112.64,0,137.728,0,168.96v198.656
@@ -162,10 +167,10 @@
 							</div>
 						</div>
 
-						<div class="col-sm-3" id="text-icon">
+						<div class="col-sm-3 col-6" id="text-icon">
 							<div class="card card-icon-top">
 								<div class="card-body text-center">
-									<a type="button" data-toggle="modal" data-target="#textProject">
+									<a data-toggle="modal" data-target="#textProject">
 										<svg id="card-icon4" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"><g><g><path d="M392,151V0H0v437c0,41.355,33.645,75,75,75h362.002C478.356,511.999,512,478.354,512,437V151H392z M75,482c-24.813,0-45-20.187-45-45V30h332c0,12.292,0,394.723,0,407c0,16.871,5.603,32.456,15.041,45H75z M482,437c0,24.813-20.187,45-45,45s-45-20.187-45-45V181h30v271h30V181h30V437z"/></g></g><g><g><path d="M60,61v45h30V91h30v90H90v30c9.503,0,80.659,0,90,0v-30h-30V91h30v15h30V61H60z"/></g></g><g><g><rect x="60" y="241" width="272" height="30"/></g></g><g><g><rect x="60" y="301" width="272" height="30"/></g></g><g><g><rect x="60" y="362" width="272" height="30"/></g></g><g><g><rect x="60" y="422" width="272" height="30"/></g></g><g><g><rect x="241" y="61" width="91" height="30"/></g></g><g><g><rect x="241" y="121" width="91" height="30"/></g></g><g><g><rect x="241" y="181" width="91" height="30"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
 										<p class="icon-title iconTitle4">텍스트작업</p>
 									</a>
@@ -194,10 +199,10 @@
 							</div>
 						</div>
 
-						<div class="col-sm-3">
+						<div class="col-sm-3 con-6">
 							<div class="card card-icon-top" id="video-icon">
 								<div class="card-body text-center">
-									<a type="button" data-toggle="modal" data-target="#videoProject">
+									<a data-toggle="modal" data-target="#videoProject">
 										<svg id="card-icon5" viewBox="0 0 298 298" style="enable-background:new 0 0 298 298;"><path d="M298,33c0-13.255-10.745-24-24-24H24C10.745,9,0,19.745,0,33v232c0,13.255,10.745,24,24,24h250c13.255,0,24-10.745,24-24V33z M91,39h43v34H91V39z M61,259H30v-34h31V259z M61,73H30V39h31V73z M134,259H91v-34h43V259z M123,176.708v-55.417c0-8.25,5.868-11.302,12.77-6.783l40.237,26.272c6.902,4.519,6.958,11.914,0.056,16.434l-40.321,26.277C128.84,188.011,123,184.958,123,176.708z M207,259h-43v-34h43V259z M207,73h-43V39h43V73z M268,259h-31v-34h31V259z M268,73h-31V39h31V73z"/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
 										<p class="icon-title iconTitle5">비디오작업</p>
 									</a>
@@ -242,7 +247,7 @@
 				<div class="row pt-4 ">
 					<div class="col-md-12">
 						<div class="row product-item-wrapper">
-							<div class="card-group">
+							<div class="card-group" style="width:100%">
 
 								{%- macro render_url_thumbnail(project, upload_method) %}
 								{%- if project.info.container %}
@@ -294,7 +299,7 @@
 				</div>
 			</div><!--project wrapper-->
 
-			<div class="profile-wrapper">
+			{#<div class="profile-wrapper">
 				<div class="row">
 					<div class="col-md-8 mx-auto text-center ">
 						<h3>금주의 포인트킹</h3>
@@ -318,7 +323,7 @@
 								{% endif %}
 								{% endmacro %}
 								<div class="owl-carousel owl-theme loop">
-
+									{#
 									{% for user in top_users %}
 
 									<!--새로 디자인한 프로필 -->
@@ -343,7 +348,7 @@
 									</div>
 
 									{% endfor %}
-
+									#}
 
 
 								</div>
@@ -351,6 +356,7 @@
 						</div>
 					</div>
 				</div>
+				#}
 
 			</div><!--profile wrapper-->
 
@@ -362,26 +368,26 @@
 							<div class="col-lg-4">
 								<img class="img-fluid" src="/static/new_design/images/wisedome-logo.png" alt="logo">
 								<div class="d-flex pt-5 pb-5">
-									<button class="btn btn-rounded btn-social-icon btn-facebook"><i class="mdi mdi-facebook"></i></button>
+									<!--<button class="btn btn-rounded btn-social-icon btn-facebook"><i class="mdi mdi-facebook"></i></button>
 									<button class="btn btn-rounded btn-social-icon btn-twitter"><i class="mdi mdi-twitter"></i></button>
 									<button class="btn btn-rounded btn-social-icon btn-youtube"><i class="mdi mdi-youtube"></i></button>
-									<button class="btn btn-rounded btn-social-icon btn-google "><i class="mdi mdi-google-plus"></i></button>
+									<button class="btn btn-rounded btn-social-icon btn-google "><i class="mdi mdi-google-plus"></i></button>-->
 								</div>
 							</div>
 							<div class="col-lg-5">
 								<div class="d-flex">
 									<i class="mdi mdi-cellphone-android"></i>
-									<h6 class="font-weight-normal">(055)-1234-5678</h6>
+									<h6 class="font-weight-normal"> (055)-213-5472</h6>
 								</div>
 								<div class="d-flex">
 									<i class="mdi mdi-settings"></i>
-									<h6 class="font-weight-normal">support@changwon.ac.kr</h6>
+									<h6 class="font-weight-normal"> wisedomekr@gamil.com</h6>
 								</div>
 								<ul class="nav mt-3">
 									<li class="nav-item">
-										<a class="nav-link pl-0" href="#">회사소개</a>
+										<a class="nav-link pl-0" href="{{url_for('home.aboutus')}}">회사소개</a>
 									</li>
-									<li class="nav-item">
+									<!--<li class="nav-item">
 										<a class="nav-link" href="#">이용약관</a>
 									</li>
 									<li class="nav-item">
@@ -389,9 +395,10 @@
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="#">라이센스</a>
-									</li>
+									</li>-->
 								</ul>
 							</div>
+							<!--
 							<div class="col-lg-3">
 								<h3 class="text-muted">Newsletter</h3>
 								<p>와이즈돔의 최신소식을 받으시려면, 이메일 구독하기를 눌러주세요 </p>
@@ -402,13 +409,14 @@
 									</div>
 								</div>
 							</div>
+							-->
 						</div>
 					</div>
 				</div>
 				<div class="container p-2">
 					<div class="row">
 						<div class="col-md-8 mx-auto text-center">
-							<small class="mt-3">Copyright © 2021 <a href="#main-img">Wisedome</a> All rights reserved.</small>
+							<small class="mt-3">Copyright © 2021 <a href="{{url_for('home.home')}}">Wisedome</a> All rights reserved.</small>
 						</div>      
 					</div>
 				</div>
@@ -428,6 +436,18 @@
 		<script src="/static/new_design/js/index.js"></script>
 		<!--nav footer js-->
 		<script src="/static/new_design/js/nav-footer.js"></script>
+
+	<script>
+		$(document).ready(function(){
+			setTimeout(function() {
+				$("#mini-notification").fadeOut('fast');
+			},5000);
+
+			$("#flash_close").on('click', function(){
+				$("#mini-notification").fadeOut('fast');
+			});
+		});
+	</script>
 
 	</body>
 </html>

@@ -1,5 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
-{% set active_page = 'home' %}
+{% set active_wisedome = 'home' %}
 
 {% block css %}
 <!---현재 페이지에만 들어가는 css-->
@@ -52,7 +52,7 @@
 						<i class="mdi mdi-crown mdi-24px float-right"></i>
 					</h4>
 					<h2 class="mb-3">
-						<a href="#">{{point.current_point|number_format}} </a> 
+						<a>{{point.current_point|number_format}} </a> 
 					</h2>
 					<h6 class="card-text" id="currentDate"></h6>
 				</div>
@@ -103,13 +103,15 @@
 			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-apps"></i></span>  &nbsp;참여중인 프로젝트
 		</h3>
 		<div class="wrapper d-flex align-items-center">
-			<div class="dropdown">
-				<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 정렬하기 </button>
+			<div class="dropdown" style="background-color:#b66dff; border-color:#b66dff;">
+				<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 정렬하기 
+					<span class="data-value"></span>
+				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton">
-					<a class="dropdown-item" href="#">최저가격순</a>
-					<a class="dropdown-item" href="#">최고가격순</a>
-					<a class="dropdown-item" href="#">최신순</a>
-					<a class="dropdown-item" href="#">마감임박순</a>
+					<a class="dropdown-item" >최저가격순</a>
+					<a class="dropdown-item" >최고가격순</a>
+					<a class="dropdown-item" >최신순</a>
+					<a class="dropdown-item" >마감임박순</a>
 				</div>
 			</div>
 		</div>
@@ -117,14 +119,16 @@
 
 
 	<div class="row">
+		{% if projects|length != 0 %} 
+		<!-- 프로젝트가 있을 때 -->
 		<div class="col-md-12">
 			<div class="row product-item-wrapper">
-				<div class="card-group" id='ajax-project-list' style="width:100%;">
 
-					{% if projects|length != 0 %}
+				<div class="card-group" id='ajax-project-list' style="width:100%;">
 					{% for project in projects %}
 					<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3"><!--col-lg-3 이라는 태그 추가함 02.19-->
 						<div class="card bg-white shadow-sm">
+
 							<a href="{{ url_for('project.details', short_name=project.short_name) }}">
 								<img class="card-img-top bd-placeholder-img" src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.name}}"><!--height 과 width값 삭제함 02.19-->
 								<div class="card-body">
@@ -134,26 +138,28 @@
 											<div class="badge">나이무관</div>
 											<div class="badge">성별무관</div>
 										</div>
-										<small class="text-muted ">{{ project.all_point }}P</small>
+										<small class="text-muted ">{{ project.all_point|number_format}}P</small>
 									</div>
 								</div>
 							</a>
 						</div>
 					</div>
 					{% endfor %}
-					{% else %}
-					<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3"><!--col-lg-3 이라는 태그 추가함 02.19-->
-						<div class="card bg-white shadow-sm">
-							<div class="card-body">
-								<h5>참여한 프로젝트가 없습니다.</h5>
-							</div>
-						</div>
-					</div>
-					{% endif %}
+
 
 				</div>
 			</div>
 		</div>
+		{% else %}
+		<!-- 프로젝트가 없을 때 -->
+		<div class="col-12 grid-margin stretch-card">
+			<div class="card bg-white">
+				<div class="card-body">
+					<p class="card-subtitle text-center"> 현재 참여한 프로젝트가 없습니다</ㅔ>
+				</div>
+			</div>
+		</div>    
+		{% endif %}
 	</div>
 
 

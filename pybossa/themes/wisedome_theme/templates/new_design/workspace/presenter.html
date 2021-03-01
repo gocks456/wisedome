@@ -1,5 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
-{% set active_page = 'project' %}
+{% set active_wisedome = 'project' %}
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="/static/new_design/css/basic/guideline.css">
@@ -26,7 +26,7 @@
 
 			<div class="wing_contents">
 				<img src="/static/new_design/images/trophy.png" class="trophy"><br>
-				<p><span>{{current_user.fullname}}님</span>의 현재 답변완료수 <span id="answer_counts">0</span>개이며, 다른 사용자들의 평균 답변수는 <span id="average">0</span>개입니다. <br> &#10005;</p>
+				<p><span>{{current_user.fullname}}</span>님의 현재 답변완료수 <span id="answer_counts">0</span>개이며, 다른 사용자들의 평균 답변수는 <span id="average">0</span>개입니다. <br> &#10005;</p>
 			</div> 
 		</label> 
 	</div>#}
@@ -41,7 +41,7 @@
 		<!--<nav aria-label="breadcrumb">
 			<ul class="breadcrumb">
 				<label for="controlbar controlbar-gradient-success"><i class="mdi mdi-format-size text-primary "></i> <span class="text-adjust">글자크기조절</span> 
-					<input type="range" min=10 max=30 value=10 class="controlbar" data-fs-target-class="textsize"/>
+					<input type="range" min=10 max=30 value=20 class="controlbar" data-fs-target-class="textsize"/>
 				</label> 
 				</li>
 			</ul>
@@ -111,7 +111,7 @@
 
 
 
-<script src="/static/new_design/js/jquery.min.js"></script>
+<script src="/static/new_design/js/plugin/jquery.min.js"></script>
 <script src="/static/new_design/js/accordion.js"></script>
 
 <script>

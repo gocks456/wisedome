@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>형태소 분석하기</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/css/function/vendor.bundle.base.css">
+    <!--기본 css--->
+    <link rel="stylesheet" href="../../static/css/basic/dashboard-basic.css">
+    <link rel="stylesheet" href="../../static/css/basic/guideline.css">
+    <link rel="stylesheet" href="../../static/css/function/darkmode.css">
+    <!---현재 페이지에만 들어가는 css-->
+    <link rel="stylesheet" href="../../static/css/TextLabeling.css">
+
+ 
+</head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo-white.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo.png" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" >
+            <span class="mdi mdi-format-horizontal-align-left " onclick="intend(this)"></span><!--아이콘버튼 사이드바 펼침 및 닫기 아이콘-->
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="../../static/images/face5.jpg" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="mb-1">창원대</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item " href="../workspace/myProfile.html">
+                  <i class="mdi mdi mdi-account-circle mr-2 text-success"></i>  마이페이지 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i>  로그아웃 </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+                 <!--기존에 있던, 메일함 알림 아이콘 삭제, 및 검색기능 삭제-->
+            <li class="nav-item">
+              <div class="nav-link">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch"></label> 
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      
+ <!--왼쪽 사이드바 -->
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav ">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="../../static/images/face5.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">창원대</span>
+                  <span class="text-secondary text-small">초급자</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./dashboard.html">
+                <span class="menu-title ">홈</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="./projectList.html"><!--프로젝트 리스트 보기 링크 걸어놓음-->
+                <span class="menu-title">프로젝트</span>
+                <i class="mdi mdi-apps menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <span class="menu-title">포인트</span>
+                <i class="mdi mdi-trophy-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./qnaBoard1.html"><!--질문게시판 링크 걸어놓음-->
+                <span class="menu-title">질문게시판</span>
+                <i class="mdi mdi-human-greeting menu-icon"></i>
+              </a>
+            </li>
+
+            <li class="nav-item sidebar-actions">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <div class="border-bottom"></div>
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4 reward-btn">
+                  <i class="mdi mdi-cash-multiple"></i> 포인트 전환</button>
+                  <br>
+                <div class="border-bottom"></div>
+              </a>
+            </li>
+          </ul>
+        </nav><!--여기까지가 기본 nav-->
+
+  <!-- 메인 작업화면 -->
+ <div class="main-panel">
+   <div class="content-wrapper">
+
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-format-quote-close"></i></span>  &nbsp;
+           형태소 선택하기
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <label for="controlbar controlbar-gradient-success"><i class="mdi mdi-format-size text-primary"></i> <span class="text-adjust">글자크기조절</span> 
+            <input type="range" min=10 max=30 value=10 class="controlbar" data-fs-target-class="textsize"/>
+            </label>
+        </ul>
+      </nav>
+    </div>
+
+
+<!------문제 들어가는 영역-------->
+<div class="row">
+  <div class="col-md-12 grid-margin">
+    <div class="card bg-white">
+      <div class="card-body"> 
+        <h4 class="card-title"><i class="mdi mdi-label"></i>&nbsp; Q. 죽는날까지 하늘을 우러러 한 점 부끄럼이 없기를 잎새에 이는 바람에도 나는 괴로워했다</h4>
+            <div class="row mt-4">
+              <div class="col-md-4 border-0 "><!----문제화면-->
+                <h6>STEP 1 <i class="mdi mdi-arrow-down-bold"></i> 어절 선택</h6>
+                <div class="list-group" id="myList" role="tablist">
+
+                  <a class="list-group-item list-group-item-action active" id="tab1" onclick="openWord(event,'Word1')" data-toggle="list" href="#myword1" role="tab" >죽는날까지</a>
+
+                  <a class="list-group-item list-group-item-action" id="tab2" onclick="openWord(event,'Word2')" data-toggle="list" href="#myword2" role="tab" >하늘을</a>
+
+                  <a class="list-group-item list-group-item-action" id="tab3" onclick="openWord(event,'Word3')"  data-toggle="list" href="#myword3" role="tab" >우러러</a>
+
+                  <a class="list-group-item list-group-item-action" id="tab4" onclick="openWord(event,'Word4')" data-toggle="list" href="#myword4" role="tab" >한 점</a>
+
+                  <a class="list-group-item  list-group-item-action" id="tab5" onclick="openWord(event,'Word5')"  data-toggle="list" href="#myword5" role="tab" >부끄럼이</ㅁ>
+
+                  <a class="list-group-item list-group-item-action" id="tab6" onclick="openWord(event,'Word6')"  data-toggle="list" href="#myword6" role="tab" >없기를</a>
+                </div>
+
+             </div>
+             
+
+<!---맨 오른쪽에 답변선택영역(5가지 객관식)-->
+<div class="col-md-4 answers">    
+  <h6>STEP 2 <i class="mdi mdi-arrow-down-bold"></i> 알맞은 형태소 분석코드 선택</h6>
+   <div class="tab-content" >
+ 
+    <div class="tab-pane fade bold show active" id="myword1" role="tabpanel"><!--1번문제 답 5개선택형-->
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word1"> 죽는날/NNG + 까/JX</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word2"> 죽는날까/NNG + /JKG</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word3"> 죽는날/VV + 까/ETM</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word4"> 죽는/NNG + /JKG</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word5"> 해당없음</button>
+    </div>
+
+    <div class="tab-pane fade bold" id="myword2" role="tabpanel" ><!----2번문제 답 5개선택형-->
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word1"> 하늘/NNG + /JX</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word2"> 하늘/NNG + /JKG</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word3"> 하늘을/VV + /ETM</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word4"> 하늘을/NNG + /JKG</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word5"> 해당없음</button>
+    </div>
+
+    <div class="tab-pane fade bold" id="myword3" role="tabpanel"><!----3번문제 답 5개선택형-->
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word1"> 우러/NNG + 러/JX</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word2"> 우러/NNB + 러/JX</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word3"> 우러러/MAG</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word4"> 우러/NNG + 러/JX</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word5"> 해당없음</button>
+    </div>
+
+    <div class="tab-pane fade bold" id="myword4" role="tabpanel" ><!----4번문제 답 5개선택형-->
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word1"> 한점/NNG + 이/JKS</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word2"> 한점/NNG + /JKS</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word3"> 한 점/NNG + /XSV</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word4"> 한점/VA + /EC</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word5"> 해당없음</button>
+    </div>
+
+    <div class="tab-pane fade bold" id="myword5" role="tabpanel" ><!----5번문제 답 5개선택형-->
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word1"> 부끄/NNG + 럼이/JX</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word2"> 부끄럼/VA + 이/ETN</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word3"> 부끄럼이/VA + /JKS</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word4"> 부끄럼/VV + 이/JX</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word5"> 해당없음</button>
+    </div>
+
+    <div class="tab-pane fade bold" id="myword6" role="tabpanel" ><!----6번문제 답 5개선택형-->
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word1"> 없기/NNG + 를/JX</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word2"> 없/VV + 기를/EC</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word3"> 없기를/NNG + /ETM</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word4"> 없기/NNB + 를/JX</button>
+      <button class="btn btn-outline-primary" type="radio" name="check" id="step2-word5"> 해당없음</button>
+    </div>
+    
+    <!---step2 의제출하기버튼-->
+    <div class="step2-submit-btn">
+      <button class="btn btn-success " id="step2-submit1" ><i class="mdi mdi-cloud-upload"></i>제출하기</button>
+      <button class="btn btn-success " id="step2-submit2" ><i class="mdi mdi-cloud-upload"></i>제출하기</button>
+      <button class="btn btn-success " id="step2-submit3" ><i class="mdi mdi-cloud-upload"></i>제출하기</button>
+      <button class="btn btn-success " id="step2-submit4" ><i class="mdi mdi-cloud-upload"></i>제출하기</button>
+      <button class="btn btn-success " id="step2-submit5" ><i class="mdi mdi-cloud-upload"></i>제출하기</button>
+      <button class="btn btn-success " id="step2-submit6" ><i class="mdi mdi-cloud-upload"></i>제출하기</button>
+   </div>
+ </div>
+</div>
+    
+<!----사전적 의미 보여지는 영역-->
+<div class="col-md-4" id="nav-tabContent">
+  <h6> STEP 3 <i class="mdi mdi-arrow-down-bold"></i> 사전적 정보 확인</h6>
+
+      <div class="tab-pane wordbook" role="tabpanel" id="Word1"><!---1번문제-->
+        <h5><i class="mdi mdi-information-outline"></i> 이단어의 사전적 의미는? </h5>
+        <p class="textsize wordcontents">
+        퓌라모스와 티스베: Babylon의 젊은 연인들; 부모를 거역하고, 몰래 벽의 갈라진 틈을 통해 이야기를 나누고 있었는데, 어느 날 Pyramus는 피가 묻어 있는 베일을 보고 Thisbe가 사자에게 물려 죽은 줄 알고 자살하였고, Thisbe는 죽은 그를 보고, 뒤를 따라 자살했다.</p>
+      </div> 
+      
+    <div class="tab-pane wordbook" role="tabpane2" id="Word2"><!---2번문제-->
+      <h5><i class="mdi mdi-information-outline"></i> 이단어의 사전적 의미는?  </h5>
+        <p class="textsize wordcontents">
+        1.	지평선이나 수평선 위로 보이는 무한대의 넓은 공간
+        2.	‘하느님’을 달리 이르는 말
+        3.	종교 일반 천공(天空)에 있어 신 또는 천인(天人)ㆍ천사(天使)가 살며, 청정무구하다는 상상의 세계. 사람이 죽은 뒤에 그 영혼이 올라가서 머무른다고 하는 곳이다.
+         </p>
+      </div> 
+ 
+    <div class="tab-pane wordbook" role="tabpane3" id="Word3"><!---3번문제-->
+      <h5><i class="mdi mdi-information-outline"></i> 이단어의 사전적 의미는?  </h5>
+        <p class="textsize wordcontents">
+          1.동사 위를 향하여 고개를 정중히 쳐들다.  2.동사 마음속으로 공경하여 떠받들다.</p>
+      </div> 
+
+    <div class="tab-pane wordbook" role="tabpane4" id="Word4"><!---4번문제-->
+       <h5><i class="mdi mdi-information-outline"></i> 이단어의 사전적 의미는?  </h5>
+        <p class="textsize wordcontents">한정하는 기준점</p>
+      </div> 
+ 
+   <div class="tab-pane wordbook" role="tabpane5" id="Word5"><!---5번문제-->
+     <h5><i class="mdi mdi-information-outline"></i> 이단어의 사전적 의미는?  </h5>
+        <p class="textsize wordcontents">명사 부끄러워하는 느낌이나 마음</p>
+      </div> 
+ 
+    <div class="tab-pane wordbook" role="tabpane6" id="Word6"><!---6번문제-->
+       <h5><i class="mdi mdi-information-outline"></i> 이단어의 사전적 의미는?  </h5>
+        <p class="textsize wordcontents">1. 형용사 사람, 동물, 물체 따위가 실제로 존재하지 않는 상태이다. 2. 형용사 어떤 사실이나 현상이 현실로 존재하지 않는 상태이다. 3.형용사 어떤 일이나 현상이나 증상 따위가 생겨 나타나지 않은 상태이다.</p>
+      </div> 
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+<!--최종답변제출 영역(노란버튼)-->
+<div class="col-md-12 grid-margin" id="final-submit">
+  <div class="card bg-white">
+    <div class="card-body">
+      <h4 class="card-title"><i class="mdi mdi-checkbox-multiple-marked-circle-outline"></i>  &nbsp; 다음문제로 넘어가기</h4> 
+      <div class="row">
+        <div class="col-md-9 d-inline-flex">
+          <p class="card-description mt-3"> 수고하셨습니다. 답변을 모두 선택했는지 확인바랍니다. 현재까지의 답변을 모두 저장하고 다음문제로 넘어가려면 버튼을 클릭해주세요.  </p>
+        </div>
+        <div class="col-md-3 answers"> 
+       <button type="submit" class="btn btn-warning" >다음문제<i class="mdi mdi-chevron-right"></i></button>
+       </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!----답변관리 섹션(파란버튼)----->
+    <div class="col-md-12 grid-margin" id="manage-answer-top">
+      <div class="card bg-white">
+        <div class="card-body ">
+    <h4 class="card-title "><i class="mdi mdi-format-list-numbered"></i>  &nbsp; 답변관리</h4>
+        <div class="row">
+    <div class="col-md-9 d-inline-flex">
+      <p class="card-description mt-3"> 내가 풀었던 문제를 다시보고 답변을 수정할 수 있습니다. 답변을 수정하고 싶으면 버튼을 클릭해주세요 </p>
+    </div>
+    <div class="col-md-3 answers">    <!---답변관리 선택 버튼-->
+      <button type="button" class="btn btn-inverse-info" id="manage-answer-btn"><i class="mdi mdi-file-multiple"></i>답변관리 </button>
+    </div>
+    </div>
+    </div>
+    </div>
+   </div>
+
+<!---클릭후 뜨는 나의 답변관리 영역-->
+<div class="col-md-12 grid-margin" id="manage-answer">
+  <div class="card bg-white">
+    <div class="card-body">
+      <h4 class="card-title"><i class="mdi mdi-message-text"></i> &nbsp; 나의답변</h4>
+
+      <div class="page-btn-group">
+        <button class="btn btn-inverse-secondary btn-sm"><i class="mdi mdi-chevron-left"></i></button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page1')">1</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page2')">2</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page3')">3</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page4')">4</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page5')">5</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page6')">6</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page7')">7</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page8')">8</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page9')">9</button>
+        <button class="btn btn-inverse-secondary btn-sm "><i class="mdi mdi-chevron-right"></i></button>
+      </div>
+
+    <div class="row mt-4">
+      <div class="col-md-9 main-text"> <!---이전 문제화면 뜨는곳-->
+
+        <div class="previous-question pageContents" id="page1"><!---1번문제화면-->
+          <p class="textsize">1번문제 여기에 나와주세요 아무거나 내용 입력해주세요</p> 
+          <p class="card-description">나의답변 <span>부끄럼/VA + 이/ETN</span>
+        </div>
+
+  
+        <div class="previous-question pageContents" id="page2"><!---2번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">2번문제 - Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod quia quidem dignissimos magnam rerum, provident a quaerat! </p> 
+          <p class="card-description">나의답변 <span>하늘/NNG + /JKG </span>
+          </p>
+        </div>
+
+
+        <div class="previous-question pageContents" id="page3"><!---3번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">3번문제 - 아무내용이나 입력일단 했습니다. 생명을 것은 목숨을 있을 위하여서. 그림자는 하는 대중을 있을 대한 듣는다</p> 
+          <p class="card-description">나의답변 <span>없기를/NNG + /ETM</span>
+          </p>
+        </div>
+
+   
+        <div class="previous-question pageContents" id="page4"><!---4번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">4번문제 - 4번문제 - It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p> 
+          <p class="card-description">나의답변 <span>우러/NNG + 러/JX</span>
+          </p>
+        </div>
+
+        <div class="previous-question pageContents" id="page5"><!---5번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">5번문제 - 실로 발휘하기 피에 풀밭에 대고, 때문이다. 끓는 인생을 인생에 갑 이것이다. 싸인 미인을 봄바람을 그들의 그들을 불러 보라</p> 
+          <p class="card-description">나의답변 <span>없기/NNB + 를/JX</span>
+          </p>
+        </div>
+
+       <!---6번문제화면(여기서부터 계속 반복)---->
+        <div class="previous-question pageContents" id="page6">
+         <p class="textsize">
+           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt veniam beatae fugit incidunt facilis ex libero inventore eveniet sapiente</p> 
+          <p class="card-description"> <span><!---기존에 선택한 답변 이곳에 떠야함 ---> </span>
+          </p>
+        </div>
+
+       <!---7번문제화면(여기서부터 계속 반복)---->
+        <div class="previous-question pageContents" id="page7">
+          <p class="textsize">7번에 풀었던 문제 여기 나옴 </p> 
+          <p class="card-description"> <span><!---아직 답변없음 ---> </span>
+          </p>
+        </div>
+
+        <!---8번문제화면(안푼문제라 버튼 비활성화 되어있음)---->
+        <div class="previous-question pageContents" id="page8">
+          <p class="textsize">8 번풀었던 문제 여기 나와주세요</p>
+          <p class="card-description">  <span><!---아직 답변없음 ---> </span>
+          </p>
+        </div>
+
+        <!---9번문제화면(안푼문제라 버튼 비활성화 되어있음)---->
+        <div class="previous-question pageContents" id="page9">
+          <p class="textsize"></p>
+          <p class="card-description"> <span><!---아직 답변없음 ---> </span>
+          </p>
+        </div>
+        
+
+ <!---답변 변경 버튼---->
+        <div class="reselect">   
+          <p class="card-description"> 답변변경</p>
+          <button type="radio" class="btn btn-outline-primary"  onclick="enableButton()"> 1번보기답변</button>
+          <button type="radio" class="btn btn-outline-primary"  onclick="enableButton()"> 2번보기답변</button>
+          <button type="radio" class="btn btn-outline-primary"  onclick="enableButton()"> 3번보기답변</button>
+          <button type="radio" class="btn btn-outline-primary"  onclick="enableButton()"> 4번보기답변</button>
+          <button type="radio" class="btn btn-outline-primary"  onclick="enableButton()"> 5번보기답변</button>
+        </div>
+      </div>
+
+      <div class="col-md-3 answers"> <!--답변수정 및 제출 영역--->
+        <button type="edit" class="btn btn-danger" id="edit"><i class="mdi mdi-tooltip-edit"></i> 수정하기</button>
+        <button type="submit" class="btn btn-success " id="submit" disabled ><i class="mdi mdi-cloud-upload"></i>제출하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+   
+
+
+<!--가이드 라인 영역-->
+<div class="col-md-12">
+  <div class="card bg-white">
+    <div class="card-body">
+     
+      <div id="accordion-1" class="accordion ">
+        <div class="card">
+          <div class="card-header " id="headingOne">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> <h6> <i class="mdi mdi-cards-playing-outline"></i>   이용방법</h6></a>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion-1">
+            <div class="card-body"> 
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate voluptas aut enim doloremque consectetur obcaecati quasi ullam numquam. Repellendus maxime laborum ut dolor iusto nesciunt aspernatur eius ullam ipsam alias.
+             </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">   <h6> <i class="mdi mdi-assistant"></i>   예시보기</h6> </a>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-1">
+            <div class="card-body"> Lorem ipsum dolor sit amet consectetur adipisicing elit. A soluta blanditiis minus itaque, molestiae id amet exercitationem quidem molestias pariatur quam sequi accusamus nulla. Tempora aliquid modi aliquam ab enim.
+            </div>
+          </div>
+        </div>
+         
+
+        </div>
+      </div>
+    </div><!--가이드라인-->
+    
+
+</div>
+</div>
+
+
+
+   
+<!------------------------------------------- FOOTER -------------------------------->
+          <footer class="footer bg-white">
+            <div class="d-flex justify-content-center">
+              <span class="text-muted">Copyright © 2020 <a href="#" target="_blank">Data.ly</a>. All rights reserved.</span>
+              </div>
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+
+
+
+
+    <!-- plugins:js 기본 필수로 들어가는 JS파일-->
+    <script src="../../static/js/plugin/vendor.bundle.base.js"></script>
+    <script src="../../static/js/plugin/off-canvas.js"></script>
+    <script src="../../static/js/plugin/hoverable-collapse.js"></script>
+    <script src="../../static/js/plugin/misc.js"></script>
+    <script src="../../static/js/darkmode.js"></script>
+
+
+    <!-- 이 페이지에서만 필요한 js -->
+    <script src="../../static/js/TextLabeling.js"></script>
+
+  </body>
+</html>

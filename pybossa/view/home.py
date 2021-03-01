@@ -35,11 +35,10 @@ from pybossa.model.blogpost import Blogpost
 
 blueprint = Blueprint('home', __name__)
 
-
 @blueprint.route('/', methods=["GET", "POST"])
 def home():
     """Render home page with the cached projects and users."""
-    project_repo.update_end_date_7days()
+    #project_repo.update_end_date_7days()
 
     if current_user.is_anonymous:
         # 오픈한 모든 프로젝트
@@ -86,7 +85,6 @@ def sort_project(projects, value):
         projects = sorted(projects, key=lambda project: project.end_date, reverse=True)
     return projects
 
-
 def trans_category(category):
     if category == 'register':
         return '회원가입'
@@ -96,7 +94,6 @@ def trans_category(category):
         return '프로젝트'
     elif category == 'exchange':
         return '환급'
-
 
 @blueprint.route("qna", defaults={'category':'register'})
 @blueprint.route("qna/<category>")
@@ -151,20 +148,7 @@ def faq():
     response = dict(template="/new_design/faq.html")
     return handle_content_type(response)
 
-@blueprint.route("faq/orderer")
-def orderer():
-	"""Render the about template."""
-	response = dict(template="/custom/faq_orderer.html")
-	return handle_content_type(response)
-
-@blueprint.route("faq/worker")
-def worker():
-	"""Render the about template."""
-	response = dict(template="/custom/faq_worker.html")
-	return handle_content_type(response)
-
-@blueprint.route("search")
-def search():
-    """Render search results page."""
-    response = dict(template="/home/search.html")
+@blueprint.route("aboutus")
+def aboutus():
+    response = dict(template="/new_design/aboutus.html")
     return handle_content_type(response)

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>대시보드</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/css/function/vendor.bundle.base.css">
+    <!--기본 css--->
+    <link rel="stylesheet" href="../../static/css/basic/dashboard-basic.css">
+    <link rel="stylesheet" href="../../static/css/function/darkmode.css">
+    <!---현재 페이지에만 들어가는 css-->
+    <link rel="stylesheet" href="../../static/css/dashboard.css">
+    <link rel="stylesheet" href="../../static/css/function/owl.carousel.min.css">
+
+
+ 
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="./dashboard.html"><img src="../../static/images/wisedome-logo-white.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="./dashboard.html"><img src="../../static/images/Symbol-grey.png" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" >
+            <span class="mdi mdi-format-horizontal-align-left " onclick="intend(this)"></span>
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="../../static/images/face5.jpg" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="mb-1">창원대</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item " href="../workspace/myProfile.html">
+                  <i class="mdi mdi mdi-account-circle mr-2 text-success"></i>  마이페이지 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i>  로그아웃 </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <div class="nav-link">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch"></label> 
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      
+ <!--왼쪽 사이드바 -->
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav ">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="../../static/images/face5.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">창원대</span>
+                  <span class="text-secondary text-small">초급자</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./dashboard.html">
+                <span class="menu-title ">홈</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="./projectList.html"><!--프로젝트 리스트 보기 링크 걸어놓음-->
+                <span class="menu-title">프로젝트</span>
+                <i class="mdi mdi-apps menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <span class="menu-title">포인트</span>
+                <i class="mdi mdi-trophy-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./qnaBoard1.html"><!--질문게시판 링크 걸어놓음-->
+                <span class="menu-title">질문게시판</span>
+                <i class="mdi mdi-human-greeting menu-icon"></i>
+              </a>
+            </li>
+
+            <li class="nav-item sidebar-actions">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <div class="border-bottom"></div>
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4 reward-btn">
+                  <i class="mdi mdi-cash-multiple"></i> 포인트 전환</button>
+                  <br>
+                <div class="border-bottom"></div>
+              </a>
+            </li>
+          </ul>
+        </nav><!--여기까지가 기본 nav-->
+
+
+
+ <div class="main-panel">
+   <div class="content-wrapper">
+
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-home"></i></span>  &nbsp;대시보드
+      </h3>
+    </div>
+
+<!--3색 컬러별 프로젝트-->
+    <div class="row">
+        <div class="col-md-4 stretch-card grid-margin">
+          <div class="card bg-blue card-img-holder">
+            <div class="card-body">
+              <h4 class=" mb-3">참여중인 프로젝트 
+                <i class="mdi mdi-chart-areaspline mdi-24px float-right"></i>
+              </h4>
+               <h2 class="mb-3">
+                <a href="#"> 2</a> 건  
+                <!--a태그안에다 자동으로 뜨도록 걸어주세요-->
+              </h2>
+              <h6 class="card-text">자격조건 : 초급자</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 stretch-card grid-margin">
+          <div class="card bg-peach card-img-holder ">
+            <div class="card-body">
+              <h4 class="mb-3">참여가능 프로젝트 
+                <i class="mdi mdi-import mdi-24px float-right"></i>
+              </h4>
+              <h2 class="mb-3">
+                <a href="#">45</a> 건
+              </h2>
+              <h6 class="card-text">마감일 : 2021.12.31</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 stretch-card grid-margin">
+          <div class="card bg-purple card-img-holder ">
+            <div class="card-body">
+              <h4 class="mb-3"> 보유포인트 
+                <i class="mdi mdi-crown mdi-24px float-right"></i>
+              </h4>
+              <h2 class="mb-3">
+                <a href="#">10,250 </a> 
+              </h2>
+              <h6 class="card-text" id="currentDate"></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  
+<!--마감임박 프로젝트 -->
+      <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+          <div class="card bg-white">
+            <div class="card-body">
+              <h4 class="card-title"> 마감임박 프로젝트</h4>
+              <div class="owl-carousel owl-theme full-width">
+
+                <div class="item">
+                  <div class="card text-white ">
+                    <a href="../workspace/projectDescription.html">
+                    <img class="card-img" src="../../static/images/premiumProject1.jpg" alt="Card image">
+                    <div class="card-img-overlay d-flex">
+                      <div class="mt-auto text-center w-100">
+                        <h4 class="carousel-title">감정분석 1</h4>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="card text-white">
+                   <a href="../workspace/projectDescription.html">
+                    <img class="card-img" src="../../static/images/premiumProject2.jpg" alt="Card image">
+                    <div class="card-img-overlay d-flex">
+                      <div class="mt-auto text-center w-100">
+                        <h4 class="carousel-title">감정분석 2</h4>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="card text-white">
+                   <a href="../workspace/projectDescription.html">
+                    <img class="card-img" src="../../static/images/premiumProject5.jpg" alt="Card image">
+                    <div class="card-img-overlay d-flex">
+                      <div class="mt-auto text-center w-100">
+                        <h4 class="carousel-title">감정분석 3</h4>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="item">
+                  <div class="card text-white">
+                   <a href="../workspace/projectDescription.html">
+                    <img class="card-img" src="../../static/images/premiumProject4.jpg" alt="Card image">
+                    <div class="card-img-overlay d-flex">
+                      <div class="mt-auto text-center w-100">
+                        <h4 class="carousel-title">감정분석 4</h4>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+<!--참여한 프로젝트-->
+  <div class="page-header">
+    <h3 class="page-title">
+      <span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-apps"></i></span>  &nbsp;참여한 프로젝트
+    </h3>
+    <div class="wrapper d-flex align-items-center">
+      <div class="dropdown">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 정렬하기 
+          <span class="data-value"></span>  <!--추가 02.28-->
+        </button>
+        
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton">
+          <a class="dropdown-item" data-value="최저가격순">최저가격순</a>  <!--data-value 값 추가 02.28-->
+          <a class="dropdown-item" data-value="최고가격순">최고가격순</a>  <!--data-value 값 추가 02.28-->
+          <a class="dropdown-item" data-value="최신순">최신순</a>      <!--data-value 값 추가 02.28-->
+          <a class="dropdown-item" data-value="마감임박순">마감임박순</a>  <!--data-value 값 추가 02.28-->
+        </div>
+      </div>
+    </div>
+   </div>
+
+<!--프로젝트 존재하지 않는 알림 박스-->
+  <div class="row">
+    <div class="col-12 grid-margin stretch-card">
+      <div class="card bg-white">
+        <div class="card-body">
+          <p class="card-subtitle text-center"> 현재 참여한 프로젝트가 없습니다</ㅔ>
+        </div>
+      </div>
+    </div>    
+
+   <!--
+<div class="row">
+  <div class="col-md-12">
+    <div class="row product-item-wrapper">
+      <div class="card-group">
+  
+  <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
+    <div class="card bg-white shadow-sm">
+      <a href="../workspace/projectDescription.html">
+      <img class="card-img-top bd-placeholder-img" src="../../static/images/project-2.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">이미지 수집하기</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="badge-group ">
+            <div class="badge">나이무관</div>
+            <div class="badge">성별무관</div>
+          </div>
+          <small class="text-muted ">1,000P</small>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
+    <div class="card bg-white shadow-sm">
+      <a href="../workspace/projectDescription.html">
+      <img class="card-img-top bd-placeholder-img" src="../../static/images/project-6.png"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">설문조사 참여하기</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="badge-group ">
+            <div class="badge">나이무관</div>
+            <div class="badge">성별무관</div>
+          </div>
+          <small class="text-muted ">500P</small>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
+    <div class="card bg-white shadow-sm">
+      <a href="../workspace/projectDescription.html">
+      <img class="card-img-top bd-placeholder-img" src="../../static/images/project-10.jpg"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">설문조사 참여하기</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="badge-group ">
+            <div class="badge">나이무관</div>
+            <div class="badge">성별무관</div>
+          </div>
+          <small class="text-muted ">500P</small>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
+    <div class="card bg-white shadow-sm">
+      <a href="../workspace/projectDescription.html">
+      <img class="card-img-top bd-placeholder-img" src="../../static/images/default-img.jpg"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">글을 읽고 요약하기</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="badge-group ">
+            <div class="badge">나이무관</div>
+            <div class="badge">성별무관</div>
+          </div>
+          <small class="text-muted ">500P</small>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+-->
+
+         
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+
+
+   
+<!-- FOOTER-->
+<footer class="footer bg-wh">
+  <div class="d-flex justify-content-center">
+    <span class="text-muted">Copyright © 2020  Data.ly. All rights reserved.</span>
+    </div>
+</footer>
+
+<!-- partial -->
+</div><!-- main-panel ends -->
+</div><!-- page-body-wrapper ends -->
+</div><!-- container-scroller -->
+
+
+
+<!-- plugins:js 기본 필수로 들어가는 JS파일-->
+<script src="../../static/js/plugin/vendor.bundle.base.js"></script>
+<script src="../../static/js/plugin/off-canvas.js"></script>
+<script src="../../static/js/plugin/hoverable-collapse.js"></script>
+<script src="../../static/js/plugin/misc.js"></script>
+<script src="../../static/js/darkmode.js"></script>
+<!--this page js-->
+<script src="../../static/js/plugin/owl.carousel.min.js"></script>
+<script src="../../static/js/plugin/owl.carousel.js"></script>
+<script src="../../static/js/dashboard.js"></script>
+
+
+</body>
+</html>

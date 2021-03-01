@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>포인트</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/css/function/vendor.bundle.base.css">
+    <!--css--->
+    <link rel="stylesheet" href="../../static/css/basic/dashboard-basic.css">
+    <link rel="stylesheet" href="../../static/css/function/darkmode.css">
+    <!--this page css-->
+    <link rel="stylesheet" href="../../static/css/point.css">
+
+ 
+</head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo-white.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo.png" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" >
+            <span class="mdi mdi-format-horizontal-align-left " onclick="intend(this)"></span><!--아이콘버튼 사이드바 펼침 및 닫기 아이콘-->
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="../../static/images/face5.jpg" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="mb-1">창원대</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item " href="../workspace/myProfile.html">
+                  <i class="mdi mdi mdi-account-circle mr-2 text-success"></i>  마이페이지 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i>  로그아웃 </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+                 <!--기존에 있던, 메일함 알림 아이콘 삭제, 및 검색기능 삭제-->
+            <li class="nav-item">
+              <div class="nav-link">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch"></label> 
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      
+ <!--왼쪽 사이드바 -->
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav ">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="../../static/images/face5.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">창원대</span>
+                  <span class="text-secondary text-small">초급자</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./dashboard.html">
+                <span class="menu-title ">홈</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="./projectList.html"><!--프로젝트 리스트 보기 링크 걸어놓음-->
+                <span class="menu-title">프로젝트</span>
+                <i class="mdi mdi-apps menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <span class="menu-title">포인트</span>
+                <i class="mdi mdi-trophy-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./qnaBoard1.html"><!--질문게시판 링크 걸어놓음-->
+                <span class="menu-title">질문게시판</span>
+                <i class="mdi mdi-human-greeting menu-icon"></i>
+              </a>
+            </li>
+
+            <li class="nav-item sidebar-actions">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <div class="border-bottom"></div>
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4 reward-btn">
+                  <i class="mdi mdi-cash-multiple"></i> 포인트 전환</button>
+                  <br>
+                <div class="border-bottom"></div>
+              </a>
+            </li>
+          </ul>
+        </nav><!--여기까지가 기본 nav-->
+
+
+               
+<div class="main-panel">
+  <div class="content-wrapper">
+    
+    <!--포인트 작성 폼-->
+      <div class="row">
+        <div class="col-12 grid-margin">
+          <div class="card bg-white">
+            <div class="card-body">
+              <h4 class="card-title"> <i class="mdi mdi-trophy-award mdi-24px"></i> &nbsp; 포인트 환전 신청</h4>
+
+              <form id="example-form" action="#" >
+                <div>
+                 <h3>이용약관</h3>
+                  <section>
+                   <h5>포인트 지급 이용약관 동의 (임시약관)</h5>
+                    <div>
+                     <ul class="list-ticked">    
+                      <li> 포인트를 현금으로 지급받기 위해서는 반드시 실명인증을 거친후 신청해 주시기 바랍니다.</li>
+                      <li> 지급신청은 5,000포인트 이상 부터 가능하며, 1,000원 단위로 신청하실 수 있습니다.</li>
+                      <li> 3.3%의 사업소득세가 차감된 금액이 지급되며, 월간 누적 세금이 1,000원 미만일 경우 익월 10일경에 환급됩니다.</li>
+                      <li> 일주일에 1회만 지급신청 할 수 있으며, 수익금 신청내역에서 상태를 확인하실 수 있습니다.</li>
+                      <li> 수익금은 매주 목요일 14시까지 신청 가능하며, 해당 건에 대하여 금요일 14시에 입금됩니다. 
+                      <br>(*목요일 14시 이후 신청한 경우, 다음 주 금요일 지급 대상자가 됩니다)</li>
+                      <li> 수익금 신청 불가 시간 (시스템 점검) : 매주 목요일 14시 01분 ~ 15시 00분</li>
+                     </ul>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">위의 내용을 모두 숙지하였으며 이용에 동의합니다
+                        <input type="checkbox" class="form-check-input" id="checkPolicy" > 
+                      </label>
+                      <p id="chkConfirm">정보이용 동의에 체크해주시기 바랍니다</p>
+                      </p>  
+                    </div>
+                  </section>
+
+                  <h3>계좌등록</h3>
+                  <section>
+                    <div class="subtitle ">
+                      <h5>은행계좌 등록</h5>
+                    </div>
+                  
+                    <div class="form-check">
+                      <label class="form-check-label ">
+                        <input type="checkbox" class="form-check-input"> 기존에 사용했던 계좌 사용하기
+                      </label>
+                    </div> 
+               
+                    <div class="form-group row">
+                      <label for="userName" class="col-sm-3 col-form-label">예금주</label>
+                      <div class="col-sm-9 ">
+                        <input id="userName" name="userName" type="text" class="form-control" placeholder="성명" required onchange='printName()'>
+                        <div class="error-name">예금주 성명을 반드시 입력해 주시기 바랍니다</div>
+                      </div>
+                    </div>
+                    <div class="form-group row">    
+                      <label for="bank" class="col-sm-3  col-form-label">은행명</label>  
+                      <div class="col-sm-9">        
+                    <select id="bank" class="form-control">
+                     <option selected="true" >은행선택</option>
+                     <option value="1">기업은행</option>
+                     <option value="2">외환은행</option>
+                     <option value="3">국민은행</option>
+                     <option value="4">농협중앙회</option>
+                     <option value="5">우리은행</option>
+                     <option value="6">신한은행</option>
+                     <option value="7">SC제일은행</option>
+                     <option value="8">씨티은행</option>
+                     <option value="9">대구은행</option>
+                     <option value="10">부산은행</option>
+                     <option value="11">광주은행</option>
+                     <option value="12">경남은행</option>
+                     <option value="13">우체국</option>
+                     <option value="14">KEB하나은행</option>
+                     <option value="15">수협중앙회</option>
+                   </select>
+                  </div>
+                   </div>
+                    <div class="form-group row"> 
+                      <label for="bankAccount" class="col-sm-3 col-form-label">계좌번호</label>  
+                      <div class="col-sm-9">
+                      <input id="bankAccount" name="bankaccount" type="text" numberOnly class="form-control" placeholder=" - 없이 숫자만 입력" required >
+                      <div class="error-account">은행 계좌번호를 반드시 입력해 주시기 바랍니다</div>
+                      </div>
+                    </div>
+                  </section>
+  
+                  <h3>신청금액</h3>
+                  <section>
+                    <div class="row pt-3">
+                      <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-8 offset-md-2">  
+                        <form class="forms-sample">
+                          <div class="my-3 text-center ">
+                            <h5><i class="mdi mdi-star"></i> 환급가능한 나의 보유포인트  <i class="mdi mdi-star "></i> </h5> 
+                            <h2 class="py-4 mypoints">532,000</h2>
+                          </div>
+                          <div class="form-group ">
+                            <div class="input-group input-money">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">₩</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Amount" id="price" onkeyup="inputNumberFormat(this)">
+                              <div class="input-group-append">
+                                <span class="input-group-text won">원</span>
+                              </div>
+                            </div>
+                            <br>
+                            <p class="point-policy">1000원 단위로 입금이 가능합니다</p>
+                          </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <h3>신청결과</h3>
+                  <section >
+                    <div class="col-xl-8 offset-xl-2 col-md-12 py-4 text-center" id="confirm-page">
+                       <i class="mdi mdi-checkbox-marked-circle-outline text-success"></i>
+                       <br>
+                       <p>
+                        <h4 id='result'></h4> 님  <h4 id='bankName'></h4> 으로 <br>
+                        <h4 id='transferMoney'></h4> 원 입금신청이 완료되었습니다
+                      </p>
+                       <p>은행영업일 기준으로 3~4일 이내로 입금 예정입니다</p>
+                      </div>
+
+                    <div id="finish">
+                      <button class="btn btn-gradient-success"><a href="../workspace/dashboard.html">대시보드로 돌아가기</a></button>
+                    </div>
+                
+                    <div class="col-xl-8 offset-xl-2 col-md-12 py-4 text-center" id="fail-page">
+                      <i class="mdi mdi-close-circle-outline text-danger"></i>
+                      <br>
+                     <h4>모든 정보를 입력해 주시기 바랍니다</h4>
+                      <p>입력 오류시 입금이 지연될수 있습니다</p>
+                     
+                   </div>
+                  </section>
+               
+                </div>
+              </form>
+            </div>
+          </div>
+  
+  
+
+</div><!--col xl 12-->
+</div><!--row-->
+</div><!--contents wrapper-->
+
+
+
+<!-- FOOTER -->
+ <footer class="footer bg-white">
+    <div class="text-center">
+      <span class="text-muted">Copyright © 2020 <a href="#" target="_blank">Data.ly</a>. All rights reserved.</span>
+    </div>
+  </footer>
+
+   
+</div> <!-- main-panel ends -->
+</div><!-- page-body-wrapper ends -->
+</div> <!-- container-scroller -->
+
+<!-- plugins:js-->
+<script src="../../static/js/plugin/vendor.bundle.base.js"></script>
+<script src="../../static/js/plugin/off-canvas.js"></script>
+<script src="../../static/js/plugin/hoverable-collapse.js"></script>
+<script src="../../static/js/plugin/misc.js"></script>
+<script src="../../static/js/darkmode.js"></script>
+
+<!-- plugins:js this page only-->
+<script src="../../static/js/plugin/wizard.jquery.steps.js"></script>
+<script src="../../static/js/point.js"></script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 {% extends "new_design/workspace/workspace_base.html" %}
+{% set active_page = "qna" %}
 
 {% block css %}
 <link rel="stylesheet" href="/static/new_design/css/qnaBoard.css">
@@ -8,7 +9,7 @@
 
 <div class="content-wrapper">
 	<div class="page-header">
-		<h3 class="page-title"> 주제별 질문게시판 - 포인트 </h3>
+		<h3 class="page-title"> 주제별 질문게시판 - 포인트</h3>
 	</div>
 
 	<div class="row">
@@ -89,7 +90,7 @@
 
 <!-- plugins:js this page only-->
 <script src="/static/new_design/js/qnaBoard.js"></script>
-<script src="/static/new_design/js/plugin/dataTable.js"></script>
 <script src="/static/new_design/js/plugin/jquery.dataTable.js"></script>
+<script src="/static/new_design/js/plugin/dataTable.js"></script>
 
 {% endblock %}

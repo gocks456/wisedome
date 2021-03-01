@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>문장요약</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/css/function/vendor.bundle.base.css">
+    <!--기본 css--->
+    <link rel="stylesheet" href="../../static/css/basic/dashboard-basic.css">
+    <link rel="stylesheet" href="../../static/css/basic/guideline.css">
+    <link rel="stylesheet" href="../../static/css/function/darkmode.css">
+    <!---현재 페이지에만 들어가는 css-->
+    <link rel="stylesheet" href="../../static/css/workspace-text.css">
+
+ 
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo-white.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo.png" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" >
+            <span class="mdi mdi-format-horizontal-align-left " onclick="intend(this)"></span><!--아이콘버튼 사이드바 펼침 및 닫기 아이콘-->
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="../../static/images/face5.jpg" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="mb-1">창원대</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item " href="../workspace/myProfile.html">
+                  <i class="mdi mdi mdi-account-circle mr-2 text-success"></i>  마이페이지 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i>  로그아웃 </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+                 <!--기존에 있던, 메일함 알림 아이콘 삭제, 및 검색기능 삭제-->
+            <li class="nav-item">
+              <div class="nav-link">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch"></label> 
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      
+ <!--왼쪽 사이드바 -->
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav ">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="../../static/images/face5.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">창원대</span>
+                  <span class="text-secondary text-small">초급자</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./dashboard.html">
+                <span class="menu-title ">홈</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="./projectList.html"><!--프로젝트 리스트 보기 링크 걸어놓음-->
+                <span class="menu-title">프로젝트</span>
+                <i class="mdi mdi-apps menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <span class="menu-title">포인트</span>
+                <i class="mdi mdi-trophy-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./qnaBoard1.html"><!--질문게시판 링크 걸어놓음-->
+                <span class="menu-title">질문게시판</span>
+                <i class="mdi mdi-human-greeting menu-icon"></i>
+              </a>
+            </li>
+
+            <li class="nav-item sidebar-actions">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <div class="border-bottom"></div>
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4 reward-btn">
+                  <i class="mdi mdi-cash-multiple"></i> 포인트 전환</button>
+                  <br>
+                <div class="border-bottom"></div>
+              </a>
+            </li>
+          </ul>
+        </nav><!--여기까지가 기본 nav-->
+
+  <!-- 메인 작업화면 -->
+ <div class="main-panel">
+   <div class="content-wrapper">
+
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-library"></i></span>  &nbsp;
+        문장 요약하기
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <label for="controlbar controlbar-gradient-success"><i class="mdi mdi-format-size text-primary "></i> <span class="text-adjust">글자크기조절</span> 
+            <input type="range" min=10 max=30 value=10 class="controlbar" data-fs-target-class="textsize"/>
+            </label> 
+        </ul>
+      </nav>
+    </div>
+
+
+<!------문제 들어가는 영역-------->
+<div class="row">
+  <div class="col-md-12 grid-margin">
+    <div class="card bg-white">
+      <div class="card-body"> <!----여기서부터 컨텐츠 내용물 들어옴(흰색바탕안에)-->
+        <h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 문장을 읽고 아래에 간단히 요약해주세요</h4>
+            <div class="row mt-4">
+              <div class="col-lg-12 main-text"><!----문제화면-->
+                <p class="textsize">듣기만 같은 길지 보배를 힘있다. 피어나기 구하지 얼마나 것은 피어나는 관현악이며, 주는 칼이다. 석가는 그들은 생생하며, 이것이야말로 것이다. 하는 가치를 동산에는 유소년에게서 운다. 것은 열락의 찬미를 구하지 앞이 몸이 것이다. 부패를 가슴에 설산에서 발휘하기 바이며, 무한한 그러므로 이성은 것이다. 풀밭에 두손을 인생의 있음으로써 보라. 피고, 위하여 천지는 우리 수 인생에 찾아다녀도, 가장 있다. 바이며, 생명을 것은 목숨을 있을 위하여서. 그림자는 하는 대중을 있을 대한 듣는다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-12 grid-margin">
+        <div class="card bg-white">
+          <div class="card-body ">
+             <h4 class="card-title "><i class="mdi mdi-format-list-numbered"></i>  &nbsp; 문장요약</h4>
+              <div class="row">
+               <div class="col-lg-9 d-inline-flex">
+                  <!---요약한문장 입력란-->
+                 <textarea id="input_text" class="text-typing" rows="1"></textarea>
+               </div>
+             <div class="col-lg-3 answers">
+             <button type="submit" class="btn btn-success" id="summary" disabled="true"><i class="mdi mdi-cloud-upload"></i>제출하기 </button>
+             </div>
+           </div>
+         </div>
+      </div>
+     </div>
+  
+
+    <div class="col-md-12 grid-margin" id="manage-answer-top">
+      <div class="card bg-white">
+        <div class="card-body ">
+           <h4 class="card-title "><i class="mdi mdi-format-list-numbered"></i>  &nbsp; 답변관리</h4>
+             <div class="row">
+              <div class="col-lg-9 d-inline-flex">
+                <p class="card-description mt-3">  내가 풀었던 문제를 다시보고 답변을 수정할 수 있습니다. 답변을 수정하고 싶으면 버튼을 클릭해주세요 </p>
+              </div>
+              <div class="col-lg-3 answers">    <!---답변관리 선택 버튼-->
+                <button type="button" class="btn btn-inverse-dark" id="manage-answer-btn"><i class="mdi mdi-file-multiple"></i>답변관리 </button>
+              </div>
+            </div>
+          </div>
+       </div>
+   </div>
+
+
+<div class="col-md-12 grid-margin" id="manage-answer"><!---나의 답변관리 영역-->
+  <div class="card bg-white">
+    <div class="card-body">
+      <h4 class="card-title"><i class="mdi mdi-message-text"></i> &nbsp; 나의답변</h4>
+
+      <div class="page-btn-group">
+        <button class="btn btn-inverse-secondary btn-sm"><i class="mdi mdi-chevron-left"></i></button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page1')">1</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page2')">2</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page3')">3</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page4')">4</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page5')">5</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page6')" disabled>6</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page7')" disabled>7</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page8')" disabled>8</button>
+        <button class="btn btn-inverse-secondary btn-sm tablink" onclick="openPage(event,'page9')" disabled>9</button>
+        <button class="btn btn-inverse-secondary btn-sm "><i class="mdi mdi-chevron-right"></i></button>
+      </div>
+      
+    
+    <div class="row mt-4">
+      <div class="col-lg-9 main-text"> <!---이전 문제화면 뜨는곳-->
+
+        <div class="previous-question pageContents" id="page1"><!---1번문제화면-->
+          <p class="textsize">1번문제 여기에 나와주세요 아무거나 내용 입력해주세요</p> <!----내가 풀은 기존의 문제 내용-->
+         <div class="my-answer">
+          <p class="card-description">나의답변 <span> 여기에 요약한 내용이 이 보라색 컬러안에 뜹니다</span><!---내가 기존에 제출한 답변 --->
+          </p>
+        </div>
+        </div>
+  
+        <div class="previous-question pageContents" id="page2"><!---2번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">2번문제 - Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod quia quidem dignissimos magnam rerum, provident a quaerat! Quos soluta voluptatum, modi a laboriosam et assumenda voluptas dolorem explicabo voluptatibus facilis. </p> <!----내가 풀은 기존의 문제 내용-->
+         <div class="my-answer">
+          <p class="card-description">나의답변 <span> 요약내용이 이곳에 뜹니다</span><!---내가 기존에 제출한 답변 --->
+          </p>
+        </div>
+        </div>
+
+        <div class="previous-question pageContents" id="page3"><!---3번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">3번문제 - 아무내용이나 입력일단 했습니다. </p> 
+         <div class="my-answer">
+          <p class="card-description">나의답변 <span> 전세구하기가 힘들어져 대출이 늘어나고있다</span>
+          </p>
+        </div>
+        </div>
+   
+        <div class="previous-question pageContents" id="page4"><!---4번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">4번문제 - 4번문제 - It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed</p> 
+         <div class="my-answer">
+          <p class="card-description">나의답변 <span> 코로나 신규확진으로 1.5단계로 격상하였다</span>
+          </p>
+        </div>
+        </div>  
+        
+        <div class="previous-question pageContents" id="page5"><!---5번문제화면(여기서부터 계속 반복)---->
+          <p class="textsize">5번문제 - 실로 발휘하기 피에 풀밭에 대고, 때문이다. 끓는 인생을 인생에 갑 이것이다. 싸인 미인을 </p> 
+         <div class="my-answer">
+          <p class="card-description">나의답변 <span> 화이자에서 신규백신 개발 가속화</span>
+          </p>
+        </div>
+        </div>  
+
+       <!---6번문제화면(여기서부터 계속 반복)---->
+        <div class="previous-question pageContents" id="page6">
+         <p class="textsize"><!--여기안에 문제들어와야함---></p> 
+         <div class="empty-default"></div>
+
+         <div class="my-answer">
+          <p class="card-description"> <span><!---기존에 선택한 답변 이곳에 떠야함 ---> </span>
+          </p>
+        </div>
+        </div>  
+       <!---7번문제화면(여기서부터 계속 반복)---->
+        <div class="previous-question pageContents" id="page7">
+          <p class="textsize"> </p> 
+          <div class="empty-default"></div>
+         <div class="my-answer">
+          <p class="card-description"> <span><!---아직 답변없음 ---> </span>
+          </p>
+        </div>
+        </div> 
+
+
+ <!---답변 다시 요약 제출란---->
+  <div class="reselect">   
+     <textarea id="input_text" class="text-typing" rows="1" placeholder="이곳에 입력해주세요"></textarea>
+    </div>
+  </div>
+
+  <div class="col-lg-3 answers"> <!--답변수정 및 제출 영역--->
+    <button type="edit" class="btn btn-danger" id="edit"><i class="mdi mdi-tooltip-edit"></i> 수정하기</button>
+    <button type="submit" class="btn btn-success" id="summary" ><i class="mdi mdi-cloud-upload"></i>제출하기 </button>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+   
+
+
+<!--가이드 라인 영역-->
+<div class="col-md-12">
+  <div class="card bg-white">
+    <div class="card-body">
+     
+      <div id="accordion-1" class="accordion ">
+        <div class="card">
+          <div class="card-header " id="headingOne">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> <h6> <i class="mdi mdi-cards-playing-outline"></i>   이용방법</h6></a>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion-1">
+            <div class="card-body"> 
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate voluptas aut enim doloremque consectetur obcaecati quasi ullam numquam. Repellendus maxime laborum ut dolor iusto nesciunt aspernatur eius ullam ipsam alias.
+             </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">   <h6> <i class="mdi mdi-assistant"></i>   예시보기</h6> </a>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-1">
+            <div class="card-body"> Lorem ipsum dolor sit amet consectetur adipisicing elit. A soluta blanditiis minus itaque, molestiae id amet exercitationem quidem molestias pariatur quam sequi accusamus nulla. Tempora aliquid modi aliquam ab enim.
+            </div>
+          </div>
+        </div>
+         
+
+        </div>
+      </div>
+    </div><!--가이드라인-->
+    
+
+</div>
+</div>
+
+
+
+   
+<!------------------------------------------- FOOTER -------------------------------->
+          <footer class="footer bg-white">
+            <div class="d-flex justify-content-center">
+              <span class="text-muted">Copyright © 2020 <a href="#" target="_blank">Data.ly</a>. All rights reserved.</span>
+              </div>
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+
+
+
+
+    <!-- plugins:js 기본 필수로 들어가는 JS파일-->
+    <script src="../../static/js/plugin/vendor.bundle.base.js"></script>
+    <script src="../../static/js/plugin/off-canvas.js"></script>
+    <script src="../../static/js/plugin/hoverable-collapse.js"></script>
+    <script src="../../static/js/plugin/misc.js"></script>
+    <script src="../../static/js/plugin/darkmode.js"></script>
+    <script src="../../static/js/plugin/accordion.js"></script>
+    <!-- 이 페이지에서만 필요한 js -->
+    <script src="../../static/js/workspace-text.js"></script>
+ 
+  </body>
+</html>

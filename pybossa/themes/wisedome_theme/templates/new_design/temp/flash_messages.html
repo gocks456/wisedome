@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>flash messages</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../static/css/function/vendor.bundle.base.css">
+    <!--css--->
+    <link rel="stylesheet" href="../static/css/basic/dashboard-basic.css">
+
+
+ 
+</head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="./dashboard-basic.html"><img src="../static/images/wisedome-logo-white.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="./dashboard-basic.html"><img src="../static/images/wisedome-logo.png" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <div class="search-field d-none d-md-block">
+            <form class="d-flex align-items-center h-100" action="#">
+              <div class="input-group">
+                <div class="input-group-prepend bg-transparent">
+                  <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                </div>
+                <input type="text" class="form-control bg-transparent border-0" placeholder="검색어를 입력하세요">
+              </div>
+            </form>
+          </div>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="../static/images/face5.jpg" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="mb-1">창원대학교</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item " href="#">
+                  <i class="mdi mdi mdi-account-circle mr-2 text-success"></i>  마이페이지 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i>  로그아웃 </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+           
+
+            <li class="nav-item dropdown d-none d-md-block">
+              <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                <i class="mdi mdi-bell-outline"></i>
+                <span class="count-symbol bg-danger"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                <h6 class="p-3 mb-0">공지사항</h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-success">
+                      <i class="mdi mdi-calendar"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column">
+                    <h6 class="preview-subject mb-1 ">프로젝트 마감</h6>
+                    <p class="ellipsis mb-0"> 참여했던 프로젝트가 오늘 마감됩니다</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-warning">
+                      <i class="mdi mdi-settings"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column">
+                    <h6 class="preview-subject mb-1 ">설정</h6>
+                    <p class="ellipsis mb-0"> 비밀번호를 주기적으로 변경해주세요 </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-info">
+                      <i class="mdi mdi-link-variant"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column">
+                    <h6 class="preview-subject mb-1 ">새로운 프로젝트</h6>
+                    <p class="ellipsis mb-0"> 당신에게 적합한 새로운 프로젝트를 추천합니다 </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <h6 class="p-3 mb-0 text-center">모두보기</h6>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="nav-link">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch"></label> 
+                </div>
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      
+ <!--왼쪽 사이드바 --->
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="../static/images/face5.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">창원대학교</span>
+                  <span class="text-secondary text-small">초급자</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="../index.html">
+                <span class="menu-title ">HOME</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">나의 프로젝트</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-ticket-account menu-icon"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="#">진행중 프로젝트</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#">새로운 프로젝트</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span class="menu-title">포인트</span>
+                <i class="mdi mdi-trophy-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span class="menu-title">답변관리</span>
+                <i class="mdi mdi-message-text menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span class="menu-title">질문게시판</span>
+                <i class="mdi mdi-human-greeting menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span class="menu-title">발주자 사이트</span>
+                <i class="mdi mdi-server-network menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+                <span class="menu-title">관리자 페이지</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-settings menu-icon"></i>
+              </a>
+              <div class="collapse" id="general-pages">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="#"> 상황판 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> 범주 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> 포인트</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> 환급 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> 사용자 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> 관리자 </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="#"> DB관리 </a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item sidebar-actions">
+              <span class="nav-link">
+                <div class="border-bottom"></div>
+                <button class="btn btn-block btn-gradient-primary mt-4 reward-btn">
+                  <i class="mdi mdi-cash-multiple"></i> 포인트 전환</button>
+                  <br>
+                <div class="border-bottom"></div>
+              </span>
+            </li>
+          </ul>
+        </nav><!--여기까지가 기본 nav-->
+                                        
+<div class="main-panel">
+<div class="content-wrapper">
+
+
+<!--Alert 띄우는 창-->
+<div id="pybossa-notification" class="alert-success alert show-notification" >
+    <i class="mdi mdi-checkbox-marked-circle-outline"></i>
+    <span>SUCESS하는 안내입니다</span>
+    <i class="mdi mdi-window-close"></i>
+</div>
+
+
+<div id="pybossa-notification" class="alert-info alert show-notification" >
+  <i class="mdi mdi-comment-alert-outline"></i>
+  <span>INFO하는 안내입니다</span>
+     <i class="mdi mdi-window-close"></i>
+</div>
+
+<div id="pybossa-notification" class="alert-warning alert show-notification" >
+  <i class="mdi mdi-alert-circle"></i>
+  <span>WARNING하는 안내입니다</span>
+     <i class="mdi mdi-window-close"></i>
+</div>
+
+<div id="pybossa-notification" class="alert-danger alert show-notification" >
+  <i class="mdi mdi-alert-outline"></i>
+  <span>DANGER하는 안내입니다</span>
+     <i class="mdi mdi-window-close"></i>
+</div>
+
+<style>
+#pybossa-notification{
+    width: 100%;
+    padding: 0.25em 1em;}
+
+.hide-notification{
+    display: none;}
+
+.mdi-checkbox-marked-circle-outline,.mdi-comment-alert-outline,.mdi-alert-circle,.mdi-alert-outline{
+    font-size: 1.5em;}
+
+.mdi-window-close{
+    float: right;
+    font-size: 1em;}
+    
+.alert {
+  position: relative;
+  padding: 1rem ;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem; }
+.alert-success {
+  color: #0e6c5e;
+  background-color: #d1f5f0;
+  border-color: #bff2ea; }
+  .alert-success hr {
+    border-top-color: #aaeee3; }
+  .alert-success .alert-link {
+    color: #083f37; }
+
+.alert-info {
+  color: #0d4876;
+  background-color: #d1e8f9;
+  border-color: #bfdef7; }
+  .alert-info hr {
+    border-top-color: #a8d2f4; }
+  .alert-info .alert-link {
+    color: #082c48; }
+
+.alert-warning {
+  color: #84700a;
+  background-color: #fff7d0;
+  border-color: #fff4bd; }
+  .alert-warning hr {
+    border-top-color: #fff0a4; }
+  .alert-warning .alert-link {
+    color: #554806; }
+
+.alert-danger {
+  color: #84404e;
+  background-color: #ffe5ea;
+  border-color: #ffdae2; }
+  .alert-danger hr {
+    border-top-color: #ffc1ce; }
+  .alert-danger .alert-link {
+    color: #622f3a; }    
+
+@media all and (max-width:575px){
+  .mdi-checkbox-marked-circle-outline,.mdi-comment-alert-outline,.mdi-alert-circle,.mdi-alert-outline{
+    font-size: 1em;}
+    #pybossa-notification{
+    padding: 0.25em 0.5em;}
+    #pybossa-notification span{
+      font-size: 0.8em;
+    }
+ }
+
+</style>
+
+
+
+
+<!-- FOOTER -->
+ <footer class="footer">
+    <div class="text-center">
+      <span class="text-muted">Copyright © 2020 <a href="#" target="_blank">Data.ly</a>. All rights reserved.</span>
+    </div>
+  </footer>
+    
+</div> <!-- main-panel ends -->
+</div><!-- page-body-wrapper ends -->
+
+
+<!-- plugins:js-->
+<scrip src="../static/js/vendor.bundle.base.js"></scrip>
+<script src="../static/js/misc.js"></script>
+
+</body>
+</html>
