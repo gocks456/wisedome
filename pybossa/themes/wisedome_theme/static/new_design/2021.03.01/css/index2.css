@@ -1,0 +1,300 @@
+body,
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "SCDream3";
+}
+a {
+  text-decoration: none;
+}
+.banner-wrapper {
+  background-color: #c7e4e2;
+}
+.banner-wrapper .row {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+.main-text h1 {
+  margin: 1em 0;
+  color: #00232c;
+  margin: 0.6em 0;
+  font-size: 2.5em;
+  letter-spacing: 0.2em;
+  line-height: 1.2em;
+  font-family: "SCDream3", "Apple Gothic";
+}
+.main-text h5 {
+  font-size: 0.8em;
+  font-family: "SCDream2";
+}
+.main-text p {
+  color: #396361;
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+.hr {
+  background-color: #b66dff;
+  border: none;
+  width: 50px;
+  height: 3px;
+  margin: 0.85rem 0 0.5rem 0;
+}
+.banner-content {
+  margin-top: 2rem;
+  padding: 0 3rem;
+}
+.banner-content img {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 350px;
+}
+
+@media screen and (max-width: 769px) {
+  .banner-content {
+    text-align: center;
+    padding: 1rem 2.5rem;
+  }
+  .hr {
+    margin: 0 auto;
+    margin-top: 0.85rem;
+  }
+  .main-text h1 {
+    font-size: 2.25em;
+  }
+  .main-text p {
+    font-size: 0.9em;
+  }
+}
+@media screen and (max-width: 575px) {
+  .banner-content {
+    margin: 1rem 1rem;
+  }
+  .main-text h1 {
+    font-size: 2em;
+  }
+  .main-text p {
+    font-size: 0.85em;
+  }
+  .banner-content img {
+    max-width: 235px;
+  }
+}
+/***2. 카테고리섹션****/
+.details-wrapper {
+  padding: 5rem 2.5rem 1rem 2.5rem;
+  background: #ffffff;
+}
+
+.title-hr {
+  background-color: #b66dff;
+  border: none;
+  width: 70px;
+  height: 4px;
+  margin: 0 auto;
+}
+
+svg {
+  fill: #315057;
+  width: 65%;
+}
+.modal-content img {
+  width: 100%;
+}
+.icon-title {
+  color: #343a40;
+}
+
+.card-body:hover svg,
+.card-body:hover p {
+  cursor: pointer;
+  fill: #b66dff;
+  color: #b66dff;
+}
+.icon-active {
+  fill: #b66dff;
+  color: #b66dff;
+}
+
+.card-col .card-body {
+  padding: 1.5rem 0 0.5rem 0;
+}
+
+@media screen and (max-width: 769px) {
+  .details-wrapper,
+  .project-wrapper {
+    padding: 3rem 0 1rem 0;
+  }
+  svg {
+    width: 70%;
+  }
+  .card-body h5 {
+    font-size: 0.85rem;
+  }
+  .col-3 {
+    padding: 0 0.25rem;
+  }
+}
+@media screen and (max-width: 575px) {
+  svg {
+    width: 50%;
+    max-width: 150px;
+  }
+}
+/***3. 프로젝트 리스트****/
+.project-wrapper {
+  padding: 5rem 2.5rem 2.5rem 2.5rem;
+  background: #f7f6f6;
+}
+.project-wrapper .col-md-8 {
+  padding-bottom: 2rem;
+}
+.card-group {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+.card-group .card-body {
+  padding: 1.5rem 1rem 1rem 1rem;
+}
+.card-group a .card-img-top {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 300px;
+}
+.card-group .card {
+  transition: transform 1s;
+  -webkit-transition: transform 1s;
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+.card-group .card a {
+  text-decoration: none;
+}
+
+.requirement {
+  list-style-type: none;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+
+.requirement button {
+  display: inline-block;
+  border: 1px solid #e2d9e4;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #84868b;
+  background: transparent;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 769px) {
+  .project-wrapper,
+  .profile-wrapper {
+    padding: 2.5rem 1rem 1rem 1rem;
+  }
+}
+@media screen and (max-width: 575px) {
+  .project-wrapper .row .col-6 {
+    padding: 0.25rem;
+  }
+}
+
+/***4. 포인트킹****/
+.profile-wrapper {
+  padding: 5rem 2.5rem 2rem 2.5rem;
+  background: #fff;
+}
+.profile-wrapper .owl-carousel {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+.profile-card {
+  height: 23rem;
+  max-height: 23rem;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  margin: 10px auto;
+  cursor: pointer;
+  font-family: "SCDream3";
+}
+.profile-card img {
+  transition: all 0.15s linear;
+}
+.profile-card .profile-name {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  padding: 30px 20px;
+  background: linear-gradient(
+    140deg,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(255, 255, 0, 0) 50%
+  );
+  transition: all 0.15s linear;
+}
+.profile-card .profile-overview {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(255, 255, 0, 0)
+  );
+  color: #fff;
+  padding: 50px 10px 10px 10px;
+  transition: all 0.15s linear;
+}
+.profile-card .profile-overview h3 {
+  font-weight: bold;
+}
+.profile-card .profile-overview p {
+  color: rgba(255, 255, 255, 0.7);
+}
+.profile-card img {
+  filter: brightness(80%);
+}
+.profile-card:hover img {
+  filter: brightness(70%);
+}
+.profile-card:hover .profile-name {
+  padding-left: 25px;
+  padding-top: 20px;
+}
+.profile-card:hover .profile-position {
+  left: 40px;
+}
+.profile-card:hover .profile-overview {
+  padding-bottom: 25px;
+}
+
+@media screen and (max-width: 769px) {
+  .profile-card,
+  .profile {
+    height: 450px;
+  }
+}
+@media screen and (max-width: 575px) {
+  .profile-wrapper {
+    padding: 2.5rem 1rem 1rem 1rem;
+  }
+  .profile-card,
+  .profile {
+    height: 400px;
+  }
+}

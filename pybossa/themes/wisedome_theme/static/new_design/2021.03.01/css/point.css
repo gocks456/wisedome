@@ -1,0 +1,685 @@
+.form-control:focus {
+  -webkit-border: 1px solid #b66dff;
+  border: 1px solid #b66dff;
+}
+.mypoints {
+  color: #b66dff;
+}
+a {
+  text-decoration: none;
+}
+#example-form section {
+  padding: 1.5em 1em 0 3em;
+}
+.point-policy {
+  font-size: 0.75rem;
+  text-align: center;
+  color: #9c9fa6;
+}
+.input-group-text {
+  border: none;
+}
+#bank,
+#userName,
+#bankAccount {
+  max-width: 40em;
+}
+
+option,
+#bank {
+  color: #343a40;
+}
+/**에러메세지*/
+.error-name,
+.error-bank,
+.error-account {
+  color: orangered;
+  font-size: 0.75rem;
+}
+
+.success-bank {
+  display: none;
+  color: green;
+  font-size: 0.75rem;
+}
+#price {
+  text-align: right;
+  font-size: 1.25em;
+}
+.input-money {
+  padding: 0 20%;
+}
+.mdi-checkbox-marked-circle-outline,
+.mdi-close-circle-outline {
+  font-size: 5em;
+}
+#confirm-page {
+  display: none;
+}
+#confirm-page h4 {
+  display: inline;
+}
+#confirm-page p {
+  font-size: 0.85rem;
+}
+#chkConfirm {
+  display: block;
+  text-align: left;
+  color: red;
+  font-size: 0.75rem;
+}
+#finish {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+#finish button a {
+  color: #fff;
+  text-decoration: none;
+}
+
+@media all and (max-width: 1280px) {
+  .input-money {
+    padding: 0 5%;
+  }
+}
+
+@media all and (max-width: 991px) {
+}
+
+@media all and (max-width: 769px) {
+  #example-form section {
+    padding: 1em 0 0 2em;
+  }
+  #bank,
+  #userName,
+  #bankAccount {
+    max-width: 20em;
+  }
+}
+
+@media (max-width: 575px) {
+  .input-money {
+    padding: 0;
+  }
+  #example-form section {
+    padding: 1em 0 0 1.5em;
+  }
+  .wizard > .actions a {
+    padding: 0.75rem 2rem !important;
+  }
+  #finish {
+    max-width: 10rem;
+  }
+}
+
+/**wizard**/
+.wizard > .actions a {
+  display: inline-block;
+  font-weight: 400;
+  color: #343a40;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.875rem 2.5rem;
+  font-size: 0.875rem;
+  line-height: 1;
+  border-radius: 0.1875rem;
+  -webkit-transition: color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wizard > .actions a {
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+
+.wizard > .actions a:hover {
+  color: #343a40;
+  text-decoration: none;
+}
+
+.wizard > .actions a.focus {
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.wizard > .actions a:disabled {
+  opacity: 0.65;
+}
+
+.wizard > .actions fieldset:disabled a {
+  pointer-events: none;
+}
+
+.wizard > .actions a {
+  color: #fff;
+  background-color: #b66dff;
+  border-color: #b66dff;
+}
+.wizard > .actions a:hover {
+  color: #fff;
+  background-color: #a347ff;
+  border-color: #9d3aff;
+}
+.wizard > .actions a:focus,
+.wizard > .actions a.focus {
+  color: #fff;
+  background-color: #a347ff;
+  border-color: #9d3aff;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(193, 131, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(193, 131, 255, 0.5);
+}
+.wizard > .actions a.disabled,
+.wizard > .actions a:disabled {
+  color: #fff;
+  background-color: #b66dff;
+  border-color: #b66dff;
+}
+.wizard > .actions a:not(:disabled):not(.disabled):active,
+.wizard > .actions a:not(:disabled):not(.disabled).active,
+.wizard > .actions .show > a.dropdown-toggle {
+  color: #fff;
+  background-color: #9d3aff;
+  border-color: #962dff;
+}
+.wizard > .actions a:not(:disabled):not(.disabled):active:focus,
+.wizard > .actions a:not(:disabled):not(.disabled).active:focus,
+.wizard > .actions .show > a.dropdown-toggle:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(193, 131, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(193, 131, 255, 0.5);
+}
+.wizard > .actions .disabled a {
+  color: #b66dff;
+  border-color: #b66dff;
+}
+
+.wizard > .actions .disabled a:hover {
+  color: #fff;
+  background-color: #b66dff;
+  border-color: #b66dff;
+}
+.wizard > .actions .disabled a:focus,
+.wizard > .actions .disabled a.focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(182, 109, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(182, 109, 255, 0.5);
+}
+.wizard > .actions .disabled a.disabled,
+.wizard > .actions .disabled a:disabled {
+  color: #b66dff;
+  background-color: transparent;
+}
+
+.wizard > .actions .disabled a:not(:disabled):not(.disabled):active,
+.wizard > .actions .disabled a:not(:disabled):not(.disabled).active,
+.wizard > .actions .disabled .show > a.dropdown-toggle {
+  color: #fff;
+  background-color: #b66dff;
+  border-color: #b66dff;
+}
+
+.wizard > .actions .disabled a:not(:disabled):not(.disabled):active:focus,
+.wizard > .actions .disabled a:not(:disabled):not(.disabled).active:focus,
+.wizard > .actions .disabled .show > a.dropdown-toggle:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(182, 109, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(182, 109, 255, 0.5);
+}
+
+.wizard > .actions .btn-group-vertical > a {
+  position: relative;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.wizard > .actions .btn-group > a:hover,
+.wizard > .actions .fc .fc-button-group > a:hover,
+.wizard > .actions .btn-group-vertical > a:hover {
+  z-index: 1;
+}
+
+.wizard > .actions .btn-group > a:focus,
+.wizard > .actions .fc .fc-button-group > a:focus,
+.wizard > .actions .btn-group > a:active,
+.wizard > .actions .fc .fc-button-group > a:active,
+.wizard > .actions .btn-group > a.active,
+.wizard > .actions .fc .fc-button-group > a.active,
+.wizard > .actions .btn-group-vertical > a:focus,
+.wizard > .actions .btn-group-vertical > a:active,
+.wizard > .actions .btn-group-vertical > a.active {
+  z-index: 1;
+}
+
+.wizard > .actions .btn-group > .btn-group:not(:last-child) > a,
+.wizard > .actions .fc .fc-button-group > .btn-group:not(:last-child) > a,
+.wizard > .actions .fc .btn-group > .fc-button-group:not(:last-child) > a,
+.wizard
+  > .actions
+  .fc
+  .fc-button-group
+  > .fc-button-group:not(:last-child)
+  > a {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.wizard > .actions .btn-group > .btn-group:not(:first-child) > a,
+.wizard > .actions .fc .fc-button-group > .btn-group:not(:first-child) > a,
+.wizard > .actions .fc .btn-group > .fc-button-group:not(:first-child) > a,
+.fc
+  .wizard
+  > .actions
+  .fc-button-group
+  > .fc-button-group:not(:first-child)
+  > a,
+.wizard
+  > .actions
+  .fc
+  .fc-button-group
+  > .fc-button-group:not(:first-child)
+  > a {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.wizard > .actions .btn-group-vertical > a {
+  width: 100%;
+}
+
+.wizard > .actions .btn-group-vertical > .btn-group:not(:last-child) > a,
+.fc
+  .wizard
+  > .actions
+  .btn-group-vertical
+  > .fc-button-group:not(:last-child)
+  > a,
+.wizard
+  > .actions
+  .fc
+  .btn-group-vertical
+  > .fc-button-group:not(:last-child)
+  > a {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.wizard > .actions .btn-group-vertical > .btn-group:not(:first-child) > a,
+.fc
+  .wizard
+  > .actions
+  .btn-group-vertical
+  > .fc-button-group:not(:first-child)
+  > a,
+.wizard
+  > .actions
+  .fc
+  .btn-group-vertical
+  > .fc-button-group:not(:first-child)
+  > a {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.wizard > .actions .btn-group-toggle > .btn-group > a,
+.fc .wizard > .actions .btn-group-toggle > .fc-button-group > a,
+.wizard > .actions .fc .btn-group-toggle > .fc-button-group > a {
+  margin-bottom: 0;
+}
+
+.wizard
+  > .actions
+  .btn-group-toggle
+  > a
+  input[type="checkbox"]
+  > .btn-group
+  > .ajax-file-upload
+  input[type="radio"],
+. .wizard > .actions .btn-group-toggle > .btn-group > a input[type="radio"],
+.fc
+  .wizard
+  > .actions
+  .btn-group-toggle
+  > .fc-button-group
+  > a
+  input[type="radio"],
+.wizard
+  > .actions
+  .fc
+  .btn-group-toggle
+  > .fc-button-group
+  > a
+  input[type="radio"],
+.wizard > .actions .btn-group-toggle > .btn-group > a input[type="checkbox"],
+.wizard
+  > .actions
+  .fc
+  .btn-group-toggle
+  > .fc-button-group
+  > a
+  input[type="checkbox"] {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+.wizard > .actions .input-group-append a {
+  position: relative;
+  z-index: 2;
+}
+
+.wizard > .actions .input-group-append a:focus {
+  z-index: 3;
+}
+
+.wizard > .actions .input-group-lg > .input-group-prepend > a,
+.wizard > .actions .input-group-lg > .input-group-append > a {
+  padding: 0.94rem 1.94rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+.wizard > .actions .input-group-sm > .input-group-prepend > a,
+.wizard > .actions .input-group-sm > .input-group-append > a {
+  padding: 0.5rem 0.81rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.wizard
+  > .actions
+  .input-group
+  > .input-group-append:last-child
+  > a:not(:last-child):not(.dropdown-toggle),
+.wizard
+  > .actions
+  .asColorPicker-wrap
+  > .input-group-append:last-child
+  > a:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.wizard > .actions a:not(.btn-light) {
+  color: #ffffff;
+}
+
+.wizard > .actions a:not(.btn-light):hover,
+.wizard > .actions a:not(.btn-light):active {
+  color: #ffffff;
+}
+
+.wizard > .actions a:not(.btn-light):focus,
+.wizard > .actions a:not(.btn-light):active {
+  background: #b66dff;
+  border-color: #b66dff;
+}
+
+.wizard > .actions .disabled a:hover,
+.wizard > .actions .disabled a:focus,
+.wizard > .actions .disabled a:active {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#da8cff),
+    to(#9a55ff)
+  );
+  background: linear-gradient(to right, #da8cff, #9a55ff);
+  color: #000;
+}
+
+/* Wizard */
+.wizard {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}
+.wizard a {
+  outline: 0;
+}
+.wizard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.wizard ul > li {
+  display: block;
+  padding: 0;
+}
+.wizard > .steps {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.wizard > .steps .current-info {
+  position: absolute;
+  left: -999em;
+}
+.wizard > .steps .number {
+  font-size: 0.875rem;
+}
+.wizard > .steps > ul > li {
+  width: 25%;
+  float: left;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .wizard > .steps > ul > li {
+    width: 50%;
+  }
+}
+.wizard > .steps a {
+  display: block;
+  width: auto;
+  margin: 0 0.5em 0.5em;
+  padding: 1em 1em;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 0.875rem;
+  font-family: "SCDream4", sans-serif;
+}
+.wizard > .steps a:hover {
+  display: block;
+  width: auto;
+  margin: 0 0.5em 0.5em;
+  padding: 1em;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.wizard > .steps a:active {
+  display: block;
+  width: auto;
+  margin: 0 0.5em 0.5em;
+  padding: 1em;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.wizard > .steps .disabled a {
+  background: #e6e9ed;
+  color: #434a54;
+  cursor: default;
+}
+.wizard > .steps .disabled a:hover {
+  background: #e6e9ed;
+  color: #434a54;
+  cursor: default;
+}
+.wizard > .steps .disabled a:active {
+  background: #e6e9ed e;
+  color: #434a54;
+  cursor: default;
+}
+.wizard > .steps .current a {
+  background: #b66dff;
+  color: #ffffff;
+  cursor: default;
+}
+.wizard > .steps .current a:hover {
+  background: #b66dff;
+  color: #ffffff;
+  cursor: default;
+}
+.wizard > .steps .current a:active {
+  background: #b66dff;
+  color: #ffffff;
+  cursor: default;
+}
+.wizard > .steps .done a {
+  background: #e9d3ff;
+  color: #ffffff;
+}
+.wizard > .steps .done a:hover {
+  background: #e9d3ff;
+  color: #ffffff;
+}
+.wizard > .steps .done a:active {
+  background: #e9d3ff;
+  color: #ffffff;
+}
+.wizard > .steps .error a {
+  background: #fe7c96;
+  color: #fff;
+}
+.wizard > .steps .error a:hover {
+  background: #fe7c96;
+  color: #fff;
+}
+.wizard > .steps .error a:active {
+  background: #fe7c96;
+  color: #fff;
+}
+.wizard > .content {
+  background: #f2edf3;
+  display: block;
+  margin: 0.5em;
+  min-height: 22em;
+  overflow: hidden;
+  position: relative;
+  width: auto;
+  border-radius: 5px;
+}
+.wizard > .content > .title {
+  position: absolute;
+  left: -999em;
+}
+.wizard > .content > .body {
+  float: left;
+  position: absolute;
+  width: 95%;
+  height: 95%;
+  padding: 2.5%;
+  overflow-y: auto;
+}
+.wizard > .content > .body ul {
+  list-style: disc;
+}
+.wizard > .content > .body ul > li {
+  display: list-item;
+}
+.wizard > .content > .body > iframe {
+  border: 0 none;
+  width: 100%;
+  height: 100%;
+}
+.wizard > .content > .body input {
+  display: block;
+  border: 1px solid #ebedf2;
+}
+.wizard > .content > .body input[type="checkbox"] {
+  display: inline-block;
+}
+.wizard > .content > .body input.error {
+  background: #fbe3e4;
+  border: 1px solid #ffe1e7;
+  color: #fe7c96;
+}
+.wizard > .content > .body label {
+  display: inline-block;
+  margin-bottom: 0.5em;
+}
+.wizard > .content > .body label.error {
+  color: #fe7c96;
+  display: inline-block;
+  margin-left: 1.5em;
+}
+.wizard > .actions {
+  padding-top: 20px;
+  position: relative;
+  display: block;
+  text-align: right;
+  width: 100%;
+}
+.wizard > .actions > ul {
+  display: inline-block;
+  text-align: right;
+}
+
+/**page next - previous btn**/
+.wizard > .actions > ul > li {
+  float: left;
+  margin: 0 0.5em;
+}
+.wizard > .actions > ul > li:nth-child(2) a {
+}
+.wizard.vertical > .steps {
+  display: inline;
+  float: left;
+  width: 30%;
+}
+
+@media (max-width: 767px) {
+  .wizard.vertical > .steps {
+    width: 42%;
+  }
+}
+.wizard.vertical > .steps > ul > li {
+  float: none;
+  width: 100%;
+  text-align: left;
+}
+.wizard.vertical > .content {
+  display: inline;
+  float: left;
+  margin: 0 2.5% 0.5em 2.5%;
+  width: 65%;
+}
+@media (max-width: 767px) {
+  .wizard.vertical > .content {
+    width: 52%;
+  }
+}
+.wizard.vertical > .actions {
+  display: inline;
+  float: right;
+  margin: 0 2.5%;
+  width: 95%;
+}
+@media (max-width: 767px) {
+  .wizard.vertical > .actions {
+    margin: 0;
+    width: 100%;
+  }
+}
+.wizard.vertical > .actions > ul > li {
+  margin: 0 0 0 1em;
+}

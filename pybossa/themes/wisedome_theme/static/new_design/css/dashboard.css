@@ -56,7 +56,10 @@ svg {
   fill: #b66dff;
   color: #b66dff;
 }
-
+.card-col {
+  padding: 0;
+  width: 20%;
+}
 .card-col .card-body {
   padding: 1.5rem 0 0.5rem 0;
 }
@@ -84,7 +87,6 @@ svg {
   .card-img {
     min-height: 200px;
   }
-
   .fluid-container p {
     font-size: 0.8em;
   }
@@ -107,7 +109,7 @@ svg {
     font-size: 0.8em;
   }
   .card p {
-    font-size: 0.75em;
+    font-size: 0.875rem;
   }
 
   .portfolio-grid figure {
@@ -117,8 +119,9 @@ svg {
   #dropdownMenuOutlineButton {
     padding: 0.7em 1.25em;
   }
-  .card-col .card-body {
-    padding: 0.5em 0;
+  /**카테고리별*/
+  .card-col {
+    width: 32%;
   }
 }
 

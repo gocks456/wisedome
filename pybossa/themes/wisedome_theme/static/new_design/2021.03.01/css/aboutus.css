@@ -1,0 +1,249 @@
+body,
+html,
+h4,
+h5,
+h6 {
+  font-family: "SCDream3", "Apple Gothic";
+}
+h1,
+h2,
+h3 {
+  font-family: "SCDream4", "Apple Gothic";
+}
+a {
+  text-decoration: none;
+}
+.banner-wrapper {
+  background-color: #c7e4e2;
+  padding-bottom: 2.5rem;
+}
+.wrapper .row {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+.img-content {
+  padding-right: 0;
+  margin-top: 3rem;
+}
+#main-img {
+  width: 100%;
+  max-width: 720px;
+}
+.main-text h1 {
+  margin: 1rem 0;
+  color: #00232c;
+  margin: 0.6em 0;
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  line-height: 2.5rem;
+  font-family: "SCDream3", "Apple Gothic";
+}
+.main-text h3 {
+  line-height: 2.5rem;
+  font-family: "SCDream4", "Apple Gothic";
+}
+.main-text h5 {
+  font-size: 0.8rem;
+}
+.main-text p {
+  color: #396361;
+  font-size: 1rem;
+  line-height: 1.5em;
+}
+
+.hr {
+  background-color: #b66dff;
+  border: none;
+  width: 50px;
+  height: 3px;
+  margin: 0.85rem 0 0.5rem 0;
+}
+
+@media screen and (max-width: 991px) {
+  .banner-wrapper {
+    padding: 2.5rem 0 2rem 1.5rem;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .banner-wrapper {
+    padding: 2.5rem 0 0 1rem;
+  }
+  .img-content {
+    margin-top: 1rem;
+  }
+}
+
+/**2번쨰 컨텐츠**/
+
+.iphone-img {
+  justify-content: left;
+}
+
+.iphone {
+  width: 100%;
+  max-width: 360px;
+}
+
+.rightContent {
+  padding-right: 7.5rem;
+}
+@media screen and (max-width: 1024px) {
+  .rightContent {
+    padding-right: 2.5rem;
+  }
+  .iphone {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .rightContent {
+    padding-right: 1rem;
+  }
+  .leftContent {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .rightContent {
+    padding-right: 0;
+  }
+}
+@media screen and (max-width: 575px) {
+  .leftContent .page-title {
+    text-align: center;
+  }
+  .leftContent .page-title .hr {
+    margin: 0 auto;
+  }
+  .iphone-img {
+    text-align: center;
+    overflow: hidden;
+    height: 20rem;
+    border: none;
+  }
+  .rightContent .feature-list {
+    display: none;
+  }
+}
+
+.rightContent .feature-list-item {
+  padding: 1rem;
+}
+
+.feature-description {
+  text-align: left;
+}
+.feature-list h4 {
+  color: #7d528f;
+}
+.icon-xl {
+  font-size: 5rem;
+  color: #7d528f;
+}
+/***품질보증 2단 부분*/
+.ourJob {
+  max-width: 1920px;
+  padding: 0 5rem;
+}
+.ourJob .pt-3 {
+  border-top: 1px solid #dfd6e0;
+}
+.ourJob .icon-xl {
+  color: #333874;
+}
+@media screen and (max-width: 575px) {
+  .ourJob {
+    padding: 2rem 0 0 0;
+  }
+  .ourJob .pt-3 {
+    border-top: 0;
+  }
+}
+
+/**데이터 구축과정 아이콘*/
+.process-wrapper {
+  background: #f7f6f6;
+}
+.process-wrapper .feature-list-item {
+  border: 1px solid #dfd6e0;
+  margin-top: 1.5rem;
+  padding: 1rem 1rem;
+  border-radius: 0.25rem;
+}
+.process-wrapper .feature-list2 .feature-list-item .icon-xl,
+.process-wrapper .feature-list2 .feature-list-item h4 {
+  color: #3274a7;
+}
+
+.feature-list2 .feature-description {
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.process-description {
+  line-height: 1.75rem;
+}
+
+@media screen and (max-width: 991px) {
+  .process-wrapper .feature-list-item {
+    padding: 0.5rem;
+  }
+}
+@media screen and (max-width: 575px) {
+  .process-wrapper .feature-list2 .col-md-4 {
+    margin: 0;
+    padding: 0;
+  }
+  .process-wrapper .feature-list-item {
+    margin: 0.25rem;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .banner-content {
+    text-align: center;
+    padding: 1rem 2.5rem;
+  }
+  .hr {
+    margin-top: 0.85rem;
+  }
+  .main-text h1 {
+    color: #315057;
+    font-size: 2.25rem;
+  }
+  .main-text p {
+    font-size: 0.9rem;
+  }
+  .process-wrapper .feature-list-item {
+    padding: 0.5rem;
+  }
+}
+@media screen and (max-width: 575px) {
+  .banner-content {
+    margin: 1rem 1rem;
+  }
+  .main-text h1 {
+    font-size: 2em;
+  }
+  .main-text p {
+    font-size: 0.85em;
+  }
+}
+
+/**주요고객사****/
+.clients .col-md-4 {
+  margin-top: 1rem;
+}
+.clients .col-md-4 img {
+  width: 100%;
+  max-width: 250px;
+}
+@media screen and (max-width: 575px) {
+  .clients .col-md-4 {
+    margin-top: 1.5rem;
+  }
+}

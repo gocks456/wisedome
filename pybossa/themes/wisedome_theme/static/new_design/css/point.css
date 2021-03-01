@@ -22,7 +22,7 @@ a {
 #bank,
 #userName,
 #bankAccount {
-  max-width: 40em;
+  width: 100%;
 }
 
 option,

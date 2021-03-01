@@ -94,12 +94,12 @@
   	})
   })(jQuery);
 
-/*
+
 
 //1-1.이름 확인과 에러메시지
   $(function() {
 
-	  var myName ="창원대";  //임의로 설정한 사용자 이름
+	  var myName ="1234";  //임의로 설정한 사용자 이름
 
     $('#name').on('keyup',function() {
         if( $(this).val() == myName ){
@@ -119,7 +119,7 @@
 //1-2.이메일확인과 에러메세지
 $(function() {
 
-	var myEmail ="abc@naver.com";  //임의로 설정한 사용자 이메일
+	var myEmail ="1234";  //임의로 설정한 사용자 이메일
 
   $('#email').on('keyup',function() {
 	  if( $(this).val() == myEmail ){
@@ -135,12 +135,12 @@ $(function() {
   });
 });
 
-*/
+
 
 //2. 인증코드확인
 $(function() {
 
-	var myCode ="ZXC123";  //임의로 설정한 인증코드
+	var myCode ="1234";  //임의로 설정한 인증코드
 
   $('#code').on('keyup',function() {
 	  if( $(this).val() == myCode ){
