@@ -1,5 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
-{% set active_page = "project" %}
+{% set active_wisedome = "project" %}
 {% import "new_design/workspace/_helpers.html" as helper %}
 
 {% block css %}
@@ -41,7 +41,7 @@
 								<div class="row py-3 ">    
 									<div class="col-md-4 d-flex align-items-center">
 										<div class="d-flex flex-row align-items-center">
-											<i class="mdi mdi-cash-100 icon-md text-warning"></i><p class="mb-0 ml-1"> {{project.all_point}} </p>
+											<i class="mdi mdi-cash-100 icon-md text-warning"></i><p class="mb-0 ml-1"> {{project.all_point|number_format}} P </p>
 										</div>
 									</div>
 									<div class="col-md-4 d-flex align-items-center">

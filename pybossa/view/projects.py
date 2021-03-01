@@ -184,7 +184,7 @@ def index(page):
         projects = cached_projects.get_all_featured()
         projects = sort_project(projects, request.form['value'])
         render = render_template('/new_design/workspace/ajax_projectList.html', projects=projects)
-        return 'ddd'#render
+        return render
 
     # New Design
     return project_index(page, cached_projects.get_all_featured,

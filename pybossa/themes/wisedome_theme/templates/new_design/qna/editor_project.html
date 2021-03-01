@@ -1,4 +1,5 @@
 {% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_wisedome="qna" %}
 
 {% block css %}
 <!--this page css-->
@@ -54,10 +55,10 @@
 														<div class="col-sm-3">
 															<select class="form-control" id="subtitle">
 																<option selected>주제</option>
-																<option >진행상황</option>
-																<option >반려</option>
-																<option >검수</option>
-																<option >기타</option>
+																<option value="진행상황">진행상황</option>
+																<option value="반려">반려</option>
+																<option value="검수">검수</option>
+																<option value="기타">기타</option>
 															</select>
 														</div>
 														<div class="col-sm-9 ">
