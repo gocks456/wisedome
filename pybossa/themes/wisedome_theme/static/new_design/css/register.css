@@ -158,7 +158,14 @@ select {
   color: #fff;
   letter-spacing: 0.25em;
 }
-
+.password-rule {
+  margin: 0 auto;
+  width: 90%;
+  padding-left: 0.5rem;
+  text-align: left;
+  font-size: 0.875rem;
+  color: blue;
+}
 .icon {
   position: absolute;
   top: 0.5em;

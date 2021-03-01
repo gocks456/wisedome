@@ -1,0 +1,305 @@
+[data-theme="dark"] {
+  background-color: #323641 !important;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  table th,
+  table td {
+    color: #fff;
+  }
+
+  /**nav메뉴**/
+  .navbar,
+  .navbar-brand-wrapper,
+  .navbar-menu-wrapper,
+  .navbar-nav li,
+  .dropdown-menu,
+  .dropdown-menu a,
+  .nav-profile-text p,
+  .navbar-dropdown {
+    background-color: #323641;
+    color: #fff;
+    .preview-subject {
+      color: #ccc;
+    }
+    .dropdown-divider {
+      border-color: #555555;
+    }
+  }
+
+  /*컨텐츠**/
+  .content-wrapper {
+    background-color: #151519;
+
+    .page-header {
+      .page-title,
+      .breadcrumb {
+        color: #fff;
+        .controlbar {
+          background-color: #76767a;
+        }
+      }
+    }
+    .wizard > .content {
+      background-color: #323641;
+      .list-ticked li {
+        color: #fff !important;
+      }
+      .wizard > .steps .number,
+      .won {
+        color: #151519 !important;
+      }
+    }
+    .card {
+      .card-body {
+        .card-title,
+        .card-description,
+        .main-text {
+          color: #fff;
+        }
+        .progress-bar {
+          background-color: #76767a;
+        }
+        #input_text,
+        input,
+        textarea,
+        select {
+          color: #fff;
+          background-color: #76767a;
+          border-color: #555555;
+        }
+        .answers,
+        .my-border-bottom,
+        .my-border-top {
+          border-color: #555555;
+          .list-group-item {
+            color: #ccc;
+          }
+        }
+        .list-group a {
+          background-color: #323641;
+          border-color: #555555;
+          color: #fff;
+        }
+        #nav-tabContent {
+          border-color: #555555;
+          .wordbook p {
+            color: #fff;
+          }
+        }
+        pre {
+          background-color: transparent;
+          color: #fff;
+          .highlight {
+            color: #555555;
+          }
+        }
+        label {
+          color: #fff;
+          border-color: #555555;
+        }
+        svg {
+          fill: #f2edf3;
+        }
+        .modal-content,
+        .dataTables_wrapper .dataTables_paginate a,
+        table,
+        th,
+        td {
+          color: #fff;
+          background-color: #76767a;
+          border-color: #555555 !important;
+        }
+        .accordion .card {
+          background-color: #323641;
+          .card-header {
+            color: #fff;
+          }
+          .card-body {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**버튼색변경**/
+.btn-outline-primary {
+  border-color: #555555;
+  color: #fff;
+}
+
+.btn-inverse-primary {
+  background-color: #8840d4;
+  color: #fff;
+}
+
+#disable-submit {
+  color: #fff;
+}
+#manage-answer-btn {
+  background-color: #62b1f1;
+  color: #fff;
+}
+
+/**푸터**/
+.footer {
+  border-color: #33333d;
+  background-color: #151519;
+}
+
+/***************/
+[data-theme="dark"] .bg-white {
+  background-color: #323641 !important;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  table th,
+  table td {
+    color: #fff;
+  }
+
+  /**nav메뉴**/
+  .navbar,
+  .navbar-brand-wrapper,
+  .navbar-menu-wrapper,
+  .navbar-nav li,
+  .dropdown-menu,
+  .dropdown-menu a,
+  .nav-profile-text p,
+  .navbar-dropdown {
+    background-color: #323641;
+    color: #fff;
+    .preview-subject {
+      color: #ccc;
+    }
+    .dropdown-divider {
+      border-color: #555555;
+    }
+  }
+
+  /*컨텐츠**/
+  .content-wrapper {
+    background-color: #151519;
+
+    .page-header {
+      .page-title,
+      .breadcrumb {
+        color: #fff;
+        .controlbar {
+          background-color: #76767a;
+        }
+      }
+    }
+
+    .card {
+      .card-body {
+        .card-title,
+        .card-description,
+        .main-text {
+          color: #fff;
+        }
+        .progress-bar {
+          background-color: #76767a;
+        }
+        #input_text,
+        input,
+        textarea,
+        select {
+          color: #fff;
+          background-color: #323641;
+          border-color: #555555;
+        }
+        .answers,
+        .my-border-bottom,
+        .my-border-top {
+          border-color: #555555;
+        }
+        .list-group a {
+          background-color: #323641;
+          border-color: #555555;
+          color: #fff;
+        }
+        #nav-tabContent {
+          border-color: #555555;
+          .wordbook p {
+            color: #fff;
+          }
+        }
+        pre {
+          background-color: transparent;
+          color: #fff;
+        }
+
+        label {
+          color: #fff;
+          border-color: #555555;
+        }
+        svg {
+          fill: #f2edf3;
+        }
+        .modal-content,
+        .dataTables_wrapper .dataTables_paginate a,
+        table,
+        th,
+        td {
+          color: #fff;
+          background-color: #76767a;
+          border-color: #555555 !important;
+        }
+        svg {
+          fill: #fff;
+        }
+        .accordion .card {
+          background-color: #323641;
+          .card-header {
+            color: #fff;
+          }
+          .card-body {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  /**버튼색변경**/
+  .btn-outline-primary {
+    border-color: #555555;
+    color: #fff;
+  }
+
+  .btn-inverse-primary {
+    background-color: #8840d4;
+    color: #fff;
+  }
+
+  #disable-submit {
+    color: #fff;
+  }
+
+  /**선색 변경**/
+  .border-top,
+  .border-bottom,
+  .border {
+    border-color: #555555;
+  }
+  /**푸터**/
+  .footer {
+    border-color: #33333d;
+    background-color: #151519;
+  }
+}

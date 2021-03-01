@@ -1,0 +1,166 @@
+.bg-peach {
+  color: #fff;
+  background-image: linear-gradient(-270deg, #d36474 0%, #ffc3a0 100%);
+}
+
+.bg-blue {
+  color: #fff;
+  background-image: linear-gradient(-270deg, #2580b3 0%, #cbbacc 100%);
+}
+
+.bg-purple {
+  color: #fff;
+  background-image: linear-gradient(-270deg, #3ba061 0%, #f5d100 100%);
+}
+
+.card-group {
+  width: 100%;
+}
+.card-body a {
+  text-decoration: none;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+}
+.icon-title {
+  color: #343a40;
+}
+.carousel-title {
+  font-family: "SCDream3";
+}
+.card-img {
+  -webkit-filter: brightness(60%);
+  filter: brightness(60%);
+}
+.shadow-sm {
+  margin: 1rem 0;
+}
+.card-img-top {
+  width: 100%;
+  height: 320px;
+}
+svg {
+  fill: #094751;
+  width: 25%;
+  min-width: 3.25em;
+  margin-bottom: 0.5rem;
+}
+
+.card-col:hover svg,
+.card-col:hover p {
+  cursor: pointer;
+  fill: #b66dff;
+  color: #b66dff;
+}
+.icon-active {
+  fill: #b66dff;
+  color: #b66dff;
+}
+
+.card-col .card-body {
+  padding: 1.5rem 0 0.5rem 0;
+}
+
+@media all and (max-width: 1280px) {
+  .fluid-container p {
+    font-size: 0.8em;
+  }
+}
+
+@media all and (max-width: 991px) {
+  .card-group .col-12 {
+    margin-bottom: 1rem;
+  }
+}
+@media all and (max-width: 769px) {
+  .icon-group {
+    padding: 0.5rem 0.75rem;
+  }
+  .shadow-sm {
+    margin: 0.75rem 0;
+  }
+}
+@media all and (max-width: 575px) {
+  .card-img {
+    min-height: 200px;
+  }
+
+  .fluid-container p {
+    font-size: 0.8em;
+  }
+  .card h1 {
+    font-size: 1.5em;
+  }
+  .card h2 {
+    font-size: 1.3em;
+  }
+  .card h3 {
+    font-size: 1.2em;
+  }
+  .card h4 {
+    font-size: 1em;
+  }
+  .card h5 {
+    font-size: 0.9em;
+  }
+  .card h6 {
+    font-size: 0.8em;
+  }
+  .card p {
+    font-size: 0.75em;
+  }
+
+  .portfolio-grid figure {
+    max-height: 200px;
+  }
+
+  #dropdownMenuOutlineButton {
+    padding: 0.7em 1.25em;
+  }
+  .card-col .card-body {
+    padding: 0.5em 0;
+  }
+}
+
+@media all and (max-width: 375px) {
+  #dropdownMenuOutlineButton {
+    padding: 0.5em;
+  }
+}
+
+/**모든 프로젝트**/
+.card-group .card-body {
+  padding: 1.5rem 1rem 1rem 1rem;
+}
+.card-group a .card-img-top {
+  max-height: 200px;
+  display: block;
+  object-fit: cover;
+}
+.card-group .card {
+  transition: transform 1s;
+  -webkit-transition: transform 1s;
+  overflow: hidden;
+}
+.card-group .card a {
+  text-decoration: none;
+}
+
+.badge-group {
+  list-style-type: none;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+
+.badge-group .badge {
+  display: inline-block;
+  border: 1px solid #e2d9e4;
+  padding: 0.25rem;
+  margin: 0.25rem 0.01rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #84868b;
+  background: transparent;
+  text-decoration: none;
+}

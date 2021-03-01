@@ -1,0 +1,323 @@
+
+#popup{display:none;}
+
+#popup ~.wing>.wing_label>.wing_contents{display:none;} 
+
+#popup:checked ~.wing>.wing_label>.wing_contents{display:block;}
+
+#popup:checked ~.wing>.wing_label{width: 20em; height: 12em;}
+
+#popup:checked ~.wing>.wing_label #podium{display: none;}
+
+.wing_label{
+  position: fixed;
+  top: 150px;
+  right: 0;
+  text-align: center;
+  display:block; 
+  overflow: hidden;
+  background: #1bcfb4;
+  padding: 1em;
+  border-top-left-radius: 0.5em; 
+  border-bottom-left-radius: 0.5em;
+  z-index: 9;
+  width:5em; 
+  height:auto;
+  transition: width 0.7s, height 0.7s;
+  transition-timing-function:ease-out;} 
+
+.wing_contents{
+  padding:0.5em;
+  height: auto;}
+
+  .wing_contents p {
+    margin-top: 0.5em;
+    color: #fff;}
+  
+  .wing_contents p span{
+    font-size: 1.1em;
+    font-weight: bold;}
+
+    
+  .controlbar{
+    margin:0 1em;
+    width: 10em;
+    height: 7px;
+    border-radius: 7px;
+    background: #ffffff;
+    outline: none;
+    -webkit-transition: .3s;
+    transition: opacity .3s;
+    -webkit-appearance: none;}
+        
+  .controlbar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background:#b068ff;
+    cursor: pointer;}
+  
+  .controlbar::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background:#b068ff;
+    cursor:pointer;}
+  
+  pre{
+    overflow: hidden;
+    white-space: pre-wrap;
+    background-color: transparent;
+    font-size: 1.2em;
+    line-height: 2em;
+    font-family: 'Times New Roman', Times, serif;}
+
+  .highlight{
+    max-width: 100px;
+    background-color: yellow;
+    border-radius: 0.125em;} 
+  
+  .answers{
+  padding-top: 1em;  
+  text-align: center;
+  border-left: 2px solid #f2edf3;}
+  
+  .answers button{  
+  width: 70%;
+  min-width: 200px;
+  text-align: center;
+  margin-bottom: 0.5em ;
+  letter-spacing: 0.25em;}
+
+  .emotion8 button{
+    letter-spacing: 0.55em;}
+
+  .popup{
+    display: none;
+    width: 100%;
+    border-radius: 0.5em;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    padding: 0.5em 0.5em 0 0.5em;}
+  .popup h6{
+    font-size: 0.9em;}
+
+    #bannerClose{
+      cursor: pointer;}
+
+    #bannerOpen{
+    cursor: pointer;
+    display: block;
+    margin-top: 0.5em;
+    font-size: 0.8em;}  
+
+  .list-group-item{
+    font-size: 0.8em;
+    text-align: left;
+    border: none;
+    background-color: transparent;  
+    padding: 0.5em 0;}
+
+  .computer-select{
+    color: #F90986;
+    background-color: #FECCE6;}
+  .computer-select:hover{
+    color: #fff;
+    background-color: #F90986 ;}
+
+  .human-select{
+    color:#FF9800;
+    background-color:#FDECCC;}    
+  .human-select:hover{
+    color: #fff;
+    background-color:#FF9800 ;}
+      
+
+  .card-description span{
+    color: #fe7c96;
+    font-weight: bold;}
+
+  #manage-answer-btn, .answers #edit, .answers #submit{
+    width: 70%;
+    min-width: 200px;
+    padding-left: 1em;
+    padding-right: 1em;}
+
+  #manage-answer{
+    display: none;}
+  
+ #page2,#page3,#page4,#page5,#page6,#page7,#page8,#page9,#page10{
+   display: none;}  
+  
+
+
+  .reselect{
+    display: none;}
+  
+  .reselect .btn{
+    width: 20%;
+    min-width: 150px;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.2em;
+    text-align: center;}
+
+
+
+@media all and (max-width:1200px){
+
+  pre{
+    font-size: 0.9em;}
+
+  .answers{
+    border-left: none;}
+
+  .answers button{
+    margin-right: 0.25em;
+    width: 40%;}  
+
+  .popup{
+    width: 85%; }  
+
+  #manage-answer-btn, .answers #edit, .answers #submit{
+      width: 50%;}  
+
+  .reselect .btn{
+     width: 40%; }
+  .reselect{
+      text-align: center;}
+
+  .page-btn-group{
+     text-align: center;}    
+     
+  }
+  
+  
+  @media all and (max-width:991px){
+
+  #manage-answer-btn{
+     margin-top: 0;
+     margin-left: 0;}
+
+  }
+    
+  
+  @media all and (max-width:769px){
+
+  #popup:checked ~.wing>.wing_label{
+    width: 12em; }
+
+  .wing_label{
+    padding: 1em 0.5em;
+    width:4.5em; } 
+  .wing_label img{ 
+    width: 75%;}  
+  .wing_contents img{
+    width:30%;}  
+  .wing_contents p{
+    padding-bottom: 0.5em;
+    font-size: 0.8em;}
+
+  .controlbar{
+   margin: 0;
+   width: 5em;}
+      
+   pre{
+    background: #e8eff4;} 
+  
+  .text-adjust{
+   display: none;}  
+
+  .answers{
+    border-left: none;}
+
+  .answers button{
+    margin-right: 0.25em;
+    min-width: 90px;
+    width: 40%;}  
+
+  .popup{
+    width: 85%; }  
+
+  .card-body .btn-group{
+      margin-left: 0; } 
+      
+  #manage-answer-btn{
+  margin-left: 0;}
+
+  .reselect{
+    text-align: center;
+    margin-bottom: 2.5em;}
+
+    .reselect .btn{
+    width: 40%;
+    min-width: 90px;
+    margin-bottom: 0.25em;}  
+
+ .answers button, #manage-answer-btn,.reselect button{ 
+   padding: 1em 0.5em;
+   letter-spacing: 0.1em;
+   line-height: 1.5em;}   
+   
+   #manage-answer-btn, .answers #edit, .answers #submit{
+    width: 50%;}
+
+  .previous-question{
+    text-align: center;
+  }
+
+  .page-btn-group{
+    text-align: center;}
+
+  }
+
+  @media all and (max-width:575px){
+
+ .wing_label{
+      top: 130px; }
+   
+.card-description{
+    letter-spacing: 0;}
+   
+ .reselect .btn,.answers button{
+    width: 40%; }
+  
+  .popup{
+     width: 90%; }  
+
+  #manage-answer-btn{
+   margin: 0;}  
+
+   #manage-answer-btn, .answers #edit, .answers #submit{
+    width: 80%;}
+
+  .page-btn-group{
+    text-align: center;}
+  .page-btn-group .btn{
+    padding: 0.5em;
+    font-size: 0.75em;} 
+  .page-btn-group .btn .mdi{
+    font-size: 0.75em;}   
+  
+ 
+  }
+  
+  
+  
+  
+  @media all and (max-width:375px){
+  .controlbar::-webkit-slider-thumb {
+      width: 12px;
+      height: 12px;}
+      
+  .page-title {
+  font-size: 0.8em;}
+  
+  .btn-group button{
+    padding: 0.5em;
+  }
+  
+  
+    }    
