@@ -88,10 +88,10 @@ a {
 /**flash message**/
 #mini-notification {
   position: fixed;
-  width: 40%;
+  width: auto;
   text-align: center;
-  padding: 0.25rem 1rem;
-  top: 70px;
+  padding: 0.5rem 2rem;
+  bottom: 0;
   right: 0;
   z-index: 99;
 }

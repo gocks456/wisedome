@@ -25,7 +25,8 @@
       ['insert', ['link', 'picture', 'video']],
       ['view', ['fullscreen', 'codeview', 'help']],
     ],
-    
+
   });
 
   $('#summernote').summernote('foreColor','#76767a');
+$('.dropdown-toggle').dropdown()
