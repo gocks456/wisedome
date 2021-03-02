@@ -7027,7 +7027,6 @@ input[type="button"].btn-block {
 }
 
 @media (max-width: 575.98px) {
- 
   .navbar-expand-sm > .container,
   .navbar-expand-sm > .container-fluid,
   .navbar-expand-sm > .container-sm,
@@ -17659,6 +17658,10 @@ dl li {
   height: 70px;
 }
 @media (max-width: 991px) {
+  .default-layout-navbar {
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
   .navbar .navbar-brand-wrapper {
     width: 55px;
   }
@@ -17710,7 +17713,6 @@ dl li {
     width: auto;
     padding-left: 15px;
     padding-right: 15px;
-    
   }
 }
 .navbar .navbar-menu-wrapper .navbar-toggler {

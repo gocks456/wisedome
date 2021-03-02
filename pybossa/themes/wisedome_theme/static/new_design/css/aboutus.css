@@ -73,7 +73,11 @@ a {
     margin-top: 1rem;
   }
 }
-
+@media screen and (max-width: 575px) {
+  #main-img {
+    height: auto;
+  }
+}
 /**2번쨰 컨텐츠**/
 
 .iphone-img {
@@ -134,7 +138,7 @@ a {
 }
 
 .feature-description {
-  text-align: left;
+  text-align: center;
 }
 .feature-list h4 {
   color: #7d528f;

@@ -1,10 +1,13 @@
+.nav-pills .nav-item {
+  width: 22.5%;
+}
+
 .nav-pills.nav-pills-custom {
   border-bottom: 0;
 }
 .nav-pills.nav-pills-custom .nav-link {
   border-radius: 0.5rem;
   font-size: 0.875rem;
-  width: 10rem;
   margin: 0.5rem;
   background: #f4f4f7;
   color: #343a40;
@@ -70,24 +73,24 @@ select.form-control:focus {
 }
 
 @media (max-width: 1024px) {
-  .nav-pills.nav-pills-custom .nav-link {
-    width: 6rem;
+  .nav-pills .nav-item {
+    width: 25%;
   }
+
   .nav-pills.nav-pills-custom .nav-link .mdi {
     font-size: 2rem;
   }
 }
 @media (max-width: 991px) {
-  .nav-pills.nav-pills-custom .nav-link {
-    width: 7.5rem;
+  .nav-pills .nav-item {
+    width: 25%;
   }
 }
-@media (max-width: 769px) {
-  .nav-pills.nav-pills-custom .nav-link {
-    width: 6.5rem;
-  }
-}
+
 @media (max-width: 575px) {
+  .nav-pills .nav-item {
+    width: 50%;
+  }
   .nav-pills.nav-pills-custom .nav-link {
     margin: 0.25rem;
   }
