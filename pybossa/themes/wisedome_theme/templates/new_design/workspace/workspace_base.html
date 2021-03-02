@@ -37,7 +37,7 @@
 					<a class="navbar-brand brand-logo-mini" href="{{ url_for('home.home') }}"><img src="/static/new_design/images/Symbol-grey.png" alt="logo" /></a>
 				</div>
 				<div class="navbar-menu-wrapper d-flex align-items-stretch">
-					<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+					<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" style="display:none;"><!--display:none;-->
 						<span class="mdi mdi-format-horizontal-align-left" onclick="intend(this)"></span>
 						<!-- 아이콘 버튼 사이드바 펼침 및 닫기 아이콘-->
 					</button>
@@ -200,6 +200,8 @@
 							<span class="text-muted">Copyright © 2021 <a href="{{url_for('home.home')}}">Wisedome</a> All rights reserved.</span>
 						</div>
 					</footer>
+
+
 					<!-- partial -->
 				</div>
 				<!-- main-panel ends -->

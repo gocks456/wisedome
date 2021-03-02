@@ -35,23 +35,23 @@
 								<ul class="navbar-nav" style="margin-left : 20px">
 									<li class="nav-item active"><a class="nav-link" href="{{ url_for('home.aboutus')}}">회사소개</a></li>
 									<!--<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SERVICE </a>
-										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-											<a class="dropdown-item" href="#">회사소개</a>
-											<a class="dropdown-item" href="#">이용방법</a>
-										</div>
-									</li>-->
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('project.index') }}">프로젝트</a></li>
-									{#<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CONTACT </a>
-										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-											<a class="dropdown-item" href="#">공지사항</a>
-											<a class="dropdown-item" href="#">이벤트</a>
-											<a class="dropdown-item" href="#">파트너협약</a>
-											<a class="dropdown-item" href="{{ url_for('home.faq') }}">자주하는질문</a>
-											<a class="dropdown-item" href="{{ url_for('home.qna')}}">문의하기</a>
-										</div>
-									</li>#}
-									<li class="nav-item"><a  class="nav-link" href="{{ url_for('home.faq') }}">자주하는질문 </a></li>
-									<li class="nav-item"><a  class="nav-link" href="{{ url_for('account.signin') }}">로그인 </a></li>
+			 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			 <a class="dropdown-item" href="#">회사소개</a>
+			 <a class="dropdown-item" href="#">이용방법</a>
+			 </div>
+			 </li>-->
+			 <li class="nav-item"><a class="nav-link" href="{{ url_for('project.index') }}">프로젝트</a></li>
+			 {#<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CONTACT </a>
+				 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					 <a class="dropdown-item" href="#">공지사항</a>
+					 <a class="dropdown-item" href="#">이벤트</a>
+					 <a class="dropdown-item" href="#">파트너협약</a>
+					 <a class="dropdown-item" href="{{ url_for('home.faq') }}">자주하는질문</a>
+					 <a class="dropdown-item" href="{{ url_for('home.qna')}}">문의하기</a>
+				 </div>
+			 </li>#}
+			 <li class="nav-item"><a  class="nav-link" href="{{ url_for('home.faq') }}">자주하는질문 </a></li>
+			 <li class="nav-item"><a  class="nav-link" href="{{ url_for('account.signin') }}">로그인 </a></li>
 								</ul>
 							</div>
 						</nav>
@@ -199,7 +199,7 @@
 							</div>
 						</div>
 
-						<div class="col-sm-3 con-6">
+						<div class="col-sm-3 col-6">
 							<div class="card card-icon-top" id="video-icon">
 								<div class="card-body text-center">
 									<a data-toggle="modal" data-target="#videoProject">
@@ -292,9 +292,9 @@
 
 				<div class="row ">
 					<div class="btn-group mx-auto">
-					<a href="{{ url_for('project.index') }}">
-						<button  class="btn btn-icon btn-inverse-primary"><i class="mdi mdi-chevron-double-right"></i> </button>
-					</a>
+						<a href="{{ url_for('project.index') }}">
+							<button  class="btn btn-icon btn-inverse-primary"><i class="mdi mdi-chevron-double-right"></i> </button>
+						</a>
 					</div>
 				</div>
 			</div><!--project wrapper-->
@@ -324,7 +324,6 @@
 								{% endif %}
 								{% endmacro %}
 								<div class="owl-carousel owl-theme loop">
-									{#
 									{% for user in top_users %}
 
 									<!--새로 디자인한 프로필 -->
@@ -349,7 +348,6 @@
 									</div>
 
 									{% endfor %}
-									#}
 
 
 								</div>
@@ -361,58 +359,49 @@
 			</div><!--profile wrapper-->
 			#}
 
-			<footer><!---footer-->
-				<div class="footer-border-bottom">
+			<footer><!---footer-내용변경됨 03.01--->
+				<div class="footer-border-bottom pb-3">
 					<div class="container ">
-						<div class="row">
+						<div class="row ">
 							<div class="col-lg-4">
 								<img class="img-fluid" src="/static/new_design/images/wisedome-logo.png" alt="logo">
-								<div class="d-flex pt-5 pb-5">
-									<!--<button class="btn btn-rounded btn-social-icon btn-facebook"><i class="mdi mdi-facebook"></i></button>
-									<button class="btn btn-rounded btn-social-icon btn-twitter"><i class="mdi mdi-twitter"></i></button>
-									<button class="btn btn-rounded btn-social-icon btn-youtube"><i class="mdi mdi-youtube"></i></button>
-									<button class="btn btn-rounded btn-social-icon btn-google "><i class="mdi mdi-google-plus"></i></button>-->
+
+								<div class="d-flex mt-3">
+									<h6 class="font-weight-normal"> 대표이사 : 차정원</h6>
+								</div>
+								<div class="d-flex">
+									<h6 class="font-weight-normal">사업자등록번호 : 458-42-00460</h6>
 								</div>
 							</div>
-							<div class="col-lg-5">
-								<div class="d-flex">
-									<i class="mdi mdi-cellphone-android"></i>
-									<h6 class="font-weight-normal"> (055)-213-5472</h6>
-								</div>
-								<div class="d-flex">
-									<i class="mdi mdi-settings"></i>
-									<h6 class="font-weight-normal"> wisedomekr@gamil.com</h6>
-								</div>
-								<ul class="nav mt-3">
+
+							<div class="col-lg-4">
+								<ul class="nav">
 									<li class="nav-item">
-										<a class="nav-link pl-0" href="{{url_for('home.aboutus')}}">회사소개</a>
+										<a class="nav-link " href="{{url_for('home.aboutus')}}"> 회사소개</a>
 									</li>
-									<!--<li class="nav-item">
-										<a class="nav-link" href="#">이용약관</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#">개인정보처리방침</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#">라이센스</a>
-									</li>-->
 								</ul>
 							</div>
-							<!--
-							<div class="col-lg-3">
-								<h3 class="text-muted">Newsletter</h3>
-								<p>와이즈돔의 최신소식을 받으시려면, 이메일 구독하기를 눌러주세요 </p>
-								<div class="mt-3">
-									<div class="form-group d-flex">
-										<input type="email" class="form-control" placeholder="Email"> 
-										<button type="submit" id="subscribe-btn" class="btn btn-primary btn-md ">구독</button>
-									</div>
+							<div class="col-lg-4">
+								<div class="d-flex">
+									<i class="mdi mdi-cellphone-android"></i>
+									<h6 class="font-weight-normal">&nbsp;  (055)-213-5472</h6>
 								</div>
+								<div class="d-flex">
+									<i class="mdi mdi-email"></i>
+									<h6 class="font-weight-normal"> &nbsp; wisedomekr@gamil.com</h6>
+								</div>
+
+								<div class="d-flex">
+									<i class="mdi mdi-home-map-marker"></i>
+									<h6 class="font-weight-normal"> &nbsp;경상남도 창원시 의창구 창원대학로 20, 85호관 506-1호 (사림동, 창원대학교)</h6>
+								</div>
+
 							</div>
-							-->
+
 						</div>
 					</div>
 				</div>
+
 				<div class="container p-2">
 					<div class="row">
 						<div class="col-md-8 mx-auto text-center">
@@ -421,12 +410,7 @@
 					</div>
 				</div>
 			</footer><!--footer 여기까지-->
-
 		</div>
-		</div>
-
-
-
 
 		<!-- plugins:js 기본 필수로 들어가는 JS파일-->
 		<script src="/static/new_design/js/plugin/vendor.bundle.base.js"></script>
@@ -437,17 +421,17 @@
 		<!--nav footer js-->
 		<script src="/static/new_design/js/nav-footer.js"></script>
 
-	<script>
-		$(document).ready(function(){
-			setTimeout(function() {
-				$("#mini-notification").fadeOut('fast');
-			},5000);
+		<script>
+			$(document).ready(function(){
+				setTimeout(function() {
+					$("#mini-notification").fadeOut('fast');
+				},5000);
 
-			$("#flash_close").on('click', function(){
-				$("#mini-notification").fadeOut('fast');
+				$("#flash_close").on('click', function(){
+					$("#mini-notification").fadeOut('fast');
+				});
 			});
-		});
-	</script>
+		</script>
 
 	</body>
 </html>
