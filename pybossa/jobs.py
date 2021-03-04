@@ -63,13 +63,9 @@ def get_quarterly_date(now):
     """Get quarterly date."""
     if not isinstance(now, datetime):
         raise TypeError('Expected %s, got %s' % (type(datetime), type(now)))
-    print('now', now)
     execute_month = int(math.ceil(now.month / 3.0) * 3)
-    print('month', execute_month)
     execute_day = 31 if execute_month in [3, 12] else 30
-    print('day', execute_day)
     execute_date = datetime(now.year, execute_month, execute_day)
-    print(execute_date)
 
     return datetime.combine(execute_date, now.time())
 
