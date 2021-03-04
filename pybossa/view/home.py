@@ -16,8 +16,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with PYBOSSA.  If not, see <http://www.gnu.org/licenses/>.
 """Home view for PYBOSSA."""
-from flask import current_app, abort, url_for, request
+from flask import current_app, abort, url_for, request, flash
 from flask_login import current_user
+from flask_babel import gettext
 from pybossa.model.category import Category
 from flask import Blueprint
 from flask import render_template
@@ -85,23 +86,14 @@ def sort_project(projects, value):
         projects = sorted(projects, key=lambda project: project.end_date, reverse=True)
     return projects
 
-def trans_category(category):
-    if category == 'register':
-        return '회원가입'
-    elif category == 'point':
-        return '포인트'
-    elif category == 'project':
-        return '프로젝트'
-    elif category == 'exchange':
-        return '환급'
-
-@blueprint.route("qna", defaults={'category':'register'})
-@blueprint.route("qna/<category>")
-def qna(category):
-
-    cat_name = trans_category(category)
-    board_list = blog_repo.get_category_blogposts(cat_name)
-    response = dict(template="new_design/qna/qnaBoard_"+category+".html", board_list=board_list)
+@blueprint.route("qna", methods=['GET', 'POST'])
+def qna():
+    if request.method == "POST":
+        board_list = blog_repo.get_category_blogposts(request.form['category'])
+        res = dict(template="new_design/qna/ajax_qna_board.html", board_list=board_list)
+        return handle_content_type(res)
+    board_list = blog_repo.get_category_blogposts('register')
+    response = dict(template="new_design/qna/qna_board.html", csrf=generate_csrf(), board_list=board_list)
     return handle_content_type(response)
 
 @blueprint.route("qna/view/<int:blog_id>", methods=['GET', 'POST'])
@@ -115,32 +107,58 @@ def qna_view(blog_id):
                        blog_id=blog_id,
                        user_id=current_user.id
                        )
+        if current_user.admin:
+            blog = blog_repo.get(blog_id)
+            blog.answer = True
+            blog_repo.update(blog)
         blog_repo.save_comment(comment)
         return 'save'
     blog = blog_repo.get(blog_id)
-    user = user_repo.get(blog.user_id)
     blog_comment = blog_repo.get_comment(blog_id)
+    if blog.user_id != None:
+        user = user_repo.get(blog.user_id)
+    else:
+        user = None
     response = dict(template="new_design/qna/viewQnA.html", blog=blog, user=user, blog_comment=blog_comment, csrf=generate_csrf())
     return handle_content_type(response)
     
-@blueprint.route("qna/write/<category>", methods=['GET', 'POST'])
-def write(category):
-    cat_name = trans_category(category)
+@blueprint.route("qna/write", methods=['GET', 'POST'])
+def write():
     if request.method == "POST":
         if request.form.get('title') != '' and request.form.get('body') != '<p><br></p>' and request.form.get('subject') != '주제':
             blog = Blogpost(
                         title=request.form.get('title'),
                         body=request.form.get('body'),
                         subject=request.form.get('subject'),
-                        category=cat_name
+                        category=request.form.get('category')
                         )
             if not current_user.is_anonymous:
                 blog.user_id = current_user.id
             blog_repo.save(blog)
-            return 'success'
+            flash(gettext('게시글 작성 완료'), 'success')
+            return url_for('.qna_view', blog_id=blog.id)
         return 'fail'
-    response = dict(template="new_design/qna/editor_"+category+".html", csrf=generate_csrf())
+    response = dict(template="new_design/qna/editor.html", csrf=generate_csrf())
     return handle_content_type(response)
+
+@blueprint.route("qna/rewrite/<int:blog_id>", methods=['GET', 'POST'])
+def rewrite(blog_id):
+    blog = blog_repo.get(blog_id)
+    if current_user.is_anonymous or current_user.id != blog.user_id:
+        return abort(403)
+
+    if request.method == "POST":
+        if request.form.get('title') != '' and request.form.get('body') != '<p><br></p>' and request.form.get('subject') != '주제':
+            blog.title = request.form.get('title')
+            blog.body = request.form.get('body')
+            blog.subject = request.form.get('subject')
+            blog.category = request.form.get('category')
+            blog_repo.update(blog)
+            flash(gettext('게시글 수정 완료'), 'success')
+            return url_for('.qna_view', blog_id=blog.id)
+        return 'fail'
+    res = dict(template="new_design/qna/re_editor.html", csrf=generate_csrf(), blog=blog, body=blog.body)
+    return handle_content_type(res)
 
 @blueprint.route("faq")
 def faq():

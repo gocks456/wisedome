@@ -2433,7 +2433,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: "SCDream3";
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1em;
 }
 
@@ -2495,7 +2495,7 @@ select,
 optgroup,
 textarea {
   margin: 0;
-  font-family: inherit;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: inherit;
   line-height: inherit;
 }

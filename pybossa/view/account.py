@@ -767,7 +767,6 @@ def update_profile(name):
     password_form = ChangePasswordForm()
 
     title_msg = "Update your profile: %s" % user.fullname
-    """
     if request.method == 'POST':
         # Update user avatar
         succeed = False
@@ -799,9 +798,7 @@ def update_profile(name):
                         title=title_msg,
                         show_passwd_form=show_passwd_form)
             return handle_content_type(data)
-    """
     if request.method == 'POST':
-        """
         acc_conf_dis = current_app.config.get('ACCOUNT_CONFIRMATION_DISABLED')
         btn = request.form["btn"]
         if btn == 'name_change':
@@ -816,7 +813,6 @@ def update_profile(name):
                 #return user.name
             else:
                 return '닉네임 중복'
-        """
         if btn == 'pw_change':
             now_pw = request.form["now_pw"]
             new_pw = request.form["new_pw"]
@@ -827,9 +823,6 @@ def update_profile(name):
             else:
                 return "False"
             
-
-            
-
     data = dict(template='/account/update.html',
                 form=update_form,
                 upload_form=avatar_form,

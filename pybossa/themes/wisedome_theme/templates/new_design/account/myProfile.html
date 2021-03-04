@@ -43,50 +43,23 @@
 						<p>{{current_user.name}}</p><!--부제목-->
 
 						<!--별명변경하는 팝업-->
-						<!--
 						<div class="text-center">    
-							<button class="btn btn-gradient-success " type="edit" data-toggle="modal" data-target="#editProfile" ><i  class="mdi mdi-account-circle"></i> &nbsp; 수정하기</button>  
+							<button class="btn btn-gradient-success " onclick="location.href='{{url_for("account.update_profile", name=current_user.name)}}'"><i  class="mdi mdi-account-circle"></i> &nbsp; 프로필 수정</button>  
 						</div>
-						-->
 					</div>
 
-					<div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editPw" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="editPw">나의정보 수정하기</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span></button>
-								</div>
-								<div class="modal-body">
-									<form>
-										<div class="form-group">
-											<label for="nickname" class="col-form-label">닉네임</label>
-											<input type="text" class="form-control" id="nickname">
-										</div>
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-									<button type="submit" class="btn btn-success" id="name_change">저장하기</button>
-								</div>
-							</div>
-						</div>
-					</div><!--프로필수정 팝업 여기까지-->           
-
-
+							<!--
 					<div class="my-border-bottom py-4">
 						<p> 나의 관심 작업분야</p>
 						<div> 
-							<!--
 		   <label class="badge badge-outline-dark">이미지태깅</label>
 		   <label class="badge badge-outline-dark">문장요약</label>
 		   <label class="badge badge-outline-dark">사진찍기</label>
 		   <label class="badge badge-outline-dark">감성분석</label>
 		   <label class="badge badge-outline-dark">포인트 높은순</label>
-							-->
 						</div>
 					</div>
+							-->
 
 					<div class="py-4">
 						<p class="clearfix">
@@ -195,57 +168,6 @@
 				</div><!--col-xl 12-->
 			</div><!--card-->
 		</div><!--card body-->
-
-		{#
-		<!--포인트내역 -->
-		<div class="col-xl-12 grid-margin">
-			<div class="card bg-white">
-				<div class="card-body">
-					<h4 class="card-title "><i class="mdi mdi-star-circle"></i>  포인트 내역</h4>
-
-					<div class="row">
-						<div class="col-xl-9 d-inline-flex">
-
-							<div class="table-responsive">
-								<table class="table table-bordered table-xl-responsive">
-									<thead>
-										<tr class="table-active">
-											<th> # </th>
-											<th> 설명 </th>
-											<th> 적립액 </th>
-											<th> 환급액 </th>
-											<th> 날짜 </th>
-										</tr>
-									</thead>
-									<tbody>
-										{% for i in range(0, point_history|length) %}
-										<tr>
-											<td>{{i}}</td>
-											<td> {% if point_history[i].name != None %} {{ point_history[i].name }} {% else %} - {% endif %}</td>
-											<td> {% if point_history[i].point != None %}{{ point_history[i].point }} {% else %} - {% endif %}</td>
-											<td> {% if point_history[i].exchange != None %}{{ point_history[i].exchange }} {% else %} - {% endif %} </td>
-											<td> {% if point_history[i].time != None %}{{ point_history[i].time[0:10] }} {% else %} - {% endif %} </td>
-										</tr>
-										{% endfor %}
-									</tbody>
-								</table>
-							</div><!--table responsive-->
-						</div><!--col xl 9-->
-
-						<div class="col-xl-3 answers">  
-							<div class="my-4">
-								<h6 class="font-weight-normal"> <i class="mdi mdi-star-circle"></i>  환급가능한 보유포인트</h6>
-								<h2 class="py-4">{{point}}</h2>
-							</div>
-							<button type="button" class="btn btn-gradient-primary btn-block"><i class="mdi mdi-cash"></i>환급신청 </button>
-						</div><!--col xl 3-->
-					</div><!--row-->
-				</div><!--card body-->
-			</div><!--card-->
-		</div><!--col xl 12-->
-		#}
-
-
 
 	</div>
 </div><!--contents wrapper-->
