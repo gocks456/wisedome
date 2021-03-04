@@ -68,17 +68,19 @@ input[type="text"] {
 
 @media (max-width: 575px) {
   .head-wrapper {
-    height: 12.5rem;
+    height: 10rem;
   }
   .faq-search {
     margin-top: 5.5rem;
     padding: 0 7.5%;
   }
-  #find {
-    width: 5rem;
-  }
 
   .page-title {
     font-size: 2rem;
   }
+}
+
+.justify-content-center .btn-gradient-primary a {
+  color: #fff;
+  text-decoration: none;
 }

@@ -35,11 +35,15 @@
 							{% else %} {{ render_user_thumbnail(user, upload_method) }} {% endif %}" alt="">
 							<div class="details col-10">
 								<h4 class="msg-subject">{{blog.title}} </h4> <!---게시물 제목-->
-								<p class="writer-nickname"> {% if user == None %}비회원{% else %}{{user.name}}{% endif %} <!--글쓴이 별명--> <span class="level-badge">초급자</span> </p>
+								<p class="writer-nickname"> {% if user == None %}비회원{% elif user.admin %}관리자{% else %}{{user.name}}{% endif %} <!--글쓴이 별명--> <span class="level-badge">초급자</span> </p>
 								<p class="sender-email"><i class="mdi mdi-delettext-primary"></i>  {{blog.updated[0:16].replace('T', ' ')}}</p> <!---글작성 날짜 및 시간-->
 							</div>
 							<div class="col-2 status">
-								<label class="badge badge-info">{% if blog.answer %}답변완료{% else %}답변대기{% endif %}</label>
+								{% if blog.answer %}
+								<label class="badge badge-success">답변완료</label>
+								{% else %}
+								<label class="badge badge-info">답변대기</label>
+								{% endif %}
 							</div>
 						</div>
 
@@ -52,15 +56,19 @@
 
 								<div class="col-xl-6 col-sm-5 mb-3 mt-3">
 									<div class="d-flex justify-content-start">
-										<!--									<button type="button" class="btn btn-sm btn-outline-secondary"><i class="mdi mdi-share"></i>  공유하기</button> -->
+										<!--<button type="button" class="btn btn-sm btn-outline-secondary"><i class="mdi mdi-share"></i>  공유하기</button> -->
 									</div>
 								</div>
 
-								<div class="col-xl-4 offset-xl-2 col-sm-7 mb-3 mt-3">
+								<div class="col-xl-4 offset-xl-2 col-sm-5 mb-3 mt-3">
+									{% if current_user.id == user.id or current_user.admin %}
 									<div class="btn-group d-flex justify-content-end">
-										<!--<button type="button" class="btn btn-sm btn-outline-primary" id="heartIcon"><i class="mdi mdi-heart-outline" ></i> 좋아요</button>-->
-										<!--<button type="button" class="btn btn-sm btn-outline-primary" id="addComment"><i class="mdi mdi-comment-processing-outline"></i>  댓글달기</button>-->
+										<a href="{{url_for('home.rewrite', blog_id=blog.id)}}">
+										<button type="button" class="btn btn-sm btn-info" id="edit" style="margin-right:1rem;"><i class="mdi mdi-heart-outline" ></i> 수정</button>
+										</a>
+										<button type="button" class="btn btn-sm btn-success" id="delete"><i class="mdi mdi-comment-processing-outline"></i>  삭제</button>
 									</div>
+									{% endif %}
 								</div> 
 							</div>
 						</div> 
@@ -75,7 +83,7 @@
 									<div class="details">
 										<i class="mdi mdi-subdirectory-arrow-right "></i>
 										<img class="img-sm rounded-circle mr-3" src="{{ render_user_thumbnail(row, upload_method) }}"><!--댓글쓴사람 프로필이미지-->
-										<p class="writer-nickname">{{ row.name }}</p><!---댓글쓴사람 닉네임-->
+										<p class="writer-nickname">{% if row.admin %}관리자{% else %}{{ row.name }}{% endif %}</p><!---댓글쓴사람 닉네임-->
 										<p class="sender-email"><i class="mdi mdi-delettext-primary"></i> {{ row.updated[0:16].replace('T', ' ') }}</p><!--댓글 쓴 날짜-->
 										<p id="displayComment" class="mr-5">{{ row.body }}</p> <!--댓글내용 입력하면 자동으로 올라옴-->
 									</div>
@@ -128,10 +136,6 @@ $("#saveComment").click(function(){
 		if (temp.match(pattern[i]) == pattern[i]) {
 			alert('보안 위반 사항이 포함되어있습니다.');
 			location.reload();
-			return;
-		}
-		else {
-			console.log(temp.match(pattern[i]));
 			return;
 		}
 	}

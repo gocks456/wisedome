@@ -1,0 +1,53 @@
+{% extends "new_design/workspace/workspace_base.html" %}
+{% set active_wisedome = "qna" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/new_design/css/qnaBoard.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="content-wrapper">
+	<div class="page-header">
+		<h3 class="page-title"> 주제별 질문게시판 </h3>
+	</div>
+
+	<div class="row">
+
+		<div class="col-12">
+			<div class="card ">
+				<div class="card-body bg-white">
+
+					<div class="row">
+						<div class="col-sm-12 mx-auto">
+
+
+							<!--질문주제-->
+							<div class="tab-content tab-content-custom-pill " >
+								<ul class="nav nav-pills nav-pills-custom justify-content-center pb-3">
+									<li class="nav-item" style="cursor:pointer;">
+										<a class="nav-link category" id="register"> <i class="mdi mdi-wallet-membership"></i><br>회원가입 </a>  
+									</li>
+									<li class="nav-item" style="cursor:pointer;">
+										<a class="nav-link category" id="point"> <i class="mdi mdi-ticket"></i><br> 포인트 </a>
+									</li>
+									<li class="nav-item" style="cursor:pointer;">
+										<a class="nav-link category" id="project"><i class="mdi mdi-television-guide"></i><br> 프로젝트 </a>
+									</li>
+									<li class="nav-item" style="cursor:pointer;">
+										<a class="nav-link category" id="exchange"> <i class="mdi mdi-wallet-giftcard"></i><br> 환급</a>
+									</li>
+								</ul>
+
+								{% block qna %}{% endblock %}
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- content-wrapper ends -->
+	</div>
+</div>
+
+{% endblock %}

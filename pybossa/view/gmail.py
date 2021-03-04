@@ -62,8 +62,9 @@ def oauth_authorized():  # pragma: no cover
 	print(resp)
 
 	if resp is None or request.args.get('error'):
-		flash('You denied the request to sign in.', 'error')
-		flash('Reason: ' + request.args['error'], 'error')
+		#flash('You denied the request to sign in.', 'error')
+		flash('요청 거부')
+		#flash('Reason: ' + request.args['error'], 'error')
 		if request.args.get('error'):
 			current_app.logger.error(resp)
 			return redirect(url_for_app_type('account.signin',
@@ -72,7 +73,8 @@ def oauth_authorized():  # pragma: no cover
 					url_for_app_type('home.home', _hash_last_flash=True))
 		return redirect(next_url)
 	if isinstance(resp, OAuthException):
-		flash('Access denied: %s' % resp.message)
+		#flash('Access denied: %s' % resp.message)
+		flash('접근 오류')
 		current_app.logger.error(resp)
 		next_url = (request.args.get('next') or
 					url_for_app_type('home.home', _hash_last_flash=True))

@@ -1,361 +1,361 @@
 <!DOCTYPE html>
 <html lang="kor">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>FAQ</title>
-		<!-- plugins:css -->
-		<link rel="stylesheet" href="../static/assets/vendors/mdi/css/materialdesignicons.min.css">
-		<link rel="stylesheet" href="../static/css/function/vendor.bundle.base.css">
-		<!--기본 css--->
-		<link rel="stylesheet" href="../static/css/basic/dashboard-basic.css">
-		<link rel="stylesheet" href="../static/css/basic/nav-footer.css">
-		<!---현재 페이지에만 들어가는 css-->
-		<link rel="stylesheet" href="../static/css/faq.css"/>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FAQ</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../static/css/function/vendor.bundle.base.css">
+    <!--기본 css--->
+    <link rel="stylesheet" href="../static/css/basic/dashboard-basic.css">
+    <link rel="stylesheet" href="../static/css/basic/nav-footer.css">
+    <!---현재 페이지에만 들어가는 css-->
+    <link rel="stylesheet" href="../static/css/faq.css"/>
 
-	</head>
+  </head>
 
-	<body>
-		<div class="container-scroller">
+<body>
+<div class="container-scroller">
 
-			<!-- Header -->
-			<section id="header" class="head-wrapper">
-				<!--여기서부터 nav-->
-				<div class="row">
-					<div class="col-lg-12">
-						<nav class="navbar fixed-top navbar-expand-lg">
-							<a class="navbar-brand" href="./index.html"><img src="../static/images/wisedome-logo.png" alt="logo" ></a>
-							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-								<span class="mdi mdi-menu"></span></button>
-							<div class="collapse navbar-collapse justify-content-lg-end justify-content-md-start" id="navbarSupportedContent">
-								<ul class="navbar-nav ">
-									<li class="nav-item active"><a class="nav-link" href="../template/index2.html">HOME</a></li>
-									<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SERVICE </a>
-										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-											<a class="dropdown-item " href="#">회사소개</a>
-											<a class="dropdown-item" href="#">이용방법</a>
-										</div>
-									</li>
-									<li class="nav-item"><a class="nav-link" href="./AllProject.html">PROJECT</a></li>
-									<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CONTACT </a>
-										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-											<a class="dropdown-item" href="#">공지사항</a>
-											<a class="dropdown-item" href="#">이벤트</a>
-											<a class="dropdown-item" href="#">파트너협약</a>
-											<a class="dropdown-item" href="./faq.html">자주하는질문</a>
-											<a class="dropdown-item" href="#">문의하기</a>
-										</div>
-									</li>
-									<li class="nav-item"><a  class="nav-link" href="../template/login.html">LOGIN </a></li>
-								</ul>
-							</div>
-						</nav>
-					</div><!--col lg 12-->
-				</div><!--row-->
-				<!--여기까지가 nav-->
+<!-- Header -->
+<section id="header" class="head-wrapper">
+   <!--여기서부터 nav-->
+   <div class="row">
+    <div class="col-lg-12">
+      <nav class="navbar fixed-top navbar-expand-lg">
+        <a class="navbar-brand" href="./index.html"><img src="../static/images/wisedome-logo.png" alt="logo" ></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="mdi mdi-menu"></span></button>
+        <div class="collapse navbar-collapse justify-content-lg-end justify-content-md-start" id="navbarSupportedContent">
+          <ul class="navbar-nav ">
+            <li class="nav-item active"><a class="nav-link" href="#">회사소개</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">프로젝트</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">자주하는질문</a></li>
+            <li class="nav-item"><a  class="nav-link" href="../template/login.html">로그인</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div><!--col lg 12-->
+  </div><!--row-->
+  <!--여기까지가 nav-->
 
-				<div class="row">
-					<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-						<form action="#" class="faq-search">
-							<h1 class="page-title"> FAQ</h1>
-							<div class="form-group d-flex search-field pb-4 ">
-								<div class="input-group-prepend bg-transparent">
-									<i class="input-group-text border-0 mdi mdi-magnify"></i>
-								</div>
-								<input type="text" class="form-control" placeholder="검색어를 입력하세요" > 
-								<button type="submit" id="find" class="btn btn-gradient-primary">찾기</button>
-							</div>
-						</form>
-					</div>
-				</div>
+  <div class="row">
+    <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+          <form action="#" class="faq-search">
+            <h1 class="page-title"> FAQ</h1>
+            <!--
+            <div class="form-group d-flex search-field pb-4 ">
+              <div class="input-group-prepend bg-transparent">
+                <i class="input-group-text border-0 mdi mdi-magnify"></i>
+              </div>
+              <input type="text" class="form-control" placeholder="검색어를 입력하세요" > 
+              <button type="submit" id="find" class="btn btn-gradient-primary">찾기</button>
+            </div>
+            -->
+          </form>
+    </div>
+  </div>
 
-			</section>
-		</div>
+</section>
+</div>
 
 
-		<!--메인-->
-		<div class="main-panel">
-			<div class="content-wrapper">
+<!--메인-->
+<div class="main-panel">
+  <div class="content-wrapper">
 
-				<div class="row">
-					<div class="col-md-6">
-						<div class="row">
-							<div class="col-12 grid-margin">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-12 grid-margin">
 
-								<div class="card">
-									<div class="faq-block card-body">
-										<div class="container-fluid py-2 ">
-											<h3 class="mb-0"><i class="mdi mdi-account-box"></i>  회원가입</h3>
-										</div>
-										<div id="accordion-1" class="accordion ">
-											<div class="card">
-												<div class="card-header " id="headingOne">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> 이메일(아이디)을 변경하고 싶어요</a>
-													</h5>
-												</div>
-												<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion-1">
-													<div class="card-body"> 
-														[로그인 > 마이페이지 > 개인정보 수정]의 [회원정보 수정] 탭에서 이메일(아이디) 변경이 가능합니다. 와이즈돔은 회원님의 이메일을 아이디로 사용하고 있기 때문에 이메일 변경을 해 주시면 됩니다.[출처:크라우드웍스] 
-													</div>
-												</div>
-											</div>
-											<div class="card">
-												<div class="card-header" id="headingTwo">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> 회원등급을 올릴 수 있는 방법은 무엇인가요? </a>
-													</h5>
-												</div>
-												<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-1">
-													<div class="card-body"> 등급은 누적 포인트로 자동 반영됩니다. (작업중 반영이 되지 않을 시, 로그아웃 후 재로그인 부탁드립니다) 자세한 회원등급 조건은 [혜택 및 이용방법]에서 확인하실 수 있습니다. [출처:크라우드웍스] 
-													</div>
-												</div>
-											</div>
-											<div class="card">
-												<div class="card-header" id="headingThree">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> 아이디 혹은 비밀번호를 잊어버렸어요</a>
-													</h5>
-												</div>
-												<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion-1">
-													<div class="card-body"> 
-														로그인 버튼 위에 아이디/비밀번호 찾기를 이용해주세요.
-														회원정보(이름/연락처)로 아이디 찾기: 아이디 일부가 보여집니다. 
-														본인인증으로 아이디 찾기: 전체 아이디가 보여집니다. 
-														회원정보로 비밀번호 찾기: 입력하신 이메일(아이디)로 임시 비밀번호가 발송 됩니다.
-														본인인증으로 비밀번호 찾기: 본인인증 후 비밀번호를 바로 재설정 하실 수 있습니다.(단, 가입시 본인인증을 한 회원만 가능)  [출처:크라우드웍스] 
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-12">
-								<div class="card">
-									<div class="faq-block card-body">
-										<div class="container-fluid py-2">
-											<h3 class="mb-0"><i class="mdi mdi-chip"></i>  포인트</h3>
-										</div>
-										<div id="accordion-4" class="accordion">
-											<div class="card">
-												<div class="card-header" id="headingOne-4">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseOne-4" aria-expanded="true" aria-controls="collapseOne-4"> 수익금 입금 신청기준은 무엇인가요?</a>
-													</h5>
-												</div>
-												<div id="collapseOne-4" class="collapse show" aria-labelledby="headingOne-4" data-parent="#accordion-4">
-													<div class="card-body"> 보유 포인트가 5,000 P 이상이시면 1,000P단위로 등록하신 계좌로 입금 신청을 하실 수 있습니다.
-													</div>
-												</div>
-											</div>
-											<div class="card">
-												<div class="card-header" id="headingTwo-4">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseTwo-4" aria-expanded="false" aria-controls="collapseTwo-4"> 수익금은 어떤 계좌로 받게 되나요? </a>
-													</h5>
-												</div>
-												<div id="collapseTwo-4" class="collapse" aria-labelledby="headingTwo-4" data-parent="#accordion-4">
-													<div class="card-body">  
-														특정 은행에 제한없이 원하시는 계좌로 수익금을 받으실 수 있습니다.
-														단, 본인 인증한 이름과 동일한 예금주의 계좌만 등록이 가능합니다.
-													</div>
-												</div>
-											</div>
-											<div class="card">
-												<div class="card-header" id="headingThree-4">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseThree-4" aria-expanded="false" aria-controls="collapseThree-4">입금 신청을 했는데 아직도 입금이 되지 않았습니다</a>
-													</h5>
-												</div>
-												<div id="collapseThree-4" class="collapse" aria-labelledby="headingThree-4" data-parent="#accordion-4">
-													<div class="card-body"> 수익금 신청을 하시면 수익금 신청내역에 예상 입금일이 표시됩니다.
-														만약 예상 입금일이 지나도 입금이 되지 않으셨다면, 아래 방법들로 문의해주시면 빠르게 처리해드리겠습니다.
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> <!-- sub col -->
+            <div class="card">
+              <div class="faq-block card-body">
+                <div class="container-fluid py-2 ">
+                  <h3 class="mb-0"><i class="mdi mdi-account-box"></i>  회원가입</h3>
+                </div>
+                <div id="accordion-1" class="accordion ">
+                  <div class="card">
+                    <div class="card-header " id="headingOne">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> 이메일(아이디)을 변경하고 싶어요</a>
+                      </h5>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion-1">
+                      <div class="card-body"> 
+                        [로그인 > 마이페이지 > 개인정보 수정]의 [회원정보 수정] 탭에서 이메일(아이디) 변경이 가능합니다. 와이즈돔은 회원님의 이메일을 아이디로 사용하고 있기 때문에 이메일 변경을 해 주시면 됩니다.[출처:크라우드웍스] 
+                       </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> 회원등급을 올릴 수 있는 방법은 무엇인가요? </a>
+                      </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-1">
+                      <div class="card-body"> 등급은 누적 포인트로 자동 반영됩니다. (작업중 반영이 되지 않을 시, 로그아웃 후 재로그인 부탁드립니다) 자세한 회원등급 조건은 [혜택 및 이용방법]에서 확인하실 수 있습니다. [출처:크라우드웍스] 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingThree">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> 아이디 혹은 비밀번호를 잊어버렸어요</a>
+                      </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion-1">
+                      <div class="card-body"> 
+                        로그인 버튼 위에 아이디/비밀번호 찾기를 이용해주세요.
+                        회원정보(이름/연락처)로 아이디 찾기: 아이디 일부가 보여집니다. 
+                        본인인증으로 아이디 찾기: 전체 아이디가 보여집니다. 
+                        회원정보로 비밀번호 찾기: 입력하신 이메일(아이디)로 임시 비밀번호가 발송 됩니다.
+                        본인인증으로 비밀번호 찾기: 본인인증 후 비밀번호를 바로 재설정 하실 수 있습니다.(단, 가입시 본인인증을 한 회원만 가능)  [출처:크라우드웍스] 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card">
+              <div class="faq-block card-body">
+                <div class="container-fluid py-2">
+                  <h3 class="mb-0"><i class="mdi mdi-chip"></i>  포인트</h3>
+                </div>
+                <div id="accordion-4" class="accordion">
+                  <div class="card">
+                    <div class="card-header" id="headingOne-4">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseOne-4" aria-expanded="true" aria-controls="collapseOne-4"> 수익금 입금 신청기준은 무엇인가요?</a>
+                      </h5>
+                    </div>
+                    <div id="collapseOne-4" class="collapse show" aria-labelledby="headingOne-4" data-parent="#accordion-4">
+                      <div class="card-body"> 보유 포인트가 5,000 P 이상이시면 1,000P단위로 등록하신 계좌로 입금 신청을 하실 수 있습니다.
+                        </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTwo-4">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseTwo-4" aria-expanded="false" aria-controls="collapseTwo-4"> 수익금은 어떤 계좌로 받게 되나요? </a>
+                      </h5>
+                    </div>
+                    <div id="collapseTwo-4" class="collapse" aria-labelledby="headingTwo-4" data-parent="#accordion-4">
+                      <div class="card-body">  
+                        특정 은행에 제한없이 원하시는 계좌로 수익금을 받으실 수 있습니다.
+                        단, 본인 인증한 이름과 동일한 예금주의 계좌만 등록이 가능합니다.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingThree-4">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseThree-4" aria-expanded="false" aria-controls="collapseThree-4">입금 신청을 했는데 아직도 입금이 되지 않았습니다</a>
+                      </h5>
+                    </div>
+                    <div id="collapseThree-4" class="collapse" aria-labelledby="headingThree-4" data-parent="#accordion-4">
+                      <div class="card-body"> 수익금 신청을 하시면 수익금 신청내역에 예상 입금일이 표시됩니다.
+                        만약 예상 입금일이 지나도 입금이 되지 않으셨다면, 아래 방법들로 문의해주시면 빠르게 처리해드리겠습니다.
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- sub col -->
 
-					<div class="col-md-6">
-						<div class="row">
-							<div class="col-12 grid-margin">
-								<div class="card card3">
-									<div class="faq-block card-body">
-										<div class="container-fluid py-2">
-											<h3 class="mb-0"><i class="mdi mdi-certificate"></i>  작업하기</h3>
-										</div>
-										<div id="accordion-3" class="accordion">
-											<div class="card">
-												<div class="card-header" id="headingOne-3">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseOne-3" aria-expanded="true" aria-controls="collapseOne-3"> 반려된 작업이란 무엇인가요?</a>
-													</h5>
-												</div>
-												<div id="collapseOne-3" class="collapse show" aria-labelledby="headingOne-3" data-parent="#accordion-3">
-													<div class="card-body"> 
-														작업하신 내용이 가이드와 다를 경우 반려 됩니다.
-														반려된 작업에는 검수자가 쓴 반려 사유가 기입되어 있습니다. 사유를 확인하신 후, 그에 맞게 재작업 해주시기 바랍니다
-													</div>
-												</div>
-											</div>
-											<div class="card">
-												<div class="card-header" id="headingTwo-3">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseTwo-3" aria-expanded="false" aria-controls="collapseTwo-3"> 진행가능한 작업이 없어요! </a>
-													</h5>
-												</div>
-												<div id="collapseTwo-3" class="collapse" aria-labelledby="headingTwo-3" data-parent="#accordion-3">
-													<div class="card-body"> 
-														프로젝트가 상시 존재하는 것은 아니며, 프로젝트 오픈 시 빠르게 마감되는 경우가 증가하고 있습니다. 최대한 많은 작업자가 프로젝트에 참여할 수 있도록 노력하고 있습니다. 
-													</div>
-												</div>
-											</div>
-											<div class="card">
-												<div class="card-header" id="headingThree-3">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseThree-3" aria-expanded="false" aria-controls="collapseThree-3"> 이용가이드는 무엇이며 꼭 봐야하나요? </a>
-													</h5>
-												</div>
-												<div id="collapseThree-3" class="collapse" aria-labelledby="headingThree-3" data-parent="#accordion-3">
-													<div class="card-body"> 
-														이용가이드는 프로젝트 작업에 필요한 내용을 알려주는 페이지 입니다.
-														이용가이드에서는 작업 방법과 작업 툴 사용법 뿐만 아니라 좋은 작업과 나쁜 작업의 예시 및 설명 등을 알려 드립니다. 
-														이용가이드를 확인 하여 훨씬 빠르고 정확한 작업을 시작하세요.
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-12">
-								<div class="card">
-									<div class="faq-block card-body">
-										<div class="container-fluid py-2">
-											<h3 class="mb-0"><i class="mdi mdi-account-key"></i>   본인인증</h3>
-										</div>
-										<div id="accordion-2" class="accordion">
-											<div class="card">
-												<div class="card-header" id="headingOne-2">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseOne-2" aria-expanded="true" aria-controls="collapseOne-2"> 본인인증을 해야만 서비스 이용이 가능한가요? </a>
-													</h5>
-												</div>
-												<div id="collapseOne-2" class="collapse show" aria-labelledby="headingOne-2" data-parent="#accordion-2">
-													<div class="card-body"> 네, 본인인증을 하셔야 합니다. 본인인증을 하지 않을 경우 서비스를 이용하실 수 없습니다 </div>
-												</div>
-											</div>
-											<div class="card">
-												<div class="card-header" id="headingTwo-2">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseTwo-2" aria-expanded="false" aria-controls="collapseTwo-2"> 본인인증 방법에는 어떤것이 있나요?</a>
-													</h5>
-												</div>
-												<div id="collapseTwo-2" class="collapse" aria-labelledby="headingTwo-2" data-parent="#accordion-2">
-													<div class="card-body"> 
-														현재는 이메일로 본인인증이 가능합니다. 추후 휴대폰을 통한 본인인증 서비스도 개설할 예정입니다.
-													</div>
-												</div>
-											</div>
-											<div class="card">
-												<div class="card-header" id="headingThree-2">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" data-target="#collapseThree-2" aria-expanded="false" aria-controls="collapseThree-2"> 본인인증 이메일을 받지 못했습니다 </a>
-													</h5>
-												</div>
-												<div id="collapseThree-2" class="collapse" aria-labelledby="headingThree-2" data-parent="#accordion-2">
-													<div class="card-body"> 
-														이메일을 받지 못하셨을 경우, 스팸폴더나 통합 이메일 사서함을 반드시 확인하여 주시기 바랍니다.
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div><!-- parent row -->
-			</div><!-- content-wrapper ends -->
-		</div><!-- main-panel ends -->
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-12 grid-margin">
+            <div class="card card3">
+              <div class="faq-block card-body">
+                <div class="container-fluid py-2">
+                  <h3 class="mb-0"><i class="mdi mdi-certificate"></i>  작업하기</h3>
+                </div>
+                <div id="accordion-3" class="accordion">
+                  <div class="card">
+                    <div class="card-header" id="headingOne-3">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseOne-3" aria-expanded="true" aria-controls="collapseOne-3"> 반려된 작업이란 무엇인가요?</a>
+                      </h5>
+                    </div>
+                    <div id="collapseOne-3" class="collapse show" aria-labelledby="headingOne-3" data-parent="#accordion-3">
+                      <div class="card-body"> 
+                        작업하신 내용이 가이드와 다를 경우 반려 됩니다.
+                        반려된 작업에는 검수자가 쓴 반려 사유가 기입되어 있습니다. 사유를 확인하신 후, 그에 맞게 재작업 해주시기 바랍니다
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTwo-3">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseTwo-3" aria-expanded="false" aria-controls="collapseTwo-3"> 진행가능한 작업이 없어요! </a>
+                      </h5>
+                    </div>
+                    <div id="collapseTwo-3" class="collapse" aria-labelledby="headingTwo-3" data-parent="#accordion-3">
+                      <div class="card-body"> 
+                        프로젝트가 상시 존재하는 것은 아니며, 프로젝트 오픈 시 빠르게 마감되는 경우가 증가하고 있습니다. 최대한 많은 작업자가 프로젝트에 참여할 수 있도록 노력하고 있습니다. 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingThree-3">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseThree-3" aria-expanded="false" aria-controls="collapseThree-3"> 이용가이드는 무엇이며 꼭 봐야하나요? </a>
+                      </h5>
+                    </div>
+                    <div id="collapseThree-3" class="collapse" aria-labelledby="headingThree-3" data-parent="#accordion-3">
+                      <div class="card-body"> 
+                        이용가이드는 프로젝트 작업에 필요한 내용을 알려주는 페이지 입니다.
+                        이용가이드에서는 작업 방법과 작업 툴 사용법 뿐만 아니라 좋은 작업과 나쁜 작업의 예시 및 설명 등을 알려 드립니다. 
+                        이용가이드를 확인 하여 훨씬 빠르고 정확한 작업을 시작하세요.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card">
+              <div class="faq-block card-body">
+                <div class="container-fluid py-2">
+                  <h3 class="mb-0"><i class="mdi mdi-account-key"></i>   본인인증</h3>
+                </div>
+                <div id="accordion-2" class="accordion">
+                  <div class="card">
+                    <div class="card-header" id="headingOne-2">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseOne-2" aria-expanded="true" aria-controls="collapseOne-2"> 본인인증을 해야만 서비스 이용이 가능한가요? </a>
+                      </h5>
+                    </div>
+                    <div id="collapseOne-2" class="collapse show" aria-labelledby="headingOne-2" data-parent="#accordion-2">
+                      <div class="card-body"> 네, 본인인증을 하셔야 합니다. 본인인증을 하지 않을 경우 서비스를 이용하실 수 없습니다 </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTwo-2">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseTwo-2" aria-expanded="false" aria-controls="collapseTwo-2"> 본인인증 방법에는 어떤것이 있나요?</a>
+                      </h5>
+                    </div>
+                    <div id="collapseTwo-2" class="collapse" aria-labelledby="headingTwo-2" data-parent="#accordion-2">
+                      <div class="card-body"> 
+                        현재는 이메일로 본인인증이 가능합니다. 추후 휴대폰을 통한 본인인증 서비스도 개설할 예정입니다.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingThree-2">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" data-target="#collapseThree-2" aria-expanded="false" aria-controls="collapseThree-2"> 본인인증 이메일을 받지 못했습니다 </a>
+                      </h5>
+                    </div>
+                    <div id="collapseThree-2" class="collapse" aria-labelledby="headingThree-2" data-parent="#accordion-2">
+                      <div class="card-body"> 
+                        이메일을 받지 못하셨을 경우, 스팸폴더나 통합 이메일 사서함을 반드시 확인하여 주시기 바랍니다.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- parent row -->
 
+
+<!---질문하러가기 버튼 추가 03.03-->
+        <div class="row pt-5">
+          <div class="col-md-10 mx-auto">
+              <h6 class="text-center">  원하는 해답을 찾지 못하셨나요? 그럼 직접 질문해주세요</h6>     
+          <div class="d-flex justify-content-center mt-3">
+			  <a href="./workspace/qnaBoard1.html">
+             <button class="btn btn-gradient-primary"> 질문하기</button>
+			  </a> 
+          </div>
+        </div>  
+      </div>
 
 
 
 
 
-		<footer><!---footer-->
-			<div class="footer-border-bottom">
-				<div class="container ">
-					<div class="row">
-						<div class="col-lg-4">
-							<img class="img-fluid" src="../static/images/wisedome-logo.png" alt="logo">
-							<div class="d-flex sns-group">
-								<button class="btn btn-rounded btn-social-icon btn-facebook"><i class="mdi mdi-facebook"></i></button>
-								<button class="btn btn-rounded btn-social-icon btn-twitter"><i class="mdi mdi-twitter"></i></button>
-								<button class="btn btn-rounded btn-social-icon btn-youtube"><i class="mdi mdi-youtube"></i></button>
-								<button class="btn btn-rounded btn-social-icon btn-google "><i class="mdi mdi-google-plus"></i></button>
-							</div>
-						</div>
-						<div class="col-lg-5">
-							<div class="d-flex">
-								<i class="mdi mdi-cellphone-android"></i>
-								<h6 class="font-weight-normal">(055)-1234-5678</h6>
-							</div>
-							<div class="d-flex">
-								<i class="mdi mdi-settings"></i>
-								<h6 class="font-weight-normal">support@changwon.ac.kr</h6>
-							</div>
-							<ul class="nav mt-3">
-								<li class="nav-item">
-									<a class="nav-link pl-0" href="#">회사소개</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">이용약관</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">개인정보처리방침</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">라이센스</a>
-								</li>
-							</ul>
-						</div>
-						<div class="col-lg-3 email-subscribe">
-							<h3 class="text-muted">Newsletter</h3>
-							<p>와이즈돔의 최신소식을 받으시려면, 이메일 구독하기를 눌러주세요 </p>
-							<div class="mt-3">
-								<div class="form-group d-flex">
-									<input type="email" class="form-control email-input" placeholder="Email"> 
-									<button type="submit" id="subscribe-btn" class="btn btn-primary btn-md ">구독</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="container p-2">
-				<div class="row">
-					<div class="col-md-8 mx-auto text-center">
-						<small class="mt-3">Copyright © 2021 <a href="#main-img">Wisedome</a> All rights reserved.</small>
-					</div>      
-				</div>
-			</div>
-		</footer><!--footer 여기까지-->
+
+  </div><!-- content-wrapper ends -->
+</div><!-- main-panel ends -->
 
 
 
 
 
-		<!-- plugins:js 기본 필수로 들어가는 JS파일-->
-		<script src="../static/js/plugin/vendor.bundle.base.js"></script>
 
-		<!--nav footer js-->
-		<script src="../static/js/nav-footer.js"></script>
-	</body>
+<footer><!--footer-->
+  <div class="footer-border-bottom pb-3">
+    <div class="container ">
+      <div class="row ">
+        <div class="col-lg-4">
+          <img class="img-fluid" src="../static/images/wisedome-logo.png" alt="logo">
+
+          <div class="d-flex mt-3">
+            <h6 class="font-weight-normal"> 대표이사 : 차정원</h6>
+          </div>
+          <div class="d-flex">
+            <h6 class="font-weight-normal">사업자등록번호 : 458-42-00460</h6>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link " href="./aboutus.html"> 회사소개</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <div class="d-flex">
+            <i class="mdi mdi-cellphone-android"></i>
+            <h6 class="font-weight-normal">&nbsp;  (055)-213-5472</h6>
+          </div>
+          <div class="d-flex">
+            <i class="mdi mdi-email"></i>
+            <h6 class="font-weight-normal"> &nbsp; wisedomekr@gmail.com</h6>
+          </div>
+
+          <div class="d-flex">
+            <i class="mdi mdi-home-map-marker"></i>
+            <h6 class="font-weight-normal"> &nbsp;경상남도 창원시 의창구 창원대학로 20, 85호관 506-1호 (사림동, 창원대학교)</h6>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container p-2">
+    <div class="row">
+      <div class="col-md-8 mx-auto text-center">
+        <small class="mt-3">Copyright © 2021 Wisedome. All rights reserved.</small>
+      </div>      
+    </div>
+  </div>
+</footer><!--footer 여기까지-->
+
+
+
+
+
+<!-- plugins:js 기본 필수로 들어가는 JS파일-->
+<script src="../static/js/plugin/vendor.bundle.base.js"></script>
+
+<!--nav footer js-->
+<script src="../static/js/nav-footer.js"></script>
+</body>
 </html>

@@ -33,7 +33,7 @@ class BlogRepository(Repository):
     def get_comment(self, blog_id):
         from pybossa.model.blog_comment import BlogComment
         from pybossa.model.user import User
-        return self.db.session.query(BlogComment.updated, BlogComment.body, User.name, User.info).filter(and_(BlogComment.blog_id==blog_id, BlogComment.user_id==User.id)).order_by(BlogComment.updated).all()
+        return self.db.session.query(BlogComment.updated, BlogComment.body, User.name, User.admin, User.info).filter(and_(BlogComment.blog_id==blog_id, BlogComment.user_id==User.id)).order_by(BlogComment.updated).all()
 
     def get_category_blogposts(self, category):
         return self.db.session.query(Blogpost.id, Blogpost.updated, Blogpost.subject, Blogpost.title, Blogpost.answer).filter_by(
