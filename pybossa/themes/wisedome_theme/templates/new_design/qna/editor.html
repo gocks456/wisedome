@@ -1,0 +1,146 @@
+{% if current_user.is_anonymous %}
+{% extends "new_design/qna/no_login_qna_base.html" %}
+{% else %}
+{% extends "new_design/qna/qna_base.html" %}
+{% endif %}
+
+{% block qna %}
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+<div class="show active">
+	<div class="row grid-margin">
+		<div class="col-lg-12">
+			<div class="card bg-white">
+				<div class="card-body">
+
+					<form id="myQuestion">
+						<div class="card-title">질문제목</div>
+						<div class="form-group row">
+							<div class="col-sm-3">
+								<select class="form-control" id="subtitle">
+									<option selected>주제</option>
+									<option class="register" value="가입" style="display:none;">가입</option>
+									<option class="register" value="탈퇴" style="display:none;">탈퇴</option>
+									<option class="register" value="본인인증" style="display:none;">본인인증</option>
+									<option class="register" value="기타" style="display:none;">기타</option>	
+
+									<option class="point" value="적립" style="display:none;">적립</option>
+									<option class="point" value="취소" style="display:none;">취소</option>
+									<option class="point" value="기타" style="display:none;">기타</option>
+
+									<option class="project" value="진행상황" style="display:none;">진행상황</option>
+									<option class="project" value="반려" style="display:none;">반려</option>
+									<option class="project" value="검수" style="display:none;">검수</option>
+									<option class="project" value="기타" style="display:none;">기타</option>
+
+									<option class="exchange" value="환급일정" style="display:none;">환급일정</option>
+									<option class="exchange" value="환급액" style="display:none;">환급액</option>
+									<option class="exchange" value="환급지연" style="display:none;">환급지연</option>
+									<option class="exchange" value="기타" style="display:none;">기타</option>
+								</select>
+							</div>
+							<div class="col-sm-9 ">
+								<input type="text" class="form-control input-title" id="myTitle" placeholder="제목을 입력하세요">
+							</div>
+						</div>
+					</form>
+					<div class="card-title">질문내용</div>
+					<div id="summernote">
+						<div class="note-editor"></div>
+					</div><!--editor template-->
+				</div><!--card body-->
+
+				<div class="btn-group editor-btn-group">
+					<a class="btn btn-gradient-secondary" id="myCancel" href="{{ url_for('home.qna') }}">취소하기</a> 
+					<a class="btn btn-gradient-primary" >글올리기</a>   
+				</div> 
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script src="/static/new_design/js/plugin/vendor.bundle.base.js"></script>
+<!-- plugins:js this page only-->
+<script src="/static/new_design/js/plugin/summernote-bs4.min.js"></script>
+<script src="/static/new_design/js/plugin/summernote-ko-KR.js"></script>
+<!--text editor-->
+<script src="/static/new_design/js/editor.js"></script>
+
+<script>
+	$(".category").on("click", function() {
+		if($(this).hasClass('active'))
+			return;
+		else {
+			$('#subtitle').val('주제');
+			$("." + $(".category.active").attr('id')).hide();
+			$(".category.active").removeClass('active');
+			$(this).addClass('active');
+			id = $(this).attr('id');
+			$("."+id).show();
+		}
+	});
+
+	$(document).ready(function() {
+		var csrf = "{{ csrf_token() }}";
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrf)
+				}
+			}});
+		
+		$("." + $(".category.active").attr('id')).show();
+
+		$(".btn-gradient-primary").click(function(){
+			temp = $("#myTitle").text().toLowerCase();
+			if (temp.match('script') == 'script' || temp.match('js') == 'js'){
+				alert('보안 위반 사항입니다.');
+				return;
+			}
+			temp = $(".note-editor").text().toLowerCase();
+			if (temp.match('script') == 'script' || temp.match('js') == 'js'){
+				alert('보안 위반 사항입니다.');
+				return;
+			}
+			if (temp.length == 0) {
+				alert('내용을 입력하세요.');
+				return;
+			}
+			if ($("#subtitle").val() == '주제') {
+				alert('주제를 선택하세요.');
+				return;
+			}
+			if ($("#myTitle").val().replace(/(\s*)/g, "") == "") {
+				alert('제목을 입력하세요.');
+				return;
+			}
+
+
+			$.ajax({
+				url: "{{url_for('home.write')}}",
+				data: {
+					"category": $(".category.active").attr('id'),
+					"title": $("#myTitle").val(),
+					"body": $(".note-editable").html(),
+					"subject": $("#subtitle").val()
+				},
+				type: 'POST',
+				success: function(res) {
+					if (res == 'fail') {
+						alert('모든 내용을 입력해주세요.');
+						return;
+					}
+					window.location.href = res;
+				},
+				error: function(request, error) {
+					console.log(request);
+					console.log(error);
+				}
+			});
+		});
+	});
+</script>
+
+{% endblock %}

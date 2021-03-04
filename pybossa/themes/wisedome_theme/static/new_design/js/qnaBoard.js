@@ -9,7 +9,8 @@
       "iDisplayLength": 10,
       "language": {
         search: ""
-      }
+      },
+		"order": [[1,'desc']]
     });
     $('#order-listing').each(function() {
       var datatable = $(this);
@@ -23,6 +24,4 @@
     });
   });
 })(jQuery);
-
-
 
