@@ -160,6 +160,16 @@ def rewrite(blog_id):
     res = dict(template="new_design/qna/re_editor.html", csrf=generate_csrf(), blog=blog, body=blog.body)
     return handle_content_type(res)
 
+@blueprint.route("qna/delete/<int:blog_id>", methods=['POST'])
+def delete_blog(blog_id):
+    blog = blog_repo.get(blog_id)
+    if not current_user.admin:
+        if current_user.is_anonymous or current_user.id != blog.user_id:
+            return abort(403)
+
+    blog_repo.delete(blog)
+    return 'success'
+
 @blueprint.route("faq")
 def faq():
     """Render the about template."""
