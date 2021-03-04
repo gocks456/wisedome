@@ -21,7 +21,11 @@
 						<td class="tb-subject">{{row.subject}}</td>
 						<td class="tb-title">{{row.title}}</td><!--해당 글보기 링크걸려있음-->
 						<td>
-							<label class="badge badge-info">{% if row.answer %}답변완료{% else %} 답변대기{% endif %}</label>
+							{% if row.answer %}
+							<label class="badge badge-success">답변완료</label>
+							{% else %} 
+							<label class="badge badge-info">답변대기</label>
+							{% endif %}
 						</td>
 					</tr>
 					{% endfor %}

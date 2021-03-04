@@ -31,39 +31,19 @@ class ProjectRepository(Repository):
 
     # 마감 임박 프로젝트 업데이트(7일 이내 프로젝트)
     def update_end_date_7days(self):
-        print('마감임박테스트')
         from datetime import datetime, timedelta
         time = datetime.now()
         after_7days = time + timedelta(days=7)
-
-        f = open('end_date.txt', mode='at', encoding='utf-8')
-
-        f.write('현재 시간: ' + time.strftime('%y/%m/%d %H:%M:%S'))
-
-        test1 = self.db.session.query(Project).filter(and_(time <= cast(Project.end_date, Date),
-                                                   after_7days >= cast(Project.end_date, Date),
-                                                   Project.published == True)).all()
-        f.write('\n\n마감임박한 프로젝트들\n')
-        for i in test1:
-            f.write(i.name + '\n')
 
         # featured True
         self.db.session.query(Project).filter(and_(time <= cast(Project.end_date, Date),
                                                    after_7days >= cast(Project.end_date, Date),
                                                    Project.published == True)).update({'featured': True}, synchronize_session='fetch')
         
-        test2 = self.db.session.query(Project).filter(and_(
-                time>cast(Project.end_date, Date), Project.complete==False)).all()
-        f.write('\n\n -----------------\n\n마감 된 프로젝트들\n')
-        for i in test2:
-            f.write(i.name + '\n')
         # 마감
         self.db.session.query(Project).filter(and_(
                 time>cast(Project.end_date, Date), Project.complete==False)).update({'published':False}, synchronize_session='fetch')
 
-        f.write('\n\n-----------------\n\n')
-        f.close()
-        
         self.db.session.commit()
         return
 

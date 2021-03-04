@@ -64,9 +64,11 @@
 									{% if current_user.id == user.id or current_user.admin %}
 									<div class="btn-group d-flex justify-content-end">
 										<a href="{{url_for('home.rewrite', blog_id=blog.id)}}">
-										<button type="button" class="btn btn-sm btn-info" id="edit" style="margin-right:1rem;"><i class="mdi mdi-heart-outline" ></i> 수정</button>
+											<button type="button" class="btn btn-sm btn-info" id="edit" style="margin-right:1rem;"><i class="mdi mdi-heart-outline" ></i> 수정</button>
 										</a>
-										<button type="button" class="btn btn-sm btn-success" id="delete"><i class="mdi mdi-comment-processing-outline"></i>  삭제</button>
+										<a>
+											<button type="button" class="btn btn-sm btn-success" id="delete"><i class="mdi mdi-comment-processing-outline"></i>  삭제</button>
+										</a>
 									</div>
 									{% endif %}
 								</div> 
@@ -158,6 +160,26 @@ $("#saveComment").click(function(){
 		}
 	});
 });
+
+$("#delete").click(function() {
+	var flag = confirm("정말 삭제하시겠습니까?");
+	if (flag){
+		$.ajax({
+			url: window.location.href.replace('view', 'delete'),
+			data: {
+			},
+			type: 'POST',
+			success: function(res) {
+				window.location.href = '/qna';
+			},
+			error: function(request, error) {
+				console.log(request);
+				console.log(error);
+			}
+		});
+	}
+});
+
 </script>
 
 
