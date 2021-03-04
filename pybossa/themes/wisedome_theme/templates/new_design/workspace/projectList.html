@@ -155,23 +155,25 @@
 
 
 					{% for project in projects %}
-					<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-						<div class="card bg-white shadow-sm">
-							<a href="{{ url_for('project.details', short_name=project.short_name) }}">
-								<img class="card-img-top bd-placeholder-img" src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.name}}">
-								<div class="card-body">
-									<h5 class="card-title">{{ project.name }}</h5>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="badge-group">
-											<div class="badge">나이무관</div>
-											<div class="badge">성별무관</div>
+						{% if ((current_user.sex == project.condition.sex) or (project.condition.sex == '0')) and ((project.condition.age_s |int >= current_user.birth)and(project.condition.age_e|int <=current_user.birth)) or current_user.admin %}
+							<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+								<div class="card bg-white shadow-sm">
+									<a href="{{ url_for('project.details', short_name=project.short_name) }}">
+										<img class="card-img-top bd-placeholder-img" src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.name}}">
+										<div class="card-body">
+											<h5 class="card-title">{{ project.name }}</h5>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="badge-group">
+													<div class="badge">나이무관</div>
+													<div class="badge">성별무관</div>
+												</div>
+												<small class="text-muted ">{{ project.all_point|number_format }}P</small>
+											</div>
 										</div>
-										<small class="text-muted ">{{ project.all_point|number_format }}P</small>
-									</div>
+									</a>
 								</div>
-							</a>
-						</div>
-					</div>
+							</div>
+						{% endif %}
 					{% endfor %}
 				</div>
 			</div>
@@ -181,7 +183,7 @@
 		<div class="col-12 grid-margin stretch-card">
 			<div class="card bg-white">
 				<div class="card-body">
-					<p class="card-subtitle text-center"> 현재 참여한 프로젝트가 없습니다</ㅔ>
+					<p class="card-subtitle text-center"> 현재 참여가능한 프로젝트가 없습니다</p>
 				</div>
 			</div>
 		</div>    

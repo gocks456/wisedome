@@ -1,0 +1,19 @@
+{
+	"id": 1649107747,
+	"connected_at": "2021-03-04T02:38:05Z",
+	"properties": {
+		"nickname": "오 진영",
+		"profile_image": "http://k.kakaocdn.net/dn/nSGdW/btqJbnd28PY/PqCWHseOAvuoa70WfXR4zK/img_640x640.jpg",
+		"thumbnail_image": "http://k.kakaocdn.net/dn/nSGdW/btqJbnd28PY/PqCWHseOAvuoa70WfXR4zK/img_110x110.jpg"
+	},
+	"kakao_account": {
+		"profile_needs_agreement": false,
+		"profile": {
+			"nickname": "오 진영",
+			"thumbnail_image_url": "http://k.kakaocdn.net/dn/nSGdW/btqJbnd28PY/PqCWHseOAvuoa70WfXR4zK/img_110x110.jpg",
+			"profile_image_url": "http://k.kakaocdn.net/dn/nSGdW/btqJbnd28PY/PqCWHseOAvuoa70WfXR4zK/img_640x640.jpg"
+		},
+		"has_email": true,
+		"email_needs_agreement": true
+	}
+}

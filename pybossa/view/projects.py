@@ -754,6 +754,13 @@ def details(short_name):
     template = 'new_design/workspace/projectDescription.html'
     pro = pro_features()
 
+    gender = project.condition["sex"]
+    min_a = project.condition["age_s"]
+    max_a = project.condition["age_e"]
+    from datetime import datetime
+
+    n_year = datetime.today().year
+
     title = project_title(project, None)
     project = add_custom_contrib_button_to(project, get_user_id_or_ip(), ps=ps)
     project_sanitized, owner_sanitized = sanitize_project_owner(project, owner,
@@ -776,8 +783,10 @@ def details(short_name):
                      "n_volunteers": ps.n_volunteers,
                      "pro_features": pro,
                      "like_project": like_project,
-                     "min": 16,
-                     "max": 100,
+                     "gender" : gender,
+                     "min": min_a,
+                     "max": max_a,
+                     "n_year" : n_year,
                      "csrf": generate_csrf()}
     if current_app.config.get('CKAN_URL'):
         template_args['ckan_name'] = current_app.config.get('CKAN_NAME')
