@@ -55,7 +55,7 @@
 }
 
 .comment-view {
-  display: none;
+  display: block;
   padding: 2rem 0.95rem 1rem 0.95rem;
 }
 #comment-input {

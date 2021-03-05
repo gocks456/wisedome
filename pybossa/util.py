@@ -87,6 +87,7 @@ def handle_content_type(data):
     if (request.headers.get('Content-Type') == 'application/json' or
             request.args.get('response_format') == 'json'):
         message_and_status = last_flashed_message()
+        print(message_and_status)
         if message_and_status:
             data['flash'] = message_and_status[1]
             data['status'] = message_and_status[0]

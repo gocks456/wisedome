@@ -98,7 +98,6 @@ def cache(key_prefix, timeout=300):
 
 
 def memoize(timeout=300):
-    print("^")
     """
     Decorator for caching functions using its arguments as part of the key.
 

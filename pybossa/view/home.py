@@ -120,6 +120,8 @@ def qna_view(blog_id):
     else:
         user = None
     response = dict(template="new_design/qna/viewQnA.html", blog=blog, user=user, blog_comment=blog_comment, csrf=generate_csrf())
+    if current_user.is_anonymous:
+        response = dict(template="new_design/qna/no_login_viewQnA.html", blog=blog, user=user, blog_comment=blog_comment, csrf=generate_csrf())
     return handle_content_type(response)
     
 @blueprint.route("qna/write", methods=['GET', 'POST'])
