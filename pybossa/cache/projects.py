@@ -597,7 +597,7 @@ def get_all(category):
     sql = text(
         '''SELECT project.id, project.name, project.short_name,
            project.description, project.info, project.created, project.updated, project.all_point, project.condition, project.complete,
-           project.category_id, project.featured, "user".fullname AS owner
+           project.end_date, project.category_id, project.featured, "user".fullname AS owner
            FROM "user", project
            LEFT OUTER JOIN category ON project.category_id=category.id
            WHERE
@@ -627,7 +627,9 @@ def get_all(category):
                        all_point=row.all_point,
                        condition=row.condition,
                        category_id=row.category_id,
-                       complete=row.complete)
+                       complete=row.complete,
+                       end_date=row.end_date,
+                       category_name=category)
         projects.append(Project().to_public_json(project))
     return projects
 

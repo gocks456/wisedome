@@ -110,11 +110,11 @@
 
 	{% from "/new_design/_formhelper.html" import render_url_thumbnail %}
 
-	<div class="row">
+	<div class="row" id="ajax-project-list">
 		{% if projects != [] %}
 		<div class="col-md-12">
 			<div class="row product-item-wrapper">
-				<div class="card-group" id="ajax-project-list" style="width:100%;">
+				<div class="card-group">
 
 
 					{% for project in projects %}
@@ -147,8 +147,8 @@
 								</div>
 								<div class="card-footer text-muted">
 									<div class="d-flex justify-content-between">
-										<p class="card-text">마감일 : ~ 2021.05.01까지</p>
-										<p class="card-text">500P</p>
+										<p class="card-text">마감일 : ~ {{ project.end_date[0:10] }}</p>
+										<p class="card-text">{{ project.all_point|number_format }}P</p>
 									</div>
 								</div>
 							</a>
