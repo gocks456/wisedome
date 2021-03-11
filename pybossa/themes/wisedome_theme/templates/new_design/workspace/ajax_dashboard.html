@@ -1,32 +1,67 @@
 
 {% from "/new_design/_formhelper.html" import render_url_thumbnail %}
 
-{% if projects|length != 0 %}
-{% for project in projects %}
-<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3"><!--col-lg-3 이라는 태그 추가함 02.19-->
-	<div class="card bg-white shadow-sm">
-		<a href="{{ url_for('project.details', short_name=project.short_name) }}">
-			<img class="card-img-top bd-placeholder-img" src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.name}}"><!--height 과 width값 삭제함 02.19-->
-			<div class="card-body">
-				<h5 class="card-title">{{ project.name }}</h5>
-				<div class="d-flex justify-content-between align-items-center">
-					<div class="badge-group">
-						<div class="badge">나이무관</div>
-						<div class="badge">성별무관</div>
-					</div>
-					<small class="text-muted ">{{ project.all_point |number_format}}P</small>
+
+{% if projects|length != 0 %} 
+<!-- 프로젝트가 있을 때 -->
+<div class="col-md-12">
+	<div class="row product-item-wrapper">
+
+		<div class="card-group">
+			{% for project in projects %}
+			<div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3"><!--col-lg-3 이라는 태그 추가함 02.19-->
+				<div class="card bg-white shadow-sm">
+
+					<a href="{{ url_for('project.details', short_name=project.short_name) }}">
+						{#<img class="card-img-top bd-placeholder-img" src="{{ render_url_thumbnail(project, upload_method) }}" alt="{{project.name}}"><!--height 과 width값 삭제함 02.19-->#}
+						<div class="card-body">
+							<div class="d-flex justify-content-start my-border-bottom">
+								{% if project.category_name == "sound" %}
+								<svg  id="audio-sm-icon" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" ><g><path xmlns="http://www.w3.org/2000/svg" d="m256 31c-141.159 0-256 114.392-256 255v120c0 8.284 6.716 15 15 15h45v15c0 24.813 20.187 45 45 45h60c8.284 0 15-6.716 15-15v-210c0-8.284-6.716-15-15-15h-60c-24.813 0-45 20.187-45 45v15h-30v-15c0-124.065 101.383-225 226-225s226 100.935 226 225v15h-30v-15c0-24.813-20.187-45-45-45h-60c-8.284 0-15 6.716-15 15v210c0 8.284 6.716 15 15 15h60c24.813 0 45-20.187 45-45v-15h45c8.284 0 15-6.716 15-15v-120c0-140.608-114.841-255-256-255zm-166 255c0-8.271 6.729-15 15-15h45v180h-45c-8.271 0-15-6.729-15-15zm-30 45v60h-30v-60zm362 105c0 8.271-6.729 15-15 15h-45v-180h45c8.271 0 15 6.729 15 15zm60-45h-30v-60h30z"></g></svg>
+								{% elif project.category_name == "vidio" %}
+								<svg id="video-sm-icon"  viewBox="0 0 512 512" ><g><path d="m338.95 243.28-120-75c-4.625-2.89-10.453-3.043-15.222-.4-4.77 2.643-7.729 7.667-7.729 13.12v150c0 5.453 2.959 10.476 7.729 13.12 2.266 1.256 4.77 1.88 7.271 1.88 2.763 0 5.522-.763 7.95-2.28l120-75c4.386-2.741 7.05-7.548 7.05-12.72s-2.663-9.979-7.049-12.72zm-112.95 60.656v-95.873l76.698 47.937z"/><path d="m437 61h-362c-41.355 0-75 33.645-75 75v240c0 41.355 33.645 75 75 75h362c41.355 0 75-33.645 75-75v-240c0-41.355-33.645-75-75-75zm45 315c0 24.813-20.187 45-45 45h-362c-24.813 0-45-20.187-45-45v-240c0-24.813 20.187-45 45-45h362c24.813 0 45 20.187 45 45z"/></g></svg>
+								{% elif project.category_name == "image" %}
+								<svg id="img-sm-icon" viewBox="0 0 512 512.00099" ><path d="m373.410156 0h-234.816406c-76.421875 0-138.59375 62.171875-138.59375 138.59375v234.8125c0 76.421875 62.171875 138.59375 138.59375 138.59375h234.816406c76.417969 0 138.589844-62.171875 138.589844-138.59375v-234.8125c0-76.421875-62.171875-138.59375-138.589844-138.59375zm108.574219 373.40625c0 59.871094-48.707031 108.578125-108.578125 108.578125h-234.8125c-59.871094 0-108.578125-48.707031-108.578125-108.578125v-1.316406l86.089844-79.25c2.4375-2.242188 6.257812-2.242188 8.695312-.003906l65.875 60.476562c7.640625 7.015625 17.941407 10.441406 28.269531 9.414062 10.324219-1.03125 19.742188-6.4375 25.847657-14.828124l116.25-159.847657c1.542969-2.117187 3.65625-2.558593 4.777343-2.632812 1.121094-.066407 3.273438.085937 5.078126 1.988281l111.082031 117.050781v68.949219zm0-112.550781-89.3125-94.109375c-7.472656-7.875-17.960937-11.984375-28.808594-11.277344-10.832031.707031-20.707031 6.148438-27.09375 14.929688l-116.253906 159.847656c-1.472656 2.023437-3.488281 2.507812-4.558594 2.613281-1.066406.105469-3.136719.035156-4.980469-1.660156l-65.875-60.472657c-13.839843-12.710937-35.503906-12.691406-49.324218.03125l-65.761719 60.535157v-192.699219c0-59.871094 48.707031-108.578125 108.578125-108.578125h234.816406c59.867188 0 108.574219 48.707031 108.574219 108.578125zm0 0"/><path d="m142.910156 86.734375c-29.082031 0-52.746094 23.664063-52.746094 52.75 0 29.082031 23.664063 52.746094 52.746094 52.746094 29.085938 0 52.746094-23.664063 52.746094-52.746094.003906-29.085937-23.660156-52.75-52.746094-52.75zm0 75.476563c-12.53125 0-22.730468-10.195313-22.730468-22.730469 0-12.53125 10.199218-22.730469 22.730468-22.730469 12.535156 0 22.730469 10.195312 22.730469 22.730469 0 12.535156-10.195313 22.730469-22.730469 22.730469zm0 0"/></svg>
+								{% else %}
+								<svg id="text-sm-icon" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><g><path d="m12.25 12c-.414 0-.75-.336-.75-.75v-.75h-7v.75c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-1.5c0-.414.336-.75.75-.75h8.5c.414 0 .75.336.75.75v1.5c0 .414-.336.75-.75.75z"/></g><g><path d="m8 18.75c-.414 0-.75-.336-.75-.75v-8c0-.414.336-.75.75-.75s.75.336.75.75v8c0 .414-.336.75-.75.75z"/></g><g><path d="m9.25 19h-2.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h2.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m20.25 10.5h-4.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h4.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m20.25 14.5h-4.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h4.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m20.25 18.5h-4.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h4.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m21.25 23h-18.5c-1.517 0-2.75-1.233-2.75-2.75v-16.5c0-1.517 1.233-2.75 2.75-2.75h18.5c1.517 0 2.75 1.233 2.75 2.75v16.5c0 1.517-1.233 2.75-2.75 2.75zm-18.5-20.5c-.689 0-1.25.561-1.25 1.25v16.5c0 .689.561 1.25 1.25 1.25h18.5c.689 0 1.25-.561 1.25-1.25v-16.5c0-.689-.561-1.25-1.25-1.25z"/></g><g><path d="m23.25 6h-22.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h22.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g></svg>
+								{% endif %}
+								<h5 class="card-title">{{ project.name }}</h5>
+							</div>
+							<h6 class="card-subtitle">{{ project.description }}</h6>
+
+							<div class="badge-group">
+								<div class="badge"><i class="mdi mdi-account-multiple-outline mr-1"></i>n대</div>
+								<div class="badge"><i class="mdi mdi-gender-female mr-1"></i>여성</div>
+								<div class="badge"><i class="mdi mdi-gender-male mr-1"></i>남성</div>
+							</div>
+							<div class="badge-ios-group">
+								<div class="badge"><i class="mdi mdi-monitor"></i></div>
+								<div class="badge"><i class="mdi mdi-cellphone-iphone"></i></div>
+							</div>
+						</div>
+
+						<div class="card-footer text-muted">
+							<div class="d-flex justify-content-between">
+								<p class="card-text">마감일 : ~ {{ project.end_date[0:10]}}</p>
+								<p class="card-text">{{ project.all_point|number_format}}P</p>
+							</div>
+						</div>
+					</a>
 				</div>
 			</div>
-		</a>
-	</div>
-</div>
-{% endfor %}
-{% else %}
-<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3"><!--col-lg-3 이라는 태그 추가함 02.19-->
-	<div class="card bg-white shadow-sm">
-		<div class="card-body">
-			<h5>참여한 프로젝트가 없습니다.</h5>
+			{% endfor %}
+
 		</div>
 	</div>
 </div>
+{% else %}
+<!-- 프로젝트가 없을 때 -->
+<div class="col-12 grid-margin stretch-card">
+	<div class="card bg-white">
+		<div class="card-body">
+			<p class="card-subtitle text-center"> 현재 참여한 프로젝트가 없습니다</ㅔ>
+		</div>
+	</div>
+</div>    
 {% endif %}
+
