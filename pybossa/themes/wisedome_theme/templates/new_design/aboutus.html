@@ -45,7 +45,11 @@
 										</div>
 									</li>#}
 									<li class="nav-item"><a class="nav-link" href="{{url_for('home.faq')}}">자주하는질문 </a></li>
+									{% if current_user.is_anonymous %}
 									<li class="nav-item"><a class="nav-link" href="{{url_for('account.signin')}}">로그인 </a></li>
+									{% else %}
+									<li class="nav-item"><a class="nav-link" href="{{url_for('account.signout')}}">로그아웃 </a></li>
+									{% endif %}
 								</ul>
 							</div>
 						</nav>

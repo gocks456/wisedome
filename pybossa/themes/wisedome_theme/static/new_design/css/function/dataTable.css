@@ -1,12 +1,9 @@
-/**data Table**/
 table.dataTable {
   clear: both;
-  border-radius: 0.25rem;
   margin-top: 6px !important;
   margin-bottom: 6px !important;
   max-width: none !important;
   border-collapse: separate !important;
-  border-spacing: 0;
 }
 table.dataTable td,
 table.dataTable th {
@@ -21,52 +18,47 @@ table.dataTable.nowrap th,
 table.dataTable.nowrap td {
   white-space: nowrap;
 }
-
-.dataTables_wrapper .dataTables_length label {
+div.dataTables_wrapper div.dataTables_length label {
   font-weight: normal;
   text-align: left;
   white-space: nowrap;
-  float: left;
-  font-size: 0.875rem;
 }
-.dataTables_wrapper .dataTables_length select {
-  width: auto;
-  border-radius: 0.25rem;
-  border: 1px solid #dae0e5 !important;
+div.dataTables_wrapper div.dataTables_length select {
+  width: 75px;
+  display: inline-block;
 }
-.dataTables_wrapper .dataTables_filter {
+div.dataTables_wrapper div.dataTables_filter {
   text-align: right;
 }
-.dataTables_wrapper .dataTables_filter label {
+div.dataTables_wrapper div.dataTables_filter label {
   font-weight: normal;
   white-space: nowrap;
   text-align: left;
-}
-.dataTables_wrapper .dataTables_filter input {
-  margin-left: 0.5em;
   font-size: 0.875rem;
+}
+div.dataTables_wrapper div.dataTables_filter input {
+  margin-left: 0.5em;
+  display: inline-block;
   width: auto;
-  float: right;
-  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  height: 30px;
   border: 1px solid #dae0e5 !important;
 }
-.dataTables_wrapper .dataTables_info {
-  padding-top: 0.85em;
+div.dataTables_wrapper div.dataTables_info {
+  padding-top: 8px;
   white-space: nowrap;
-  font-size: 0.75rem;
 }
-.dataTables_wrapper .dataTables_paginate {
+div.dataTables_wrapper div.dataTables_paginate {
   margin: 0;
   white-space: nowrap;
   text-align: center;
   cursor: pointer;
 }
-.dataTables_wrapper .dataTables_paginate ul.pagination {
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   margin: 2px 0;
   white-space: nowrap;
   justify-content: flex-end;
 }
-
 .dataTables_wrapper .dataTables_paginate a {
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
@@ -75,13 +67,21 @@ table.dataTable.nowrap td {
   background-color: #f8f9fa;
   border-color: #f8f9fa;
 }
+
 .dataTables_wrapper .dataTables_paginate a:hover {
   color: #212529;
   background-color: #e2e6ea;
   border-color: #dae0e5;
 }
-
-.dataTables_wrapper .dataTables_processing {
+.dataTables_wrapper .dataTables_paginate .page-link {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  color: #212529;
+  background-color: #f8f9fa;
+  border: 1px solid #d8d8d8;
+}
+div.dataTables_wrapper div.dataTables_processing {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -92,7 +92,6 @@ table.dataTable.nowrap td {
   padding: 1em 0;
 }
 
-/* bootstrap table***/
 table.dataTable thead > tr > th.sorting_asc,
 table.dataTable thead > tr > th.sorting_desc,
 table.dataTable thead > tr > th.sorting,
@@ -184,28 +183,27 @@ div.dataTables_scrollFoot > .dataTables_scrollFootInner > table {
 }
 
 @media screen and (max-width: 767px) {
-  div.dataTables_wrapper div.dataTables_length,
-  div.dataTables_wrapper div.dataTables_filter,
   div.dataTables_wrapper div.dataTables_info,
   div.dataTables_wrapper div.dataTables_paginate {
     text-align: center;
   }
+  div.dataTables_wrapper div.dataTables_length,
+  div.dataTables_wrapper div.dataTables_filter {
+    text-align: right;
+  }
 }
-table.dataTable.table-sm > thead > tr > th {
+table.dataTable.table-condensed > thead > tr > th {
   padding-right: 20px;
 }
-table.dataTable.table-sm .sorting:before,
-table.dataTable.table-sm .sorting_asc:before,
-table.dataTable.table-sm .sorting_desc:before {
-  top: 5px;
-  right: 0.85em;
+table.dataTable.table-condensed .sorting:after,
+table.dataTable.table-condensed .sorting_asc:after,
+table.dataTable.table-condensed .sorting_desc:after {
+  top: 6px;
+  right: 6px;
 }
-table.dataTable.table-sm .sorting:after,
-table.dataTable.table-sm .sorting_asc:after,
-table.dataTable.table-sm .sorting_desc:after {
-  top: 5px;
+table.table-bordered.dataTable {
+  border-right-width: 0;
 }
-
 table.table-bordered.dataTable th,
 table.table-bordered.dataTable td {
   border-left-width: 0;
@@ -214,17 +212,15 @@ table.table-bordered.dataTable th:last-child,
 table.table-bordered.dataTable th:last-child,
 table.table-bordered.dataTable td:last-child,
 table.table-bordered.dataTable td:last-child {
-  border-right-width: 0;
+  border-right-width: 1px;
 }
 table.table-bordered.dataTable tbody th,
 table.table-bordered.dataTable tbody td {
   border-bottom-width: 0;
 }
-
 div.dataTables_scrollHead table.table-bordered {
   border-bottom-width: 0;
 }
-
 div.table-responsive > div.dataTables_wrapper > div.row {
   margin: 0;
 }
@@ -239,84 +235,4 @@ div.table-responsive
   > div.row
   > div[class^="col-"]:last-child {
   padding-right: 0;
-}
-.table {
-  border-radius: 0.25rem;
-  border-collapse: collapse !important;
-}
-
-.table td,
-.table th {
-  background-color: #ffffff;
-}
-.table-bordered th,
-.table-bordered td {
-  border: 1px solid #dee2e6 !important;
-}
-.table-dark {
-  color: inherit;
-}
-.table-dark th,
-.table-dark td,
-.table-dark thead th,
-.table-dark tbody + tbody {
-  border-color: #ebedf2;
-}
-.table .thead-dark th,
-.jsgrid .jsgrid-table .thead-dark th {
-  color: inherit;
-  border-color: #ebedf2;
-}
-@media (max-width: 1280px) {
-  .editor-btn-group {
-    width: 90%;
-  }
-}
-@media (max-width: 991px) {
-  .editor-btn-group {
-    width: 75%;
-  }
-}
-
-@media (max-width: 769px) {
-  .table {
-    margin: 0 auto;
-  }
-  .table .tb-subject {
-    display: none;
-  }
-  .editor-btn-group {
-    width: 90%;
-  }
-}
-
-@media (max-width: 575px) {
-  .table .tb-date,
-  .table label,
-  .table .tb-status,
-  .table .tb-subject {
-    display: none;
-  }
-  .form-group input {
-    margin-top: 0.75rem;
-  }
-  .editor-btn-group {
-    width: 100%;
-  }
-  .editor-btn-group .btn {
-    margin: 0 0.5rem;
-    padding: 0.875rem 1.25rem;
-  }
-  #editor-btn {
-    margin: 1rem;
-  }
-  .dataTables_wrapper .dataTables_filter input {
-    max-width: 6rem;
-  }
-  .dataTables_wrapper .dataTables_info {
-    margin: 0.5rem 0;
-  }
-  .dataTables_wrapper .dataTables_paginate a {
-    font-size: 0.75rem;
-  }
 }

@@ -992,7 +992,10 @@ def task_presenter(short_name, task_id):
 
     if request.method == "POST":
         if request.form.get('btn', None) == "Upload" :
-            _file = request.files['avatar']
+            _file = request.files['fileInput']
+            if _file.content_type != 'image/png' and _file.content_type != 'image/jpg':
+                flash(gettext("jpg 또는 png 파일만 업로드 가능합니다."), "error")
+                return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
             _file.seek(0, os.SEEK_END)
             size = _file.tell()
             if size > 2000000:

@@ -1,16 +1,21 @@
 
 //폰트 글자 키우기
-function changeFontSize(className, fontSize) {
-  for (let element of document.getElementsByClassName(className))
-    element.style.fontSize =
-      (typeof fontSize === "function" ? fontSize(element) : fontSize) + "px";
-}
+var def_size=16;
+var cur_base=def_size;
+$('input[type="button"]').click(function(){
+   
+    change_font_size( parseInt($(this).data('csize')) );
 
-window.addEventListener("input", () => {
-  const input = event.target;
-  if (input.classList.contains("controlbar"))
-    changeFontSize(input.dataset.fsTargetClass || "textsize", input.value);
-});
+})
+function change_font_size(csize){
+    var $cotent_html=$('.textsize');
+    $cotent_html.each(function(){
+        var cur_size = parseInt($(this).css('font-size'));
+        cur_size=cur_size+csize;
+        console.log(cur_size);
+        $(this).css('font-size', cur_size.toString()+'px');
+    });
+}
 
 
 //답변 컬러에관한 설명

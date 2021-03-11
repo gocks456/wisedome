@@ -227,6 +227,8 @@ select {
 
 input[type="checkbox"] {
   outline: none;
+  -webkit-outline: none;
+  -moz-outline: none;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
