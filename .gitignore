@@ -8,7 +8,7 @@ venv
 .project_order/
 uploads
 pybossa/backup/
-
+pybossa/themes/wisedome_theme/templates/new_design/temp/
 
 *.db
 *.pyc

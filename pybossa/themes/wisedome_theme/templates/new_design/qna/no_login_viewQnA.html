@@ -1,16 +1,13 @@
-
-{% extends "/new_design/workspace/workspace_base.html" %}
+{% extends "/new_design/qna/no_login_qna_base.html" %}
 
 {% set active_wisedome = "qna" %}
 
-{% block css %}
+{% block qna %}
 <link rel="stylesheet" href="/static/new_design/css/viewQnA.css">
-{% endblock %}
 
-{% block content %}
 <div class="content-wrapper">
 	<div class="page-header">
-		<h3 class="page-title"> <a href="{{url_for('home.qna')}}">게시판 글보기</a></h3>
+		<h4 class="page-title" style="font-size:1.2rem;"> <a href="{{url_for('home.qna')}}">게시판 글보기</a></h4>
 	</div>
 
 	<div class="row">
@@ -114,13 +111,12 @@
 </div><!-- content-wrapper ends -->
 
 <!-- plugins:js this page only-->
+<script src="/static/new_design/js/plugin/jquery.min.js"></script>
 <script src="/static/new_design/js/viewQnA.js"></script>
 
 <script>
 	$(document).ready(function() {
-		{% if current_user.is_anonymous %}
 		$("#category_icons").hide();
-		{% endif %}
 		var csrf = "{{ csrf_token() }}";
 		$.ajaxSetup({
 			beforeSend: function(xhr, settings) {

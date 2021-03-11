@@ -1,85 +1,59 @@
-<head>
-	<script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
-</head>
-<body>
-	<div class="mainbox">
-
-		<div class ="logo_img">
-			<a href="{{url_for('home.home')}}"><img src="/static/new_design/images/wisedome-logo.png" alt="logo"></a>
-		</div>
-		<div class="err">4</div>
-		<i class="far fa-question-circle"></i>
-		<div class="err2">4</div>
-		<div class="msg">
-			<h1>Page not found!</h1>
-			<p>We're sorry, but we can't find the page<br>that you're looking for.</p>
-
-			<a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-lg" > 
-				<i class="icon-home"></i>
-				Go Home
-			</a>
-			<a id="btnBack" href="#" class="btn btn-lg" onclick="history.back()"> 
-				<i class="icon-arrow-left"></i>
-				Go Back
-			</a>
-		</div>
-	</div>
-</body>
+<!DOCTYPE html>
+<html lang="kor">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>에러페이지</title>
+		<!-- plugins:css -->
+		<link rel="stylesheet" href="/static/new_design/assets/vendors/mdi/css/materialdesignicons.min.css">
+		<link rel="stylesheet" href="/static/new_design/css/function/vendor.bundle.base.css">
+		<!--기본 css--->
+		<link rel="stylesheet" href="/static/new_design/css/basic/dashboard-basic.css">
+		<link rel="stylesheet" href="/static/new_design/css/function/darkmode.css">
 
 
-<style>
-body {
-	background-color: #f2edf3;
-}
+	</head>
+	<body>
+		<div class="container-scroller">
 
-.mainbox {
-	top : 5rem;
-	background-color: #ffffff;
-	margin: auto;
-	height: 800px;
-	width: 600px;
-	position: relative;
-}
+			<!--에러 페이지 (필요하면 참고)-->
+			<div class="main-panel" style="width:100%; height:100vh;">
+				<div class="content-wrapper d-flex align-items-center text-center error-page">
+					<div class="row flex-grow">
+						<div class="col-9 mx-auto">
+							<div class="row align-items-center d-flex flex-row">
+								<div class="col-12 text-lg-center pr-lg-4">
+									<h1 class="display-1 mb-0">404</h1>
+								</div>
+								<div class="col-12 error-page-divider text-lg-center pl-lg-4">
+									<h2>SORRY!</h2>
+									<h3 class="font-weight-light">페이지를 찾을수 없습니다.</h3>
+								</div>
+							</div>
+							<div class="row mt-5">
+								<div class="col-12 text-center mt-xl-2">
+									<a class="font-weight-medium" href="{{url_for('home.home')}}">메인으로 돌아가기</a>
+								</div>
+							</div>
 
-  .err {
-	  color: #000000;
-	  font-size: 11rem;
-	  position:absolute;
-	  left: 20%;
-	  top: 8%;
-  }
+						</div>
+					</div>
+				</div>
 
-  .far {
-	  position: absolute;
-	  font-size: 8.5rem;
-	  left: 40%;
-	  top: 16%;
-	  color: #000000;
-  }
 
-  .err2 {
-	  color: #000000;
-	  font-size: 11rem;
-	  position:absolute;
-	  left: 68%;
-	  top: 8%;
-  }
 
-  .msg {
-	  font-size: 1.6rem;
-	  position:absolute;
-	  left: 5%;
-	  top: 45%;
-	  width: 90%;
-  }
+				<!-- FOOTER-->
+				<footer class="footer">
+					<div class="d-flex justify-content-center">
+						<span class="text-muted">Copyright © 2021 <a href="{{url_for('home.home')}}">Wisedome</a>. All rights reserved.</span>
+					</div>
+				</footer>
 
-  img {
-	  margin-top : 20px;
-  }
+				<!-- partial -->
+			</div><!-- main-panel ends -->
+		</div><!-- container-scroller -->
 
-  .logo_img {
-	  text-align: center;
-  }
 
-</style>
 
+	</body>
+</html>

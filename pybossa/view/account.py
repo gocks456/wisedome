@@ -1009,9 +1009,10 @@ def forgot_password():
         user = user_repo.get_by(email_addr=request.form["email_addr"])
         if user and user.email_addr:
             if user.fullname != request.form["fullname"]:
-                flash('입력하신 이름의 이메일이 존재하지 않습니다.', 'error')
-                data = dict(template='/new_design/register/findPassword.html', csrf=generate_csrf())
-                return handle_content_type(data)
+                #flash('입력하신 이름의 이메일이 존재하지 않습니다.', 'error')
+                return 'name_error'
+                #data = dict(template='/new_design/register/findPassword.html', csrf=generate_csrf())
+                #return handle_content_type(data)
             msg = dict(title = 'Wisedome 비빌번호 재설정')
             userdict = {'user': user.name, 'password': user.passwd_hash}
             key = signer.dumps(userdict, salt='password-reset')
@@ -1025,9 +1026,11 @@ def forgot_password():
             from pybossa.view.gmail import send_mail, create_message
             msg = create_message(current_app.config['GMAIL'], user.email_addr, msg['title'], msg['body'])
             send_mail(msg)
-            flash('이메일을 전송하였습니다!', 'success')
+            #flash('이메일을 전송하였습니다!', 'success')
+            return 'success'
         else:
-            flash("이메일이 존재하지 않습니다.", 'error')
+            #flash("이메일이 존재하지 않습니다.", 'error')
+            return 'email_error'
 
     data = dict(template='/new_design/register/findPassword.html', csrf=generate_csrf())
     return handle_content_type(data)
