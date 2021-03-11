@@ -15,6 +15,14 @@
 
 .card-group {
   width: 100%;
+  /*
+  max-width: 1920px;
+  */
+}
+@media all and (min-width: 1281px) {
+  .col-xl-3 {
+    max-width: 400px;
+  }
 }
 .card-body a {
   text-decoration: none;
@@ -23,39 +31,80 @@
   margin: 0;
 }
 .icon-title {
-  color: #343a40;
+  color: #5e5c5c;
 }
-.carousel-title {
-  font-family: "SCDream3";
-}
-.card-img {
+
+.owl-carousel .card-img {
   -webkit-filter: brightness(60%);
   filter: brightness(60%);
+  width: 100%;
+  height: 225px;
 }
 .shadow-sm {
   margin: 1rem 0;
 }
 .card-img-top {
   width: 100%;
-  height: 320px;
-}
-svg {
-  fill: #094751;
-  width: 25%;
-  min-width: 3.25em;
-  margin-bottom: 0.5rem;
+  height: 225px;
 }
 
-.card-col:hover svg,
-.card-col:hover p {
+/**카테고리 아이콘**/
+.card-col {
   cursor: pointer;
-  fill: #b66dff;
-  color: #b66dff;
 }
-.icon-active {
-  fill: #b66dff;
-  color: #b66dff;
+.card-col svg {
+  fill: #5e5c5c;
+  /*fill: #f5be57;*/
 }
+
+/**
+.card-col #card-icon2 {
+  fill: #79dd70;
+}
+.card-col #card-icon3 {
+  fill: #5f94f8;
+}
+.card-col #card-icon4 {
+  fill: #b66382;
+}
+.card-col #card-icon5 {
+  fill: #b679f7;
+}
+**/
+#premium-icon .icon-active,
+#premium-icon :hover svg,
+#premium-icon :hover h6 {
+  fill: #e29300;
+  color: #e29300;
+}
+#voice-icon .icon-active,
+#voice-icon:hover svg,
+#voice-icon:hover h6 {
+  fill: #11cf00;
+  color: #11cf00;
+}
+
+#img-icon .icon-active,
+#img-icon:hover svg,
+#img-icon:hover h6 {
+  fill: #034ed8;
+  color: #034ed8;
+}
+
+#text-icon .icon-active,
+#text-icon:hover svg,
+#text-icon :hover h6 {
+  fill: #70012b;
+  color: #70012b;
+}
+
+#video-icon .icon-active,
+#video-icon:hover svg,
+#video-icon:hover h6 {
+  fill: #7801f7;
+  color: #7801f7;
+}
+
 .card-col {
   padding: 0;
   width: 20%;
@@ -63,16 +112,29 @@ svg {
 .card-col .card-body {
   padding: 1.5rem 0 0.5rem 0;
 }
+.card-col svg {
+  width: 25%;
+  min-width: 3.25em;
+  margin-bottom: 0.5rem;
+}
 
 @media all and (max-width: 1280px) {
   .fluid-container p {
     font-size: 0.8em;
+  }
+  .owl-carousel .card-img,
+  .card-img-top {
+    height: 185px;
   }
 }
 
 @media all and (max-width: 991px) {
   .card-group .col-12 {
     margin-bottom: 1rem;
+  }
+  .owl-carousel .card-img,
+  .card-img-top {
+    height: 150px;
   }
 }
 @media all and (max-width: 769px) {
@@ -82,11 +144,12 @@ svg {
   .shadow-sm {
     margin: 0.75rem 0;
   }
+  .owl-carousel .card-img,
+  .card-img-top {
+    height: 150px;
+  }
 }
 @media all and (max-width: 575px) {
-  .card-img {
-    min-height: 200px;
-  }
   .fluid-container p {
     font-size: 0.8em;
   }
@@ -111,13 +174,17 @@ svg {
   .card p {
     font-size: 0.875rem;
   }
-
+  .owl-carousel .card-img,
+  .card-img-top {
+    height: 200px;
+  }
   .portfolio-grid figure {
-    max-height: 200px;
+    max-height: 150px;
   }
 
   #dropdownMenuOutlineButton {
-    padding: 0.7em 1.25em;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.65rem;
   }
   /**카테고리별*/
   .card-col {
@@ -125,13 +192,7 @@ svg {
   }
 }
 
-@media all and (max-width: 375px) {
-  #dropdownMenuOutlineButton {
-    padding: 0.5em;
-  }
-}
-
-/**모든 프로젝트**/
+/**참여가능 프로젝트 리스트**/
 .card-group .card-body {
   padding: 1.5rem 1rem 1rem 1rem;
 }
@@ -145,8 +206,14 @@ svg {
   -webkit-transition: transform 1s;
   overflow: hidden;
 }
+.card .card-text {
+  font-size: 0.85rem;
+}
 .card-group .card a {
   text-decoration: none;
+}
+.card .card-footer {
+  padding-bottom: 0;
 }
 
 .badge-group {
@@ -157,13 +224,70 @@ svg {
 
 .badge-group .badge {
   display: inline-block;
-  border: 1px solid #e2d9e4;
+  border: 1px solid #888888;
+  color: #888888;
+  /*border: 1px solid #0bb69c;*/
   padding: 0.25rem;
   margin: 0.25rem 0.01rem;
   border-radius: 0.25rem;
   font-size: 0.75rem;
   font-weight: 500;
-  color: #84868b;
+  /*color: #0bb69c;*/
   background: transparent;
   text-decoration: none;
+}
+
+.badge-ios-group .badge {
+  display: inline-block;
+  border: 1px solid #888888;
+  color: #888888;
+  /* border: 1px solid #198ae3;*/
+  padding: 0.25rem;
+  margin: 0.25rem 0.01rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  /* color: #198ae3;*/
+  background: transparent;
+  text-decoration: none;
+}
+
+.col-xl-3 svg {
+  margin-right: 1rem;
+  width: 38px;
+  height: 38px;
+}
+.card-title {
+  line-height: 38px;
+}
+@media all and (max-width: 769px) {
+  .col-xl-3 svg {
+    width: 32px;
+    height: 32px;
+  }
+  .card-title {
+    line-height: 32px;
+  }
+}
+@media all and (max-width: 575px) {
+  .col-xl-3 svg {
+    width: 25px;
+    height: 25px;
+  }
+  .card-title {
+    line-height: 25px;
+  }
+}
+/**프로젝트박스 안에 제목옆에 있는 아이콘**/
+#video-sm-icon {
+  fill: #b679f7;
+}
+#img-sm-icon {
+  fill: #5f94f8;
+}
+#text-sm-icon {
+  fill: #b66382;
+}
+#audio-sm-icon {
+  fill: #79dd70;
 }

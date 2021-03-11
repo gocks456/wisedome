@@ -65,6 +65,18 @@
 {%- elif project.info.thumbnail %}
 {{project.info.thumbnail}}"
 {% else -%}
-{{url_for('static', filename='new_design/images/default-image.png')}}
+
+{% if project.category_name == 'sound' %}
+{{url_for('static', filename='new_design/images/audio.jpg')}}
+{% elif project.category_name == 'text' %}
+{{url_for('static', filename='new_design/images/text.jpg')}}
+{% elif project.category_name == 'image' %}
+{{url_for('static', filename='new_design/images/image.jpg')}}
+{% elif project.category_name == 'vidio' %}
+{{url_for('static', filename='new_design/images/vidid.jpg')}}
+{% else %}
+{{url_for('static', filename='new_design/images/default-img.jpg')}}
+{% endif %}
+
 {% endif -%}
 {% endmacro -%}

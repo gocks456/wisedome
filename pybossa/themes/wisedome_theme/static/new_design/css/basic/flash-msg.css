@@ -1,0 +1,65 @@
+/**flash message**/
+#mini-notification {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  padding: 0.75rem 2rem;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.hide-notification {
+  display: none;
+}
+
+.mdi-checkbox-marked-circle-outline,
+.mdi-comment-alert-outline,
+.mdi-alert-circle,
+.mdi-alert-outline {
+  font-size: 1.5em;
+}
+
+.mdi-window-close {
+  float: right;
+  font-size: 1em;
+}
+
+.alert-success {
+  color: #0e6c5e;
+  background-color: #d1f5f0;
+  border-color: #bff2ea;
+}
+
+.alert-info {
+  color: #0d4876;
+  background-color: #d1e8f9;
+  border-color: #bfdef7;
+}
+
+.alert-warning {
+  color: #84700a;
+  background-color: #fff7d0;
+  border-color: #fff4bd;
+}
+
+.alert-danger {
+  color: #84404e;
+  background-color: #ffe5ea;
+  border-color: #ffdae2;
+}
+
+@media all and (max-width: 575px) {
+  .mdi-checkbox-marked-circle-outline,
+  .mdi-comment-alert-outline,
+  .mdi-alert-circle,
+  .mdi-alert-outline {
+    font-size: 1em;
+  }
+  #mini-notification {
+    padding: 0.5rem 0.75rem;
+  }
+  #mini-notification span {
+    font-size: 0.875rem;
+  }
+}

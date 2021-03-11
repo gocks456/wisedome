@@ -1,0 +1,151 @@
+.head-wrapper {
+  background: #c7e4e2;
+  height: auto;
+}
+#nav > ul > li > a {
+  color: #dbceddf5 !important;
+}
+.content-wrapper {
+  background: #fff !important;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.main-panel {
+  width: calc(100%) !important;
+  z-index: -1;
+}
+
+.mainTitle {
+  margin-top: 7.5rem;
+}
+input[type="text"] {
+  border-radius: 0;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2.25rem;
+  padding-bottom: 1rem;
+  font-family: "SCDream3";
+  letter-spacing: 0.25rem;
+}
+
+.content-wrapper .card .card-body {
+  background-color: #fff;
+}
+
+@media (max-width: 575px) {
+  .mainTitle {
+    margin-top: 5.5rem;
+    padding: 0 7.5%;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+}
+
+/* Message Content */
+.message-body {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 5rem;
+}
+.message-body .sender-details {
+  padding: 1rem 0.95rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.message-body .sender-details img {
+  margin: 0.5rem 1rem 0 0;
+}
+
+.message-body .sender-details .details {
+  padding-bottom: 0;
+}
+.message-body .details .msg-subject {
+  margin-bottom: 0.5rem;
+  font-family: "SCDream4", sans-serif;
+  font-weight: bold;
+}
+.message-body .details .sender-email {
+  margin-bottom: 1.25rem;
+  font-family: "SCDream2", sans-serif;
+  color: #9c9fa6;
+  display: inline-block;
+}
+.message-body .details .writer-nickname {
+  margin-bottom: 1.25rem;
+  font-family: "SCDream3", sans-serif;
+  display: inline-block;
+}
+.message-body .sender-details .details .sender-email i {
+  font-size: 1rem;
+  font-family: "SCDream4", sans-serif;
+  margin: 0 1px 0 7px;
+}
+
+.message-body .message-content {
+  padding: 3rem 0.95rem;
+}
+
+.level-badge {
+  display: inline-block;
+  border: 1px solid #e2d9e4;
+  padding: 0px 15px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 500;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: "background";
+  transition-property: "background";
+  color: #84868b;
+  text-decoration: none;
+}
+
+.comment-view {
+  display: block;
+  padding: 2rem 0.95rem 1rem 0.95rem;
+}
+#submitComment {
+  min-width: 200px;
+}
+#comment-input {
+  width: 100%;
+  border-radius: 0.25rem;
+  border: 1px solid #dae0e5 !important;
+}
+#displayComment {
+  padding-left: 5rem;
+}
+.comment-area {
+  display: none;
+}
+.mdi-subdirectory-arrow-right {
+  font-size: 1.5rem;
+}
+@media screen and (max-width: 1024px) {
+  .message-body {
+    padding: 0 2.5rem;
+  }
+}
+@media screen and (max-width: 769px) {
+  .message-body {
+    padding: 0;
+  }
+  #submitComment {
+    min-width: 150px;
+    padding: 0.875rem 0;
+  }
+  .status {
+    display: none;
+  }
+}
+@media screen and (max-width: 575px) {
+  #displayComment {
+    padding-left: 2.5rem;
+  }
+}
