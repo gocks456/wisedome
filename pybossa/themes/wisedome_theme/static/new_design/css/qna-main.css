@@ -112,6 +112,17 @@ select.form-control:focus {
   text-decoration: none;
   color: #343a40;
 }
+
+.btn-write {
+  background: -webkit-linear-gradient(to left, #5cd8c1, #c1ccff);
+  background: linear-gradient(to left, #5cd8c1, #c1ccff);
+  border: 0;
+  color: #ffffff;
+}
+
+.btn-write :hover a {
+  color: #ffffff;
+}
 /**내가쓴글 확인하기 페이지**/
 .my-border {
   border-radius: 0.25rem;
@@ -188,6 +199,20 @@ select.form-control:focus {
 }
 
 @media (max-width: 575px) {
+  .nav-pills.nav-pills-custom .nav-link {
+    letter-spacing: normal;
+  }
+  .table .tb-date,
+  .table label,
+  .table .tb-status,
+  .table .tb-subject {
+    display: none;
+  }
+  .table .tb-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .form-group input {
     margin-top: 0.75rem;
   }

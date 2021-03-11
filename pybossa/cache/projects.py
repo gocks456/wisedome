@@ -544,16 +544,16 @@ def get_projects_limit(limit='all', category=None):
     sql = text(
         '''SELECT project.id, project.name, project.short_name,
            project.description, project.info, project.created, project.updated, project.all_point, project.condition, project.complete,
-           project.category_id, project.featured, "user".fullname AS owner
-           FROM "user", project
+           project.featured, "user".fullname AS owner, category.name AS category_name, project.end_date AS end_date
+           FROM "user", project, category
            WHERE
            "user".id=project.owner_id
            AND "user".restrict=false
            AND project.published=true
            AND project.complete=false
-           GROUP BY project.id, "user".id
+           GROUP BY project.id, "user".id, category.id
            ORDER BY project.end_date DESC
-		   LIMIT :limit;''')
+           LIMIT :limit;''')
 
     results = session.execute(sql, dict(limit=limit))
     projects = []
@@ -573,7 +573,8 @@ def get_projects_limit(limit='all', category=None):
                        info=row.info,
                        all_point=row.all_point,
                        condition=row.condition,
-                       category_id=row.category_id,
+                       category_name=row.category_name,
+                       end_date=row.end_date,
                        complete=row.complete)
         projects.append(Project().to_public_json(project))
   

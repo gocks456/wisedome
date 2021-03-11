@@ -1,0 +1,23 @@
+/**footer**/
+footer {
+  background-color: #f2edf3;
+  font-family: "SCDream2";
+  padding-top: 2rem;
+}
+.font-weight-normal {
+  font-size: 0.65rem;
+}
+
+.footer-border-bottom {
+  border-bottom: 1px solid #dfd1e2;
+}
+
+footer .nav-link {
+  font-size: 0.65rem;
+  letter-spacing: 0.25rem;
+  color: #164947;
+  font-family: "SCDream3";
+}
+footer .nav-link:hover {
+  color: black;
+}

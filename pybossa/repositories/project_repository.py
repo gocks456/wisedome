@@ -68,9 +68,13 @@ class ProjectRepository(Repository):
     # 대시보드 / 참여한 프로젝트 (종료된 프로젝트 X)
     def get_contributed_projects_all(self, user_id):
         from pybossa.model.task_run import TaskRun
-        return self.db.session.query(Project.name, Project.short_name, Project.condition, Project.all_point, Project.updated, Project.end_date,  Project.info).filter(
-                        and_(Project.id==TaskRun.project_id, Project.complete==False, Project.published==True,
-                            TaskRun.user_id==user_id)).group_by(Project.id, TaskRun.project_id).order_by((Project.end_date).desc()).all()
+        from pybossa.model.category import Category
+
+        return self.db.session.query(Project.name, Project.short_name, Project.description, Project.condition, Project.all_point, 
+                            Project.updated, Project.end_date, Project.info, Category.name.label('category_name')).filter(
+                        and_(Project.id==TaskRun.project_id, #Project.complete==False, Project.published==True,
+                            TaskRun.user_id==user_id, Project.category_id==Category.id)).group_by(
+                        Project.id, TaskRun.project_id, Category.id).order_by((Project.end_date).desc()).all()
 
     #20.02.25. 수정사항
     def get_point(self, short_name):

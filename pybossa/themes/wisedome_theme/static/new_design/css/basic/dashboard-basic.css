@@ -17663,6 +17663,7 @@ dl li {
 }
 @media (max-width: 991px) {
   .default-layout-navbar {
+    -moz-box-shadow:0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   }
@@ -18443,10 +18444,12 @@ dl li {
   padding: 0;
   width: 250px;
   z-index: 11;
+  /**
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
   -moz-transition: width 0.25s ease, background 0.25s ease;
   -ms-transition: width 0.25s ease, background 0.25s ease;
+  **/
 }
 .sidebar .nav {
   overflow: hidden;
@@ -18461,10 +18464,12 @@ dl li {
 }
 .sidebar .nav .nav-item {
   padding: 0 2.25rem;
+  /**
   -webkit-transition-duration: 0.25s;
   transition-duration: 0.25s;
   transition-property: background;
   -webkit-transition-property: background;
+  **/
 }
 .sidebar .nav .nav-item .collapse {
   z-index: 999;
@@ -18479,10 +18484,12 @@ dl li {
   white-space: nowrap;
   padding: 1.125rem 0 1.125rem 0;
   color: #fff;
+  /**
   -webkit-transition-duration: 0.45s;
   transition-duration: 0.45s;
   transition-property: color;
   -webkit-transition-property: color;
+  **/
 }
 .sidebar .nav .nav-item .nav-link i {
   color: inherit;
