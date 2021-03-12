@@ -3,7 +3,7 @@
 <!--this page css-->
 {% block css %}
 <link rel="stylesheet" href="/static/new_design/css/point.css">
-<!--<link rel="stylesheet" href="/static/new_design/css/pointTable.css">-->
+<link rel="stylesheet" href="/static/new_design/css/qnaBoard.css">
 {% endblock %}
 
 {% block content %}
@@ -168,10 +168,10 @@
 				<div class="card-body">
 					<h4 class="card-title "><i class="mdi mdi-star-circle"></i>  포인트 내역</h4>
 
-					<div class="table-responsive">
-						<table class="table table-bordered table-xl-responsive" id="point-table">
+					<div class="col-12 table-responsive">
+						<table class="table table-md-responsive" id="point-table">
 							<thead class="thead-light">
-								<tr class="table-active">
+								<tr>
 									<th> # </th>
 									<th> 설명 </th>
 									<th> 적립 </th>
@@ -191,8 +191,8 @@
 								</tr>
 								{% endfor %}
 								{% endif %}
-										
-								
+
+
 								{% if point_log|length != 0 %}
 								{% for i in range (0, point_log|length) %}
 								<tr>
@@ -221,9 +221,9 @@
 <!-- plugins:js this page only-->
 <script src="/static/new_design/js/plugin/wizard.jquery.steps.js"></script>
 <script src="/static/new_design/js/point.js"></script>
+<script src="/static/new_design/js/pointTable.js"></script>
 <script src="/static/new_design/js/plugin/jquery.dataTable.js"></script>
 <script src="/static/new_design/js/plugin/dataTable.js"></script>
-<script src="/static/new_design/js/pointTable.js"></script>
 
 	<script>
 		$(document).ready(function() {
@@ -243,10 +243,6 @@
 				var account_number = $("#bankNum").text();
 				var exchange_point = $("#transferMoney").text();
 
-				console.log(request_name);
-				console.log(bank);
-				console.log(account_number);
-				console.log(exchange_point);
 				if (request_name != '' && bank != '' && account_number != '' && exchange_point != '' ) {
 					$.ajax({
 						url: window.location.href,
@@ -267,7 +263,6 @@
 					});
 				}
 			});
-			console.log('hhhh');
 		});
 	</script>
 
