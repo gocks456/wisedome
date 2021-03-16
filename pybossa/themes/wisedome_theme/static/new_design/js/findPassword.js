@@ -95,6 +95,69 @@
   })(jQuery);
 
 
+
+//1-1.이름 확인과 에러메시지
+  $(function() {
+
+	  var myName ="1234";  //임의로 설정한 사용자 이름
+
+    $('#name').on('keyup',function() {
+        if( $(this).val() == myName ){
+			$('#success-name').css("display","block");
+			$('#error-name').css("display","none");
+            $('#step1').attr('disabled', false);
+        }
+        else {
+			$('#error-name').css("display","block");
+			$('#success-name').css("display","none");
+            $('#step1').attr('disabled', true);
+        }
+    });
+});
+
+
+//1-2.이메일확인과 에러메세지
+$(function() {
+
+	var myEmail ="1234";  //임의로 설정한 사용자 이메일
+
+  $('#email').on('keyup',function() {
+	  if( $(this).val() == myEmail ){
+		  $('#success-email').css("display","block");
+		  $('#error-email').css("display","none");
+		  $('#step1').attr('disabled', false);
+	  }
+	  else {
+		  $('#error-email').css("display","block");
+		  $('#success-email').css("display","none");
+		  $('#step1').attr('disabled', true);
+	  }
+  });
+});
+
+
+
+//2. 인증코드확인
+$(function() {
+
+	var myCode ="1234";  //임의로 설정한 인증코드
+
+  $('#code').on('keyup',function() {
+	  if( $(this).val() == myCode ){
+		  $('#success-code').css("display","block");
+		  $('#error-code').css("display","none");
+		  $('#step2').attr('disabled', false);
+	  }
+	  else {
+		  $('#error-code').css("display","block");
+		  $('#success-code').css("display","none");
+		  $('#step2').attr('disabled', true);
+	  }
+  });
+});
+
+
+
 //3.비밀번호 일치하면 버튼 활성화
 $(function() {
     $('#pwd2').on('keyup',function() {

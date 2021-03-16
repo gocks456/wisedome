@@ -1,3 +1,4 @@
+
 (function($) {
   'use strict';
   $(function() {
@@ -10,7 +11,7 @@
       "language": {
         search: ""
       },
-		"order": [[1,'desc']]
+      "order": [[1,'desc']]
     });
     $('#order-listing').each(function() {
       var datatable = $(this);

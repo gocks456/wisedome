@@ -6,14 +6,13 @@
   });
 
 
-//editor emplate
+//editor template
   $('#summernote').summernote({
 
     lang: "ko-KR",
     placeholder: "입력하세요",
     tabsize: 2,
     height: 250,
-
 
     toolbar: [
       ['style', ['style']],
@@ -25,8 +24,7 @@
       ['insert', ['link', 'picture', 'video']],
       ['view', ['fullscreen', 'codeview', 'help']],
     ],
-
+    
   });
 
   $('#summernote').summernote('foreColor','#76767a');
-$('.dropdown-toggle').dropdown()

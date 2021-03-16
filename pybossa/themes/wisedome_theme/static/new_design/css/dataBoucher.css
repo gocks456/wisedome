@@ -1,0 +1,283 @@
+body,
+html,
+h4,
+h5,
+h6 {
+  font-family: "SCDream3", "Apple Gothic";
+}
+h1,
+h2,
+h3 {
+  font-family: "SCDream4", "Apple Gothic";
+}
+a {
+  text-decoration: none;
+}
+.btn a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/**메인 탑 페이지***/
+.banner-wrapper {
+  background-color: #c7e4e2;
+  padding-bottom: 2.5rem;
+}
+
+.mainImg-content {
+  padding-right: 0;
+  margin-top: 3rem;
+  justify-content: end;
+}
+
+#main-img {
+  width: 100%;
+  max-width: 500px;
+}
+#main-img-tablet {
+  display: none;
+}
+.main-text h1 {
+  margin: 1rem 0;
+  color: #00232c;
+  margin: 0.6em 0;
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  line-height: 2.5rem;
+  font-family: "SCDream3", "Apple Gothic";
+}
+
+.main-text h5 {
+  font-size: 0.8rem;
+}
+.main-text p {
+  color: #396361;
+  font-size: 1rem;
+  line-height: 1.5em;
+}
+
+.hr {
+  background-color: #b66dff;
+  border: none;
+  width: 50px;
+  height: 3px;
+  margin: 0.85rem 0 0.5rem 0;
+}
+
+@media screen and (max-width: 991px) {
+  .banner-wrapper {
+    padding: 2.5rem 0 2rem 2rem;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .hr {
+    margin-top: 0.85rem;
+    margin: 0 auto;
+  }
+  .banner-wrapper {
+    padding: 2.5rem 0 0 0;
+  }
+  .mainImg-content {
+    margin-top: 2.5rem;
+    justify-content: center !important;
+  }
+  #main-img {
+    display: none;
+  }
+  #main-img-tablet {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+  }
+  .main-text {
+    text-align: center;
+    padding: 0 4rem;
+  }
+  .main-text h1 {
+    color: #315057;
+    font-size: 2.25rem;
+  }
+  .main-text p {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (max-width: 575px) {
+  .main-text {
+    padding: 0 2rem;
+  }
+  .main-text h1 {
+    font-size: 2em;
+  }
+  .main-text p {
+    font-size: 0.85em;
+  }
+  .mainImg-content {
+    margin-top: 2rem;
+    padding: 0 2rem;
+  }
+}
+
+/**가공서비스 4개 아이콘**/
+.datalist-wrapper {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 2.5rem 5rem;
+}
+.feature-list {
+  padding-top: 2.5rem;
+}
+.feature-description {
+  text-align: center;
+}
+.feature-list-item {
+  text-align: center;
+  padding: 0 2.5rem;
+}
+.feature-list h4 {
+  color: #294d91;
+}
+.icon-xl {
+  font-size: 5rem;
+  color: #294d91;
+}
+@media screen and (max-width: 991px) {
+  .datalist-wrapper {
+    padding: 2rem 2.5rem;
+  }
+  .feature-list-item {
+    padding: 0 1.5rem;
+  }
+}
+@media screen and (max-width: 769px) {
+  .howTo-wrapper.feature-list-item {
+    padding: 0.5rem;
+  }
+}
+@media screen and (max-width: 575px) {
+  .datalist-wrapper {
+    padding: 1rem 1.5rem 0 1.5rem;
+  }
+  .feature-list-item {
+    padding: 0 1rem;
+  }
+}
+
+/**신청방법 아이콘*/
+.howTo-wrapper {
+  background: #f7f6f6;
+
+  padding: 2.5rem 5rem;
+}
+
+/* Pricing table */
+.pricing-table {
+  padding-top: 2.5rem;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+.pricing-table .pricing-card .pricing-card-body {
+  padding: 2.5rem 2.5rem 1rem 2.5rem;
+}
+.pricing-table .pricing-card .pricing-card-body .pricing-card-head h4 {
+  color: black;
+  font-family: "SCDream4";
+}
+.pricing-table .pricing-card .pricing-card-body .plan-features {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.pricing-table .pricing-card .pricing-card-body .plan-features li {
+  text-align: left;
+  padding: 0.25rem 0;
+  font-size: 0.875rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .howTo-wrapper {
+    padding: 2rem 2.5rem;
+  }
+  .pricing-table .pricing-card .pricing-card-body {
+    padding: 2rem 1rem 1rem 2rem;
+  }
+}
+@media screen and (max-width: 769px) {
+  .pricing-table .pricing-card .pricing-card-body {
+    padding: 2rem 3rem 1rem 3rem;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .howTo-wrapper {
+    padding: 1rem 1.5rem 0 1.5rem;
+  }
+  .pricing-table .pricing-card .pricing-card-body {
+    padding: 2rem 2rem 1rem 2rem;
+  }
+}
+
+/**contact us***/
+.contact-wrapper {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 2.5rem 5rem 0 5rem;
+}
+.edica-contact {
+  padding-top: 2.5rem;
+}
+.edica-contact input,
+.edica-contact textarea {
+  border: 1px solid #e4c0c6;
+  border-radius: 0.25rem;
+}
+.edica-contact input:focus,
+.edica-contact textarea:focus {
+  border: 1px solid #fc6180;
+}
+
+.edica-contact .contact-sidebar {
+  text-align: center;
+}
+.edica-contact .contact-sidebar h5 {
+  margin-bottom: 25px;
+  font-family: "SCDream4";
+}
+
+.edica-contact .contact-sidebar p {
+  font-size: 0.875rem;
+  line-height: 1.63;
+  color: #7d848b;
+  margin-bottom: 19px;
+}
+.icon-xxl {
+  font-size: 6.5rem;
+}
+
+@media screen and (max-width: 991px) {
+  .contact-wrapper {
+    padding: 2rem 2.5rem;
+    margin-bottom: 0;
+  }
+}
+@media screen and (max-width: 769px) {
+  .edica-contact .contact-sidebar {
+    margin-bottom: 2rem;
+    padding: 0 2.5rem;
+  }
+  .edica-contact .contact-sidebar h5 {
+    margin-bottom: 1.5rem;
+  }
+  .edica-contact .btn {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 575px) {
+  .contact-wrapper {
+    padding: 1rem 1.5rem 0 1.5rem;
+  }
+  .edica-contact .btn {
+    width: 90%;
+    margin: 0 auto;
+  }
+}

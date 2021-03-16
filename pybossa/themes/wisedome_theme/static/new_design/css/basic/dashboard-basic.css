@@ -2499,10 +2499,10 @@ textarea {
   line-height: inherit;
 }
 
-textarea, input{
+textarea,
+input {
   font-family: Arial, Helvetica, sans-serif !important;
 }
-
 
 button,
 input {
@@ -5428,13 +5428,13 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary {
-  color: #b66dff;
-  border-color: #b66dff;
+  color: #b66dff !important;
+  border-color: #b66dff !important;
 }
 .btn-outline-primary:hover {
-  color: #fff;
-  background-color: #b66dff;
-  border-color: #b66dff;
+  color: #fff !important;
+  background-color: #b66dff !important;
+  border-color: #b66dff !important;
 }
 .btn-outline-primary:focus,
 .btn-outline-primary.focus {
@@ -15333,12 +15333,12 @@ code {
 
 /* inverse buttons */
 .btn-inverse-primary {
-  background-color: rgba(182, 109, 255, 0.2);
-  background-image: none;
-  border-color: rgba(182, 109, 255, 0);
+  background-color: rgba(182, 109, 255, 0.2) !important;
+  background-image: none ;
+  border-color: rgba(182, 109, 255, 0) !important;
 }
 .btn-inverse-primary:not(.btn-inverse-light) {
-  color: #b66dff;
+  color: #b66dff !important;
 }
 .btn-inverse-primary:hover {
   color: #ffffff;
@@ -17663,7 +17663,7 @@ dl li {
 }
 @media (max-width: 991px) {
   .default-layout-navbar {
-    -moz-box-shadow:0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   }
