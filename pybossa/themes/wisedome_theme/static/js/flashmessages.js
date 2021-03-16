@@ -1,10 +1,14 @@
 function pybossaNotify(msg, showNotification, type){
+	if (msg=='로그아웃 완료' || msg=='발생한 오류를 수정하세요.')
+		return;
+
     $("#pybossa-notification").remove();
     var div = $("<div/>");
     div.attr("id", "pybossa-notification");
-    var icon = $("<li/>");
-    var close = $("<li/>");
-    close.addClass("fa fa-2x fa-close pull-right");
+    //div.attr("class", "content-wrapper");
+    var icon = $("<i/>");
+    var close = $("<i/>");
+    close.addClass("mdi mdi-window-close");
     close.on('click', function(){
         $("#pybossa-notification").addClass("hide-notification");
     });
@@ -12,7 +16,7 @@ function pybossaNotify(msg, showNotification, type){
         type = 'info';
     }
     if ((type === 'danger') || (type === 'error') || (type === 'warning') || (type == 'message')) {
-        icon.addClass("fa fa-2x fa-exclamation-triangle pull-left"); 
+        icon.addClass("mdi mdi-alert-circle"); 
     }
 
     if (type === 'message') {
@@ -20,15 +24,15 @@ function pybossaNotify(msg, showNotification, type){
     }
 
     if (type === 'info') {
-        icon.addClass("fa fa-2x fa-bullhorn pull-left"); 
+        icon.addClass("mdi mdi-comment-alert-outline"); 
     }
 
     if (type === 'success') {
-        icon.addClass("fa fa-2x fa-check pull-left"); 
+        icon.addClass("mdi mdi-checkbox-marked-circle-outline"); 
     }
 
     if (type === 'loading') {
-        icon.addClass("fa fa-2x fa-circle-o-notch fa-spin pull-left"); 
+        icon.addClass("mdi mdi-comment-alert-outline"); 
         type = 'info';
     }
 
@@ -39,13 +43,18 @@ function pybossaNotify(msg, showNotification, type){
     if (type === 'error') {
         type = 'danger';
     }
+	// 추가
+	div.addClass("alert");
+
     div.addClass("alert-" + type);
     div.prepend(icon);
     div.append(text);
     div.append(close);
     if (showNotification === true) {
         div.addClass("show-notification");
-        $("body").prepend(div);
+        //$("body").prepend(div);
+		$(".flash_messages").prepend(div);
+
     }
     else {
         $("#pybossa-notification").addClass("hide-notification");

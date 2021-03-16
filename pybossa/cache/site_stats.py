@@ -20,7 +20,7 @@ from sqlalchemy.sql import text
 from flask import current_app
 
 from pybossa.core import db
-from pybossa.cache import cache, ONE_DAY
+from pybossa.cache import cache, ONE_DAY, SEVEN_DAYS
 
 session = db.slave_session
 
@@ -99,8 +99,8 @@ def get_top5_projects_24_hours():
     sql = text('''SELECT project.id, project.name, project.short_name, project.info,
                COUNT(task_run.project_id) AS n_answers FROM project, task_run
                WHERE project.id=task_run.project_id
-               AND DATE(task_run.finish_time) > NOW() AT TIME ZONE 'utc' - INTERVAL '24 hour'
-               AND DATE(task_run.finish_time) <= NOW() AT TIME ZONE 'utc'
+               AND DATE(task_run.finish_time) > NOW() AT TIME ZONE 'ROK' - INTERVAL '24 hour'
+               AND DATE(task_run.finish_time) <= NOW() AT TIME ZONE 'ROK'
                GROUP BY project.id
                ORDER BY n_answers DESC LIMIT 5;''')
 
@@ -122,8 +122,8 @@ def get_top5_users_24_hours():
                "user".restrict,
                COUNT(task_run.project_id) AS n_answers FROM "user", task_run
                WHERE "user".restrict=false AND "user".id=task_run.user_id
-               AND DATE(task_run.finish_time) > NOW() AT TIME ZONE 'utc' - INTERVAL '24 hour'
-               AND DATE(task_run.finish_time) <= NOW() AT TIME ZONE 'utc'
+               AND DATE(task_run.finish_time) > NOW() AT TIME ZONE 'ROK' - INTERVAL '24 hour'
+               AND DATE(task_run.finish_time) <= NOW() AT TIME ZONE 'ROK'
                GROUP BY "user".id
                ORDER BY n_answers DESC LIMIT 5;''')
 
@@ -135,3 +135,27 @@ def get_top5_users_24_hours():
                     n_answers=row.n_answers)
         top5_users_24_hours.append(user)
     return top5_users_24_hours
+
+@cache(timeout=SEVEN_DAYS, key_prefix="site_top5_users_7_days")
+def get_top5_users_7_days():
+    """Return top 10 users in last 7 days."""
+    # Top 5 Most active users in last 7 days
+    sql = text('''SELECT "user".id, "user".fullname, "user".name, "user".info,
+               "user".restrict, SUM(task_run.point) AS point, SUBSTRING("user".created, 0 ,5) AS created,
+               COUNT(task_run.project_id) AS n_answers FROM "user", task_run
+               WHERE "user".restrict=false AND "user".id=task_run.user_id
+               AND DATE(task_run.finish_time) > NOW() AT TIME ZONE 'ROK' - INTERVAL '7 days'
+               AND DATE(task_run.finish_time) <= NOW() AT TIME ZONE 'ROK'
+               GROUP BY "user".id
+               ORDER BY point DESC LIMIT 5;''')
+
+    results = session.execute(sql, dict(limit=5))
+    top5_users_7_days = []
+    ranking = 1
+    for row in results:
+        user = dict(id=row.id, fullname=row.fullname,
+                    name=row.name, created=row.created, point=row.point, info=row.info,
+                    n_answers=row.n_answers, rank=ranking)
+        top5_users_7_days.append(user)
+        ranking = ranking + 1
+    return top5_users_7_days

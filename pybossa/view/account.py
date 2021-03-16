@@ -52,7 +52,7 @@ from pybossa.cache import users as cached_users
 from pybossa.cache import categories as cached_cat
 from pybossa.auth import ensure_authorized_to
 from pybossa.jobs import send_mail, export_userdata, delete_account
-from pybossa.core import user_repo, ldap, point_repo, exchange_repo, achi_repo
+from pybossa.core import user_repo, ldap, point_repo, exchange_repo, task_repo, project_repo
 from pybossa.feed import get_update_feed
 from pybossa.messages import *
 from pybossa import otp
@@ -103,6 +103,7 @@ def signin():
 
     """
     form = LoginForm(request.body)
+
     isLdap = current_app.config.get('LDAP_HOST', False)
     if (request.method == 'POST' and form.validate()
             and isLdap is False):
@@ -111,7 +112,8 @@ def signin():
         user = user_repo.get_by(email_addr=email)
         if user and user.check_password(password):
             if not current_app.config.get('ENABLE_TWO_FACTOR_AUTH'):
-                msg_1 = gettext("Welcome back") + " " + user.fullname
+                #msg_1 = gettext("Welcome back") + " " + user.fullname
+                msg_1 = gettext(" ") + user.fullname + ("님 환영합니다.")
                 flash(msg_1, 'success')
                 return _sign_in_user(user)
             else:
@@ -125,14 +127,14 @@ def signin():
             if method == 'local':
                 #msg = gettext("Ooops, Incorrect email/password")
                 msg = gettext("비밀번호가 일치하지 않습니다.")
-                flash(msg, 'error')
+                flash(msg, 'warning')
             else:
-                flash(msg, 'info')
+                flash(msg, 'warning')
         else:
             #msg = gettext("Ooops, we didn't find you in the system, \
             #              did you sign up?")
             msg = gettext("존재하지 않는 아이디입니다.")
-            flash(msg, 'info')
+            flash(msg, 'warning')
 
 
     if (request.method == 'POST' and form.validate()
@@ -157,11 +159,13 @@ def signin():
             else:
                 login_user(user_db, remember=True)
         else:
-            msg = gettext("User LDAP credentials are wrong.")
+            #msg = gettext("User LDAP credentials are wrong.")
+            msg = gettext("사용자 인증이 잘못되었습니다.")
             flash(msg, 'info')
 
     if request.method == 'POST' and not form.validate():
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요.'), 'error')
     auth = {'twitter': False, 'facebook': False, 'google': False}
     if current_user.is_anonymous:
         # If Twitter is enabled in config, show the Twitter Sign in button
@@ -172,11 +176,19 @@ def signin():
                 auth['facebook'] = True
             if ('google' in current_app.blueprints):  # pragma: no cover
                 auth['google'] = True
-        response = dict(template='account/signin.html',
+        #response = dict(template='account/signin.html',
+        #                title="Sign in",
+        #                form=form,
+        #                auth=auth,
+        #                next=request.args.get('next'))
+
+        # 로그인 New Design
+        response = dict(template='new_design/login.html',
                         title="Sign in",
                         form=form,
                         auth=auth,
                         next=request.args.get('next'))
+
         return handle_content_type(response)
     else:
         # User already signed in, so redirect to home page
@@ -208,15 +220,17 @@ def _email_two_factor_auth(user, invalid_token=False):
                         user=user, otpcode=otp_code)
     mail_queue.enqueue(send_mail, msg)
     if not invalid_token:
-        flash(gettext('an email has been sent to you with one time password'),
-              'success')
+        #flash(gettext('an email has been sent to you with one time password'),
+        #      'success')
+        flash(gettext('일회용 패스워드를 메일로 전송하였습니다.'), 'success')
 
 
 @blueprint.route('/<token>/otpvalidation', methods=['GET', 'POST'])
 def otpvalidation(token):
     email = otp.retrieve_email_for_token(token)
     if not email:
-        flash(gettext('Please sign in.'), 'error')
+        #flash(gettext('Please sign in.'), 'error')
+        flash(gettext('로그인 해주세요.'), 'error')
         return redirect_content_type(url_for('account.signin'))
     form = OTPForm(request.body)
     user_otp = form.otp.data
@@ -231,17 +245,20 @@ def otpvalidation(token):
         if otp_code is not None:
             print(otp_code, user_otp)
             if otp_code == user_otp:
-                msg = gettext('OTP verified. You are logged in to the system')
+                #msg = gettext('OTP verified. You are logged in to the system')
+                msg = gettext('OTP 인증 완료. 시스템에 로그인 되었습니다.')
                 flash(msg, 'success')
                 otp.expire_token(token)
                 return _sign_in_user(user)
             else:
-                msg = gettext('Invalid one time password, a newly generated '
-                              'one time password was sent to your email.')
+                #msg = gettext('Invalid one time password, a newly generated '
+                #              'one time password was sent to your email.')
+                msg = gettext('잘못된 일회용 패스워드입니다. 메일을 확인해주세요.')
                 flash(msg, 'error')
         else:
-            msg = gettext('Expired one time password, a newly generated one '
-                          'time password was sent to your email.')
+            #msg = gettext('Expired one time password, a newly generated one '
+            #              'time password was sent to your email.')
+            msg = gettext('일회용 패스워드가 만료되었습니다.')
             flash(msg, 'error')
 
         current_app.logger.info(('Invalid OTP. retrieved: {}, submitted: {}, '
@@ -266,7 +283,8 @@ def signout():
 
     """
     logout_user()
-    flash(gettext('You are now signed out'), SUCCESS)
+    #flash(gettext('You are now signed out'), SUCCESS)
+    flash(gettext('로그아웃 완료'), SUCCESS)
     return redirect_content_type(url_for('home.home'), status=SUCCESS)
 
 
@@ -303,8 +321,9 @@ def confirm_email():
         msg['html'] = render_template('/account/email/validate_email.html',
                                       user=account, confirm_url=confirm_url)
         mail_queue.enqueue(send_mail, msg)
-        msg = gettext("An e-mail has been sent to \
-                       validate your e-mail address.")
+        #msg = gettext("An e-mail has been sent to \
+        #               validate your e-mail address.")
+        msg = gettext("이메일 인증을 해주세요.")
         flash(msg, 'info')
         user.confirmation_email_sent = True
         user_repo.update(user)
@@ -327,17 +346,20 @@ def register():
         form = RegisterFormWithUserPrefMetadata(request.body)
         form.set_upref_mdata_choices()
 
-    msg = "I accept receiving emails from %s" % current_app.config.get('BRAND')
-    form.consent.label = msg
+    #msg = "와이즈돔 이용약관에 동의합니다 (필수)"
+    #form.consent.label = msg
 
     if request.method == 'POST' and form.validate():
+        for f in form:
+            print(f)
         if current_app.config.upref_mdata:
             user_pref, metadata = get_user_pref_and_metadata(form.name.data, form)
             account = dict(fullname=form.fullname.data, name=form.name.data,
                            email_addr=form.email_addr.data,
                            password=form.password.data,
-                           consent=form.consent.data,
-                           sex=form.sex.data, birth=form.birth.data,
+                           #consent=form.consent.data,
+                           sex=form.sex.data, birth=(form.year.data + form.month.data + form.day.data),
+                           #sex=form.sex.data, birth=form.birth.data,
                            user_type=form.user_type.data)
             account['user_pref'] = user_pref
             account['metadata'] = metadata
@@ -345,14 +367,16 @@ def register():
             account = dict(fullname=form.fullname.data, name=form.name.data,
                            email_addr=form.email_addr.data,
                            password=form.password.data,
-                           consent=form.consent.data,
-                           sex=form.sex.data, birth=form.birth.data)
+                           #consent=form.consent.data,
+                           sex=form.sex.data, birth=(form.year.data + form.month.data + form.day.data))
+                           #sex=form.sex.data, birth=form.birth.data)
         confirm_url = get_email_confirmation_url(account)
 
 
         if current_app.config.get('ACCOUNT_CONFIRMATION_DISABLED'):
             return _create_account(account)
-        msg = dict(subject='Welcome to %s!' % current_app.config.get('BRAND'),
+        #msg = dict(subject='Welcome to %s!' % current_app.config.get('BRAND'),
+        msg = dict(subject='%s 에 오신 것을 환영합니다.' % current_app.config.get('BRAND'),
                    recipients=[account['email_addr']],
                    body=render_template('/account/email/validate_account.md',
                                         user=account, confirm_url=confirm_url))
@@ -363,9 +387,10 @@ def register():
                     status='sent')
         return handle_content_type(data)
     if request.method == 'POST' and not form.validate():
-        flash(gettext('Please correct the errors'), 'error')
-    data = dict(template='account/register.html',
-                title=gettext("Register"), form=form)
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext("발생한 오류를 수정하세요."), 'error')
+    data = dict(template='new_design/register/register.html',
+                title=gettext("Register"), form=form, csrf=generate_csrf())
     return handle_content_type(data)
 
 
@@ -387,13 +412,15 @@ def newsletter_subscribe():
             user_repo.update(user)
         if request.args.get('subscribe') == 'True':
             newsletter.subscribe_user(user)
-            flash("You are subscribed to our newsletter!", 'success')
+            #flash("You are subscribed to our newsletter!", 'success')
+            flash("구독 되었습니다.", 'success')
             return redirect_content_type(next_url)
         elif request.args.get('subscribe') == 'False':
             return redirect_content_type(next_url)
         else:
             response = dict(template='account/newsletter.html',
-                            title=gettext("Subscribe to our Newsletter"),
+                            #title=gettext("Subscribe to our Newsletter"),
+                            title=gettext("구독"),
                             next=next_url)
             return handle_content_type(response)
     else:
@@ -422,11 +449,12 @@ def _create_account(user_data, ldap_disabled=True):
                                name=user_data['name'],
                                email_addr=user_data['email_addr'],
                                valid_email=True,
+                               # 2020.11.27. 업적 리뉴얼 예정
                                #20.02.26. 수정사항
-                               achievement={"all": "", "rank": "", "category": ""},
+                               #achievement={"all": "", "rank": "", "category": ""},
                                sex=user_data['sex'],
-                               birth=user_data['birth'],
-                               consent=user_data['consent'])
+                               birth=user_data['birth'])#,
+                               #consent=user_data['consent'])
 
     if user_data.get('user_pref'):
         new_user.user_pref = user_data['user_pref']
@@ -486,6 +514,7 @@ def redirect_profile():
 
 @blueprint.route('/<name>/', methods=['GET'])
 def profile(name):
+
     """
     Get user profile.
 
@@ -503,6 +532,7 @@ def profile(name):
         form.set_upref_mdata_choices()
 
     if current_user.is_anonymous or (user.id != current_user.id):
+        return abort(403)
         return _show_public_profile(user, form)
     if current_user.is_authenticated and user.id == current_user.id:
         return _show_own_profile(user, form, current_user)
@@ -548,72 +578,55 @@ def exchange(name):
     """
     user = user_repo.get_by_name(name)
 
-   # f = open("./pybossa/is_lock.py",'r')
-   # ff = f.read()
-   # f.close()
-
-    #print(ff[5])
-
     if not user:
         return abort(404)
     if current_user.name != name:
         return abort(403)
 
-
     if request.method == 'GET' and current_user.is_authenticated and user.id == current_user.id:
         return _exchange_request(user)
 
     if request.method == 'POST':
-        form = ExchangeForm(request.body)
-        exchange = model.exchange.Exchange(user_id = current_user.id,
-                            request_name = form.request_name.data,
-                            bank = form.bank.data,
-                            account_number = form.account_number.data,
-                            exchange_point = form.exchange_point.data,
-                            created = get_time())
-        response = dict(template='/account/exchange.html',
-                form=form,
-                name=name)
+        exchange = model.exchange.Exchange(user_id = user.id,
+                            request_name = request.form['request_name'],
+                            bank = request.form['bank'],
+                            account_number = request.form['account_number'],
+                            exchange_point = int(request.form['exchange_point'].replace(',' , '')))
 
-        if form.validate():
-#            if (ff[5]=="F"):
- #               flash(gettext('LOCKED'), 'error')
-  #              return handle_content_type(response)
-            a = form.exchange_point
-            if (int(exchange.exchange_point) > int(current_user.current_point)):
-                flash(gettext('가지고 있는 포인트 이내에서 환급요청 하십시오!'), 'error')
-                return handle_content_type(response)
+        current_point = point_repo.get_current_point(user.id).current_point
+        if (int(exchange.exchange_point) > int(current_point)):
+            flash(gettext('가지고 있는 포인트 이내에서 환급요청 하십시오!'), 'error')
+            return 'fail'
+        else:
             flash(gettext('환급요청성공'), 'success')
-            point_repo.exchange(current_user.id,form.exchange_point.data)
+            point_repo.exchange(user.id, exchange.exchange_point)
             exchange_repo.save(exchange)
-            return redirect_content_type(url_for('.point',
-                                                 name=current_user.name))
-
-        flash(gettext('환급 요청 실패'), 'error')
-        return handle_content_type(response)
-
-def get_time():
-    now = datetime.datetime.now()
-    return now.strftime('%Y-%m-%dT%H:%M:%S.%f')
+            return 'success'
 
 def _exchange_request(user):
-    exchange_user = model.exchange.Exchange(request_name = current_user.fullname)
-    user_dict = cached_users.get_user_summary(user.name)
-    form = ExchangeForm(obj=exchange_user)
-    #form.request_name=current_user.fullname
-    response = dict(template='account/exchange.html',
+    current_point = format(point_repo.get_current_point(user.id).current_point, ",")
+    point_log = exchange_repo.get_exchange_log(user.id)
+    exchanging = exchange_repo.get_exchanging(user.id)
+    print(exchanging)
+
+    response = dict(template='new_design/account/exchange.html',
                     title=gettext("Exchange"),
-                    user=user_dict,
-                    form = form,
-                    can_update=False)
+                    user=user,
+                    current_point=current_point,
+                    point_log=point_log,
+                    exchanging=exchanging,
+                    csrf=generate_csrf())
     return handle_content_type(response)
 
+# 2020.11.27. 업적 리뉴얼 예정
+'''
 @blueprint.route('/<name>/achievement/')
 @blueprint.route('/<name>/achievement/<string:achieve_id>/')
 @blueprint.route('/<name>/achievement/<string:achieve_id>/<string:category_name>/')
 @login_required
 def achievement(name, achieve_id='', category_name=''):
-    """ 업적 페이지 """
+    
+
     user = user_repo.get_by_name(name)
     achieve_dict = []
     if achieve_id != '':
@@ -632,7 +645,7 @@ def achievement(name, achieve_id='', category_name=''):
                               user=user,
                               achievement=achieve_dict)
     return handle_content_type(response)
-        
+'''
 @blueprint.route('/<name>/point')
 @login_required
 def point(name):
@@ -650,50 +663,43 @@ def point(name):
         return _show_public_profile(user, form)
     if current_user.is_authenticated and user.id == current_user.id:
         return _show_points(user)
-
 def _show_points(user):
-    user_dict = cached_users.get_user_summary(user.name)
-    projects_contributed = cached_users.public_projects_contributed_cached(user.id)
     point_history = cached_users.get_user_point_history(current_user.id)
     from operator import itemgetter
     point_history = sorted(point_history, key=itemgetter('finish_time'), reverse=True)
     response = dict(template='account/point.html',
                     title=gettext("Point"),
-                    user=user_dict,
-                    projects_contrib=projects_contributed,
                     point_hist=point_history,
-                    c_name=cached_cat.get_all_name(),
                     can_update=False)
     return handle_content_type(response)
 
 
 
 def _show_own_profile(user, form, current_user):
-    n_year = datetime.datetime.now().year
-    user_dict = cached_users.get_user_summary(user.name, current_user)
-    rank_and_score = cached_users.rank_and_score(user.id)
-    user.rank = rank_and_score['rank']
-    user.score = rank_and_score['score']
-    user.total = cached_users.get_total_users()
-    projects_contributed = cached_users.public_projects_contributed_cached(user.id)
-    projects_published, projects_draft = _get_user_projects(user.id)
-    cached_users.get_user_summary(user.name)
-    projects_answer_rate = cached_users.projects_answer_rate(user.id)
 
-    for row in projects_contributed:
-        for temp in projects_answer_rate:
-            if(row['id'] == temp['id']):
-                row['n_correct_rate']=temp['n_correct_rate']
-                row['n_tasks_rate']=temp['n_tasks_rate']
+    # 참여한 프로젝트
+    projects_contributed = project_repo.get_contributed_projects_top10(current_user.id)
 
-    response = dict(template='account/profile.html',
+    # 현재 포인트
+    current_point = format(point_repo.get_current_point(current_user.id).current_point, ",")
+
+    # 이번달 데이터
+    task_run_30days = task_repo.get_30days_task_run(current_user.id)
+    if task_run_30days == None:
+        projects_count_30days = 0
+        point_30days = 0
+    else:
+        projects_count_30days = task_run_30days.count
+        point_30days = task_run_30days.point
+
+    response = dict(template='new_design/account/myProfile.html',
                     title=gettext("Profile"),
-                    n_year=n_year,
-                    user=user_dict,
                     projects_contrib=projects_contributed,
-                    projects_published=projects_published,
-                    projects_draft=projects_draft,
+                    point=current_point,
+                    projects_count_30days=projects_count_30days,
+                    point_30days=point_30days,
                     form=form,
+                    csrf=generate_csrf(),
                     can_update=True)
 
     return handle_content_type(response)
@@ -761,7 +767,6 @@ def update_profile(name):
     password_form = ChangePasswordForm()
 
     title_msg = "Update your profile: %s" % user.fullname
-
     if request.method == 'POST':
         # Update user avatar
         succeed = False
@@ -793,7 +798,31 @@ def update_profile(name):
                         title=title_msg,
                         show_passwd_form=show_passwd_form)
             return handle_content_type(data)
-
+    if request.method == 'POST':
+        acc_conf_dis = current_app.config.get('ACCOUNT_CONFIRMATION_DISABLED')
+        btn = request.form["btn"]
+        if btn == 'name_change':
+            new_name = request.form["value"]
+            if user_repo.get_by_name(new_name) == None or new_name == "":
+                user.name = new_name
+                user_repo.update(user)
+                cached_users.delete_user_summary(user.name)
+                return redirect_content_type(url_for('.update_profile',
+                                                 name=user.name),
+                                         status=SUCCESS)
+                #return user.name
+            else:
+                return '닉네임 중복'
+        if btn == 'pw_change':
+            now_pw = request.form["now_pw"]
+            new_pw = request.form["new_pw"]
+            if user.check_password(now_pw):
+                user.set_password(new_pw)
+                user_repo.update(user)
+                return "True"
+            else:
+                return "False"
+            
     data = dict(template='/account/update.html',
                 form=update_form,
                 upload_form=avatar_form,
@@ -827,11 +856,13 @@ def _handle_avatar_update(user, avatar_form):
         user.info['avatar_url'] = avatar_url
         user_repo.update(user)
         cached_users.delete_user_summary(user.name)
-        flash(gettext('Your avatar has been updated! It may \
-                      take some minutes to refresh...'), 'success')
+        #flash(gettext('Your avatar has been updated! It may \
+        #              take some minutes to refresh...'), 'success')
+        flash(gettext('프로필 사진이 업데이트 되었습니다.'), 'success')
         return True
     else:
-        flash("You have to provide an image file to update your avatar", "error")
+        #flash("You have to provide an image file to update your avatar", "error")
+        flash("프로필 사진을 올려주세요", "error")
         return False
 
 
@@ -861,13 +892,15 @@ def _handle_profile_update(user, update_form):
             msg['html'] = markdown(msg['body'])
             mail_queue.enqueue(send_mail, msg)
             user.confirmation_email_sent = True
-            fls = gettext('An email has been sent to verify your \
-                          new email: %s. Once you verify it, it will \
-                          be updated.' % account['email_addr'])
+            #fls = gettext('An email has been sent to verify your \
+            #              new email: %s. Once you verify it, it will \
+            #              be updated.' % account['email_addr'])
+            fls = gettext('새로운 이메일로 메일을 전송하였습니다. 확인해주세요.')
             flash(fls, 'info')
             return True
         if acc_conf_dis is False and domain in current_app.config.get('SPAM'):
-            fls = gettext('Use a valid email account')
+            #fls = gettext('Use a valid email account')
+            fls = gettext('인증된 이메일 계정 사용')
             flash(fls, 'info')
             return False
         if acc_conf_dis:
@@ -878,10 +911,12 @@ def _handle_profile_update(user, update_form):
         user.subscribed = fuzzyboolean(update_form.subscribed.data)
         user_repo.update(user)
         cached_users.delete_user_summary(user.name)
-        flash(gettext('Your profile has been updated!'), 'success')
+        #flash(gettext('Your profile has been updated!'), 'success')
+        flash(gettext('프로필 업데이트!'), 'success')
         return True
     else:
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
         return False
 
 
@@ -891,16 +926,19 @@ def _handle_password_update(user, password_form):
         if user.check_password(password_form.current_password.data):
             user.set_password(password_form.new_password.data)
             user_repo.update(user)
-            flash(gettext('Yay, you changed your password succesfully!'),
-                  'success')
+            #flash(gettext('Yay, you changed your password succesfully!'),
+            #      'success')
+            flash(gettext('비밀번호 변경 완료!'), 'success')
             return True
         else:
-            msg = gettext("Your current password doesn't match the "
-                          "one in our records")
+            #msg = gettext("Your current password doesn't match the "
+            #              "one in our records")
+            msg = gettext("현재 비밀번호가 일치하지 않습니다.")
             flash(msg, 'error')
             return False
     else:
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
         return False
 
 
@@ -913,10 +951,12 @@ def _handle_external_services_update(user, update_form):
         user.ckan_api = update_form.ckan_api.data or None
         user_repo.update(user)
         cached_users.delete_user_summary(user.name)
-        flash(gettext('Your profile has been updated!'), 'success')
+        #flash(gettext('Your profile has been updated!'), 'success')
+        flash(gettext('프로필 업데이트 완료!'), 'success')
         return True
     else:
-        flash(gettext('Please correct the errors'), 'error')
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
         return False
 
 
@@ -947,11 +987,13 @@ def reset_password():
     if form.validate_on_submit():
         user.set_password(form.new_password.data)
         user_repo.update(user)
-        flash(gettext('You reset your password successfully!'), 'success')
+        #flash(gettext('You reset your password successfully!'), 'success')
+        flash(gettext('패스워드 초기화 완료!'))
         return _sign_in_user(user)
     if request.method == 'POST' and not form.validate():
-        flash(gettext('Please correct the errors'), 'error')
-    response = dict(template='/account/password_reset.html', form=form)
+        #flash(gettext('Please correct the errors'), 'error')
+        flash(gettext('오류를 수정해주세요'), 'error')
+    response = dict(template='/new_design/register/findPassword2.html', form=form)
     return handle_content_type(response)
 
 
@@ -963,58 +1005,34 @@ def forgot_password():
     Returns a Jinja2 template.
 
     """
-    form = ForgotPasswordForm(request.body)
-    if form.validate_on_submit():
-        user = user_repo.get_by(email_addr=form.email_addr.data)
+    if request.method == "POST":
+        user = user_repo.get_by(email_addr=request.form["email_addr"])
         if user and user.email_addr:
-            msg = dict(subject='Account Recovery',
-                       recipients=[user.email_addr])
-            if user.twitter_user_id:
-                msg['body'] = render_template(
-                    '/account/email/forgot_password_openid.md',
-                    user=user, account_name='Twitter')
-                msg['html'] = render_template(
-                    '/account/email/forgot_password_openid.html',
-                    user=user, account_name='Twitter')
-            elif user.facebook_user_id:
-                msg['body'] = render_template(
-                    '/account/email/forgot_password_openid.md',
-                    user=user, account_name='Facebook')
-                msg['html'] = render_template(
-                    '/account/email/forgot_password_openid.html',
-                    user=user, account_name='Facebook')
-            elif user.google_user_id:
-                msg['body'] = render_template(
-                    '/account/email/forgot_password_openid.md',
-                    user=user, account_name='Google')
-                msg['html'] = render_template(
-                    '/account/email/forgot_password_openid.html',
-                    user=user, account_name='Google')
-            else:
-                userdict = {'user': user.name, 'password': user.passwd_hash}
-                key = signer.dumps(userdict, salt='password-reset')
-                recovery_url = url_for_app_type('.reset_password',
-                                                key=key, _external=True)
-                msg['body'] = render_template(
-                    '/account/email/forgot_password.md',
-                    user=user, recovery_url=recovery_url)
-                msg['html'] = render_template(
-                    '/account/email/forgot_password.html',
-                    user=user, recovery_url=recovery_url)
-            mail_queue.enqueue(send_mail, msg)
-            flash(gettext("We've sent you an email with account "
-                          "recovery instructions!"),
-                  'success')
+            if user.fullname != request.form["fullname"]:
+                #flash('입력하신 이름의 이메일이 존재하지 않습니다.', 'error')
+                return 'name_error'
+                #data = dict(template='/new_design/register/findPassword.html', csrf=generate_csrf())
+                #return handle_content_type(data)
+            msg = dict(title = 'Wisedome 비빌번호 재설정')
+            userdict = {'user': user.name, 'password': user.passwd_hash}
+            key = signer.dumps(userdict, salt='password-reset')
+            recovery_url = url_for_app_type('.reset_password',
+                                            key=key, _external=True)
+            msg['body'] = render_template(
+                #'/account/email/forgot_password.md',
+                '/new_design/email/password_reset.html',
+                user=user, recovery_url=recovery_url)
+
+            from pybossa.view.gmail import send_mail, create_message
+            msg = create_message(current_app.config['GMAIL'], user.email_addr, msg['title'], msg['body'])
+            send_mail(msg)
+            #flash('이메일을 전송하였습니다!', 'success')
+            return 'success'
         else:
-            flash(gettext("We don't have this email in our records. "
-                          "You may have signed up with a different "
-                          "email or used Twitter, Facebook, or "
-                          "Google to sign-in"), 'error')
-    if request.method == 'POST' and not form.validate():
-        flash(gettext('Something went wrong, please correct the errors on the '
-              'form'), 'error')
-    data = dict(template='/account/password_forgot.html',
-                form=form)
+            #flash("이메일이 존재하지 않습니다.", 'error')
+            return 'email_error'
+
+    data = dict(template='/new_design/register/findPassword.html', csrf=generate_csrf())
     return handle_content_type(data)
 
 
@@ -1058,7 +1076,8 @@ def reset_api_key(name):
         user.api_key = model.make_uuid()
         user_repo.update(user)
         cached_users.delete_user_summary(user.name)
-        msg = gettext('New API-KEY generated')
+        #msg = gettext('New API-KEY generated')
+        msg = gettext('새로운 API-KEY 생성')
         flash(msg, 'success')
         return redirect_content_type(url_for('account.profile', name=name))
     else:

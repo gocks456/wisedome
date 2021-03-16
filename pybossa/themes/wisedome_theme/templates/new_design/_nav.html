@@ -1,0 +1,28 @@
+<nav id="nav">
+  <ul>
+	  <li class="logo"><a href="{{ url_for('home.home') }}"><img src="/static/new_design/images/wisedome-logo.png" alt="logo"></a></li>
+ <li class="current"><a href="{{ url_for('home.home') }}">HOME</a></li>
+    <li><a href="#">SERVICE  <i class="fas fa-caret-down"></i></a>
+      <ul>
+        <li><a href="#">회사소개</a></li>
+        <li><a href="#">이용방법</a></li>
+      </ul>
+    </li>
+ <li><a href="{{ url_for('project.index') }}">PROJECT</a></li>
+    <li><a href="#">CONTACT <i class="fas fa-caret-down"></i></a>
+      <ul>
+        <li><a href="#">공지사항</a></li>
+        <li><a href="#">이벤트</a></li>
+        <li><a href="#">파트너협약</a></li>
+		<li><a href="{{ url_for('home.faq') }}">자주하는질문</a></li>
+        <li><a href="#">문의하기</a></li>
+      </ul>
+    </li>
+ <li>
+	 {% if current_user.is_authenticated %}
+	 <a href="{{ url_for('account.signout') }}">LOGOUT</a>
+	 {% else %}
+	 <a href="{{ url_for('account.signin') }}">LOGIN </a></li>
+	 {% endif %}
+  </ul>
+</nav>

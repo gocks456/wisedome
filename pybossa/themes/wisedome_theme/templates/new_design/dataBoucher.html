@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>데이터바우처 소개</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+		<!-- plugins:css -->
+		<link rel="stylesheet" href="/static/new_design/assets/vendors/mdi/css/materialdesignicons.min.css">
+		<link rel="stylesheet" href="/static/new_design/css/function/vendor.bundle.base.css">
+		<!--기본css파일-->
+		<link rel="stylesheet" href="/static/new_design/css/basic/dashboard-basic.css">
+		<link rel="stylesheet" href="/static/new_design/css/basic/nav-footer.css">
+		<!--this page css-->
+		<link rel="stylesheet" href="/static/new_design/css/dataBoucher.css"/>
+
+	</head>
+	<body>
+		<div class="container-scroller">
+			<div class="wrapper banner-wrapper">
+				<!--여기서부터 nav-->
+				<div class="row">
+					<div class="col-lg-12">
+						<nav class="navbar fixed-top navbar-expand-lg">
+							<a class="navbar-brand" href="{{ url_for ('home.home') }}"><img src="/static/new_design/images/wisedome-logo.png" alt="logo" ></a>
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="mdi mdi-menu"></span></button>
+							<div class="collapse navbar-collapse justify-content-lg-end justify-content-md-start" id="navbarSupportedContent">
+
+								<ul class="navbar-nav">
+									<li class="nav-item active"><a class="nav-link" href="{{ url_for ('home.aboutus') }}">회사소개</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ url_for ('home.databoucher') }}">데이터 바우처</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ url_for ('home.faq') }}">자주하는질문</a></li></li>
+									<li class="nav-item"><a  class="nav-link" href="{{ url_for ('account.signin') }}">로그인 </a></li>
+								</ul>
+							</div>
+						</nav>
+					</div>
+				</div>
+				<!--여기까지가 nav-->
+
+				<div class="row align-items-center py-5">
+					<div class="offset-xl-2 col-xl-4 offset-lg-1 col-lg-5 col-md-4 main-text">
+						<h5>WISEDOME</h5>
+						<div class="hr"></div>
+						<h1>데이터바우처 <br> 수요기업 모집 </h1>
+						<p> 믿을만한 빅데이터 기업 WISEDOME에서 <b>최대 7천만원</b>  지원받고 필요한 데이터를 얻어가세요.</p> 
+						<button type="button" class="btn btn-gradient-primary"><a href="#">와이즈돔에 문의하기</a></button>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-8 d-flex justify-content-md-end mainImg-content">
+						<img src="/static/new_design/images/database.png" alt="main image" id="main-img">
+						<img src="/static/new_design/images/database-sm.png" alt="main image" id="main-img-tablet">
+					</div>
+				</div>
+			</div>
+
+			<!--2번쨰 컨텐츠-->
+			<div class="datalist-wrapper ">
+				<div class="row py-5">
+
+					<div class="col-md-9 mx-auto text-center">
+						<h3>WISEDOME의 데이터 가공서비스 </h3>
+						<div class="hr mx-auto"></div>
+					</div>
+
+					<div class=" col-12 d-flex align-items-center ">
+						<div class="feature-list">
+							<div class="row  ">
+
+								<div class="col-md-3 col-6 feature-list-item">
+									<i class="mdi mdi-pencil-box-outline icon-xl"></i>
+									<h4>이미지</h4>
+									<p class="feature-description">이미지 속성과 분류, 이미지 주제등의 데이터 작업</p>
+								</div>
+
+								<div class="col-md-3 col-6 feature-list-item">
+									<i class="mdi mdi-play-circle-outline icon-xl"></i>
+									<h4>영상</h4>
+									<p class="feature-description">영상의 주제, 영상파일의 텍스트화 등의 작업</p>
+								</div>
+
+								<div class="col-md-3 col-6 feature-list-item">
+									<i class="mdi mdi-voicemail icon-xl"></i>
+									<h4>음성</h4>
+									<p class="feature-description">음성녹음 및 음성파일 텍스트화 등의 작업</p>
+								</div>
+
+								<div class="col-md-3 col-6 feature-list-item">
+									<i class="mdi mdi-comment-text-outline icon-xl"></i>
+									<h4>텍스트</h4>
+									<p class="feature-description">문서, 신문기사, 일반적인 대화등의 텍스트 분류작업 </p>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div><!--row-->
+			</div><!--wrapper-->
+
+			<!---설명3-->
+			<div class="howTo-wrapper">
+				<div class="row py-5">
+
+					<div class="col-md-9 mx-auto text-center">
+						<h3>데이터바우처 신청방법 </h3>
+						<div class="hr mx-auto"></div>
+					</div>
+
+					<div class="col-12">
+						<div class="row pricing-table">
+
+							<div class="col-md-4 grid-margin stretch-card pricing-card">
+								<div class="card border-success border pricing-card-body">
+									<div class="text-center pricing-card-head">
+										<h4>신청서 작성</h4>
+										<h1 class="font-weight-normal mb-4">한국데이터산업진흥원</h1>
+									</div>
+									<ul class="list-arrow plan-features">
+										<h5 class="text-success font-weight-bold"> 신청기간</h5>
+										<li>  데이터구매 : ~ 2021년 4월 13일(화) 18:00 까지 </li>
+										<li>  데이터가공 : ~ 2021년 4월 16일(금) 18:00 까지</li>
+									</ul>
+									<ul class="list-arrow plan-features">
+										<h5 class="text-success font-weight-bold"> 접수방법</h5>
+										<li>  데이터바우처 포털사이트(www.kdata.or.kr/datavoucher) 접속 </li>
+										<li>  안내에 따라 신청서 접수(사용자 매뉴얼 별도 제공)</li>
+									</ul>
+									<button class="btn btn-success "><a href="https://www.kdata.or.kr/datavoucher/index.do" target="_blank" >신청하기</a></button>
+								</div>
+							</div>
+
+							<div class="col-md-4 grid-margin stretch-card pricing-card">
+								<div class="card border-success border pricing-card-body">
+									<div class="text-center pricing-card-head">
+										<h4>서류평가</h4>
+										<h1 class="font-weight-normal mb-4">한국데이터산업진흥원</h1>
+									</div>
+									<ul class="list-arrow plan-features">
+										<h5 class="text-success font-weight-bold"> 지원대상선정</h5>
+										<li>  선정일 :  2021년 4월 또는 5월중 </li>
+									</ul>
+									<ul class="list-arrow plan-features">
+										<h5 class="text-success font-weight-bold">문의처</h5>
+										<li>  데이터바우처 지원사업 대표번호 : 1833-2246 </li>
+										<li>  데이터바우처 사업관리시스템 고객센터(pms.datastore.or.kr)</li>
+									</ul>
+									<button class="btn btn-success "><a href="https://pms.datastore.or.kr/index.do" target="_blank" >해당 고객센터로 문의하기</a></button>
+								</div>
+							</div>
+
+							<div class="col-md-4 grid-margin stretch-card pricing-card">
+								<div class="card border-primary border pricing-card-body">
+									<div class="text-center pricing-card-head">
+										<h4>데이터 공급</h4>
+										<h1 class="font-weight-normal mb-4">WISEDOME</h1>
+									</div>
+									<ul class="list-arrow plan-features">
+										<h5 class="text-primary font-weight-bold"> 수행기간</h5>
+										<li>2021년 6월 1일 ~ 11월 30일 </li>
+									</ul>
+									<ul class="list-arrow plan-features">
+										<h5 class="text-primary font-weight-bold">문의처</h5>
+										<li>  와이즈돔 대표번호 :  (055)-213-5472</li>
+										<li>  와이즈돔 이메일 : wisedomekr@gmail.com</li>
+									</ul>
+									<button class="btn btn-primary "><a href="#" target="_blank" > 문의하기</a></button>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- content-wrapper ends -->
+
+
+		<!--contact us-->
+		<div class="contact-wrapper">
+			<div class="row pt-5">
+				<div class="col-md-9 mx-auto text-center">
+					<h3>문의하기 </h3>
+					<div class="hr mx-auto"></div>
+				</div>
+
+				<section class="edica-contact pb-5 mb-5">
+					<div class="row">
+
+						<div class="col-md-4 contact-sidebar">
+							<p><i class="mdi mdi-phone-in-talk text-danger icon-xxl"></i></p>
+							<h5>무엇이든 물어보세요</h5>
+							<p>데이터 바우처에 관해 궁금한점이 있으시면 언제든지 저희에게 문의주세요. 평일 업무시간 기준으로 5일이내 신속하게 답변해 드리도록 하겠습니다</p>
+						</div>
+
+						<div class="col-md-8 contact-form-wrapper">
+							<form action="#" data-aos="fade-up">
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label for="name">성함</label>
+										<input type="text" class="form-control" id="name" name="name" placeholder="성함을 입력해주세요">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="email">이메일</label>
+										<input type="email" class="form-control" id="email" name="email" placeholder="이메일주소를 입력해주세요">
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-12">
+										<label for="message">문의사항</label>
+										<textarea name="message" id="message" rows="10" class="form-control"></textarea>
+									</div>
+								</div>
+								<div class="d-flex justify-content-end">
+									<button type="submit" class="btn btn-gradient-danger">문의하기</button>
+								</div>
+							</form>
+						</div>
+					</div>    
+
+				</section>
+			</div>
+		</div>
+
+
+		<footer><!---footer-->
+			<div class="footer-border-bottom pb-3">
+				<div class="container ">
+					<div class="row ">
+						<div class="col-lg-4">
+							<img class="img-fluid" src="/static/new_design/images/wisedome-logo.png" alt="logo">
+
+							<div class="d-flex mt-3">
+								<h6 class="font-weight-normal"> 대표이사 : 차정원</h6>
+							</div>
+							<div class="d-flex">
+								<h6 class="font-weight-normal">사업자등록번호 : 458-42-00460</h6>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<ul class="nav">
+								<li class="nav-item">
+									<a class="nav-link " href="{{ url_for ('home.aboutus') }}"> 회사소개</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-lg-4">
+							<div class="d-flex">
+								<i class="mdi mdi-cellphone-android"></i>
+								<h6 class="font-weight-normal">&nbsp;  (055)-213-5472</h6>
+							</div>
+							<div class="d-flex">
+								<i class="mdi mdi-email"></i>
+								<h6 class="font-weight-normal"> &nbsp; wisedomekr@gmail.com</h6>
+							</div>
+
+							<div class="d-flex">
+								<i class="mdi mdi-home-map-marker"></i>
+								<h6 class="font-weight-normal"> &nbsp;경상남도 창원시 의창구 창원대학로 20, 85호관 506-1호 (사림동, 창원대학교)</h6>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="container p-2">
+				<div class="row">
+					<div class="col-md-8 mx-auto text-center">
+						<small class="mt-3">Copyright © 2021 <a href="{{ url_for ('home.home') }}">Wisedome</a> All rights reserved.</small>
+					</div>      
+				</div>
+			</div>
+		</footer><!--footer 여기까지-->
+
+
+
+
+
+
+
+		<!-- plugins:js 기본 필수로 들어가는 JS파일-->
+		<script src="/static/new_design/js/plugin/vendor.bundle.base.js"></script>
+		<!-- this page js-->
+
+		<!--nav footer js-->
+		<script src="/static/new_design/js/nav-footer.js"></script>
+
+	</body>
+</html>
+

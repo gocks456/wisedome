@@ -1,0 +1,186 @@
+{% extends "/new_design/qna/no_login_qna_base.html" %}
+
+{% set active_wisedome = "qna" %}
+
+{% block qna %}
+<link rel="stylesheet" href="/static/new_design/css/viewQnA.css">
+
+<div class="content-wrapper">
+	<div class="page-header">
+		<h4 class="page-title" style="font-size:1.2rem;"> <a href="{{url_for('home.qna')}}">게시판 글보기</a></h4>
+	</div>
+
+	<div class="row">
+		<div class="col-12">
+			<div class="card ">
+				<div class="card-body bg-white">
+					<div class="message-body">
+
+						{% macro render_user_thumbnail(user, upload_method) -%}
+						{% if user.info.avatar %}
+						{% if upload_method == 'rackspace'%}
+						{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onError="this.onerror=null;this.src='{{url_for('static', filename='new_design/images/user-default.png')}}';
+						{% else %}
+						{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar))}}" onError="this.onerror=null;this.src='{{url_for('static', filename='new_design/images/user-default.png')}}';
+						{% endif %}
+						{% else %}
+						{{ url_for('static', filename='new_design/images/user-default.png')}}
+						{% endif %}
+						{%- endmacro %}
+
+
+						<div class="sender-details my-border-bottom">
+							<img class="img-sm rounded-circle" src="{% if user == None %}{{ url_for('static', filename='new_design/images/user-default.png')}}
+							{% else %} {{ render_user_thumbnail(user, upload_method) }} {% endif %}" alt="">
+							<div class="details col-10">
+								<h4 class="msg-subject">{{blog.title}} </h4> <!---게시물 제목-->
+								<p class="writer-nickname"> {% if user == None %}비회원{% elif user.admin %}관리자{% else %}{{user.name}}{% endif %} <!--글쓴이 별명--> <span class="level-badge">초급자</span> </p>
+								<p class="sender-email"><i class="mdi mdi-delettext-primary"></i>  {{blog.updated[0:16].replace('T', ' ')}}</p> <!---글작성 날짜 및 시간-->
+							</div>
+							<div class="col-2 status">
+								{% if blog.answer %}
+								<label class="badge badge-success">답변완료</label>
+								{% else %}
+								<label class="badge badge-info">답변대기</label>
+								{% endif %}
+							</div>
+						</div>
+
+						<div class="message-content "> <!--게시물 내용 보여지는곳-->
+							{{ blog.body|safe}}
+						</div>
+
+						<div class="mail-view col-12 bg-white">
+							<div class="row my-border-bottom">
+
+								<div class="col-xl-6 col-sm-5 mb-3 mt-3">
+									<div class="d-flex justify-content-start">
+										<!--<button type="button" class="btn btn-sm btn-outline-secondary"><i class="mdi mdi-share"></i>  공유하기</button> -->
+									</div>
+								</div>
+
+								<div class="col-xl-4 offset-xl-2 col-sm-5 mb-3 mt-3">
+									{% if current_user.id == user.id or current_user.admin %}
+									<div class="btn-group d-flex justify-content-end">
+										<a href="{{url_for('home.rewrite', blog_id=blog.id)}}">
+											<button type="button" class="btn btn-sm btn-info" id="edit" style="margin-right:1rem;"><i class="mdi mdi-heart-outline" ></i> 수정</button>
+										</a>
+										<a>
+											<button type="button" class="btn btn-sm btn-success" id="delete"><i class="mdi mdi-comment-processing-outline"></i>  삭제</button>
+										</a>
+									</div>
+									{% endif %}
+								</div> 
+							</div>
+						</div> 
+
+						<!--댓글섹션-->
+						<div class="comment-view col-12 bg-white" style="display:block;">
+							<div class="row">
+
+								<div class="col-12 comment-area" style="display:block;" >
+
+									{% for row in blog_comment %}
+									<div class="details">
+										<i class="mdi mdi-subdirectory-arrow-right "></i>
+										<img class="img-sm rounded-circle mr-3" src="{{ render_user_thumbnail(row, upload_method) }}"><!--댓글쓴사람 프로필이미지-->
+										<p class="writer-nickname">{% if row.admin %}관리자{% else %}{{ row.name }}{% endif %}</p><!---댓글쓴사람 닉네임-->
+										<p class="sender-email"><i class="mdi mdi-delettext-primary"></i> {{ row.updated[0:16].replace('T', ' ') }}</p><!--댓글 쓴 날짜-->
+										<p id="displayComment" class="mr-5">{{ row.body }}</p> <!--댓글내용 입력하면 자동으로 올라옴-->
+									</div>
+									{% endfor %}
+								</div>
+
+								<div class="col-sm-9 col-7 d-flex justify-content-start">
+									<textarea id="comment-input" rows="1" placeholder="댓글을 입력하세요"></textarea>
+								</div>
+
+								<div class="col-sm-3 col-5 d-flex justify-content-end">
+									<button type="submit" class="btn btn-inverse-success" id="saveComment"><i class="mdi mdi-arrow-up-bold-circle"></i>   등록하기 </button>
+								</div>
+							</div>
+						</div>
+
+
+					</div><!--message body-->         
+
+				</div><!--card body-->
+			</div><!--card-->
+		</div><!--col 12-->
+	</div><!--row-->
+</div><!-- content-wrapper ends -->
+
+<!-- plugins:js this page only-->
+<script src="/static/new_design/js/plugin/jquery.min.js"></script>
+<script src="/static/new_design/js/viewQnA.js"></script>
+
+<script>
+	$(document).ready(function() {
+		$("#category_icons").hide();
+		var csrf = "{{ csrf_token() }}";
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrf)
+				}
+			}});
+	});
+
+$("#saveComment").click(function(){
+	if ($("#comment-input").val() == '')
+		return;
+	if ($("#comment-input").val().length > 100) {
+		alert('입력 가능한 글자 수를 초과하였습니다.');
+		return;
+	}
+	temp = $("#comment-input").val().toLowerCase();
+	pattern = ['script', 'js']
+	for (i=0; i< pattern.length; i++) {
+		if (temp.match(pattern[i]) == pattern[i]) {
+			alert('보안 위반 사항이 포함되어있습니다.');
+			location.reload();
+			return;
+		}
+	}
+	$.ajax({
+		url:window.location.href,
+		data: {
+			"body": $("#comment-input").val()
+		},
+		type: 'POST',
+		success: function(res) {
+			if (res == "register") {
+				alert('댓글 작성은 회원만 가능합니다.');
+				return;
+			}
+			location.reload();
+		},
+		error: function(request, error) {
+			console.log(request);
+			console.log(error);
+		}
+	});
+});
+
+$("#delete").click(function() {
+	var flag = confirm("정말 삭제하시겠습니까?");
+	if (flag){
+		$.ajax({
+			url: window.location.href.replace('view', 'delete'),
+			data: {
+			},
+			type: 'POST',
+			success: function(res) {
+				window.location.href = '/qna';
+			},
+			error: function(request, error) {
+				console.log(request);
+				console.log(error);
+			}
+		});
+	}
+});
+
+</script>
+
+{% endblock %}

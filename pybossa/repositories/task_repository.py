@@ -26,18 +26,93 @@ from pybossa.model.task_run import TaskRun
 from pybossa.exc import WrongObjectError, DBIntegrityError
 from pybossa.cache import projects as cached_projects
 from pybossa.core import uploader
-from sqlalchemy import text
+from sqlalchemy import text, and_, extract, desc, null, distinct
 
 
 class TaskRepository(Repository):
+
+
+    def get_1hour_user_data(self):
+        # 최근 1시간 답변을 제출한 사용자
+        from datetime import datetime, timedelta
+        time = datetime.now() - timedelta(hours=1)
+        return self.db.session.query(func.array_agg(distinct(TaskRun.user_id)).label('user_ids')).filter(
+               and_(time <= cast(TaskRun.finish_time, Date), TaskRun.user_id.isnot(None))).one()[0]
+
+    def is_task_completed(self, task_id):
+        # task_run 각각에 포인트 업데이트
+        task = self.db.session.query(Task.state.label('state')).filter(Task.id==task_id).one()
+        return task.state
+
+    def task_update_point(self, project_id, task_id):
+        # task_run 각각에 포인트 업데이트
+        if self.is_task_completed(task_id) != 'completed':
+            return
+
+        answer_data = self.db.session.query(func.count(TaskRun.user_id).label('count'), func.array_agg(TaskRun.id).label('task_id')).filter(
+               and_(TaskRun.project_id==project_id), (TaskRun.task_id==task_id)).group_by(TaskRun.info).order_by(desc('count')).first()
+        from pybossa.model.project import Project
+        project_data = self.db.session.query((Project.all_point/Task.n_answers).label('point'), Task.n_answers.label('n_answers'),
+                Project.featured.label('featured')).filter(
+                and_(Project.id==project_id), (Task.id==task_id)).first()
+
+        point = project_data.point
+        if project_data.featured:
+            point = project_data.point * 1.1
+
+        # 포인트 초기화
+        self.db.session.query(TaskRun).filter(TaskRun.task_id==task_id).update({'point': 0})
+
+        if (answer_data.count >= 1 and project_data.n_answers == 1) or (answer_data.count == 1 and project_data.n_answers != 1):
+            # 반복수가 1 일 때 답변 수가 1 이상
+            # 정답이 다 다를 때
+            self.db.session.query(TaskRun).filter(TaskRun.task_id==task_id).update({'point': point})
+
+            for task_run_id in answer_data.task_id:
+                task_run = self.get_task_run(task_run_id)
+                self.user_point_update(task_run.user_id, point)
+
+            self.db.session.commit()
+
+        else:
+            for task_run_id in answer_data.task_id:
+                # 과반수의 정답이 존재할 때
+                task_run = self.get_task_run(task_run_id)
+                task_run.point = point
+
+                self.user_point_update(task_run.user_id, point)
+            self.db.session.commit()
+        return
+
+    def user_point_update(self, user_id, point):
+        # 사용자 포인트 갱신
+        if user_id is None:
+            return
+        from pybossa.model.point import Point
+        point_row = self.db.session.query(Point).filter(Point.user_id==user_id).first()
+        point_row.current_point = point_row.current_point + point
+        point_row.point_sum = point_row.point_sum + point
+        return
+
+
+    def get_30days_task_run(self, user_id):
+        # 최근 30일 답변
+        import datetime
+        now = datetime.datetime.now()
+        return self.db.session.query(func.count(TaskRun.id).label('count'), func.sum(TaskRun.point).label('point')).filter(
+                and_(now.year == extract('year', cast(TaskRun.finish_time, Date)),
+                    now.month == extract('month', cast(TaskRun.finish_time, Date)),
+                    TaskRun.user_id == user_id)).group_by(TaskRun.user_id).first()
+
+
     def get_task_run_present(self, project_id, user_id, task_id):
         return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).filter(TaskRun.task_id==task_id).first()
 
     def get_answer_manage(self, project_id, user_id):
         return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).order_by(TaskRun.finish_time.desc()).first()
 
-    def get_task_run_prev(self, project_id, user_id, task_id):
-        return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).filter(TaskRun.finish_time<task_id).order_by(TaskRun.finish_time.desc()).first()
+    def get_task_run_prev(self, project_id, user_id, finish_time):
+        return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).filter(TaskRun.finish_time<finish_time).order_by(TaskRun.finish_time.desc()).first()
         #return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).filter(TaskRun.task_id<task_id).order_by(TaskRun.task_id.desc()).first()
 
     def get_task_run_next(self, project_id, user_id, task_id):
@@ -73,7 +148,6 @@ class TaskRepository(Repository):
 
     def get_task_by(self, **attributes):
         filters, _, _, _ = self.generate_query_from_keywords(Task, **attributes)
-        print(self.db.session.query(Task).filter(*filters))
         return self.db.session.query(Task).filter(*filters).first()
 
     def filter_tasks_by(self, limit=None, offset=0, yielded=False,
@@ -227,8 +301,57 @@ class TaskRepository(Repository):
         csv_tasks_filename = csv_exporter.download_name(project, 'task')
         json_taskruns_filename = json_exporter.download_name(project, 'task_run')
         csv_taskruns_filename = csv_exporter.download_name(project, 'task_run')
+
+        QnA_filename = json_exporter.download_name(project, 'QnA')
+
         container = "user_%s" % project.owner_id
         uploader.delete_file(json_tasks_filename, container)
         uploader.delete_file(csv_tasks_filename, container)
         uploader.delete_file(json_taskruns_filename, container)
         uploader.delete_file(csv_taskruns_filename, container)
+        uploader.delete_file(QnA_filename, container)
+
+    def get_all_info(self):
+        return self.db.session.query(Task.info).filter(Task.id > 175000).all()
+
+
+
+    def get_all_info2(self):
+        result = self.db.session.query(Task).filter(Task.id > 209728)
+        results = result.all()
+        print ("result : ")
+        print (result)
+        print ("results : ")
+        print (results)
+        print ("type")
+        print ("result | results")
+        print (str(type(result))+" | "+str(type(results)))
+        print ("len : " + str(len(results)))
+        return results
+
+
+    def get_all_info3(self):
+        return self.db.session.query(Task.info).all()
+
+    def ttest(self):
+        from pybossa.model.user import User
+        from sqlalchemy import and_
+        result = self.db.session.query(TaskRun.user_id, User.name).filter(and_(
+                TaskRun.project_id == 78, User.id == TaskRun.user_id)).group_by(TaskRun.user_id,User.name)
+        print (result)
+        for i in result.all():
+            print (i)
+        return
+
+    def get_QnA_data(self, project_id):
+        sql = '''
+              SELECT t.info AS question, json_agg(r.info) AS answers
+              FROM task t, task_run r WHERE t.id=r.task_id AND t.project_id=:project_id
+              GROUP BY t.id ORDER BY t.id;
+              '''
+        results = self.db.session.execute(sql, dict(project_id=project_id))
+        tmp = []
+        for row in results:
+            data = dict(question=row.question, answers=row.answers)
+            tmp.append(data)
+        return tmp

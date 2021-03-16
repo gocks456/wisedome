@@ -3,16 +3,25 @@
 {% set active_project = project.short_name %}
 
 {% block content %}
+<meta name="csrf-token" content="{{csrf_token()}}">
 
-{{ project.info.tutorial | safe}}
+{% if project.info.tutorial %}
+<link rel='stylesheet' href="{{url_for('static', filename='css/signature/signature-pad.css')}}">
+<link rel='stylesheet' href="{{url_for('static', filename='css/signature/ie9.css')}}">
+{% endif %}
+<script src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}"></script>
 
-<div class="row">
-    <div class="col-md-12" style="text-align:center;padding-top:20px;">
-        <a id="start" href={{url_for('project.presenter', short_name = project.short_name)}}
-           class="btn btn-primary btn-lg"> 
-           <i class="icon-thumbs-up"></i> 
-           {{_('Start contributing')}}!</a>
-    </div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="contract" id="contract" style="text-align:center;">
+				{{ project.info.tutorial | safe}}
+			</div>
+		</div>	
+		<div class="save-btn" style="text-align:center;">
+			<button id="contract-save" class='btn btn-primary' style="margin-top:20px;">저장</button>
+		</div>
+	</div>
 </div>
 
 <div id='PYBOSSA_USER_LOCALE' hidden>
@@ -23,16 +32,93 @@ en
 {% endif %}
 </div>
 
-<script src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}"></script>
+{% if project.info.tutorial %}
+<script src="{{url_for('static', filename='js/add-js/capture/html2canvas.min.js')}}"></script>
+<!--<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>-->
+
+<script src="{{url_for('static', filename='js/add-js/signature/signature_pad.js')}}"></script>
+<script src="{{url_for('static', filename='js/add-js/signature/app.js')}}"></script>
+{% endif %}
+
+<script>
+	setTimeout(function() {
+		$('#pybossa-notification').fadeOut('fast');
+	}, 5000);
+</script>
+
 <script>
 	$(document).ready(function() {
+		var csrftoken = $('meta[name=csrf-token]').attr('content')
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken)
+				}
+			}
+		});
+
+		var checkCanvas = document.getElementById('sign-pad').toDataURL();
+		console.log(checkCanvas);
+
 		var pre_url = document.referrer;
 		if (pre_url == '') {
 			alert("잘못된 접근 입니다.");
 			history.back();
 		}
+
+		$("#contract-save").on('click', function(){
+			if ($("input[name=check]").val() != "yes" || $("input[name=name]").val() != "{{current_user.fullname}}" ) {
+				pybossaNotify("계약서를 올바르게 작성해주세요!", true, "error");
+				return;
+			}
+
+			if ( checkCanvas == document.getElementById('sign-pad').toDataURL() || 3*(document.getElementById('sign-pad').toDataURL().length / 4) < 3000) {
+				pybossaNotify("올바른 서명을 해주세요!", true, "error");
+				return;
+			}
+
+			html2canvas(document.getElementById("contract")).then(function(canvas) {
+				contractImage = canvas.toDataURL();
+
+				console.log(document.getElementById('sign-pad').toDataURL());
+
+				saveAS(contractImage, "{{project.name}}" + "_" + "{{current_user.fullname}}" + ".jpg");
+				var url = window.location.href;
+				$.ajax({
+					url: url,
+					data: {"contract": contractImage,
+						"user_id": {{current_user.id}} },
+					type: 'POST',
+					success: function(res) {
+						if (res == "success") {
+							window.location.replace(url);
+						}
+						else {
+							console.log("Error");
+						}
+					},
+					error: function(request, error) {
+						console.log(request);
+						console.log(error);
+					}
+				});
+			}).catch(function(err) {
+				console.log(err);
+			});
+		});
+		function saveAS(url, filename) {
+			var link = document.createElement('a');
+			if (typeof link.download === 'string') {
+				link.href = url;
+				link.download = filename;
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link); }
+			else {
+				window.open(url);
+			}
+		}
 	});
 </script>
-
 
 {% endblock %}

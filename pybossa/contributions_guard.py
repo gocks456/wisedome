@@ -22,8 +22,8 @@ from pybossa.model import make_timestamp
 class ContributionsGuard(object):
 
     KEY_PREFIX = 'pybossa:task_requested:user:%s:task:%s'
-    #STAMP_TTL = 60 * 60
-    STAMP_TTL = 60 * 5
+    STAMP_TTL = 60 * 60
+    #STAMP_TTL = 60 * 1
 
     def __init__(self, redis_conn):
         self.conn = redis_conn

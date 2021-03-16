@@ -26,6 +26,94 @@ from pybossa.cache import memoize, cache, delete_memoized, delete_cached
 session = db.slave_session
 
 
+# 마감임박 프로젝트
+
+# 경쟁관계 TEST
+"""
+def get_users_task_run_count(project_id):
+    sql = text('''SELECT "user".id, "user".name, COUNT(task_run.id) AS count
+                  FROM "user", task_run
+                  WHERE "user".id = task_run.user_id
+                  AND task_run.project_id=:project_id
+                  GROUP BY "user".id;''')
+    results = session.execute(sql, dict(project_id=project_id))
+    user_list = []
+    for row in results:
+        user = dict(id=row.id, name=row.name, count=row.count)
+        user_list.append(user)
+    return user_list
+"""
+
+def get_redundancy(short_name):
+    sql = text('''SELECT MAX(t.n_answers)
+                  FROM task t, project p
+                  WHERE p.id = t.project_id
+                  AND p.short_name = :short_name''')
+    result = session.execute(sql)
+    print (result)
+    return
+
+
+def get_users_task_run_count(project_id):
+    sql = text('''SELECT "user".id, "user".name, COUNT(task_run.id) AS count
+                  FROM "user", task_run
+                  WHERE "user".id = task_run.user_id
+                  AND task_run.project_id > 116
+                  GROUP BY "user".id;''')
+    results = session.execute(sql)
+    user_list = []
+    for row in results:
+        user = dict(id=row.id, name=row.name, count=row.count)
+        user_list.append(user)
+    return user_list
+
+def get_ongoing_projects(user_id):
+    sql = text('''SELECT id, name, description
+                  FROM project
+                  WHERE published = True AND complete = False
+                  AND :user_id = ANY(contractor_ids);''')
+    results = session.execute(sql, dict(user_id=user_id))
+    projects = []
+    for row in results:
+        project = dict(id=row.id, name=row.name, description=row.description)
+        projects.append(project)
+    return projects
+
+def get_popular_top5_projects():
+    sql = text('''SELECT id, name, description, info, short_name
+                  FROM project
+                  WHERE published = True AND complete = False
+                  AND ARRAY_LENGTH(contractor_ids, 1) > 0
+                  ORDER BY contractor_ids DESC
+                  LIMIT 5;''')
+    results = session.execute(sql)
+    projects = []
+    for row in results:
+        project = dict(id=row.id, name=row.name, description=row.description, short_name = row.short_name, info=row.info)
+        projects.append(project)
+    return projects
+
+#발주자 관리용 쿼리
+def get_orderer_projects():
+    sql = text('''SELECT id, name, short_name, owners_ids, info, all_point
+                  FROM project
+                  WHERE array_length(owners_ids, 1) > 1;''')
+    results = session.execute(sql)
+    projects = []
+    for row in results:
+        users_fullname = []
+        for i in range(1, len(row.owners_ids)):
+            sql = text('''SELECT fullname
+                          FROM "user"
+                          WHERE id = :owner_id;''')
+            user_result = session.execute(sql, dict(owner_id=row.owners_ids[i]))
+            for user in user_result:
+                users_fullname.append(user.fullname)
+
+        project = dict(id=row.id, name=row.name, short_name=row.short_name, info=row.info, all_point=row.all_point, users_fullname=users_fullname)
+        projects.append(project)
+    return projects
+
 @cache(timeout=timeouts.get('STATS_FRONTPAGE_TIMEOUT'),
        key_prefix="front_page_top_projects")
 def get_top(n=4):
@@ -203,8 +291,8 @@ def last_activity(project_id):
 @memoize(timeout=timeouts.get('APP_TIMEOUT'))
 def average_contribution_time(project_id):
     sql = text('''SELECT
-        AVG(to_timestamp(finish_time, 'YYYY-MM-DD-THH24-MI-SS.US') -
-            to_timestamp(created, 'YYYY-MM-DD-THH24-MI-SS.US')) AS average_time
+        AVG(to_timestamp(finish_time, 'YYYY-MM-DD-HH24-MI-SS.US') -
+            to_timestamp(created, 'YYYY-MM-DD-HH24-MI-SS.US')) AS average_time
         FROM task_run
         WHERE project_id=:project_id;''')
 
@@ -219,15 +307,7 @@ def average_contribution_time(project_id):
 
 def n_blogposts(project_id):
     """Return number of blogposts of a project."""
-    sql = text('''
-               SELECT COUNT(id) as ct from blogpost
-               WHERE project_id=:project_id;
-               ''')
-    results = session.execute(sql, dict(project_id=project_id))
-    n_blogposts = 0
-    for row in results:
-        n_blogposts = row.ct
-    return n_blogposts
+    return 0
 
 
 # This function does not change too much, so cache it for a longer time
@@ -250,7 +330,7 @@ def get_all_featured(category=None):
     sql = text(
         '''SELECT project.id, project.name, project.short_name, project.info,
                project.created, project.updated, project.description, project.all_point, project.condition, project.complete,
-               "user".fullname AS owner, project.category_id
+               "user".fullname AS owner, project.category_id, project.end_date
            FROM project, "user"
            WHERE project.featured=true
            AND "user".id=project.owner_id
@@ -274,7 +354,8 @@ def get_all_featured(category=None):
                        all_point=row.all_point,
                        condition=row.condition,
                        category_id=row.category_id,
-                       complete=row.complete)
+                       complete=row.complete,
+                       end_date=row.end_date)
         projects.append(Project().to_public_json(project))
     return projects
 
@@ -376,6 +457,56 @@ def get_all_complete(category=None):
         projects.append(Project().to_public_json(project)) #XXX
     return projects
 
+@memoize(timeout=timeouts.get('STATS_FRONTPAGE_TIMEOUT'))
+def get_all_before_score(category=None):
+    """Return list of all before_score."""
+    """
+    sql = text('''
+               SELECT project.id, project.name, project.short_name,project.created,
+                   project.description, project.info, project.updated, project.all_point, project.condition, project.complete,
+                   "user".fullname AS owner, project.category_id
+               FROM "user", project, project_stats ps
+               WHERE project.owner_id="user".id
+               AND "user".restrict=false
+               AND ps.project_id = project.id
+               AND ps.n_tasks<ps.n_results
+               AND project.complete=true
+               ''')
+    """
+    sql = text('''
+                SELECT project.id, project.name, project.short_name,project.created,
+                    project.description, project.info, project.updated, project.all_point, project.condition, project.complete,
+                    "user".fullname AS owner, project.category_id
+                FROM "user", project, task t
+                WHERE project.owner_id="user".id
+                AND project.id = t.project_id
+                AND "user".restrict=false
+                AND project.complete=true
+                GROUP BY project.id, owner
+                HAVING count(CASE WHEN (t.score_check = true)then 1 end) != count(t.id);
+                ''')
+
+    results = session.execute(sql)
+    projects = []
+    for row in results:
+        project = dict(id=row.id, name=row.name, short_name=row.short_name,
+                       created=row.created,
+                       updated=row.updated,
+                       description=row.description,
+                       owner=row.owner,
+                       last_activity=pretty_date(last_activity(row.id)),
+                       last_activity_raw=last_activity(row.id),
+                       overall_progress=overall_progress(row.id),
+                       n_tasks=n_tasks(row.id),
+                       n_volunteers=n_volunteers(row.id),
+                       info=row.info,
+                       all_point=row.all_point,
+                       condition=row.condition,
+                       category_id=row.category_id,
+                       complete=row.complete)
+        projects.append(Project().to_public_json(project)) #XXX
+    return projects
+
 
 def get_draft(category=None, page=1, per_page=5):
     """Return a list of draft project with a pagination."""
@@ -407,6 +538,57 @@ def n_count(category):
         count = row[0]
     return count
 
+@memoize(timeout=timeouts.get('APP_TIMEOUT'))
+def get_projects_limit(limit='all', category=None):
+    # 공개된 프로젝트 전체
+    sql = text(
+        '''SELECT project.id, project.name, project.short_name,
+           project.description, project.info, project.created, project.updated, project.all_point, project.condition, project.complete,
+           project.featured, "user".fullname AS owner, category.name AS category_name, project.end_date AS end_date
+           FROM "user", project, category
+           WHERE
+           "user".id=project.owner_id
+           AND "user".restrict=false
+           AND project.published=true
+           AND project.complete=false
+           GROUP BY project.id, "user".id, category.id
+           ORDER BY project.end_date DESC
+           LIMIT :limit;''')
+
+    results = session.execute(sql, dict(limit=limit))
+    projects = []
+    for row in results:
+        project = dict(id=row.id,
+                       name=row.name, short_name=row.short_name,
+                       created=row.created,
+                       updated=row.updated,
+                       description=row.description,
+                       owner=row.owner,
+                       featured=row.featured,
+                       last_activity=pretty_date(last_activity(row.id)),
+                       last_activity_raw=last_activity(row.id),
+                       overall_progress=overall_progress(row.id),
+                       n_tasks=n_tasks(row.id),
+                       n_volunteers=n_volunteers(row.id),
+                       info=row.info,
+                       all_point=row.all_point,
+                       condition=row.condition,
+                       category_name=row.category_name,
+                       end_date=row.end_date,
+                       complete=row.complete)
+        projects.append(Project().to_public_json(project))
+  
+    return projects
+
+def loadtest2():
+    sql = text('''SELECT id, info FROM task where id > 175000''')
+    results = session.execute(sql)
+    projects = []
+    for row in results:
+        project = dict(id=row.id,
+                       info=row.info)
+        projects.append(project)
+    return projects
 
 @memoize(timeout=timeouts.get('APP_TIMEOUT'))
 def get_all(category):
@@ -415,7 +597,7 @@ def get_all(category):
     sql = text(
         '''SELECT project.id, project.name, project.short_name,
            project.description, project.info, project.created, project.updated, project.all_point, project.condition, project.complete,
-           project.category_id, project.featured, "user".fullname AS owner
+           project.end_date, project.category_id, project.featured, "user".fullname AS owner
            FROM "user", project
            LEFT OUTER JOIN category ON project.category_id=category.id
            WHERE
@@ -445,7 +627,9 @@ def get_all(category):
                        all_point=row.all_point,
                        condition=row.condition,
                        category_id=row.category_id,
-                       complete=row.complete)
+                       complete=row.complete,
+                       end_date=row.end_date,
+                       category_name=category)
         projects.append(Project().to_public_json(project))
     return projects
 

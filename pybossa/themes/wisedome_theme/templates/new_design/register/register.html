@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>회원가입</title>
+
+	<!-- fontawesome-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+	<!--이페이지의 css-->
+	<link rel="stylesheet" href="/static/new_design/css/register.css">	
+
+
+</head>
+<body>
+
+	<section id="left">
+
+		<div class="text">
+
+			<h3>4차산업혁명 <br> 데이터가공 전문가</h3>
+			<p class="intro">누구나 회원가입후 와이즈돔에서 자체교육을 이수한뒤에, 데이터 가공 전문가로 활동할수 있습니다</p>
+		</div>
+
+	</section>
+
+	<!--로그인화면-->
+	<section id="right">
+
+		<div class="register-form">
+			<a href="{{url_for('home.home')}}"><img src="/static/new_design/images/wisedome-logo.png" alt="logo"></a>
+
+			<div class="signup">
+				<h5>회원가입</h5>
+				<h6>16세 이상의 이용자만 이용할 수 있습니다.</h6>
+
+
+				{% from "/new_design/_formhelpers.html" import render_form %}
+				{% from "/new_design/_formhelper.html" import render_field %}
+				{# {{ render_form(form, form_id="register", action_url=url_for('account.register'), btn_class="btn btn-primary btn-block" )}} #}
+
+				<form id="register" method="post" action="{{ url_for('account.register')}}" onsubmit="return email_auth();">
+					{{ form.hidden_tag() }}
+					{#{{ render_field(form.email_addr, "fas fa-envelope icon")}}  <!-- 이메일 -->#}
+					<div class="form-group">
+						<i class="fas fa-envelope icon"></i>
+						<input type="email" class="input-field" name="email_addr" id="email_addr" placeholder="이메일" required>
+						<button type="button" class="email-confirm" onclick="Alert.render()">인증받기</button> 
+					</div>
+
+					<div id="dialogoverlay"></div>
+					<div id="dialogbox">
+						<div>
+							<div id="dialogboxhead"></div>
+							<div id="dialogtime">남은시간 : <span id="timer"></span></div>
+							<div id="dialogboxbody"> </div>
+							<div id="dialogboxfoot">        
+								<div id="dialogResend"></div>
+								<div id="dialogOk"></div>
+							</div>
+						</div>
+					</div>
+
+					<div id="emptyoverlay"></div>
+					<div id="emptybox">
+						<div>
+							<div id="emptyboxhead"></div>
+							<div id="emptyboxbody"> </div>
+							<div id="emptyboxfoot"></div>
+						</div>
+					</div>
+
+					<div class="mail_chk" id="false"></div>
+
+
+
+
+					{{ render_field(form.password, "fas fa-unlock icon")}}		<!-- 비밀번호 -->
+					{{ render_field(form.confirm, "fas fa-lock icon")}}			<!-- 비밀번호 확인 -->
+
+					<ul class="password-rule" style="display: block;">  <!--비밀번호 조건추가됨 02.28-->
+						<li>영문 소문자, 숫자, 특수문자를 조합한 8~15자</li>
+						<li>특수문자는 ! @ # $ % ^ & * 만 지원가능합니다.</li>
+						<li>띄워쓰기는 불가합니다.</li>
+					</ul>
+
+
+					{{ render_field(form.fullname, "fas fa-user icon")}}		<!-- 이름 -->
+					{{ render_field(form.name, "fas fa-address-card icon")}}	<!-- 별명 -->
+
+					<div class="form-group">
+						<i class="fas fa-birthday-cake icon"></i>
+						<select id="year" name="year" class="form-control select" required>
+							<option value="" selected disabled >출생년도</option>
+							{% for i in range(2005, 1949, -1) %}
+							<option value="{{i}}">{{i}}</option>
+							{% endfor %}
+
+						</select>
+
+						<select id="month" name="month" class="form-control select" required>
+							<option value="" selected disabled >월</option>
+							<option value="01">1</option>
+							<option value="02">2</option>
+							<option value="03">3</option>
+							<option value="04">4</option>
+							<option value="05">5</option>
+							<option value="06">6</option>
+							<option value="07">7</option>
+							<option value="08">8</option>
+							<option value="09">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>
+
+						<select id="day" name="day" class="form-control select" required>
+							<option value="" selected disabled>일</option>
+							<option value="01">1</option>
+							<option value="02">2</option>
+							<option value="03">3</option>
+							<option value="04">4</option>
+							<option value="05">5</option>
+							<option value="06">6</option>
+							<option value="07">7</option>
+							<option value="08">8</option>
+							<option value="09">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+							<option value="31">31</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<i class="fas fa-venus-mars icon"></i>
+						<select id="sex" name="sex" class="form-control select" required>
+							<option value="" selected disabled>성별</option>
+							<option value="M">남성</option>
+							<option value="F">여성</option>
+						</select>
+					</div>
+
+					<!-- 이 부분이 이 form 안에 있어야 합니당.. -->
+					<ul>
+						<li><input type='checkbox' name='enable1' value='agree' required >  &nbsp; 
+							와이즈돔의 이용약관에 동의합니다.(필수)</li>
+						<li><a href="#" id="read-detail">자세히보기</a></li>
+					</ul>
+
+					<button type="submit" class="btn btn-primary btn-block">가입하기</button>
+				</form>
+
+				<div id="myModal" class="modal" style="display:none;">
+					<div class="modal-content">
+						<span class="close">&times;</span>
+						<img src="/static/new_design/images/wisedome-logo.png" alt="logo">
+
+						<div class="terms">
+							<h3>와이즈돔 이용약관</h3>
+							<textarea style="height:19vh;">
+여러분을 환영합니다.
+와이즈돔 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 와이즈돔 서비스의 이용과 관련하여 와이즈돔 서비스를 제공하는 와이즈돔 주식회사(이하 ‘와이즈돔’)와 이를 이용하는 와이즈돔 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 와이즈돔 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+
+회원으로 가입하시면 와이즈돔 서비스를 보다 편리하게 이용할 수 있습니다.
+여러분은 본 약관을 읽고 동의하신 후 회원 가입을 신청하실 수 있으며, 와이즈돔는 이에 대한 승낙을 통해 회원 가입 절차를 완료하고 여러분께 와이즈돔 서비스 이용 계정(이하 ‘계정’)을 부여합니다. 계정이란 회원이 와이즈돔 서비스에 로그인한 이후 이용하는 각종 서비스 이용 이력을 회원 별로 관리하기 위해 설정한 회원 식별 단위를 말합니다. 회원은 자신의 계정을 통해 좀더 다양한 와이즈돔 서비스를 보다 편리하게 이용할 수 있습니다. 이와 관련한 상세한 내용은 계정 운영정책 및 고객센터 내 와이즈돔 회원가입 방법 등에서 확인해 주세요.
+							</textarea>
+						</div>
+
+						<div class="terms">
+							<h3>개인정보 수집 및 이용동의</h3>
+							<textarea>
+개인정보보호법에 따라 와이즈돔에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
+
+1. 수집하는 개인정보
+1-1)이용자는 회원가입을 하지 않아도 정보 검색, 뉴스 보기 등 대부분의 와이즈돔 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 메일, 캘린더, 카페, 블로그 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 와이즈돔는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
+
+1-2) 이용자 기기의 고유한 정보를 원래의 값을 확인하지 못 하도록 안전하게 변환하여 수집합니다. 서비스 이용 과정에서 위치정보가 수집될 수 있으며,
+와이즈돔에서 제공하는 위치기반 서비스에 대해서는 '와이즈돔 위치정보 이용약관'에서 자세하게 규정하고 있습니다.
+이와 같이 수집된 정보는 개인정보와의 연계 여부 등에 따라 개인정보에 해당할 수 있고, 개인정보에 해당하지 않을 수도 있습니다.
+
+2. 수집한 개인정보의 이용
+와이즈돔 및 와이즈돔 관련 제반 서비스(모바일 웹/앱 포함)의 회원관리, 서비스 개발・제공 및 향상, 안전한 인터넷 이용환경 구축 등 아래의 목적으로만 개인정보를 이용합니다.
+
+3. 개인정보의 보관기간
+회사는 원칙적으로 이용자의 개인정보를 회원 탈퇴 시 지체없이 파기하고 있습니다.
+단, 이용자에게 개인정보 보관기간에 대해 별도의 동의를 얻은 경우, 또는 법령에서 일정 기간 정보보관 의무를 부과하는 경우에는 해당 기간 동안 개인정보를 안전하게 보관합니다.
+
+4. 개인정보 수집 및 이용 동의를 거부할 권리
+이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.
+							</textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="register" >
+				<span >이미 회원이세요? <a href="{{ url_for('account.signin' )}}">지금 바로 로그인하기</a></span>
+			</div>
+
+		</div> 
+	</section>
+
+	<script src="/static/new_design/js/register.js"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}"></script>
+
+	<script>
+		var div = $("label[for = 'fullname']").parent();
+$("#fullname").attr("placeholder", "이름");
+
+var div = $("label[for = 'name']").parent();
+$("#name").attr("placeholder", "별명");
+$("#name").attr("type", "text");
+$("#name").attr("id", "_name");
+
+var div = $("label[for = 'email_addr']").parent();
+$("#email_addr").attr("placeholder", "이메일");
+
+var div = $("label[for = 'password']").parent();
+$("#password").attr("placeholder", "비밀번호");
+
+var div = $("label[for = 'confirm']").parent();
+$("#confirm").attr("placeholder", "비밀번호 재확인");
+
+
+function email_auth() {
+	return;
+	if ($(".mail_chk").attr('id') == "false") {
+		alert("인증되지 않은 이메일입니다.");
+		return false;
+	}
+	else {
+		return;
+	}
+}
+
+$(document).ready(function(){
+	var csrf = "{{ csrf_token() }}";
+	$("#csrf_token").val(csrf);
+
+	$.ajaxSetup({
+		beforeSend: function(xhr, settings) {
+			if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+				xhr.setRequestHeader("X-CSRFToken", csrf)
+			}
+		}
+	});
+
+	var random_num = 0;
+
+	$(".email-confirm").on('click', function(){
+
+
+		random_num = Math.floor(Math.random()*(999999-100000+1)) + 100000;
+
+		var email = $('#email_addr').val();
+
+		if (email == "") {
+			random_num = 0;
+		}
+
+
+		$.ajax({
+			url: '{{url_for("gmail.auth_msg")}}',
+			data: {"random_num": random_num, "email": email},
+			type: 'POST',
+			success: function(res) {
+				if (res == "CAN'T SEND") {
+					return;
+				}
+				if (res != "SEND") {
+					alert('이메일 전송 실패');
+				}
+			},
+			error:function(request, error) {
+				console.log(request);
+				console.log(error);
+			}
+		});
+	});
+
+
+	$("#dialogResend").on('click', '#re-send-email', function(){
+
+		random_num = Math.floor(Math.random()*(999999-100000+1)) + 100000;
+
+		var email = $('#email_addr').val();
+
+		if (email == "") {
+			random_num = 0;
+		}
+
+		$.ajax({
+			url: '{{url_for("gmail.auth_msg")}}',
+			data: {"random_num": random_num, "email": email},
+			type: 'POST',
+			success: function(res) {
+				if (res == "CAN'T SEND") {
+					return;
+				}
+				if (res != "SEND") {
+					alert('이메일 전송 실패');
+				}
+			},
+			error:function(request, error) {
+				console.log(request);
+				console.log(error);
+			}
+		});
+	});
+
+
+	$("#dialogOk").on('click', function(){
+		var auth_num = $("#auth_num").val();
+
+		if(auth_num == random_num && $("#dialogtime").text() != "인증시간이 초과되었습니다" ) {
+
+			alert('인증되었습니다.');
+			document.getElementById('dialogbox').style.display = "none";
+			document.getElementById('dialogoverlay').style.display = "none";
+			document.getElementById('emptybox').style.display = "none";
+			document.getElementById('emptyoverlay').style.display = "none";
+
+			$("#email_addr").attr("readonly", true);
+			$("#email_addr").css("background", "#dfdfdf");
+			$(".mail_chk").attr('id', 'true');
+
+
+		}
+		else {
+			alert('인증번호가 일치하지 않습니다.');
+		}
+	});
+});
+
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Wisedome</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+		<!-- plugins:css -->
+		<link rel="stylesheet" href="/static/new_design/assets/vendors/mdi/css/materialdesignicons.min.css">
+		<link rel="stylesheet" href="/static/new_design/css/function/vendor.bundle.base.css">
+		<link rel="stylesheet" href="/static/new_design/css/function/owl.carousel.min.css">
+		<!--기본css파일-->
+		<link rel="stylesheet" href="/static/new_design/css/basic/dashboard-basic.css">
+		<link rel="stylesheet" href="/static/new_design/css/basic/nav-footer.css">
+		<!--this page css-->
+		<link rel="stylesheet" href="/static/new_design/css/index2.css"/>
+		<link rel="stylesheet" href="/static/new_design/css/basic/flash-msg.css"/>
+
+	</head>
+	<body>
+
+
+		<div class="banner-wrapper">
+			<div class="container-scroller">
+				<!--여기서부터 nav-->
+				<div class="row">
+					<div class="col-lg-12">
+						<nav class="navbar fixed-top navbar-expand-lg">
+							<a class="navbar-brand" href="{{url_for('home.home')}}"><img src="/static/new_design/images/wisedome-logo.png" alt="logo" ></a>
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="mdi mdi-menu"></span></button>
+							<div class="collapse navbar-collapse justify-content-lg-end justify-content-md-start" id="navbarSupportedContent">
+								<ul class="navbar-nav" style="margin-left : 20px">
+									<li class="nav-item active"><a class="nav-link" href="{{ url_for('home.aboutus')}}">회사소개</a></li>
+
+									<li class="nav-item"><a class="nav-link" href="{{ url_for('home.databoucher') }}">데이터 바우처</a></li>
+
+									<li class="nav-item"><a  class="nav-link" href="{{ url_for('home.faq') }}">자주하는질문 </a></li>
+									<li class="nav-item"><a  class="nav-link" href="{{ url_for('account.signin') }}">로그인 </a></li>
+								</ul>
+							</div>
+						</nav>
+					</div><!--col lg 12-->
+				</div><!--row-->
+				<!--여기까지가 nav-->
+
+				<div class="row align-items-center py-5">
+					<div class="offset-xl-2 col-xl-5 offset-lg-1 col-lg-5 col-md-6 col-sm-6 banner-content main-text ">
+						<h5>LET'S START TODAY</h5>
+						<div class="hr"></div>
+						<h1 >TOUCH FOR YOUR<br> BUCKET LIST </h1>
+						<p> 당신의 버킷리스트를 위해 지금 터치하세요 <br>
+						어디에서나 자유롭게 시간을 활용할수 있습니다</p>
+						<!--<button class="btn btn-primary btn-lg-lg btn-md-sm mr-2 mb-3">사용방법보기 <i class="mdi mdi-chevron-double-right"></i></button>-->
+					</div>
+					<div class="col-xl-5 col-lg-6 col-md-6 col-sm-6 banner-content">
+						<img src="/static/new_design/images/mockup.png" alt="main image" id="main-img">
+					</div>
+				</div>
+			</div>
+
+			<!--체험프로젝트-->
+			<div class="details-wrapper ">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 mx-auto text-center ">
+							<h3>체험프로젝트</h3>
+							<div class="title-hr"></div>
+						</div>
+					</div>
+
+					<div class="row pt-4">
+
+						<div class="col-md-3 col-6" id="voice-icon">
+							<div class="card card-icon-top">
+								<div class="card-body text-center">
+									<a data-toggle="modal" data-target="#voiceProject">
+										<svg  id="card-icon2" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" ><g><path xmlns="http://www.w3.org/2000/svg" d="m256 31c-141.159 0-256 114.392-256 255v120c0 8.284 6.716 15 15 15h45v15c0 24.813 20.187 45 45 45h60c8.284 0 15-6.716 15-15v-210c0-8.284-6.716-15-15-15h-60c-24.813 0-45 20.187-45 45v15h-30v-15c0-124.065 101.383-225 226-225s226 100.935 226 225v15h-30v-15c0-24.813-20.187-45-45-45h-60c-8.284 0-15 6.716-15 15v210c0 8.284 6.716 15 15 15h60c24.813 0 45-20.187 45-45v-15h45c8.284 0 15-6.716 15-15v-120c0-140.608-114.841-255-256-255zm-166 255c0-8.271 6.729-15 15-15h45v180h-45c-8.271 0-15-6.729-15-15zm-30 45v60h-30v-60zm362 105c0 8.271-6.729 15-15 15h-45v-180h45c8.271 0 15 6.729 15 15zm60-45h-30v-60h30z"></g></svg>
+										<h4 class="icon-title iconTitle2">음성작업</h4>
+									</a>
+								</div>
+							</div>
+						</div>
+						<!--음성작업 팝업창-->
+						<div class="modal fade" id="voiceProject" tabindex="-1" role="dialog" aria-labelledby="voiceProjectLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="voiceProjectLabel">음성작업</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										{#<img src="/static/new_design/images/car2.jpg" alt="template image"><!--여기에 템플릿 이미지 걸어주면됨(현재 이미지는 테스트용)-->
+										<p>음성작업 템플릿</p><!--글은 이안에다 바꿔주면됨-->#}
+										{% include "/new_design/workspace/no_sample.html" %}
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-6" id="img-icon">
+							<div class="card card-icon-top">
+								<div class="card-body text-center">
+									<a data-toggle="modal" data-target="#imgProject">
+										<svg id="card-icon3" viewBox="0 0 512 512.00099" ><path d="m373.410156 0h-234.816406c-76.421875 0-138.59375 62.171875-138.59375 138.59375v234.8125c0 76.421875 62.171875 138.59375 138.59375 138.59375h234.816406c76.417969 0 138.589844-62.171875 138.589844-138.59375v-234.8125c0-76.421875-62.171875-138.59375-138.589844-138.59375zm108.574219 373.40625c0 59.871094-48.707031 108.578125-108.578125 108.578125h-234.8125c-59.871094 0-108.578125-48.707031-108.578125-108.578125v-1.316406l86.089844-79.25c2.4375-2.242188 6.257812-2.242188 8.695312-.003906l65.875 60.476562c7.640625 7.015625 17.941407 10.441406 28.269531 9.414062 10.324219-1.03125 19.742188-6.4375 25.847657-14.828124l116.25-159.847657c1.542969-2.117187 3.65625-2.558593 4.777343-2.632812 1.121094-.066407 3.273438.085937 5.078126 1.988281l111.082031 117.050781v68.949219zm0-112.550781-89.3125-94.109375c-7.472656-7.875-17.960937-11.984375-28.808594-11.277344-10.832031.707031-20.707031 6.148438-27.09375 14.929688l-116.253906 159.847656c-1.472656 2.023437-3.488281 2.507812-4.558594 2.613281-1.066406.105469-3.136719.035156-4.980469-1.660156l-65.875-60.472657c-13.839843-12.710937-35.503906-12.691406-49.324218.03125l-65.761719 60.535157v-192.699219c0-59.871094 48.707031-108.578125 108.578125-108.578125h234.816406c59.867188 0 108.574219 48.707031 108.574219 108.578125zm0 0"/><path d="m142.910156 86.734375c-29.082031 0-52.746094 23.664063-52.746094 52.75 0 29.082031 23.664063 52.746094 52.746094 52.746094 29.085938 0 52.746094-23.664063 52.746094-52.746094.003906-29.085937-23.660156-52.75-52.746094-52.75zm0 75.476563c-12.53125 0-22.730468-10.195313-22.730468-22.730469 0-12.53125 10.199218-22.730469 22.730468-22.730469 12.535156 0 22.730469 10.195312 22.730469 22.730469 0 12.535156-10.195313 22.730469-22.730469 22.730469zm0 0"/></svg>
+										<h4 class="icon-title iconTitle3">이미지작업</h4>
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<!--이미지작업 팝업창-->
+						<div class="modal fade" id="imgProject" tabindex="-1" role="dialog" aria-labelledby="imgProjectLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="imgProjectLabel">이미지작업</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										{#<img src="#" alt="template image"><!--템플릿이미지넣기-->
+										<p>이미지 작업 템플릿</p><!--글은 이안에다 바꿔주면됨-->#}
+										{% include "/new_design/workspace/image_sample.html" %}
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-6" id="text-icon">
+							<div class="card card-icon-top">
+								<div class="card-body text-center">
+									<a data-toggle="modal" data-target="#textProject">
+										<svg id="card-icon4" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><g><path d="m12.25 12c-.414 0-.75-.336-.75-.75v-.75h-7v.75c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-1.5c0-.414.336-.75.75-.75h8.5c.414 0 .75.336.75.75v1.5c0 .414-.336.75-.75.75z"/></g><g><path d="m8 18.75c-.414 0-.75-.336-.75-.75v-8c0-.414.336-.75.75-.75s.75.336.75.75v8c0 .414-.336.75-.75.75z"/></g><g><path d="m9.25 19h-2.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h2.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m20.25 10.5h-4.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h4.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m20.25 14.5h-4.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h4.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m20.25 18.5h-4.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h4.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m21.25 23h-18.5c-1.517 0-2.75-1.233-2.75-2.75v-16.5c0-1.517 1.233-2.75 2.75-2.75h18.5c1.517 0 2.75 1.233 2.75 2.75v16.5c0 1.517-1.233 2.75-2.75 2.75zm-18.5-20.5c-.689 0-1.25.561-1.25 1.25v16.5c0 .689.561 1.25 1.25 1.25h18.5c.689 0 1.25-.561 1.25-1.25v-16.5c0-.689-.561-1.25-1.25-1.25z"/></g><g><path d="m23.25 6h-22.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h22.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g></svg> 
+										<h4 class="icon-title iconTitle4">텍스트작업</h4>
+									</a>
+								</div>
+							</div>
+						</div>
+						<!--텍스트 팝업창-->
+						<div class="modal fade" id="textProject" tabindex="-1" role="dialog" aria-labelledby="textProjectLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="textProjectLabel">텍스트작업</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										{#<img src="#" alt="template image"><!--템플릿이미지넣기-->
+										<p>텍스트 작업 템플릿</p><!--글넣기-->#}
+										{% include "/new_design/workspace/text-emotion.html" %}
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-6">
+							<div class="card card-icon-top" id="video-icon">
+								<div class="card-body text-center">
+									<a data-toggle="modal" data-target="#videoProject">
+										<svg id="card-icon5"  viewBox="0 0 512 512" ><g><path d="m338.95 243.28-120-75c-4.625-2.89-10.453-3.043-15.222-.4-4.77 2.643-7.729 7.667-7.729 13.12v150c0 5.453 2.959 10.476 7.729 13.12 2.266 1.256 4.77 1.88 7.271 1.88 2.763 0 5.522-.763 7.95-2.28l120-75c4.386-2.741 7.05-7.548 7.05-12.72s-2.663-9.979-7.049-12.72zm-112.95 60.656v-95.873l76.698 47.937z"/><path d="m437 61h-362c-41.355 0-75 33.645-75 75v240c0 41.355 33.645 75 75 75h362c41.355 0 75-33.645 75-75v-240c0-41.355-33.645-75-75-75zm45 315c0 24.813-20.187 45-45 45h-362c-24.813 0-45-20.187-45-45v-240c0-24.813 20.187-45 45-45h362c24.813 0 45 20.187 45 45z"/></g></svg>  
+										<h4 class="icon-title iconTitle5">비디오작업</h4>
+									</a>
+								</div>
+							</div>
+						</div>
+						<!--비디오 팝업창-->
+						<div class="modal fade" id="videoProject" tabindex="-1" role="dialog" aria-labelledby="videoProjectLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="videoProjectLabel">비디오작업</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										{#<img src="#" alt="template image"><!--템플릿이미지넣기-->
+										<p>비디오작업 템플릿</p><!--글넣기-->#}
+										{% include "/new_design/workspace/no_sample.html" %}
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><!--row-->
+				</div><!--container-->
+			</div><!--detail wrapper-->
+
+
+			<div class="project-wrapper">
+
+				<div class="row">
+					<div class="col-md-8 mx-auto text-center ">
+						<h3>진행중인 프로젝트</h3>
+						<div class="title-hr"></div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row product-item-wrapper">
+							<div class="card-group" style="width:100%">
+
+								{% for project in projects %}
+								<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+									<div class="card bg-white shadow-sm">
+										<a href="{{ url_for('project.details', short_name=project.short_name) }}">
+											<div class="card-body">
+												<div class="d-flex justify-content-start my-border-bottom">
+													{% if project.category_name == "sound" %}
+													<svg  id="audio-sm-icon" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" ><g><path xmlns="http://www.w3.org/2000/svg" d="m256 31c-141.159 0-256 114.392-256 255v120c0 8.284 6.716 15 15 15h45v15c0 24.813 20.187 45 45 45h60c8.284 0 15-6.716 15-15v-210c0-8.284-6.716-15-15-15h-60c-24.813 0-45 20.187-45 45v15h-30v-15c0-124.065 101.383-225 226-225s226 100.935 226 225v15h-30v-15c0-24.813-20.187-45-45-45h-60c-8.284 0-15 6.716-15 15v210c0 8.284 6.716 15 15 15h60c24.813 0 45-20.187 45-45v-15h45c8.284 0 15-6.716 15-15v-120c0-140.608-114.841-255-256-255zm-166 255c0-8.271 6.729-15 15-15h45v180h-45c-8.271 0-15-6.729-15-15zm-30 45v60h-30v-60zm362 105c0 8.271-6.729 15-15 15h-45v-180h45c8.271 0 15 6.729 15 15zm60-45h-30v-60h30z"></g></svg>
+													{% elif project.category_name == "vidio" %}
+													<svg id="video-sm-icon"  viewBox="0 0 512 512" ><g><path d="m338.95 243.28-120-75c-4.625-2.89-10.453-3.043-15.222-.4-4.77 2.643-7.729 7.667-7.729 13.12v150c0 5.453 2.959 10.476 7.729 13.12 2.266 1.256 4.77 1.88 7.271 1.88 2.763 0 5.522-.763 7.95-2.28l120-75c4.386-2.741 7.05-7.548 7.05-12.72s-2.663-9.979-7.049-12.72zm-112.95 60.656v-95.873l76.698 47.937z"/><path d="m437 61h-362c-41.355 0-75 33.645-75 75v240c0 41.355 33.645 75 75 75h362c41.355 0 75-33.645 75-75v-240c0-41.355-33.645-75-75-75zm45 315c0 24.813-20.187 45-45 45h-362c-24.813 0-45-20.187-45-45v-240c0-24.813 20.187-45 45-45h362c24.813 0 45 20.187 45 45z"/></g></svg>
+													{% elif project.category_name == "image" %}
+													<svg id="img-sm-icon" viewBox="0 0 512 512.00099" ><path d="m373.410156 0h-234.816406c-76.421875 0-138.59375 62.171875-138.59375 138.59375v234.8125c0 76.421875 62.171875 138.59375 138.59375 138.59375h234.816406c76.417969 0 138.589844-62.171875 138.589844-138.59375v-234.8125c0-76.421875-62.171875-138.59375-138.589844-138.59375zm108.574219 373.40625c0 59.871094-48.707031 108.578125-108.578125 108.578125h-234.8125c-59.871094 0-108.578125-48.707031-108.578125-108.578125v-1.316406l86.089844-79.25c2.4375-2.242188 6.257812-2.242188 8.695312-.003906l65.875 60.476562c7.640625 7.015625 17.941407 10.441406 28.269531 9.414062 10.324219-1.03125 19.742188-6.4375 25.847657-14.828124l116.25-159.847657c1.542969-2.117187 3.65625-2.558593 4.777343-2.632812 1.121094-.066407 3.273438.085937 5.078126 1.988281l111.082031 117.050781v68.949219zm0-112.550781-89.3125-94.109375c-7.472656-7.875-17.960937-11.984375-28.808594-11.277344-10.832031.707031-20.707031 6.148438-27.09375 14.929688l-116.253906 159.847656c-1.472656 2.023437-3.488281 2.507812-4.558594 2.613281-1.066406.105469-3.136719.035156-4.980469-1.660156l-65.875-60.472657c-13.839843-12.710937-35.503906-12.691406-49.324218.03125l-65.761719 60.535157v-192.699219c0-59.871094 48.707031-108.578125 108.578125-108.578125h234.816406c59.867188 0 108.574219 48.707031 108.574219 108.578125zm0 0"/><path d="m142.910156 86.734375c-29.082031 0-52.746094 23.664063-52.746094 52.75 0 29.082031 23.664063 52.746094 52.746094 52.746094 29.085938 0 52.746094-23.664063 52.746094-52.746094.003906-29.085937-23.660156-52.75-52.746094-52.75zm0 75.476563c-12.53125 0-22.730468-10.195313-22.730468-22.730469 0-12.53125 10.199218-22.730469 22.730468-22.730469 12.535156 0 22.730469 10.195312 22.730469 22.730469 0 12.535156-10.195313 22.730469-22.730469 22.730469zm0 0"/></svg>
+													{% else %}
+													<svg id="text-sm-icon" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><g><path d="m12.25 12c-.414 0-.75-.336-.75-.75v-.75h-7v.75c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-1.5c0-.414.336-.75.75-.75h8.5c.414 0 .75.336.75.75v1.5c0 .414-.336.75-.75.75z"/></g><g><path d="m8 18.75c-.414 0-.75-.336-.75-.75v-8c0-.414.336-.75.75-.75s.75.336.75.75v8c0 .414-.336.75-.75.75z"/></g><g><path d="m9.25 19h-2.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h2.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m20.25 10.5h-4.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h4.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m20.25 14.5h-4.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h4.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m20.25 18.5h-4.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h4.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g><g><path d="m21.25 23h-18.5c-1.517 0-2.75-1.233-2.75-2.75v-16.5c0-1.517 1.233-2.75 2.75-2.75h18.5c1.517 0 2.75 1.233 2.75 2.75v16.5c0 1.517-1.233 2.75-2.75 2.75zm-18.5-20.5c-.689 0-1.25.561-1.25 1.25v16.5c0 .689.561 1.25 1.25 1.25h18.5c.689 0 1.25-.561 1.25-1.25v-16.5c0-.689-.561-1.25-1.25-1.25z"/></g><g><path d="m23.25 6h-22.5c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h22.5c.414 0 .75.336.75.75s-.336.75-.75.75z"/></g></svg>
+													{% endif %}
+													<h6 class="card-title">{{ project.name }}</h6>
+												</div>
+												<h6 class="card-subtitle">{{ project.description }}</h6>
+
+												<div class="badge-group">
+													<div class="badge"><i class="mdi mdi-account-multiple-outline mr-1"></i>n대</div>
+													<div class="badge"><i class="mdi mdi-gender-female mr-1"></i>여성</div>
+													<div class="badge"><i class="mdi mdi-gender-male mr-1"></i>남성</div>
+												</div>
+												<div class="badge-ios-group">
+													<div class="badge"><i class="mdi mdi-monitor"></i></div>
+													<div class="badge"><i class="mdi mdi-cellphone-iphone"></i></div>
+												</div>
+											</div>
+
+											<div class="card-footer text-muted">
+												<div class="d-flex justify-content-between">
+													<p class="card-text">마감일 : ~ {{ project.end_date[0:10]}}</p>
+													<p class="card-text">{{ project.all_point|number_format}}P</p>
+												</div>
+											</div>
+										</a>
+									</div>
+								</div>
+								{% endfor %}
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row ">
+					<div class="btn-group mx-auto">
+						<a href="{{ url_for('project.index') }}">
+							<button  class="btn btn-icon btn-inverse-primary"><i class="mdi mdi-chevron-double-right"></i> </button>
+						</a>
+					</div>
+				</div>
+			</div><!--project wrapper-->
+
+			{#
+			<div class="profile-wrapper">
+				<div class="row">
+					<div class="col-md-8 mx-auto text-center ">
+						<h3>금주의 포인트킹</h3>
+						<div class="title-hr"></div>
+					</div>
+				</div>
+
+				<div class="row grid-margin">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								{% macro render_user_thumbnail(user, upload_method) %}
+								{% if user.info.avatar %}
+								{% if upload_method == 'rackspace'%}
+								{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onError="this.onerror=null;this.src='{{url_for('static', filename='new_design/images/user-default.png')}}';
+								{% else %}
+								{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar))}}" onError="this.onerror=null;this.src='{{url_for('static', filename='new_design/images/user-default.png')}}';
+								{% endif %}
+								{% else %}
+								{{ url_for('static', filename='new_design/images/profile-default.jpg')}}
+								{% endif %}
+								{% endmacro %}
+								<div class="owl-carousel owl-theme loop">
+									{% for user in top_users %}
+
+									<!--새로 디자인한 프로필 -->
+									<div class="item profile-card">
+										<img src="{{ render_user_thumbnail(user, upload_method) }}" class="img img-responsive">
+										<div class="profile-name">{{ user.name }}</div> <!--사용자이름-->
+										<div class="profile-overview">
+											<div class="profile-overview">
+												<div class="row text-center">
+													<div class="col-4">
+														<h3>{{ user.point }}</h3> <p>포인트</p>
+													</div>
+													<div class="col-4">
+														<h3>{{ user.n_answers }}</h3> <p>참여</p>
+													</div>
+													<div class="col-4">
+														<h3>{{ user.rank }}</h3> <p>랭킹</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									{% endfor %}
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div><!--profile wrapper-->
+			#}
+
+			<footer><!---footer-내용변경됨 03.01-->
+				<div class="footer-border-bottom pb-3">
+					<div class="container ">
+						<div class="row ">
+							<div class="col-lg-4">
+								<img class="img-fluid" src="/static/new_design/images/wisedome-logo.png" alt="logo">
+
+								<div class="d-flex mt-3">
+									<h6 class="font-weight-normal"> 대표이사 : 차정원</h6>
+								</div>
+								<div class="d-flex">
+									<h6 class="font-weight-normal">사업자등록번호 : 458-42-00460</h6>
+								</div>
+							</div>
+
+							<div class="col-lg-4">
+								<ul class="nav">
+									<li class="nav-item">
+										<a class="nav-link " href="{{url_for('home.aboutus')}}"> 회사소개</a>
+									</li>
+								</ul>
+							</div>
+							<div class="col-lg-4">
+								<div class="d-flex">
+									<i class="mdi mdi-cellphone-android"></i>
+									<h6 class="font-weight-normal">&nbsp;  (055)-213-5472</h6>
+								</div>
+								<div class="d-flex">
+									<i class="mdi mdi-email"></i>
+									<h6 class="font-weight-normal"> &nbsp; wisedomekr@gmail.com</h6>
+								</div>
+
+								<div class="d-flex">
+									<i class="mdi mdi-home-map-marker"></i>
+									<h6 class="font-weight-normal"> &nbsp;경상남도 창원시 의창구 창원대학로 20, 85호관 506-1호 (사림동, 창원대학교)</h6>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="container p-2">
+					<div class="row">
+						<div class="col-md-8 mx-auto text-center">
+							<small class="mt-3">Copyright © 2021 <a href="{{url_for('home.home')}}">Wisedome</a> All rights reserved.</small>
+						</div>      
+					</div>
+				</div>
+			</footer><!--footer 여기까지-->
+
+			<div id="mini-notification" class="alert-info alert show-notification flash_message" style="left:0; margin:0 auto;">
+				<i class="mdi mdi-comment-alert-outline"></i><span> 이 사이트는 Google Chrome에 최적화 되어있습니다</span><i class="mdi mdi-window-close" id="flash_close"></i>
+			</div>
+
+		</div>
+
+		<!-- plugins:js 기본 필수로 들어가는 JS파일-->
+		<script src="/static/new_design/js/plugin/vendor.bundle.base.js"></script>
+		<script src="/static/new_design/js/plugin/owl.carousel.js"></script>
+		<script src="/static/new_design/js/plugin/owl.carousel.min.js"></script>
+		<!-- this page js-->
+		<script src="/static/new_design/js/index.js"></script>
+		<!--nav footer js-->
+		<script src="/static/new_design/js/nav-footer.js"></script>
+
+		<script>
+			$(document).ready(function(){
+				setTimeout(function() {
+					$("#mini-notification").fadeOut('fast');
+				},5000);
+
+				$("#flash_close").on('click', function(){
+					$("#mini-notification").fadeOut('fast');
+				});
+			});
+		</script>
+
+	</body>
+</html>
+

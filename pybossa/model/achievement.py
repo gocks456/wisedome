@@ -12,7 +12,7 @@ class Achievement(db.Model, DomainObject):
 
     id = Column(Integer, primary_key=True)
 
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
 
     created = Column(Text, default=make_timestamp)
 

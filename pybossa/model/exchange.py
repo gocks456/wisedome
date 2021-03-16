@@ -12,7 +12,7 @@ class Exchange(db.Model, DomainObject):
 
     id = Column(Integer, primary_key=True)
 
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
 
     request_name = Column(Unicode(length=254), nullable=False)
 
@@ -22,10 +22,10 @@ class Exchange(db.Model, DomainObject):
 
     exchange_point = Column(Integer)
 
-    created = Column(Text) #, default=make_timestamp)
+    created = Column(Text, default=make_timestamp)
 
     finish_time = Column(Text) #, default='F')
 
-    exchanged = Column(Unicode(length=2))
+    exchanged = Column(Unicode(length=254))
 
     down_check = Column (Boolean)

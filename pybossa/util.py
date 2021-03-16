@@ -87,6 +87,7 @@ def handle_content_type(data):
     if (request.headers.get('Content-Type') == 'application/json' or
             request.args.get('response_format') == 'json'):
         message_and_status = last_flashed_message()
+        print(message_and_status)
         if message_and_status:
             data['flash'] = message_and_status[1]
             data['status'] = message_and_status[0]
@@ -288,31 +289,25 @@ class Pagination(object):
 
 def get_user_signup_method(user):
     """Return which OAuth sign up method the user used."""
-    msg = 'Sorry, there is already an account with the same e-mail.'
     if user.info:
         # Google
         if user.info.get('google_token'):
-            msg += " <strong>It seems like you signed up with your Google account.</strong>"
-            msg += "<br/>You can try and sign in by clicking in the Google button."
+            msg = "구글 계정으로 회원가입하였습니다. 하단의 구글 버튼을 통해 로그인하세요."
             return (msg, 'google')
-        # Facebook
-        elif user.info.get('facebook_token'):
-            msg += " <strong>It seems like you signed up with your Facebook account.</strong>"
-            msg += "<br/>You can try and sign in by clicking in the Facebook button."
-            return (msg, 'facebook')
+        # Kakao
+        elif user.info.get('kakao_token'):
+            msg = "카카오 계정으로 회원가입하였습니다. 하단의 카카오톡 버튼을 통해 로그인하세요."
+            return (msg, 'kakao')
         # Twitter
         elif user.info.get('twitter_token'):
-            msg += " <strong>It seems like you signed up with your Twitter account.</strong>"
-            msg += "<br/>You can try and sign in by clicking in the Twitter button."
+            msg = " <strong>It seems like you signed up with your Twitter account.</strong>"
             return (msg, 'twitter')
         # Local account
         else:
-            msg += " <strong>It seems that you created an account locally.</strong>"
-            msg += " <br/>You can reset your password if you don't remember it."
+            msg = "비밀번호가 기억이 나지 않는다면 하단의 재설정을 이용해주세요."
             return (msg, 'local')
     else:
-        msg += " <strong>It seems that you created an account locally.</strong>"
-        msg += " <br/>You can reset your password if you don't remember it."
+        msg = "비밀번호가 기억이 나지 않는다면 하단의 재설정을 이용해주세요."
         return (msg, 'local')
 
 
@@ -414,7 +409,7 @@ def _last_activity_points(project):
         last_activity_datetime, '%Y-%m-%dT%H:%M:%S')
     most_recent = max(updated, last_activity)
 
-    days_since_modified = (datetime.utcnow() - most_recent).days
+    days_since_modified = (datetime.now() - most_recent).days
 
     if days_since_modified < 1:
         return 50
@@ -556,8 +551,8 @@ def check_password_strength(
     """
 
     required_chars = []
-    if uppercase:
-        required_chars.append(r'[A-Z]')
+    #if uppercase:
+    #    required_chars.append(r'[A-Z]')
     if lowercase:
         required_chars.append(r'[a-z]')
     if numeric:
@@ -568,11 +563,17 @@ def check_password_strength(
     pwd_len = len(password)
     if pwd_len < min_len or pwd_len > max_len:
         message = lazy_gettext(
-                    'Password must be between {0} and {1} characters'
+                    #'Password must be between {0} and {1} characters'
+                    '비밀번호의 길이는 {0} ~ {1}자 입니다.'
                     .format(min_len, max_len))
         return False, message
 
+    if ' ' in password:
+        message = lazy_gettext('비밀번호에 공백이 있습니다.')
+        return False, message
+
     valid = all(re.search(ch, password) for ch in required_chars)
+
     if not valid:
         return False, message
     else:

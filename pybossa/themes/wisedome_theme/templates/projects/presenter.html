@@ -19,6 +19,34 @@
         nope: '{{url_for('static', filename='js/vendor/json2.min.js')}}'
 });
 </script>
+<style>
+
+.tab {
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+}
+
+.tabcontent {
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-top: none;
+}
+
+.tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+}
+
+
+</style>
 
 <div class="container">
     <div class="row">
@@ -35,6 +63,10 @@
         </div>
     </div>
     {% endif %}
+
+	<button name="answer-manager" value="answer_manager" class="btn" id="managetest">TEST</button>
+	<h2 id="ajaxtest"></h2>
+	<button name="modify" value="modify" class="btn" id="moditest">MODI</button>
 	
 	<form action="" method="GET">
 		<button name="data" value="answer_manage" class="btn btn-primary">답변 관리</button>
@@ -57,6 +89,25 @@
 	{% endif %}
 	<div style="clear:both;"></div>
 	{{ project.info.task_presenter|safe }}
+	<div class="tab">
+		<button class="tablinks" onclick="openMenu(event, 'guide_line')">가이드라인 보기</button>
+		<button class="tablinks" onclick="openMenu(event, 'example')">예시 보기</button>
+		<button class="tablinks" onclick="openMenu(event, 'how_to_use')">이용방법 보기</button>
+	</div>
+	<div id="guide_line" class="tabcontent">
+		<h3>가이드라인</h3><br>
+		<p id = "gpid">{{project.long_description|markdown}}</p>
+	</div>
+
+	<div id="example" class="tabcontent">
+		<h3>예시</h3><br>
+		<p id="epid">{{ ex}}</p> 
+	</div>
+
+	<div id="how_to_use" class="tabcontent">
+		<h3>이용방법</h3><br>
+		<p>{{ htd }}</p>
+	</div>
 
     <div id='PYBOSSA_USER_LOCALE' hidden>
         {% if current_user.is_anonymous %}
@@ -66,6 +117,95 @@
         {% endif %}
 	</div>
 </div>
+
+
+	<script>
+		var csrf = "{{ csrf_token() }}";
+		$("#csrf_token").val(csrf);
+	</script>
+
+
+<script>
+	$(document).ready(function(){
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrf)
+				}
+			}
+		})
+
+		$("#managetest").click(function(){
+			var url = window.location.href;
+			$.ajax({
+				url:url,
+				data: {"btn":$(this).val()},
+				type:'POST',
+				success: function(data) {
+					//console.log(data);
+					console.log(typeof(data));
+					json = JSON.parse(data);
+					console.log(typeof(json));
+					console.log(Object.keys(json));
+					console.log(json[0].task_run_info);
+					$('#ajaxtest').text(json[0].task_run_info);
+					$('#ajaxtest').attr('value',json[0].id);
+				},
+				error:function(request,error){
+					console.log(request);
+					console.log(error);
+				}
+			});
+		});
+		$("#moditest").click(function(){
+			console.log('aaaa');
+			var url = window.location.href;
+			console.log($('#ajaxtest').attr('value'));
+			$.ajax({
+				url:url,
+				data: {
+					"btn":$(this).val(),
+					"task_run_id":$('#ajaxtest').attr('value'),
+					"answer": "new_answer"
+				},
+				type:'POST',
+				success: function(data) {
+					console.log(data);
+				},
+				error:function(request,error){
+					console.log(request);
+					console.log(error);
+				}
+			});
+		});
+	});
+</script>
+
+
+
+<script>
+	function openMenu(evt, menuName) {
+		var i, tabcontent, tablinks,temp;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		temp = evt.currentTarget.className;
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		
+		console.log(temp);
+		if (temp !== "tablinks active"){
+			evt.currentTarget.className += " active";
+		    document.getElementById(menuName).style.display = "block";
+		}
+			  
+	}
+
+</script>
+
 <script>
 	function get_cookie(cname) {
 		var name = cname + "=";

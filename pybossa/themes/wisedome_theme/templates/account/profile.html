@@ -35,7 +35,7 @@
 						<div class="col-md-12">
 							<div class="text-center">
 								<h1>당신이 참여한 과제</h1>
-								<p>채점 하지 않은 작업의 정답은 정답 수로 카운트되지 않습니다.</p></br>
+								<p> 정답률 : {{current_user.answer_rate}} </p>
 							</div>
 							{% for f in projects_contrib %}
 							<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4" onclick="location.href='{{ url_for('project.details', short_name=f.short_name)}}'" style="cursor:pointer;">
@@ -44,7 +44,11 @@
 									<div class="caption">
 										<h3>{{f.name}}</h3>
 										<h4><strong>{{f.all_point}}</strong><img src="{{url_for('static',filename='img/pppp.jpg')}}" width="33" height="35"></h4>
+										{% if f.complete_check == true %}
 										<h5><strong>정답 수 / 총 작업 수 : {{f.n_correct_rate}} / {{f.n_tasks_rate}}</strong></h5>
+										{% else %}
+										<h5><strong>아직 채점하지 않은 프로젝트입니다.</strong></h5>
+										{% endif %}
 										<p>{{f.description}}</p>
 										<!-- 정답 갯수 추가 -->
 

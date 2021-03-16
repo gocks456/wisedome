@@ -53,7 +53,7 @@
 			<table id = "down_check_table" class="table table-hover">
 				<thead>
 					<tr style="background-color:lightgray">
-						<th><input type="checkbox" id="allCheck"/></th>
+						<th><input type="checkbox" id="allcheck"/></th>
 						<th>id</th>
 						<th>user</th>
 						<th>예금주</th>
@@ -126,8 +126,8 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			<button type="button" onclick="DownToCsv('all_exchange_history','환급완료 내역',0)">CSV로 다운받기</button>
-
+	<!--		<button type="button" onclick="DownToCsv('all_exchange_history','환급완료 내역',0)">CSV로 다운받기</button>
+	-->
 		</div>
 
 	</div>
@@ -175,7 +175,9 @@
     $(function($){
         $("#down_check_table").dataTable( {
 			"order":[1,'desc'],
-			"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
+			"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+			"columnDefs": [
+				{ "orderable" : false, "targets" : 0}]
 		} );
     });
     $(function($){
@@ -200,8 +202,8 @@
 		})
 	})
 	$(function(){
-		$("#allCheck").click(function(){							// 전체선택 체크박스 클릭하면
-			if($("#allCheck").prop("checked")) {					// 전체 선택 체크박스가 체크된상태일경우
+		$("#allcheck").click(function(){							// 전체선택 체크박스 클릭하면
+			if($("#allcheck").prop("checked")) {					// 전체 선택 체크박스가 체크된상태일경우
 				$("input[name=down_check]").prop("checked",true);		// 해당화면에 전체 checkbox들을 체크해준다
 			} else {												// 전체 선택 체크박스가 해제된 경우
 				$("input[name=down_check]").prop("checked",false);	// 해당화면에 모든 checkbox들의 체크를해제시킨다.

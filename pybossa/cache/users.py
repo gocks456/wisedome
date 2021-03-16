@@ -45,7 +45,7 @@ def get_leaderboard(n, user_id=None, window=0, info=None):
 def get_category_leaderboard(current_user_name, category_name):
     sql = text('''
                SELECT ROW_NUMBER() OVER(ORDER BY SUM(t.point) desc) AS rank, u.id AS id, u.name AS name,
-               SUM(t.point) AS point, COUNT(t.id) AS n_tasks, COUNT(CASE WHEN t.score_mark = True THEN 1 END) AS n_correct, c.name AS category_name
+               SUM(t.point) AS point, c.name AS category_name
                FROM "user" u, category c, project p, task_run t
                WHERE p.category_id = c.id AND t.project_id = p.id AND t.user_id = u.id AND c.name=:cat_name GROUP BY u.id, c.name ORDER BY c.name, 4 DESC;
                ''')
@@ -53,20 +53,20 @@ def get_category_leaderboard(current_user_name, category_name):
     rank_categorys = []
     for row in results:
         if row.rank <= 20:
-            # n_tasks 와 n_correct 는 정답률이 얼마인지 계산하여 answer_rate 로 저장
-            rank_category = dict(id=row.id, rank=row.rank, name=row.name, point=row.point, answer_rate=round(row.n_correct / row.n_tasks * 100, 1),
+            rank_category = dict(id=row.id, rank=row.rank, name=row.name, point=row.point,
                                 category_name=row.category_name)
             rank_categorys.append(rank_category)
         elif row.rank > 20 and row.name == current_user_name:
-            rank_category = dict(id=row.id, rank=row.rank, name=row.name, point=row.point, answer_rate=round(row.n_correct / row.n_tasks * 100, 1),
+            rank_category = dict(id=row.id, rank=row.rank, name=row.name, point=row.point,
                                 category_name=row.category_name)
             rank_categorys.append(rank_category)
-
     return rank_categorys
 
 def get_category_GPA():
     sql = text('''
-               SELECT u.id AS id, SUM(t.point) AS point, COUNT(t.id) AS n_tasks, COUNT(CASE WHEN t.score_mark = True THEN 1 END) AS n_correct, c.name AS category_name
+               SELECT u.id AS id, SUM(t.point) AS point, COUNT(t.id) AS n_tasks,
+               COUNT(CASE WHEN t.score_mark = True THEN 1 END) AS n_correct,
+               COUNT(CASE WHEN t.completed_score = False THEN 1 END) AS n_no_score, c.name AS category_name
                FROM "user" u, category c, project p, task_run t
                WHERE p.category_id = c.id AND t.project_id = p.id AND t.user_id = u.id GROUP BY p.name, u.id, c.name ORDER BY c.name DESC;
                ''')
@@ -74,11 +74,19 @@ def get_category_GPA():
     rank_categorys = []
     for row in results:
         # n_tasks 와 n_correct 는 정답률이 얼마인지 계산하여 answer_rate 로 저장
-        rank_category = dict(id=row.id, point_sum=row.point, answer_rate=round(row.n_correct / row.n_tasks * 100, 1),
-                                category_name=row.category_name)
+        if(row.n_tasks - row.n_no_score > 0):
+            rank_category = dict(id=row.id, point_sum=row.point,
+                                 answer_rate=round((row.n_correct - row.n_no_score) / (row.n_tasks - row.n_no_score) * 100, 1),
+                                 category_name=row.category_name)
+        else:
+            rank_category = dict(id=row.id, point_sum=row.point,
+                                 answer_rate=0,
+                                 category_name=row.category_name)
         rank_categorys.append(rank_category)
     return rank_categorys
 
+# 2020.11.27. 업적 리뉴얼 예정
+"""
 def get_achievement(user_id, achievement_id):
     sql = text('''
                SELECT * FROM achievement WHERE user_id=:user_id AND achieve_id=:achieve_id;
@@ -117,26 +125,65 @@ def get_category_achieve(user_id):
         elif rank[0] == 'master':
             achieve[row.c_id] = 4
     return achieve
+"""
 
 def get_answer_rate(user):
     sql = text('''
-              SELECT COUNT(id) AS n_tasks, COUNT(CASE WHEN score_mark = True THEN 1 END) AS n_correct
+              SELECT COUNT(id) AS n_tasks, COUNT(CASE WHEN score_mark = True THEN 1 END) AS n_correct,
+              COUNT(CASE WHEN completed_score = False THEN 1 END) AS n_no_score
               FROM task_run
               WHERE user_id=:user_id
               ''')
     results = session.execute(sql, dict(user_id=user.id))
     answer_rate = 0
     for row in results:
-        answer_rate = row.n_correct / row.n_tasks * 100
+        if row.n_tasks - row.n_no_score > 0:
+            answer_rate = row.n_correct / (row.n_tasks - row.n_no_score) * 100
+        else:
+            answer_rate = 0
 
     return round(answer_rate, 1)
 
+def get_point_management():
+    sql = ('''
+           SELECT e.user_id, u.name, p.point_sum, p.current_point,
+           SUM(CASE WHEN e.exchanged = '정상환급' THEN exchange_point ELSE 0 END) "exchange_sum",
+		   count(*) "count_exchange",
+           count (CASE WHEN e.exchanged = '정상환급' THEN 1 END) "n_success",
+           count (e.exchanged)-count (CASE WHEN e.exchanged = '정상환급' THEN 1 END) "n_failure",
+           count(*)-count(e.exchanged) "n_todo"
+           FROM exchange e ,"user" u, point p
+           WHERE u.id = e.user_id AND u.id = p.user_id
+           GROUP BY e.user_id,u.name,p.point_sum,p.current_point
+           ''')
+    results = session.execute(sql,dict())
+    point_management = []
+    for row in results:
+        temp = dict(user_id=row.user_id, name=row.name, point_sum=row.point_sum, current_point=row.current_point,
+                exchange_sum=row.exchange_sum, count_exchange=row.count_exchange, n_success=row.n_success,
+                n_failure=row.n_failure, n_todo=row.n_todo)
+        point_management.append(temp)
+
+    return point_management
+
+def get_user_projects_points(user_id):
+    sql = text('''
+               SELECT SUM(t.point) AS points, p.name AS name, COUNT(t.id) AS count, MAX(t.finish_time) AS finish_time
+               FROM task_run t, project p
+               WHERE t.project_id=p.id AND t.user_id=:user_id GROUP BY p.id ORDER BY MAX(t.finish_time) DESC;
+               ''')
+    results = session.execute(sql, dict(user_id=user_id))
+    points = []
+    for row in results:
+        temp = dict(project_name=row.name, count=row.count, points=row.points, finish_time=row.finish_time)
+        points.append(temp)
+    return points
 
 def get_user_point_history(user_id):
     """Return user point history."""
     sql = text('''
                SELECT u.id AS id, t.project_id AS project_id, p.name AS project_name, MAX(t.finish_time) AS finish_time,
-               sum(t.point) AS point, p.short_name AS project_short_name, c.name AS category
+               sum(t.point) AS point, count(t.id) AS count, p.short_name AS project_short_name, c.name AS category
                FROM "user" u, task_run t, project p, category c
                WHERE t.project_id = p.id AND t.user_id = u.id AND p.category_id = c.id
                AND u.id =:user_id
@@ -147,7 +194,7 @@ def get_user_point_history(user_id):
     point_historys = []
     for row in results:
         point_history = dict(id=row.id, #project_id=row.project_id,
-                project_name=row.project_name, finish_time=row.finish_time,
+                project_name=row.project_name, finish_time=row.finish_time, count=row.count,
                             point=row.point, project_short_name=row.project_short_name, category=row.category)
         point_historys.append(point_history)
 #================================================#
@@ -190,6 +237,26 @@ def get_user_point_history(user_id):
 
 
 #==============================================#
+#def get_all_user_point_history():
+#    """Return user point history."""
+#    sql = text('''
+#               SELECT u.id AS id, u.name AS uname, t.project_id AS project_id, p.name AS project_name, MAX(t.finish_time) AS finish_time,
+#               sum(t.point) AS point, p.short_name AS project_short_name, c.name AS category
+#               FROM "user" u, task_run t, project p, category c
+#               WHERE t.project_id = p.id AND t.user_id = u.id AND p.category_id = c.id
+#               GROUP BY t.project_id, u.id, p.name, p.short_name, c.name
+#               ORDER BY finish_time desc
+#               ''')
+#    results = session.execute(sql, dict())
+#    all_point_historys = []
+#    for row in results:
+#        all_point_history = dict(id=row.id, project_id=row.project_id, name=row.uname,
+#                project_name=row.project_name, finish_time=row.finish_time[0:10],
+#                            point=row.point, project_short_name=row.project_short_name, category=row.category)
+#        all_point_historys.append(all_point_history)
+#
+#    return all_point_historys
+
 def get_all_user_point_history():
     """Return user point history."""
     sql = text('''
@@ -199,16 +266,53 @@ def get_all_user_point_history():
                WHERE t.project_id = p.id AND t.user_id = u.id AND p.category_id = c.id
                GROUP BY t.project_id, u.id, p.name, p.short_name, c.name
                ORDER BY finish_time desc
+             ''')
+    results = session.execute(sql, dict())
+    point_historys = []
+    for row in results:
+        point_history = dict(id=row.id, name=row.uname,
+                project_name=row.project_name, finish_time=row.finish_time,
+                point=row.point, project_short_name=row.project_short_name, category=row.category)
+        point_historys.append(point_history)
+#================================================#
+    sql = text('''
+               SELECT e.user_id AS id, u.name AS uname, e.exchange_point, e.finish_time, e.exchanged
+               FROM exchange e, "user" u
+               WHERE finish_time IS NOT NULL AND exchanged != '정상환급'
+               AND e.user_id = u.id
                ''')
     results = session.execute(sql, dict())
-    all_point_historys = []
     for row in results:
-        all_point_history = dict(id=row.id, project_id=row.project_id, name=row.uname,
-                project_name=row.project_name, finish_time=row.finish_time[0:10],
-                            point=row.point, project_short_name=row.project_short_name, category=row.category)
-        all_point_historys.append(all_point_history)
+        exchange_point_history = dict(id=row.id, project_name="---" + str(row.exchange_point) + "포인트 "+row.exchanged, finish_time=row.finish_time, name=row.uname,
+                point="(0)", project_short_name="exchange", category="환급취소")
+        point_historys.append(exchange_point_history)
+#================================================#
+    sql = text('''
+               SELECT user_id AS id, u.name AS uname, exchange_point, finish_time
+               FROM exchange e, "user" u
+               WHERE finish_time IS NOT NULL AND exchanged = '정상환급'
+               AND e.user_id = u.id
+               ''')
+    results = session.execute(sql, dict())
+    for row in results:
+        exchange_point_history = dict(id=row.id, project_name="---" + str(row.exchange_point) + "포인트", finish_time=row.finish_time, name=row.uname,
+                point=int(row.exchange_point)*(-1), project_short_name="exchange", category="환급완료")
+        point_historys.append(exchange_point_history)
+#=============================================#
+    sql = text('''
+               SELECT user_id AS id, u.name AS uname, exchange_point, e.created
+               FROM exchange e, "user" u
+               WHERE finish_time IS NULL
+               AND e.user_id = u.id
+               ''')
+    results = session.execute(sql,dict())
+    for row in results:
+        exchange_point_history = dict(id=row.id, project_name="---" + str(row.exchange_point) + "포인트", finish_time = row.created, name=row.uname,
+                point=int(row.exchange_point)*(-1), project_short_name="exchange", category="환급신청")
+        point_historys.append(exchange_point_history)
 
-    return all_point_historys
+    return point_historys
+
 
 
 def get_manage_exchange():
@@ -341,7 +445,7 @@ def get_user_summary(name, current_user=None):
                SELECT "user".id, "user".name, "user".fullname, "user".created,
                "user".api_key, "user".twitter_user_id, "user".facebook_user_id,
                "user".google_user_id, "user".info, "user".admin,
-               "user".locale, "user".sex, "user".birth, "user".point_sum, "user".current_point, "user".achievement,
+               "user".locale, "user".sex, "user".birth, "user".achievement,
                "user".email_addr, COUNT(task_run.user_id) AS n_answers,
                "user".valid_email, "user".confirmation_email_sent, 
                "user".restrict
@@ -359,7 +463,7 @@ def get_user_summary(name, current_user=None):
                     google_user_id=row.google_user_id,
                     facebook_user_id=row.facebook_user_id,
                     info=row.info, admin=row.admin,
-                    locale=row.locale, sex=row.sex, birth=row.birth, point_sum=row.point_sum, current_point=row.current_point, achievement=row.achievement,
+                    locale=row.locale, sex=row.sex, birth=row.birth, achievement=row.achievement,
                     email_addr=row.email_addr, n_answers=row.n_answers,
                     valid_email=row.valid_email,
                     confirmation_email_sent=row.confirmation_email_sent,
@@ -410,14 +514,17 @@ def rank_and_score(user_id):
 
 def projects_answer_rate(user_id):
     sql = text('''
-               SELECT p.id AS id, COUNT(t.id) AS n_tasks, COUNT(CASE WHEN t.score_mark = True THEN 1 END) AS n_correct
+               SELECT p.id AS id, COUNT(t.id) AS n_tasks, COUNT(CASE WHEN t.score_mark = True THEN 1 END) AS n_correct,
+               COUNT(CASE WHEN t.completed_score = False THEN 1 END) AS complete_check
                FROM project p, task_run t
                WHERE t.project_id = p.id AND t.user_id=:user_id GROUP BY p.id
                ''')
     results = session.execute(sql, dict(user_id=user_id))
     projects_answer_rate = []
     for row in results:
-        project = dict(id=row.id, n_correct_rate=row.n_correct, n_tasks_rate=row.n_tasks)
+        project = dict(id=row.id, n_correct_rate=row.n_correct, n_tasks_rate=row.n_tasks, complete_check=True)
+        if row.complete_check == row.n_tasks:
+            project['complete_check'] = False
         projects_answer_rate.append(project)
     return projects_answer_rate
 
@@ -428,7 +535,7 @@ def projects_contributed(user_id, order_by='name'):
                     (SELECT project_id, MAX(finish_time) as last_contribution  FROM task_run
                      WHERE user_id=:user_id GROUP BY project_id)
                SELECT * FROM project, projects_contributed
-               WHERE project.id=projects_contributed.project_id ORDER BY {} DESC;
+               WHERE project.id=projects_contributed.project_id ORDER BY project.id;
                '''.format(order_by))
     results = session.execute(sql, dict(user_id=user_id))
     projects_contributed = []

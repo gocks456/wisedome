@@ -1,0 +1,121 @@
+/**가이드라인**/
+
+.accordion__item:last-child{
+  border-bottom: 1.5px solid #f2edf3;
+}
+
+.accordion__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  border-top: 1.5px solid #f2edf3;
+  padding: 1em 0;}
+
+.accordion__title h5{
+    font-size: 1.1em;}  
+
+.accordion__icon {
+  margin-right: 2em;
+  width: 24px;
+  height: 24px; 
+  background-repeat: no-repeat;
+  transform: rotate(0deg);
+  transition: all .4s ease-in-out;
+}
+.accordion__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all .8s ease-in-out;}
+
+.accordion__content p {
+  padding: 0.5em 1em ;
+  font-size: 1.1em;
+  line-height: 1.8em;
+}
+.active .accordion__content {
+  max-height: 2999px;
+}
+.active .accordion__icon {
+  transform: rotate(45deg);
+}
+
+
+/**작은 모니터**/
+@media screen and (max-width: 1280px){
+
+.accordion__content p {
+  font-size: 1em;}
+}
+
+/**큰 태블릿**/
+@media screen and (max-width: 991px){
+
+.container {
+  padding: 0 3em;
+}
+
+.accordion__title {
+  border-top: 1px solid #f2edf3;
+  padding: 0.7em 0;
+}
+
+.accordion__item:last-child{
+  border-bottom: 1px solid #f2edf3;
+}
+.accordion__icon {
+  width: 24px;
+  height: 24px;
+  transform: translateY(-5px);}  
+}
+
+
+/***태블릿**/
+@media screen and (max-width: 769px){
+
+.accordion__title{
+    text-indent: 0;}
+.accordion__title h5{
+    font-size: 1em;}
+
+  .accordion__icon {
+  width: 15px;
+  height: 15px;
+  transform: translateY(-10px);
+  }
+  .accordion__content p {
+    padding: 1em 0.5em;
+    font-size: 0.9em;
+  }
+    
+  .active .accordion__content {
+    max-height: 1000px;
+  }
+}
+
+
+
+/***핸드폰화면**/
+@media screen and (max-width: 575px){
+
+ .accordion__title{
+    text-indent: 0;}
+ .accordion__title h5{
+    font-size: 0.9em;}
+
+.accordion__icon {
+  width: 10px;
+  height: 10px;
+  transform: translateY(-12px);}
+
+.accordion__content p {
+    font-size: 0.7em;}  
+
+.active .accordion__content {
+  max-height: 9999px;}
+}
+
+
+
+

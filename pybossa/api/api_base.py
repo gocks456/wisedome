@@ -321,6 +321,10 @@ class APIBase(MethodView):
             repo = repos[self.__class__.__name__]['repo']
             save_func = repos[self.__class__.__name__]['save']
             getattr(repo, save_func)(inst)
+
+            if inst.__tablename__ == 'task_run':
+                task_repo.task_update_point(inst.project_id, inst.task_id)
+
             self._log_changes(None, inst)
             self.refresh_cache(cls_name, inst.id)
             json_response = json.dumps(inst.dictize())
@@ -338,6 +342,11 @@ class APIBase(MethodView):
                 e,
                 target=self.__class__.__name__.lower(),
                 action='POST')
+
+    def _check_task_run_completed(self, data):
+        return 
+
+        
 
     def _create_instance_from_request(self, data):
         data = self.hateoas.remove_links(data)

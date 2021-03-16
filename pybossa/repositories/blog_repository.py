@@ -18,16 +18,26 @@
 
 from sqlalchemy.exc import IntegrityError
 
-from pybossa.cache.projects import clean_project
 from pybossa.repositories import Repository
 from pybossa.model.blogpost import Blogpost
 from pybossa.exc import WrongObjectError, DBIntegrityError
+
+from sqlalchemy import and_
 
 
 class BlogRepository(Repository):
 
     def __init__(self, db):
         self.db = db
+
+    def get_comment(self, blog_id):
+        from pybossa.model.blog_comment import BlogComment
+        from pybossa.model.user import User
+        return self.db.session.query(BlogComment.updated, BlogComment.body, User.name, User.admin, User.info).filter(and_(BlogComment.blog_id==blog_id, BlogComment.user_id==User.id)).order_by(BlogComment.updated).all()
+
+    def get_category_blogposts(self, category):
+        return self.db.session.query(Blogpost.id, Blogpost.updated, Blogpost.subject, Blogpost.title, Blogpost.answer).filter_by(
+                    category=category).order_by(Blogpost.updated.desc()).all()
 
     def get_lately(self, user_id):
         return self.db.session.query(Blogpost.id).filter_by(user_id=user_id).order_by(Blogpost.created.desc()).first()
@@ -52,7 +62,16 @@ class BlogRepository(Repository):
         try:
             self.db.session.add(blogpost)
             self.db.session.commit()
-            clean_project(blogpost.project_id)
+        except IntegrityError as e:
+            self.db.session.rollback()
+            raise DBIntegrityError(e)
+
+    # 댓글 저장
+    def save_comment(self, comment):
+        self._validate_can_be_comment('saved', comment)
+        try:
+            self.db.session.add(comment)
+            self.db.session.commit()
         except IntegrityError as e:
             self.db.session.rollback()
             raise DBIntegrityError(e)
@@ -62,21 +81,25 @@ class BlogRepository(Repository):
         try:
             self.db.session.merge(blogpost)
             self.db.session.commit()
-            clean_project(blogpost.project_id)
         except IntegrityError as e:
             self.db.session.rollback()
             raise DBIntegrityError(e)
 
     def delete(self, blogpost):
         self._validate_can_be('deleted', blogpost)
-        project_id = blogpost.project_id
         blog = self.db.session.query(Blogpost).filter(Blogpost.id==blogpost.id).first()
         self.db.session.delete(blog)
         self.db.session.commit()
-        clean_project(project_id)
 
     def _validate_can_be(self, action, blogpost):
         if not isinstance(blogpost, Blogpost):
+            name = blogpost.__class__.__name__
+            msg = '%s cannot be %s by %s' % (name, action, self.__class__.__name__)
+            raise WrongObjectError(msg)
+
+    def _validate_can_be_comment(self, action, comment):
+        from pybossa.model.blog_comment import BlogComment
+        if not isinstance(comment, BlogComment):
             name = blogpost.__class__.__name__
             msg = '%s cannot be %s by %s' % (name, action, self.__class__.__name__)
             raise WrongObjectError(msg)

@@ -43,6 +43,12 @@ class Exporter(object):
 
     def _get_data(self, table, project_id, flat=False, info_only=False):
         """Get the data for a given table."""
+
+        # 문제 및 답변
+        if table == 'QnA':
+            QnA_data = task_repo.get_QnA_data(project_id)
+            return QnA_data
+
         repo, query = self.repositories[table]
         data = getattr(repo, query)(project_id=project_id)
         ignore_keys = current_app.config.get('IGNORE_FLAT_KEYS') or []
@@ -164,6 +170,10 @@ class Exporter(object):
                             mimetype='application/octet-stream',
                             as_attachment=True,
                             attachment_filename=filename)
+
+            # QnA 다운로드 후 삭제
+            task_repo._delete_zip_files_from_store(project)
+
             # fail safe mode for more encoded filenames.
             # It seems Flask and Werkzeug do not support RFC 5987 http://greenbytes.de/tech/tc2231/#encoding-2231-char
             # res.headers['Content-Disposition'] = 'attachment; filename*=%s' % filename
