@@ -1,0 +1,204 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_wisedome = 'project' %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/new_design/css/basic/guideline.css">
+<!--현재 페이지에만 들어가는 css-->
+<!--<link rel="stylesheet" href="/static/new_design/css/workspace-text.css">-->
+{% endblock %}
+
+
+
+{% block content %}
+
+<script src="/static/js/gen/full.min.js"></script>
+<script src="/static/js/pybossa/pybossa.js"></script>
+<script src="/static/js/pybossa-player/dist/pybossa-player.min.js"></script>
+
+<!-- 메인 작업화면 -->
+<div class="content-wrapper">
+
+	{#<!--경쟁자 진행상황보기 배너-->
+	<input type="checkbox" id="popup">
+	<div class="wing">
+		<label for="popup" class="wing_label">
+			<img src="/static/new_design/images/podium.png" alt="popup img" id="podium">
+
+			<div class="wing_contents">
+				<img src="/static/new_design/images/trophy.png" class="trophy"><br>
+				<p><span>{{current_user.fullname}}</span>님의 현재 답변완료수 <span id="answer_counts">0</span>개이며, 다른 사용자들의 평균 답변수는 <span id="average">0</span>개입니다. <br> &#10005;</p>
+			</div> 
+		</label> 
+	</div>#}
+
+
+	<div class="page-header">
+		<h3 class="page-title" onclick="location.href='{{ url_for("project.details", short_name=project.short_name) }}'" style="cursor:pointer">
+			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-heart"></i></span> 
+			<!--감성 분석하기 /  프로젝트 이름 -->
+			{{project.name}}
+		</h3>
+		<!--<nav aria-label="breadcrumb">
+			<ul class="breadcrumb">
+				<label for="controlbar controlbar-gradient-success"><i class="mdi mdi-format-size text-primary "></i> <span class="text-adjust">글자크기조절</span> 
+					<input type="range" min=10 max=30 value=20 class="controlbar" data-fs-target-class="textsize"/>
+				</label> 
+				</li>
+			</ul>
+		</nav>-->
+	</div>
+
+	<!--컨텐츠 들어가는 영역-->
+	<div class="row">
+		<!-- 프로젝트 Template 추가 -->
+		{{ project.info.task_presenter|safe }}
+
+
+
+		<!--가이드 라인 영역-->
+		<div class="col-md-12 grid-margin">
+			<div class="card bg-white">
+				<div class="card-body">
+
+					<div class="accordion">
+						<ul class="accordion__items">
+
+							<li class="accordion__item">
+								<div class="accordion__title">
+									<h5> <i class="mdi mdi-cards-playing-outline"></i>   이용방법</h5>
+									<span class="accordion__icon"><img src="/static/new_design/images/plus-24px.png" alt="plus icon"></span>
+								</div>
+								<div class="accordion__content"><!---이용방법에 대한 내용 첨부하기-->
+									<p>
+									{% if project.long_description != project.description  %}
+									{{ project.long_description | markdown }}
+									{% endif %}
+
+									</p>
+								</div>
+							</li>
+
+							<li class="accordion__item">
+								<div class="accordion__title">
+									<h5><i class="mdi mdi-bell-ring"></i>   주의사항</h5>
+									<span class="accordion__icon"><img src="/static/new_design/images/plus-24px.png" alt="plus icon"></span>
+								</div>
+								<div class="accordion__content"><!---주의사항 첨부하기-->
+									<p> 답변 검토 시 오류 및 문제점은 포인트 지급대상에서 제외될 수 있습니다.
+									</p>
+								</div>
+							</li>
+
+							<li class="accordion__item">
+								<div class="accordion__title">
+									<h5><i class="mdi mdi-cash-multiple"></i>   포인트안내</h5>
+									<span class="accordion__icon"><img src="/static/new_design/images/plus-24px.png" alt="plus icon"></span>
+								</div>
+								<div class="accordion__content"><!---포인트제도 첨부하기-->
+									<p> 주어진 문제를 모두 맞출 시 총 {{project.all_point}}포인트를 얻을 수 있습니다.</p>
+								</div>
+							</li>
+							<div class="accordion__title"></div>
+						</ul>
+					</div>  
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+<script src="/static/new_design/js/plugin/jquery.min.js"></script>
+<script src="/static/new_design/js/accordion.js"></script>
+
+<script>
+	var csrf = "{{ csrf_token() }}";
+$("#csrf_token").val(csrf);
+</script>
+
+
+<script>
+	$(document).ready(function(){
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrf)
+				}
+			}
+		});
+	});
+</script>
+
+<script>
+	function setUserGraph() {
+		var url = window.location.href;
+		$.ajax({
+			url:url,
+			data: {"value": "ranking"},
+			type: 'POST',
+			success: function(res) {
+				res = JSON.parse(res);
+				$("#answer_counts").text(res.my_count);
+				$("#average").text(res.people_count);
+
+			},
+			error:function(request, error) {
+				console.log(request);
+				console.log(error);
+			}
+		});
+	}
+</script>
+
+<script>
+	function openMenu(evt, menuName) {
+		var i, tabcontent, tablinks,temp;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		temp = evt.currentTarget.className;
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+
+		console.log(temp);
+		if (temp !== "tablinks active"){
+			evt.currentTarget.className += " active";
+			document.getElementById(menuName).style.display = "block";
+		}
+
+	}
+
+</script>
+
+<script>
+	function get_cookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for(var i = 0; i <ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+$(document).ready(function() {
+	var c = get_cookie("answer_open");
+	if(c == "yes")
+		$("#form_div").show();
+});
+
+
+</script>
+
+{% endblock %}

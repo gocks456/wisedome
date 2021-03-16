@@ -45,7 +45,7 @@ webhook_queue = Queue('high', connection=sentinel.master)
 mail_queue = Queue('email', connection=sentinel.master)
 webpush_queue = Queue('webpush', connection=sentinel.master)
 
-
+'''
 @event.listens_for(Blogpost, 'after_insert')
 def add_blog_event(mapper, conn, target):
     """Update PYBOSSA feed with new blog post."""
@@ -86,7 +86,7 @@ def add_blog_event(mapper, conn, target):
                               headings=headings,
                               web_buttons=web_buttons,
                               launch_url=launch_url)
-
+'''
 
 @event.listens_for(Project, 'after_insert')
 def add_project_event(mapper, conn, target):
@@ -179,7 +179,7 @@ def push_webhook(project_obj, task_id, result_id):
                        project_id=project_obj['id'],
                        task_id=task_id,
                        result_id=result_id,
-                       fired_at=datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"))
+                       fired_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         webhook_queue.enqueue(webhook, project_obj['webhook'], payload)
 
 
@@ -253,8 +253,8 @@ def on_taskrun_submit(mapper, conn, target):
         push_webhook(project_private, target.task_id, result_id)
 
 
-@event.listens_for(Blogpost, 'after_insert')
-@event.listens_for(Blogpost, 'after_update')
+#@event.listens_for(Blogpost, 'after_insert')
+#@event.listens_for(Blogpost, 'after_update')
 @event.listens_for(Task, 'after_insert')
 @event.listens_for(Task, 'after_update')
 @event.listens_for(TaskRun, 'after_insert')

@@ -64,6 +64,19 @@ class LocalUploader(Uploader):
         except Exception:
             return False
 
+    def dir_size(self, container):
+        path = os.path.join(self.upload_folder, container)
+        if not os.path.isdir(path):
+            return True
+        dir_list = os.scandir(path)
+        total_size = total_count = 0
+        for file_size in dir_list:
+            total_size += file_size.stat().st_size
+            total_count += 1
+        if total_count > 20 or total_size > 10000000:
+            return False
+        return True
+
     def delete_file(self, name, container):
         """Delete file from filesystem."""
         try:

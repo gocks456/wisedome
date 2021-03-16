@@ -1,0 +1,158 @@
+{% extends "orderer/base.html" %}
+{% from "account/_helpers.html" import render_account_local_nav %}
+{% from "orderer/_helpers.html" import render_admin_user, render_project_card_user, render_project_card %}
+
+{% block rightbody %}
+<meta name="csrf-token" content="{{csrf_token()}}">
+
+<h1><strong>발주자 사이트:</strong> 발주자 관리</h1>
+{% from "_formhelpers.html" import render_field %}
+
+<div class="row">
+    <form class="form-search" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="col-md-12">
+            <div class="input-group">
+                <input id="project" name="project" type="text" class="form-control" placeholder="프로젝트 이름을 입력해주세요.">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary "><i class="fa fa-search"></i> {{ _('Search') }}</button>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% if found %}
+<h2>검색 결과</h2>	
+<button id='check'>체크</button>
+<button id='reset'>체크 해제</button>
+<button id='add'>발주자 추가</button>
+
+<div class="row name-found" style="display:none;">
+	<div class="col-md-12">
+		<div class="input-group">
+			<input id="user_name" name="user_name" type="text" class="form-control" placeholder="추가할 발주자 이름 검색">
+			<span class="input-group-btn">
+				<button class="btn btn-primary" id="name-search"><i class="fa fa-search"></i> {{ _('Search') }}</button>
+			</span>
+		</div>
+	</div>
+</div>
+
+<div class="row" id="add_orderer">
+	<div class="row" id="found-div">
+		{% for project in found %}
+		<div class="col-sm-4 col-md-4" id='found'>
+			{{ render_project_card(current_user, project, upload_method, background=True)}}
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endif %}
+
+{% if projects %}
+<h1>발주자가 지정된 프로젝트</h1>
+<div class="row">
+	{% for project in projects %}
+	<div class="col-sm-4 col-md-4">
+		{{ render_project_card(current_user, project, upload_method, background=True)}}
+	</div>
+	{% endfor %}
+</div>
+{% endif %}
+<script type='text/javascript' src="{{url_for('static', filename='js/vendor/jquery-2.2.3.js') }}"></script>
+<script type='text/javascript' src="{{url_for('static', filename='js/flashmessages.js') }}"></script>
+<script>
+	$(document).ready(function(){
+		var csrftoken = $('meta[name=csrf-token]').attr('content')
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken)
+				}
+			}
+		});
+
+		$('#reset').hide();
+		$('#add').hide();
+		var checkHtml = null;
+		var border = $('#found > .thumbnail').css('border');
+
+		$('#check').off('click').on('click', function(evt) {
+			checkHtml = $('#found-div').html();
+			$('#check').hide();
+			$('#add').show();
+			$('#reset').show();
+			$('#found > .thumbnail').attr('onclick', '').unbind('click');
+
+			$('#found > .thumbnail').off('click').on('click', function(evt) {
+				if( $(this).css("border") == border) {
+					$(this).css('border', 'solid 2px red');
+					$(this).find('h3').attr('name' , 'clicked');
+				}
+				else {
+					$(this).css('border', border);
+					$(this).attr('id' , '');
+				}
+			});
+		});
+
+		$('#reset').off('click').on('click', function(evt) {
+			$('#found-div').empty();
+			$('#found-div').append(checkHtml);
+			$('#reset').hide();
+			$('#check').show();
+			$('#add').hide();
+			$('.name-found').hide();
+		});
+
+		var foundHtml = null;
+
+		$('#add').off('click').on('click', function(evt) {
+			$('.name-found').show();
+		});
+
+		$('#name-search').off('click').on('click', function(evt) {
+			var name = $('input[name=user_name]').val();
+			$.ajax({
+				url: window.location.href,
+				data: { "name": name },
+				type: 'POST',
+				success: function(res) {
+					$('#found-div').hide();
+					$('#add_orderer').append(res);
+				},
+				error: function(request,error) {
+					console.log(request);
+					console.log(error);
+				}
+			});
+		});
+		
+		$(document).on('click', '.add-orderer', function() {
+			var len = $('h3[name = clicked]').length;
+			var projects = new Array(len);
+			for (var i=0; i<len; i++) {
+				projects[i] = $('h3[name = clicked]').eq(i).text();
+			}
+			var user_id = $(this).attr('id');
+			var url = window.location.href + "/add_coowner/" + user_id
+
+			$.ajax({
+				url: url,
+				traditional: true,
+				data: { "projects": projects },
+				type: 'GET',
+				success: function(res) {
+					window.location.replace(url);
+				},
+				error: function(request, error) {
+					console.log(request);
+					console.log(error);
+				}
+			});
+		});
+	});
+
+</script>
+{% endblock %}

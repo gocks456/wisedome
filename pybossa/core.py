@@ -227,16 +227,18 @@ def setup_repositories(app):
     helping_repo = HelpingMaterialRepository(db)
     page_repo = PageRepository(db)
 
-	#20.02.19. 추가내용
+    #20.02.19. 추가내용
     from pybossa.repositories import PointRepository
     global point_repo
     point_repo = PointRepository(db)
     from pybossa.repositories import ExchangeRepository
     global exchange_repo
     exchange_repo = ExchangeRepository(db)
-    from pybossa.repositories import AchievementRepository
-    global achi_repo
-    achi_repo = AchievementRepository(db)
+    #from pybossa.repositories import AchievementRepository
+
+    # 2020.11.27. 업적 리뉴얼 예정
+    #global achi_repo
+    #achi_repo = AchievementRepository(db)
 
 
 def setup_error_email(app):
@@ -273,7 +275,7 @@ def setup_logging(app):
 def setup_login_manager(app):
     """Setup login manager."""
     login_manager.login_view = 'account.signin'
-    login_manager.login_message = "Please sign in to access this page."
+    login_manager.login_message = "로그인이 필요합니다."
 
     @login_manager.user_loader
     def _load_user(username):
@@ -317,6 +319,7 @@ def setup_blueprints(app):
     from pybossa.view.home import blueprint as home
     from pybossa.view.uploads import blueprint as uploads
     from pybossa.view.amazon import blueprint as amazon
+    from pybossa.view.orderer import blueprint as orderer
 
     blueprints = [{'handler': home, 'url_prefix': '/'},
                   {'handler': api,  'url_prefix': '/api'},
@@ -329,6 +332,7 @@ def setup_blueprints(app):
                   {'handler': stats, 'url_prefix': '/stats'},
                   {'handler': uploads, 'url_prefix': '/uploads'},
                   {'handler': amazon, 'url_prefix': '/amazon'},
+                  {'handler': orderer, 'url_prefix': '/orderer'}
                   ]
 
     for bp in blueprints:
@@ -355,6 +359,8 @@ def setup_external_services(app):
     setup_twitter_login(app)
     setup_facebook_login(app)
     setup_google_login(app)
+    setup_gmail_login(app)
+    setup_kakao_login(app)
     setup_flickr_importer(app)
     setup_dropbox_importer(app)
     setup_twitter_importer(app)
@@ -408,6 +414,38 @@ def setup_google_login(app):
         print(inst)
         print("Google signin disabled")
         log_message = 'Google signin disabled: %s' % str(inst)
+        app.logger.info(log_message)
+
+def setup_gmail_login(app):
+    try:  # pragma: no cover
+        if (app.config['GMAIL_CLIENT_ID']
+                and app.config['GMAIL_CLIENT_SECRET']
+                and app.config.get('LDAP_HOST') is None):
+            gmail.init_app(app)
+            from pybossa.view.gmail import blueprint as gmail_bp
+            app.register_blueprint(gmail_bp, url_prefix='/gmail')
+    except Exception as inst:  # pragma: no cover
+        print(type(inst))
+        print(inst.args)
+        print(inst)
+        print("Gmail signin disabled")
+        log_message = 'Gmail signin disabled: %s' % str(inst)
+        app.logger.info(log_message)
+
+def setup_kakao_login(app):
+    try:  # pragma: no cover
+        if (app.config['KAKAO_CLIENT_ID']
+                and app.config['KAKAO_CLIENT_SECRET']
+                and app.config.get('LDAP_HOST') is None):
+            kakao.init_app(app)
+            from pybossa.view.kakao import blueprint as kakao_bp
+            app.register_blueprint(kakao_bp, url_prefix='/kakao')
+    except Exception as inst:  # pragma: no cover
+        print(type(inst))
+        print(inst.args)
+        print(inst)
+        print("Kakao signin disabled")
+        log_message = 'Kakao signin disabled: %s' % str(inst)
         app.logger.info(log_message)
 
 
@@ -482,41 +520,44 @@ def url_for_other_page(page):
     args['page'] = page
     return url_for(request.endpoint, **args)
 
+def number_format(value):
+    return '{:,}'.format(value)
 
 def setup_jinja(app):
     """Setup jinja."""
     app.jinja_env.globals['url_for_other_page'] = url_for_other_page
+    app.jinja_env.filters['number_format'] = number_format
 
 
 def setup_error_handlers(app):
     """Setup error handlers."""
     @app.errorhandler(400)
     def _bad_request(e):
-        response = dict(template='400.html', code=400,
+        response = dict(template='error_400.html', code=400,
                         description=BADREQUEST)
         return handle_content_type(response)
 
     @app.errorhandler(404)
     def _page_not_found(e):
-        response = dict(template='404.html', code=404,
+        response = dict(template='error_404.html', code=404,
                         description=NOTFOUND)
         return handle_content_type(response)
 
     @app.errorhandler(500)
     def _server_error(e):  # pragma: no cover
-        response = dict(template='500.html', code=500,
+        response = dict(template='error_500.html', code=500,
                         description=INTERNALSERVERERROR)
         return handle_content_type(response)
 
     @app.errorhandler(403)
     def _forbidden(e):
-        response = dict(template='403.html', code=403,
+        response = dict(template='error_403.html', code=403,
                         description=FORBIDDEN)
         return handle_content_type(response)
 
     @app.errorhandler(401)
     def _unauthorized(e):
-        response = dict(template='401.html', code=401,
+        response = dict(template='error_401.html', code=401,
                         description=UNAUTHORIZED)
         return handle_content_type(response)
 
@@ -641,6 +682,12 @@ def setup_jinja2_filters(app):
     def _disqus_sso(obj):  # pragma: no cover
         return get_disqus_sso(obj)
 
+    @app.template_filter('autoversion')
+    def autoversion_filter(filename):
+        fullpath = os.path.join(app.static_folder, filename[8:].split('?')[0])
+        newfilename = filename.split('?')[0] + '?ver=' + str(os.stat(fullpath).st_mtime)
+        return newfilename
+
 
 def setup_csrf_protection(app):
     """Setup csrf protection."""
@@ -693,7 +740,7 @@ def setup_scheduled_jobs(app):  # pragma: no cover
     MINUTE = 60
     HOUR = 60 * 60
     MONTH = 30 * (24 * HOUR)
-    first_quaterly_execution = get_quarterly_date(datetime.utcnow())
+    first_quaterly_execution = get_quarterly_date(datetime.now())
     JOBS = [dict(name=enqueue_periodic_jobs, args=['email'], kwargs={},
                  interval=(1 * MINUTE), timeout=(10 * MINUTE)),
             dict(name=enqueue_periodic_jobs, args=['maintenance'], kwargs={},

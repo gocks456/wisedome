@@ -22,10 +22,13 @@ from flask import abort
 from flask_login import login_user, current_user
 from flask_oauthlib.client import OAuthException
 
-from pybossa.core import google, user_repo, newsletter
+from pybossa.core import google, user_repo, newsletter, point_repo
 from pybossa.model.user import User
+from pybossa.model.point import Point
 from pybossa.util import get_user_signup_method, username_from_full_name
-from pybossa.util import url_for_app_type
+from pybossa.util import url_for_app_type, handle_content_type, redirect_content_type
+
+from pybossa.forms.account_view_forms import APIRegisterForm
 # Required to access the config parameters outside a context as we are using
 # Flask 0.8
 # See http://goo.gl/tbhgF for more info
@@ -60,9 +63,11 @@ def get_google_token():  # pragma: no cover
 def oauth_authorized():  # pragma: no cover
     """Authorize Oauth."""
     resp = google.oauth.authorized_response()
+
     if resp is None or request.args.get('error'):
         flash('You denied the request to sign in.', 'error')
-        flash('Reason: ' + request.args['error'], 'error')
+        flash('로그인 요청 거부')
+        #flash('Reason: ' + request.args['error'], 'error')
         if request.args.get('error'):
             current_app.logger.error(resp)
             return redirect(url_for_app_type('account.signin',
@@ -71,7 +76,8 @@ def oauth_authorized():  # pragma: no cover
                     url_for_app_type('home.home', _hash_last_flash=True))
         return redirect(next_url)
     if isinstance(resp, OAuthException):
-        flash('Access denied: %s' % resp.message)
+        #flash('Access denied: %s' % resp.message)
+        flash('접근 오류')
         current_app.logger.error(resp)
         next_url = (request.args.get('next') or
                     url_for_app_type('home.home', _hash_last_flash=True))
@@ -86,76 +92,64 @@ def oauth_authorized():  # pragma: no cover
             return redirect(url_for_app_type('account.signin'))
         return r.content
 
+    import json
     access_token = resp['access_token']
     session['oauth_token'] = access_token
-    import json
     user_data = json.loads(r.content)
-    user = manage_user(access_token, user_data)
-    next_url = request.args.get('next') or url_for_app_type('home.home')
-    return manage_user_login(user, user_data, next_url)
-
-
-def manage_user(access_token, user_data):
-    """Manage the user after signin"""
-    # We have to store the oauth_token in the session to get the USER fields
 
     user = user_repo.get_by(google_user_id=user_data['id'])
-    google_token = dict(oauth_token=access_token)
-    print("user", user)
-    # user never signed on
-    if user is None:
-        info = dict(google_token=google_token)
-        name = username_from_full_name(user_data['name'])
-        user = user_repo.get_by_name(name)
-
-        email = user_repo.get_by(email_addr=user_data['email'])
-        print("email", email)
-
-        if ((user is None) and (email is None)):
-            if type(name) == bytes:
-                name = name.decode('utf-8')
-            user = User(fullname=user_data['name'],
-                        name=name,
-                        email_addr=user_data['email'],
-                        google_user_id=user_data['id'],
-                        info=info)
-            user_repo.save(user)
-            if newsletter.is_initialized():
-                newsletter.subscribe_user(user)
-            return user
-        else:
-            return None
-    else:
+    if user is not None:
+        google_token = dict(oauth_token=access_token)
         user.info['google_token'] = google_token
-        # Update the name to fit with new paradigm to avoid UTF8 problems
-        if type(user.name) == str or ' ' in user.name:
-            user.name = username_from_full_name(user.name).decode('utf-8')
         user_repo.save(user)
-        return user
+        return _sign_in_user(user)
 
+    if user_data["locale"] == None:
+        user_data["locale"] = 'ko'
 
-def manage_user_login(user, user_data, next_url):
-    """Manage user login."""
-    if user is None:
-        # Give a hint for the user
-        user = user_repo.get_by(email_addr=user_data['email'])
-        if user is None:
-            name = username_from_full_name(user_data['name'])
-            user = user_repo.get_by_name(name)
+    user_form = user_data_parser(user_data, access_token)
 
-        msg, method = get_user_signup_method(user)
-        flash(msg, 'info')
-        if method == 'local':
-            return redirect(url_for_app_type('account.forgot_password',
-                                             _hash_last_flash=True))
-        else:
-            return redirect(url_for_app_type('account.signin',
-                                             _hash_last_flash=True))
-    else:
-        login_user(user, remember=True)
-        flash("Welcome back %s" % user.fullname, 'success')
-        if user.newsletter_prompted is False and newsletter.is_initialized():
-            return redirect(url_for_app_type('account.newsletter_subscribe',
-                                             next=next_url,
-                                             _hash_last_flash=True))
-        return redirect(next_url)
+    data = dict(template='new_design/register/google.html', form=user_form)
+    return handle_content_type(data)
+
+@blueprint.route('/register', methods=['POST'])
+def register():
+    form = APIRegisterForm(request.body)
+
+    if form.validate():
+        google_token = dict(oauth_token=form.api_token.data)
+        info = dict(google_token=google_token)
+        user = User(fullname=form.fullname.data,
+                    name=form.name.data,
+                    email_addr=form.email_addr.data,
+                    google_user_id=form.api_id.data,
+                    sex=form.sex.data,
+                    birth=(form.year.data + form.month.data + form.day.data),
+                    locale=form.locale.data,
+                    info=info)
+        user_repo.save(user)
+        _create_point(user.id)
+        return _sign_in_user(user)
+    data = dict(template='new_design/register/google.html', form=form)
+    return handle_content_type(data)
+
+def user_data_parser(data, access_token):
+    form = APIRegisterForm(request.body)
+
+    form.fullname.data = data["name"]
+    #form.name.data = data["given_name"]
+    form.email_addr.data = data["email"]
+    form.locale.data = data["locale"]
+    form.api_id.data = data["id"]
+    form.api_token.data = access_token
+
+    return form
+
+def _sign_in_user(user):
+    login_user(user, remember=True)
+    return redirect_content_type(url_for("home.home"))
+
+def _create_point(user_id):
+    new_point = Point(user_id=user_id)
+    point_repo.save(new_point)
+    return user_id

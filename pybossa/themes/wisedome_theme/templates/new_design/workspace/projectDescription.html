@@ -1,0 +1,76 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_wisedome = "project" %}
+{% import "new_design/workspace/_helpers.html" as helper %}
+
+{% block css %}
+<!---현재 페이지에만 들어가는 css-->
+<link rel="stylesheet" href="/static/new_design/css/projectDescription.css">
+{% endblock %}
+
+
+{% block content %}
+<div class="content-wrapper">
+
+	<!--프로젝트 사진 및 간단요약 -->
+	<div class="row">
+		<div class="col-12 grid-margin stretch-card">
+			<div class="card bg-white">
+				<div class="card-body">
+					<div class="row ">
+						<div class="col-xl-5 col-lg-3 col-md-5"> 
+							<div style="display:flex; justify-content: center;">
+								<img src="{{helper.render_url_thumbnail(project, upload_method)}}" alt="{{project.name}}"  class="rounded mw-100" id="projectImg">
+							</div>
+						</div> <!--col lg 5-->
+
+						<div class="col-xl-7 col-lg-9 col-md-7"> 
+							<div class="row sumSection pb-3 d-flex justify-content-between">
+
+								<div class="col-sm-6 mainTitle">
+									<h3 >{{project.name}}</h3>
+									<div class="align-items-center">
+										<h5 class="mb-0 text-muted"> <!--<a href="#">-->{{ overall_progress | round | int }}<!--</a>--> % 완료</h5>
+									</div>
+								</div>  
+								<div class="ml-auto str-btn">
+									{#<a href="#"><button class="btn btn-gradient-primary "> <i class="mdi mdi-arrow-right-bold-circle"></i> 시작하기</button></a>#}
+									{{helper.render_contribute_button(project)}}
+								</div>
+							</div>
+							<div class="my-border-top">
+								<div class="row py-3 ">    
+									<div class="col-md-4 d-flex align-items-center">
+										<div class="d-flex flex-row align-items-center">
+											<i class="mdi mdi-cash-100 icon-md text-warning"></i><p class="mb-0 ml-1"> {{project.all_point|number_format}} P </p>
+										</div>
+									</div>
+									<div class="col-md-4 d-flex align-items-center">
+										<div class="d-flex flex-row align-items-center">
+											<i class="mdi mdi-human-male-female icon-md text-success"></i><p class="mb-0 ml-1"> 남녀무관 </p>
+										</div>
+									</div>
+									<div class="col-md-4 d-flex align-items-center">
+										<div class="d-flex flex-row align-items-center">
+											<i class="mdi mdi-face mdi icon-md text-danger"></i><p class="mb-0 ml-1"> {{min}}세 ~ {{max}}세 </p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card-subtitle my-border-top">
+								<h5>{{project.description}}</h5>
+							</div> 
+							<div class="card-title">
+								<p>작업마감일 : ~ {{project.end_date[0:10]}} </p>
+							</div>
+
+						</div> <!--col lg 6-->
+					</div> <!--row-->
+				</div> <!--card-body-->
+			</div> <!--card-->
+		</div> <!--col-12-->
+	</div> <!--row-->
+
+	<div class="card bg-white">
+		{{project.long_description|safe|markdown}}
+	</div>
+	{% endblock %}

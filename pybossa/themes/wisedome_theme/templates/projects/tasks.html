@@ -32,9 +32,9 @@
         {{ render_project_card_option(project, upload_method, title=_('Auto-import Tasks'), explanation=_('Import tasks regularly and automatically'), link=url_for('project.setup_autoimporter', short_name=project.short_name), link_action_text=_('Setup'), icon='magic')}}
     </div>
     {% endif %}
-	<div id="task_Scoring" class="col-md-6">
+	{#<div id="task_Scoring" class="col-md-6">
 		{{ render_project_card_option(project, upload_method, title=_('Scoring'), explanation=_('채점하기'), link=url_for('project.score', short_name=project.short_name), link_action_text=_('Scoring'), icon='pencil')}}
-    </div>
+	</div>#}
 </div>
 
 {% else %}

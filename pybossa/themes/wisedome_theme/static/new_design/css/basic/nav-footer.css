@@ -1,0 +1,47 @@
+a {
+  text-decoration: none;
+}
+.navbar {
+  max-width: 1920px;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  margin: 0 auto;
+  background: #c7e4e2;
+}
+
+.nav-item {
+  padding-right: 0.5em;
+}
+.nav-link {
+  font-size: 0.75rem;
+  letter-spacing: 0.25rem;
+  color: #164947;
+  font-family: "SCDream3";
+}
+.nav-link:hover {
+  color: black;
+}
+.dropdown-menu {
+  border: none;
+  background-color: #e5f1f0;
+}
+.dropdown-item {
+  font-size: 0.6rem;
+  color: #164947;
+  font-family: "SCDream2";
+  background-color: #e5f1f0;
+}
+
+/**footer**/
+footer {
+  background-color: #f2edf3;
+  font-family: "SCDream2";
+  padding-top: 2rem;
+}
+.font-weight-normal {
+  font-size: 0.75rem;
+}
+
+.footer-border-bottom {
+  border-bottom: 1px solid #dfd1e2;
+}

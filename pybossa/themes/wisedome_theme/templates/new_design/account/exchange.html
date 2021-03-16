@@ -1,0 +1,269 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+{% set active_wisedome = " exchange" %}
+<!--this page css-->
+{% block css %}
+<link rel="stylesheet" href="/static/new_design/css/point.css">
+<link rel="stylesheet" href="/static/new_design/css/qnaBoard.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="content-wrapper">
+
+	<!--포인트 작성 폼-->
+	<div class="row">
+		<div class="col-12 grid-margin">
+			<div class="card bg-white">
+				<div class="card-body">
+					<h4 class="card-title"> <i class="mdi mdi-trophy-award mdi-24px"></i> &nbsp; 포인트 환전 신청</h4>
+
+					<form id="example-form" action="#" >
+						<div>
+							<h3>이용약관</h3>
+							<section style="overflow-x:hidden;">
+								<h5>포인트 지급 이용약관 동의 약관</h5>
+								<div>
+									<ul class="list-ticked">    
+										<li> 포인트를 현금으로 지급받기 위해서는 반드시 실명인증을 거친후 신청해 주시기 바랍니다.</li>
+										<li> 지급신청은 5,000포인트 이상 부터 가능하며, 1,000원 단위로 신청하실 수 있습니다.</li>
+										<li> 3.3%의 사업소득세가 차감된 금액이 지급되며, 월간 누적 세금이 1,000원 미만일 경우 익월 10일경에 환급됩니다.</li>
+										<li> 일주일에 1회만 지급신청 할 수 있으며, 수익금 신청내역에서 상태를 확인하실 수 있습니다.</li>
+										<li> 수익금은 매주 목요일 14시까지 신청 가능하며, 해당 건에 대하여 금요일 14시에 입금됩니다. 
+											<br>(*목요일 14시 이후 신청한 경우, 다음 주 금요일 지급 대상자가 됩니다)</li>
+										<li> 수익금 신청 불가 시간 (시스템 점검) : 매주 목요일 14시 01분 ~ 15시 00분</li>
+
+									</ul>
+								</div>
+								<div class="form-check">
+									<label class="form-check-label">위의 내용을 모두 숙지하였으며 이용에 동의합니다
+										<input type="checkbox" class="form-check-input" id="checkPolicy"> 
+									</label>
+								</div>
+							</section>
+
+							<h3>계좌등록</h3>
+							<section style="overflow-x:hidden;">
+								<div class="subtitle ">
+									<h5>은행계좌 등록</h5>
+								</div>
+
+								<div class="form-group row">
+									<label for="userName" class="col-sm-3 col-form-label">예금주</label>
+									<div class="col-sm-9 ">
+										<input id="userName" name="userName" type="text" class="form-control" placeholder="성명" required onchange='printName()'>
+									</div>
+								</div>
+								<div class="form-group row">    
+									<label for="bank" class="col-sm-3  col-form-label">은행명</label>  
+									<div class="col-sm-9">        
+										<select id="bank" class="form-control" required>
+											<option value="" selected disabled >은행선택</option>
+											<option value="농협">농협</option>
+											<option value="국민">국민</option>
+											<option value="기업">기업</option>
+											<option value="신한">신한</option>
+											<option value="우리">우리</option>
+											<option value="하나">하나</option>
+											<option value="카카오뱅크">카카오뱅크</option>
+											<option value="케이뱅크">케이뱅크</option>
+											<option value="SC은행">SC은행</option>
+											<option value="경남">경남</option>
+											<option value="광주">광주</option>
+											<option value="대구">대구</option>
+											<option value="부산">부산</option>
+											<option value="산업">산업</option>
+											<option value="산림조합">산림조합</option>
+											<option value="새마을">새마을</option>
+											<option value="수협">수협</option>
+											<option value="신협">신협</option>
+											<option value="우체국">우체국</option>
+											<option value="저축은행">저축은행</option>
+											<option value="전북">전북</option>
+											<option value="제주">제주</option>
+											<option value="한국씨티">한국씨티</option>
+											<option value="뱅크오브아메리카">뱅크오브아메리카</option>
+											<option value="도이치">도이치</option>
+											<option value="HSBC">HSBC</option>
+											<option value="JP모건">JP모건</option>
+											<option value="중국공상은행">중국공상은행</option>
+											<option value="중국은행">중국은행</option>
+
+										</select>
+									</div>
+								</div>
+								<div class="form-group row"> 
+									<label for="bankAccount" class="col-sm-3 col-form-label">계좌번호</label>  
+									<div class="col-sm-9">
+										<input id="bankAccount" name="bankaccount" type="text" numberOnly class="form-control" placeholder=" - 없이 숫자만 입력" required onchange='bankNum()'>
+									</div>
+								</div>
+							</section>
+
+							<h3>신청금액</h3>
+							<section style="overflow-x:hidden;">
+								<div class="row pt-3">
+									<div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-8 offset-md-2">  
+										<form class="forms-sample">
+											<div class="my-3 text-center ">
+												<h5><i class="mdi mdi-star"></i> 환급가능한 나의 보유포인트  <i class="mdi mdi-star "></i> </h5> 
+												<h2 class="py-4 mypoints">{{current_point}}</h2>
+											</div>
+											<div class="form-group ">
+												<div class="input-group input-money">
+													<div class="input-group-prepend">
+														<span class="input-group-text bg-gradient-primary text-white">₩</span>
+													</div>
+													<input type="text" class="form-control" aria-label="Amount" id="price" onkeyup="inputNumberFormat(this)">
+													<div class="input-group-append">
+														<span class="input-group-text won">원</span>
+													</div>
+												</div>
+												<br>
+												<p class="point-policy">1,000원 단위로 입금이 가능합니다</p>
+											</div>
+									</div>
+								</div>
+							</section>
+
+							<h3>신청결과</h3>
+							<section  style="overflow-x:hidden;">
+								<div class="col-xl-8 offset-xl-2 col-md-12 py-4 text-center" id="confirm-page">
+									<i class="mdi mdi-checkbox-marked-circle-outline text-success"></i>
+									<br>
+									<h4>예금주 : <h4 id='result'></h4>
+									<br><br>
+									<h4>계좌 : </h4><h4 id='bankName'></h4> <h4 id='bankNum'></h4>
+									<br><br>
+									<h4>신청 금액 : </h4><h4 id='transferMoney'></h4>
+									<br><br>
+									<p>최종 확인 후 완료버튼을 누르세요</p>
+									<p>은행영업일 기준으로 3~4일 이내로 입금 예정입니다</p>
+								</div>
+
+								<div id="finish">
+									<button class="btn btn-gradient-success"><a href="{{ url_for('home.home') }}">대시보드로 돌아가기</a></button>
+								</div>
+
+								<div class="col-xl-8 offset-xl-2 col-md-12 py-4 text-center" id="fail-page">
+									<i class="mdi mdi-close-circle-outline text-danger"></i>
+									<br>
+									<h4>모든 정보를 입력해 주시기 바랍니다</h4>
+									<p>입력 오류시 입금이 지연될수 있습니다</p>
+									<p id="chkConfirm">정보이용 동의에 체크해주시기 바랍니다</p>
+								</div>
+							</section>
+
+						</div>
+										</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!--포인트내역 -->
+	<div class="row">
+		<div class="col-12 grid-margin">
+			<div class="card bg-white">
+				<div class="card-body">
+					<h4 class="card-title "><i class="mdi mdi-star-circle"></i>  포인트 내역</h4>
+
+					<div class="col-12 table-responsive">
+						<table class="table table-md-responsive" id="point-table">
+							<thead class="thead-light">
+								<tr>
+									<th> # </th>
+									<th> 설명 </th>
+									<th> 적립 </th>
+									<th> 환급 </th>
+									<th class="tb-date"> 날짜 </th>
+								</tr>
+							</thead>
+							<tbody>
+								{% if exchanging|length != 0 %}
+								{% for row in exchanging %}
+								<tr>
+									<td> # 환급대기</td>
+									<td> 계좌 : {{row.bank}} | {{row.account_number}} </td>
+									<td> - </td>
+									<td> {{row.exchange_point | number_format}} </td>
+									<td> {{row.created[0:10]}}</td>
+								</tr>
+								{% endfor %}
+								{% endif %}
+
+
+								{% if point_log|length != 0 %}
+								{% for i in range (0, point_log|length) %}
+								<tr>
+									<td> {{i+1}} </td>
+									<td> {{point_log[i].name}} </td>
+									<td> {% if point_log[i].point != None %}{{point_log[i].point | number_format}} {% else %} - {% endif %}</td>
+									<td> {% if point_log[i].exchange != None %}{{point_log[i].exchange | number_format}} {% else %} - {% endif %}</td>
+									<td> {{point_log[i].time[0:10]}} </td>
+								</tr>
+
+								{% endfor %}
+								{% endif %}
+							</tbody>
+						</table>
+					</div><!--table responsive-->
+
+
+
+				</div><!--card body-->
+			</div><!--card-->
+		</div><!--col xl 12-->
+	</div><!--row-->
+</div><!--contents wrapper-->
+
+
+<!-- plugins:js this page only-->
+<script src="/static/new_design/js/plugin/wizard.jquery.steps.js"></script>
+<script src="/static/new_design/js/point.js"></script>
+<script src="/static/new_design/js/pointTable.js"></script>
+<script src="/static/new_design/js/plugin/jquery.dataTable.js"></script>
+<script src="/static/new_design/js/plugin/dataTable.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$(this).scrollTop(0);
+			$.ajaxSetup({
+				beforeSend: function(xhr, settings) {
+					if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+						xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token() }}")
+					}
+				}
+			});
+			var finish_btn = $("a:contains('완료')");
+
+			$(finish_btn).on('click', function() {
+				var request_name = $("#result").text();
+				var bank = $("#bankName").text();
+				var account_number = $("#bankNum").text();
+				var exchange_point = $("#transferMoney").text();
+
+				if (request_name != '' && bank != '' && account_number != '' && exchange_point != '' ) {
+					$.ajax({
+						url: window.location.href,
+						data: {
+							"request_name": request_name,
+							"bank":bank,
+							"account_number":account_number,
+							"exchange_point":exchange_point
+						},
+						type: 'POST',
+						success: function(res) {
+							location.reload();
+						},
+						error:function(request, error) {
+							console.log(request);
+							console.log(error);
+						}
+					});
+				}
+			});
+		});
+	</script>
+
+{% endblock %}

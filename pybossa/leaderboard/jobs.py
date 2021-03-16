@@ -20,8 +20,8 @@ from sqlalchemy import text
 from pybossa.core import db
 from pybossa.util import exists_materialized_view, refresh_materialized_view
 
-
 def leaderboard(info=None):
+    update_all_user_answer_rate()
     """Create or update leaderboard materialized view."""
     materialized_view = 'users_rank'
     materialized_view_idx = 'users_rank_idx'
@@ -30,9 +30,6 @@ def leaderboard(info=None):
         materialized_view_idx = 'users_rank_%s_idx' % info
 
     if exists_materialized_view(db, materialized_view):
-        #현재는 채점을 계속 누르는 상황이 아니므로 여기서 갱신 중 나중에 삭제 할 것
-        all_rank_achievement()
-        category_rank_achievement()
         return refresh_materialized_view(db, materialized_view)
     else:
         #sql = '''
@@ -46,7 +43,8 @@ def leaderboard(info=None):
 
         sql = '''
                     CREATE MATERIALIZED VIEW "{}" AS WITH scores AS (
-                        SELECT "user".*, "user".point_sum AS score FROM "user" where "user".restrict=false ORDER BY score DESC
+                        SELECT "user".*, SUM(task_run.point) AS score FROM "user", task_run
+                        WHERE "user".id=task_run.user_id and "user".restrict=false GROUP BY "user".id ORDER BY score DESC
                     ) SELECT *, row_number() OVER (ORDER BY score DESC) as rank FROM scores;
               '''.format(materialized_view)
        
@@ -67,11 +65,36 @@ def leaderboard(info=None):
 
         return "Materialized view created"
 
-def all_rank_achievement():
-    sql = '''
+def update_all_user_answer_rate():
+    from pybossa.cache import users as cached_users
+    import decimal
+    from pybossa.core import user_repo
+
+    users = user_repo.get_all()
+    for user in users:
+        answer_rate = cached_users.get_answer_rate(user)
+        user.answer_rate = answer_rate
+        user_repo.update(user)
+    return "Update AnswerRate"
+
+def update_point():
+    from pybossa.core import user_repo, task_repo
+    user_ids = task_repo.get_1hour_user_data()
+    if user_ids is None:
+        return
+    for user_id in user_ids:
+        user_repo.update_point(user_id)
+    return
+
+# 2020.11.27. 업적 리뉴얼 예정
+    #sql = 
+    '''
                  SELECT id, point_sum, answer_rate
                  FROM users_rank
-          '''
+          
+    '''
+'''
+def all_rank_achievement():
     results = db.session.execute(sql)
     for row in results:
         achieve = ''
@@ -144,3 +167,5 @@ def update_achievement(user_id, achieve, achieve_id, category=None):
                 user_repo.update_achievement(user_id, achieve, achieve_id)
         return "Achievement add"
     return "Achieve Overlap"
+
+'''

@@ -19,8 +19,8 @@
 from sqlalchemy import Integer, Boolean, Unicode, Text, String, BigInteger, Numeric
 from sqlalchemy.schema import Column
 from sqlalchemy.orm import relationship, backref
-from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy.dialects.postgresql import JSONB, ARRAY
+from sqlalchemy.ext.mutable import MutableDict, MutableList
 from flask_login import UserMixin
 from flask import current_app
 
@@ -57,8 +57,8 @@ class User(db.Model, DomainObject, UserMixin):
     #20.02.18. User 성별 추가 male = M / female = F
     sex = Column(Unicode(length=1), nullable=False)
     birth = Column(Integer)
-    point_sum = Column(Integer, default=0)
-    current_point = Column(Integer, default=0)
+    #point_sum = Column(Integer, default=0)
+    #current_point = Column(Integer, default=0)
     answer_rate = Column(Numeric(4,1), default=0)
     achievement = Column(JSONB)
     
@@ -73,6 +73,7 @@ class User(db.Model, DomainObject, UserMixin):
     twitter_user_id = Column(BigInteger, unique=True)
     facebook_user_id = Column(BigInteger, unique=True)
     google_user_id = Column(String, unique=True)
+    kakao_user_id = Column(BigInteger, unique=True)
     ckan_api = Column(String, unique=True)
     newsletter_prompted = Column(Boolean, default=False)
     valid_email = Column(Boolean, default=False)
@@ -81,6 +82,8 @@ class User(db.Model, DomainObject, UserMixin):
     consent = Column(Boolean, default=False)
     info = Column(MutableDict.as_mutable(JSONB), default=dict())
     user_pref = Column(JSONB)
+    like_projects = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())
+    orderer = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())
 
     ## Relationships
     task_runs = relationship(TaskRun, backref='user')
@@ -108,7 +111,7 @@ class User(db.Model, DomainObject, UserMixin):
     @classmethod
     def public_attributes(self):
         """Return a list of public attributes."""
-        return ['created', 'name', 'fullname', 'info', 'point_sum', 'answer_rate', 'current_point', 'achievement',
+        return ['created', 'name', 'fullname', 'info', 'answer_rate', 'achievement',
                 'n_answers', 'registered_ago', 'rank', 'score', 'locale']
 
     @classmethod

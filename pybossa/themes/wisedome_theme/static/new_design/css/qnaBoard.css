@@ -1,0 +1,190 @@
+.nav-pills .nav-item {
+  width: 22.5%;
+}
+
+.nav-pills.nav-pills-custom {
+  border-bottom: 0;
+}
+.nav-pills.nav-pills-custom .nav-link {
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  margin: 0.5rem;
+  background: #f4f4f7;
+  color: #343a40;
+  text-align: center;
+}
+
+.nav-pills.nav-pills-custom .nav-link .mdi {
+  font-size: 2.5rem;
+}
+.nav-pills.nav-pills-custom .nav-link.active {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#ffbf96),
+    to(#fe7096)
+  );
+  background: linear-gradient(to right, #ffbf96, #fe7096);
+  color: #ffffff;
+}
+.tab-pane {
+  margin-top: 1.5rem;
+}
+.input-title {
+  font-size: 0.875rem;
+}
+.input-title:focus {
+  border: 1px solid #b66dff;
+}
+.form-control {
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+}
+select.form-control,
+select.form-control:focus {
+  color: #343a40;
+}
+.note-editor {
+  font-family: Arial !important;
+}
+#editor-btn a {
+  color: #fff;
+  text-decoration: none;
+}
+.editor-btn-group {
+  width: 50%;
+  margin: 0 auto;
+}
+.editor-btn-group .btn {
+  margin: 0 1rem;
+  border-radius: 0.25rem;
+}
+.tb-title a {
+  text-decoration: none;
+  color: #343a40;
+}
+/**내가쓴글 확인하기 페이지**/
+.my-border {
+  border-radius: 0.25rem;
+  border: 1px solid #e3dfe4;
+}
+.card-header {
+  background: transparent;
+  border-radius: 0.25rem;
+}
+
+@media (max-width: 1024px) {
+  .nav-pills .nav-item {
+    width: 25%;
+  }
+
+  .nav-pills.nav-pills-custom .nav-link .mdi {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 991px) {
+  .nav-pills .nav-item {
+    width: 25%;
+  }
+}
+
+@media (max-width: 575px) {
+  .nav-pills .nav-item {
+    width: 50%;
+  }
+  .nav-pills.nav-pills-custom .nav-link {
+    margin: 0.25rem;
+  }
+}
+
+.table {
+  border-radius: 0.25rem;
+  border-collapse: collapse !important;
+}
+
+.table td,
+.table th {
+  background-color: #ffffff;
+}
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6 !important;
+}
+.table-dark {
+  color: inherit;
+}
+.table-dark th,
+.table-dark td,
+.table-dark thead th,
+.table-dark tbody + tbody {
+  border-color: #ebedf2;
+}
+.table .thead-dark th,
+.jsgrid .jsgrid-table .thead-dark th {
+  color: inherit;
+  border-color: #ebedf2;
+}
+@media (max-width: 1280px) {
+  .editor-btn-group {
+    width: 90%;
+  }
+}
+@media (max-width: 991px) {
+  .editor-btn-group {
+    width: 75%;
+  }
+}
+
+@media (max-width: 769px) {
+  .table {
+    margin: 0 auto;
+  }
+  .table .tb-subject {
+    display: none;
+  }
+  .editor-btn-group {
+    width: 90%;
+  }
+}
+
+@media (max-width: 575px) {
+  .nav-pills.nav-pills-custom .nav-link {
+    letter-spacing: normal;
+  }
+
+  .table .tb-date,
+  .table label,
+  .table .tb-status,
+  .table .tb-subject {
+    display: none;
+  }
+  .table .tb-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .form-group input {
+    margin-top: 0.75rem;
+  }
+  .editor-btn-group {
+    width: 100%;
+  }
+  .editor-btn-group .btn {
+    margin: 0 0.5rem;
+    padding: 0.875rem 1.25rem;
+  }
+  #editor-btn {
+    margin: 1rem;
+  }
+
+  .dataTables_wrapper .dataTables_info {
+    margin: 0.5rem 0;
+  }
+  .dataTables_wrapper .dataTables_paginate a {
+    font-size: 0.75rem;
+  }
+  div.dataTables_wrapper div.dataTables_filter input {
+    height: 20px;
+  }
+}

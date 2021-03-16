@@ -20,7 +20,7 @@ from flask import current_app
 from flask_wtf import Form
 from flask_wtf.file import FileField, FileRequired
 from wtforms import IntegerField, DecimalField, TextField, BooleanField, SelectField, validators, TextAreaField, PasswordField, FieldList, SelectMultipleField, StringField
-from wtforms.fields.html5 import EmailField, URLField
+from wtforms.fields.html5 import EmailField, URLField, DateField
 from wtforms.widgets import HiddenInput
 from flask_babel import lazy_gettext, gettext
 from pybossa.core import project_repo, user_repo
@@ -60,7 +60,7 @@ class ProjectForm(Form):
                                     "Short Name is already taken.")),
                             pb_validator.ReservedName('project', current_app)])
 # 이거 추가함
-    all_point = TextField(lazy_gettext('ALL Point'),
+    all_point = TextField(lazy_gettext('포인트'),
                            [validators.Required(),
                             pb_validator.CommaSeparatedIntegers(
                                 message=lazy_gettext("숫자만"))])
@@ -104,8 +104,8 @@ class ExchangeForm(Form):
     exchange_point = IntegerField(lazy_gettext('환급신청 포인트'),
                              [validators.Required(),
                               validators.NumberRange(
-                                  min=1, max=10000,
-                                  message=lazy_gettext('최대10,000 POINT까지 환전신청 가능합니다.'))])
+                                  min=1, max=1000000,
+                                  message=lazy_gettext('최대1,000,000 POINT까지 환전신청 가능합니다.'))])
 '''                              [validators.Required(),
                                validators.NumberRange(
                                    min=1, max=1000,
@@ -117,7 +117,9 @@ class ExchangeForm(Form):
 class ProjectUpdateForm(ProjectForm):
     id = IntegerField(label=None, widget=HiddenInput())
     #20.03.02. 수정사항
-    all_point = TextField(lazy_gettext('ALL Point'))
+    all_point = TextField(lazy_gettext('포인트'))
+
+    end_date = DateField(lazy_gettext('마감일자'))
 
     description = TextAreaField(lazy_gettext('Description'),
                             [validators.Required(
@@ -392,15 +394,14 @@ class LoginForm(Form):
 
     """Login Form class for signin into PYBOSSA."""
 
-    #Test_SJ = SelectField(u'Test SelectField', choices=[('a', '손'), ('b', '석'), ('c', '준')])
     email = TextField(lazy_gettext('E-mail'),
                       [validators.Required(
-                          message=lazy_gettext("The e-mail is required"))])
+                          message=lazy_gettext("이메일을 입력하세요."))])
 
     password = PasswordField(lazy_gettext('Password'),
                              [validators.Required(
                                  message=lazy_gettext(
-                                     "You must provide a password"))])
+                                     "비밀번호를 입력하세요."))])
 
 
 class RegisterForm(Form):
@@ -419,7 +420,7 @@ class RegisterForm(Form):
     #err_msg_2 = lazy_gettext("The user name is already taken")
     err_msg_2 = lazy_gettext("이미 등록된 별명 입니다.")
     #name = TextField(lazy_gettext('User name'),
-    name = StringField('별명 (설정하지 않을 시 이름으로 자동입력)',
+    name = StringField('별명',
                          [validators.Length(min=2, max=USER_NAME_MAX_LENGTH, message=err_msg),
                           pb_validator.NotAllowedChars(),
                           pb_validator.Unique(user_repo.get_by, 'name', err_msg_2),
@@ -454,14 +455,48 @@ class RegisterForm(Form):
                             validators.EqualTo('confirm', err_msg_2)])
 
     confirm = PasswordField(lazy_gettext('Repeat Password'))
-    consent = BooleanField(false_values=("False", "false", '', '0', 0))
+    #consent = BooleanField(false_values=("False", "false", '', '0', 0),validators=[validators.DataRequired("체크해주세요")])
     err_msg = lazy_gettext("생년월일과 성별을 체크해주세요.")
-    birth = IntegerField([validators.Required(),
-                              validators.NumberRange(
-                                  min=10000000, max=99999999,
-                                  message=lazy_gettext('생년월일과 성별을 체크해주세요.'))])
+    #birth = IntegerField([validators.Required(),
+    #                          validators.NumberRange(
+    #                              min=10000000, max=99999999,
+    #                              message=lazy_gettext('생년월일과 성별을 체크해주세요.'))], widget=HiddenInput())
+    year = TextField()
+    month = TextField()
+    day = TextField()
+    sex = TextField(label=None)
 
-    sex = TextField(label=None, widget=HiddenInput())
+
+class APIRegisterForm(Form):
+
+    err_msg = lazy_gettext("이름을 입력하세요.")
+    fullname = TextField(lazy_gettext('Full name'),
+                         [validators.Length(min=2, max=USER_FULLNAME_MAX_LENGTH, message=err_msg)])
+
+    err_msg = lazy_gettext("별명을 입력하세요.")
+    err_msg_2 = lazy_gettext("이미 등록된 별명 입니다.")
+    name = StringField('별명',
+                         [validators.Length(min=2, max=USER_NAME_MAX_LENGTH, message=err_msg),
+                          pb_validator.NotAllowedChars(),
+                          pb_validator.Unique(user_repo.get_by, 'name', err_msg_2),
+                          pb_validator.ReservedName('account', current_app)])
+
+    err_msg = lazy_gettext("이메일을 입력하세요.")
+    err_msg_2 = lazy_gettext("이미 등록된 이메일 입니다.")
+    email_addr = EmailField(lazy_gettext('Email Address'),
+                           [validators.Length(min=3,
+                                              max=EMAIL_MAX_LENGTH,
+                                              message=err_msg),
+                            validators.Email(),
+                            pb_validator.Unique(user_repo.get_by, 'email_addr', err_msg_2)])
+
+    year = TextField()
+    month = TextField()
+    day = TextField()
+    sex = TextField(label=None)
+    locale = TextField()
+    api_id = TextField()
+    api_token = TextField()
 
 class UpdateProfileForm(Form):
 
@@ -502,8 +537,8 @@ class UpdateProfileForm(Form):
 
     locale = SelectField(lazy_gettext('Language'))
     ckan_api = TextField(lazy_gettext('CKAN API Key'))
-    privacy_mode = BooleanField(lazy_gettext('Privacy Mode'))
-    restrict = BooleanField(lazy_gettext('Restrict processing'))
+    privacy_mode = BooleanField(lazy_gettext('개인 정보 보호 모드'))
+    restrict = BooleanField(lazy_gettext('처리 제한'))
 
     def set_locales(self, locales):
         """Fill the locale.choices."""
@@ -517,10 +552,11 @@ class ChangePasswordForm(Form):
 
     """Form for changing user's password."""
 
-    current_password = PasswordField(lazy_gettext('Current password'))
+    #current_password = PasswordField(lazy_gettext('Current password'))
+    current_password = PasswordField(lazy_gettext('현재 비밀번호'))
 
-    err_msg = lazy_gettext("Password cannot be empty")
-    err_msg_2 = lazy_gettext("Passwords must match")
+    err_msg = lazy_gettext("비밀번호를 입력하세요.")
+    err_msg_2 = lazy_gettext("비밀번호가 일치하지 않습니다.")
     if enable_strong_password:
         new_password = PasswordField(
                         lazy_gettext('New Password'),
@@ -534,15 +570,16 @@ class ChangePasswordForm(Form):
                         [validators.Required(err_msg),
                             validators.EqualTo('confirm', err_msg_2)])
 
-    confirm = PasswordField(lazy_gettext('Repeat password'))
+    #confirm = PasswordField(lazy_gettext('Repeat password'))
+    confirm = PasswordField(lazy_gettext('비밀번호 재입력'))
 
 
 class ResetPasswordForm(Form):
 
     """Class for resetting user's password."""
 
-    err_msg = lazy_gettext("Password cannot be empty")
-    err_msg_2 = lazy_gettext("Passwords must match")
+    err_msg = lazy_gettext("비밀번호를 입력하세요.")
+    err_msg_2 = lazy_gettext("비밀번호가 일치하지않습니다.")
     if enable_strong_password:
         new_password = PasswordField(
                         lazy_gettext('New Password'),
@@ -582,6 +619,8 @@ class OTPForm(Form):
 class SearchForm(Form):
     user = TextField(lazy_gettext('User'))
 
+class OrderSearchForm(Form):
+    project = TextField(lazy_gettext('Project'))
 
 class CategoryForm(Form):
     id = IntegerField(label=None, widget=HiddenInput())

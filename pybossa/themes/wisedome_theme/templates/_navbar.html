@@ -2,7 +2,7 @@
     <div class="container">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="{{ url_for('home.home') }}"><img src="{{url_for('static',filename='img/logo.svg')}}" alt="{{brand}}"></a>
-			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main"style="padding:5px 10px 5px 10px;margin:18px 15px 18px 1px">
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main" style="padding:5px 10px 5px 10px;margin:18px 15px 18px 1px">
 				<!-- {{_('Menu')}} -->
 				<span class = "icon-bar"></span>
 				<span class = "icon-bar"></span>
@@ -18,13 +18,10 @@
 				<!--<li {% if active_page == 'community' %} class="active" {% endif %}><a href="{{ url_for('account.index')}}">{{ _('Community') }}</a></li>-->
                 <li {% if active_page == 'projects' %} class="active" {% endif %}><a href="{{ url_for('project.index') }}">{{ _('Projects') }}</a></li>
 				<li {% if active_page == 'faq' %} class="active" {% endif %}><a href="{{ url_for('home.faq') }}">{{ _('FAQ') }}</a></li>
-                <!--<li {% if active_page == 'create' %} class="active" {% endif %}><a href="{{ url_for('project.new') }}">{{ _('Create') }}</a></li>
-				<li {% if active_page == 'about' %} class="active" {% endif %}><a href="{{ url_for('home.about')}}">{{ _('About') }}</a></li>-->
+				<li {% if active_page == 'create' %} class="active" {% endif %}><a href="{{ url_for('project.new') }}">{{ _('Create') }}</a></li>
             </ul>
             {% include '_gcs_form.html' ignore missing %}
             <ul class="nav navbar-nav navbar-right">
-				<li {% if active_page == 'about' %} class="active" {% endif %}><a href="{{ url_for('home.about')}}">{{ _('About') }} </a></li>
-				<li {% if active_page == 'order' %} class="active" {% endif %}><a href="{{ url_for('home.orderer')}}">{{ _('작업의뢰') }}</a></li>
             {% if current_user.is_authenticated %}
                 <li {% if active_page == 'profile' %} class="active" {% endif %}><a href="#" data-toggle="dropdown" class="dropdown-toggle"> {{ current_user.name | truncate(15,true) }} <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -32,7 +29,12 @@
 					<!--<li><a href="{{ url_for('account.update_profile', name=current_user.name) }}"> {{ _('My Settings') }}</a></li>-->
 					<!--<li><a href="{{ url_for('account.update_profile', name=current_user.name) }}"> {{ _('My Settings') }}</a></li>-->
 					<li><a href="{{ url_for('account.point', name=current_user.name) }}">포인트</a></li>
-					<li><a href="{{ url_for('account.achievement', name=current_user.name) }}">업적</a></li>
+					{# <li><a href="{{ url_for('account.achievement', name=current_user.name) }}">업적</a></li> #}
+					{% if current_user.orderer != None or current_user.admin == 1 %}
+                    <li class="divider"></li>
+					<li><a href="{{ url_for('orderer.index') }}">발주자 사이트</a></li>
+					{% endif %}
+
                     {% if current_user.admin == 1 %}
                     <li class="divider"></li>
 					<li><a href="{{ url_for('account.projects', name=current_user.name) }}"> {{ _('My Projects') }}</a></li>
@@ -45,7 +47,6 @@
 				<!--<li class="active"><a>{{ current_user.current_point }}<img src="{{url_for('static',filename='img/pppp.png')}}" width="33" height=""></a></li>a-->
             {% else %}
                 <li><a href="{{ url_for('account.signin') }}"> {{ _('Sign in') }}</a></li>
-
             {% endif %}
             </ul>
         </div>

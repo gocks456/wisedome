@@ -1,0 +1,56 @@
+
+{% import "account/_helpers.html" as helper %}
+{% import "projects/_helpers.html" as project_helper %}
+
+{% macro render_found_user(user, upload_method) %}
+<div class="row well well-small">
+    <div class="col-md-2">
+        {{ helper.render_user_thumbnail(user, upload_method, style="height:100px; width:100px;")}}
+    </div>
+    <div class="col-md-10">
+        <h2>{{user.fullname}} <small>({{ _('nick') }}: {{user.name}})</small></h2>
+        <h3>{{ _('Member since') }}: {{user.created[0:10]}}</h3>
+        <a href="{{url_for('admin.del_admin', user_id=user.id)}}" class="btn btn-danger">
+            <i class="icon-remove"></i>
+            발주자 추가</a>
+    </div>
+</div>
+{% endmacro %}
+
+{%- macro render_project_card(user, project, upload_method, title, explanation, link, link_action_text, background=False, download=False, nofollow=False, link_class=None, id=None, icon=None, link_two=None, link_action_text_two=None) %}
+<div {%if id%}id="{{id}}"{% endif %} class="thumbnail card"
+	{% if user.admin %}
+	onclick="location.href='{{url_for('project.coowners', short_name=project.short_name)}}'"
+	{% elif user.orderer %}
+	onclick="location.href='{{url_for('project.show_stats', short_name=project.short_name)}}'"
+	{% endif %}
+	style="cursor:pointer;">
+	<div class="post-pic" style="background: rgb(0, 151, 167) {%- if background %}url({{project_helper.render_url_thumbnail(project, upload_method)}}){% endif -%} no-repeat center top; background-size: cover;">
+        {% if not background %}
+            {% if icon %}
+            <div class="row">
+                <div class="col-xs-8">
+                    <h3>{{project.name}}</h3>
+                </div>
+                <div class="col-xs-3">
+                    <i class="fa fa-{{icon}} fa-fw fa-4x"></i>
+                </div>
+            </div>
+            {% else %}
+                <h3>{{project.name}}</h3>
+            {% endif %}
+        {% endif %}
+	</div>
+    <div class="caption">
+        {% if background %}
+        <h3>{{project.name}}</h3>
+		<h4>진행률: {{project.progress_rate}}%</h4>
+		<h4><strong>{{project.all_point}}</strong><img src="{{url_for('static',filename='img/pppp.jpg')}}" width="33" height="35"></h4>
+        {% endif %}
+		{% if project.users_fullname and user.admin %}
+		<h5>발주자 이름: {% for name in project.users_fullname %} {{ name }} {% endfor %} </h5>
+		{% endif %}
+    </div>
+</div>
+{% endmacro -%}
+

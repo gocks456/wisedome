@@ -1,0 +1,46 @@
+<!--질문내용-->
+<div class="tab-pane show active">
+	<div class="row">
+		<div class="col-12 table-responsive">
+			<table id="order-listing" class="table table-md-responsive">
+				<thead class="thead-light">
+					<tr>
+						<th>#</th>
+						<th class="tb-date">작성일</th>
+						<th class="tb-subject">질문유형</th>
+						<th>제목</th>
+						<th class="tb-status">답변상태</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for row in board_list %}
+					<tr onClick = "location.href='{{ url_for("home.qna_view", blog_id=row.id) }}'" style="cursor:pointer;">
+						<td>{{row.id}}</td>
+						<td th class="tb-date">{{row.updated[0:10]}}</td>
+						<td class="tb-subject">{{row.subject}}</td>
+						<td class="tb-title">{{row.title}}</td><!--해당 글보기 링크걸려있음-->
+						<td>
+							{% if row.answer %}
+							<label class="badge badge-success">답변완료</label>
+							{% else %} 
+							<label class="badge badge-info">답변대기</label>
+							{% endif %}
+						</td>
+					</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+			<div class="text-right">
+				<a href="{{url_for('home.write')}}">
+				<button class="btn btn-write" type="submit" id="editor-btn"> 글쓰기</button>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/static/new_design/js/qnaBoard.js"></script>
+<script src="/static/new_design/js/plugin/jquery.dataTable.js"></script>
+<script src="/static/new_design/js/plugin/dataTable.js"></script>

@@ -27,6 +27,23 @@ session = db.slave_session
 @cache(key_prefix="categories_all",
        timeout=timeouts.get('CATEGORY_TIMEOUT'))
 
+def get_list_cat2():
+    sql = text('''
+               SELECT c.*
+               FROM category c, project p
+               WHERE c.id = p.category_id
+               AND p.complete = false
+               GROUP BY c.id
+               ORDER BY c.id
+               ''')
+    results = session.execute(sql,dict())
+    list_cat = []
+    for row in results:
+        cat= dict(id=row.id, name=row.name, short_name=row.short_name, description=row.description, created=row.created, info=row.info)
+        list_cat.append(cat)
+
+    return list_cat
+
 def get_list_cat():
     sql = text('''
                SELECT c.*

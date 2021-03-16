@@ -49,6 +49,8 @@ ONE_HOUR = 60 * 60
 HALF_HOUR = 30 * 60
 FIVE_MINUTES = 5 * 60
 
+SEVEN_DAYS = 24 * 60 * 60 * 7
+
 
 def get_key_to_hash(*args, **kwargs):
     """Return key to hash for *args and **kwargs."""
@@ -87,7 +89,7 @@ def cache(key_prefix, timeout=300):
                 if output:
                     return pickle.loads(output)
                 output = f(*args, **kwargs)
-                #sentinel.master.setex(key, timeout, pickle.dumps(output))
+                sentinel.master.setex(key, timeout, pickle.dumps(output))
                 return output
             output = f(*args, **kwargs)
             return output
@@ -115,7 +117,10 @@ def memoize(timeout=300):
                 if output:
                     return pickle.loads(output)
                 output = f(*args, **kwargs)
-                #sentinel.master.setex(key, timeout, pickle.dumps(output))
+                #왜 주석이였을까?
+                sentinel.master.setex(key, timeout, pickle.dumps(output))
+                # ######
+                #print(str(f.__name__))
                 return output
             output = f(*args, **kwargs)
             return output
