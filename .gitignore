@@ -19,6 +19,7 @@ pybossa/themes/wisedome_theme/templates/new_design/temp/
 *.log
 *.sql
 *.ini
+*.mp4
 
 dump.rdb
 settings_local.py
