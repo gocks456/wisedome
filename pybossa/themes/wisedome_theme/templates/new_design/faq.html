@@ -7,7 +7,7 @@
 		<!-- plugins:css -->
 		<link rel="stylesheet" href="/static/new_design/assets/vendors/mdi/css/materialdesignicons.min.css">
 		<link rel="stylesheet" href="/static/new_design/css/function/vendor.bundle.base.css">
-		<!--기본 css--->
+		<!--기본 css-->
 		<link rel="stylesheet" href="/static/new_design/css/basic/dashboard-basic.css">
 		<link rel="stylesheet" href="/static/new_design/css/basic/nav-footer.css">
 		<!---현재 페이지에만 들어가는 css-->
@@ -31,27 +31,12 @@
 							<div class="collapse navbar-collapse justify-content-lg-end justify-content-md-start" id="navbarSupportedContent">
 								<ul class="navbar-nav ">
 									<li class="nav-item active"><a class="nav-link" href="{{ url_for('home.aboutus') }}">회사소개</a></li>
-									{#<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SERVICE </a>
-										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-											<a class="dropdown-item " href="#">회사소개</a>
-											<a class="dropdown-item" href="#">이용방법</a>
-										</div>
-									</li>#}
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('project.index') }}">프로젝트</a></li>
-									{#<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CONTACT </a>
-										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-											<a class="dropdown-item" href="#">공지사항</a>
-											<a class="dropdown-item" href="#">이벤트</a>
-											<a class="dropdown-item" href="#">파트너협약</a>
-											<a class="dropdown-item" href="{{ url_for('home.faq') }}">자주하는질문</a>
-											<a class="dropdown-item" href="{{ url_for('home.qna') }}">문의하기</a>
-										</div>
-									</li>#}
+									<li class="nav-item"><a class="nav-link" href="{{ url_for('home.databoucher') }}">데이터 바우처</a></li>
 									<li class="nav-item"><a  class="nav-link" href="{{ url_for('home.faq') }}">자주하는질문 </a></li>
 									{% if current_user.is_authenticated %}
-									<li class="nav-item"><a  class="nav-link" href="{{ url_for('account.signout') }}">LOGOUT </a></li>
+									<li class="nav-item"><a  class="nav-link" href="{{ url_for('account.signout') }}">로그아웃</a></li>
 									{% else %}
-									<li class="nav-item"><a  class="nav-link" href="{{ url_for('account.signin') }}">LOGIN </a></li>
+									<li class="nav-item"><a  class="nav-link" href="{{ url_for('account.signin') }}">로그인</a></li>
 									{% endif %}
 								</ul>
 							</div>

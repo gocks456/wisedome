@@ -182,3 +182,8 @@ def faq():
 def aboutus():
     response = dict(template="/new_design/aboutus.html")
     return handle_content_type(response)
+
+@blueprint.route("dataBoucher")
+def databoucher():
+    response = dict(template="/new_design/dataBoucher.html")
+    return handle_content_type(response)
