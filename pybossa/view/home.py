@@ -182,3 +182,17 @@ def faq():
 def aboutus():
     response = dict(template="/new_design/aboutus.html")
     return handle_content_type(response)
+
+@blueprint.route("dataBoucher", methods=['GET', 'POST'])
+def databoucher():
+    if request.method == "POST":
+        from pybossa.view.gmail import send_mail, create_message
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+        body = render_template('/new_design/email/dataBoucher_email.html', name=name, email=email, message=message)
+        msg = create_message(current_app.config['GMAIL'], current_app.config['GMAIL'], "와이즈돔 데이터바우처 문의사항", body)
+        send_mail(msg)
+        flash(gettext('문의가 접수되었습니다.'), 'success')
+    response = dict(template="/new_design/dataBoucher.html", csrf=generate_csrf())
+    return handle_content_type(response)

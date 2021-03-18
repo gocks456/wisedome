@@ -34,6 +34,11 @@
 								</div>  
 								<div class="ml-auto str-btn">
 									{#<a href="#"><button class="btn btn-gradient-primary "> <i class="mdi mdi-arrow-right-bold-circle"></i> 시작하기</button></a>#}
+									{% if current_user.admin %}
+									<a href="{{ url_for('project.update', short_name=project.short_name) }}" style="text-decoration:none;">
+										<button class="btn btn-gradient-primary">프로젝트 설정</button>
+									</a>
+									{% endif %}
 									{{helper.render_contribute_button(project)}}
 								</div>
 							</div>

@@ -23,6 +23,15 @@
     </fieldset>
 </form>
 
+<style>
+select.form-control {
+	color:black;
+}
+select.form-control:focus {
+	color:black;
+}
+</style>
+
 <!-- Update form for project data-->
 <h2>프로젝트 세부 사항</h2>
 <form method="post" action="{{ url_for('project.update', short_name = project.short_name) }}">
@@ -35,9 +44,9 @@
 		{{ render_field(form.long_description, class_="input-xlarge", placeholder='프로젝트에 대한 자세한 설명을 입력하시오.(마크다운 사용 가능)') }}
 		<div class="form-group input-xlarge">
 			<label for="end_date" class="control-label">
-				<label for="end_date">프로젝트 마감기한</label>
+				<label for="end_date">프로젝트 마감기한<span style="color:red;"> (필수 입력)</span></label>
 			</label>
-			<input class='form-control' type='date' id='end_date' name='end_date' value=''>
+			<input class='form-control' type='date' id='end_date' name='end_date' value='{{form.end_date[0:10]}}'>
 		</div>
 		<div class ="row">
 			<h3 class ='col-sm-12'><strong>프로젝트 제한사항</strong></h3>
@@ -48,6 +57,15 @@
 		<div class="row">
 			{{ render_field(form.option_all_achieve, class_="col-sm-3") }}
 			{{ render_field(form.option_cat_achieve, class_="col-sm-3") }}
+			<div class="form-group col-sm-3">
+				<label for="self_score" class="control-label">
+					<label for="self_score">채점 방식</label>
+				</label>
+				<select class="form-control" id="self_score" name="self_score">
+					<option {% if form.self_score == "True" %}selected{% endif %} value="True">수동</option>
+					<option {% if form.self_score == "False" %}selected{% endif %} value="False">자동</option>
+				</select>
+			</div>
 			<h4 class ='col-sm-8' style="margin-bottom:30px;">제한이 필요 없으시다면 빈칸으로 남겨주세요. </h4>
 		</div>
 

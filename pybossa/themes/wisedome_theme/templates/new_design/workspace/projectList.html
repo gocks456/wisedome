@@ -87,7 +87,19 @@
 		</div>
 	</div>
 
-	<!--모든프로젝트-->
+	<!--모든프로젝트-->	
+	{% if current_user.admin %}
+	<div class="row">
+		<div class="col-lg-6">
+		<a href=" {{ url_for('project.draft') }} " style="text-decoration:none;">
+			<button class="btn btn-gradient-primary">임시 프로젝트</button>
+		</a>
+		<a href=" {{ url_for('project.complete') }} ">
+			<button class="btn btn-gradient-primary">완료 프로젝트</button>
+		</a>
+		</div>
+	</div>
+	{% endif %}
 	<div class="page-header">
 		<h3 class="page-title">
 			<span class="page-title-icon bg-gradient-primary text-white"><i class="mdi mdi-apps"></i></span>  &nbsp; {{ko_cat}} 프로젝트

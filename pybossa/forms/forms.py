@@ -120,6 +120,7 @@ class ProjectUpdateForm(ProjectForm):
     all_point = TextField(lazy_gettext('포인트'))
 
     end_date = DateField(lazy_gettext('마감일자'))
+    self_score = SelectField(lazy_gettext('채점방식'), choices=[('True', 'True'), ('False', 'False')])
 
     description = TextAreaField(lazy_gettext('Description'),
                             [validators.Required(

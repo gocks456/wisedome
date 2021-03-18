@@ -241,6 +241,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
         ko_cat = '텍스트'
     elif category == 'vidio':
         ko_cat = '비디오'
+    else:
+        ko_cat = '관리자'
 
     # 2020.12.04. Login 했을 때 안했을 때 구별 (임시)
     # 2021.02.18. 비로그인시 프로젝트 목록은 메인화면에 구성해준 것 만 확인
@@ -634,6 +636,12 @@ def update(short_name):
             # 마감일
             end_date = datetime.datetime.combine(form.end_date.data, datetime.datetime.min.time()).isoformat()+'.000000'
             new_project.end_date = end_date
+            # 채점 방식
+            if form.self_score.data == "True":
+                self_score = True
+            else:
+                self_score = False
+            new_project.self_score = self_score
 
         if fuzzyboolean(form.protect.data) and form.password.data:
             new_project.set_password(form.password.data)
@@ -670,6 +678,8 @@ def update(short_name):
             project.category_id = categories[0].id
         form.populate_obj(project)
         form.protect.data = project.needs_password()
+        form.end_date = project.end_date
+        form.self_score = project.self_score
 
     if request.method == 'POST':
         upload_form = AvatarUploadForm()
