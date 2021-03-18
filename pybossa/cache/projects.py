@@ -395,7 +395,7 @@ def _n_draft():
 def get_all_draft(category=None):
     """Return list of all draft projects."""
     sql = text(
-        '''SELECT project.id, project.name, project.short_name, project.created,
+        '''SELECT project.id, project.name, project.short_name, project.created, project.end_date,
             project.description, project.info, project.updated, project.all_point, project.condition, project.complete,
             "user".fullname AS owner, project.category_id
            FROM "user", project
@@ -420,6 +420,7 @@ def get_all_draft(category=None):
                        all_point=row.all_point,
                        condition=row.condition,
                        category_id=row.category_id,
+                       end_date=row.end_date,
                        complete=row.complete)
         projects.append(Project().to_public_json(project)) #XXX
     return projects
@@ -428,7 +429,7 @@ def get_all_draft(category=None):
 def get_all_complete(category=None):
     """Return list of all draft projects."""
     sql = text(
-        '''SELECT project.id, project.name, project.short_name, project.created,
+        '''SELECT project.id, project.name, project.short_name, project.created, project.end_date, 
             project.description, project.info, project.updated, project.all_point, project.condition, project.complete,
             "user".fullname AS owner, project.category_id
            FROM "user", project
@@ -453,6 +454,7 @@ def get_all_complete(category=None):
                        all_point=row.all_point,
                        condition=row.condition,
                        category_id=row.category_id,
+                       end_date=row.end_date,
                        complete=row.complete)
         projects.append(Project().to_public_json(project)) #XXX
     return projects

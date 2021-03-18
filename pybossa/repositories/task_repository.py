@@ -345,13 +345,13 @@ class TaskRepository(Repository):
 
     def get_QnA_data(self, project_id):
         sql = '''
-              SELECT t.info AS question, json_agg(r.info) AS answers
+              SELECT JSON_BUILD_OBJECT('question', t.info, 'answers', json_agg(
+              json_build_object('user_id', r.user_id,'answer', r.info))) AS data
               FROM task t, task_run r WHERE t.id=r.task_id AND t.project_id=:project_id
               GROUP BY t.id ORDER BY t.id;
               '''
         results = self.db.session.execute(sql, dict(project_id=project_id))
         tmp = []
         for row in results:
-            data = dict(question=row.question, answers=row.answers)
-            tmp.append(data)
+            tmp.append(row.data)
         return tmp

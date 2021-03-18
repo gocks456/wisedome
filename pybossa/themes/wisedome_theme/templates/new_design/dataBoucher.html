@@ -14,6 +14,8 @@
 		<link rel="stylesheet" href="/static/new_design/css/basic/nav-footer.css">
 		<!--this page css-->
 		<link rel="stylesheet" href="/static/new_design/css/dataBoucher.css"/>
+		<link rel="stylesheet" href="/static/new_design/css/basic/flash-msg.css"/>
+
 
 	</head>
 	<body>
@@ -40,13 +42,15 @@
 				</div>
 				<!--여기까지가 nav-->
 
+
+
 				<div class="row align-items-center py-5">
 					<div class="offset-xl-2 col-xl-4 offset-lg-1 col-lg-5 col-md-4 main-text">
 						<h5>WISEDOME</h5>
 						<div class="hr"></div>
 						<h1>데이터바우처 <br> 수요기업 모집 </h1>
 						<p> 믿을만한 빅데이터 기업 WISEDOME에서 <b>최대 7천만원</b>  지원받고 필요한 데이터를 얻어가세요.</p> 
-						<button type="button" class="btn btn-gradient-primary"><a href="#">와이즈돔에 문의하기</a></button>
+						<button type="button" class="btn btn-gradient-primary" id="detail" onclick="detailMove()">자세히 알아보기</button>
 					</div>
 					<div class="col-xl-6 col-lg-6 col-md-8 d-flex justify-content-md-end mainImg-content">
 						<img src="/static/new_design/images/database.png" alt="main image" id="main-img">
@@ -56,7 +60,7 @@
 			</div>
 
 			<!--2번쨰 컨텐츠-->
-			<div class="datalist-wrapper ">
+			<div class="datalist-wrapper " id="detailMove">
 				<div class="row py-5">
 
 					<div class="col-md-9 mx-auto text-center">
@@ -126,7 +130,7 @@
 										<li>  데이터바우처 포털사이트(www.kdata.or.kr/datavoucher) 접속 </li>
 										<li>  안내에 따라 신청서 접수(사용자 매뉴얼 별도 제공)</li>
 									</ul>
-									<button class="btn btn-success "><a href="https://www.kdata.or.kr/datavoucher/index.do" target="_blank" >신청하기</a></button>
+									<button class="btn btn-success " onclick="window.open('https://www.kdata.or.kr/datavoucher/index.do')">신청하기</button>
 								</div>
 							</div>
 
@@ -145,7 +149,7 @@
 										<li>  데이터바우처 지원사업 대표번호 : 1833-2246 </li>
 										<li>  데이터바우처 사업관리시스템 고객센터(pms.datastore.or.kr)</li>
 									</ul>
-									<button class="btn btn-success "><a href="https://pms.datastore.or.kr/index.do" target="_blank" >해당 고객센터로 문의하기</a></button>
+									<button class="btn btn-success " onclick="window.open('https://pms.datastore.or.kr/index.do')" >해당 고객센터로 문의하기</a></button>
 								</div>
 							</div>
 
@@ -164,7 +168,7 @@
 										<li>  와이즈돔 대표번호 :  (055)-213-5472</li>
 										<li>  와이즈돔 이메일 : wisedomekr@gmail.com</li>
 									</ul>
-									<button class="btn btn-primary "><a href="#" target="_blank" > 문의하기</a></button>
+									<button class="btn btn-primary " id="contact" onclick="contactToggle()"> 문의하기</button>
 								</div>
 							</div>
 
@@ -176,7 +180,7 @@
 
 
 		<!--contact us-->
-		<div class="contact-wrapper">
+		<div class="contact-wrapper" id="contact-box" style="display:none;">
 			<div class="row pt-5">
 				<div class="col-md-9 mx-auto text-center">
 					<h3>문의하기 </h3>
@@ -193,25 +197,28 @@
 						</div>
 
 						<div class="col-md-8 contact-form-wrapper">
-							<form action="#" data-aos="fade-up">
+							<form action="{{ url_for('home.databoucher') }}" method="POST" role="form">
+								<div style="display:none;">
+									<input id="csrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+								</div>
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="name">성함</label>
-										<input type="text" class="form-control" id="name" name="name" placeholder="성함을 입력해주세요">
+										<input type="text" class="form-control" id="name" name="name" placeholder="성함을 입력해주세요" required>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="email">이메일</label>
-										<input type="email" class="form-control" id="email" name="email" placeholder="이메일주소를 입력해주세요">
+										<input type="email" class="form-control" id="email" name="email" placeholder="이메일주소를 입력해주세요" required>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-12">
 										<label for="message">문의사항</label>
-										<textarea name="message" id="message" rows="10" class="form-control"></textarea>
+										<textarea name="message" id="message" rows="10" class="form-control" required></textarea>
 									</div>
 								</div>
 								<div class="d-flex justify-content-end">
-									<button type="submit" class="btn btn-gradient-danger">문의하기</button>
+									<button type="submit" class="btn btn-gradient-danger" >문의하기</button>
 								</div>
 							</form>
 						</div>
@@ -274,10 +281,11 @@
 			</div>
 		</footer><!--footer 여기까지-->
 
-
-
-
-
+		<script src="/static/new_design/js/plugin/jquery.min.js"></script>
+		<script type="text/javascript" src="/static/js/flashmessages.js"></script>
+		<div id="mini-notification" class="alert show-notification flash_messages" style="left:0; margin:0 auto;">
+			{% include "_flash_messages.html" %}
+		</div>
 
 
 		<!-- plugins:js 기본 필수로 들어가는 JS파일-->
@@ -286,6 +294,21 @@
 
 		<!--nav footer js-->
 		<script src="/static/new_design/js/nav-footer.js"></script>
+
+
+		<script>
+			function detailMove(){
+				var offset = $("#detailMove").offset();
+				$('html, body').animate({scrollTop : offset.top}, 400);
+			}
+
+			function contactToggle() {
+				$("#contact-box").toggle(400);
+				var offset = $("#contact-box").offset();
+				$('html, body').animate({scrollTop : offset.top}, 400);
+			}
+
+		</script>
 
 	</body>
 </html>

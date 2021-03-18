@@ -77,6 +77,8 @@ class Project(db.Model, DomainObject):
     condition = Column(MutableDict.as_mutable(JSONB), default=dict())
     complete = Column(Boolean, default=False)
 
+    self_score = Column(Boolean, default=False)
+
     tasks = relationship(Task, cascade='all, delete, delete-orphan', backref='project')
     task_runs = relationship(TaskRun, backref='project',
                              cascade='all, delete-orphan',
