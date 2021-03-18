@@ -323,6 +323,16 @@ def project_cat_index(category=None, page=1):
     return project_index(page, cached_projects.get_all, category, False, True,
                          order_by, desc)
 
+@blueprint.route('give_point')
+@login_required
+def give_point():
+    #aaaa
+    print ("BBBBB")
+
+
+
+
+
 
 @blueprint.route('/new', methods=['GET', 'POST'])
 @login_required
@@ -1002,7 +1012,7 @@ def task_presenter(short_name, task_id):
     if request.method == "POST":
         if request.form.get('btn', None) == "Upload" :
             _file = request.files['fileInput']
-            if _file.content_type != 'image/png' and _file.content_type != 'image/jpg':
+            if _file.content_type != 'image/png' and _file.content_type != 'image/jpg' and _file.content_type != 'image/jpeg':
                 flash(gettext("jpg 또는 png 파일만 업로드 가능합니다."), "error")
                 return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
             _file.seek(0, os.SEEK_END)
@@ -1028,7 +1038,7 @@ def task_presenter(short_name, task_id):
             uploader.upload_file(_file,
                                  container=container)
             flash(gettext("저장 완료!"), "success")
-            return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
+            return redirect_content_type(url_for('.presenter', short_name=project.short_name))
 
 
         def get_task_run_by_rank(rank):
@@ -1352,6 +1362,59 @@ def tasks(short_name):
                     pro_features=pro)
 
     return handle_content_type(response)
+
+
+
+@blueprint.route('/<short_name>/tasks/givepoint')
+@blueprint.route('/<short_name>/tasks/givepoint/<int:page>')
+def give_points(short_name, page=1):
+    project, owner, ps = project_by_shortname(short_name)
+    title = project_title(project, "Tasks")
+    pro = pro_features()
+
+    def respond():
+        per_page = 10
+        offset = (page - 1) * per_page
+        count = ps.n_tasks
+        page_tasks = cached_projects.browse_tasks(project.get('id'), per_page, offset)
+        if not page_tasks and page != 1:
+            abort(404)
+
+        pagination = Pagination(page, per_page, count)
+
+        project_sanitized, owner_sanitized = sanitize_project_owner(project,
+                                                                    owner,
+                                                                    current_user,
+                                                                    ps)
+
+        data = dict(template='/projects/give_point.html',
+                    project=project_sanitized,
+                    owner=owner_sanitized,
+                    tasks=page_tasks,
+                    title=title,
+                    pagination=pagination,
+                    n_tasks=ps.n_tasks,
+                    overall_progress=ps.overall_progress,
+                    n_volunteers=ps.n_volunteers,
+                    n_completed_tasks=ps.n_completed_tasks,
+                    pro_features=pro)
+
+        return handle_content_type(data)
+
+    if project.needs_password():
+        redirect_to_password = _check_if_redirect_to_password(project)
+        if redirect_to_password:
+            return redirect_to_password
+    else:
+        ensure_authorized_to('read', project)
+
+    zip_enabled(project, current_user)
+
+    project = add_custom_contrib_button_to(project, get_user_id_or_ip())
+    return respond()
+
+
+
 
 @blueprint.route('/<short_name>/tasks/browse')
 @blueprint.route('/<short_name>/tasks/browse/<int:page>')

@@ -126,13 +126,13 @@
 }
 </style>
 #}
-	<div class="row">
+	<div class="row" id='ajax-project-list'>
 		{% if projects|length != 0 %} 
 		<!-- 프로젝트가 있을 때 -->
 		<div class="col-md-12">
 			<div class="row product-item-wrapper">
 
-				<div class="card-group" id='ajax-project-list' {#style="width:100%;"#}>
+				<div class="card-group">
 					{% for project in projects %}
 					<div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3"><!--col-lg-3 이라는 태그 추가함 02.19-->
 						<div class="card bg-white shadow-sm">

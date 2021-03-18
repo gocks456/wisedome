@@ -16,4 +16,22 @@
 		"has_email": true,
 		"email_needs_agreement": true
 	}
+}{
+	"id": 1657777053,
+	"connected_at": "2021-03-11T13:44:50Z",
+	"properties": {
+		"nickname": "정민수",
+		"profile_image": "http://k.kakaocdn.net/dn/bqXiLk/btqZvbI6suD/6INkjSKXmocxWs69ehSz8k/m1.jpg",
+		"thumbnail_image": "http://k.kakaocdn.net/dn/bqXiLk/btqZvbI6suD/6INkjSKXmocxWs69ehSz8k/p1.jpg"
+	},
+	"kakao_account": {
+		"profile_needs_agreement": false,
+		"profile": {
+			"nickname": "정민수",
+			"thumbnail_image_url": "http://k.kakaocdn.net/dn/bqXiLk/btqZvbI6suD/6INkjSKXmocxWs69ehSz8k/p1.jpg",
+			"profile_image_url": "http://k.kakaocdn.net/dn/bqXiLk/btqZvbI6suD/6INkjSKXmocxWs69ehSz8k/m1.jpg"
+		},
+		"has_email": true,
+		"email_needs_agreement": true
+	}
 }

@@ -110,11 +110,11 @@
 
 	{% from "/new_design/_formhelper.html" import render_url_thumbnail %}
 
-	<div class="row">
+	<div class="row" id="ajax-project-list">
 		{% if projects != [] %}
 		<div class="col-md-12">
 			<div class="row product-item-wrapper">
-				<div class="card-group" id="ajax-project-list" style="width:100%;">
+				<div class="card-group">
 
 
 					{% for project in projects %}
@@ -151,8 +151,9 @@
 										<p class="card-text">{{ project.all_point|number_format }}P</p>
 									</div>
 								</div>
-							</div>
-						{% endif %}
+							</a>
+						</div>
+					</div>
 					{% endfor %}
 				</div>
 			</div>
