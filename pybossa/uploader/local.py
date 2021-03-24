@@ -93,3 +93,23 @@ class LocalUploader(Uploader):
             return os.path.isfile(path)
         except Exception:
             return False
+
+
+    def delete_dir(self, container, name, index, sub_index):
+        # 이미지 업로드 후 일정시간이 지날 때 이미지 삭제
+        import shutil
+        path = os.path.join(self.upload_folder, container)
+        if not os.path.isdir(path):
+            return
+        dir_list = os.listdir(path)
+
+        dir_list.remove(name + '_' + str(index))
+        dir_list.remove(name + '_' + str(sub_index))
+        for _dir in dir_list:
+            if not os.path.isdir(path + _dir):
+                continue
+            try:
+                shutil.rmtree(path + _dir)
+            except:
+                continue
+        return
