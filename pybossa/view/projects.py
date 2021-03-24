@@ -1027,10 +1027,7 @@ def task_presenter(short_name, task_id):
                 return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
             _file.seek(0, os.SEEK_END)
             size = _file.tell()
-            if size > 2000000:
-                flash(gettext("이미지의 크기가 2MB를 초과했습니다."), "error")
-                return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
-            elif size == 0:
+            if size == 0:
                 flash(gettext("저장할 파일이 존재하지 않습니다."), "error")
                 return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
             _file.seek(0)
@@ -1333,6 +1330,30 @@ def export(short_name, task_id):
     else:
         return abort(404)
 
+@blueprint.route('/<short_name>/<int:task_id>/score2')
+def score2(short_name, task_id):
+    """Return a file with all the TaskRuns for a given Task"""
+    # Check if the project exists
+    project, owner, ps = project_by_shortname(short_name)
+
+    if project.needs_password():
+        redirect_to_password = _check_if_redirect_to_password(project)
+        if redirect_to_password:
+            return redirect_to_password
+    else:
+        ensure_authorized_to('read', project)
+
+    # Check if the task belongs to the project and exists
+    task = task_repo.get_task_by(project_id=project.id, id=task_id)
+    if task:
+        taskruns = task_repo.filter_task_runs_by(task_id=task_id, project_id=project.id)
+        results = [tr.dictize() for tr in taskruns]
+        task1 = dict(id=task.id, info = task.info)
+        response = dict(template = '/projects/score2.html', t_r = results, project = project, task=task1)
+        return handle_content_type(response)
+    else:
+        print ("@@@")
+        return abort(404)
 
 @blueprint.route('/<short_name>/tasks/', methods=['GET','POST'])
 @login_required
@@ -1396,6 +1417,7 @@ def give_points(short_name, page=1):
                                                                     owner,
                                                                     current_user,
                                                                     ps)
+        print (project_sanitized)
 
         data = dict(template='/projects/give_point.html',
                     project=project_sanitized,

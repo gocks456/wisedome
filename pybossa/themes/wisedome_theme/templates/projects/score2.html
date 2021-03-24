@@ -1,0 +1,52 @@
+{% extends "projects/base.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% set active_link = "tasks" %}
+{% set section = _('Give points') %}
+
+{% block projectcontent %}
+	<div>
+		{% for t in t_r %}
+			{{t.user_id}} &Tab;# {{t.info}}
+				</br>
+			{% endfor %}
+
+			</br>
+			</br>
+			</br>
+
+			{% for t in t_r %}
+				{{t}} 
+				</br>
+		{% endfor %}
+	</div>
+
+	<div class = "table-responsive">
+		<table>
+			<thead>
+				<tr>
+					<th>/</th>
+					<th>user_id</th>
+					<th>info</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for t in t_r%}
+				<tr>
+					<th>/</th>
+					<th>{{ t.user_id }}</th>
+					<th>{{ t.info }}/</th>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+
+	<div>
+		{{ task }}
+	</div>
+
+		
+{% endblock %}
+

@@ -97,9 +97,6 @@ def oauth_authorized():  # pragma: no cover
     session['oauth_token'] = access_token
     user_data = json.loads(r.content)
 
-    with open('./kakao_log.json', 'a') as output_file:
-        print(json.dump(user_data, output_file, indent="\t", ensure_ascii=False))
-
     if user_data["kakao_account"]["email_needs_agreement"]:
         form = APIRegisterForm(request.body)
         form.locale.data = "ko"

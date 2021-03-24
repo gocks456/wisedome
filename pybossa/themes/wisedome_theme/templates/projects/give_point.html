@@ -2,13 +2,12 @@
 {% set active_page = "projects" %}
 {% set active_project  = "all" %}
 {% set active_link = "tasks" %}
-{% set section = _('Give points') %}
+{% set section = _('채점하기') %}
 
 {% block projectcontent %}
 <div class="row">
     <div class="col-md-12">
-        <p>{{_('This page shows all the available tasks for this project')}}.</p> 
-        <p>{{_('For each task, you can find the following information')}}</p>
+		<p>프로젝트 총 포인트 : {{project.all_point}}</p>
     </div>
 </div>
 {% for t in tasks %}
@@ -35,10 +34,10 @@
         {% elif task_pct > 0 and task_pct < 100 %}
         <a id="partialdownload" rel="nofollow" class="btn btn-info btn-xs" href="{{ url_for('project.export', 
             short_name=project.short_name,
-            task_id=t.id) }}"><i class="fa fa-cloud-download"></i> {{_('Download Partial results')}}</a>
+            task_id=t.id) }}"><i class="fa fa-cloud-download"></i> {{_('임시채점(비추천)')}}</a>
 
         {% else %}
-        <a id="nothingtodownload" rel="nofollow" class="btn btn-info btn-xs disabled" href="#"><i class="fa fa-cloud-download"></i> {{_('Nothing to download yet')}}</a>
+        <a id="nothingtodownload" rel="nofollow" class="btn btn-info btn-xs disabled" href="#"><i class="fa fa-cloud-download"></i> {{_('채점 불가')}}</a>
         {% endif %}
     </div>
 </div>
