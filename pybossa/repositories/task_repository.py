@@ -44,9 +44,17 @@ class TaskRepository(Repository):
         task = self.db.session.query(Task.state.label('state')).filter(Task.id==task_id).one()
         return task.state
 
+    def is_project_self_score(self, project_id):
+        # 프로젝트 채점 방식
+        project = self.db.session.query(Project.self_score.label('self_score')).filter(Project.id==project_id).one()
+        return project.self_score
+
     def task_update_point(self, project_id, task_id):
         # task_run 각각에 포인트 업데이트
         if self.is_task_completed(task_id) != 'completed':
+            return
+
+        if not self.is_project_self_score():
             return
 
         answer_data = self.db.session.query(func.count(TaskRun.user_id).label('count'), func.array_agg(TaskRun.id).label('task_id')).filter(
