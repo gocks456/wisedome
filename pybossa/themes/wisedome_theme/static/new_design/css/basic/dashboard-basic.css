@@ -18649,11 +18649,12 @@ dl li {
 .sidebar .nav.sub-menu .nav-item:hover {
   background: transparent;
 }
+/*
 .reward-btn {
-  /**포인트 전환버튼**/
   font-size: 0.9em;
   padding: 1.2em 0;
 }
+*/
 
 /* style for off-canvas menu*/
 @media screen and (max-width: 991px) {

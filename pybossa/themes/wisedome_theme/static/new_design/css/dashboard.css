@@ -251,6 +251,11 @@
   background: transparent;
   text-decoration: none;
 }
+.badge-premium{
+color:  #fff !important;
+background-color:#ffa600  !important;
+border: 1px solid #ffa600 !important ;
+}
 
 .col-xl-3 svg {
   margin-right: 1rem;
