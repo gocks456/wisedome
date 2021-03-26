@@ -103,8 +103,10 @@ class LocalUploader(Uploader):
             return
         dir_list = os.listdir(path)
 
-        dir_list.remove(name + '_' + str(index))
-        dir_list.remove(name + '_' + str(sub_index))
+        if (name + '_' + str(index)) in dir_list:
+            dir_list.remove(name + '_' + str(index))
+        if (name + '_' + str(sub_index)) in dir_list:
+            dir_list.remove(name + '_' + str(sub_index))
         for _dir in dir_list:
             if not os.path.isdir(path + _dir):
                 continue

@@ -541,8 +541,8 @@ def n_count(category):
     return count
 
 @memoize(timeout=timeouts.get('APP_TIMEOUT'))
-def get_projects_limit(limit='all', category=None):
-    # 공개된 프로젝트 전체
+def get_projects_limit(limit=8, category=None):
+    # 공개된 프로젝트 제한 걸어서 출력
     sql = text(
         '''SELECT project.id, project.name, project.short_name,
            project.description, project.info, project.created, project.updated, project.all_point, project.condition, project.complete,
@@ -578,18 +578,47 @@ def get_projects_limit(limit='all', category=None):
                        category_name=row.category_name,
                        end_date=row.end_date,
                        complete=row.complete)
-        projects.append(Project().to_public_json(project))
+        #projects.append(Project().to_public_json(project))
+        projects.append(project)
   
     return projects
 
-def loadtest2():
-    sql = text('''SELECT id, info FROM task where id > 175000''')
+@memoize(timeout=timeouts.get('APP_TIMEOUT'))
+def get_published_projects():
+    # 공개된 프로젝트 출력
+    sql = text(
+        '''SELECT project.id, project.name, project.short_name,
+           project.description, project.info, project.created, project.updated, project.all_point, project.condition, project.complete,
+           project.featured,  category.name AS category_name, project.end_date AS end_date
+           FROM project, category
+           WHERE project.category_id = category.id 
+           AND project.published=true
+           AND project.complete=false
+           ORDER BY project.featured DESC, project.end_date DESC;''')
+
     results = session.execute(sql)
     projects = []
     for row in results:
         project = dict(id=row.id,
-                       info=row.info)
+                       name=row.name, short_name=row.short_name,
+                       created=row.created,
+                       updated=row.updated,
+                       description=row.description,
+                       featured=row.featured,
+                       last_activity=pretty_date(last_activity(row.id)),
+                       last_activity_raw=last_activity(row.id),
+                       overall_progress=overall_progress(row.id),
+                       n_tasks=n_tasks(row.id),
+                       n_volunteers=n_volunteers(row.id),
+                       info=row.info,
+                       all_point=row.all_point,
+                       condition=row.condition,
+                       category_name=row.category_name,
+                       end_date=row.end_date,
+                       complete=row.complete)
+        #projects.append(Project().to_public_json(project))
         projects.append(project)
+  
     return projects
 
 @memoize(timeout=timeouts.get('APP_TIMEOUT'))
@@ -608,7 +637,7 @@ def get_all(category):
            AND "user".restrict=false
            AND project.published=true
            AND project.complete=false
-           GROUP BY project.id, "user".id ORDER BY project.name;''')
+           GROUP BY project.id, "user".id ORDER BY project.featured DESC, project.end_date DESC;''')
 
     results = session.execute(sql, dict(category=category))
     projects = []
@@ -632,9 +661,9 @@ def get_all(category):
                        complete=row.complete,
                        end_date=row.end_date,
                        category_name=category)
-        projects.append(Project().to_public_json(project))
+        #projects.append(Project().to_public_json(project))
+        projects.append(project)
     return projects
-
 
 def get(category, page=1, per_page=5):
     """Return a list of published projects with a pagination for a given category.

@@ -218,13 +218,11 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
                   desc=False, pre_ranked=False):
     """Show projects of a category"""
     per_page = current_app.config['APPS_PER_PAGE']
-    ranked_projects = lookup(category)
+    if category == 'featured':
+        projects = cached_projects.get_published_projects()
+    else:
+        projects = lookup(category)
 
-    if not pre_ranked:
-        ranked_projects = rank(ranked_projects, order_by, desc)
-
-    offset = (page - 1) * per_page
-    projects = ranked_projects[offset:offset+per_page]
     count = cached_projects.n_count(category)
 
     # 2020.11.27. 업적 리뉴얼 예정
@@ -232,7 +230,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
     #user_all_achieve(achieve)
 
     if category == 'featured':
-        ko_cat = '프리미엄'
+        #ko_cat = '프리미엄'
+        ko_cat = '전체'
     elif category == 'sound':
         ko_cat = '음성'
     elif category == 'image':
