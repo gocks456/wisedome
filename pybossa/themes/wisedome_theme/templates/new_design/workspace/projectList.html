@@ -120,22 +120,6 @@
 		</div>
 	</div>
 
-	<style>
-#card-test::after{
-	position: absolute;
-	content: '프리미엄';
-	top: 9px;
-	right: -14px;
-	padding: 0.2rem 0.3rem 0.2rem 0.5rem;
-	width: 5rem;
-	background: #3949ab;
-	color: white;
-	font-size: small;
-	text-align: left;
-	box-shadow: 2px 2px 15px rgba(26, 35, 126, 0.2);
-}
-	</style>
-
 	{% from "/new_design/_formhelper.html" import render_url_thumbnail %}
 
 	<div class="row" id="ajax-project-list">
@@ -147,7 +131,7 @@
 
 					{% for project in projects %}
 					<div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-						<div class="card bg-white shadow-sm" {% if project.featured == True %}id="card-test"{% endif %}> 
+						<div class="card bg-white shadow-sm"> 
 							<a href="{{ url_for('project.details', short_name=project.short_name) }}">
 								<div class="card-body">
 									<div class="d-flex justify-cnontent-start my-border-bottom">
@@ -171,6 +155,9 @@
 									<div class="badge-ios-group">
 										<div class="badge "><i class="mdi mdi-monitor"></i></div>
 										<div class="badge"><i class="mdi mdi-cellphone-iphone"></i></div>
+										{% if project.featured == True %}
+										<div class="badge badge-premium mr-1"><i class="mdi mdi-diamond"></i> 프리미엄</div>
+										{% endif %}
 									</div>
 								</div>
 								<div class="card-footer text-muted">

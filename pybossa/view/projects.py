@@ -181,7 +181,7 @@ def index(page):
     desc = bool(request.args.get('desc', False))
 
     if request.method == 'POST':
-        projects = cached_projects.get_all_featured()
+        projects = cached_projects.get_published_projects()
         projects = sort_project(projects, request.form['value'])
         render = render_template('/new_design/workspace/ajax_projectList.html', projects=projects)
         return render
