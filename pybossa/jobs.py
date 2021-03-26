@@ -207,7 +207,7 @@ def get_project_jobs(queue):
     timeout = current_app.config.get('TIMEOUT')
 
     yield dict(name=project_deadline, args=[], kwargs={},
-               timeout=timeout, queue='midium')
+               timeout=timeout, queue='low')
     if queue == 'super':
         projects = cached_projects.get_from_pro_user()
     elif queue == 'high':

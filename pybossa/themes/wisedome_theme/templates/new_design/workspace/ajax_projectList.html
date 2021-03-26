@@ -34,6 +34,9 @@
 							<div class="badge-ios-group">
 								<div class="badge "><i class="mdi mdi-monitor"></i></div>
 								<div class="badge"><i class="mdi mdi-cellphone-iphone"></i></div>
+								{% if project.featured == True %}
+								<div class="badge badge-premium mr-1"><i class="mdi mdi-diamond"></i> 프리미엄</div>
+								{% endif %}
 							</div>
 						</div>
 						<div class="card-footer text-muted">
