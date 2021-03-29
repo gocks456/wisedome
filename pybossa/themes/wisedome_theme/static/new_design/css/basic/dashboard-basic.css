@@ -14064,7 +14064,7 @@ code {
 
 .page-title {
   color: #343a40;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   margin-bottom: 0;
 }
 .page-title .page-title-icon {
@@ -18940,12 +18940,6 @@ dl li {
 
   .card .card-body {
     padding: 0.5rem;
-  }
-  .card .card-title {
-    font-size: 0.85rem;
-  }
-  .card-description {
-    font-size: 0.7em;
   }
 
   .accordion .card .card-body {
