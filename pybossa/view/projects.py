@@ -1026,26 +1026,11 @@ def task_presenter(short_name, task_id):
             _file.seek(0)
             prefix = time.time()
             _file.filename = "%i.png" % (prefix)
-            
-            now_time = time.localtime().tm_hour
-            if now_time < 6:
-                index = 1
-                sub_index = 4
-            elif now_time >= 6 and now_time < 12:
-                index = 2
-                sub_index = 1
-            elif now_time >= 12 and now_time < 18:
-                index = 3
-                sub_index = 2
-            elif now_time >= 18 and now_time < 24:
-                index = 4
-                sub_index = 3
-            container = "projects/%s/" % (short_name)
-            uploader.delete_dir(container, time.strftime('%Y-%m-%d', time.localtime(time.time())), index, sub_index)
 
             container = "projects/%s/user_id_%i" % (short_name, current_user.id)
+            uploader.delete_img(container)
             if not uploader.dir_size(container):
-                flash(gettext("하루 업로드 제한 초과"), "error")
+                flash(gettext("업로드 제한 초과"), "error")
                 return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
             from tempfile import SpooledTemporaryFile
             stream = _file.stream
