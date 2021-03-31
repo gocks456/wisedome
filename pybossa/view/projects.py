@@ -282,16 +282,6 @@ def complete(page):
     return project_index(page, cached_projects.get_all_complete, 'complete', #XXX
                          False, True, order_by, desc)
 
-@blueprint.route('/category/before_score/', defaults={'page': 1})
-@blueprint.route('/category/before_score/page/<int:page>/')
-@login_required
-@admin_required
-def before_score(page):
-    """Show the before_score projects"""
-    order_by = request.args.get('orderby', None)
-    desc = bool(request.args.get('desc', False))
-    return project_index(page, cached_projects.get_all_before_score, 'before_score', #XXX
-                         False, True, order_by, desc)
 
 @blueprint.route('/category/historical_contributions/', defaults={'page': 1})
 @blueprint.route('/category/historical_contributions/page/<int:page>/')
@@ -1030,7 +1020,7 @@ def task_presenter(short_name, task_id):
             container = "projects/%s/" % (short_name)
             uploader.delete_dir(container, time.strftime('%Y-%m-%d', time.localtime(time.time())), index, sub_index)
 
-            container = "projects/%s/%s_%d/user_id_%i" % (short_name, time.strftime('%Y-%m-%d', time.localtime(time.time())), index, current_user.id)
+            container = "projects/%s/user_id_%i" % (short_name, current_user.id)
             if not uploader.dir_size(container):
                 flash(gettext("하루 업로드 제한 초과"), "error")
                 return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))

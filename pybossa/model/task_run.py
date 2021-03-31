@@ -56,8 +56,8 @@ class TaskRun(db.Model, DomainObject):
 
     # 20.02.18. 수정
     point = Column(Integer, default=0)
-    score_mark = Column(Boolean, default=False)
     completed_score = Column(Boolean, default=False)
+
     is_featured = Column(Boolean)
     '''General writable field that should be used by clients to record results\
     of a TaskRun. Usually a template for this will be provided by Task

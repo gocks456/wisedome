@@ -62,6 +62,8 @@ def get_category_leaderboard(current_user_name, category_name):
             rank_categorys.append(rank_category)
     return rank_categorys
 
+# 2020.11.27. 업적 리뉴얼 예정
+"""
 def get_category_GPA():
     sql = text('''
                SELECT u.id AS id, SUM(t.point) AS point, COUNT(t.id) AS n_tasks,
@@ -85,8 +87,7 @@ def get_category_GPA():
         rank_categorys.append(rank_category)
     return rank_categorys
 
-# 2020.11.27. 업적 리뉴얼 예정
-"""
+
 def get_achievement(user_id, achievement_id):
     sql = text('''
                SELECT * FROM achievement WHERE user_id=:user_id AND achieve_id=:achieve_id;
@@ -511,22 +512,6 @@ def rank_and_score(user_id):
         rank_and_score['rank'] = row.rank
         rank_and_score['score'] = row.score
     return rank_and_score
-
-def projects_answer_rate(user_id):
-    sql = text('''
-               SELECT p.id AS id, COUNT(t.id) AS n_tasks, COUNT(CASE WHEN t.score_mark = True THEN 1 END) AS n_correct,
-               COUNT(CASE WHEN t.completed_score = False THEN 1 END) AS complete_check
-               FROM project p, task_run t
-               WHERE t.project_id = p.id AND t.user_id=:user_id GROUP BY p.id
-               ''')
-    results = session.execute(sql, dict(user_id=user_id))
-    projects_answer_rate = []
-    for row in results:
-        project = dict(id=row.id, n_correct_rate=row.n_correct, n_tasks_rate=row.n_tasks, complete_check=True)
-        if row.complete_check == row.n_tasks:
-            project['complete_check'] = False
-        projects_answer_rate.append(project)
-    return projects_answer_rate
 
 def projects_contributed(user_id, order_by='name'):
     """Return projects that user_id has contributed to."""
