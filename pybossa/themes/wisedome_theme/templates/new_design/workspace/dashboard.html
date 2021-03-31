@@ -151,10 +151,14 @@
 										{% endif %}
 										<h5 class="card-title">{{ project.name }}</h5>
 									</div>
-									<h6 class="card-subtitle">{{ project.description }}</h6>
+									<h6 class="card-subtitle" style ="height:36px;">{{ project.description }}</h6>
 
 									<div class="badge-group">
-										<div class="badge"><i class="mdi mdi-account-multiple-outline mr-1"></i>n대</div>
+										{% if (project.condition.age_s =='20220000'|int) and (project.condition.age_e =='19230000'|int)%}
+											<div class="badge"><i class="mdi mdi-account-multiple-outline mr-1"></i>나이무관</div>
+										{% else %}
+											<div class="badge"><i class="mdi mdi-account-multiple-outline mr-1"></i>{{(n_year - (project.condition.age_s/10000)+1)|int}}세 ~ {{(n_year - (project.condition.age_e/10000)+2) | int}}</div>
+										{% endif %}
 										<div class="badge"><i class="mdi mdi-gender-female mr-1"></i>여성</div>
 										<div class="badge"><i class="mdi mdi-gender-male mr-1"></i>남성</div>
 									</div>

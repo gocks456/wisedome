@@ -225,6 +225,9 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
 
     count = cached_projects.n_count(category)
 
+    from datetime import datetime
+
+    n_year = datetime.today().year
     # 2020.11.27. 업적 리뉴얼 예정
     #achieve = cached_users.get_category_achieve(current_user.id)
     #user_all_achieve(achieve)
@@ -253,7 +256,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
         "category": category,
         "ko_cat": ko_cat,
         "template": template,
-        "csrf": generate_csrf()}
+        "csrf": generate_csrf(),
+        "n_year":n_year}
 
     if use_count:
         template_args.update({"count": count})
