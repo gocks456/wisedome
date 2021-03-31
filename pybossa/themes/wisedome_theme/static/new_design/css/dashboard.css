@@ -253,10 +253,17 @@ border: 1px solid #ffa600 !important ;
   line-height: 38px;
 }
 
-.card-title,.card-subtitle {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.card-title {
+	overflow: hidden;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+}
+.card-subtitle{
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
 }
 
 

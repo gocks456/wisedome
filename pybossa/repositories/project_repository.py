@@ -71,10 +71,10 @@ class ProjectRepository(Repository):
         from pybossa.model.category import Category
 
         return self.db.session.query(Project.name, Project.short_name, Project.description, Project.condition, Project.all_point, 
-                            Project.updated, Project.end_date, Project.info, Category.name.label('category_name')).filter(
+                            Project.updated, Project.end_date, Project.featured, Project.info, Category.name.label('category_name')).filter(
                         and_(Project.id==TaskRun.project_id, #Project.complete==False, Project.published==True,
                             TaskRun.user_id==user_id, Project.category_id==Category.id)).group_by(
-                        Project.id, TaskRun.project_id, Category.id).order_by((Project.end_date).desc()).all()
+                        Project.id, TaskRun.project_id, Category.id).order_by(Project.end_date).all()
 
     #20.02.25. 수정사항
     def get_point(self, short_name):
