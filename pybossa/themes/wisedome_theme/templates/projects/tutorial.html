@@ -1,4 +1,4 @@
-{% extends "/base.html" %}
+{% extends "/new_design/workspace/workspace_base.html" %}
 {% set active_page = "projects"  %}
 {% set active_project = project.short_name %}
 
@@ -26,7 +26,7 @@
 
 <div id='PYBOSSA_USER_LOCALE' hidden>
 {% if current_user.is_anonymous %}
-en
+ko
 {% else %}
 {{ current_user.locale }}
 {% endif %}
