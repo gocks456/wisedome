@@ -1325,6 +1325,18 @@ def export(short_name, task_id):
     else:
         return abort(404)
 
+@blueprint.route('/<short_name>/score3')
+def score3(short_name):
+    import json
+    with open("results.json") as jf:
+        data1 = json.load(jf)
+
+    for i in data1:
+        task_repo.score_by_json(i['user'][8:],i['date'],i['project'],i['count'])
+
+    return "AAAAAAA"
+
+
 @blueprint.route('/<short_name>/<int:task_id>/score2')
 def score2(short_name, task_id):
     """Return a file with all the TaskRuns for a given Task"""

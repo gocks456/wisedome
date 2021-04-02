@@ -40,7 +40,9 @@ blueprint = Blueprint('home', __name__)
 def home():
     """Render home page with the cached projects and users."""
     #project_repo.update_end_date_7days()
+    from datetime import datetime
 
+    n_year = datetime.today().year
     if current_user.is_anonymous:
         # 오픈한 모든 프로젝트
         # 개수 지정할 필요있음
@@ -69,7 +71,7 @@ def home():
         current_point = point_repo.get_current_point(current_user.id)
 
         response = dict(template='/new_design/workspace/dashboard.html', n_projects=n_projects, n_ongoing_projects=n_ongoing_projects,
-                                                               point=current_point, projects=projects
+                                                               point=current_point, projects=projects, n_year = n_year
                                                                )
         return handle_content_type(response)
 #        return redirect_content_type(url_for('project.index'))
