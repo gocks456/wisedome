@@ -39,7 +39,6 @@ blueprint = Blueprint('home', __name__)
 @blueprint.route('/', methods=["GET", "POST"])
 def home():
     """Render home page with the cached projects and users."""
-    #project_repo.update_end_date_7days()
 
     if current_user.is_anonymous:
         # 오픈한 모든 프로젝트
