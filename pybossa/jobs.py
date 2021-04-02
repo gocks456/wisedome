@@ -242,6 +242,8 @@ def get_project_jobs(queue):
                timeout=timeout, queue='low')
     yield dict(name=image_results_scoring, args=[], kwargs={},
                timeout=timeout, queue='high')
+    yield dict(name=self_scoring, args=[], kwargs={},
+               timeout=timeout, queue='high')
     if queue == 'super':
         projects = cached_projects.get_from_pro_user()
     elif queue == 'high':
