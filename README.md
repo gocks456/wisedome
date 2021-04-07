@@ -1,6 +1,6 @@
 ## 와이즈돔
 
-[와이즈돔][http://wisedome.kr] 은 클라우드 환경에서 인공지능 학습을 위한 데이터를 수집 및 관리하는 웹 서비스이다.
+[와이즈돔](http://wisedome.kr) 은 클라우드 환경에서 인공지능 학습을 위한 데이터를 수집 및 관리하는 웹 서비스이다.
 
 와이즈돔을 통해 인공지능 데이터를 필요로 하는 사람은 쉽게 데이터를 구할 수 있고, 수 많은 사람들은 다양한 작업을 통해 일자리를 얻을 수 있다.
 
@@ -82,7 +82,7 @@ sudo apt-get install redis-server
 * Redis-server: 마스터 노드로서 읽기 및 쓰기 작업 수행
 * Redis-sentinel: 마스터 및 슬레이브 노드를 구성
 
-> Redis의 자세한 사항은 [Redis Docs][https://redis.io/] 를 참고하세요.
+> Redis의 자세한 사항은 [Redis Docs](https://redis.io/) 를 참고하세요.
 
 ```shell
 # contrib/sentinel.conf 설정
@@ -113,7 +113,7 @@ python app_context_rqworker.py scheduled jobs super high medium low maintenance
 
 **4. DB 설정**
 
-와이즈돔은 [PostgreSQL][https://www.postgresql.org/] 데이터베이스를 사용한다.
+와이즈돔은 [PostgreSQL](https://www.postgresql.org/) 데이터베이스를 사용한다.
 
 ```shell
 # PostgreSQL DB 생성
