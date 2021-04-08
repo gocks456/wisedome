@@ -41,6 +41,13 @@
 									{% endif %}
 									{{helper.render_contribute_button(project)}}
 								</div>
+								<div class="ml-auto str-btn">
+									{% if current_user.admin %}
+									<a href="{{ url_for('project.tasks', short_name=project.short_name) }}" style="text-decoration:none;">
+										<button class="btn btn-gradient-primary">작업 설정</button>
+									</a>
+									{% endif %}
+								</div>
 							</div>
 							<div class="my-border-top">
 								<div class="row py-3 ">    

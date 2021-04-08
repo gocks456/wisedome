@@ -2,11 +2,12 @@
 {% set active_page = "projects" %}
 {% set active_project  = "all" %}
 {% set active_link = "tasks" %}
-{% set section = _('Export All Tasks and Task Runs') %}
+{% set section = "" %}
 
 {% from "projects/_helpers.html" import render_project_card_option %}
 
 {% block projectcontent %}
+{#
 <p>{{ _('You can export and download') }} <strong>{{ _('all the available') }}</strong> {{ _('Tasks and Task Runs (the submitted answers by the users) in CSV or JSON formats.') }}</p>
 <div id="csv" class="row">
     <div class="col-md-12 text-center">
@@ -37,16 +38,16 @@
     </div>
 
 </div>
-
-<div id="QnA" class="row">
-    <div class="col-md-12 text-center">
+#}
+<div id="QnA" class="row" style="margin-top:3em;">
+    <div class="col-lg-12 text-center">
         <h3>모든 문제에 대한 답변 받기</h3>
 
         {{ render_project_card_option(project, upload_method, title=_('QnA'), explanation=_('모든 문제에 대한 답변 받기'), link=url_for('project.export_to', short_name=project.short_name, type='QnA', format='json'), link_action_text=_('Export'), download=True, nofollow=True)}}
     </div>
 
 </div>
-
+{#
 {% if current_user.is_authenticated and project.owner_id == current_user.id %}
 <div id="ckan" class="row">
     <div class="col-md-12 text-center">
@@ -59,7 +60,6 @@
     </div>
     {% if current_user.ckan_api %}
     <div class="col-md-6">
-
         {{ render_project_card_option(project, upload_method, title=_('Task'), explanation=_('Export tasks into a CKAN server '), link=url_for('project.export_to', short_name=project.short_name, type='task', format='ckan'), link_action_text=_('Export'), download=True, nofollow=True, id="ckan_task")}}
     </div>
     <div class="col-md-6">
@@ -70,6 +70,7 @@
     </div>
     {% endif %}
 </div>
+#}
 {% endblock %}
 {% block extrajs %}
 <script>

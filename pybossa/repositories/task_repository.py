@@ -77,6 +77,29 @@ class TaskRepository(Repository):
         project = self.db.session.query(Project.self_score.label('self_score')).filter(Project.id==project_id).one()
         return project.self_score
 
+    def self_score(self, user_id, task_run_id):
+        # 수동 채점 프로젝트 채점한 데이터 적용
+
+        task_run = self.get_task_run(task_run_id)
+
+        from pybossa.model.project_stats import ProjectStats
+        project_data = self.db.session.query((Project.all_point/ProjectStats.n_tasks).label('point'),
+                Project.featured.label('featured')).filter(
+                and_(Project.id==ProjectStats.project_id) , (Project.id==task_run.project_id)).first()
+
+        self.db.session.query(TaskRun).filter(
+				and_(TaskRun.project_id==task_run.project_id), (TaskRun.id < task_run.id)).update({'completed_score': True})
+
+
+        point = project_data.point
+        if project_data.featured:
+            point = project_data.point * 1.1
+
+        task_run.point = point
+        task_run.completed_score = True
+        self.user_point_update(user_id, point)
+        self.db.session.commit()
+
     def task_update_point(self, project_id, task_id):
         # task_run 각각에 포인트 업데이트
         if self.is_task_completed(task_id) != 'completed':
@@ -361,7 +384,7 @@ class TaskRepository(Repository):
     def get_QnA_data(self, project_id):
         sql = '''
               SELECT JSON_BUILD_OBJECT('question', t.info, 'answers', json_agg(
-              json_build_object('user_id', r.user_id,'answer', r.info))) AS data
+              json_build_object('user_id', r.user_id,'answer', r.info, 'task_run_id', r.id))) AS data
               FROM task t, task_run r WHERE t.id=r.task_id AND t.project_id=:project_id
               GROUP BY t.id ORDER BY t.id;
               '''

@@ -1023,6 +1023,7 @@ def task_presenter(short_name, task_id):
             if size == 0:
                 flash(gettext("저장할 파일이 존재하지 않습니다."), "error")
                 return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
+            #if size == 
             _file.seek(0)
             prefix = time.time()
             _file.filename = "%i.png" % (prefix)
@@ -1541,6 +1542,25 @@ def delete_tasks(short_name):
         flash(msg, 'success')
         return redirect_content_type(url_for('.tasks', short_name=project.short_name))
 
+@blueprint.route('/<short_name>/tasks/results_upload', methods=['GET', 'POST'])
+@admin_required
+def results_upload(short_name):
+    project, owner, ps = project_by_shortname(short_name)
+    if request.method == "POST":
+        _file = request.files["results"]
+        if _file.content_type != "application/json":
+            flash(gettext("json 형식의 파일만 가능합니다."), "error");
+            return handle_content_type(dict(template="/new_design/workspace/results_upload.html", project=project, csrf=generate_csrf()))
+        container = "self_score/"
+        from tempfile import SpooledTemporaryFile
+        _file.filename = "%s.json" % (short_name)
+        stream = _file.stream
+        print(stream)
+        print(stream.__dict__)
+        print(stream._file)
+        uploader.upload_file(_file, container=container)
+        flash(gettext("저장 완료"), "success")
+    return handle_content_type(dict(template="/new_design/workspace/results_upload.html", project=project, csrf=generate_csrf()))
 
 @blueprint.route('/<short_name>/tasks/export')
 def export_to(short_name):

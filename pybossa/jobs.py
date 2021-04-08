@@ -152,12 +152,44 @@ def project_deadline():
     import pybossa.cache.projects as cached_projects
 
     # 1. 모든프로젝트 (공개된) 가져옴 +  2. end_date 확인
-	# 3. 1주일 안에 끝날 프로젝트 마감임박
-	# 4. end_date가 지나면 공개 끊음
+    # 3. 1주일 안에 끝날 프로젝트 마감임박
+    # 4. end_date가 지나면 공개 끊음
     projects = project_repo.update_end_date_7days()
 
-	# 5. 관리자는 끝난 프로젝트를 두 분류로 받음 (정상 종료, 마감 종료)
-	# 6. 재오픈 or 종료
+    # 5. 관리자는 끝난 프로젝트를 두 분류로 받음 (정상 종료, 마감 종료)
+    # 6. 재오픈 or 종료
+
+
+def image_results_scoring():
+    """ 이미지 채점결과 포인트 지급"""
+    import json
+    import os
+    path = os.path.join('uploads/' ,'projects/')
+    file_list = os.listdir(path)
+    for f in file_list:
+        if os.path.isfile(os.path.join(path, f)):
+            with open(os.path.join(path, f), 'r') as data:
+                results = json.load(data)
+                for result in results:
+                    task_repo.score_by_json(result['user'][8:], result['date'], result['project'], result['count'])
+            os.remove(os.path.join(path, f))
+
+def self_scoring():
+    """ 수동 채점 결과 반영 """
+    import json
+    import os
+    path = os.path.join('uploads/' 'self_score/')
+    file_list = os.listdir(path)
+    for f in file_list:
+        if os.path.isfile(os.path.join(path, f)):
+            with open(os.path.join(path, f), 'r') as data:
+                results = json.load(data)
+                for result in results:
+                    task_run_ids = result['task_run_ids']
+                    for task_run_id in task_run_ids:
+                        task_repo.self_score(result['user_id'], task_run_id)
+            os.remove(os.path.join(path, f))
+
 
 def get_maintenance_jobs():
     """Return mantainance jobs."""
@@ -208,6 +240,10 @@ def get_project_jobs(queue):
 
     yield dict(name=project_deadline, args=[], kwargs={},
                timeout=timeout, queue='low')
+    yield dict(name=image_results_scoring, args=[], kwargs={},
+               timeout=timeout, queue='high')
+    yield dict(name=self_scoring, args=[], kwargs={},
+               timeout=timeout, queue='high')
     if queue == 'super':
         projects = cached_projects.get_from_pro_user()
     elif queue == 'high':
@@ -490,7 +526,8 @@ def warn_old_project_owners():
     from pybossa.core import mail, project_repo
     from pybossa.cache.projects import clean
     from flask_mail import Message
-
+    # 메일 오류로 인해 주석
+    """
     projects = get_non_updated_projects()
 
     with mail.connect() as conn:
@@ -517,6 +554,7 @@ def warn_old_project_owners():
             else:
                 return False
     return True
+    """
 
 
 def send_mail(message_dict):
