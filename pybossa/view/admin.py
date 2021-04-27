@@ -77,7 +77,7 @@ def index():
     """List admin actions."""
     key = NOTIFY_ADMIN + str(current_user.id)
     sentinel.master.delete(key)
-    return handle_content_type(dict(template='/admin/index.html'))
+    return handle_content_type(dict(template='new_design/admin/admin.html'))
 
 def gettime():
     now = datetime.datetime.now()
@@ -640,7 +640,8 @@ def dashboard():
         update_feed = get_update_feed()
 
         response = dict(
-            template='admin/dashboard.html',
+            #template='admin/dashboard.html',
+            template='new_design/admin/liveBoard.html',
             title=gettext('Dashboard'),
             active_users_last_week=active_users_last_week,
             active_anon_last_week=active_anon_last_week,
@@ -655,7 +656,7 @@ def dashboard():
             wait=False)
         return handle_content_type(response)
     except ProgrammingError as e:
-        response = dict(template='admin/dashboard.html',
+        response = dict(template='new_design/admin/liveBoard.html',    #   'admin/dashboard.html',
                         title=gettext('Dashboard'),
                         wait=True)
         return handle_content_type(response)

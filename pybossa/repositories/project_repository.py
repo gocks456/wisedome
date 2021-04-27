@@ -44,6 +44,8 @@ class ProjectRepository(Repository):
         self.db.session.query(Project).filter(and_(
                 time>cast(Project.end_date, Date), Project.complete==False)).update({'published':False}, synchronize_session='fetch')
 
+        print("마감 작업 테스트 중")
+
         self.db.session.commit()
         return
 

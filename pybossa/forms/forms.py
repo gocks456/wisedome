@@ -625,7 +625,7 @@ class OrderSearchForm(Form):
 
 class CategoryForm(Form):
     id = IntegerField(label=None, widget=HiddenInput())
-    name = TextField(lazy_gettext('Name'),
+    name = TextField(lazy_gettext('카테고리 이름'),
                      [validators.Required(),
                       pb_validator.Unique(project_repo.get_category_by, 'name',
                                           message="Name is already taken.")])
