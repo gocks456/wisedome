@@ -130,7 +130,7 @@ def get_category_achieve(user_id):
 
 def get_answer_rate(user):
     sql = text('''
-              SELECT COUNT(id) AS n_tasks, COUNT(CASE WHEN score_mark = True THEN 1 END) AS n_correct,
+              SELECT COUNT(id) AS n_tasks, COUNT(CASE WHEN point != 0 THEN 1 END) AS n_correct,
               COUNT(CASE WHEN completed_score = False THEN 1 END) AS n_no_score
               FROM task_run
               WHERE user_id=:user_id
