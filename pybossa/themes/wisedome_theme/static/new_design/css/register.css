@@ -296,7 +296,7 @@ form ul li {
   display: none;
   position: fixed;
   z-index: 9;
-  padding-top: 5em;
+  padding-top: 0;
   left: 0;
   top: 0;
   width: 100%;
@@ -310,9 +310,9 @@ form ul li {
   background: #f2edf3;
   margin: auto;
   text-align: center;
-  padding: 2em;
+  padding: 2rem 2rem 0rem 2rem;
   border: 1px solid #888;
-  width: 50%;
+  width: 70%;
 }
 
 .close {
@@ -330,9 +330,15 @@ form ul li {
 }
 
 textarea {
+  border-color:#ccc;
+  border-radius: 0.5rem;
   text-align: left;
   width: 100%;
-  height: 25vh;
+  height: 20vh;
+}
+
+#closeBtn{   /****/
+  cursor: pointer;
 }
 
 #alert {
@@ -432,7 +438,8 @@ textarea {
     padding: 10% 15%;
   }
   .modal-content {
-    width: 75%;
+    width: 80%;  
+    padding: 1rem 1rem 0rem 1rem;
   }
   #dialogbox,
   #emptybox {
@@ -461,9 +468,7 @@ textarea {
   .agreefm ul li:last-child {
     margin-top: 0.5em;
   }
-  .modal-content {
-    width: 80%;
-  }
+
   .signup h6 {
     padding: 0;
   }
