@@ -2,12 +2,16 @@
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("read-detail");
 var span = document.getElementsByClassName("close")[0];
+var closeBtn = document.getElementById("closeBtn");
 
 btn.onclick = function() {
   modal.style.display = "block";}
 
 span.onclick = function() {
   modal.style.display = "none";}
+
+closeBtn.onclick = function() {  
+  modal.style.display = "none";}    
 
 window.onclick = function(event) {
   if (event.target == modal) {
