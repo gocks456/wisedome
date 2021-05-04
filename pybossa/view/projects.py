@@ -1041,6 +1041,14 @@ def task_presenter(short_name, task_id):
             return results
 
 
+        if request.form.get('value') == "user_answer_count":
+            time = datetime.date.today()
+            time = time.ctime()
+            count = task_repo.get_1day_user_data(current_user.id, project.id)
+            res = dict(count=count)
+            return json.dumps(res, ensure_ascii=False)
+
+
         # 프로젝트 진행 중 답변 관리를 눌렀을 때 (답변관리의 value로 바꿔주어야 함)
         if request.form.get('btn', None) == "answer_manager":
             count = task_repo.count_task_runs_with(project_id=project.id, user_id=current_user.id)
@@ -1221,6 +1229,13 @@ def presenter(short_name):
         project.contractor_ids.append(int(request.form['user_id']))
         project_repo.update(project)
         return "success"
+
+    if request.method == "POST" and request.form.get('value') == "user_answer_count":
+        time = datetime.date.today()
+        time = time.ctime()
+        count = task_repo.get_1day_user_data(current_user.id, project.id)
+        res = dict(count=count)
+        return json.dumps(res, ensure_ascii=False)
 
     #2020.09.22. 계약서 연결
     if current_user.id not in project.contractor_ids and current_user.id not in project.owners_ids and current_user.admin:

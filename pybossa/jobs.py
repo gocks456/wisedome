@@ -239,7 +239,7 @@ def get_project_jobs(queue):
     timeout = current_app.config.get('TIMEOUT')
 
     yield dict(name=project_deadline, args=[], kwargs={},
-               timeout=timeout, queue='low')
+               timeout=timeout, queue='high')
     yield dict(name=image_results_scoring, args=[], kwargs={},
                timeout=timeout, queue='high')
     yield dict(name=self_scoring, args=[], kwargs={},
