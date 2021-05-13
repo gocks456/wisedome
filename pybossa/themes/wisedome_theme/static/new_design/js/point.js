@@ -154,6 +154,11 @@ $(function() {
         var optionText = $("#bank option:selected").text();
         $('#bankName').html(optionText);
     });
+
+    $('#bankAccount').on('change',function(){
+        var bankaccount = $("#bankAccount").val();
+        $('#bankNum').html(bankaccount);
+    });
 });
 
 
@@ -172,5 +177,4 @@ function printTransferMoney()  {
   document.getElementById("transferMoney").innerText = price;
 }
 document.querySelector(".wizard .actions ul li:nth-child(2) a").addEventListener("click",printTransferMoney,false); 
-
 
