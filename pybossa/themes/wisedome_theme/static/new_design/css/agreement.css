@@ -1,0 +1,30 @@
+.hr {
+    background-color: #b66dff;
+    border: none;
+    width: 75px;
+    height: 3px;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+  }
+  
+  .card-title{
+     font-weight: bold;
+     margin-top: 2.5rem;
+  }
+
+  p.policy{
+    line-height:2rem;
+    padding: 1rem 0;
+  }
+
+  .getDate{
+      text-align: center;
+      font-weight: bold;
+  }
+
+  span.box{
+      border: 1px solid #b66dff;
+      padding: 0.25rem 1rem;
+      font-weight: bold;
+  }

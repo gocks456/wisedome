@@ -4,15 +4,18 @@
 {% block rightbody %}
 <link rel="stylesheet" href="/static/new_design/css/dashboard.css">
 
-
 <h1><strong>{{ _('Admin Site') }} :</strong> {{ _('Manage featured projects') }}</h1>
+
+<div class="d-flex align-items-center justify-content-center flex-column">
 <ul class="nav nav-pills nav-justified">
 	{% for c in categories %}
-	<li {% if loop.first %}class="active"{% endif %}>
-		<a href="#{{c.short_name}}" data-toggle="tab">{{c.name}}</a>
+	<li {% if loop.first %}class="active"{% endif %} style="margin-left:2rem; margin-right:2rem; margin-bottom:2rem;">
+		<a class="btn btn-info {% if loop.first %}active{% endif %}" href="#{{c.short_name}}" data-toggle="tab">{{c.name}}</a>
 	</li>
 	{% endfor %}
 </ul>
+</div>
+
 <div class="tab-content">
 	{% for c in categories %}
 	<div {% if loop.first %}class="tab-pane active" {% else %} class="tab-pane" {% endif %} id="{{c.short_name}}">
@@ -28,7 +31,6 @@
 						{% for project in projects[c.short_name] %}
 						<div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
 							<div class="card bg-white shadow-sm"> 
-								<a href="{{ url_for('project.details', short_name=project.short_name) }}">
 									<div class="card-body">
 										<div class="d-flex justify-cnontent-start my-border-bottom">
 											{% if project.category_name == "sound" %}
@@ -55,14 +57,16 @@
 											<div class="badge badge-premium mr-1"><i class="mdi mdi-diamond"></i> 프리미엄</div>
 											{% endif %}
 										</div>
-									</div>
-									<div class="card-footer text-muted">
-										<div class="d-flex justify-content-between">
-											<p class="card-text">마감일 : ~ {{ project.end_date[0:10] }}</p>
-											<p class="card-text">{{ project.all_point|number_format }}P</p>
+										<div class="badge-group">
+											{% if project.featured %}
+											<button class="btn-danger" id="projectBtnDel{{project.id}}" onclick="del({{project.id}})">{{ _('Remove from Featured') }}</button>
+											<button class="btn-primary" id="projectBtnAdd{{project.id}}" onclick="add({{project.id}})" style="display:none">{{ _('Add to Featured') }}</button>
+											{% else %}
+											<button class="btn-danger" id="projectBtnDel{{project.id}}" onclick="del({{project.id}})" style="display:none">{{ _('Remove from Featured') }}</button>
+											<button class="btn-primary" id="projectBtnAdd{{project.id}}" onclick="add({{project.id}})">{{ _('Add to Featured') }}</button>
+											{% endif %}
 										</div>
 									</div>
-								</a>
 							</div>
 						</div>
 						{% endfor %}
@@ -85,5 +89,6 @@
 	{% endfor %}
 </div>
 {% include "admin/js/featured_projects.js" %}
+
 {% endblock %}
 

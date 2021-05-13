@@ -1,6 +1,7 @@
 var wrapper = document.getElementById("signature-pad");
 console.log(wrapper);
-var clearButton = wrapper.querySelector("[data-action=clear]");
+//var clearButton = wrapper.querySelector("[data-action=clear]");
+var clearButton = document.querySelector("[data-action=clear]");
 //var changeColorButton = wrapper.querySelector("[data-action=change-color]");
 var canvas = wrapper.querySelector("canvas");
 var signaturePad = new SignaturePad(canvas, {

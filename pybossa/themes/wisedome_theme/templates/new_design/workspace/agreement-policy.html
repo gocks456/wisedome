@@ -1,0 +1,169 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/new_design/css/agreement.css">
+
+<link rel="stylesheet" href="/static/css/signature/signature-pad.css">
+<link rel="stylesheet" href="/static/css/signature/ie9.css">
+{% endblock %}
+
+{% block content %}
+<!-- 메인 작업화면 -->
+<div class="content-wrapper">
+
+	<div class="page-header">
+		<h3 class="page-title">
+			<span class="page-title-icon bg-gradient-primary text-white mr-2"><i class="mdi mdi-pencil"></i></span>서약서 작성
+		</h3>
+	</div>
+
+
+	<div class="row contract" id="contract">
+		<div class="col-md-12 grid-margin">
+			<div class="card bg-white">
+				<div class="card-body ">
+					<div class="row mt-4">
+						<div class="col-xl-8 col-lg-10 col-md-12 col-12 mx-auto ">
+							<h2 class="modal-title text-center">업무위탁 및 개인정보처리 위탁계약서 및 서약서</h2>
+							<div class="hr"></div>
+
+							<h5 class="card-title">위탁계약 내용</h5>
+							<p class="policy"> <u> WISEDOME </u>  (이하 “갑”이라 한다)과 <span class="box" id="userName1">{{current_user.fullname}}</span> (이하 “을”이라 한다)는 “갑”의 <span class="box" id="prjName1">{{project.name}}</span> 및 개인정보 처리업무를 “을”에게 위탁함에 있어 다음과 같은 내용으로 본 업무위탁계약을 체결한다. 
+							</p>
+
+							<h5 class="card-title">서약서</h5>
+							<p class="policy"> <u> WISEDOME </u>  (이하 “갑”이라 한다)과  <span class="box" id="userName2">{{current_user.fullname}}</span> (이하 “을”이라 한다)는 “갑”의 <span class="box" id="prjName2">{{project.name}}</span> 및 개인정보 처리업무를 “을”에게 위탁함에 있어 다음과 같은 내용으로 본 업무위탁계약을 체결한다.  </p>
+
+							<h4 class="text-center py-5">상기 사항을 숙지하고 이를 성실히 준수할 것을 서약합니다.</h4>
+						</div>
+					</div> 
+
+					<div class="col-lg-11 col-md-12 col-12 mx-auto ">
+						<div class="row">
+							<div class="col-lg-8 col-md-12 col-12 mx-auto">
+								<p class="getDate"> <span id ="year"></span> 년   <span id ="month"></span>  월    <span id ="date"></span> 일</p>
+							</div>
+						</div>
+						<div class="row py-5">
+							<div class="col-md-7">
+								<h5 class="text-left">개인정보 확인</h5>
+								<div class="form-group row">
+									<label for="userName" class="col-sm-3 col-form-label">이름</label>
+									<div class="col-sm-9">
+										<span class="form-control box" id="userName3" style="font-size:large; padding-top:1rem;">{{current_user.fullname}}</span>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="emailAddr" class="col-sm-3 col-form-label">연락처</label>
+									<div class="col-sm-9">
+										<span class="form-control box" id="emailAddr" style="font-size:large; padding-top:1rem;">{{current_user.email_addr}}</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-5">
+								<h5 class="text-center">자필서명</h5>
+								<!--<div class="border" id="sign-pad" style="height:10rem"></div> --> <!-- 서명 하는곳 -->
+								<div class="signature-pad" id="signature-pad">
+									<div class="signature-pad--body">
+										<canvas class="pad" id="sign-pad"></canvas>
+									</div>
+								</div>
+								<div class="mx-auto d-flex justify-content-center pt-3" role="group">
+									<button type="button" class="btn btn-inverse-dark mr-3 button clear" data-action="clear">지우기</button>
+								</div>
+							</div>
+						</div>
+
+					</div> <!--col-lg-11-->
+
+					<div class="mx-auto d-flex justify-content-center pt-3" role="group">
+						<button type="button" class="btn btn-secondary btn-lg mr-3">취소</button>
+						<button type="button" class="btn btn-primary btn-lg" id="contract-save">제출</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 이 페이지에서만 필요한 js -->
+<script src="/static/new_design/js/agreement.js"></script>
+<script src="/static/js/add-js/capture/html2canvas.min.js"></script>
+<script src="/static/js/add-js/signature/signature_pad.js"></script>
+<script src="/static/js/add-js/signature/app.js"></script>
+
+	<script>
+	$(document).ready(function() {
+		var csrftoken = "{{csrf_token()}}"//$('meta[name=csrf-token]').attr('content')
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken)
+				}
+			}
+		});
+
+		var checkCanvas = document.getElementById('sign-pad').toDataURL();
+		console.log(checkCanvas);
+
+		var pre_url = document.referrer;
+		if (pre_url == '') {
+			alert("잘못된 접근 입니다.");
+			history.back();
+		}
+
+		$("#contract-save").on('click', function(){
+
+			if ( checkCanvas == document.getElementById('sign-pad').toDataURL() || 3*(document.getElementById('sign-pad').toDataURL().length / 4) < 3000) {
+				pybossaNotify("올바른 서명을 해주세요!", true, "error");
+				return;
+			}
+
+			html2canvas(document.getElementById("contract")).then(function(canvas) {
+				contractImage = canvas.toDataURL();
+
+				console.log(document.getElementById('sign-pad').toDataURL());
+				console.log(contractImage);
+
+				//saveAS(contractImage, "{{project.name}}" + "_" + "서약서" + ".jpg");
+				var url = window.location.href;
+				$.ajax({
+					url: url,
+					data: {"contract": contractImage,
+						"user_id": {{current_user.id}} },
+					type: 'POST',
+					success: function(res) {
+						if (res == "success") {
+							window.location.replace(url);
+						}
+						else {
+							console.log("Error");
+						}
+					},
+					error: function(request, error) {
+						console.log(request);
+						console.log(error);
+					}
+				});
+			}).catch(function(err) {
+				console.log(err);
+			});
+		});
+		function saveAS(url, filename) {
+			var link = document.createElement('a');
+			if (typeof link.download === 'string') {
+				link.href = url;
+				link.download = filename;
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link); }
+			else {
+				window.open(url);
+			}
+		}
+	});
+</script>
+
+{% endblock %}

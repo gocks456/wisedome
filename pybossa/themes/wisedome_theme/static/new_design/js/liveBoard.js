@@ -1,32 +1,31 @@
-$(function () {
+//$(function () {
     /* ChartJS
      * -------
      * Data and config for chartjs
      */
-    'use strict';
+  //  'use strict';
   
-
   //신규프로젝트 
     var data = {  
-      labels: ["2020년1월", "2020년12월","2021년1월", "2021년2월", "2021년3월", "2021년4월"],
+      labels: ["임시 프로젝트", "진행 중 프로젝트","완료 프로젝트"],
       datasets: [{
         label: '프로젝트수',
-        data: [10, 19, 3, 5, 2, 3], 
+        data: [1,1,1], 
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(255, 206, 86, 0.2)'//,
+          //'rgba(75, 192, 192, 0.2)',
+          //'rgba(153, 102, 255, 0.2)',
+          //'rgba(255, 159, 64, 0.2)'
         ],
         borderColor: [
           'rgba(255,99,132,1)',
           'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgba(255, 206, 86, 1)'//,
+          //'rgba(75, 192, 192, 1)',
+          //'rgba(153, 102, 255, 1)',
+          //'rgba(255, 159, 64, 1)'
         ],
         borderWidth: 1,
         fill: false
@@ -37,7 +36,7 @@ $(function () {
     var multiColorBar = {  
         labels: ["4월1주", "4월2주","4월3주", "4월4주", "4월5주"],
         datasets: [{
-          label: '최근작업수',
+          label: '최근 1주 새로운 작업 수',
           data: [1, 3, 15, 4, 9], 
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -225,6 +224,8 @@ $(function () {
     }
   
 
+
+function mk_chart() {
   
     if ($("#barChart").length) {
       var barChartCanvas = $("#barChart").get(0).getContext("2d");
@@ -281,6 +282,6 @@ $(function () {
           options: areaOptions
         });
       }
-    
+}
   
-  });
+  //});
