@@ -21,6 +21,8 @@ pybossa/themes/wisedome_theme/static/img/
 *.ini
 *.mp4
 
+._*
+
 dump.rdb
 settings_local.py
 alembic.ini

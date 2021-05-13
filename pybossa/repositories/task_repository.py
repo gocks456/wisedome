@@ -60,6 +60,15 @@ class TaskRepository(Repository):
                 temp += 1
                 self.update(i)
 
+    def get_1day_user_data(self, user_id, project_id):
+        # 오늘 답변 수 (날짜만으로 비교)
+        import time
+        import datetime
+        time = datetime.date.today()
+        time = time.ctime()
+        return self.db.session.query(func.count('*')).filter(
+               and_(time <= cast(TaskRun.finish_time, Date), TaskRun.user_id==user_id, TaskRun.project_id==project_id)).one()[0]
+
     def get_1hour_user_data(self):
         # 최근 1시간 답변을 제출한 사용자
         from datetime import datetime, timedelta
