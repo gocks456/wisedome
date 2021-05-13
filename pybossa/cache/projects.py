@@ -370,20 +370,30 @@ def get_featured(category=None, page=1, per_page=5):
        timeout=timeouts.get('STATS_APP_TIMEOUT'))
 def n_published():
     """Return number of published projects."""
-    sql = text('''SELECT COUNT(id) FROM project WHERE published=true;''')
+    sql = text('''SELECT COUNT(id) FROM project WHERE published=true AND complete=false;''')
 
     results = session.execute(sql)
     for row in results:
         count = row[0]
     return count
 
+@cache(key_prefix="number_complete_projects",
+       timeout=timeouts.get('STATS_APP_TIMEOUT'))
+def n_complete():
+    """Return number of complete projects."""
+    sql = text('''SELECT COUNT(id) FROM project WHERE complete=true;''')
+
+    results = session.execute(sql)
+    for row in results:
+        count = row[0]
+    return count
 
 # Cache it for longer times, as this is only shown to admin users
 @cache(timeout=timeouts.get('STATS_DRAFT_TIMEOUT'),
        key_prefix="number_draft_projects")
 def _n_draft():
     """Return number of draft projects."""
-    sql = text('''SELECT COUNT(id) FROM project WHERE published=false;''')
+    sql = text('''SELECT COUNT(id) FROM project WHERE published=false AND complete=false;''')
 
     results = session.execute(sql)
     for row in results:

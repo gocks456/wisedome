@@ -39,7 +39,7 @@
 
 					<div class="my-border-bottom text-center pb-4">
 						<img src="{{ render_user_thumbnail(current_user, upload_method) }}" alt="profile" class="img-lg rounded-circle mb-3">
-						<h6>{{current_user.fullname}} 님</h6> <!--닉네임-->
+						<h6 id="userName">{{current_user.fullname}} 님</h6> <!--닉네임-->
 						<p>{{current_user.name}}</p><!--부제목-->
 
 						<!--별명변경하는 팝업-->
@@ -173,6 +173,7 @@
 </div><!--contents wrapper-->
 
 <script src="/static/new_design/js/plugin/jquery.min.js"></script>
+
 <script>
 	var birth = "{{current_user.birth}}";
 var birth = birth.slice(0,4) + '.' + birth.slice(4,6) + '.' + birth.slice(6);

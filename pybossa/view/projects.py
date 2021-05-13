@@ -1234,7 +1234,7 @@ def presenter(short_name):
         # FileStorage에 값 추가
         _file.stream = stream
         _file.name = 'contract'
-        _file.filename = current_user.email_addr + ".png"
+        _file.filename = current_user.fullname + ".png"
         _file.headers = "Headers([('Content-Disposition', 'form-data; name='contract'; filename='temp.png''), ('Content-Type', 'image/png')])"
         _file.seek(0, os.SEEK_END)
         _file.seek(0)
@@ -1261,8 +1261,9 @@ def presenter(short_name):
         return json.dumps(res, ensure_ascii=False)
 
     #2020.09.22. 계약서 연결
-    if current_user.id not in project.contractor_ids and current_user.id not in project.owners_ids and current_user.admin:
-        resp = respond('/projects/tutorial.html')
+    if current_user.id not in project.contractor_ids and current_user.id not in project.owners_ids and not current_user.admin:
+        #resp = respond('/projects/tutorial.html')
+        resp = respond('/new_design/workspace/agreement-policy.html')
         return resp
 
     #if project.info.get("tutorial") and \
