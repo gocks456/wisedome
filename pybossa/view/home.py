@@ -39,7 +39,6 @@ blueprint = Blueprint('home', __name__)
 @blueprint.route('/', methods=["GET", "POST"])
 def home():
     """Render home page with the cached projects and users."""
-    #project_repo.update_end_date_7days()
 
     if current_user.is_anonymous:
         # 오픈한 모든 프로젝트
@@ -181,4 +180,18 @@ def faq():
 @blueprint.route("aboutus")
 def aboutus():
     response = dict(template="/new_design/aboutus.html")
+    return handle_content_type(response)
+
+@blueprint.route("dataBoucher", methods=['GET', 'POST'])
+def databoucher():
+    if request.method == "POST":
+        from pybossa.view.gmail import send_mail, create_message
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+        body = render_template('/new_design/email/dataBoucher_email.html', name=name, email=email, message=message)
+        msg = create_message(current_app.config['GMAIL'], current_app.config['GMAIL'], "와이즈돔 데이터바우처 문의사항", body)
+        send_mail(msg)
+        flash(gettext('문의가 접수되었습니다.'), 'success')
+    response = dict(template="/new_design/dataBoucher.html", csrf=generate_csrf())
     return handle_content_type(response)
