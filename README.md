@@ -25,7 +25,7 @@
 
 ## 개발 환경
 
-* Ubuntu 20.04 LTS
+* Ubuntu 18.04.3 LTS
 * Python >= 3.6
 * PostgreSQL >= 9.5
 * Redis >= 2.6
