@@ -23,4 +23,9 @@
         {{ render_project_card_option(project, upload_method, title='작업 반복 수', explanation=_('Change the redundancy level for the tasks'), link=url_for('project.task_n_answers', short_name=project.short_name), link_action_text=_('Redundancy'), icon='repeat')}}
     </div>
 </div>
+<div class="row">
+    <div id="task_one_day_max" class="col-lg-6">
+        {{ render_project_card_option(project, upload_method, title='작업 할당량', explanation='사용자의 1일 작업 할당량 설정', link=url_for('project.one_day_max', short_name=project.short_name), link_action_text='할당량 설정', icon='repeat')}}
+    </div>
+</div>
 {% endblock %}

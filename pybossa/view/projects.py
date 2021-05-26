@@ -1359,6 +1359,31 @@ def tasks(short_name):
 
     return handle_content_type(response)
 
+@blueprint.route('/<short_name>/tasks/onetasks/', methods=['GET', 'POST'])
+@login_required
+def one_day_max(short_name):
+    project, owner, ps = project_by_shortname(short_name)
+    ensure_authorized_to('update', project)
+    form = TaskOneMaxForm(request.body)
+
+    if request.method == 'GET':
+        data = dict(template='/projects/one_day_max.html',
+                    project=project,
+                    form=form)
+        return handle_content_type(data)
+    elif request.method == 'POST' and form.validate():
+        project_repo.update_project_one_day_max(project, form.one_day_max.data)
+        msg = gettext('1일 할당량 설정 완료')
+        flash(msg, 'success')
+        return redirect_content_type(url_for('.tasks', short_name=project.short_name))
+    else:
+        flash(gettext('오류를 수정해주세요'), 'error') 
+        data = dict(template='/projects/one_day_max.html',
+                    project=project,
+                    form=form)
+        return handle_content_type(data)
+
+
 @blueprint.route('/<short_name>/tasks/browse')
 @blueprint.route('/<short_name>/tasks/browse/<int:page>')
 def tasks_browse(short_name, page=1):
