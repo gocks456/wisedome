@@ -7,7 +7,9 @@ venv
 /project_order/
 .project_order/
 uploads
+.uploads/
 pybossa/backup/
+pybossa/themes/default/
 pybossa/themes/wisedome_theme/templates/new_design/temp/
 pybossa/themes/wisedome_theme/static/img/
 pybossa/themes/wisedome_theme/static/video/
