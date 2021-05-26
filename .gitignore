@@ -10,6 +10,7 @@ uploads
 pybossa/backup/
 pybossa/themes/wisedome_theme/templates/new_design/temp/
 pybossa/themes/wisedome_theme/static/img/
+pybossa/themes/wisedome_theme/static/video/
 
 *.db
 *.pyc
