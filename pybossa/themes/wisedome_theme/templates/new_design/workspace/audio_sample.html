@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="/static/new_design/css/workspace-img.css">
+
+
+<!-- 메인 작업화면 -->
+<div class="content-wrapper image-area">
+
+	<!--문제 들어가는 영역-->
+		<div class="col-md-12 grid-margin" style="padding-right:0; padding-left:0; margin-bottom:0;">
+			<div class="card bg-white ">
+				<div class="card-body " id="audio_sample1"> 
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 녹음된 음성을 듣고 받아 써 주세요</h4>
+					<div class="row mt-4"style="justify-content:flex-end;">
+						<div class="col-lg-6" style="padding-right:0; padding-left:0;">  <!--이 안에 선택한 이미지 뜨는곳-->
+							<audio controls>
+								<source src ="/static/sound/1.wav">
+							</audio>
+
+						</div>
+						<div class=col-lg-3">
+						<textarea rows = "3"cols="40"></textarea>
+						</div>
+						<div class=col-lg-3"align="right">
+						<button type="radio" style="margin-left: 30px;" class="float-right btn btn-audio-sample1 btn-outline-primary">확인</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-body " id="audio_sample2"style = "display:none;"> 
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 녹음된 음성을 듣고 받아 써 주세요</h4>
+					<div class="row mt-4 "style="justify-content:flex-end;">
+						<div class="col-lg-6" style="padding-right:0; padding-left:0;">  <!--이 안에 선택한 이미지 뜨는곳-->
+							<audio controls>
+								<source src ="/static/sound/2.wav">
+							</audio>
+
+						</div>
+						<div class=col-lg-3">
+						<textarea rows = "3"cols="40"></textarea>
+						</div>
+						<div class=col-lg-3">
+						<button type="radio" style="margin-left: 30px;" class="btn btn-audio-sample2 btn-outline-primary">확인</button>
+						</div>
+					</div>
+				</div>
+				<div id="success-img" style="display:none;">
+					{% include "/new_design/workspace/success_sample.html" %}
+				</div>
+
+			</div>
+		</div>
+
+
+</div>
+<script src="/static/new_design/js/plugin/jquery.min.js"></script>
+<script>
+
+		$(".btn-audio-sample1").on('click', function(evt){
+			$("#audio_sample1").hide();
+			$("#audio_sample2").show();
+		});
+		$(".btn-audio-sample2").on('click', function(evt){
+			$("#audio_sample2").hide();
+			$("#success-img").show();
+		});
+
+</script>
+
