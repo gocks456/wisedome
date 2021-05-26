@@ -50,6 +50,12 @@ class ProjectRepository(Repository):
         return
 
 
+    # 1일 할당량 업데이트
+    def update_project_one_day_max(self, project, data):
+        self.db.session.query(Project).filter(project.id == Project.id).update({'one_day_max':data}, synchronize_session='fetch')
+        self.db.session.commit()
+        return
+
     # 공개된 프로젝트 수
     def get_count_published_projects(self):
         return self.db.session.query(func.count(Project.id).label('count')).filter(

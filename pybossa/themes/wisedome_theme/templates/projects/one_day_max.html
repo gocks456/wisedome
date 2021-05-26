@@ -1,0 +1,29 @@
+{% extends "projects/base.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% set active_link = "tasks" %}
+{% set section = "1일 할당량" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block projectcontent %}
+<div class="row">
+    <div class="col-md-12">
+        <p>이 페이지는 프로젝트 사용자들이 하루에 할 수 있는 작업 량을 제한합니다.</p> 
+        <p>사용 방법: 입력 창에 제한할 숫자를 입력합니다.</p>
+		<p>예) 5 입력 시 한 사용자는 하루에 5개의 작업을 할 수 있습니다.</p>
+		<h4>할당량을 설정하기를 원하지 않을 시 반드시 0을 입력합니다.</h4>
+	</div>
+</div>
+
+<form id="task_redundancy" method="post" action="{{ url_for('project.one_day_max', short_name=project.short_name) }}">
+	{{ form.hidden_tag() }}
+	<fieldset>
+		{{ render_field(form.one_day_max, placeholder= "사용자의 1일 작업 할당량")}}
+		<div class="form-actions">
+			<input type="submit" value="설정" class="btn btn-primary" />
+			<a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-danger">취소</a>
+		</div>
+	</fieldset>
+</form>
+
+{% endblock %}
