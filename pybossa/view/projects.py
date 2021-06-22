@@ -1266,7 +1266,7 @@ def sertification(short_name):
 
     project, owner, ps = project_by_shortname(short_name)
 
-    if current_user.id not in project.contractor_ids and project.info['tutorial'] != "":
+    if project.published == True and current_user.id not in project.contractor_ids and project.info['tutorial'] != "":
         response = dict(template='/projects/sertification.html', current_user=current_user,
                         csrf=generate_csrf())
         return handle_content_type(response)
