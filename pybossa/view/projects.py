@@ -1211,13 +1211,13 @@ def presenter(short_name):
         # FileStorage에 값 추가
         _file.stream = stream
         _file.name = 'contract'
-        _file.filename = current_user.fullname + ".png"
+        _file.filename = str(current_user.id) + ".png"
         _file.headers = "Headers([('Content-Disposition', 'form-data; name='contract'; filename='temp.png''), ('Content-Type', 'image/png')])"
         _file.seek(0, os.SEEK_END)
         _file.seek(0)
 
         # 저장할 경로 지정 및 File 저장
-        container = "project_%s/contract" % (project.name)
+        container = "project_%s/contract/" % (project.name)
         uploader.upload_file(_file, container=container)
         flash(gettext("계약서 작성 완료!"), "success")
         return

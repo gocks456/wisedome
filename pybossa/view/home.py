@@ -177,6 +177,12 @@ def faq():
     response = dict(template="/new_design/faq.html")
     return handle_content_type(response)
 
+@blueprint.route("guide")
+def guide():
+    """Render the about template."""
+    response = dict(template="/new_design/guide.html")
+    return handle_content_type(response)
+
 @blueprint.route("aboutus")
 def aboutus():
     response = dict(template="/new_design/aboutus.html")
