@@ -84,6 +84,21 @@ class ProjectRepository(Repository):
                             TaskRun.user_id==user_id, Project.category_id==Category.id)).group_by(
                         Project.id, TaskRun.project_id, Category.id).order_by(Project.end_date).all()
 
+
+    #21.07.12
+    def get_percent(self, user_id, project_id):
+
+        from pybossa.model.task import Task
+        from pybossa.model.task_run import TaskRun
+        num_of_tasks = int(str(self.db.session.query(func.count(Task.id)).filter(Task.project_id == project_id).all()).split(',')[0].split('(')[1])
+        num_of_user_tasks = int(str(self.db.session.query(func.count(TaskRun.id)).filter(
+                and_(TaskRun.project_id == project_id, TaskRun.user_id==user_id)).all()).split(',')[0].split('(')[1])
+        end_time = self.db.session.query(TaskRun.finish_time).filter(
+                and_(TaskRun.project_id == project_id, TaskRun.user_id==user_id)).order_by(TaskRun.finish_time.desc()).first()
+        if end_time == None:
+            return num_of_user_tasks, num_of_tasks, end_time
+        return num_of_user_tasks, num_of_tasks, end_time.finish_time
+                            
     #20.02.25. 수정사항
     def get_point(self, short_name):
         return self.db.session.query(Project).filter_by(short_name=short_name).all()

@@ -72,7 +72,7 @@ class Project(db.Model, DomainObject):
     #: Project info field formatted as JSON
     info = Column(MutableDict.as_mutable(JSONB), default=dict())
 
-	#20.02.24. 수정사항
+    #20.02.24. 수정사항
     all_point = Column(Integer, default=0)
     condition = Column(MutableDict.as_mutable(JSONB), default=dict())
     complete = Column(Boolean, default=False)
@@ -97,6 +97,8 @@ class Project(db.Model, DomainObject):
     one_day_max = Column(Integer, default=-1)
 
     option_sex = option_age_start = option_age_end = "0"
+
+    pre_proj = Column(MutableList.as_mutable(ARRAY(Integer)), default=list())
 
     def needs_password(self):
         return self.get_passwd_hash() is not None

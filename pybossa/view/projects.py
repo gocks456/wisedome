@@ -744,9 +744,24 @@ def update(short_name):
 @login_required
 def details(short_name):
     project, owner, ps = project_by_shortname(short_name)
+    user = user_repo.get(current_user.id)
+    from datetime import datetime, date
+
+    if project.pre_proj != [] and not current_user.admin:
+        for i in project.pre_proj:
+            user_tasks, tasks, end_time = project_repo.get_percent(user.id,i)
+            if end_time == None:
+                response = dict(template='/error_pre.html')
+                return handle_content_type(response)
+            end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%f')
+            today = datetime.strptime(date.today().ctime(), "%a %b %d %H:%M:%S %Y")
+
+            if user_tasks < 200 or end_time >= today:
+                response = dict(template='/error_pre.html')
+                return handle_content_type(response)
+
 
     if request.method == 'POST':
-        user = user_repo.get(current_user.id)
         if request.form['value'] == 'dislike':
             user.like_projects.append(project.id)
             user_repo.update(user)
@@ -770,7 +785,6 @@ def details(short_name):
     gender = project.condition["sex"]
     min_a = project.condition["age_s"]
     max_a = project.condition["age_e"]
-    from datetime import datetime
 
     n_year = datetime.today().year
 
@@ -1071,6 +1085,17 @@ def task_presenter(short_name, task_id):
             res = dict(count=count)
             return json.dumps(res, ensure_ascii=False)
 
+        # Test Task 불러오기
+        if request.form.get('btn', None) == "get_test_task":
+            count = task_repo.count_task_runs_with(project_id=project.id, user_id=current_user.id)
+
+            data = []
+            with open("test_data/"+project.short_name+"/test_data.json", "r", encoding="utf-8") as json_file:
+                data = json.load(json_file)
+                    
+            res=dict(count=count, answer=data)
+
+            return json.dumps(res, ensure_ascii=False)
 
         # 프로젝트 진행 중 답변 관리를 눌렀을 때 (답변관리의 value로 바꿔주어야 함)
         if request.form.get('btn', None) == "answer_manager":
@@ -1289,7 +1314,7 @@ def sertification(short_name):
 
     project, owner, ps = project_by_shortname(short_name)
 
-    if project.published == True and current_user.id not in project.contractor_ids and project.info['tutorial'] != "":
+    if project.published == True and project.info['tutorial'] != "":
         response = dict(template='/projects/sertification.html', current_user=current_user,
                         csrf=generate_csrf())
         return handle_content_type(response)
