@@ -1,121 +1,143 @@
-[![Scifabric](https://img.shields.io/badge/made%20by-scifabric-blue.svg)](https://scifabric.com/)
-[![Build Status](https://circleci.com/gh/Scifabric/pybossa/tree/master.svg?style=shield)](https://circleci.com/gh/Scifabric/pybossa)
- [![Coverage Status](https://img.shields.io/coveralls/Scifabric/pybossa.svg)](https://coveralls.io/r/Scifabric/pybossa?branch=master)
-[![Documentation](https://readthedocs.org/projects/pybossa/badge/?version=latest)](http://docs.pybossa.com) [![License](http://img.shields.io/badge/license-agplv3-b75bb6.svg)](http://www.gnu.org/licenses/agpl-3.0.html) [![Join the chat at https://gitter.im/Scifabric/pybossa](https://badges.gitter.im/Scifabric/pybossa.svg)](https://gitter.im/Scifabric/pybossa?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
-[![DOI](https://zenodo.org/badge/12868/PyBossa/pybossa.svg)](https://zenodo.org/badge/latestdoi/12868/PyBossa/pybossa)
-[![Scifabric's Patreon](https://img.shields.io/badge/support%20us%20on-patreon-orange.svg)](https://www.patreon.com/bePatron?u=4979179)
+## 와이즈돔
 
-# What is PYBOSSA?
+[와이즈돔](http://wisedome.kr) 은 클라우드 환경에서 인공지능 학습을 위한 데이터를 수집 및 관리하는 웹 서비스이다.
 
-PYBOSSA is a technology built by [Scifabric](https://scifabric.com), for crowdsourcing or citizen science platforms.
+와이즈돔을 통해 인공지능 데이터를 필요로 하는 사람은 쉽게 데이터를 구할 수 있고, 수 많은 사람들은 다양한 작업을 통해 일자리를 얻을 수 있다.
 
-PYBOSSA is an extremely flexible and versatile technology with a multitude of applications that
-adapt to each specific case facilitating many of the daily tasks that take place in research
-environments such as museums, art galleries, heritage institutions, libraries of any kind, market
-research companies, hospitals, universities and all those organisations that manage data or require
-information from their customers/users -such as airports, shopping malls, banks, hotel chains, etc.
-
-PYBOSSA’s simplicity consists in its easy adjustment to any areas using any of the available
-templates, this way every customer can then adapt it to their own needs.
-
-PYBOSSA integrates with other data collection products such as Amazon S3, Twitter, Youtube,
-Google Spreadsheets, Flickr, Raspberry Pi, etc. Through all these integrations
-PYBOSSA allows data capture for further analysis made by users in a transparent and easy way.
-
-- 📘 Documentation: [https://docs.pybossa.com](https://docs.pybossa.com)
-- 🎬 Video: [Intro](https://www.youtube.com/watch?v=oH8fJAhRDJM)
-- 🐦 Twitter: [@PyBossa](https://twitter.com/pybossa)
-- 💬 Chat: [Gitter](https://gitter.im/Scifabric/pybossa)
-- 📦 [PYBOSSA extras](https://github.com/Scifabric/)
-- 👉 [Play with PYBOSSA online](https://crowdcrafting.org)
-
-# PYBOSSA for python 3
-
-PYBOSSA runs in python >= 3.6. While 3.8 has been released recently, it needs testing before officially support it.
-
-If you have a python2.7 server, please, checkout the python2.7 branch and use that one for your server. 
-
-## Get professional support
-
-You can hire us to help you with your PYBOSSA project or server (specially for python 2.7). Go to our website, and [contact us](https://scifabric.com/).
+<table align="center" height="700">
+  <thead>
+  <tr align="center">
+    <th colspan ="2">Screenshot</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan = "2"><img src="docs/main.png" alt="메인화면" style=""/></td>
+    </tr>
+    <tr>
+      <td><img src="docs/image_sample.png" style="width:100%; height:300px;" alt="이미지 작업 샘플"/></td>
+      <td><img src="docs/text_sample.png" alt="텍스트 작업 샘플" style="width:100% ; height:300px;" /></td>
+    </tr>
+  </tbody>
+</table>
 
 
-### Supporting PYBOSSA
 
-PYBOSSA is an open source project. Its ongoing development is made possible thanks to the support by these awesome 
-[backers](https://github.com/Scifabric/pybossa/blob/master/BACKERS.md). If you'd like to join them, check out 
-[Scifabric's Patreon campaign](https://www.patreon.com/scifabric).
+## 개발 환경
 
-
-Actividad subvencionada por el Ministerio de Educación, Cultura y Deporte
-
-![Ministerio de Educación, Cultura y Deporte](http://i.imgur.com/4ShmIt1.jpg)
+* Ubuntu 18.04.3 LTS
+* Python >= 3.6
+* PostgreSQL >= 9.5
+* Redis >= 2.6
+* pip >= 6.1
 
 
-# See it in Action
 
-PYBOSSA powers [Solar Maps](https://solarmaps.greenpeace.es/) and [MicroPast](http://crowdsourced.micropasts.org/), [LibCrowds](https://www.libcrowds.com/) and many more projects.
+## 설치 방법
 
-For a full list of PYBOSSA projects, check our [case studies](https://scifabric.com/) and [blog](https://scifabric.com/blog/).
+**1. 초기 설정**
 
-# Installing and Upgrading
-
-**Important: if you are updating a server, please, be sure to check the
-Database Migration scripts, as new changes could introduce new tables,
-columns, etc, in the DB model. See the [Updating Section](https://docs.pybossa.com/installation/guide/#updating-pybossa) from the documentation**
-
-See [installation instructions](https://docs.pybossa.com/installation/gettingstarted/).
-
-# Testing
-
-## Unit testing
-
-Just run:
-
-```
-  nosetests test/
+```shell
+  # 소스 코드 받기
+  git clone https://github.com/gocks456/wisedome.git
+  
+  # 소스 코드 디렉토리에 액세스
+  cd wisedome
+  
+  # 와이즈돔에 필요한 필수 라이브러리 설치
+  sudo apt-get install python-dev build-essential libjpeg-dev libssl-dev libffi-dev
+  sudo apt-get install dbus libdbus-1-dev libdbus-glib-1-dev libldap2-dev libsasl2-dev
+  
+  # virtualenv Python3 active (가상 환경 생성 및 활성화 후)
+  # Upgrade pip
+  pip install -U pip
+  # 와이즈돔 파이썬 라이브러리 설치
+  pip install -r requirements.txt
 ```
 
-## Browser testing
+**2. 와이즈돔 설정 및 DB 연결**
 
-[![BrowserStack](http://i.imgur.com/Pg0utrk.png)](http://browserstack.com/)
+```shell
+cp setting_local.py.tmpl settings_local.py
+# 개인 설정에 맞게 수정
+vim settings_local.py
 
-Thanks to the support of [BrowserStack](http://browserstack.com/) we can do real cross browser testing on multiple desktop and mobile platforms.
+cp alembic.ini.tmpl alembic.ini
+# DB URL 수정
+```
 
-# Contributing
+**3. 백그라운드 작업**
 
-If you want to contribute to the project, please, check the
-[CONTRIBUTING file](CONTRIBUTING.md).
+와이즈돔은 백그라운드 작업을 통해 관리자의 불편함을 감소시킨다.
 
-It has the instructions to become a contributor.
+만약 백그라운드 작업이 정상적으로 작동하지 않을 시 일부 기능이 동작하지 않는다.
 
-## Acknowledgments
+**​	3-1) Redis**
 
-* [Citizen Cyberscience Centre](http://www.citizencyberlab.org/)
-* [Open Knowledge Foundation](http://okfn.org/)
-* [FontAwesome fonts](http://fortawesome.github.com/Font-Awesome/)
-* [GeoLite data by MaxMind](http://www.maxmind.com)
-* [yaycryptopan](https://github.com/keiichishima/yacryptopan)
+```shell
+# Redis 설치
+sudo apt-get install redis-server
+```
 
-Special thanks to Shuttleworth Foundations for funding us and their true support:
-* [Shuttleworth Foundation](https://www.shuttleworthfoundation.org/)
-![Shuttleworth Foundation Funded](http://pybossa.com/assets/img/shuttleworth-funded.png)
+* Redis-server: 마스터 노드로서 읽기 및 쓰기 작업 수행
+* Redis-sentinel: 마스터 및 슬레이브 노드를 구성
 
-PYBOSSA was inspired by the [BOSSA](http://bossa.berkeley.edu/) crowdsourcing engine but is written in
-python (hence the name!). It can be used for any distributed tasks project
-but was initially developed to help scientists and other researchers
-crowd-source human problem-solving skills!
+> Redis의 자세한 사항은 [Redis Docs](https://redis.io/) 를 참고하세요.
 
-## Copyright / License
+```shell
+# contrib/sentinel.conf 설정
+sentinel monitor mymaster 127.0.0.1 6379 2
+sentinel down-after-milliseconds mymaster 60000
+sentinel failover-timeout mymaster 180000
+sentinel parallel-syncs mymaster 1
 
-Copyright 2019 [Scifabric LTD](https://scifabric.com).
+# Redis 실행
+redis-server contrib/sentinel.conf --sentinel
+```
 
-Source Code License: The GNU Affero General Public License, either version 3 of the License
-or (at your option) any later version. (see COPYING file)
+<img src="docs/redis.png" alt="Redis 실행화면" style="zoom:67%;" />
 
-The GNU Affero General Public License is a free, copyleft license for
-software and other kinds of works, specifically designed to ensure
-cooperation with the community in the case of network server software.
 
-Documentation and media is under a Creative Commons Attribution License version
-3.
+
+**​	3-2) RQ**
+
+``` shell
+# RQ Scheduler 실행
+rqscheduler --host "redis host" --port "redis port" --interval "반복할 주기"
+
+# RQ Worker 실행
+python app_context_rqworker.py scheduled jobs super high medium low maintenance
+```
+
+
+
+**4. DB 설정**
+
+와이즈돔은 [PostgreSQL](https://www.postgresql.org/) 데이터베이스를 사용한다.
+
+```shell
+# PostgreSQL DB 생성
+sudo su postgres
+createuser -d -P 사용자이름
+createdb 데이터베이스이름 -O 사용자이름
+exit
+```
+
+> 사용자 이름과 데이터베이스 이름은 Setting_local.py, alembic.ini 설정과 동일해야 함
+
+```shell
+# DB 테이블 생성
+python cli.py db_create
+```
+
+
+
+**5. 실행**
+
+```shell
+# run.py 실행
+python run.py
+```
+
+> 와이즈돔의 템플릿 코드는 비공개이므로 웹 접속 시 에러가 발생할 수 있음
+
