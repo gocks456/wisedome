@@ -1,0 +1,46 @@
+{% extends "projects/base.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% set active_link = "tasks" %}
+
+<script src ="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}" type = "text/javascript"></script>
+<script src ="{{url_for('static', filename='js/add-js/datatables.min.js')}}" type = "text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+
+{% block projectcontent %}
+
+	<div>
+		</br>
+		<h4>task <{{ task.id}}></h4>
+		<h4>문제&nbsp;:&nbsp;{{ task.info }}</h4>
+		</br>
+		</br>
+	</div>
+
+	<div class = "table-responsive">
+		<table>
+			<thead>
+				<tr style="background-color:lightgray">
+					<th>user_id</th>
+					<th style="padding-left:20px">info</th>
+					<th style="padding-left:20px">정답체크<input type="checkbox" name="score_all_check"/></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for t in t_r%}
+				<tr>
+					<th style="text-align:right">{{ t.user_id }}</th>
+					<th style="padding-left:20px">{{ t.info }}</th>
+					<th style="text-align:right"><input type="checkbox" name="score_check"/></th>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+
+	</div>
+		
+{% endblock %}
+

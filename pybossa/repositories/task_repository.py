@@ -29,10 +29,36 @@ from pybossa.core import uploader
 from sqlalchemy import text, and_, extract, desc, null, distinct
 
 
+from pybossa.model.project_stats import ProjectStats
 from pybossa.model.project import Project
 
 class TaskRepository(Repository):
 
+    def score_by_json(self, user_id, date, psn, count):
+        date = "%{}%".format(date)
+        # project 정보
+        project_data = self.db.session.query(Project.id.label('pid'),
+                (Project.all_point/ProjectStats.n_tasks).label('point'),
+                Project.featured.label('featured')).filter(
+                and_(Project.id==ProjectStats.project_id),(Project.short_name==psn)).first()
+        pid = project_data.pid
+        point = project_data.point
+        if project_data.featured:
+            point *= 1.1
+        # 프로젝트 -> task_run
+        task_runs = self.db.session.query(TaskRun).filter(and_(TaskRun.project_id == pid), (TaskRun.user_id == user_id), (TaskRun.created.like(date))).all()
+        temp = 0
+        for i in task_runs:
+            if i.completed_score == False:
+                i.completed_score = True
+                if temp < int(count):
+                    print ("정답")
+                    i.point = point
+                    self.user_point_update(user_id, point)
+                else:
+                    print ("오답")
+                temp += 1
+                self.update(i)
 
     def get_1day_user_data(self, user_id, project_id):
         # 오늘 답변 수 (날짜만으로 비교)

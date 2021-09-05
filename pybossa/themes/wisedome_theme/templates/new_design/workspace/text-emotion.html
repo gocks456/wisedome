@@ -5,29 +5,74 @@
 	<div class="row">
 		<div class="col-12 grid-margin stretch-card" style="padding-right:0; padding-left:0; margin-bottom:0;">
 			<div class="card bg-white">
-				<div class="card-body" id="text_sample">
+				<div class="card-body" id="text_sample1">
 					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 전체 대화를 읽고 해당 문장에 대한 대화자의 감정을 선택해주세요</h4>
 					<div class="row">
 						<div class="col-xl-9 " style="padding-right:0; padding-left:0;">
 							<pre class="textsize">
-A: 야! 너 이번 주에 운동 한번도 안 나왔더라?
-B: 아… 이번 주는 아무래도 운동 못갈 것 같아. 시험기간이라서 피곤해.
-A: 올? 너 공부 좀 빡세게 하나 보다? 니가 언제부터 공부를 그렇게 열심히 했냐?
-B: 야, 내가 평소에 좀 놀아서 그렇지, 그래도 시험기간에는 빡세게 했거든 언제나?
-A: 아니 왜 또 발끈하고 그래.
-<span class="highlight">B: 발끈하긴 뭘 발끈해, 니가 말도 안 되는 소리를 하니까 그렇지.</span>
+<span class="highlight">A : 야, 여기 있던 내 옷 못 봤어?</span>
+B : 무슨 옷 말하는 건데?
+A : 그거, 내가 생일에 친구한테 선물받은 원피스!
+B : 친구한테… 선물 받은 거?
+A : 그래, 그 남색에, 어깨 부분에 장식 달린 거 있잖아.
+B : 아.. 그거… 그거 내가 저번에 한 번 입었어.
+A : 뭐? 그걸 니가 왜 입어?
+B : 아이, 그거 좀 입은 것 가지고 쩨쩨하게 그러냐?
+A : 야! 내 허락도 없이 니 맘대로 그걸 입으면 어떡해!
+B : 됐다, 됐어, 나도 이제 치사해서 안 입는다!
+
 </pre>
 						</div>
 
 						<div class="col-xl-3  answers emotion8">  
-							<button type="radio" class="btn btn-inverse-primary btn-text-sample"><i class="mdi mdi-emoticon"></i> 기쁨</button>
-							<button type="radio" class="btn btn-inverse-primary btn-text-sample"><i class="mdi mdi-emoticon-happy"></i> 놀람</button>
-							<button type="radio" class="btn computer-select btn-text-sample"><i class="mdi mdi-emoticon-devil"></i> 분노</button>
-							<button type="radio" class="btn btn-inverse-primary btn-text-sample"><i class="mdi mdi-emoticon-sad"></i> 슬픔</button>
-							<button type="radio" class="btn btn-inverse-primary btn-text-sample"><i class="mdi mdi-emoticon-poop"></i> 혐오</button>
-							<button type="radio" class="btn human-select btn-text-sample"><i class="mdi mdi-emoticon-cool"></i> 공포</button>
-							<button type="radio" class="btn btn-inverse-primary btn-text-sample"><i class="mdi mdi-emoticon-tongue"></i> 경멸</button>
-							<button type="radio" class="btn btn-inverse-primary btn-text-sample"><i class="mdi mdi-emoticon-neutral"></i> 중립</button>   
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample1"><i class="mdi mdi-emoticon"></i> 기쁨</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample1"><i class="mdi mdi-emoticon-happy"></i> 놀람</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample1"><i class="mdi mdi-emoticon-devil"></i> 분노</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample1"><i class="mdi mdi-emoticon-sad"></i> 슬픔</button>
+							<button type="radio" class="btn computer-select btn-text-sample1"><i class="mdi mdi-emoticon-poop"></i> 혐오</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample1"><i class="mdi mdi-emoticon-cool"></i> 공포</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample1"><i class="mdi mdi-emoticon-tongue"></i> 경멸</button>
+							<button type="radio" class="btn human-select btn-text-sample1"><i class="mdi mdi-emoticon-neutral"></i> 중립</button>   
+							<div class=" popup card-inverse-secondary">
+								<ul class="list-arrow">
+									<h6>버튼 컬러별 답변 참고</h6>
+									<li class="list-group-item"> <span class="badge computer-select">분홍색</span>   :  컴퓨터 제시 답안   </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  사람 제시 답안 </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  컴퓨터 + 사람   공통으로 제시된 답안 </li>
+									<i class="mdi mdi-close text-success" id="bannerClose"></i> 
+								</ul> 
+							</div>   
+						</div>
+					</div>
+				</div>
+				<div class="card-body" id="text_sample2" style="display:none;">
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 전체 대화를 읽고 해당 문장에 대한 대화자의 감정을 선택해주세요</h4>
+					<div class="row">
+						<div class="col-xl-9 " style="padding-right:0; padding-left:0;">
+							<pre class="textsize">
+A : 야, 여기 있던 내 옷 못 봤어?
+<span class="highlight">B : 무슨 옷 말하는 건데?</span>
+A : 그거, 내가 생일에 친구한테 선물받은 원피스!
+B : 친구한테… 선물 받은 거?
+A : 그래, 그 남색에, 어깨 부분에 장식 달린 거 있잖아.
+B : 아.. 그거… 그거 내가 저번에 한 번 입었어.
+A : 뭐? 그걸 니가 왜 입어?
+B : 아이, 그거 좀 입은 것 가지고 쩨쩨하게 그러냐?
+A : 야! 내 허락도 없이 니 맘대로 그걸 입으면 어떡해!
+B : 됐다, 됐어, 나도 이제 치사해서 안 입는다!
+
+</pre>
+						</div>
+
+						<div class="col-xl-3  answers emotion8">  
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample2"><i class="mdi mdi-emoticon"></i> 기쁨</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample2"><i class="mdi mdi-emoticon-happy"></i> 놀람</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample2"><i class="mdi mdi-emoticon-devil"></i> 분노</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample2"><i class="mdi mdi-emoticon-sad"></i> 슬픔</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample2"><i class="mdi mdi-emoticon-poop"></i> 혐오</button>
+							<button type="radio" class="btn human-select btn-text-sample2"><i class="mdi mdi-emoticon-cool"></i> 공포</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample2"><i class="mdi mdi-emoticon-tongue"></i> 경멸</button>
+							<button type="radio" class="btn computer-select btn-text-sample2"><i class="mdi mdi-emoticon-neutral"></i> 중립</button>   
 							<div class=" popup card-inverse-secondary">
 								<ul class="list-arrow">
 									<h6>버튼 컬러별 답변 참고</h6>
@@ -41,6 +86,328 @@ A: 아니 왜 또 발끈하고 그래.
 					</div>
 				</div>
 
+				<div class="card-body" id="text_sample3" style="display:none;">
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 전체 대화를 읽고 해당 문장에 대한 대화자의 감정을 선택해주세요</h4>
+					<div class="row">
+						<div class="col-xl-9 " style="padding-right:0; padding-left:0;">
+							<pre class="textsize">
+A : 야, 여기 있던 내 옷 못 봤어?
+B : 무슨 옷 말하는 건데?
+<span class="highlight">A : 그거, 내가 생일에 친구한테 선물받은 원피스!</span>
+B : 친구한테… 선물 받은 거?
+A : 그래, 그 남색에, 어깨 부분에 장식 달린 거 있잖아.
+B : 아.. 그거… 그거 내가 저번에 한 번 입었어.
+A : 뭐? 그걸 니가 왜 입어?
+B : 아이, 그거 좀 입은 것 가지고 쩨쩨하게 그러냐?
+A : 야! 내 허락도 없이 니 맘대로 그걸 입으면 어떡해!
+B : 됐다, 됐어, 나도 이제 치사해서 안 입는다!
+
+</pre>
+						</div>
+
+						<div class="col-xl-3  answers emotion8">  
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample3"><i class="mdi mdi-emoticon"></i> 기쁨</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample3"><i class="mdi mdi-emoticon-happy"></i> 놀람</button>
+							<button type="radio" class="btn human-select btn-text-sample3"><i class="mdi mdi-emoticon-devil"></i> 분노</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample3"><i class="mdi mdi-emoticon-sad"></i> 슬픔</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample3"><i class="mdi mdi-emoticon-poop"></i> 혐오</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample3"><i class="mdi mdi-emoticon-cool"></i> 공포</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample3"><i class="mdi mdi-emoticon-tongue"></i> 경멸</button>
+							<button type="radio" class="btn computer-select btn-text-sample3"><i class="mdi mdi-emoticon-neutral"></i> 중립</button>   
+							<div class=" popup card-inverse-secondary">
+								<ul class="list-arrow">
+									<h6>버튼 컬러별 답변 참고</h6>
+									<li class="list-group-item"> <span class="badge computer-select">분홍색</span>   :  컴퓨터 제시 답안   </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  사람 제시 답안 </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  컴퓨터 + 사람   공통으로 제시된 답안 </li>
+									<i class="mdi mdi-close text-success" id="bannerClose"></i> 
+								</ul> 
+							</div>   
+						</div>
+					</div>
+				</div>
+				<div class="card-body" id="text_sample4" style="display:none;">
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 전체 대화를 읽고 해당 문장에 대한 대화자의 감정을 선택해주세요</h4>
+					<div class="row">
+						<div class="col-xl-9 " style="padding-right:0; padding-left:0;">
+							<pre class="textsize">
+A : 야, 여기 있던 내 옷 못 봤어?
+B : 무슨 옷 말하는 건데?
+A : 그거, 내가 생일에 친구한테 선물받은 원피스!
+<span class="highlight">B : 친구한테… 선물 받은 거?</span>
+A : 그래, 그 남색에, 어깨 부분에 장식 달린 거 있잖아.
+B : 아.. 그거… 그거 내가 저번에 한 번 입었어.
+A : 뭐? 그걸 니가 왜 입어?
+B : 아이, 그거 좀 입은 것 가지고 쩨쩨하게 그러냐?
+A : 야! 내 허락도 없이 니 맘대로 그걸 입으면 어떡해!
+B : 됐다, 됐어, 나도 이제 치사해서 안 입는다!
+
+</pre>
+						</div>
+
+						<div class="col-xl-3  answers emotion8">  
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample4"><i class="mdi mdi-emoticon"></i> 기쁨</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample4"><i class="mdi mdi-emoticon-happy"></i> 놀람</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample4"><i class="mdi mdi-emoticon-devil"></i> 분노</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample4"><i class="mdi mdi-emoticon-sad"></i> 슬픔</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample4"><i class="mdi mdi-emoticon-poop"></i> 혐오</button>
+							<button type="radio" class="btn human-select btn-text-sample4"><i class="mdi mdi-emoticon-cool"></i> 공포</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample4"><i class="mdi mdi-emoticon-tongue"></i> 경멸</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample4"><i class="mdi mdi-emoticon-neutral"></i> 중립</button>   
+							<div class=" popup card-inverse-secondary">
+								<ul class="list-arrow">
+									<h6>버튼 컬러별 답변 참고</h6>
+									<li class="list-group-item"> <span class="badge computer-select">분홍색</span>   :  컴퓨터 제시 답안   </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  사람 제시 답안 </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  컴퓨터 + 사람   공통으로 제시된 답안 </li>
+									<i class="mdi mdi-close text-success" id="bannerClose"></i> 
+								</ul> 
+							</div>   
+						</div>
+					</div>
+				</div>
+				<div class="card-body" id="text_sample5" style="display:none;">
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 전체 대화를 읽고 해당 문장에 대한 대화자의 감정을 선택해주세요</h4>
+					<div class="row">
+						<div class="col-xl-9 " style="padding-right:0; padding-left:0;">
+							<pre class="textsize">
+A : 야, 여기 있던 내 옷 못 봤어?
+B : 무슨 옷 말하는 건데?
+A : 그거, 내가 생일에 친구한테 선물받은 원피스!
+B : 친구한테… 선물 받은 거?
+<span class="highlight">A : 그래, 그 남색에, 어깨 부분에 장식 달린 거 있잖아.</span>
+B : 아.. 그거… 그거 내가 저번에 한 번 입었어.
+A : 뭐? 그걸 니가 왜 입어?
+B : 아이, 그거 좀 입은 것 가지고 쩨쩨하게 그러냐?
+A : 야! 내 허락도 없이 니 맘대로 그걸 입으면 어떡해!
+B : 됐다, 됐어, 나도 이제 치사해서 안 입는다!
+
+</pre>
+						</div>
+
+						<div class="col-xl-3  answers emotion8">  
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample5"><i class="mdi mdi-emoticon"></i> 기쁨</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample5"><i class="mdi mdi-emoticon-happy"></i> 놀람</button>
+							<button type="radio" class="btn human-select btn-text-sample5"><i class="mdi mdi-emoticon-devil"></i> 분노</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample5"><i class="mdi mdi-emoticon-sad"></i> 슬픔</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample5"><i class="mdi mdi-emoticon-poop"></i> 혐오</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample5"><i class="mdi mdi-emoticon-cool"></i> 공포</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample5"><i class="mdi mdi-emoticon-tongue"></i> 경멸</button>
+							<button type="radio" class="btn computer-select btn-text-sample5"><i class="mdi mdi-emoticon-neutral"></i> 중립</button>   
+							<div class=" popup card-inverse-secondary">
+								<ul class="list-arrow">
+									<h6>버튼 컬러별 답변 참고</h6>
+									<li class="list-group-item"> <span class="badge computer-select">분홍색</span>   :  컴퓨터 제시 답안   </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  사람 제시 답안 </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  컴퓨터 + 사람   공통으로 제시된 답안 </li>
+									<i class="mdi mdi-close text-success" id="bannerClose"></i> 
+								</ul> 
+							</div>   
+						</div>
+					</div>
+				</div>
+				<div class="card-body" id="text_sample6" style="display:none;">
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 전체 대화를 읽고 해당 문장에 대한 대화자의 감정을 선택해주세요</h4>
+					<div class="row">
+						<div class="col-xl-9 " style="padding-right:0; padding-left:0;">
+							<pre class="textsize">
+A : 야, 여기 있던 내 옷 못 봤어?
+B : 무슨 옷 말하는 건데?
+A : 그거, 내가 생일에 친구한테 선물받은 원피스!
+B : 친구한테… 선물 받은 거?
+A : 그래, 그 남색에, 어깨 부분에 장식 달린 거 있잖아.
+<span class="highlight">B : 아.. 그거… 그거 내가 저번에 한 번 입었어.</span>
+A : 뭐? 그걸 니가 왜 입어?
+B : 아이, 그거 좀 입은 것 가지고 쩨쩨하게 그러냐?
+A : 야! 내 허락도 없이 니 맘대로 그걸 입으면 어떡해!
+B : 됐다, 됐어, 나도 이제 치사해서 안 입는다!
+
+</pre>
+						</div>
+
+						<div class="col-xl-3  answers emotion8">  
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample6"><i class="mdi mdi-emoticon"></i> 기쁨</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample6"><i class="mdi mdi-emoticon-happy"></i> 놀람</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample6"><i class="mdi mdi-emoticon-devil"></i> 분노</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample6"><i class="mdi mdi-emoticon-sad"></i> 슬픔</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample6"><i class="mdi mdi-emoticon-poop"></i> 혐오</button>
+							<button type="radio" class="btn human-select btn-text-sample6"><i class="mdi mdi-emoticon-cool"></i> 공포</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample6"><i class="mdi mdi-emoticon-tongue"></i> 경멸</button>
+							<button type="radio" class="btn computer-select btn-text-sample6"><i class="mdi mdi-emoticon-neutral"></i> 중립</button>   
+							<div class=" popup card-inverse-secondary">
+								<ul class="list-arrow">
+									<h6>버튼 컬러별 답변 참고</h6>
+									<li class="list-group-item"> <span class="badge computer-select">분홍색</span>   :  컴퓨터 제시 답안   </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  사람 제시 답안 </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  컴퓨터 + 사람   공통으로 제시된 답안 </li>
+									<i class="mdi mdi-close text-success" id="bannerClose"></i> 
+								</ul> 
+							</div>   
+						</div>
+					</div>
+				</div>
+				<div class="card-body" id="text_sample7" style="display:none;">
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 전체 대화를 읽고 해당 문장에 대한 대화자의 감정을 선택해주세요</h4>
+					<div class="row">
+						<div class="col-xl-9 " style="padding-right:0; padding-left:0;">
+							<pre class="textsize">
+A : 야, 여기 있던 내 옷 못 봤어?
+B : 무슨 옷 말하는 건데?
+A : 그거, 내가 생일에 친구한테 선물받은 원피스!
+B : 친구한테… 선물 받은 거?
+A : 그래, 그 남색에, 어깨 부분에 장식 달린 거 있잖아.
+B : 아.. 그거… 그거 내가 저번에 한 번 입었어.
+<span class="highlight">A : 뭐? 그걸 니가 왜 입어?</span>
+B : 아이, 그거 좀 입은 것 가지고 쩨쩨하게 그러냐?
+A : 야! 내 허락도 없이 니 맘대로 그걸 입으면 어떡해!
+B : 됐다, 됐어, 나도 이제 치사해서 안 입는다!
+
+</pre>
+						</div>
+
+						<div class="col-xl-3  answers emotion8">  
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample7"><i class="mdi mdi-emoticon"></i> 기쁨</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample7"><i class="mdi mdi-emoticon-happy"></i> 놀람</button>
+							<button type="radio" class="btn human-select btn-text-sample7"><i class="mdi mdi-emoticon-devil"></i> 분노</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample7"><i class="mdi mdi-emoticon-sad"></i> 슬픔</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample7"><i class="mdi mdi-emoticon-poop"></i> 혐오</button>
+							<button type="radio" class="btn computer-select btn-text-sample7"><i class="mdi mdi-emoticon-cool"></i> 공포</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample7"><i class="mdi mdi-emoticon-tongue"></i> 경멸</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample7"><i class="mdi mdi-emoticon-neutral"></i> 중립</button>   
+							<div class=" popup card-inverse-secondary">
+								<ul class="list-arrow">
+									<h6>버튼 컬러별 답변 참고</h6>
+									<li class="list-group-item"> <span class="badge computer-select">분홍색</span>   :  컴퓨터 제시 답안   </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  사람 제시 답안 </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  컴퓨터 + 사람   공통으로 제시된 답안 </li>
+									<i class="mdi mdi-close text-success" id="bannerClose"></i> 
+								</ul> 
+							</div>   
+						</div>
+					</div>
+				</div>
+				<div class="card-body" id="text_sample8" style="display:none;">
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 전체 대화를 읽고 해당 문장에 대한 대화자의 감정을 선택해주세요</h4>
+					<div class="row">
+						<div class="col-xl-9 " style="padding-right:0; padding-left:0;">
+							<pre class="textsize">
+A : 야, 여기 있던 내 옷 못 봤어?
+B : 무슨 옷 말하는 건데?
+A : 그거, 내가 생일에 친구한테 선물받은 원피스!
+B : 친구한테… 선물 받은 거?
+A : 그래, 그 남색에, 어깨 부분에 장식 달린 거 있잖아.
+B : 아.. 그거… 그거 내가 저번에 한 번 입었어.
+A : 뭐? 그걸 니가 왜 입어?
+<span class="highlight">B : 아이, 그거 좀 입은 것 가지고 쩨쩨하게 그러냐?</span>
+A : 야! 내 허락도 없이 니 맘대로 그걸 입으면 어떡해!
+B : 됐다, 됐어, 나도 이제 치사해서 안 입는다!
+
+</pre>
+						</div>
+
+						<div class="col-xl-3  answers emotion8">  
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample8"><i class="mdi mdi-emoticon"></i> 기쁨</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample8"><i class="mdi mdi-emoticon-happy"></i> 놀람</button>
+							<button type="radio" class="btn computer-select btn-text-sample8"><i class="mdi mdi-emoticon-devil"></i> 분노</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample8"><i class="mdi mdi-emoticon-sad"></i> 슬픔</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample8"><i class="mdi mdi-emoticon-poop"></i> 혐오</button>
+							<button type="radio" class="btn human-select btn-text-sample8"><i class="mdi mdi-emoticon-cool"></i> 공포</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample8"><i class="mdi mdi-emoticon-tongue"></i> 경멸</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample8"><i class="mdi mdi-emoticon-neutral"></i> 중립</button>   
+							<div class=" popup card-inverse-secondary">
+								<ul class="list-arrow">
+									<h6>버튼 컬러별 답변 참고</h6>
+									<li class="list-group-item"> <span class="badge computer-select">분홍색</span>   :  컴퓨터 제시 답안   </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  사람 제시 답안 </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  컴퓨터 + 사람   공통으로 제시된 답안 </li>
+									<i class="mdi mdi-close text-success" id="bannerClose"></i> 
+								</ul> 
+							</div>   
+						</div>
+					</div>
+				</div>
+				<div class="card-body" id="text_sample9" style="display:none;">
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 전체 대화를 읽고 해당 문장에 대한 대화자의 감정을 선택해주세요</h4>
+					<div class="row">
+						<div class="col-xl-9 " style="padding-right:0; padding-left:0;">
+							<pre class="textsize">
+A : 야, 여기 있던 내 옷 못 봤어?
+B : 무슨 옷 말하는 건데?
+A : 그거, 내가 생일에 친구한테 선물받은 원피스!
+B : 친구한테… 선물 받은 거?
+A : 그래, 그 남색에, 어깨 부분에 장식 달린 거 있잖아.
+B : 아.. 그거… 그거 내가 저번에 한 번 입었어.
+A : 뭐? 그걸 니가 왜 입어?
+B : 아이, 그거 좀 입은 것 가지고 쩨쩨하게 그러냐?
+<span class="highlight">A : 야! 내 허락도 없이 니 맘대로 그걸 입으면 어떡해!</span>
+B : 됐다, 됐어, 나도 이제 치사해서 안 입는다!
+
+</pre>
+						</div>
+
+						<div class="col-xl-3  answers emotion8">  
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample9"><i class="mdi mdi-emoticon"></i> 기쁨</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample9"><i class="mdi mdi-emoticon-happy"></i> 놀람</button>
+							<button type="radio" class="btn human-select btn-text-sample9"><i class="mdi mdi-emoticon-devil"></i> 분노</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample9"><i class="mdi mdi-emoticon-sad"></i> 슬픔</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample9"><i class="mdi mdi-emoticon-poop"></i> 혐오</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample9"><i class="mdi mdi-emoticon-cool"></i> 공포</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample9"><i class="mdi mdi-emoticon-tongue"></i> 경멸</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample9"><i class="mdi mdi-emoticon-neutral"></i> 중립</button>   
+							<div class=" popup card-inverse-secondary">
+								<ul class="list-arrow">
+									<h6>버튼 컬러별 답변 참고</h6>
+									<li class="list-group-item"> <span class="badge computer-select">분홍색</span>   :  컴퓨터 제시 답안   </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  사람 제시 답안 </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  컴퓨터 + 사람   공통으로 제시된 답안 </li>
+									<i class="mdi mdi-close text-success" id="bannerClose"></i> 
+								</ul> 
+							</div>   
+						</div>
+					</div>
+				</div>
+				<div class="card-body" id="text_sample10" style="display:none;">
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 다음 전체 대화를 읽고 해당 문장에 대한 대화자의 감정을 선택해주세요</h4>
+					<div class="row">
+						<div class="col-xl-9 " style="padding-right:0; padding-left:0;">
+							<pre class="textsize">
+A : 야, 여기 있던 내 옷 못 봤어?
+B : 무슨 옷 말하는 건데?
+A : 그거, 내가 생일에 친구한테 선물받은 원피스!
+B : 친구한테… 선물 받은 거?
+A : 그래, 그 남색에, 어깨 부분에 장식 달린 거 있잖아.
+B : 아.. 그거… 그거 내가 저번에 한 번 입었어.
+A : 뭐? 그걸 니가 왜 입어?
+B : 아이, 그거 좀 입은 것 가지고 쩨쩨하게 그러냐?
+A : 야! 내 허락도 없이 니 맘대로 그걸 입으면 어떡해!
+<span class="highlight">B : 됐다, 됐어, 나도 이제 치사해서 안 입는다!</span>
+
+</pre>
+						</div>
+
+						<div class="col-xl-3  answers emotion8">  
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample10"><i class="mdi mdi-emoticon"></i> 기쁨</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample10"><i class="mdi mdi-emoticon-happy"></i> 놀람</button>
+							<button type="radio" class="btn human-select btn-text-sample10"><i class="mdi mdi-emoticon-devil"></i> 분노</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample10"><i class="mdi mdi-emoticon-sad"></i> 슬픔</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample10"><i class="mdi mdi-emoticon-poop"></i> 혐오</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample10"><i class="mdi mdi-emoticon-cool"></i> 공포</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample10"><i class="mdi mdi-emoticon-tongue"></i> 경멸</button>
+							<button type="radio" class="btn btn-inverse-primary btn-text-sample10"><i class="mdi mdi-emoticon-neutral"></i> 중립</button>   
+							<div class=" popup card-inverse-secondary">
+								<ul class="list-arrow">
+									<h6>버튼 컬러별 답변 참고</h6>
+									<li class="list-group-item"> <span class="badge computer-select">분홍색</span>   :  컴퓨터 제시 답안   </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  사람 제시 답안 </li>
+									<li class="list-group-item"> <span class="badge human-select">주황색</span>  :  컴퓨터 + 사람   공통으로 제시된 답안 </li>
+									<i class="mdi mdi-close text-success" id="bannerClose"></i> 
+								</ul> 
+							</div>   
+						</div>
+					</div>
+				</div>
+
+
 				<div id="success-text" style="display:none;">
 				{% include "/new_design/workspace/success_sample.html" %}
 				</div>
@@ -49,9 +416,66 @@ A: 아니 왜 또 발끈하고 그래.
 	</div>
 
 <script src="/static/new_design/js/plugin/jquery.min.js"></script>
+
 	<script>
-			$(".btn-text-sample").on('click', function(evt){
-				$("#text_sample").hide();
+			$(".btn-text-sample1").on('click', function(evt){
+				$("#text_sample1").hide();
+				$("#text_sample2").show();
+			});
+	</script>
+
+	<script>
+			$(".btn-text-sample2").on('click', function(evt){
+				$("#text_sample2").hide();
+				$("#text_sample3").show();
+			});
+	</script>
+	<script>
+			$(".btn-text-sample3").on('click', function(evt){
+				$("#text_sample3").hide();
+				$("#text_sample4").show();
+			});
+	</script>
+	<script>
+			$(".btn-text-sample4").on('click', function(evt){
+				$("#text_sample4").hide();
+				$("#text_sample5").show();
+			});
+	</script>
+	<script>
+			$(".btn-text-sample5").on('click', function(evt){
+				$("#text_sample5").hide();
+				$("#text_sample6").show();
+			});
+	</script>
+	<script>
+			$(".btn-text-sample6").on('click', function(evt){
+				$("#text_sample6").hide();
+				$("#text_sample7").show();
+			});
+	</script>
+	<script>
+			$(".btn-text-sample7").on('click', function(evt){
+				$("#text_sample7").hide();
+				$("#text_sample8").show();
+			});
+	</script>
+	<script>
+			$(".btn-text-sample8").on('click', function(evt){
+				$("#text_sample8").hide();
+				$("#text_sample9").show();
+			});
+	</script>
+	<script>
+			$(".btn-text-sample9").on('click', function(evt){
+				$("#text_sample9").hide();
+				$("#text_sample10").show();
+			});
+	</script>
+
+	<script>
+			$(".btn-text-sample10").on('click', function(evt){
+				$("#text_sample10").hide();
 				$("#success-text").show();
 			});
 	</script>

@@ -26,10 +26,14 @@
     <div id="task_browse" class="col-lg-6">
         {{ render_project_card_option(project, upload_method, title=_('Browse'), explanation=_('Check the status of the tasks'), link=url_for('project.tasks_browse', short_name=project.short_name), link_action_text=_('Browse'), icon='compass')}}
     </div>
-    {% if autoimporter_enabled %}
+    {% if autoimporter_enabled =='1' %}
 	<!-- 자동 작업 추가는 기능적 구현이 어려워 보류-->
     <div id="autoimport_tasks" class="col-lg-6"style="display:none">
         {{ render_project_card_option(project, upload_method, title=_('Auto-import Tasks'), explanation=_('Import tasks regularly and automatically'), link=url_for('project.setup_autoimporter', short_name=project.short_name), link_action_text=_('Setup'), icon='magic')}}
+    </div>
+	{% else %}
+    <div id="autoimport_tasks" class="col-md-6">
+        {{ render_project_card_option(project, upload_method, title="각각채점", explanation=_('Import tasks regularly and automatically'), link=url_for('project.give_points', short_name=project.short_name), link_action_text='채점', icon='magic')}}
     </div>
     {% endif %}
 	{#<div id="task_Scoring" class="col-lg-6">

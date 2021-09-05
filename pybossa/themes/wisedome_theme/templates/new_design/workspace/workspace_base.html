@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="kor">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="csrf-token" id="csrf_token" content="">
+		<meta name="csrf-token" content="">
 		<title>Wisedome</title>
 		<!-- plugins:css -->
 		<link rel="stylesheet" href="/static/new_design/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -48,7 +47,7 @@
 							<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
 								<div class="nav-profile-img">
 									<img src="{{ render_user_thumbnail(current_user, upload_method) }}" alt="{{current_user.name}}">
-									<span class="availability-status online"></span>
+									<span class="availability-status"></span>
 								</div>
 								<div class="nav-profile-text">
 									<p class="mb-1">{{current_user.name}}</p>
@@ -152,6 +151,7 @@
 								<span class="menu-title">관리자 페이지</span>
 								<i class="mdi mdi-settings menu-icon"></i>
 							</a>
+
 						</li>
 						{% endif %}
 						<li class="nav-item sidebar-actions">
@@ -214,7 +214,7 @@
 
 									<div class="d-flex">
 										<i class="mdi mdi-home-map-marker"></i>
-										<h6 class="font-weight-normal"> &nbsp;경상남도 창원시 의창구 창원대학로 20, 85호관 506-1호 (사림동, 창원대학교)</h6>
+										<h6 class="font-weight-normal"> &nbsp;경상남도 창원시 의창구 용동로83번안길 36 SM비즈타운 313호</h6>
 									</div>
 								</div>
 

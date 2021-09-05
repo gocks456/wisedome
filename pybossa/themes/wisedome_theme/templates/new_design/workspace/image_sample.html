@@ -1,45 +1,71 @@
 <link rel="stylesheet" href="/static/new_design/css/workspace-img.css">
 
+
 <!-- 메인 작업화면 -->
-	<div class="content-wrapper image-area">
+<div class="content-wrapper image-area">
 
-		<!--문제 들어가는 영역-->
-			<div class="col-md-12 grid-margin" style="padding-right:0; padding-left:0; margin-bottom:0;">
-				<div class="card bg-white ">
-					<div class="card-body " id="image_sample"> 
-						<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 적절한 이미지 제목을 선택해주세요</h4>
-						<div class="row mt-4 ">
-							<div class="col-lg-9 bounding" style="padding-right:0; padding-left:0;">  <!--이 안에 선택한 이미지 뜨는곳-->
-								<img src="/static/new_design/images/trees.jpg" alt="">  
-							</div>
+	<!--문제 들어가는 영역-->
+		<div class="col-md-12 grid-margin" style="padding-right:0; padding-left:0; margin-bottom:0;">
+			<div class="card bg-white ">
+				<div class="card-body " id="image_sample1"> 
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 적절한 이미지 제목을 선택해주세요</h4>
+					<div class="row mt-4 ">
+						<div class="col-lg-9 bounding" style="padding-right:0; padding-left:0;">  <!--이 안에 선택한 이미지 뜨는곳-->
+							<img src="/static/new_design/images/trees.jpg" style="max-width:none;max-height:none;">  
+						</div>
 
-							<div class="col-lg-3 answers">    <!--답변선택영역-->
-								<button type="radio" class="btn btn-outline-primary" onclick="taggedButton()">숲속의 나무</button>
-								<button type="radio" class="btn btn-outline-primary" onclick="taggedButton()">초원의 양떼</button>
-								<button type="radio" class="btn btn-outline-primary" onclick="taggedButton()">목장과 소년</button>
-								<button type="submit" class="btn btn-success btn-img-sample" id="submit" disabled><i class="mdi mdi-cloud-upload"></i>제출하기 </button>
-							</div>
+						<div class="col-lg-3 answers">    <!--답변선택영역-->
+							<button type="radio" class="btn btn-outline-primary" onclick="taggedButton1()">숲속의 나무</button>
+							<button type="radio" class="btn btn-outline-primary" onclick="taggedButton1()">초원의 양떼</button>
+							<button type="radio" class="btn btn-outline-primary" onclick="taggedButton1()">열기구</button>
+							<button type="submit" class="btn btn-success btn-img-sample1" id="submit" disabled><i class="mdi mdi-cloud-upload"></i>제출하기 </button>
 						</div>
 					</div>
-
-					<div id="success-img" style="display:none;">
-						{% include "/new_design/workspace/success_sample.html" %}
-					</div>
-
 				</div>
+
+				<div class="card-body " id="image_sample2"style="display:none;"> 
+					<h4 class="card-title"><i class="mdi mdi-label"></i>  &nbsp; 적절한 이미지 제목을 선택해주세요</h4>
+					<div class="row mt-4 ">
+						<div class="col-lg-9 bounding" style="padding-right:0; padding-left:0;">  <!--이 안에 선택한 이미지 뜨는곳-->
+							<img src="/static/new_design/images/balloon.jpg"style="max-width:none;max-height:none;">  
+						</div>
+
+						<div class="col-lg-3 answers">    <!--답변선택영역-->
+							<button type="radio" class="btn btn-outline-primary" onclick="taggedButton2()">숲속의 나무</button>
+							<button type="radio" class="btn btn-outline-primary" onclick="taggedButton2()">초원의 양떼</button>
+							<button type="radio" class="btn btn-outline-primary" onclick="taggedButton2()">열기구</button>
+							<button type="submit" class="btn btn-success btn-img-sample2" id="submit" disabled><i class="mdi mdi-cloud-upload"></i>제출하기 </button>
+						</div>
+					</div>
+				</div>
+
+				<div id="success-img" style="display:none;">
+					{% include "/new_design/workspace/success_sample.html" %}
+				</div>
+
 			</div>
+		</div>
 
 
-	</div>
-	<script src="/static/new_design/js/plugin/jquery.min.js"></script>
-	<script>
-		$(".btn-img-sample").on('click', function(evt){
-			$("#image_sample").hide();
+</div>
+<script src="/static/new_design/js/plugin/jquery.min.js"></script>
+<script>
+
+		$(".btn-img-sample1").on('click', function(evt){
+			$("#image_sample1").hide();
+			$("#image_sample2").show();
+		});
+		$(".btn-img-sample2").on('click', function(evt){
+			$("#image_sample2").hide();
 			$("#success-img").show();
 		});
 
-function taggedButton(){
-	$(".btn-img-sample").attr('disabled', false);
-}
-	</script>
+	function taggedButton1(){
+		$(".btn-img-sample1").attr('disabled', false);
+	}
+
+	function taggedButton2(){
+		$(".btn-img-sample2").attr('disabled', false);
+	}
+</script>
 

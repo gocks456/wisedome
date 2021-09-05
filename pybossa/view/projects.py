@@ -225,6 +225,9 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
 
     count = cached_projects.n_count(category)
 
+    from datetime import datetime
+
+    n_year = datetime.today().year
     # 2020.11.27. 업적 리뉴얼 예정
     #achieve = cached_users.get_category_achieve(current_user.id)
     #user_all_achieve(achieve)
@@ -253,7 +256,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
         "category": category,
         "ko_cat": ko_cat,
         "template": template,
-        "csrf": generate_csrf()}
+        "csrf": generate_csrf(),
+        "n_year":n_year}
 
     if use_count:
         template_args.update({"count": count})
@@ -313,6 +317,16 @@ def project_cat_index(category=None, page=1):
         return redirect_content_type(url_for('.index'))
     return project_index(page, cached_projects.get_all, category, False, True,
                          order_by, desc)
+
+@blueprint.route('give_point')
+@login_required
+def give_point():
+    #aaaa
+    print ("BBBBB")
+
+
+
+
 
 
 @blueprint.route('/new', methods=['GET', 'POST'])
@@ -730,9 +744,24 @@ def update(short_name):
 @login_required
 def details(short_name):
     project, owner, ps = project_by_shortname(short_name)
+    user = user_repo.get(current_user.id)
+    from datetime import datetime, date
+
+    if project.pre_proj != [] and not current_user.admin:
+        for i in project.pre_proj:
+            user_tasks, tasks, end_time = project_repo.get_percent(user.id,i)
+            if end_time == None:
+                response = dict(template='/error_pre.html')
+                return handle_content_type(response)
+            end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%f')
+            today = datetime.strptime(date.today().ctime(), "%a %b %d %H:%M:%S %Y")
+
+            if user_tasks < 200 or end_time >= today:
+                response = dict(template='/error_pre.html')
+                return handle_content_type(response)
+
 
     if request.method == 'POST':
-        user = user_repo.get(current_user.id)
         if request.form['value'] == 'dislike':
             user.like_projects.append(project.id)
             user_repo.update(user)
@@ -752,6 +781,12 @@ def details(short_name):
     #template = '/projects/project.html'
     template = 'new_design/workspace/projectDescription.html'
     pro = pro_features()
+
+    gender = project.condition["sex"]
+    min_a = project.condition["age_s"]
+    max_a = project.condition["age_e"]
+
+    n_year = datetime.today().year
 
     title = project_title(project, None)
     project = add_custom_contrib_button_to(project, get_user_id_or_ip(), ps=ps)
@@ -775,8 +810,10 @@ def details(short_name):
                      "n_volunteers": ps.n_volunteers,
                      "pro_features": pro,
                      "like_project": like_project,
-                     "min": 16,
-                     "max": 100,
+                     "gender" : gender,
+                     "min": min_a,
+                     "max": max_a,
+                     "n_year" : n_year,
                      "csrf": generate_csrf()}
     if current_app.config.get('CKAN_URL'):
         template_args['ckan_name'] = current_app.config.get('CKAN_NAME')
@@ -1048,6 +1085,17 @@ def task_presenter(short_name, task_id):
             res = dict(count=count)
             return json.dumps(res, ensure_ascii=False)
 
+        # Test Task 불러오기
+        if request.form.get('btn', None) == "get_test_task":
+            count = task_repo.count_task_runs_with(project_id=project.id, user_id=current_user.id)
+
+            data = []
+            with open("test_data/"+project.short_name+"/test_data.json", "r", encoding="utf-8") as json_file:
+                data = json.load(json_file)
+                    
+            res=dict(count=count, answer=data)
+
+            return json.dumps(res, ensure_ascii=False)
 
         # 프로젝트 진행 중 답변 관리를 눌렀을 때 (답변관리의 value로 바꿔주어야 함)
         if request.form.get('btn', None) == "answer_manager":
@@ -1266,7 +1314,7 @@ def sertification(short_name):
 
     project, owner, ps = project_by_shortname(short_name)
 
-    if project.published == True and current_user.id not in project.contractor_ids and project.info['tutorial'] != "":
+    if project.published == True and project.info['tutorial'] != "":
         response = dict(template='/projects/sertification.html', current_user=current_user,
                         csrf=generate_csrf())
         return handle_content_type(response)
@@ -1319,6 +1367,42 @@ def export(short_name, task_id):
     else:
         return abort(404)
 
+@blueprint.route('/<short_name>/score3')
+def score3(short_name):
+    import json
+    with open("results.json") as jf:
+        data1 = json.load(jf)
+
+    for i in data1:
+        task_repo.score_by_json(i['user'][8:],i['date'],i['project'],i['count'])
+
+    return "AAAAAAA"
+
+
+@blueprint.route('/<short_name>/<int:task_id>/score2')
+def score2(short_name, task_id):
+    """Return a file with all the TaskRuns for a given Task"""
+    # Check if the project exists
+    project, owner, ps = project_by_shortname(short_name)
+
+    if project.needs_password():
+        redirect_to_password = _check_if_redirect_to_password(project)
+        if redirect_to_password:
+            return redirect_to_password
+    else:
+        ensure_authorized_to('read', project)
+
+    # Check if the task belongs to the project and exists
+    task = task_repo.get_task_by(project_id=project.id, id=task_id)
+    if task:
+        taskruns = task_repo.filter_task_runs_by(task_id=task_id, project_id=project.id)
+        results = [tr.dictize() for tr in taskruns]
+        task1 = dict(id=task.id, info = task.info)
+        response = dict(template = '/projects/score2.html', t_r = results, project = project, task=task1)
+        return handle_content_type(response)
+    else:
+        print ("@@@")
+        return abort(404)
 
 @blueprint.route('/<short_name>/tasks/', methods=['GET','POST'])
 @login_required
@@ -1358,6 +1442,57 @@ def tasks(short_name):
                     pro_features=pro)
 
     return handle_content_type(response)
+
+
+@blueprint.route('/<short_name>/tasks/givepoint')
+@blueprint.route('/<short_name>/tasks/givepoint/<int:page>')
+def give_points(short_name, page=1):
+    project, owner, ps = project_by_shortname(short_name)
+    title = project_title(project, "Tasks")
+    pro = pro_features()
+
+    def respond():
+        per_page = 10
+        offset = (page - 1) * per_page
+        count = ps.n_tasks
+        page_tasks = cached_projects.browse_tasks(project.get('id'), per_page, offset)
+        if not page_tasks and page != 1:
+            abort(404)
+
+        pagination = Pagination(page, per_page, count)
+
+        project_sanitized, owner_sanitized = sanitize_project_owner(project,
+                                                                    owner,
+                                                                    current_user,
+                                                                    ps)
+        print (project_sanitized)
+
+        data = dict(template='/projects/give_point.html',
+                    project=project_sanitized,
+                    owner=owner_sanitized,
+                    tasks=page_tasks,
+                    title=title,
+                    pagination=pagination,
+                    n_tasks=ps.n_tasks,
+                    overall_progress=ps.overall_progress,
+                    n_volunteers=ps.n_volunteers,
+                    n_completed_tasks=ps.n_completed_tasks,
+                    pro_features=pro)
+
+        return handle_content_type(data)
+
+    if project.needs_password():
+        redirect_to_password = _check_if_redirect_to_password(project)
+        if redirect_to_password:
+            return redirect_to_password
+    else:
+        ensure_authorized_to('read', project)
+
+    zip_enabled(project, current_user)
+
+    project = add_custom_contrib_button_to(project, get_user_id_or_ip())
+    return respond()
+
 
 @blueprint.route('/<short_name>/tasks/onetasks/', methods=['GET', 'POST'])
 @login_required

@@ -7,9 +7,14 @@ venv
 /project_order/
 .project_order/
 uploads
+.uploads/
 pybossa/backup/
+pybossa/themes/default/
 pybossa/themes/wisedome_theme/templates/new_design/temp/
 pybossa/themes/wisedome_theme/static/img/
+pybossa/themes/wisedome_theme/static/video/
+pybossa/themes/wisedome_theme/static/sound/
+test_data/
 
 *.db
 *.pyc
@@ -20,6 +25,16 @@ pybossa/themes/wisedome_theme/static/img/
 *.sql
 *.ini
 *.mp4
+*.mkv
+*.avi
+*.mpg
+*.flv
+*.wmv
+*.asf
+*.asx
+*.ogm
+*.ogv
+*.mov
 
 ._*
 

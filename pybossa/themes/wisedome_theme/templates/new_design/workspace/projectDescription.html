@@ -58,12 +58,26 @@
 									</div>
 									<div class="col-md-4 d-flex align-items-center">
 										<div class="d-flex flex-row align-items-center">
-											<i class="mdi mdi-human-male-female icon-md text-success"></i><p class="mb-0 ml-1"> 남녀무관 </p>
+											{% if gender == '0' %}
+												<i class="mdi mdi-human-male-female icon-md text-success"></i><p class="mb-0 ml-1"> 성별무관 </p>
+
+											{% elif gender == 'M' %}
+												<i class="mdi mdi-human-male icon-md text-success"></i><p class="mb-0 ml-1"> 남성전용 </p>
+
+											{% elif gender == 'F' %}
+												<i class="mdi mdi-human-female icon-md text-success"></i><p class="mb-0 ml-1"> 여성전용 </p>
+											
+											{% endif %}
+
 										</div>
 									</div>
 									<div class="col-md-4 d-flex align-items-center">
 										<div class="d-flex flex-row align-items-center">
-											<i class="mdi mdi-face mdi icon-md text-danger"></i><p class="mb-0 ml-1"> {{min}}세 ~ {{max}}세 </p>
+											{% if (min == '20220000'|int) and (max == '19230000'|int) %}
+												<i class="mdi mdi-face mdi icon-md text-danger"></i><p class="mb-0 ml-1"> 나이무관 </p>
+											{% else %}
+												<i class="mdi mdi-face mdi icon-md text-danger"></i><p class="mb-0 ml-1"> {{ (n_year -(min/10000) +1) | int }}세 ~ {{ (n_year -(max/10000) +2) | int }}세 </p>
+											{% endif %}
 										</div>
 									</div>
 								</div>

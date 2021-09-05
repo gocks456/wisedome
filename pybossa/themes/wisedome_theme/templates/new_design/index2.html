@@ -30,7 +30,7 @@
 							<a class="navbar-brand" href="{{url_for('home.home')}}"><img src="/static/new_design/images/wisedome-logo.png" alt="logo" ></a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="mdi mdi-menu"></span></button>
-							<div class="collapse navbar-collapse justify-content-lg-end justify-content-md-start" id="navbarSupportedContent">
+							<div class="collapse navbar-collapse justify-content-lg-end justify-content-md-start" id="navbarSupportedContent" style="background-color:#c7e4e2;">
 								<ul class="navbar-nav" style="margin-left : 20px">
 									<li class="nav-item active"><a class="nav-link" href="{{ url_for('home.aboutus')}}">회사소개</a></li>
 
@@ -96,7 +96,7 @@
 									<div class="modal-body">
 										{#<img src="/static/new_design/images/car2.jpg" alt="template image"><!--여기에 템플릿 이미지 걸어주면됨(현재 이미지는 테스트용)-->
 										<p>음성작업 템플릿</p><!--글은 이안에다 바꿔주면됨-->#}
-										{% include "/new_design/workspace/no_sample.html" %}
+										{% include "/new_design/workspace/audio_sample.html" %}
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
@@ -193,7 +193,7 @@
 									<div class="modal-body">
 										{#<img src="#" alt="template image"><!--템플릿이미지넣기-->
 										<p>비디오작업 템플릿</p><!--글넣기-->#}
-										{% include "/new_design/workspace/no_sample.html" %}
+										{% include "/new_design/workspace/video_sample.html" %}
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
@@ -371,7 +371,7 @@
 
 								<div class="d-flex">
 									<i class="mdi mdi-home-map-marker"></i>
-									<h6 class="font-weight-normal"> &nbsp;경상남도 창원시 의창구 창원대학로 20, 85호관 506-1호 (사림동, 창원대학교)</h6>
+									<h6 class="font-weight-normal"> &nbsp;경상남도 창원시 의창구 용동로83번안길 36 SM비즈타운 313호</h6>
 								</div>
 
 							</div>
@@ -418,4 +418,3 @@
 
 	</body>
 </html>
-
