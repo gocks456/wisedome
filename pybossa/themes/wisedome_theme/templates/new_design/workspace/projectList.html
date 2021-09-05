@@ -93,7 +93,7 @@
 		<div class="col-lg-6">
 		<a href=" {{ url_for('project.draft') }} " style="text-decoration:none;">
 			<button class="btn btn-gradient-primary">임시 프로젝트</button>
-		</a>
+		</a>	
 		<a href=" {{ url_for('project.complete') }} ">
 			<button class="btn btn-gradient-primary">완료 프로젝트</button>
 		</a>
@@ -131,7 +131,7 @@
 
 					{% for project in projects %}
 					<div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3">
-						<div class="card bg-white shadow-sm">
+						<div class="card bg-white shadow-sm"> 
 							<a href="{{ url_for('project.details', short_name=project.short_name) }}">
 								<div class="card-body">
 									<div class="d-flex justify-cnontent-start my-border-bottom">
@@ -155,6 +155,9 @@
 									<div class="badge-ios-group">
 										<div class="badge "><i class="mdi mdi-monitor"></i></div>
 										<div class="badge"><i class="mdi mdi-cellphone-iphone"></i></div>
+										{% if project.featured == True %}
+										<div class="badge badge-premium mr-1"><i class="mdi mdi-diamond"></i> 프리미엄</div>
+										{% endif %}
 									</div>
 								</div>
 								<div class="card-footer text-muted">

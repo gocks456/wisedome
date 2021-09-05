@@ -1,0 +1,196 @@
+{% extends "new_design/workspace/workspace_base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/new_design/css/admin.css">
+{% endblock %}
+
+{% block content %}
+<!-- 어드민 관리 섹션-->
+<div class="content-wrapper">
+	<div class="row">
+
+		<div class="col-xl-3 col-md-4 col-sm-6 grid-margin stretch-card">
+			<div class="card card-statistics">
+				<div class="card-body">
+					<a href="{{url_for('admin.dashboard')}}">
+						<div class="clearfix">
+							<div class="float-left">
+								<i class="mdi mdi-bulletin-board text-danger icon-lg"></i>
+							</div>
+							<div class="float-right py-3">
+								<h3 class="font-weight-medium text-right mb-0">상황판</h3>
+							</div>
+						</div>
+						<p class="mt-3 mb-0"><i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Internal statistics</p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-4 col-sm-6 grid-margin stretch-card">
+			<div class="card card-statistics">
+				<div class="card-body">
+					<a href="{{url_for('rq_dashboard.overview')}}">
+					<div class="clearfix">
+						<div class="float-left">
+							<i class="mdi mdi-receipt text-warning icon-lg"></i>
+						</div>
+						<div class="float-right py-3">
+							<h3 class="font-weight-medium text-right mb-0">백그라운드</h3>
+						</div>
+					</div>
+					<p class="mt-3 mb-0"><i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>Monitor background jobs </p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-4 col-sm-6 grid-margin stretch-card">
+			<div class="card card-statistics">
+				<div class="card-body">
+					<a href="{{url_for('admin.featured')}}">
+					<div class="clearfix">
+						<div class="float-left">
+							<i class="mdi mdi-clock-fast text-success icon-lg"></i>
+						</div>
+						<div class="float-right py-3">
+							<h3 class="font-weight-medium text-right mb-0">긴급프로젝트</h3>
+						</div>
+					</div>
+					<p class="mt-3 mb-0"><i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>Show projects on the front page </p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-4 col-sm-6 grid-margin stretch-card">
+			<div class="card card-statistics">
+				<div class="card-body">
+					<a href="{{url_for('admin.categories')}}">
+					<div class="clearfix">
+						<div class="float-left">
+							<i class="mdi mdi-vector-circle text-info icon-lg"></i>
+						</div>
+						<div class="float-right py-3">
+							<h3 class="font-weight-medium text-right mb-0">범주</h3>
+						</div>
+					</div>
+					<p class="mt-3 mb-0"><i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>프로젝트 범주관리 </p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-4 col-sm-6 grid-margin stretch-card">
+			<div class="card card-statistics">
+				<div class="card-body">
+					<a href="{{url_for('admin.users')}}">
+					<div class="clearfix">
+						<div class="float-left">
+							<i class="mdi mdi-account-multiple text-success icon-lg"></i>
+						</div>
+						<div class="float-right py-3">
+							<h3 class="font-weight-medium text-right mb-0">관리자</h3>
+						</div>
+					</div>
+					<p class="mt-3 mb-0"><i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>관리자 관리 </p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-4 col-sm-6 grid-margin stretch-card">
+			<div class="card card-statistics">
+				<div class="card-body">
+					<a href="{{url_for('admin.export_users', format='json')}}">
+					<div class="clearfix">
+						<div class="float-left">
+							<i class="mdi mdi-account-check text-danger icon-lg"></i>
+						</div>
+						<div class="float-right py-3">
+							<h3 class="font-weight-medium text-right mb-0">사용자</h3>
+						</div>
+					</div>
+					<p class=" mt-3 mb-0">
+					<i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> 사용자 리스트 출력 </p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-4 col-sm-6 grid-margin stretch-card">
+			<div class="card card-statistics">
+				<div class="card-body">
+					<a href="{{url_for('admin.show_point_log')}}">
+					<div class="clearfix">
+						<div class="float-left">
+							<i class="mdi mdi-trophy text-warning icon-lg"></i>
+						</div>
+						<div class="float-right py-3">
+							<h3 class="font-weight-medium text-right mb-0">포인트</h3>
+						</div>
+					</div>
+					<p class="mt-3 mb-0"><i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> 포인트 로그 </p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-4 col-sm-6 grid-margin stretch-card">
+			<div class="card card-statistics">
+				<div class="card-body">
+					<a href="{{url_for('admin.manage_exchange')}}">
+					<div class="clearfix">
+						<div class="float-left">
+							<i class="mdi mdi-cash-100 text-success icon-lg"></i>
+						</div>
+						<div class="float-right py-3">
+							<h3 class="font-weight-medium text-right mb-0">환급</h3>
+						</div>
+					</div>
+					<p class="mt-3 mb-0"><i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>환급 관리 </p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-4 col-sm-6 grid-margin stretch-card">
+			<div class="card card-statistics">
+				<div class="card-body">
+					<a href="{{url_for('admin.back_up')}}">
+					<div class="clearfix">
+						<div class="float-left">
+							<i class="mdi mdi-database text-info icon-lg"></i>
+						</div>
+						<div class="float-right py-3">
+							<h3 class="font-weight-medium text-right mb-0">DB관리</h3>
+						</div>
+					</div>
+						<p class="mt-3 mb-0"><i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> 백업</p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-md-4 col-sm-6 grid-margin stretch-card">
+			<div class="card card-statistics">
+				<div class="card-body">
+					<a href="{{url_for('admin.restore')}}">
+					<div class="clearfix">
+						<div class="float-left">
+							<i class="mdi mdi-database text-info icon-lg"></i>
+						</div>
+						<div class="float-right py-3">
+							<h3 class="font-weight-medium text-right mb-0">DB관리</h3>
+						</div>
+					</div>
+						<p class="mt-3 mb-0"><i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>복원 </p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{% endblock %}

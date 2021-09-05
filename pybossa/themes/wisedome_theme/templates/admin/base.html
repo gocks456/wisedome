@@ -1,12 +1,17 @@
-{% extends "/base_left_navigation.html" %}
+{#{% extends "/base_left_navigation.html" %}#}
+{% extends "/new_design/workspace/workspace_base.html" %}
 {% set active_page = "admin" %}
 {% set active_link = "admin" %}
 {% import "account/_helpers.html" as helper %}
 {% from "projects/_helpers.html" import render_project_card_option %}
-
+{#
 {% block leftnavigation %}
     {{ helper.render_account_local_nav(current_user, active_link) }}
 {% endblock %}
-
+#}
+{% block content %}
+<div class="content-wrapper">
 {% block rightbody %}
+{% endblock %}
+</div>
 {% endblock %}

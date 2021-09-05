@@ -9,7 +9,7 @@ venv
 uploads
 pybossa/backup/
 pybossa/themes/wisedome_theme/templates/new_design/temp/
-
+pybossa/themes/wisedome_theme/static/img/
 
 *.db
 *.pyc
@@ -20,6 +20,8 @@ pybossa/themes/wisedome_theme/templates/new_design/temp/
 *.sql
 *.ini
 *.mp4
+
+._*
 
 dump.rdb
 settings_local.py

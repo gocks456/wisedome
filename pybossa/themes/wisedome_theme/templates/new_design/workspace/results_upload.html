@@ -1,0 +1,70 @@
+{#{% extends "/new_design/workspace/workspace_base.html" %}#}
+{% extends "/projects/base.html" %}
+
+{% block projectcontent %}
+<link rel="stylesheet" href="/static/new_design/css/workspace-img.css">
+
+
+<div class="row" style="margin-top:3em;">
+	<div class="col-md-12 grid-margin">
+		<div class="card bg-white ">
+			<div class="card-body "> 
+				<h4 class="card-title"><i class="mdi mdi-label"></i>채점 완료한 결과 파일을 업로드 해주세요.</h4>
+				<div class="row mt-4 ">
+					<form action="" method="POST" enctype="multipart/form-data">
+						<div class="col-xl-9 col-lg-8 " style="float:left;"> 
+
+
+							<input type="hidden" id="csrf_token" name="csrf_token" value=""/>
+							<div class="upload-container">
+
+								<div class="form-group">
+									<div class="preview-zone hidden">
+										<div class="box box-solid">
+											<div class="sample-body">
+												<h4 class="card-description pb-3"> 결과 파일 포맷</h4>
+												<img src="/static/new_design/images/results_format.JPG" width="80%" style="margin-bottom:1rem;">
+											</div>
+											<div class="box-body">
+											</div>
+										</div>
+									</div>
+									<div class="dropzone-wrapper">
+										<div class="dropzone-desc">
+											<i class="mdi mdi-briefcase-upload" ></i><br><br>
+											<p>첨부파일을 이곳에 더블클릭 또는 드래그 해주세요</p>
+										</div>
+										<input type="file" id="results" name="results" class="dropzone" accept="application/json" >
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xl-3 col-lg-4 answers" style="float:left;">    <!---답변선택영역-->
+							<p class="card-description pb-3"> 결과 파일은 json 형식만 지원합니다.</p>
+							<p class="card-description pb-3"> 결과 반영은 1시간 이내에 진행됩니다.</p>
+							<p class="card-description pb-3"> 포맷이 일치하지 않을 경우 반영되지 않습니다.</p>
+							<button type="submit" class="btn btn-success" id="file-submit" ><i class="mdi mdi-cloud-upload"></i>제출하기 </button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</div>
+
+
+
+<!-- 이 페이지에서만 필요한 js -->
+<script src="/static/new_design/js/workspace-img.js"></script>
+<script src="/static/new_design/js/json-upload.js"></script>
+
+<script>
+	var csrf = "{{ csrf_token() }}";
+$("#csrf_token").val(csrf);
+</script>
+{% endblock %}

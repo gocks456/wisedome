@@ -29,8 +29,19 @@ from pybossa.core import uploader
 from sqlalchemy import text, and_, extract, desc, null, distinct
 
 
+from pybossa.model.project import Project
+
 class TaskRepository(Repository):
 
+
+    def get_1day_user_data(self, user_id, project_id):
+        # 오늘 답변 수 (날짜만으로 비교)
+        import time
+        import datetime
+        time = datetime.date.today()
+        time = time.ctime()
+        return self.db.session.query(func.count('*')).filter(
+               and_(time <= cast(TaskRun.finish_time, Date), TaskRun.user_id==user_id, TaskRun.project_id==project_id)).one()[0]
 
     def get_1hour_user_data(self):
         # 최근 1시간 답변을 제출한 사용자
@@ -44,17 +55,48 @@ class TaskRepository(Repository):
         task = self.db.session.query(Task.state.label('state')).filter(Task.id==task_id).one()
         return task.state
 
+    def is_project_self_score(self, project_id):
+        # 프로젝트 채점 방식
+        project = self.db.session.query(Project.self_score.label('self_score')).filter(Project.id==project_id).one()
+        return project.self_score
+
+    def self_score(self, user_id, task_run_id):
+        # 수동 채점 프로젝트 채점한 데이터 적용
+
+        task_run = self.get_task_run(task_run_id)
+
+        from pybossa.model.project_stats import ProjectStats
+        project_data = self.db.session.query((Project.all_point/ProjectStats.n_tasks).label('point'),
+                Project.featured.label('featured')).filter(
+                and_(Project.id==ProjectStats.project_id) , (Project.id==task_run.project_id)).first()
+
+        self.db.session.query(TaskRun).filter(
+				and_(TaskRun.project_id==task_run.project_id), (TaskRun.id < task_run.id)).update({'completed_score': True})
+
+
+        point = project_data.point
+        if project_data.featured:
+            point = project_data.point * 1.1
+
+        task_run.point = point
+        task_run.completed_score = True
+        self.user_point_update(user_id, point)
+        self.db.session.commit()
+
     def task_update_point(self, project_id, task_id):
         # task_run 각각에 포인트 업데이트
         if self.is_task_completed(task_id) != 'completed':
             return
 
+        if self.is_project_self_score(project_id):
+            return
+
         answer_data = self.db.session.query(func.count(TaskRun.user_id).label('count'), func.array_agg(TaskRun.id).label('task_id')).filter(
                and_(TaskRun.project_id==project_id), (TaskRun.task_id==task_id)).group_by(TaskRun.info).order_by(desc('count')).first()
-        from pybossa.model.project import Project
-        project_data = self.db.session.query((Project.all_point/Task.n_answers).label('point'), Task.n_answers.label('n_answers'),
+        from pybossa.model.project_stats import ProjectStats
+        project_data = self.db.session.query((Project.all_point/ProjectStats.n_tasks).label('point'),
                 Project.featured.label('featured')).filter(
-                and_(Project.id==project_id), (Task.id==task_id)).first()
+                and_(Project.id==ProjectStats.project_id) , (Project.id==project_id)).first()
 
         point = project_data.point
         if project_data.featured:
@@ -63,13 +105,13 @@ class TaskRepository(Repository):
         # 포인트 초기화
         self.db.session.query(TaskRun).filter(TaskRun.task_id==task_id).update({'point': 0})
 
-        if (answer_data.count >= 1 and project_data.n_answers == 1) or (answer_data.count == 1 and project_data.n_answers != 1):
-            # 반복수가 1 일 때 답변 수가 1 이상
-            # 정답이 다 다를 때
+        if answer_data.count == 1:
+            # 정답이 다 다를 때 or 반복이 1이라서 답이 1개
             self.db.session.query(TaskRun).filter(TaskRun.task_id==task_id).update({'point': point})
 
             for task_run_id in answer_data.task_id:
                 task_run = self.get_task_run(task_run_id)
+                task_run.completed_score = True
                 self.user_point_update(task_run.user_id, point)
 
             self.db.session.commit()
@@ -79,7 +121,7 @@ class TaskRepository(Repository):
                 # 과반수의 정답이 존재할 때
                 task_run = self.get_task_run(task_run_id)
                 task_run.point = point
-
+                task_run.completed_score = True
                 self.user_point_update(task_run.user_id, point)
             self.db.session.commit()
         return
@@ -118,29 +160,8 @@ class TaskRepository(Repository):
     def get_task_run_next(self, project_id, user_id, task_id):
         return self.db.session.query(TaskRun).filter(TaskRun.project_id == project_id).filter(TaskRun.user_id == user_id).filter(TaskRun.task_id>task_id).order_by(TaskRun.task_id).first()
 
-    #20.02.25. 수정사항
-    def count_task(self, project_id):
-        return self.db.session.query(Task).filter_by(project_id = project_id, score_check=False).count()
-
     def redundancy(self, project_id):
         return self.db.session.query(Task).filter_by(project_id = project_id).first()
-
-    def save_point(self, project_id, point):
-        task_run=self.db.session.query(TaskRun).filter_by(project_id=project_id, score_mark=True, completed_score=False).all()
-        for row in task_run:
-            if row.is_featured == True:
-                row.point = point * 1.1
-            else:
-                row.point = point
-
-        task=self.db.session.query(Task).filter_by(project_id=project_id, state='completed', score_check=False).all()
-        for row in task:
-            row.score_check=True
-
-        self.db.session.commit()
-
-    def get_task_Yes(self, project_id):
-        return self.db.session.query(TaskRun.user_id, func.sum(TaskRun.point).label('point_sum')).filter_by(project_id=project_id, score_mark=True, completed_score=False).group_by(TaskRun.user_id).all()
 
     # Methods for queries on Task objects
     def get_task(self, id):
@@ -346,7 +367,7 @@ class TaskRepository(Repository):
     def get_QnA_data(self, project_id):
         sql = '''
               SELECT JSON_BUILD_OBJECT('question', t.info, 'answers', json_agg(
-              json_build_object('user_id', r.user_id,'answer', r.info))) AS data
+              json_build_object('user_id', r.user_id,'answer', r.info, 'task_run_id', r.id))) AS data
               FROM task t, task_run r WHERE t.id=r.task_id AND t.project_id=:project_id
               GROUP BY t.id ORDER BY t.id;
               '''

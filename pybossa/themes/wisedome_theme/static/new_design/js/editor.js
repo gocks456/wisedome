@@ -27,4 +27,6 @@
     
   });
 
+$('.dropdown-toggle').dropdown();
+
   $('#summernote').summernote('foreColor','#76767a');

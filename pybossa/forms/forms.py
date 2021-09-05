@@ -155,6 +155,13 @@ class TaskRedundancyForm(Form):
                                   message=lazy_gettext('Number of answers should be a \
                                                        value between 1 and 1,000'))])
 
+class TaskOneMaxForm(Form):
+    one_day_max = IntegerField(lazy_gettext('1일 할당량'),
+                             [validators.Required(),
+                              validators.NumberRange(
+                                  min=0, max=1000,
+                                  message=lazy_gettext('Number of answers should be a \
+                                                       value between 0 and 1,000'))])
 
 class TaskPriorityForm(Form):
     task_ids = TextField(lazy_gettext('Task IDs'),
@@ -625,7 +632,7 @@ class OrderSearchForm(Form):
 
 class CategoryForm(Form):
     id = IntegerField(label=None, widget=HiddenInput())
-    name = TextField(lazy_gettext('Name'),
+    name = TextField(lazy_gettext('카테고리 이름'),
                      [validators.Required(),
                       pb_validator.Unique(project_repo.get_category_by, 'name',
                                           message="Name is already taken.")])

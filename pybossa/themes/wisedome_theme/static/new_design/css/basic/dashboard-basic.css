@@ -14064,7 +14064,7 @@ code {
 
 .page-title {
   color: #343a40;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   margin-bottom: 0;
 }
 .page-title .page-title-icon {
@@ -18649,11 +18649,12 @@ dl li {
 .sidebar .nav.sub-menu .nav-item:hover {
   background: transparent;
 }
+/*
 .reward-btn {
-  /**포인트 전환버튼**/
   font-size: 0.9em;
   padding: 1.2em 0;
 }
+*/
 
 /* style for off-canvas menu*/
 @media screen and (max-width: 991px) {
@@ -18939,12 +18940,6 @@ dl li {
 
   .card .card-body {
     padding: 0.5rem;
-  }
-  .card .card-title {
-    font-size: 0.85rem;
-  }
-  .card-description {
-    font-size: 0.7em;
   }
 
   .accordion .card .card-body {

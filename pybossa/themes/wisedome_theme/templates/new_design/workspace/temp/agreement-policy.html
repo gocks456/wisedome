@@ -1,0 +1,86 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/new_design/static/css/agreement.css">
+{% endblock %}
+
+{% block content %}
+<!-- 메인 작업화면 -->
+<div class="content-wrapper">
+
+	<div class="page-header">
+		<h3 class="page-title">
+			<span class="page-title-icon bg-gradient-primary text-white mr-2"><i class="mdi mdi-pencil"></i></span>서약서 작성
+		</h3>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-12 grid-margin">
+			<div class="card bg-white">
+				<div class="card-body ">
+					<div class="row mt-4">
+						<div class="col-xl-8 col-lg-10 col-md-12 col-12 mx-auto ">
+							<h2 class="modal-title text-center">업무위탁 및 개인정보처리 위탁계약서 및 서약서</h2>
+							<div class="hr"></div>
+
+							<h5 class="card-title">위탁계약 내용</h5>
+							<p class="policy"> <u> WISEDOME </u>  (이하 “갑”이라 한다)과 <span class="box" id="userName1"></span> (이하 “을”이라 한다)는 “갑”의 <span class="box" id="prjName1"></span> 및 개인정보 처리업무를 “을”에게 위탁함에 있어 다음과 같은 내용으로 본 업무위탁계약을 체결한다. 
+							</p>
+
+							<h5 class="card-title">서약서</h5>
+							<p class="policy"> <u> WISEDOME </u>  (이하 “갑”이라 한다)과  <span class="box" id="userName2"></span> (이하 “을”이라 한다)는 “갑”의 <span class="box" id="prjName2"></span> 및 개인정보 처리업무를 “을”에게 위탁함에 있어 다음과 같은 내용으로 본 업무위탁계약을 체결한다.  </p>
+
+							<h4 class="text-center py-5">상기 사항을 숙지하고 이를 성실히 준수할 것을 서약합니다.</h4>
+						</div>
+					</div> 
+
+					<div class="col-lg-8 col-md-12 col-12 mx-auto ">
+						<div class="row">
+							<div class="col-lg-8 col-md-12 col-12 mx-auto">
+								<p class="getDate"> <span id ="year"></span> 년   <span id ="month"></span>  월    <span id ="date"></span> 일</p>
+							</div>
+						</div>
+						<div class="row py-5">
+							<div class="col-md-7">
+								<h5 class="text-left">개인정보 확인</h5>
+								<div class="form-group row">
+									<label for="userName" class="col-sm-3 col-form-label">이름</label>
+									<div class="col-sm-9">
+										<span class="form-control box" id="userName3"></span>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="emailAddr" class="col-sm-3 col-form-label">연락처</label>
+									<div class="col-sm-9">
+										<span class="form-control box" id="emailAddr"></span>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-5">
+								<h5 class="text-center">자필서명</h5>
+								<div class="border" id="singBox" style="height:10rem"></div>  <!-- 서명 하는곳 -->
+								<div class="mx-auto d-flex justify-content-center pt-3" role="group">
+									<button type="button" class="btn btn-inverse-dark mr-3">지우기</button>
+									<button type="button" class="btn btn-inverse-primary">서명확인</button>
+								</div>
+							</div>
+						</div>
+
+					</div> <!--col-lg-8-->
+
+					<div class="mx-auto d-flex justify-content-center pt-3" role="group">
+						<button type="button" class="btn btn-secondary btn-lg mr-3">취소</button>
+						<button type="button" class="btn btn-primary btn-lg">제출</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 이 페이지에서만 필요한 js -->
+<script src="/new_design/static/js/agreement.js"></script>
+{% endblock %}

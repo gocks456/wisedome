@@ -3,21 +3,38 @@ footer {
   background-color: #f2edf3;
   font-family: "SCDream2";
   padding-top: 2rem;
+  padding-bottom: 0;
 }
 .font-weight-normal {
   font-size: 0.65rem;
+  color: #164947 !important;
 }
 
 .footer-border-bottom {
   border-bottom: 1px solid #dfd1e2;
 }
 
+footer .row .col-12 {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: baseline !important;
+  height: 20px;
+}
 footer .nav-link {
   font-size: 0.65rem;
   letter-spacing: 0.25rem;
-  color: #164947;
+  color: #164947 !important;
   font-family: "SCDream3";
 }
 footer .nav-link:hover {
   color: black;
+}
+@media all and (max-width: 575px) {
+  .font-weight-normal,
+  footer .nav-link {
+    font-size: 0.65rem;
+  }
+  .text-small {
+    font-size: 0.35rem;
+  }
 }

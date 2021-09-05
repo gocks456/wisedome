@@ -1,23 +1,35 @@
-{% extends "/base.html" %}
+{% extends "new_design/workspace/workspace_base.html" %}
 
 {% block content %}
 <meta name="csrf-token" content="{{csrf_token()}}">
 
 <script src="{{url_for('static', filename='js/add-js/jquery-1.12.4.min.js')}}"></script>
 
-<div class="container">
+<div class="content-wrapper">
+	
+	<div class="page-header">
+		<h3 class="page-title">
+			<span class="page-title-icon bg-gradient-primary text-white mr-2"><i class="mdi mdi-lock"></i></span>
+			본인 인증
+		</h3>
+	</div>
+
 	<div class="row">
-		<div class="col-md-12">
-			<div class="passwdCheck">
-				<h1>본인 인증</h1>
-				<label for="password" class=control-label">
-					<label for="password">비밀번호</label>
-				</label>
-				<input class="form-control" id="password" name="password" type="password" value>
-				<button id="passwd" class="btn btn-primary" type="submit">확인</button>
+		<div class="col-md-12 grid-margin">
+			<div class="card bg-white">
+				<div class="card-body">
+					<div class="col-lg-12 col-md-12 col-12 mx-auto">
+						<div class="passwdCheck">
+							<label for="password" class=control-label">
+								<label for="password">비밀번호</label>
+							</label>
+							<input class="form-control" id="password" name="password" type="password" placeholder="비밀번호 입력" value>
+							<button id="passwd" class="btn btn-primary" type="submit" style="margin-top:1rem;">확인</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
 </div>
 
 <div id='PYBOSSA_USER_LOCALE' hidden>
@@ -36,7 +48,9 @@ en
 
 <script>
 	$(document).ready(function() {
-		var csrftoken = $('meta[name=csrf-token]').attr('content')
+		//var csrftoken = $('meta[name=csrf-token]').attr('content')
+		csrftoken = "{{ csrf_token() }}";
+		$('meta[name=csrf-token]').attr('content', csrftoken)
 		$.ajaxSetup({
 			beforeSend: function(xhr, settings) {
 				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {

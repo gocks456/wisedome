@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>프로젝트 설명</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/css/function/vendor.bundle.base.css">
+    <!--기본 css--->
+    <link rel="stylesheet" href="../../static/css/basic/dashboard-basic.css">
+    <link rel="stylesheet" href="../../static/css/function/darkmode.css">
+    <!---현재 페이지에만 들어가는 css-->
+    <link rel="stylesheet" href="../../static/css/projectDescription.css">
+
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo-white.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="./dashboard-basic.html"><img src="../../static/images/wisedome-logo.png" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" >
+            <span class="mdi mdi-format-horizontal-align-left " onclick="intend(this)"></span>
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-img">
+                  <img src="../../static/images/face5.jpg" alt="image">
+                  <span class="availability-status online"></span>
+                </div>
+                <div class="nav-profile-text">
+                  <p class="mb-1">창원대</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item " href="../workspace/myProfile.html">
+                  <i class="mdi mdi mdi-account-circle mr-2 text-success"></i>  마이페이지 </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i>  로그아웃 </a>
+              </div>
+            </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+                 <!--기존에 있던, 메일함 알림 아이콘 삭제, 및 검색기능 삭제-->
+            <li class="nav-item">
+              <div class="nav-link">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch"></label> 
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+
+      
+ <!--왼쪽 사이드바 -->
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav ">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="../../static/images/face5.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">창원대</span>
+                  <span class="text-secondary text-small">초급자</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./dashboard.html">
+                <span class="menu-title ">홈</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="./projectList.html"><!--프로젝트 리스트 보기 링크 걸어놓음-->
+                <span class="menu-title">프로젝트</span>
+                <i class="mdi mdi-apps menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <span class="menu-title">포인트</span>
+                <i class="mdi mdi-trophy-variant menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./qnaBoard1.html"><!--질문게시판 링크 걸어놓음-->
+                <span class="menu-title">질문게시판</span>
+                <i class="mdi mdi-human-greeting menu-icon"></i>
+              </a>
+            </li>
+
+            <li class="nav-item sidebar-actions">
+              <a class="nav-link" href="./point.html"><!--포인트 전환 링크 걸어놓음-->
+                <div class="border-bottom"></div>
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4 reward-btn">
+                  <i class="mdi mdi-cash-multiple"></i> 포인트 전환</button>
+                  <br>
+                <div class="border-bottom"></div>
+              </a>
+            </li>
+          </ul>
+        </nav><!--여기까지가 기본 nav-->
+
+
+
+ <div class="main-panel">
+   <div class="content-wrapper">
+
+  
+<!--프로젝트 사진 및 간단요약 -->
+<div class="row">
+  <div class="col-12 grid-margin stretch-card">
+    <div class="card bg-white">
+      <div class="card-body">
+         <div class="row ">
+           <div class="col-xl-5 col-lg-3 col-md-5"> 
+             <div>
+               <img src="../../static/images/project-10.jpg" alt="project img"  class="rounded mw-100" id="projectImg">
+             </div>
+            </div> <!--col lg 5-->
+
+            <div class="col-xl-7 col-lg-9 col-md-7"> 
+             <div class="row sumSection pb-3 d-flex justify-content-between">
+              
+                <div class="col-sm-6 mainTitle">
+                  <h3 id="projectTitle">객관주관 분석하기</h3> <!---->
+                    <div class="align-items-center">
+                      <h5 class="mb-0 text-muted"> <a href="#">0</a> % 완료</h5>
+                    </div>
+                  </div>  
+                 <div class="ml-auto str-btn">
+                   <button class="btn btn-gradient-primary " onclick="getProject()"><i class="mdi mdi-arrow-right-bold-circle"></i> 시작하기</button>  <!---->
+                 </div>
+                </div>
+               <div class="my-border-top">
+                <div class="row py-3 ">    
+                  <div class="col-md-4 d-flex align-items-center">
+                    <div class="d-flex flex-row align-items-center">
+                      <i class="mdi mdi-cash-100 icon-md text-warning"></i><p class="mb-0 ml-1"> 10,000 </p>
+                    </div>
+                  </div>
+                  <div class="col-md-4 d-flex align-items-center">
+                    <div class="d-flex flex-row align-items-center">
+                      <i class="mdi mdi-human-male-female icon-md text-success"></i><p class="mb-0 ml-1"> 남녀무관 </p>
+                    </div>
+                  </div>
+                  <div class="col-md-4 d-flex align-items-center">
+                    <div class="d-flex flex-row align-items-center">
+                      <i class="mdi mdi-face mdi icon-md text-danger"></i><p class="mb-0 ml-1"> 16세 ~ 99세 </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-subtitle my-border-top">
+                  <h5>대화를 읽고 각 대화자의 감정을 분류하는 작업</h5>
+                  <p>감정은 총 8개로 구분되어 있으며 각 감정에 대한 세부적인 사항은 아래와 같습니다.</p>
+                </div> 
+                <div class="card-title">
+                  <p>작업마감일 : ~ 2021.12.31 </p>
+                </div>
+ 
+          </div> <!--col lg 6-->
+        </div> <!--row-->
+      </div> <!--card-body-->
+    </div> <!--card-->
+  </div> <!--col-12-->
+</div> <!--row-->
+
+
+<!--설명부분-->
+<div class="row">
+ <div class="col-12 grid-margin">
+  <div class="card bg-white ">
+   <div class="card-body">
+    
+    <div class="container-fluid  bg-primary py-2">
+      <p class="mb-0 text-white">이용방법</p>
+    </div>
+     <div class="faq-section">
+      <div id="accordion-1" class="accordion">
+        
+        <div class="card bg-white">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> 답변 예시보기 </a>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion-1">
+            <div class="card-body">
+             <h5>1. 기쁨 (happy)</h5> 
+             <p> 만족감을 얻어 흡족한 상태, 또는 행복한 감정.
+              반가움, 즐거움, 기대, 감사, 감격, 감탄 등</p> 
+              <p> ex) 전에 할머니 살아 계실 때 많이 먹어서 좋아해.<br>
+                  ex) 삼촌! 진짜 오랜만이다, 그치.</p> 
+                  <br>
+             <h5>2. 놀람 (surprise)</h5>
+             <p> 예상치 못했던 갑작스런 상황이나 등장, 몰랐던 사실 등으로 인하여 당혹스럽거나 의아한 상태.</p>
+             <p> ex) 마이클이 한식 좋아하는 구나?<br>
+                 ex) 아니 멀쩡하게 생긴 사람이… 너무 의외야!</p>
+                 <br>
+             <h5> 3. 분노 (angry)</h5>
+             <p> 불만스럽고 화난 상태
+              언짢음, 절망, 짜증, 미움, 못마땅함 등</p>
+             <p> ex) 너나 잘해, 너나!!<br>
+                 ex) 나는 아직도 니 얼굴보면 화나. 너네 반으로 가.</p>
+                 <br>
+             <h5> 4. 슬픔 (sad)</h5>
+             <p> 우울감이나 좌절감을 느끼는 상태
+                우울, 걱정, 아쉬움, 안타까움, 자책</p>
+             <p> ex) 정말? 너무 하다...<br>
+                 ex) 그렇긴 한데. 지난 두 달이 워낙 적자였어서, 아직도 전체적으론 마이너스네.</p>
+                 <br>
+             <h5> 5. 혐오 (dislike)</h5>
+             <p> 어떤 행동이나 상황, 대상을 부정적으로 대하거나 싫어하는 것.
+             별로 내켜하지 않거나 반대하거나 상대방에 대한 부정적인 언급을 함.</p>
+             <p> ex) 어쩔 수 없이 같이 다니지만 난 철수 싫어.<br>
+                 ex) 내가 내 동생이랑 붙어있는 꼴 봤냐? 치가 떨려.</p>
+                 <br>
+             <h5> 6. 공포 (fear)</h5>
+             <p> 두려움이나 무서움을 느끼는 상태.
+              불안함, 염려, 걱정 등</p>
+             <p> ex) 나 아빠가 부탁한 거 깜빡했어.. 큰일났다.. 무지하게 혼날 거 같은데..<br>
+                 ex) 당장..? 막상 가려니 겁이 나네.</p>
+                 <br>
+             <h5> 7. 경멸 (contempt)</h5>
+             <p> 어떤 행동이나 상황, 대상에 대해 극도로 싫어하는 감정을 느낌.
+              혐오의 상위 단계.
+              관계의 절연, 회피, 극도의 혐오, 무시</p>
+             <p> ex) 난 소아성애자들을 보면 칼로 찔러 죽이고 싶어.<br>
+                 ex) 미친새끼, 지옥에나 떨어져라.</p>
+                 <br>
+             <h5> 8. 중립 (neutral)</h5>
+             <p> 위에 해당하지 않거나 아무런 감정이 없는 평서문</p>
+             <p> ex) 아니 그냥 그렇다고.<br>
+                 ex) 오늘은 유치원에서 뭐했어?</p>
+
+            </div>
+          </div>
+        </div>
+      </div><!--accodrion-->
+    </div><!--faq section-->
+    
+    <div class="faq-section">
+      <div id="accordion-2" class="accordion">
+
+        <div class="card bg-white">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"> 영상으로 보기 </a>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-2">
+            <div class="card-body">
+         
+              <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="http://wisedome.kr/static/img/pm.mp4"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!--accodrion-->
+    </div><!--faq section-->
+   </div>
+  </div>
+ </div>
+</div>
+
+
+<!-- FOOTER-->
+<footer class="footer bg-white">
+  <div class="d-flex justify-content-center">
+    <span class="text-muted">Copyright © 2020 <a href="#" target="_blank">Data.ly</a>. All rights reserved.</span>
+    </div>
+</footer>
+
+<!-- partial -->
+</div><!-- main-panel ends -->
+</div><!-- page-body-wrapper ends -->
+</div><!-- container-scroller -->
+
+
+
+<!-- plugins:js 기본 필수로 들어가는 JS파일-->
+<script src="../../static/js/plugin/vendor.bundle.base.js"></script>
+<script src="../../static/js/plugin/off-canvas.js"></script>
+<script src="../../static/js/plugin/hoverable-collapse.js"></script>
+<script src="../../static/js/plugin/misc.js"></script>
+<script src="../../static/js/darkmode.js"></script>
+
+<script>
+//프로젝트타이틀 값 서약서에 보내기
+function getProject(){
+  var projectTitle = document.getElementById("projectTitle").textContent;
+  localStorage.setItem("titleValue", projectTitle);
+}
+
+</script>
+
+  </body>
+</html>

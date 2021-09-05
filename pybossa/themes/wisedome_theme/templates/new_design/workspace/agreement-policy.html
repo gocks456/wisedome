@@ -1,0 +1,259 @@
+{% extends "/new_design/workspace/workspace_base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/new_design/css/agreement.css">
+
+<link rel="stylesheet" href="/static/css/signature/signature-pad.css">
+<link rel="stylesheet" href="/static/css/signature/ie9.css">
+<style>
+.title-box {
+	font-size:large;
+	font-weight:bold;
+}
+
+.text-box {
+	padding: 0;
+}
+.policy-box {
+	border: solid 0.1rem;
+	margin: 2rem;
+	padding: 0.5rem;
+}
+.text2 {
+	padding: 0;
+	line-height:1;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- 메인 작업화면 -->
+<div class="content-wrapper">
+
+	<div class="page-header">
+		<h3 class="page-title">
+			<span class="page-title-icon bg-gradient-primary text-white mr-2"><i class="mdi mdi-pencil"></i></span>서약서 작성
+		</h3>
+	</div>
+
+
+	<div id="contract" style="margin:0; padding:0;">
+		<div class="row contract">
+			<div class="col-md-12 grid-margin">
+				<div class="card bg-white">
+					<div class="card-body ">
+						<div class="row mt-4">
+							<div class="col-xl-8 col-lg-10 col-md-12 col-12 mx-auto ">
+								<h2 class="modal-title text-center">업무위탁 및 개인정보처리 위탁계약서 및 보안서약서</h2>
+								<div class="hr"></div>
+
+								<p class="title-box"> <u> WISEDOME </u>  (이하 “회사”라고 한다)에서 업무를 수행함에 있어 다음의 각 사항을 준수할 것을 서약합니다.  </p>
+								<p class="text-box">1. 본인은 회사 정보보호 정책 및 지침을 성실히 준수하겠습니다.</p>
+								<p class="text-box">2. 본인은 회사부터 취득한 일체의 정보를 계약 기간 중에는 물론 계약 종료 후에도 회사의 서면 승인이 없이는 절대로 누설하지 않을 것을 신뢰를 바탕으로 동의합니다.</p>
+								<p class="text-box">3. 본인은 개인정보를 수집할 때에는 업무상 필요한 정보 이외의 것을 확인하지 않으며, 본인에게 접근이 허용되지 않은 정보에 대한 접근 통제 규칙을 철저하게 준수하겠습니다. </p>
+								<p class="text-box">4. 본인은 정보유출이나 정보보호 위반사례를 발견할 시에는 이를 지체 없이 회사 책임자에게 보고하겠습니다. </p>
+								<p class="text-box">5. 본인은 업무 프로그램, 시설물 등을 훼손하거나 외부로 유출하는 일이 없도록 하겠습니다. </p>
+								<p class="text-box">6. 본인은 정보통신망 이용촉진 및 정보보호 등에 관한 법률에 입각하여 회사의 정보보호 지침을 준수합니다. </p>
+								<p class="text-box">7. 만일 서약사항을 위반하여 회사의 업무에 장애를 일으키거나 손해를 끼친 경우 본 회사에 대하여 어떠한 제재를 취하여도 이유를 제기하지 않고 조치를 따르겠습니다. </p>
+
+								<div class="policy-box">
+									<h4 class="text-center">개인정보 수집, 이용에 대한 동의</h4>
+									<hr>
+									<p class="text-box">본인은 Data.ly의 업무 참여를 위해 '개인정보 보호법' 등에 의해 보호되고 있는 본인에 관한 각종 정보자료를 ‘동법 제23조 단서 및 제15조’에 따라 담당자가 수집 및 이용하는 데 동의합니다. 또한 본인이 서명날인한 동의서의 복사본은 Data.ly의 운영에 필요한 다양한 자료 수집 및 이용의 편의를 위해서 원본과 동일하게 유효하다는 것을 인정합니다.</p>
+									<hr>
+									<h4 class="text-center">수집 및 이용 정보자료의 범위</h4>
+									<hr>
+									<p class="text2"> ▫ 개인정보의 수집․이용목적 : 근로 제공 및 수당 지급 등</p>
+									<p class="text2"> ▫ 수집하려는 개인정보의 항목 : 개인 인적 제반사항(성명, 거주지, 연락처, 계좌번호, 생년월일 등)</p>
+									<p class="text2"> ▫ 개인정보의 보유 및 이용기간</p>
+									<p class="text2"> - Data.ly 근로 기간에 이용</p>
+									<p class="text2"> - 개인정보 자료는 기록물 관리 지침에 따라 보관되며, 반환되지 않음.</p>
+									<p class="text2"> ▫ 지원자는 개인정보 보호법 제15조 제2항 제4호에 따라 개인정보를 수집 및 이용에 관하여 거부할 수 있으며, 동의 거부에 따른 신청서 접수 제한 등 불이익이 있을 수 있음</p>
+									<p class="text2" style="font-weight:bold;"> ▫ 개인정보 수집 및 이용에 동의하십니까?   동의함 <input type="radio" value='agree' name="agree">,  동의하지 않음 <input type="radio" name="agree"></p>
+								</div>
+							</div>
+						</div> 
+
+						<div class="col-lg-11 col-md-12 col-12 mx-auto ">
+							<div class="row">
+								<div class="col-lg-8 col-md-12 col-12 mx-auto">
+									<p class="getDate"> <span id ="year"></span> 년   <span id ="month"></span>  월    <span id ="date"></span> 일</p>
+								</div>
+							</div>
+							<div class="row py-5">
+								<div class="col-md-7">
+									<h5 class="text-center">개인정보 확인</h5>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group row">
+												<label for="userName" class="col-sm-5 col-form-label">이름</label>
+												<div class="col-sm-7">
+													<span class="form-control box" id="userName3" style="font-size:large; padding-top:1rem;">{{current_user.fullname}}</span>
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="emailAddr" class="col-sm-5 col-form-label">이메일</label>
+												<div class="col-sm-7">
+													<span class="form-control box" id="emailAddr" style=" padding-top:1rem;">{{current_user.email_addr}}</span>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group row">
+												<label for="userNumber" class="col-sm-5 col-form-label">주민등록번호</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control box" id="userNumber" style=" padding-top:1rem;" placeholder="000000-0000000">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="phoneNumber" class="col-sm-5 col-form-label">전화번호</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control box" id="phoneNumber" style=" padding-top:1rem;" placeholder="010-1234-5678">
+												</div>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="form-group row">
+												<label for="homeAddr" class="col-sm-3 col-form-label">거주지</label>
+												<div class="col-sm-9">
+													<input class="form-control box" id="homeAddr" style="padding-top:1rem;" placeholder="경상남도 창원시">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="accountNumber" class="col-sm-3 col-form-label">계좌번호</label>
+												<div class="col-sm-9">
+													<input class="form-control box" id="accountNumber" style="padding-top:1rem;" placeholder="은행명 / 계좌번호">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-5">
+									<h5 class="text-center">자필서명</h5>
+									<!--<div class="border" id="sign-pad" style="height:10rem"></div> --> <!-- 서명 하는곳 -->
+									<div class="signature-pad" id="signature-pad">
+										<div class="signature-pad--body">
+											<canvas class="pad" id="sign-pad"></canvas>
+										</div>
+									</div>
+									<div class="mx-auto d-flex justify-content-center pt-3" role="group">
+										<button type="button" class="btn btn-inverse-dark mr-3 button clear" data-action="clear">지우기</button>
+									</div>
+								</div>
+							</div>
+
+						</div> <!--col-lg-11-->
+
+						<div class="mx-auto d-flex justify-content-center pt-3" role="group">
+							<button type="button" class="btn btn-secondary btn-lg mr-3">취소</button>
+							<button type="button" class="btn btn-primary btn-lg" id="contract-save">제출</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- 이 페이지에서만 필요한 js -->
+<script src="/static/new_design/js/agreement.js"></script>
+<script src="/static/js/add-js/capture/html2canvas.min.js"></script>
+<script src="/static/js/add-js/signature/signature_pad.js"></script>
+<script src="/static/js/add-js/signature/app.js"></script>
+
+<script>
+	$(document).ready(function() {
+		var csrftoken = "{{csrf_token()}}"//$('meta[name=csrf-token]').attr('content')
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken)
+				}
+			}
+		});
+
+		var checkCanvas = document.getElementById('sign-pad').toDataURL();
+		console.log(checkCanvas);
+
+		var pre_url = document.referrer;
+		if (pre_url == '') {
+			alert("잘못된 접근 입니다.");
+			history.back();
+		}
+
+		$("#contract-save").on('click', function(){
+			if ($("#userNumber").val() == "" || $("#phoneNumber").val() == "" || $("#homeAddr").val() == "" || $("#accountNumber").val() == "") {
+				pybossaNotify("모든 정보를 입력해주세요.", true, "error");
+				$('html').scrollTop(0);
+				return;
+			}
+			if($('input:radio[name=agree]:checked').val() != "agree") {
+				pybossaNotify("개인정보 수집 및 이용에 동의해주세요.", true, "error");
+				$('html').scrollTop(0);
+				return;
+			}
+
+			if ( checkCanvas == document.getElementById('sign-pad').toDataURL() || 3*(document.getElementById('sign-pad').toDataURL().length / 4) < 3000) {
+				window.scrollTo(0,0);
+				pybossaNotify("올바른 서명을 해주세요!", true, "error");
+				$('html').scrollTop(0);
+				return;
+			}
+			var contract = document.getElementById("contract");
+
+			var _transform = contract.style.transform;
+
+			contract.style.setProperty("transform", "none");
+
+
+			html2canvas(contract, {y:190}).then(function(canvas) {
+
+				contractImage = canvas.toDataURL();
+
+
+				contract.style.transform = _transform;
+
+				saveAS(contractImage, "{{project.name}}" + "_" + "서약서" + ".jpg");
+				var url = window.location.href;
+				$.ajax({
+					url: url,
+					data: {"contract": contractImage,
+						"user_id": {{current_user.id}} },
+					type: 'POST',
+					success: function(res) {
+						if (res == "success") {
+							window.location.replace(url);
+						}
+						else {
+							console.log("Error");
+						}
+					},
+					error: function(request, status, error) {
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						console.log(request);
+						console.log(error);
+					}
+				});
+			}).catch(function(err) {
+				console.log(err);
+			});
+		});
+		function saveAS(url, filename) {
+			var link = document.createElement('a');
+			if (typeof link.download === 'string') {
+				link.href = url;
+				link.download = filename;
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link); }
+			else {
+				window.open(url);
+			}
+		}
+	});
+</script>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+audio {
+  margin: 0 auto;
+  width: 100%;
+}
+.flex-column .btn {
+  margin-top: 0.5rem;
+}
+
+.answerBtnArea{
+  padding-top: 1em;  
+  text-align: center;
+ /* border-left: 2px solid #f2edf3;*/
+}
+
+.answerBtnArea button{
+  width:70%;
+  min-width: 200px;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-top:0.5rem
+}
+.purple{
+  background:#b068ff;
+  color: #fff !important;
+}
+.pageContents,#manage-answer {
+  display: none
+}
+
+@media all and (max-width: 1024px) {
+.select-answer .btn{
+  line-height:1.25rem;
+  padding: 0.55rem 1.5rem;
+ }
+}
+
+
+@media all and (max-width: 575px) {
+ 
+}

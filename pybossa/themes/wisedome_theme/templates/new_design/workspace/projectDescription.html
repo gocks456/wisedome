@@ -27,7 +27,7 @@
 							<div class="row sumSection pb-3 d-flex justify-content-between">
 
 								<div class="col-sm-6 mainTitle">
-									<h3 >{{project.name}}</h3>
+									<h3 id="projectTitle">{{project.name}}</h3>
 									<div class="align-items-center">
 										<h5 class="mb-0 text-muted"> <!--<a href="#">-->{{ overall_progress | round | int }}<!--</a>--> % 완료</h5>
 									</div>
@@ -40,6 +40,13 @@
 									</a>
 									{% endif %}
 									{{helper.render_contribute_button(project)}}
+								</div>
+								<div class="ml-auto str-btn">
+									{% if current_user.admin %}
+									<a href="{{ url_for('project.tasks', short_name=project.short_name) }}" style="text-decoration:none;">
+										<button class="btn btn-gradient-primary">작업 설정</button>
+									</a>
+									{% endif %}
 								</div>
 							</div>
 							<div class="my-border-top">
@@ -78,4 +85,7 @@
 	<div class="card bg-white">
 		{{project.long_description|safe|markdown}}
 	</div>
+
+
+
 	{% endblock %}

@@ -6,12 +6,12 @@
 <h1><strong>{{ _('Admin Site') }}:</strong> {{ _('Manage Admin Users') }}</h1>
 {% from "_formhelpers.html" import render_field %}
 
-<div class="row">
+<div class="row" style="margin-bottom:3rem;">
     <form class="form-search" method="POST">
         {{ form.hidden_tag() }}
         <div class="col-md-12">
             <div class="input-group">
-                <input id="user" name="user" type="text" class="form-control" placeholder={{ _('Try with the full name or nick') }}>
+                <input id="user" name="user" type="text" class="form-control" placeholder="사용자의 이름 또는 별명">
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary "><i class="fa fa-search"></i> {{ _('Search') }}</button>
                 </span>
@@ -22,9 +22,9 @@
 
 {% if found %}
 <h2>{{ _('Found Users') }}</h2>
-<div class="row">
+<div class="row" style="margin-bottom:3rem;">
 {% for user in found %}
-    <div class="col-sm-4 col-md-4">
+    <div class="col-sm-3 col-md-3" style="margin-botton:1rem;">
     {{ render_project_card_user(user, upload_method, background=True)}}
     </div>
 {% endfor %}
@@ -35,7 +35,7 @@
 <h1>{{ _('Current Users with Admin privileges') }}</h1>
 <div class="row">
     {% for user in users %}
-    <div class="col-sm-4 col-md-4">
+    <div class="col-sm-3 col-md-3">
     {{ render_project_card_user(user, upload_method, background=True)}}
     </div>
     {% endfor %}

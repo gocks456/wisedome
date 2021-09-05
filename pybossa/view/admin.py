@@ -77,7 +77,7 @@ def index():
     """List admin actions."""
     key = NOTIFY_ADMIN + str(current_user.id)
     sentinel.master.delete(key)
-    return handle_content_type(dict(template='/admin/index.html'))
+    return handle_content_type(dict(template='new_design/admin/admin.html'))
 
 def gettime():
     now = datetime.datetime.now()
@@ -630,9 +630,17 @@ def dashboard():
             flash(msg)
         active_users_last_week = dashb.format_users_week()
         active_anon_last_week = dashb.format_anon_week()
-        draft_projects_last_week = dashb.format_draft_projects()
-        published_projects_last_week = dashb.format_published_projects()
-        update_projects_last_week = dashb.format_update_projects()
+
+        n_draft_projects=cached_projects._n_draft()
+        n_published_projects=cached_projects.n_published()
+        n_complete_projects=cached_projects.n_complete()
+
+        project_data = []
+        project_data.append(n_draft_projects)
+        project_data.append(n_published_projects)
+        project_data.append(n_complete_projects)
+
+
         new_tasks_week = dashb.format_new_tasks()
         new_task_runs_week = dashb.format_new_task_runs()
         new_users_week = dashb.format_new_users()
@@ -640,13 +648,12 @@ def dashboard():
         update_feed = get_update_feed()
 
         response = dict(
-            template='admin/dashboard.html',
+            #template='admin/dashboard.html',
+            template='new_design/admin/liveBoard.html',
             title=gettext('Dashboard'),
             active_users_last_week=active_users_last_week,
             active_anon_last_week=active_anon_last_week,
-            draft_projects_last_week=draft_projects_last_week,
-            published_projects_last_week=published_projects_last_week,
-            update_projects_last_week=update_projects_last_week,
+            project_data=project_data,
             new_tasks_week=new_tasks_week,
             new_task_runs_week=new_task_runs_week,
             new_users_week=new_users_week,
@@ -655,7 +662,7 @@ def dashboard():
             wait=False)
         return handle_content_type(response)
     except ProgrammingError as e:
-        response = dict(template='admin/dashboard.html',
+        response = dict(template='admin/dashboard.html',#'new_design/admin/liveBoard.html',    #   'admin/dashboard.html',
                         title=gettext('Dashboard'),
                         wait=True)
         return handle_content_type(response)

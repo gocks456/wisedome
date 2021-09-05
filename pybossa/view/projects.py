@@ -181,7 +181,7 @@ def index(page):
     desc = bool(request.args.get('desc', False))
 
     if request.method == 'POST':
-        projects = cached_projects.get_all_featured()
+        projects = cached_projects.get_published_projects()
         projects = sort_project(projects, request.form['value'])
         render = render_template('/new_design/workspace/ajax_projectList.html', projects=projects)
         return render
@@ -218,13 +218,11 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
                   desc=False, pre_ranked=False):
     """Show projects of a category"""
     per_page = current_app.config['APPS_PER_PAGE']
-    ranked_projects = lookup(category)
+    if category == 'featured':
+        projects = cached_projects.get_published_projects()
+    else:
+        projects = lookup(category)
 
-    if not pre_ranked:
-        ranked_projects = rank(ranked_projects, order_by, desc)
-
-    offset = (page - 1) * per_page
-    projects = ranked_projects[offset:offset+per_page]
     count = cached_projects.n_count(category)
 
     # 2020.11.27. 업적 리뉴얼 예정
@@ -232,7 +230,8 @@ def project_index(page, lookup, category, fallback, use_count, order_by=None,
     #user_all_achieve(achieve)
 
     if category == 'featured':
-        ko_cat = '프리미엄'
+        #ko_cat = '프리미엄'
+        ko_cat = '전체'
     elif category == 'sound':
         ko_cat = '음성'
     elif category == 'image':
@@ -283,16 +282,6 @@ def complete(page):
     return project_index(page, cached_projects.get_all_complete, 'complete', #XXX
                          False, True, order_by, desc)
 
-@blueprint.route('/category/before_score/', defaults={'page': 1})
-@blueprint.route('/category/before_score/page/<int:page>/')
-@login_required
-@admin_required
-def before_score(page):
-    """Show the before_score projects"""
-    order_by = request.args.get('orderby', None)
-    desc = bool(request.args.get('desc', False))
-    return project_index(page, cached_projects.get_all_before_score, 'before_score', #XXX
-                         False, True, order_by, desc)
 
 @blueprint.route('/category/historical_contributions/', defaults={'page': 1})
 @blueprint.route('/category/historical_contributions/page/<int:page>/')
@@ -1008,18 +997,18 @@ def task_presenter(short_name, task_id):
                 return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
             _file.seek(0, os.SEEK_END)
             size = _file.tell()
-            if size > 2000000:
-                flash(gettext("이미지의 크기가 2MB를 초과했습니다."), "error")
-                return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
-            elif size == 0:
+            if size == 0:
                 flash(gettext("저장할 파일이 존재하지 않습니다."), "error")
                 return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
+            #if size == 
             _file.seek(0)
             prefix = time.time()
-            _file.filename = "%i_%i.png" % (current_user.id, prefix)
-            container = "project_%s/user_id_%i/%s" % (short_name, current_user.id, time.strftime('%Y-%m-%d', time.localtime(time.time())))
+            _file.filename = "%i.png" % (prefix)
+
+            container = "projects/%s/user_id_%i" % (short_name, current_user.id)
+            uploader.delete_img(container)
             if not uploader.dir_size(container):
-                flash(gettext("하루 업로드 제한 초과"), "error")
+                flash(gettext("업로드 제한 초과"), "error")
                 return redirect_content_type(url_for('.task_presenter', short_name=project.short_name, task_id=task_id))
             from tempfile import SpooledTemporaryFile
             stream = _file.stream
@@ -1050,6 +1039,14 @@ def task_presenter(short_name, task_id):
                 result = dict(id=row.id, task_info=row.task_info, task_run_info=row.task_run_info)
                 results.append(result)
             return results
+
+
+        if request.form.get('value') == "user_answer_count":
+            time = datetime.date.today()
+            time = time.ctime()
+            count = task_repo.get_1day_user_data(current_user.id, project.id)
+            res = dict(count=count)
+            return json.dumps(res, ensure_ascii=False)
 
 
         # 프로젝트 진행 중 답변 관리를 눌렀을 때 (답변관리의 value로 바꿔주어야 함)
@@ -1214,13 +1211,13 @@ def presenter(short_name):
         # FileStorage에 값 추가
         _file.stream = stream
         _file.name = 'contract'
-        _file.filename = current_user.email_addr + ".png"
+        _file.filename = str(current_user.id) + ".png"
         _file.headers = "Headers([('Content-Disposition', 'form-data; name='contract'; filename='temp.png''), ('Content-Type', 'image/png')])"
         _file.seek(0, os.SEEK_END)
         _file.seek(0)
 
         # 저장할 경로 지정 및 File 저장
-        container = "project_%s/contract" % (project.name)
+        container = "project_%s/contract/" % (project.name)
         uploader.upload_file(_file, container=container)
         flash(gettext("계약서 작성 완료!"), "success")
         return
@@ -1233,9 +1230,17 @@ def presenter(short_name):
         project_repo.update(project)
         return "success"
 
+    if request.method == "POST" and request.form.get('value') == "user_answer_count":
+        time = datetime.date.today()
+        time = time.ctime()
+        count = task_repo.get_1day_user_data(current_user.id, project.id)
+        res = dict(count=count)
+        return json.dumps(res, ensure_ascii=False)
+
     #2020.09.22. 계약서 연결
-    if current_user.id not in project.contractor_ids and current_user.id not in project.owners_ids and current_user.admin:
-        resp = respond('/projects/tutorial.html')
+    if current_user.id not in project.contractor_ids and current_user.id not in project.owners_ids and not current_user.admin:
+        #resp = respond('/projects/tutorial.html')
+        resp = respond('/new_design/workspace/agreement-policy.html')
         return resp
 
     #if project.info.get("tutorial") and \
@@ -1261,7 +1266,7 @@ def sertification(short_name):
 
     project, owner, ps = project_by_shortname(short_name)
 
-    if current_user.id not in project.contractor_ids and project.info['tutorial'] != "":
+    if project.published == True and current_user.id not in project.contractor_ids and project.info['tutorial'] != "":
         response = dict(template='/projects/sertification.html', current_user=current_user,
                         csrf=generate_csrf())
         return handle_content_type(response)
@@ -1354,6 +1359,31 @@ def tasks(short_name):
 
     return handle_content_type(response)
 
+@blueprint.route('/<short_name>/tasks/onetasks/', methods=['GET', 'POST'])
+@login_required
+def one_day_max(short_name):
+    project, owner, ps = project_by_shortname(short_name)
+    ensure_authorized_to('update', project)
+    form = TaskOneMaxForm(request.body)
+
+    if request.method == 'GET':
+        data = dict(template='/projects/one_day_max.html',
+                    project=project,
+                    form=form)
+        return handle_content_type(data)
+    elif request.method == 'POST' and form.validate():
+        project_repo.update_project_one_day_max(project, form.one_day_max.data)
+        msg = gettext('1일 할당량 설정 완료')
+        flash(msg, 'success')
+        return redirect_content_type(url_for('.tasks', short_name=project.short_name))
+    else:
+        flash(gettext('오류를 수정해주세요'), 'error') 
+        data = dict(template='/projects/one_day_max.html',
+                    project=project,
+                    form=form)
+        return handle_content_type(data)
+
+
 @blueprint.route('/<short_name>/tasks/browse')
 @blueprint.route('/<short_name>/tasks/browse/<int:page>')
 def tasks_browse(short_name, page=1):
@@ -1440,6 +1470,25 @@ def delete_tasks(short_name):
         flash(msg, 'success')
         return redirect_content_type(url_for('.tasks', short_name=project.short_name))
 
+@blueprint.route('/<short_name>/tasks/results_upload', methods=['GET', 'POST'])
+@admin_required
+def results_upload(short_name):
+    project, owner, ps = project_by_shortname(short_name)
+    if request.method == "POST":
+        _file = request.files["results"]
+        if _file.content_type != "application/json":
+            flash(gettext("json 형식의 파일만 가능합니다."), "error");
+            return handle_content_type(dict(template="/new_design/workspace/results_upload.html", project=project, csrf=generate_csrf()))
+        container = "self_score/"
+        from tempfile import SpooledTemporaryFile
+        _file.filename = "%s.json" % (short_name)
+        stream = _file.stream
+        print(stream)
+        print(stream.__dict__)
+        print(stream._file)
+        uploader.upload_file(_file, container=container)
+        flash(gettext("저장 완료"), "success")
+    return handle_content_type(dict(template="/new_design/workspace/results_upload.html", project=project, csrf=generate_csrf()))
 
 @blueprint.route('/<short_name>/tasks/export')
 def export_to(short_name):

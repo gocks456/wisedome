@@ -53,58 +53,63 @@
 		<!-- 프로젝트 Template 추가 -->
 		{{ project.info.task_presenter|safe }}
 
-
-
-		<!--가이드 라인 영역-->
-		<div class="col-md-12 grid-margin">
+		<div class="col-12 grid-margin" id="finished" style="display:none;">
 			<div class="card bg-white">
 				<div class="card-body">
-
-					<div class="accordion">
-						<ul class="accordion__items">
-
-							<li class="accordion__item">
-								<div class="accordion__title">
-									<h5> <i class="mdi mdi-cards-playing-outline"></i>   이용방법</h5>
-									<span class="accordion__icon"><img src="/static/new_design/images/plus-24px.png" alt="plus icon"></span>
-								</div>
-								<div class="accordion__content"><!---이용방법에 대한 내용 첨부하기-->
-									<p>
-									{% if project.long_description != project.description  %}
-									{{ project.long_description | markdown }}
-									{% endif %}
-
-									</p>
-								</div>
-							</li>
-
-							<li class="accordion__item">
-								<div class="accordion__title">
-									<h5><i class="mdi mdi-bell-ring"></i>   주의사항</h5>
-									<span class="accordion__icon"><img src="/static/new_design/images/plus-24px.png" alt="plus icon"></span>
-								</div>
-								<div class="accordion__content"><!---주의사항 첨부하기-->
-									<p> 답변 검토 시 오류 및 문제점은 포인트 지급대상에서 제외될 수 있습니다.
-									</p>
-								</div>
-							</li>
-
-							<li class="accordion__item">
-								<div class="accordion__title">
-									<h5><i class="mdi mdi-cash-multiple"></i>   포인트안내</h5>
-									<span class="accordion__icon"><img src="/static/new_design/images/plus-24px.png" alt="plus icon"></span>
-								</div>
-								<div class="accordion__content"><!---포인트제도 첨부하기-->
-									<p> 주어진 문제를 모두 맞출 시 총 {{project.all_point}}포인트를 얻을 수 있습니다.</p>
-								</div>
-							</li>
-							<div class="accordion__title"></div>
-						</ul>
-					</div>  
-
+					<h4 class="card-title">FINISH</h4>
+					<div class="row">
+						<div class="col-xl-9 d-inline-flex">
+							{% if project.one_day_max > 0 and project.complete == false %} <p class="card-description mt-3" style="font-size:large; color:#827676; margin-left: 1rem;"> 금일 할당량을 모두 채웠습니다. </p>
+							{% elif project.complete or project.one_day_max == 0 %} <p class="card-description mt-3" style="font-size:large; color:#827676; margin-left: 1rem;"> 프로젝트를 완료하였습니다.</p>
+							{% endif %}
+						</div>
+						<div class="col-xl-3 answers">    <!-- 홈으로 돌아가기 -->
+							<h3>
+								<a href="/">HOME<i class="mdi mdi-home menu-icon"></i></a>
+							</h3>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+
+
+		<!--가이드 라인 영역 (기존포맷 아니고 새로운포맷)-->
+		<div class="col-md-12">
+			<div class="card bg-white">
+				<div class="card-body">
+
+					<div id="accordion-1" class="accordion ">
+						<div class="card">
+							<div class="card-header " id="headingOne">
+								<h5 class="mb-0">
+									<a data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"> <h6> <i class="mdi mdi-cards-playing-outline"></i>   이용방법</h6></a>
+								</h5>
+							</div>
+							<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion-1">
+								<div class="card-body"> 
+									{% if project.long_description != project.description  %}
+									{{ project.long_description | markdown }}
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-header" id="headingTwo">
+								<h5 class="mb-0">
+									<a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">   <h6> <i class="mdi mdi-assistant"></i>   예시보기</h6> </a>
+								</h5>
+							</div>
+							<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-1">
+								<div class="card-body"> 예시작업을 이곳에 넣어주세요</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 	</div>
 </div>
@@ -115,13 +120,8 @@
 <script src="/static/new_design/js/accordion.js"></script>
 
 <script>
-	var csrf = "{{ csrf_token() }}";
-$("#csrf_token").val(csrf);
-</script>
-
-
-<script>
-	$(document).ready(function(){
+	$(document).ready(function(){	
+		var csrf = "{{ csrf_token() }}";
 		$.ajaxSetup({
 			beforeSend: function(xhr, settings) {
 				if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
@@ -129,10 +129,49 @@ $("#csrf_token").val(csrf);
 				}
 			}
 		});
+		get_answer_count();
 	});
 </script>
 
-<script>
+	<script>
+		var answer_count = 0;
+
+
+// 1일 할당량 함수
+function get_answer_count() {
+	var url = window.location.href;
+	$.ajax({
+		url: url,
+		data: {
+			"value": "user_answer_count"
+		},
+		type: 'POST',
+		success: function(res) {
+			data = JSON.parse(res);
+			answer_count = data.count;
+
+			answer_count_check();
+
+		},
+		error: function(request, error) {
+			console.log(request);
+			console.log(error);
+		}
+	});
+}
+
+// 1일 할당량 체크
+function answer_count_check() {
+	if (Number({{project.one_day_max}}) <= 0 )
+		return;
+	if (answer_count >= Number({{project.one_day_max}})) {
+		$("#running").hide();
+		$("#finished").fadeIn(500);
+	}
+}
+
+
+
 	function setUserGraph() {
 		var url = window.location.href;
 		$.ajax({
@@ -141,8 +180,9 @@ $("#csrf_token").val(csrf);
 			type: 'POST',
 			success: function(res) {
 				res = JSON.parse(res);
-				$("#answer_counts").text(res.my_count);
-				$("#average").text(res.people_count);
+				//$("#answer_counts").text(res.my_count);
+				//$("#average").text(res.people_count);
+				console.log(res)
 
 			},
 			error:function(request, error) {

@@ -1,0 +1,176 @@
+{% extends "new_design/workspace/workspace_base.html" %}
+
+{% block css %}{% endblock %}
+
+{% block content %}
+
+{% import "account/_helpers.html" as helper %}
+{% import "projects/_helpers.html" as project_helper %}
+{% from "account/_helpers.html" import render_account_local_nav %}
+{% from "projects/_helpers.html" import render_project_admin_featured, broken_image %}
+
+
+<!-- 어드민 관리 섹션-->
+<div class="content-wrapper">
+	<div class="page-header">
+		<h3 class="page-title">대시보드 상황판 </h3>
+		<nav aria-label="breadcrumb">
+			<div class="breadcrumb">
+				<button class="breadcrumb-item btn btn-sm btn-secondary" onclick="location.href='{{url_for("admin.dashboard", refresh="1")}}'"> <i class="mdi mdi-autorenew"> 새로고침</i></button>
+			</div>
+		</nav>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">최근활동 회원</h4>
+					<canvas id="areaChart" style="height:250px"></canvas> <!--핑크색차트 (각 차트들의 세부사항은 liveBoard.js파일 참고)-->
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">프로젝트 </h4>
+					<canvas id="barChart" style="height:230px"></canvas><!--멀티컬러 바 그래프 차트-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">최근작업</h4>
+					<canvas id="barChart-2" style="height:250px"></canvas> <!--멀티컬러 바 그래프차트 -->
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">최근답변 </h4>
+					<canvas id="lineChart-2" style="height:230px"></canvas><!--파란색 차트-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">신규회원</h4>
+					<canvas id="areaChart-2" style="height:250px"></canvas> <!--보라색차트-->
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">최근활동</h4>
+
+					{% if update_feed %}
+
+					{% for u in update_feed[0:9] %}
+					<div class="user-avatar d-flex align-items-start mt-2">
+
+
+                {% if u.action_updated == 'Project' %}
+						<img src="{{url_for('static', filename='img/placeholder.project.png')}}" alt="profile image" class="profile-img img-xs rounded-circle mr-3">
+						<p class="my-auto"> 
+						<span class="font-weight-bold"><a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name }}</a></span>
+						<span class="text-info"> 프로젝트 생성</span>  
+						<span class="text-muted ml-1">{{u.updated | pretty_date }}</span>  
+						</p>
+                {% endif %}
+                {% if u.action_updated == 'Blog' %}
+                <p><img class="img-circle" src="{{project_helper.render_url_thumbnail(u, upload_method)}}" style="max-width:30px;">
+                <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a> {{ _('has published a blog post') }} {{u.updated | pretty_date }} </p>
+                {% endif %}
+                {% if u.action_updated == 'Task' %}
+						<img src="{{project_helper.render_url_thumbnail(u, upload_method)}}" alt="profile image" class="profile-img img-xs rounded-circle mr-3">	
+						<p class="my-auto"> 
+						<span class="font-weight-bold"><a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a></span>
+						<span class="text-info"> </span>  새로운 작업 추가
+						<span class="text-muted ml-1">{{u.updated | pretty_date}}</span>  
+						</p>
+                {% endif %}
+                {% if u.action_updated == 'TaskCompleted' %}
+						<img src="{{project_helper.render_url_thumbnail(u, upload_method)}}" alt="profile image" class="profile-img img-xs rounded-circle mr-3">
+						<p class="my-auto"> 
+						<span class="font-weight-bold"> <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a></span>
+						<span class="text-info"> 작업 완료</span>  
+						<span class="text-muted ml-1">{{u.updated | pretty_date}}</span>  
+						</p>
+                {% endif %}
+                {% if u.action_updated == 'UserContribution' %}
+						 {{ helper.render_avatar(u, upload_method, class='profile-img img-xs rounded-circle mr-3')}}
+						<p class="my-auto"> 
+						<span class="font-weight-bold"> {{u.fullname}}</span>
+						<span class="text-info"> 
+							<a href="{{url_for('project.details', short_name=u.project_short_name)}}">
+								<span class="visible-xs-fullnames">{{u.project_name | truncate(10)}}</span>
+							</a>
+						</span>  
+						참여함  
+						<span class="text-muted ml-1">{{u.updated | pretty_date}}</span>  
+						</p>
+                {% endif %}
+                {% if u.action_updated == 'User' %}
+						 {{ helper.render_avatar(u, upload_method, class='profile-img img-xs rounded-circle mr-3')}}
+						<p class="my-auto"> 
+						<span class="font-weight-bold"> {{u.fullname}}</span>
+						<span class="text-info"> 프로필 수정</span>  
+						<span class="text-muted ml-1">{{u.updated | pretty_date}}</span>  
+						</p>
+                {% endif %}
+					</div>
+                {% endfor %}
+						<!--<img src="" alt="profile image" class="profile-img img-xs rounded-circle mr-3">
+						<p class="my-auto"> 
+						<span class="font-weight-bold"> 해찬이</span>
+						<span class="text-info"> 이미지 업데이트</span>  
+						참여함  
+						<span class="text-muted ml-1">1일전</span>  
+						</p>-->
+
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 이 페이지에서만 필요한 js -->
+<script src="/static/new_design/js/plugin/Chart.min.js"></script>
+<script src="/static/new_design/js/liveBoard.js"></script>
+
+	<script>
+		// 프로젝트
+		data["datasets"][0]["data"] = {{project_data}};
+		console.log(data);
+
+//최근 작업 수
+multiColorBar["labels"] = {{new_tasks_week["labels"]|safe}};
+multiColorBar["datasets"][0]["data"] = {{new_tasks_week["series"][0]|safe}};
+
+//최근 답변 수
+lineDataSecondary["labels"] = {{new_task_runs_week["labels"]|safe}};
+lineDataSecondary["datasets"][0]["data"] = {{new_task_runs_week["series"][0]|safe}};
+
+//최근 활동 회원
+areaData["labels"] = {{active_users_last_week["labels"]|safe}};
+areaData["datasets"][0]["data"] = {{active_users_last_week["series"][0]|safe}};
+
+//신규 회원
+areaDataDark["labels"] = {{new_users_week["labels"]|safe}};
+areaDataDark["datasets"][0]["data"] = {{new_users_week["series"][0]|safe}};
+
+mk_chart();
+		
+	</script>
+
+{% endblock %}

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="csrf-token" content="">
+		<meta name="csrf-token" id="csrf_token" content="">
 		<title>Wisedome</title>
 		<!-- plugins:css -->
 		<link rel="stylesheet" href="/static/new_design/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -11,6 +11,7 @@
 		<!--기본 css-->
 		<link rel="stylesheet" href="/static/new_design/css/basic/dashboard-basic.css">
 		<link rel="stylesheet" href="/static/new_design/css/function/darkmode.css">
+		<link rel="stylesheet" href="/static/new_design/css/afterlongin-navfooter.css">
 
 		{% block css %}{% endblock %}
 
@@ -33,8 +34,8 @@
 		<div class="container-scroller">
 			<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 				<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-					<a class="navbar-brand brand-logo" href="{{ url_for('home.home') }}"><img src="/static/new_design/images/wisedome-logo-white.png" alt="logo" /></a>
-					<a class="navbar-brand brand-logo-mini" href="{{ url_for('home.home') }}"><img src="/static/new_design/images/wisedome-logo-sm.png" alt="logo" /></a>
+					<a class="navbar-brand brand-logo" href="{{ url_for('home.home') }}"><img src="/static/new_design/images/text-logo.png" alt="logo" /></a>
+					<a class="navbar-brand brand-logo-mini" href="{{ url_for('home.home') }}"><img src="/static/new_design/images/logo-only.png" alt="logo" /></a>
 				</div>
 				<div class="navbar-menu-wrapper d-flex align-items-stretch">
 					<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" style="display:none;"><!--display:none;-->
@@ -147,26 +148,10 @@
 						{% endif %}#}
 						{% if current_user.admin == 1 %}
 						<li class="nav-item {% if active_page == 'admin' %} active {% endif %}">
-							<a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+							<a class="nav-link" href="{{ url_for('admin.index') }}">
 								<span class="menu-title">관리자 페이지</span>
-								<i class="menu-arrow"></i>
 								<i class="mdi mdi-settings menu-icon"></i>
 							</a>
-							<div class="collapse" id="general-pages">
-								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.index') }}"> 관리자페이지 </a></li>
-									<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.dashboard') }}"> 상황판 </a></li>
-									<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.featured') }}"> 프리미엄 프로젝트 </a></li>
-									<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.show_point_log') }}"> 포인트</a></li>
-									<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.manage_exchange') }}"> 환급 </a></li>
-									<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.export_users', format='csv') }}"> 사용자 CSV</a></li>
-									<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.export_users', format='json') }}"> 사용자 JSON</a></li>
-									<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.users') }}"> 관리자 목록</a></li>
-									<li class="nav-item"> <a class="nav-link" href="{{ url_for('gmail.login') }}"> Gmail 생성</a></li>
-									<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.back_up') }}"> DB백업 </a></li>
-									<li class="nav-item"> <a class="nav-link" href="{{ url_for('admin.restore') }}"> DB복원 </a></li>
-								</ul>
-							</div>
 						</li>
 						{% endif %}
 						<li class="nav-item sidebar-actions">
@@ -220,7 +205,7 @@
 								<div class="col-lg-4">
 									<div class="d-flex">
 										<i class="mdi mdi-cellphone-android"></i>
-										<h6 class="font-weight-normal">&nbsp;  (055)-213-5472</h6>
+										<h6 class="font-weight-normal">&nbsp;  (055)-713-5473</h6>
 									</div>
 									<div class="d-flex">
 										<i class="mdi mdi-email"></i>

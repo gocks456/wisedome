@@ -94,9 +94,7 @@ class Project(db.Model, DomainObject):
 
     end_date = Column(Text, default=make_timestamp)
 
-    #마감기한
-    #deadline = Column(Text, default=make_timestamp)
-    #updated 에 원하는 시간만큼 더하는 방안으로 해야될 것으로 보임
+    one_day_max = Column(Integer, default=-1)
 
     option_sex = option_age_start = option_age_end = "0"
 
@@ -148,7 +146,8 @@ class Project(db.Model, DomainObject):
                 'overall_progress', 'short_name', 'created', 'category_id',
                 'long_description', 'last_activity', 'last_activity_raw',
                 'n_task_runs', 'n_results', 'owner', 'updated', 'featured',
-                'owner_id', 'n_completed_tasks', 'n_blogposts', 'owners_ids', 'all_point', 'condition', 'complete', 'end_date']
+                'owner_id', 'n_completed_tasks', 'n_blogposts', 'owners_ids',
+                'all_point', 'condition', 'complete', 'end_date', 'one_day_max']
 
     @classmethod
     def public_info_keys(self):
